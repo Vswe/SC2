@@ -1,6 +1,7 @@
 package vswe.stevescarts.Items;
 
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -42,6 +43,10 @@ public final class Items {
         component = new ItemCartComponent(config.getItem(COMPONENTS_NAME, COMPONENTS_DEFAULT_ID).getInt(COMPONENTS_DEFAULT_ID));
         modules = new ItemCartModule(config.getItem(MODULES_NAME, MODULES_DEFAULT_ID).getInt(MODULES_DEFAULT_ID));
 
+        GameRegistry.registerItem(carts, CART_NAME);
+        GameRegistry.registerItem(component, COMPONENTS_NAME);
+        GameRegistry.registerItem(modules, MODULES_NAME);
+
         ModuleData.init();
 
         for (ModuleData module : ModuleData.getList().values()) {
@@ -49,12 +54,39 @@ public final class Items {
                 validModules.put(module.getID(), config.get("EnabledModules", module.getName().replace(" ", "").replace(":","_"), module.getEnabledByDefault()).getBoolean(true));
             }
         }
+
+        for (int i = 0; i < ItemCartComponent.size(); i++) {
+            ItemStack subcomponent = new ItemStack(component,1,i);
+            GameRegistry.registerCustomItemStack(subcomponent.getUnlocalizedName(), subcomponent);
+        }
+
+        for (ModuleData module : ModuleData.getList().values()) {
+            ItemStack submodule = new ItemStack(modules,1,module.getID());
+            GameRegistry.registerCustomItemStack(submodule.getUnlocalizedName(), submodule);
+        }
     }
 
     public static void postBlockInit(Configuration config) {
         detectors = (ItemBlockDetector) Item.itemsList[Blocks.DETECTOR_UNIT.getId()];
         upgrades = (ItemUpgrade)Item.itemsList[Blocks.UPGRADE.getId()];
         storages = (ItemBlockStorage)Item.itemsList[Blocks.STORAGE.getId()];
+
+
+
+        for (int i = 0; i < ItemBlockStorage.blocks.length; i++) {
+            ItemStack storage = new ItemStack(storages, 1, i);
+            GameRegistry.registerCustomItemStack(storage.getUnlocalizedName(), storage);
+        }
+
+        for (AssemblerUpgrade upgrade : AssemblerUpgrade.getUpgradesList()) {
+            ItemStack upgradeStack = new ItemStack(upgrades, 1, upgrade.getId());
+            GameRegistry.registerCustomItemStack(upgradeStack.getUnlocalizedName(), upgradeStack);
+        }
+
+        for (DetectorType type : DetectorType.values()) {
+            ItemStack stack = new ItemStack(detectors, 1, type.getMeta());
+            GameRegistry.registerCustomItemStack(stack.getUnlocalizedName(), stack);
+        }
     }
 
     public static void addNames() {
