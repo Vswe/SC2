@@ -4,6 +4,7 @@ import java.util.List;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import vswe.stevescarts.Helpers.ComponentTypes;
 import vswe.stevescarts.StevesCarts;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -18,103 +19,15 @@ import net.minecraft.potion.PotionEffect;
 import vswe.stevescarts.Helpers.EntityEasterEgg;
 public class ItemCartComponent extends Item
 {
-    private static String components[] = new String[]
-    {
-        "Wooden Wheels",
-        "Iron Wheels",
-		"Red Pigment",
-		"Green Pigment",
-		"Blue Pigment",
-		"Glass o'Magic",
-		"Dynamite",
-		null,
-		null,
-		"Simple PCB",
-		"Graphical Interface",
-		"Raw Handle",
-		"Refined Handle",
-		"Speed Handle",
-		"Wheel",
-		"Saw Blade",
-		"Advanced PCB",
-		"Wood Cutting Core",
-		"Raw Hardener",
-		"Refined Hardener",
-		"Hardened Mesh",
-		"Stabilized Metal",
-		"Reinforced Metal",
-		"Reinforced Wheels",
-		"Pipe",
-		"Shooting Station",
-		"Entity Scanner",
-		"Entity Analyzer",
-		"Empty Disk",
-		"Tri-torch",
-		"Chest Pane",
-		"Large Chest Pane",
-		"Huge Chest Pane",
-		"Chest Lock",
-		"Iron Pane",
-		"Large Iron Pane",
-		"Huge Iron Pane",
-		"Dynamic Pane",
-		"Large Dynamic Pane",
-		"Huge Dynamic Pane",
-		"Cleaning Fan",
-		"Cleaning Core",
-		"Cleaning Tube",
-		"Fuse",
-		"Solar Panel",
-		"Eye of Galgador",
-		"Lump of Galgador",
-		"Galgadorian Metal",
-		"Large Lump of Galgador",
-		"Enhanced Galgadorian Metal", 
-		"Stolen Present",
-		"Green Wrapping Paper", 
-		"Red Wrapping Paper",
-		"Warm hat",
-		"Red Gift Ribbon",
-		"Yellow Gift Ribbon",
-		"Sock",
-		"Stuffed Sock",
-		"Advanced Solar Panel",
-		"Blank Upgrade",
-		"Tank Valve",
-		"Tank Pane",
-		"Large Tank Pane",
-		"Huge Tank Pane",
-		"Liquid Cleaning Core",
-		"Liquid Cleaning Tube",
-		"Explosive Easter Egg",
-		"Burning Easter Egg",
-		"Glistering Easter Egg",
-		"Chocolate Easter Egg",
-		"Painted Easter Egg",
-		"Basket",
-		"Oak Log",
-		"Oak Twig",
-		"Spruce Log",
-		"Spruce Twig",
-		"Birch Log",
-		"Birch Twig",
-		"Jungle Log",
-		"Jungle Twig",
-		"Hardened Saw Blade",
-		"Galgadorian Saw Blade",
-		"Galgadorian Wheels",
-		"Iron Blade",
-		"Blade Arm"		
-    };
+
 
 	private Icon icons[];
 	private Icon unknownIcon;
 	public static int size () {
-		return components.length;
+		return ComponentTypes.values().length;
 	}
 
-    public ItemCartComponent(int i)
-    {
+    public ItemCartComponent(int i) {
         super(i);
         setHasSubtypes(true);
         setMaxDamage(0);
@@ -122,7 +35,7 @@ public class ItemCartComponent extends Item
     }
 
 	private String getName(int dmg) {
-		return components[dmg];
+		return ComponentTypes.values()[dmg].getName();
 	}
 	
 	public String getName(ItemStack par1ItemStack)
@@ -146,7 +59,7 @@ public class ItemCartComponent extends Item
     }	
 	
 	private String getRawName(int i) {
-		return components[i].replace(":","").replace(" ","_").toLowerCase();
+		return getName(i).replace(":","").replace(" ","_").toLowerCase();
 	}
 	
 	@Override
@@ -195,7 +108,7 @@ public class ItemCartComponent extends Item
      */
     public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List)
     {
-		for (int i = 0; i < components.length; i++) {
+		for (int i = 0; i < size(); i++) {
 			ItemStack iStack = new ItemStack(par1, 1, i);
 			if (isValid(iStack)) {
 				par3List.add(iStack);

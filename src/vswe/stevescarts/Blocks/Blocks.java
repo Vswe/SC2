@@ -9,6 +9,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.Configuration;
+import vswe.stevescarts.Helpers.ComponentTypes;
 import vswe.stevescarts.Helpers.RecipeHelper;
 import vswe.stevescarts.Items.ItemBlockDetector;
 import vswe.stevescarts.Items.ItemBlockStorage;
@@ -106,21 +107,13 @@ public enum Blocks {
         String blue = "dyeBlue";
         String orange = "dyeOrange";
 
-        ItemStack pcb = new ItemStack(Items.component, 1 , 9);
-        ItemStack advpcb = new ItemStack(Items.component, 1 , 16);
 
-        ItemStack advtank = new ItemStack(Items.modules, 1 , 66);
-
-        ItemStack bigIronChestThingy = new ItemStack(Items.component, 1 , 35);
-        ItemStack hugeIronChestThingy = new ItemStack(Items.component, 1 , 36);
-        ItemStack bigDynamicChestThingy = new ItemStack(Items.component, 1 , 38);
-        ItemStack valve = new ItemStack(Items.component, 8 , 60);
 
         //cargo manager
         RecipeHelper.addRecipe(new ItemStack(CARGO_MANAGER.block, 1), new Object[][]{
-                {bigIronChestThingy, hugeIronChestThingy, bigIronChestThingy},
-                {hugeIronChestThingy, bigDynamicChestThingy, hugeIronChestThingy},
-                {bigIronChestThingy, hugeIronChestThingy, bigIronChestThingy}
+                {ComponentTypes.LARGE_IRON_PANE.getItemStack(), ComponentTypes.HUGE_IRON_PANE.getItemStack(), ComponentTypes.LARGE_IRON_PANE.getItemStack()},
+                {ComponentTypes.HUGE_IRON_PANE.getItemStack(), ComponentTypes.LARGE_DYNAMIC_PANE.getItemStack(), ComponentTypes.HUGE_IRON_PANE.getItemStack()},
+                {ComponentTypes.LARGE_IRON_PANE.getItemStack(), ComponentTypes.HUGE_IRON_PANE.getItemStack(), ComponentTypes.LARGE_IRON_PANE.getItemStack()}
         });
 
 
@@ -128,21 +121,21 @@ public enum Blocks {
         RecipeHelper.addRecipe(new ItemStack(MODULE_TOGGLER.block, 1), new Object[][]{
                 {orange, Item.ingotGold, blue},
                 {Block.stone, Item.ingotIron, Block.stone},
-                {Item.redstone, advpcb, Item.redstone}
+                {Item.redstone, ComponentTypes.ADVANCED_PCB.getItemStack(), Item.redstone}
         });
 
         //distributor
         RecipeHelper.addRecipe(new ItemStack(EXTERNAL_DISTRIBUTOR.block, 1), new Object[][]{
-                {Block.stone, pcb, Block.stone},
-                {pcb, Item.redstone, pcb},
-                {Block.stone, pcb, Block.stone}
+                {Block.stone, ComponentTypes.SIMPLE_PCB.getItemStack(), Block.stone},
+                {ComponentTypes.SIMPLE_PCB.getItemStack(), Item.redstone, ComponentTypes.SIMPLE_PCB.getItemStack()},
+                {Block.stone, ComponentTypes.SIMPLE_PCB.getItemStack(), Block.stone}
         });
 
         //cart assembler
         RecipeHelper.addRecipe(new ItemStack(CART_ASSEMBLER.block, 1), new Object[][]{
                 {Item.ingotIron, Block.stone, Item.ingotIron},
                 {Block.stone, Item.ingotIron, Block.stone},
-                {pcb, Block.stone, pcb}
+                {ComponentTypes.SIMPLE_PCB.getItemStack(), Block.stone, ComponentTypes.SIMPLE_PCB.getItemStack()}
         });
 
         //junction rail
@@ -165,25 +158,25 @@ public enum Blocks {
         ItemStack unit = new ItemStack(DETECTOR_UNIT.block, 1 , 1);
         RecipeHelper.addRecipe(unit, new Object[][]{
                 {Block.cobblestone, Block.pressurePlateStone, Block.cobblestone},
-                {Item.ingotIron, pcb, Item.ingotIron},
+                {Item.ingotIron, ComponentTypes.SIMPLE_PCB.getItemStack(), Item.ingotIron},
                 {Block.cobblestone, Item.redstone, Block.cobblestone}
         });
         //detector manager
         RecipeHelper.addRecipe(new ItemStack(DETECTOR_UNIT.block, 1, 0), new Object[][]{
-                {pcb},
+                {ComponentTypes.SIMPLE_PCB.getItemStack()},
                 {unit}
         });
         //detector station
         RecipeHelper.addRecipe(new ItemStack(DETECTOR_UNIT.block, 1, 2), new Object[][]{
                 {Item.ingotIron, Item.ingotIron, Item.ingotIron},
                 {null, unit, null},
-                {null, pcb, null}
+                {null, ComponentTypes.SIMPLE_PCB.getItemStack(), null}
         });
         //detector junction
         RecipeHelper.addRecipe(new ItemStack(DETECTOR_UNIT.block, 1, 3), new Object[][]{
                 {Block.torchRedstoneActive, null, Block.torchRedstoneActive},
                 {Item.redstone, unit, Item.redstone},
-                {null, pcb, null}
+                {null, ComponentTypes.SIMPLE_PCB.getItemStack(), null}
         });
         //detector redstone
         RecipeHelper.addRecipe(new ItemStack(DETECTOR_UNIT.block, 1, 4), new Object[][]{
@@ -193,11 +186,12 @@ public enum Blocks {
         });
         /** **/
 
+        ItemStack advtank = new ItemStack(Items.modules, 1, 66);
 
         //liquid manager
         RecipeHelper.addRecipe(new ItemStack(LIQUID_MANAGER.block, 1), new Object[][]{
                 {advtank, Item.ingotIron, advtank},
-                {Item.ingotIron, valve, Item.ingotIron},
+                {Item.ingotIron, ComponentTypes.TANK_VALVE, Item.ingotIron},
                 {advtank, Item.ingotIron, advtank}
         });
     }

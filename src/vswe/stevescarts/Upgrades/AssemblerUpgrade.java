@@ -13,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Icon;
 import vswe.stevescarts.Blocks.Blocks;
+import vswe.stevescarts.Helpers.ComponentTypes;
 import vswe.stevescarts.Helpers.RecipeHelper;
 import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.StevesCarts;
@@ -43,15 +44,7 @@ public class AssemblerUpgrade {
 	}
 	
 	public static void init() {
-		ItemStack base = new ItemStack(Items.component, 1, 59);
-		ItemStack hardmetal = new ItemStack(Items.component, 1 , 22);
-		ItemStack magicTingy = new ItemStack(Items.component,1,45);
-		ItemStack pcb = new ItemStack(Items.component, 1 , 9);
-		ItemStack advpcb = new ItemStack(Items.component, 1 , 16);
-		ItemStack magicmetal = new ItemStack(Items.component,1,47);
-		ItemStack magicmetalthing = new ItemStack(Items.component,1,49);
-		ItemStack cleaningfan = new ItemStack(Items.component,1,40);
-		
+
 		AssemblerUpgrade batteries = 
 		new AssemblerUpgrade(0, "Batteries")
 			.addEffect(new FuelCapacity(5000))
@@ -59,7 +52,7 @@ public class AssemblerUpgrade {
 			.addRecipe(new Object[][] {
 				{Item.redstone,Item.redstone,Item.redstone},
 				{Item.redstone,Item.diamond,Item.redstone},
-				{Item.redstone,base,Item.redstone}
+				{Item.redstone, ComponentTypes.BLANK_UPGRADE.getItemStack(),Item.redstone}
 			});	
 			
 		new AssemblerUpgrade(1, "Power Crystal")
@@ -79,7 +72,7 @@ public class AssemblerUpgrade {
 			.addRecipe(new Object[][] {
 				{Item.book,Block.bookShelf,Item.book},
 				{Block.bookShelf,Block.enchantmentTable,Block.bookShelf},
-				{hardmetal,base,hardmetal}
+				{ComponentTypes.REINFORCED_METAL.getItemStack() ,ComponentTypes.BLANK_UPGRADE.getItemStack(),  ComponentTypes.REINFORCED_METAL.getItemStack()}
 			});
 			
 		new AssemblerUpgrade(3, "Industrial espionage")
@@ -87,9 +80,9 @@ public class AssemblerUpgrade {
 			.addEffect(new TimeFlatCart(-14000))
 			.addEffect(new WorkEfficiency(-0.01F))
 			.addRecipe(new Object[][] {
-				{Block.bookShelf,hardmetal,Block.bookShelf},
-				{magicTingy,hardmetal,magicTingy},
-				{hardmetal,knowledge.getItemStack(),hardmetal}
+				{Block.bookShelf,  ComponentTypes.REINFORCED_METAL.getItemStack(), Block.bookShelf},
+				{ComponentTypes.EYE_OF_GALGADOR.getItemStack(),  ComponentTypes.REINFORCED_METAL.getItemStack(), ComponentTypes.EYE_OF_GALGADOR.getItemStack()},
+				{ ComponentTypes.REINFORCED_METAL.getItemStack() ,knowledge.getItemStack(),  ComponentTypes.REINFORCED_METAL.getItemStack()}
 			});		
 		
 		ItemStack books[] = new ItemStack[5];
@@ -102,29 +95,29 @@ public class AssemblerUpgrade {
 			.addEffect(new WorkEfficiency(0.10F))
 			.addEffect(new FuelCost(0.3F))
 			.addRecipe(new Object[][] {
-					{pcb,books[0],pcb},
-					{hardmetal,advpcb,hardmetal},
-					{hardmetal,base,hardmetal}
+					{ComponentTypes.SIMPLE_PCB, books[0], ComponentTypes.SIMPLE_PCB},
+					{ ComponentTypes.REINFORCED_METAL.getItemStack() , ComponentTypes.ADVANCED_PCB.getItemStack(),  ComponentTypes.REINFORCED_METAL.getItemStack()},
+					{ ComponentTypes.REINFORCED_METAL.getItemStack() , ComponentTypes.BLANK_UPGRADE.getItemStack(),  ComponentTypes.REINFORCED_METAL.getItemStack()}
 				})
 			.addRecipe(new Object[][] {
 					{Item.redstone,books[1],Item.redstone},
-					{hardmetal,advpcb,hardmetal},
-					{hardmetal,base,hardmetal}
+					{ ComponentTypes.REINFORCED_METAL.getItemStack() , ComponentTypes.ADVANCED_PCB.getItemStack(),  ComponentTypes.REINFORCED_METAL.getItemStack()},
+					{ ComponentTypes.REINFORCED_METAL.getItemStack() ,ComponentTypes.BLANK_UPGRADE.getItemStack(),  ComponentTypes.REINFORCED_METAL.getItemStack()}
 				})
 			.addRecipe(new Object[][] {
 					{Item.redstone,books[2],Item.redstone},
-					{Item.ingotIron,advpcb,Item.ingotIron},
-					{hardmetal,base,hardmetal}
+					{Item.ingotIron, ComponentTypes.ADVANCED_PCB.getItemStack(),Item.ingotIron},
+					{ ComponentTypes.REINFORCED_METAL.getItemStack() ,ComponentTypes.BLANK_UPGRADE.getItemStack(),  ComponentTypes.REINFORCED_METAL.getItemStack()}
 				})
 			.addRecipe(new Object[][] {
 					{null,books[3], null},
-					{Item.ingotIron,pcb,Item.ingotIron},
-					{hardmetal,base,hardmetal}
+					{Item.ingotIron, ComponentTypes.SIMPLE_PCB,Item.ingotIron},
+					{ ComponentTypes.REINFORCED_METAL.getItemStack() ,ComponentTypes.BLANK_UPGRADE.getItemStack(), ComponentTypes.REINFORCED_METAL.getItemStack()}
 				})
 			.addRecipe(new Object[][] {
 					{null,books[4], null},
 					{null,Item.redstone,null},
-					{Item.ingotIron,base,Item.ingotIron}
+					{Item.ingotIron,ComponentTypes.BLANK_UPGRADE.getItemStack(),Item.ingotIron}
 				});
 
 				
@@ -132,74 +125,74 @@ public class AssemblerUpgrade {
 			.addEffect(new WorkEfficiency(1.00F))	
 			.addEffect(new FuelCost(30.00F))
 			.addRecipe(new Object[][] {
-					{magicmetal,books[4], magicmetal},
-					{magicmetal,advpcb, magicmetal},
-					{magicmetal,experienced.getItemStack(),magicmetal}
+					{ComponentTypes.GALGADORIAN_METAL.getItemStack(),books[4], ComponentTypes.GALGADORIAN_METAL.getItemStack()},
+					{ComponentTypes.GALGADORIAN_METAL.getItemStack(), ComponentTypes.ADVANCED_PCB, ComponentTypes.GALGADORIAN_METAL.getItemStack()},
+					{ComponentTypes.GALGADORIAN_METAL.getItemStack(),experienced.getItemStack(),ComponentTypes.GALGADORIAN_METAL.getItemStack()}
 				});
 				
 		new AssemblerUpgrade(6, "CO2 friendly")
 			.addEffect(new FuelCost(-0.15F))
 			.addRecipe(new Object[][] {
 					{null,Block.pistonBase, null},
-					{pcb,Block.fenceIron, pcb},
-					{cleaningfan,base, cleaningfan}
+					{ComponentTypes.SIMPLE_PCB.getItemStack(),Block.fenceIron, ComponentTypes.SIMPLE_PCB.getItemStack()},
+					{ComponentTypes.CLEANING_FAN, ComponentTypes.BLANK_UPGRADE.getItemStack(), ComponentTypes.CLEANING_FAN}
 				});
 				
 		new AssemblerUpgrade(7, "Generic engine")
 			.addEffect(new CombustionFuel())	
 			.addEffect(new FuelCost(0.05F))
 			.addRecipe(new Object[][] {
-					{null, pcb, null},
+					{null, ComponentTypes.SIMPLE_PCB.getItemStack(), null},
 					{Block.pistonBase,Block.furnaceIdle, Block.pistonBase},
-					{Item.ingotIron,base, Item.ingotIron}
+					{Item.ingotIron, ComponentTypes.BLANK_UPGRADE.getItemStack(), Item.ingotIron}
 				});			
 	
 		new AssemblerUpgrade(8, "Module input", 1)
 			.addEffect(new InputChest(7, 3))	
 			.addRecipe(new Object[][] {
-					{null, advpcb, null},
+					{null, ComponentTypes.ADVANCED_PCB.getItemStack(), null},
 					{Block.pistonBase,Block.chest, Block.pistonBase},
-					{Item.ingotIron,base, Item.ingotIron}
+					{Item.ingotIron, ComponentTypes.BLANK_UPGRADE.getItemStack(), Item.ingotIron}
 				});		
 			
 		new AssemblerUpgrade(9, "Production line")
 			.addEffect(new Blueprint())				
 			.addRecipe(new Object[][] {
-					{null, pcb, null},
-					{advpcb,Item.redstone,advpcb},
-					{hardmetal,base, hardmetal}
+					{null, ComponentTypes.SIMPLE_PCB.getItemStack(), null},
+					{ComponentTypes.ADVANCED_PCB.getItemStack(),Item.redstone, ComponentTypes.ADVANCED_PCB.getItemStack()},
+					{ComponentTypes.REINFORCED_METAL.getItemStack(), ComponentTypes.BLANK_UPGRADE.getItemStack(), ComponentTypes.REINFORCED_METAL.getItemStack()}
 				});
 				
 		new AssemblerUpgrade(10, "Cart Deployer")
 			.addEffect(new Deployer())
 			.addRecipe(new Object[][] {
 					{Item.ingotIron, Block.rail, Item.ingotIron},
-					{pcb,Block.pistonBase,pcb},
-					{Item.ingotIron,base, Item.ingotIron}
+					{ComponentTypes.SIMPLE_PCB.getItemStack() ,Block.pistonBase, ComponentTypes.SIMPLE_PCB.getItemStack()},
+					{Item.ingotIron, ComponentTypes.BLANK_UPGRADE.getItemStack(), Item.ingotIron}
 				});			
 
 		new AssemblerUpgrade(11, "Cart Modifier")
 			.addEffect(new Disassemble())
 			.addRecipe(new Object[][] {
 					{Item.ingotIron, null, Item.ingotIron},
-					{pcb,Block.anvil,pcb},
-					{Item.ingotIron,base, Item.ingotIron}
+					{ComponentTypes.SIMPLE_PCB.getItemStack() ,Block.anvil, ComponentTypes.SIMPLE_PCB.getItemStack()},
+					{Item.ingotIron, ComponentTypes.BLANK_UPGRADE.getItemStack(), Item.ingotIron}
 				});		
 				
 		new AssemblerUpgrade(12, "Cart Crane")
 			.addEffect(new Transposer())
 			.addRecipe(new Object[][] {
 					{Block.pistonBase, Block.rail, Block.pistonBase},
-					{pcb, Item.ingotIron,pcb},
-					{null,base, null}
+					{ComponentTypes.SIMPLE_PCB.getItemStack(), Item.ingotIron, ComponentTypes.SIMPLE_PCB.getItemStack()},
+					{null, ComponentTypes.BLANK_UPGRADE.getItemStack(), null}
 				});				
 
 		new AssemblerUpgrade(13, "Redstone Control")
 			.addEffect(new Redstone())
 			.addRecipe(new Object[][] {
-					{pcb, Item.redstoneRepeater, pcb},
-					{Block.torchRedstoneActive, advpcb, Block.torchRedstoneActive},
-					{Item.redstone,base, Item.redstone}
+					{ComponentTypes.SIMPLE_PCB.getItemStack(), Item.redstoneRepeater, ComponentTypes.SIMPLE_PCB.getItemStack()},
+					{Block.torchRedstoneActive, ComponentTypes.ADVANCED_PCB.getItemStack(), Block.torchRedstoneActive},
+					{Item.redstone, ComponentTypes.BLANK_UPGRADE.getItemStack(), Item.redstone}
 				});	
 				
 		new AssemblerUpgrade(14, "Creative Mode")
@@ -211,18 +204,18 @@ public class AssemblerUpgrade {
 		new AssemblerUpgrade(15, "Quick Demolisher")
 			.addEffect(new TimeFlatRemoved(-8000))
 			.addRecipe(new Object[][] {
-				{Block.obsidian,hardmetal, Block.obsidian},
-				{hardmetal,Block.blockIron,hardmetal},
-				{Block.obsidian,base, Block.obsidian}
+				{Block.obsidian, ComponentTypes.REINFORCED_METAL.getItemStack(), Block.obsidian},
+				{ComponentTypes.REINFORCED_METAL.getItemStack() ,Block.blockIron, ComponentTypes.REINFORCED_METAL.getItemStack()},
+				{Block.obsidian, ComponentTypes.BLANK_UPGRADE.getItemStack(), Block.obsidian}
 			});	
 
 		new AssemblerUpgrade(16, "Entropy")
 			.addEffect(new TimeFlatRemoved(-32000))
 			.addEffect(new TimeFlat(3000))			
 			.addRecipe(new Object[][] {
-				{magicTingy,hardmetal,null},
+				{ComponentTypes.EYE_OF_GALGADOR.getItemStack(), ComponentTypes.REINFORCED_METAL.getItemStack(),null},
 				{Item.diamond,Block.blockLapis,Item.diamond},
-				{null,demolisher.getItemStack(),magicTingy}
+				{null,demolisher.getItemStack(), ComponentTypes.EYE_OF_GALGADOR.getItemStack()}
 			});		
 		
 		new AssemblerUpgrade(17, "Manager Bridge")
@@ -230,8 +223,8 @@ public class AssemblerUpgrade {
 		.addEffect(new TimeFlatCart(200))
 		.addRecipe(new Object[][] {
 				{Item.ingotIron, Item.enderPearl, Item.ingotIron},
-				{pcb, Blocks.EXTERNAL_DISTRIBUTOR.getBlock(), pcb},
-				{Item.ingotIron, base, Item.ingotIron}
+				{ComponentTypes.SIMPLE_PCB.getItemStack(), Blocks.EXTERNAL_DISTRIBUTOR.getBlock(), ComponentTypes.SIMPLE_PCB.getItemStack()},
+				{Item.ingotIron,  ComponentTypes.BLANK_UPGRADE.getItemStack(), Item.ingotIron}
 			});			
 			
 
@@ -239,20 +232,19 @@ public class AssemblerUpgrade {
 		.addEffect(new ThermalFuel())
 		.addEffect(new FuelCost(0.05F))
 		.addRecipe(new Object[][] {
-				{Block.netherBrick, advpcb, Block.netherBrick},
+				{Block.netherBrick, ComponentTypes.ADVANCED_PCB.getItemStack(), Block.netherBrick},
 				{Block.pistonBase,Block.furnaceIdle, Block.pistonBase},
-				{Block.obsidian,base, Block.obsidian}
+				{Block.obsidian, ComponentTypes.BLANK_UPGRADE.getItemStack(), Block.obsidian}
 			});			
 
 
-		ItemStack solarpanel = new ItemStack(Items.component, 1 , 44);
 		
 		new AssemblerUpgrade(19, "Solar Panel")
 			.addEffect(new Solar())
 			.addRecipe(new Object[][] {
-					{solarpanel,solarpanel,solarpanel},
+					{ComponentTypes.SOLAR_PANEL.getItemStack(), ComponentTypes.SOLAR_PANEL.getItemStack(), ComponentTypes.SOLAR_PANEL.getItemStack()},
 					{Item.diamond, Item.redstone,Item.diamond},
-					{Item.redstone, base,Item.redstone}
+					{Item.redstone, ComponentTypes.BLANK_UPGRADE.getItemStack(),Item.redstone}
 				});	
 		
 

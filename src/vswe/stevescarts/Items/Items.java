@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.common.Configuration;
 import vswe.stevescarts.Blocks.Blocks;
+import vswe.stevescarts.Helpers.ComponentTypes;
 import vswe.stevescarts.Helpers.DetectorType;
 import vswe.stevescarts.Helpers.GiftItem;
 import vswe.stevescarts.Helpers.RecipeHelper;
@@ -136,49 +137,46 @@ public final class Items {
 
         String planks = "plankWood"; //ore dict
         String wood = "logWood"; //ore dict
-        ItemStack sapling = new ItemStack(Block.sapling, 1, -1);
+        String red = "dyeRed";
+        String green = "dyeGreen";
+        String blue = "dyeBlue";
+        String orange = "dyeOrange";
+        String yellow = "dyeYellow";
+
 
         //wooden wheels
-        RecipeHelper.addRecipe(new ItemStack(component, 1, 0), new Object[][]{
+        RecipeHelper.addRecipe(ComponentTypes.WOODEN_WHEELS.getItemStack(), new Object[][]{
                 {null, Item.stick, null},
                 {Item.stick, planks, Item.stick},
                 {null, Item.stick, null}
         });
 
         //iron wheels
-        RecipeHelper.addRecipe(new ItemStack(component, 1 , 1), new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.IRON_WHEELS.getItemStack(), new Object[][] {
                 {null, Item.stick, null},
                 {Item.stick, Item.ingotIron, Item.stick},
                 {null, Item.stick, null}
         });
 
-        String red = "dyeRed";
-        String green = "dyeGreen";
-        String blue = "dyeBlue";
-        String orange = "dyeOrange";
-        String yellow = "dyeYellow";
-        String black = "dyeBlack";
-        String white = "dyeWhite";
-        String brown = "dyeBrown";
 
 
 
         //color component (RED)
-        RecipeHelper.addRecipe( new ItemStack(component, 1 , 2), new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.RED_PIGMENT.getItemStack(), new Object[][] {
                 {null, Item.glowstone, null},
                 {red, red, red},
                 {null, Item.glowstone, null}
         });
 
         //color component (GREEN)
-        RecipeHelper.addRecipe(new ItemStack(component, 1 , 3), new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.GREEN_PIGMENT.getItemStack(), new Object[][] {
                 {null, Item.glowstone, null},
                 {green, green, green},
                 {null, Item.glowstone, null}
         });
 
         //color component (BLUE)
-        RecipeHelper.addRecipe(new ItemStack(component, 1 , 4), new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.BLUE_PIGMENT.getItemStack(), new Object[][] {
                 {null, Item.glowstone, null},
                 {blue, blue, blue},
                 {null, Item.glowstone, null}
@@ -186,152 +184,131 @@ public final class Items {
 
 
         //magic glass
-        RecipeHelper.addRecipe(new ItemStack(component, 1 , 5), new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.GLASS_O_MAGIC.getItemStack(), new Object[][] {
                 {Block.thinGlass, Item.fermentedSpiderEye, Block.thinGlass},
                 {Block.thinGlass, Item.redstone, Block.thinGlass},
                 {Block.thinGlass, Block.thinGlass, Block.thinGlass}
         });
 
-        ItemStack fuse = new ItemStack(component, 12, 43);
 
         //fuse
-        RecipeHelper.addRecipe(fuse, new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.FUSE.getItemStack(12), new Object[][] {
                 {Item.silk},
                 {Item.silk},
                 {Item.silk}
         });
 
         //dynamite
-        RecipeHelper.addRecipe(new ItemStack(component, 1 , 6), new Object[][] {
-                {fuse},
+        RecipeHelper.addRecipe(ComponentTypes.DYNAMITE.getItemStack(), new Object[][] {
+                {ComponentTypes.FUSE.getItemStack()},
                 {Item.gunpowder},
                 {Item.gunpowder}
         });
 
-        ItemStack smalltank = new ItemStack(component, 1 , 7);
 
-        //small tank
-        RecipeHelper.addRecipe(smalltank, new Object[][] {
-                {Block.thinGlass,  Item.bucketEmpty, Block.thinGlass},
-                {Block.glass, null, Block.glass},
-                {Block.thinGlass, Item.bucketEmpty, Block.thinGlass}
-        });
 
-        //big tank
-        RecipeHelper.addRecipe(new ItemStack(component, 1 , 8), new Object[][] {
-                {Block.thinGlass, smalltank, Block.thinGlass},
-                {Block.glass, null, Block.glass},
-                {Block.thinGlass, smalltank, Block.thinGlass}
-        });
 
-        ItemStack pcb = new ItemStack(component, 1 , 9);
 
         //pcb
-        RecipeHelper.addRecipe(pcb, new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.SIMPLE_PCB.getItemStack(), new Object[][] {
                 {Item.ingotIron,Item.redstone,Item.ingotIron},
                 {Item.redstone,Item.ingotGold,Item.redstone},
                 {Item.ingotIron,Item.redstone,Item.ingotIron}
         });
-        RecipeHelper.addRecipe(pcb, new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.SIMPLE_PCB.getItemStack(), new Object[][] {
                 {Item.redstone,Item.ingotIron,Item.redstone},
                 {Item.ingotIron,Item.ingotGold,Item.ingotIron},
                 {Item.redstone,Item.ingotIron,Item.redstone}
         });
 
         //screen
-        RecipeHelper.addRecipe(new ItemStack(component, 1 , 10), new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.GRAPHICAL_INTERFACE.getItemStack(), new Object[][] {
                 {Item.ingotGold,Item.diamond,Item.ingotGold},
-                {Block.thinGlass,pcb,Block.thinGlass},
+                {Block.thinGlass,ComponentTypes.SIMPLE_PCB.getItemStack(),Block.thinGlass},
                 {Item.redstone,Block.thinGlass,Item.redstone}
         });
 
-        ItemStack prehandle = new ItemStack(component, 1 , 11);
-        ItemStack handle = new ItemStack(component, 1 , 12);
-
         //unrefined handle
-        RecipeHelper.addRecipe(prehandle,new Object[][] {{null, null, Item.ingotIron},
+        RecipeHelper.addRecipe(ComponentTypes.RAW_HANDLE.getItemStack(),new Object[][] {{null, null, Item.ingotIron},
                 {null, Item.ingotIron, null},
                 {Item.ingotIron, null, null}
         });
 
-        FurnaceRecipes.smelting().addSmelting(component.itemID, prehandle.getItemDamage(), handle, 0F);
+        FurnaceRecipes.smelting().addSmelting(component.itemID, ComponentTypes.RAW_HANDLE.getId(), ComponentTypes.REFINED_HANDLE.getItemStack(), 0F);
 
         //speed handle
-        RecipeHelper.addRecipe(new ItemStack(component, 1 , 13),new Object[][] {{null, null, blue},
-                {Item.ingotGold, handle, null},
+        RecipeHelper.addRecipe(ComponentTypes.SPEED_HANDLE.getItemStack(),new Object[][] {{null, null, blue},
+                {Item.ingotGold, ComponentTypes.REFINED_HANDLE.getItemStack(), null},
                 {Item.redstone, Item.ingotGold, null}
         });
 
         //wheel
-        RecipeHelper.addRecipe(new ItemStack(component, 1 , 14),new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.WHEEL.getItemStack(),new Object[][] {
                 {Item.ingotIron,Item.stick,Item.ingotIron},
                 {Item.stick,Item.ingotIron,Item.stick},
                 {null,Item.stick,null}
         });
 
         //saw head
-        RecipeHelper.addRecipe(new ItemStack(component, 1 , 15),new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.SAW_BLADE.getItemStack(),new Object[][] {
                 {Item.ingotIron,Item.ingotIron,Item.diamond}
         });
 
 
-        ItemStack advpcb = new ItemStack(component, 1 , 16);
 
         //advanced pcb
-        RecipeHelper.addRecipe(advpcb,new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.ADVANCED_PCB.getItemStack(),new Object[][] {
                 {Item.redstone,Item.ingotIron,Item.redstone},
-                {pcb,Item.ingotIron,pcb},
+                {ComponentTypes.SIMPLE_PCB.getItemStack(),Item.ingotIron,ComponentTypes.SIMPLE_PCB.getItemStack()},
                 {Item.redstone,Item.ingotIron,Item.redstone},
         });
 
         //wood cutter
-        RecipeHelper.addRecipe(new ItemStack(component, 1 , 17),new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.WOOD_CUTTING_CORE.getItemStack(),new Object[][] {
                 {"treeSapling","treeSapling","treeSapling"},
-                {"treeSapling",advpcb,"treeSapling"},
+                {"treeSapling",ComponentTypes.ADVANCED_PCB.getItemStack(),"treeSapling"},
                 {"treeSapling","treeSapling","treeSapling"}
         });
 
 
-        ItemStack rawhardstuff = new ItemStack(component, 2 , 18);
-        ItemStack hardstuff = new ItemStack(component, 1 , 19);
 
-        RecipeHelper.addRecipe(rawhardstuff,new Object[][] {
+
+        RecipeHelper.addRecipe(ComponentTypes.RAW_HARDENER.getItemStack(2),new Object[][] {
                 {Block.obsidian,null,Block.obsidian},
                 {null,Item.diamond,null},
                 {Block.obsidian,null,Block.obsidian}
         });
 
 
-        FurnaceRecipes.smelting().addSmelting(component.itemID, rawhardstuff.getItemDamage(), hardstuff, 0F);
+        FurnaceRecipes.smelting().addSmelting(component.itemID, ComponentTypes.RAW_HARDENER.getId(), ComponentTypes.REFINED_HARDENER.getItemStack(), 0F);
 
-        ItemStack hardmesh = new ItemStack(component, 1 , 20);
+
 
         //hardened mesh
-        RecipeHelper.addRecipe(hardmesh,new Object[][] {
-                {Block.fenceIron,hardstuff,Block.fenceIron},
-                {hardstuff,Block.fenceIron,hardstuff},
-                {Block.fenceIron,hardstuff,Block.fenceIron}
+        RecipeHelper.addRecipe(ComponentTypes.HARDENED_MESH.getItemStack(),new Object[][] {
+                {Block.fenceIron,ComponentTypes.REFINED_HARDENER.getItemStack(),Block.fenceIron},
+                {ComponentTypes.REFINED_HARDENER.getItemStack(),Block.fenceIron,ComponentTypes.REFINED_HARDENER.getItemStack()},
+                {Block.fenceIron,ComponentTypes.REFINED_HARDENER.getItemStack(),Block.fenceIron}
         });
 
-        ItemStack rawhardmetal = new ItemStack(component, 5 , 21);
-        ItemStack hardmetal = new ItemStack(component, 1 , 22);
+
 
         //hardened metal
-        RecipeHelper.addRecipe(rawhardmetal,new Object[][] {
-                {Item.ingotIron,hardmesh,Item.ingotIron},
+        RecipeHelper.addRecipe(ComponentTypes.STABILIZED_METAL.getItemStack(5),new Object[][] {
+                {Item.ingotIron,ComponentTypes.HARDENED_MESH.getItemStack(),Item.ingotIron},
                 {Item.ingotIron,Item.ingotIron,Item.ingotIron},
-                {hardstuff,hardmesh,hardstuff}
+                {ComponentTypes.REFINED_HARDENER.getItemStack(),ComponentTypes.REFINED_HARDENER.getItemStack(),ComponentTypes.REFINED_HARDENER.getItemStack()}
         });
 
-        FurnaceRecipes.smelting().addSmelting(component.itemID, rawhardmetal.getItemDamage(), hardmetal, 0F);
+        FurnaceRecipes.smelting().addSmelting(component.itemID, ComponentTypes.STABILIZED_METAL.getId(), ComponentTypes.REINFORCED_METAL.getItemStack(), 0F);
 
 
 
 
         //hardened wheels
-        RecipeHelper.addRecipe(new ItemStack(component, 1 , 23),new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.REINFORCED_WHEELS.getItemStack(),new Object[][] {
                 {null,Item.ingotIron,null},
-                {Item.ingotIron,hardmetal,Item.ingotIron},
+                {Item.ingotIron,ComponentTypes.REINFORCED_METAL.getItemStack(),Item.ingotIron},
                 {null,Item.ingotIron,null}
         });
 
@@ -339,59 +316,54 @@ public final class Items {
 
 
         //pipe
-        RecipeHelper.addRecipe(new ItemStack(component, 1 , 24), new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.PIPE.getItemStack(), new Object[][] {
                 {Block.stone,Block.stone,Block.stone},
                 {Item.ingotIron,null,null}
         });
 
         //shooting core
-        RecipeHelper.addRecipe(new ItemStack(component, 1 , 25), new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.SHOOTING_STATION.getItemStack(), new Object[][] {
                 {Item.redstone,null,Item.redstone},
                 {Item.redstone,Item.ingotGold,Item.redstone},
-                {Block.dispenser,pcb,Block.dispenser}
+                {Block.dispenser,ComponentTypes.SIMPLE_PCB.getItemStack(),Block.dispenser}
         });
 
         //mob scanner
-        RecipeHelper.addRecipe(new ItemStack(component, 1 , 26), new Object[][] {
-                {Item.ingotGold,pcb,Item.ingotGold},
-                {Item.redstone,advpcb,Item.redstone},
+        RecipeHelper.addRecipe(ComponentTypes.ENTITY_SCANNER.getItemStack(), new Object[][] {
+                {Item.ingotGold,ComponentTypes.SIMPLE_PCB.getItemStack(),Item.ingotGold},
+                {Item.redstone,ComponentTypes.ADVANCED_PCB.getItemStack(),Item.redstone},
                 {Item.redstone,null,Item.redstone}
         });
 
 
         //entity analyzer
-        RecipeHelper.addRecipe(new ItemStack(component, 1 , 27), new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.ENTITY_ANALYZER.getItemStack(), new Object[][] {
                 {Item.ingotIron,Item.redstone,Item.ingotIron},
-                {Item.ingotIron,pcb,Item.ingotIron},
+                {Item.ingotIron,ComponentTypes.SIMPLE_PCB.getItemStack(),Item.ingotIron},
                 {Item.ingotIron,Item.ingotIron,Item.ingotIron}
         });
 
         //empty entity disk
-        RecipeHelper.addRecipe(new ItemStack(component, 1 , 28), new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.EMPTY_DISK.getItemStack(), new Object[][] {
                 {Item.redstone},
-                {pcb}
+                {ComponentTypes.SIMPLE_PCB.getItemStack()}
         });
 
 
 
         //tri-torch
-        RecipeHelper.addRecipe(new ItemStack(component, 1 , 29), new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.TRI_TORCH.getItemStack(), new Object[][] {
                 {Block.torchWood, Block.torchWood, Block.torchWood}
         });
 
-        ItemStack chestThingy = new ItemStack(component, 32 , 30);
-        ItemStack bigChestThingy = new ItemStack(component, 1 , 31);
-        ItemStack hugeChestThingy = new ItemStack(component, 1 , 32);
-        ItemStack chestLock = new ItemStack(component, 8 , 33);
-        ItemStack ironChestThingy = new ItemStack(component, 8 , 34);
-        ItemStack bigIronChestThingy = new ItemStack(component, 1 , 35);
-        ItemStack hugeIronChestThingy = new ItemStack(component, 1 , 36);
-        ItemStack dynamicChestThingy = new ItemStack(component, 1 , 37);
-        ItemStack bigDynamicChestThingy = new ItemStack(component, 1 , 38);
-        ItemStack hugeDynamicChestThingy = new ItemStack(component, 1 , 39);
+
+
+
+
+
 
         //chest thingy
-        RecipeHelper.addRecipe(chestThingy, new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.CHEST_PANE.getItemStack(32), new Object[][] {
                 {planks, planks, planks},
                 {wood, planks, wood},
                 {planks, planks, planks}
@@ -399,78 +371,77 @@ public final class Items {
 
 
         //big chest thingy
-        RecipeHelper.addRecipe(bigChestThingy, new Object[][] {
-                {chestThingy, chestThingy},
-                {chestThingy, chestThingy}
+        RecipeHelper.addRecipe(ComponentTypes.LARGE_CHEST_PANE.getItemStack(), new Object[][] {
+                {ComponentTypes.CHEST_PANE.getItemStack(), ComponentTypes.CHEST_PANE.getItemStack()},
+                {ComponentTypes.CHEST_PANE.getItemStack(), ComponentTypes.CHEST_PANE.getItemStack()}
         });
 
         //large chest thingy
-        RecipeHelper.addRecipe(hugeChestThingy, new Object[][] {
-                {chestThingy,chestThingy,chestThingy},
-                {chestThingy,chestThingy,chestThingy},
-                {chestThingy,chestThingy,chestThingy}
+        RecipeHelper.addRecipe(ComponentTypes.HUGE_CHEST_PANE.getItemStack(), new Object[][] {
+                {ComponentTypes.CHEST_PANE.getItemStack(),ComponentTypes.CHEST_PANE.getItemStack(),ComponentTypes.CHEST_PANE.getItemStack()},
+                {ComponentTypes.CHEST_PANE.getItemStack(),ComponentTypes.CHEST_PANE.getItemStack(),ComponentTypes.CHEST_PANE.getItemStack()},
+                {ComponentTypes.CHEST_PANE.getItemStack(),ComponentTypes.CHEST_PANE.getItemStack(),ComponentTypes.CHEST_PANE.getItemStack()}
         });
 
         //large chest thingy
-        RecipeHelper.addRecipe(chestLock, new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.CHEST_LOCK.getItemStack(8), new Object[][] {
                 {Item.ingotIron},
                 {Block.stone}
         });
-        RecipeHelper.addRecipe(chestLock, new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.CHEST_LOCK.getItemStack(8), new Object[][] {
                 {Block.stone},
                 {Item.ingotIron}
         });
 
         //iron chest thingy
-        RecipeHelper.addRecipe(ironChestThingy, new Object[][] {
-                {chestThingy,chestThingy,chestThingy},
-                {chestThingy,Item.ingotIron,chestThingy},
-                {chestThingy,chestThingy,chestThingy}
+        RecipeHelper.addRecipe(ComponentTypes.IRON_PANE.getItemStack(8), new Object[][] {
+                {ComponentTypes.CHEST_PANE.getItemStack(),ComponentTypes.CHEST_PANE.getItemStack(),ComponentTypes.CHEST_PANE.getItemStack()},
+                {ComponentTypes.CHEST_PANE.getItemStack(),Item.ingotIron,ComponentTypes.CHEST_PANE.getItemStack()},
+                {ComponentTypes.CHEST_PANE.getItemStack(),ComponentTypes.CHEST_PANE.getItemStack(),ComponentTypes.CHEST_PANE.getItemStack()}
         });
 
         //big iron chest thingy
-        RecipeHelper.addRecipe(bigIronChestThingy, new Object[][] {
-                {ironChestThingy, ironChestThingy},
-                {ironChestThingy, ironChestThingy}
+        RecipeHelper.addRecipe(ComponentTypes.LARGE_IRON_PANE.getItemStack(), new Object[][] {
+                {ComponentTypes.IRON_PANE.getItemStack(), ComponentTypes.IRON_PANE.getItemStack()},
+                {ComponentTypes.IRON_PANE.getItemStack(), ComponentTypes.IRON_PANE.getItemStack()}
         });
 
         //large iron chest thingy
-        RecipeHelper.addRecipe(hugeIronChestThingy, new Object[][] {
-                {ironChestThingy,ironChestThingy,ironChestThingy},
-                {ironChestThingy,ironChestThingy,ironChestThingy},
-                {ironChestThingy,ironChestThingy,ironChestThingy}
+        RecipeHelper.addRecipe(ComponentTypes.HUGE_IRON_PANE.getItemStack(), new Object[][] {
+                {ComponentTypes.IRON_PANE.getItemStack(),ComponentTypes.IRON_PANE.getItemStack(),ComponentTypes.IRON_PANE.getItemStack()},
+                {ComponentTypes.IRON_PANE.getItemStack(),ComponentTypes.IRON_PANE.getItemStack(),ComponentTypes.IRON_PANE.getItemStack()},
+                {ComponentTypes.IRON_PANE.getItemStack(),ComponentTypes.IRON_PANE.getItemStack(),ComponentTypes.IRON_PANE.getItemStack()}
         });
 
         //dynamic chest thingy
-        RecipeHelper.addRecipe(dynamicChestThingy, new Object[][] {
-                {ironChestThingy},
+        RecipeHelper.addRecipe(ComponentTypes.DYNAMIC_PANE.getItemStack(), new Object[][] {
+                {ComponentTypes.IRON_PANE.getItemStack()},
                 {Item.redstone}
         });
-        RecipeHelper.addRecipe(dynamicChestThingy, new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.DYNAMIC_PANE.getItemStack(), new Object[][] {
                 {Item.redstone},
-                {ironChestThingy}
+                {ComponentTypes.IRON_PANE.getItemStack()}
         });
 
         //big dynamic chest thingy
-        RecipeHelper.addRecipe(bigDynamicChestThingy, new Object[][] {
-                {null,dynamicChestThingy, null},
-                {dynamicChestThingy,Item.redstone, dynamicChestThingy},
-                {null,dynamicChestThingy, null}
+        RecipeHelper.addRecipe(ComponentTypes.LARGE_DYNAMIC_PANE.getItemStack(), new Object[][] {
+                {null,ComponentTypes.DYNAMIC_PANE.getItemStack(), null},
+                {ComponentTypes.DYNAMIC_PANE.getItemStack(),Item.redstone, ComponentTypes.DYNAMIC_PANE.getItemStack()},
+                {null,ComponentTypes.DYNAMIC_PANE.getItemStack(), null}
         });
 
         //large dynamic chest thingy
-        RecipeHelper.addRecipe(hugeDynamicChestThingy, new Object[][] {
-                {dynamicChestThingy,dynamicChestThingy,dynamicChestThingy},
-                {dynamicChestThingy,pcb,dynamicChestThingy},
-                {dynamicChestThingy,dynamicChestThingy,dynamicChestThingy}
+        RecipeHelper.addRecipe(ComponentTypes.HUGE_DYNAMIC_PANE.getItemStack(), new Object[][] {
+                {ComponentTypes.DYNAMIC_PANE.getItemStack(),ComponentTypes.DYNAMIC_PANE.getItemStack(),ComponentTypes.DYNAMIC_PANE.getItemStack()},
+                {ComponentTypes.DYNAMIC_PANE.getItemStack(),ComponentTypes.SIMPLE_PCB.getItemStack(),ComponentTypes.DYNAMIC_PANE.getItemStack()},
+                {ComponentTypes.DYNAMIC_PANE.getItemStack(),ComponentTypes.DYNAMIC_PANE.getItemStack(),ComponentTypes.DYNAMIC_PANE.getItemStack()}
         });
 
 
-        ItemStack cleaningfan = new ItemStack(component,1,40);
-        ItemStack cleaningtube = new ItemStack(component,2,42);
+
 
         //cleaning fan
-        RecipeHelper.addRecipe(cleaningfan, new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.CLEANING_FAN.getItemStack(), new Object[][] {
                 {Block.fenceIron,Item.redstone,Block.fenceIron},
                 {Item.redstone,null,Item.redstone},
                 {Block.fenceIron,Item.redstone,Block.fenceIron}
@@ -478,156 +449,146 @@ public final class Items {
 
 
         //cleaning core
-        RecipeHelper.addRecipe(new ItemStack(component,1,41), new Object[][] {
-                {cleaningfan,Item.ingotIron,cleaningfan},
-                {cleaningtube,cleaningtube,cleaningtube},
-                {Item.ingotIron,cleaningtube,Item.ingotIron}
+        RecipeHelper.addRecipe(ComponentTypes.CLEANING_CORE.getItemStack(), new Object[][] {
+                {ComponentTypes.CLEANING_FAN.getItemStack(),Item.ingotIron,ComponentTypes.CLEANING_FAN.getItemStack()},
+                {ComponentTypes.CLEANING_TUBE.getItemStack(),ComponentTypes.CLEANING_TUBE.getItemStack(),ComponentTypes.CLEANING_TUBE.getItemStack()},
+                {Item.ingotIron,ComponentTypes.CLEANING_TUBE.getItemStack(),Item.ingotIron}
         });
 
         //cleaning tube
-        RecipeHelper.addRecipe(cleaningtube, new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.CLEANING_TUBE.getItemStack(2), new Object[][] {
                 {orange,Item.ingotIron,orange},
                 {orange,Item.ingotIron,orange},
                 {orange,Item.ingotIron,orange}
         });
 
         //solar panel
-        ItemStack solarpanel = new ItemStack(component,1,44);
-        RecipeHelper.addRecipe(solarpanel,new Object[][] {
+
+        RecipeHelper.addRecipe(ComponentTypes.SOLAR_PANEL.getItemStack(),new Object[][] {
                 {Item.glowstone,Item.redstone},
                 {Item.ingotIron,Item.glowstone}
         });
 
-        ItemStack magicTingy = new ItemStack(component,1,45);
-
 
         //magic thingy
-        RecipeHelper.addRecipe(magicTingy,new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.EYE_OF_GALGADOR.getItemStack(),new Object[][] {
                 {Item.magmaCream,Item.fermentedSpiderEye, Item.magmaCream},
                 {Item.ghastTear, Item.eyeOfEnder,Item.ghastTear},
                 {Item.magmaCream,Item.fermentedSpiderEye, Item.magmaCream}
         });
 
-        ItemStack rawmagicmetal = new ItemStack(component,2,46);
-        ItemStack magicmetal = new ItemStack(component,1,47);
+
+
 
         //magic metal
-        RecipeHelper.addRecipe(rawmagicmetal,new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.LUMP_OF_GALGADOR.getItemStack(2),new Object[][] {
                 {Item.glowstone,Block.blockDiamond, Item.glowstone},
-                {magicTingy, Item.glowstone,magicTingy},
-                {rawhardmetal,magicTingy,rawhardmetal}
+                {ComponentTypes.EYE_OF_GALGADOR.getItemStack(), Item.glowstone,ComponentTypes.EYE_OF_GALGADOR.getItemStack()},
+                {ComponentTypes.STABILIZED_METAL.getItemStack(),ComponentTypes.EYE_OF_GALGADOR.getItemStack(),ComponentTypes.STABILIZED_METAL.getItemStack()}
         });
 
-        FurnaceRecipes.smelting().addSmelting(component.itemID, rawmagicmetal.getItemDamage(), magicmetal, 0F);
+        FurnaceRecipes.smelting().addSmelting(component.itemID, ComponentTypes.LUMP_OF_GALGADOR.getId(), ComponentTypes.GALGADORIAN_METAL.getItemStack(), 0F);
 
 
-        ItemStack rawmagicmetalthing = new ItemStack(component,1,48);
-        ItemStack magicmetalthing = new ItemStack(component,1,49);
 
-        RecipeHelper.addRecipe(rawmagicmetalthing,new Object[][] {
-                {rawmagicmetal,rawmagicmetal,rawmagicmetal},
-                {rawmagicmetal,rawmagicmetal,rawmagicmetal},
-                {rawmagicmetal,rawmagicmetal,rawmagicmetal}
+
+        RecipeHelper.addRecipe(ComponentTypes.LARGE_LUMP_OF_GALGADOR.getItemStack(),new Object[][] {
+                {ComponentTypes.LUMP_OF_GALGADOR.getItemStack(),ComponentTypes.LUMP_OF_GALGADOR.getItemStack(),ComponentTypes.LUMP_OF_GALGADOR.getItemStack()},
+                {ComponentTypes.LUMP_OF_GALGADOR.getItemStack(),ComponentTypes.LUMP_OF_GALGADOR.getItemStack(),ComponentTypes.LUMP_OF_GALGADOR.getItemStack()},
+                {ComponentTypes.LUMP_OF_GALGADOR.getItemStack(),ComponentTypes.LUMP_OF_GALGADOR.getItemStack(),ComponentTypes.LUMP_OF_GALGADOR.getItemStack()}
         });
 
-        FurnaceRecipes.smelting().addSmelting(component.itemID, rawmagicmetalthing.getItemDamage(), magicmetalthing, 0F);
+        FurnaceRecipes.smelting().addSmelting(component.itemID, ComponentTypes.LARGE_LUMP_OF_GALGADOR.getId(), ComponentTypes.ENHANCED_GALGADORIAN_METAL.getItemStack(), 0F);
 
 
-        ItemStack redribbon = new ItemStack(component,1,54);
-        ItemStack yellowribbon = new ItemStack(component,1,55);
 
-        RecipeHelper.addRecipe(redribbon,new Object[][] {
+
+        RecipeHelper.addRecipe(ComponentTypes.RED_GIFT_RIBBON.getItemStack(),new Object[][] {
                 {Item.silk,Item.silk,Item.silk},
                 {Item.silk,red,Item.silk},
                 {Item.silk,Item.silk,Item.silk}
         });
 
-        RecipeHelper.addRecipe(yellowribbon,new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.YELLOW_GIFT_RIBBON.getItemStack(),new Object[][] {
                 {Item.silk,Item.silk,Item.silk},
                 {Item.silk,yellow,Item.silk},
                 {Item.silk,Item.silk,Item.silk}
         });
 
-        RecipeHelper.addRecipe(new ItemStack(component,1,53),new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.WARM_HAT.getItemStack(),new Object[][] {
                 {null,new ItemStack(Block.cloth,1,14),new ItemStack(Block.cloth,1,0)},
                 {new ItemStack(Block.cloth,1,14),Item.diamond,new ItemStack(Block.cloth,1,14)},
                 {new ItemStack(Block.cloth,1,14),new ItemStack(Block.cloth,1,14),new ItemStack(Block.cloth,1,14)}
         });
 
-        RecipeHelper.addRecipe(new ItemStack(component,1,56),new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.SOCK.getItemStack(),new Object[][] {
                 {new ItemStack(Block.cloth,1,14),new ItemStack(Block.cloth,1,14),Item.cookie},
                 {new ItemStack(Block.cloth,1,14),new ItemStack(Block.cloth,1,14),Item.bucketMilk},
                 {new ItemStack(Block.cloth,1,14),new ItemStack(Block.cloth,1,14),new ItemStack(Block.cloth,1,14)}
         });
 
         //advanced panel
-        ItemStack advsolarpanel = new ItemStack(component,1,58);
-        RecipeHelper.addRecipe(advsolarpanel,new Object[][] {
-                {solarpanel,null,solarpanel},
-                {Item.ingotIron, pcb, Item.ingotIron},
-                {solarpanel,null,solarpanel}
+        RecipeHelper.addRecipe(ComponentTypes.ADVANCED_SOLAR_PANEL.getItemStack(),new Object[][] {
+                {ComponentTypes.SOLAR_PANEL.getItemStack(),null,ComponentTypes.SOLAR_PANEL.getItemStack()},
+                {Item.ingotIron, ComponentTypes.SIMPLE_PCB.getItemStack(), Item.ingotIron},
+                {ComponentTypes.SOLAR_PANEL.getItemStack(),null,ComponentTypes.SOLAR_PANEL.getItemStack()}
         });
-        RecipeHelper.addRecipe(advsolarpanel,new Object[][] {
-                {solarpanel,Item.ingotIron,solarpanel},
-                {null, pcb, null},
-                {solarpanel,Item.ingotIron,solarpanel}
+        RecipeHelper.addRecipe(ComponentTypes.ADVANCED_SOLAR_PANEL.getItemStack(),new Object[][] {
+                {ComponentTypes.SOLAR_PANEL.getItemStack(),Item.ingotIron,ComponentTypes.SOLAR_PANEL.getItemStack()},
+                {null, ComponentTypes.SIMPLE_PCB.getItemStack(), null},
+                {ComponentTypes.SOLAR_PANEL.getItemStack(),Item.ingotIron,ComponentTypes.SOLAR_PANEL.getItemStack()}
         });
 
 
         //blank upgrade
-        ItemStack blankupgrade = new ItemStack(component,1,59);
-        RecipeHelper.addRecipe(blankupgrade,new Object[][] {
+
+        RecipeHelper.addRecipe(ComponentTypes.BLANK_UPGRADE.getItemStack(2),new Object[][] {
                 {Item.ingotIron,Item.ingotIron,Item.ingotIron},
-                {hardmetal, Item.redstone, hardmetal},
-                {Item.ingotIron,advpcb,Item.ingotIron}
+                {ComponentTypes.REINFORCED_METAL.getItemStack(), Item.redstone, ComponentTypes.REINFORCED_METAL.getItemStack()},
+                {Item.ingotIron,ComponentTypes.ADVANCED_PCB.getItemStack(),Item.ingotIron}
         });
 
 
-        ItemStack valve = new ItemStack(component, 8 , 60);
-        ItemStack tankpane = new ItemStack(component, 32 , 61);
-        ItemStack largetankpane = new ItemStack(component, 1 , 62);
-        ItemStack hugetankpane = new ItemStack(component, 1 , 63);
-        ItemStack advtank = new ItemStack(modules, 1 , 66);
 
 
         //valve
-        RecipeHelper.addRecipe(valve, new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.TANK_VALVE.getItemStack(8), new Object[][] {
                 {null, Item.ingotIron, null},
                 {Item.ingotIron, Block.fenceIron, Item.ingotIron},
                 {null, Item.ingotIron, null}
         });
 
         //tank pane
-        RecipeHelper.addRecipe(tankpane, new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.TANK_PANE.getItemStack(32), new Object[][] {
                 {Block.thinGlass,  Block.thinGlass, Block.thinGlass},
                 {Block.glass, Block.thinGlass, Block.glass},
                 {Block.thinGlass, Block.thinGlass, Block.thinGlass}
         });
 
         //large tank pane
-        RecipeHelper.addRecipe(largetankpane, new Object[][] {
-                {tankpane,  tankpane},
-                {tankpane, tankpane}
+        RecipeHelper.addRecipe(ComponentTypes.LARGE_TANK_PANE.getItemStack(), new Object[][] {
+                {ComponentTypes.TANK_PANE.getItemStack(),  ComponentTypes.TANK_PANE.getItemStack()},
+                {ComponentTypes.TANK_PANE.getItemStack(), ComponentTypes.TANK_PANE.getItemStack()}
         });
 
         //huge tank pane
-        RecipeHelper.addRecipe(hugetankpane, new Object[][] {
-                {tankpane,  tankpane, tankpane},
-                {tankpane, tankpane, tankpane},
-                {tankpane, tankpane, tankpane}
+        RecipeHelper.addRecipe(ComponentTypes.HUGE_TANK_PANE.getItemStack(), new Object[][] {
+                {ComponentTypes.TANK_PANE.getItemStack(),  ComponentTypes.TANK_PANE.getItemStack(), ComponentTypes.TANK_PANE.getItemStack()},
+                {ComponentTypes.TANK_PANE.getItemStack(), ComponentTypes.TANK_PANE.getItemStack(), ComponentTypes.TANK_PANE.getItemStack()},
+                {ComponentTypes.TANK_PANE.getItemStack(), ComponentTypes.TANK_PANE.getItemStack(), ComponentTypes.TANK_PANE.getItemStack()}
         });
 
-        ItemStack cleaningtubeliquid = new ItemStack(component,2,65);
+
 
         //cleaning core
-        RecipeHelper.addRecipe(new ItemStack(component,1,64), new Object[][] {
-                {cleaningfan,Item.ingotIron,cleaningfan},
-                {cleaningtubeliquid,cleaningtubeliquid,cleaningtubeliquid},
-                {Item.ingotIron,cleaningtubeliquid,Item.ingotIron}
+        RecipeHelper.addRecipe(ComponentTypes.LIQUID_CLEANING_CORE.getItemStack(), new Object[][] {
+                {ComponentTypes.CLEANING_FAN.getItemStack(),Item.ingotIron,ComponentTypes.CLEANING_FAN.getItemStack()},
+                {ComponentTypes.LIQUID_CLEANING_TUBE.getItemStack(),ComponentTypes.LIQUID_CLEANING_TUBE.getItemStack(),ComponentTypes.LIQUID_CLEANING_TUBE.getItemStack()},
+                {Item.ingotIron,ComponentTypes.LIQUID_CLEANING_TUBE.getItemStack(),Item.ingotIron}
         });
 
         //cleaning tube
-        RecipeHelper.addRecipe(cleaningtubeliquid, new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.LIQUID_CLEANING_TUBE.getItemStack(2), new Object[][] {
                 {green,Item.ingotIron,green},
                 {green,Item.ingotIron,green},
                 {green,Item.ingotIron,green}
@@ -635,25 +596,20 @@ public final class Items {
 
 
         //Easter Eggs, really, Eggs you paint at Easter. Those kind of Easter Eggs.
-        ItemStack easterEggExplosive = new ItemStack(component,1,66);
-        ItemStack easterEggBurning = new ItemStack(component,1,67);
-        ItemStack easterEggGlistering = new ItemStack(component,1,68);
-        ItemStack easterEggChocolate = new ItemStack(component,1,69);
 
-
-        RecipeHelper.addRecipe(easterEggExplosive, new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.EXPLOSIVE_EASTER_EGG.getItemStack(), new Object[][] {
                 {Item.gunpowder,Item.gunpowder,Item.gunpowder},
                 {Item.gunpowder,Item.egg,Item.gunpowder},
                 {Item.gunpowder,green,Item.gunpowder}
         });
 
-        RecipeHelper.addRecipe(easterEggBurning, new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.BURNING_EASTER_EGG.getItemStack(), new Object[][] {
                 {Item.blazePowder,Item.blazeRod,Item.blazePowder},
                 {Item.blazePowder,Item.egg,Item.blazePowder},
                 {red,Item.magmaCream,yellow}
         });
 
-        RecipeHelper.addRecipe(easterEggGlistering, new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.GLISTERING_EASTER_EGG.getItemStack(), new Object[][] {
                 {Item.goldNugget,Item.goldNugget,Item.goldNugget},
                 {Item.goldNugget,Item.egg,Item.goldNugget},
                 {Item.goldNugget,blue,Item.goldNugget}
@@ -661,15 +617,13 @@ public final class Items {
 
         ItemStack chocolate = new ItemStack(Item.dyePowder, 1, 3);
 
-        RecipeHelper.addRecipe(easterEggChocolate, new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.CHOCOLATE_EASTER_EGG.getItemStack(), new Object[][] {
                 {chocolate, Item.sugar, chocolate},
                 {chocolate,Item.egg,chocolate},
                 {chocolate, Item.sugar, chocolate}
         });
 
-        ItemStack basket = new ItemStack(component,1,71);
-
-        RecipeHelper.addRecipe(basket, new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.BASKET.getItemStack(), new Object[][] {
                 {Item.stick, Item.stick, Item.stick},
                 {Item.stick,null,Item.stick},
                 {planks, planks, planks}
@@ -689,25 +643,25 @@ public final class Items {
 
 
         //higher tier saw heads
-        RecipeHelper.addRecipe(new ItemStack(component, 1 , 80),new Object[][] {
-                {Item.ingotIron,Item.ingotIron, hardmetal}
+        RecipeHelper.addRecipe(ComponentTypes.HARDENED_SAW_BLADE.getItemStack(),new Object[][] {
+                {Item.ingotIron,Item.ingotIron, ComponentTypes.REINFORCED_METAL.getItemStack()}
         });
-        RecipeHelper.addRecipe(new ItemStack(component, 1 , 81),new Object[][] {
-                {Item.ingotIron,Item.ingotIron, magicmetal}
+        RecipeHelper.addRecipe(ComponentTypes.GALGADORIAN_SAW_BLADE.getItemStack(),new Object[][] {
+                {Item.ingotIron,Item.ingotIron, ComponentTypes.GALGADORIAN_METAL.getItemStack()}
         });
 
         //galgadorian wheels
-        RecipeHelper.addRecipe(new ItemStack(component, 1 , 82),new Object[][] {
-                {null, hardmetal, null},
-                {hardmetal, magicmetal, hardmetal},
-                {null, hardmetal, null}
+        RecipeHelper.addRecipe(ComponentTypes.GALGADORIAN_WHEELS.getItemStack(),new Object[][] {
+                {null, ComponentTypes.REINFORCED_METAL.getItemStack(), null},
+                {ComponentTypes.REINFORCED_METAL.getItemStack(), ComponentTypes.GALGADORIAN_METAL.getItemStack(), ComponentTypes.REINFORCED_METAL.getItemStack()},
+                {null, ComponentTypes.REINFORCED_METAL.getItemStack(), null}
         });
 
 
-        ItemStack ironblade = new ItemStack(component, 8 , 83);
+
 
         //iron blade
-        RecipeHelper.addRecipe(ironblade,new Object[][] {
+        RecipeHelper.addRecipe(ComponentTypes.IRON_BLADE.getItemStack(4),new Object[][] {
                 {null, Item.shears, null},
                 {Item.ingotIron, Item.ingotIron, Item.ingotIron},
                 {null, Item.ingotIron, null}
@@ -715,10 +669,10 @@ public final class Items {
 
 
         //blade arm
-        RecipeHelper.addRecipe(new ItemStack(component, 1 , 84),new Object[][] {
-                {ironblade, null, ironblade},
-                {null, hardmetal, null},
-                {ironblade, null, ironblade}
+        RecipeHelper.addRecipe(ComponentTypes.BLADE_ARM.getItemStack(),new Object[][] {
+                {ComponentTypes.IRON_BLADE.getItemStack(), null, ComponentTypes.IRON_BLADE.getItemStack()},
+                {null, Item.ingotIron, null},
+                {ComponentTypes.IRON_BLADE.getItemStack(), null, ComponentTypes.IRON_BLADE.getItemStack()}
         });
 
 

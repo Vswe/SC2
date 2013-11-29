@@ -1,6 +1,7 @@
 package vswe.stevescarts.Items;
 import java.util.List;
 
+import vswe.stevescarts.Helpers.ComponentTypes;
 import vswe.stevescarts.Helpers.StorageBlock;
 import vswe.stevescarts.TileEntities.TileEntityBase;
 
@@ -26,9 +27,9 @@ public class ItemBlockStorage extends ItemBlock
 	
 	public static void init() {
 		blocks = new StorageBlock[] {
-			new StorageBlock("Reinforced Metal Block", new ItemStack(Items.component, 1, 22)),
-			new StorageBlock("Galgadorian Block", new ItemStack(Items.component, 1, 47)),
-			new StorageBlock("Enhanced Galgadorian Block", new ItemStack(Items.component, 1, 49)),
+			new StorageBlock("Reinforced Metal Block", ComponentTypes.REINFORCED_METAL.getItemStack()),
+			new StorageBlock("Galgadorian Block", ComponentTypes.GALGADORIAN_METAL.getItemStack()),
+			new StorageBlock("Enhanced Galgadorian Block", ComponentTypes.ENHANCED_GALGADORIAN_METAL.getItemStack()),
 		};		
 	}
 	

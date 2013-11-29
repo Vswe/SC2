@@ -1,6 +1,7 @@
 package vswe.stevescarts.Modules.Realtimers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevescarts.Helpers.ComponentTypes;
 import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Carts.MinecartModular;
@@ -189,7 +190,7 @@ public class ModuleDynamite extends ModuleBase {
 			f += getStack(0).stackSize * 5;
 		}*/
 		
-		if (getStack(0) != null && getStack(0).getItem().itemID == Items.component.itemID && getStack(0).getItemDamage() == 6) {
+		if (ComponentTypes.DYNAMITE.isStackOfType(getStack(0))) {
 			f += getStack(0).stackSize * 2;
 		}
 		

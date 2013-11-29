@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import vswe.stevescarts.Helpers.ComponentTypes;
 import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.StevesCarts;
 
@@ -31,7 +32,7 @@ public class MobDeathListener {
 			if (monster instanceof EntityMob) {
 
 				if (Math.random() < 0.10d) {							
-					dropItem(monster, new ItemStack(Items.component, 1, 50));
+					dropItem(monster, ComponentTypes.STOLEN_PRESENT.getItemStack());
 				}
 			}			
 		}
@@ -45,7 +46,7 @@ public class MobDeathListener {
 			}
 		}else*/ if(monster instanceof EntityBlaze) {
 			if (Math.random() < 0.12/*0.05d*/) {
-				dropItem(monster, new ItemStack(Items.component, 1, 52));
+				dropItem(monster, ComponentTypes.RED_WRAPPING_PAPER.getItemStack());
 			}
 		}
 	}

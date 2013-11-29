@@ -1,6 +1,7 @@
 package vswe.stevescarts.Slots;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import vswe.stevescarts.Helpers.ComponentTypes;
 import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.StevesCarts;
 
@@ -18,6 +19,6 @@ public class SlotExplosion extends SlotBase implements ISlotExplosions
 
     public boolean isItemValid(ItemStack itemstack)
     {
-        return itemstack.getItem().itemID == Items.component.itemID && itemstack.getItemDamage() == 6;
+        return ComponentTypes.DYNAMITE.isStackOfType(itemstack);
     }
 }
