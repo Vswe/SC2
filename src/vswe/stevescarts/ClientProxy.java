@@ -7,6 +7,7 @@ import vswe.stevescarts.Helpers.CapeHandler;
 import vswe.stevescarts.Helpers.EntityCake;
 import vswe.stevescarts.Helpers.EntityEasterEgg;
 import vswe.stevescarts.Helpers.SoundHandler;
+import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.Renders.RendererMinecart;
 import vswe.stevescarts.Renders.RendererMinecartItem;
 import vswe.stevescarts.Renders.RendererUpgrade;
@@ -22,7 +23,7 @@ public class ClientProxy extends CommonProxy{
 	@Override
 	public void renderInit() {
 		RenderingRegistry.registerEntityRenderingHandler(MinecartModular.class, new RendererMinecart());
-		RenderingRegistry.registerEntityRenderingHandler(EntityEasterEgg.class, new RenderSnowball(StevesCarts.instance.component, 70));
+		RenderingRegistry.registerEntityRenderingHandler(EntityEasterEgg.class, new RenderSnowball(Items.component, 70));
 		StevesCarts.instance.blockRenderer = new RendererUpgrade();
 		new RendererMinecartItem();
 		RenderingRegistry.registerEntityRenderingHandler(EntityCake.class, new RenderSnowball(Item.cake));

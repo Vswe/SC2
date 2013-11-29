@@ -3,6 +3,7 @@ import java.util.EnumSet;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.StevesCarts;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
@@ -46,10 +47,10 @@ public class PlayerSleepListener implements ITickHandler
 		if (type.contains(TickType.PLAYER)) {
 			EntityPlayer player =  (EntityPlayer)tickData[0];
 			
-			if (StevesCarts.instance.isChristmas && player.isPlayerFullyAsleep()) {
+			if (StevesCarts.isChristmas && player.isPlayerFullyAsleep()) {
 				for (int i = 0; i < player.inventory.getSizeInventory();i++) {
 					ItemStack item = player.inventory.getStackInSlot(i);
-					if (item != null && item.getItem() == StevesCarts.instance.component && item.getItemDamage() == 56) {
+					if (item != null && item.getItem() == Items.component && item.getItemDamage() == 56) {
 						item.setItemDamage(item.getItemDamage() + 1);
 					}
 				}

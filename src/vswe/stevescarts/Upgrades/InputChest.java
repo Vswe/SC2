@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Containers.ContainerCartAssembler;
 import vswe.stevescarts.Helpers.TransferHandler;
@@ -55,7 +56,7 @@ public class InputChest extends SimpleInventoryEffect {
 					ItemStack itemstack = upgrade.getStackInSlot(slotId);
 					if (itemstack != null) {
 					
-						ModuleData module = StevesCarts.instance.modules.getModuleData(itemstack);
+						ModuleData module = Items.modules.getModuleData(itemstack);
 						if (module == null) {
 							continue;
 						}		

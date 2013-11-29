@@ -12,6 +12,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.PacketHandler;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Containers.ContainerCartAssembler;
@@ -76,7 +77,7 @@ public class GuiCartAssembler extends GuiBase
 			addText(lines,"To start making a cart, please add a Cart Hull of your choice to the Hull Slot.");
 			hasErrors = true;
 		}else{
-			ModuleData hulldata = StevesCarts.modules.getModuleData(assembler.getStackInSlot(0));
+			ModuleData hulldata = Items.modules.getModuleData(assembler.getStackInSlot(0));
 			if (hulldata == null || !(hulldata instanceof ModuleDataHull)) {
 				addText(lines,"The Cart Hull added to the Hull Slot is not a valid Hull. This should not be possible so you've probably done something strange.",0x9E0B0E);
 				hasErrors = true;

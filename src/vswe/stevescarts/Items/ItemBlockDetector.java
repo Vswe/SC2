@@ -1,9 +1,8 @@
 package vswe.stevescarts.Items;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+
 import vswe.stevescarts.StevesCarts;
 
 public class ItemBlockDetector extends ItemBlock {

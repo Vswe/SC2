@@ -10,6 +10,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Containers.ContainerBase;
 import vswe.stevescarts.Containers.ContainerCargo;
@@ -59,9 +60,9 @@ public class TileEntityCargo extends TileEntityManager
 	
 	public static void loadSelectionSettings() {
 		itemSelections = new ArrayList<CargoItemSelection>();
-		itemSelections.add(new CargoItemSelection("All slots", Slot.class, new ItemStack(StevesCarts.carts, 1, 0)));
-		itemSelections.add(new CargoItemSelection("Engine", SlotFuel.class, new ItemStack(StevesCarts.modules, 1, 0)));
-		itemSelections.add(new CargoItemSelection("Railers", SlotBuilder.class, new ItemStack(StevesCarts.modules, 1, 10)));
+		itemSelections.add(new CargoItemSelection("All slots", Slot.class, new ItemStack(Items.carts, 1, 0)));
+		itemSelections.add(new CargoItemSelection("Engine", SlotFuel.class, new ItemStack(Items.modules, 1, 0)));
+		itemSelections.add(new CargoItemSelection("Railers", SlotBuilder.class, new ItemStack(Items.modules, 1, 10)));
 		itemSelections.add(new CargoItemSelection("Storage slots", SlotChest.class, new ItemStack(Block.chest, 1)));
 		itemSelections.add(new CargoItemSelection("Torches", SlotTorch.class, new ItemStack(Block.torchWood, 1)));
 		itemSelections.add(new CargoItemSelection("Explosives", ISlotExplosions.class, new ItemStack(Block.tnt, 1)));

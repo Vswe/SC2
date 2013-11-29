@@ -1,4 +1,5 @@
 package vswe.stevescarts.Slots;
+import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Helpers.TransferHandler.TRANSFER_TYPE;
 import net.minecraft.block.Block;
@@ -15,7 +16,7 @@ public class SlotCakeDynamite extends SlotCake implements ISlotExplosions
 
     public boolean isItemValid(ItemStack itemstack)
     {
-        return super.isItemValid(itemstack) || (itemstack != null && itemstack.getItem().itemID == StevesCarts.component.itemID && itemstack.getItemDamage() == 6);
+        return super.isItemValid(itemstack) || (itemstack != null && itemstack.getItem().itemID == Items.component.itemID && itemstack.getItemDamage() == 6);
     }
 
 

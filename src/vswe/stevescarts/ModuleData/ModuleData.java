@@ -13,6 +13,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Icon;
+import vswe.stevescarts.Helpers.RecipeHelper;
+import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.Modules.Workers.*;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Carts.MinecartModular;
@@ -182,99 +184,99 @@ public class ModuleData {
 		String wood = "logWood"; //ore dict
 		
 		ItemStack woodSingleSlab = new ItemStack(Block.woodSingleSlab, 1, -1);
-	
-		ItemStack woodenWheels = new ItemStack(StevesCarts.instance.component, 1 , 0);
-		ItemStack ironWheels = new ItemStack(StevesCarts.instance.component, 1 , 1);
-	
-		ItemStack redComponent = new ItemStack(StevesCarts.instance.component, 1 , 2);
-		ItemStack greenComponent = new ItemStack(StevesCarts.instance.component, 1 , 3);
-		ItemStack blueComponent = new ItemStack(StevesCarts.instance.component, 1 , 4);	
-	
-		ItemStack magicGlass = new ItemStack(StevesCarts.instance.component, 1 , 5);	
-		ItemStack dynamite = new ItemStack(StevesCarts.instance.component, 1 , 6);	
-		
-		ItemStack smalltank = new ItemStack(StevesCarts.instance.component, 1 , 7);	
-		ItemStack bigtank = new ItemStack(StevesCarts.instance.component, 1 , 8);	
-		
-		ItemStack pcb = new ItemStack(StevesCarts.instance.component, 1 , 9);
-		
-		ItemStack screen = new ItemStack(StevesCarts.instance.component, 1 , 10);
-		ItemStack handle = new ItemStack(StevesCarts.instance.component, 1 , 12);
-		ItemStack speedhandle = new ItemStack(StevesCarts.instance.component, 1 , 13);
-		ItemStack wheel = new ItemStack(StevesCarts.instance.component, 1 , 14);
-		
-		ItemStack saw = new ItemStack(StevesCarts.instance.component, 1 , 15);
-		ItemStack advpcb = new ItemStack(StevesCarts.instance.component, 1 , 16);
-		ItemStack woodcore = new ItemStack(StevesCarts.instance.component, 1 , 17);
-		
-		ItemStack hardstuff = new ItemStack(StevesCarts.instance.component, 1 , 19);
-		ItemStack hardmesh = new ItemStack(StevesCarts.instance.component, 1 , 20);
-		
-		ItemStack refinedMetal = new ItemStack(StevesCarts.instance.component, 1 , 22);
-		ItemStack refinedWheels = new ItemStack(StevesCarts.instance.component, 1 , 23);
-		
-		ItemStack pipe = new ItemStack(StevesCarts.instance.component, 1 , 24);
-		ItemStack shootingcore = new ItemStack(StevesCarts.instance.component, 1 , 25);
 
-		ItemStack mobdetector = new ItemStack(StevesCarts.instance.component, 1 , 26);
-		ItemStack analyzer = new ItemStack(StevesCarts.instance.component, 1 , 27);
-		ItemStack disk = new ItemStack(StevesCarts.instance.component, 1 , 28);
+		ItemStack woodenWheels = new ItemStack(Items.component, 1 , 0);
+		ItemStack ironWheels = new ItemStack(Items.component, 1 , 1);
+	
+		ItemStack redComponent = new ItemStack(Items.component, 1 , 2);
+		ItemStack greenComponent = new ItemStack(Items.component, 1 , 3);
+		ItemStack blueComponent = new ItemStack(Items.component, 1 , 4);	
+	
+		ItemStack magicGlass = new ItemStack(Items.component, 1 , 5);	
+		ItemStack dynamite = new ItemStack(Items.component, 1 , 6);	
 		
-		ItemStack tritorch = new ItemStack(StevesCarts.instance.component, 1, 29);
+		ItemStack smalltank = new ItemStack(Items.component, 1 , 7);	
+		ItemStack bigtank = new ItemStack(Items.component, 1 , 8);	
 		
-		ItemStack chestThingy = new ItemStack(StevesCarts.instance.component, 1 , 30);	
-		ItemStack bigChestThingy = new ItemStack(StevesCarts.instance.component, 1 , 31);	
-		ItemStack hugeChestThingy = new ItemStack(StevesCarts.instance.component, 1 , 32);	
-		ItemStack chestLock = new ItemStack(StevesCarts.instance.component, 1 , 33);
-		ItemStack ironChestThingy = new ItemStack(StevesCarts.instance.component, 1 , 34);
-		ItemStack bigIronChestThingy = new ItemStack(StevesCarts.instance.component, 1 , 35);
-		ItemStack hugeIronChestThingy = new ItemStack(StevesCarts.instance.component, 1 , 36);	
-		ItemStack dynamicChestThingy = new ItemStack(StevesCarts.instance.component, 1 , 37);	
-		ItemStack bigDynamicChestThingy = new ItemStack(StevesCarts.instance.component, 1 , 38);
-		ItemStack hugeDynamicChestThingy = new ItemStack(StevesCarts.instance.component, 1 , 39);		
+		ItemStack pcb = new ItemStack(Items.component, 1 , 9);
 		
-		ItemStack cleaningcore = new ItemStack(StevesCarts.instance.component, 1 , 41);
-		ItemStack cleaningtube = new ItemStack(StevesCarts.instance.component, 1 , 42);
+		ItemStack screen = new ItemStack(Items.component, 1 , 10);
+		ItemStack handle = new ItemStack(Items.component, 1 , 12);
+		ItemStack speedhandle = new ItemStack(Items.component, 1 , 13);
+		ItemStack wheel = new ItemStack(Items.component, 1 , 14);
 		
-		ItemStack fuse = new ItemStack(StevesCarts.instance.component, 12, 43);	
+		ItemStack saw = new ItemStack(Items.component, 1 , 15);
+		ItemStack advpcb = new ItemStack(Items.component, 1 , 16);
+		ItemStack woodcore = new ItemStack(Items.component, 1 , 17);
 		
-		ItemStack solarpanel = new ItemStack(StevesCarts.instance.component, 1 , 44);
+		ItemStack hardstuff = new ItemStack(Items.component, 1 , 19);
+		ItemStack hardmesh = new ItemStack(Items.component, 1 , 20);
 		
-		ItemStack magicTingy = new ItemStack(StevesCarts.instance.component,1,45);
-		ItemStack magicmetal = new ItemStack(StevesCarts.instance.component, 1 , 47);		
-		ItemStack magicmetalthingy = new ItemStack(StevesCarts.instance.component, 1 , 49);
+		ItemStack refinedMetal = new ItemStack(Items.component, 1 , 22);
+		ItemStack refinedWheels = new ItemStack(Items.component, 1 , 23);
+		
+		ItemStack pipe = new ItemStack(Items.component, 1 , 24);
+		ItemStack shootingcore = new ItemStack(Items.component, 1 , 25);
+
+		ItemStack mobdetector = new ItemStack(Items.component, 1 , 26);
+		ItemStack analyzer = new ItemStack(Items.component, 1 , 27);
+		ItemStack disk = new ItemStack(Items.component, 1 , 28);
+		
+		ItemStack tritorch = new ItemStack(Items.component, 1, 29);
+		
+		ItemStack chestThingy = new ItemStack(Items.component, 1 , 30);	
+		ItemStack bigChestThingy = new ItemStack(Items.component, 1 , 31);	
+		ItemStack hugeChestThingy = new ItemStack(Items.component, 1 , 32);	
+		ItemStack chestLock = new ItemStack(Items.component, 1 , 33);
+		ItemStack ironChestThingy = new ItemStack(Items.component, 1 , 34);
+		ItemStack bigIronChestThingy = new ItemStack(Items.component, 1 , 35);
+		ItemStack hugeIronChestThingy = new ItemStack(Items.component, 1 , 36);	
+		ItemStack dynamicChestThingy = new ItemStack(Items.component, 1 , 37);	
+		ItemStack bigDynamicChestThingy = new ItemStack(Items.component, 1 , 38);
+		ItemStack hugeDynamicChestThingy = new ItemStack(Items.component, 1 , 39);		
+		
+		ItemStack cleaningcore = new ItemStack(Items.component, 1 , 41);
+		ItemStack cleaningtube = new ItemStack(Items.component, 1 , 42);
+		
+		ItemStack fuse = new ItemStack(Items.component, 12, 43);	
+		
+		ItemStack solarpanel = new ItemStack(Items.component, 1 , 44);
+		
+		ItemStack magicTingy = new ItemStack(Items.component,1,45);
+		ItemStack magicmetal = new ItemStack(Items.component, 1 , 47);		
+		ItemStack magicmetalthingy = new ItemStack(Items.component, 1 , 49);
 		
 		ItemStack bonemeal = new ItemStack(Item.dyePowder, 1, 15);
 		
-		ItemStack greenwrapping = new ItemStack(StevesCarts.instance.component, 1, 51);
-		ItemStack redwrapping = new ItemStack(StevesCarts.instance.component, 1, 52);
-		ItemStack redribbon = new ItemStack(StevesCarts.instance.component, 1, 54);
-		ItemStack yellowribbon = new ItemStack(StevesCarts.instance.component, 1, 55);
-		ItemStack filledsock = new ItemStack(StevesCarts.instance.component, 1, 57);
+		ItemStack greenwrapping = new ItemStack(Items.component, 1, 51);
+		ItemStack redwrapping = new ItemStack(Items.component, 1, 52);
+		ItemStack redribbon = new ItemStack(Items.component, 1, 54);
+		ItemStack yellowribbon = new ItemStack(Items.component, 1, 55);
+		ItemStack filledsock = new ItemStack(Items.component, 1, 57);
 		
-		ItemStack advsolarpanel = new ItemStack(StevesCarts.instance.component, 1, 58);
+		ItemStack advsolarpanel = new ItemStack(Items.component, 1, 58);
 		
-		ItemStack valve = new ItemStack(StevesCarts.instance.component, 1, 60);
-		ItemStack tankpane = new ItemStack(StevesCarts.instance.component, 1, 61);
-		ItemStack largetankpane = new ItemStack(StevesCarts.instance.component, 1, 62);
-		ItemStack hugetankpane = new ItemStack(StevesCarts.instance.component, 1, 63);
+		ItemStack valve = new ItemStack(Items.component, 1, 60);
+		ItemStack tankpane = new ItemStack(Items.component, 1, 61);
+		ItemStack largetankpane = new ItemStack(Items.component, 1, 62);
+		ItemStack hugetankpane = new ItemStack(Items.component, 1, 63);
 		
-		ItemStack cleaningcoreliquid = new ItemStack(StevesCarts.instance.component, 1 , 64);
-		ItemStack cleaningtubeliquid = new ItemStack(StevesCarts.instance.component, 1 , 65);		
+		ItemStack cleaningcoreliquid = new ItemStack(Items.component, 1 , 64);
+		ItemStack cleaningtubeliquid = new ItemStack(Items.component, 1 , 65);		
 		
 		ItemStack [] easterEggs = new ItemStack [] { 
-			new ItemStack(StevesCarts.instance.component, 1 , 66),
-			new ItemStack(StevesCarts.instance.component, 1 , 67),
-			new ItemStack(StevesCarts.instance.component, 1 , 68),
-			new ItemStack(StevesCarts.instance.component, 1 , 69)
+			new ItemStack(Items.component, 1 , 66),
+			new ItemStack(Items.component, 1 , 67),
+			new ItemStack(Items.component, 1 , 68),
+			new ItemStack(Items.component, 1 , 69)
 			};
-		ItemStack basket = new ItemStack(StevesCarts.instance.component, 1 , 71);	
+		ItemStack basket = new ItemStack(Items.component, 1 , 71);	
 
-		ItemStack hardenedsaw = new ItemStack(StevesCarts.instance.component, 1 , 80);	
-		ItemStack galgsaw = new ItemStack(StevesCarts.instance.component, 1 , 81);	
-		ItemStack galgWheels = new ItemStack(StevesCarts.instance.component, 1 , 82);	
+		ItemStack hardenedsaw = new ItemStack(Items.component, 1 , 80);	
+		ItemStack galgsaw = new ItemStack(Items.component, 1 , 81);	
+		ItemStack galgWheels = new ItemStack(Items.component, 1 , 82);	
 		
-		ItemStack bladearm = new ItemStack(StevesCarts.instance.component, 1 , 84);	
+		ItemStack bladearm = new ItemStack(Items.component, 1 , 84);	
 		
 		moduleGroups = new Class[] {ModuleHull.class, ModuleEngine.class, ModuleTool.class,ModuleStorage.class, ModuleAddon.class};
 		moduleGroupNames = new String[] {"Hull", "Engine", "Tool", "Storage", "Addon", "Attachment"};
@@ -587,7 +589,7 @@ public class ModuleData {
 			.addRecipe(new Object[][] {{null,  dynamite,  null},
 									   {dynamite, Item.flintAndSteel,  dynamite},
 									   {null,  dynamite, null}
-									  });
+                                  });
 		
 		new ModuleData(32, "Divine Shield", ModuleShield.class, 60)			
 			.addRecipe(new Object[][] {{Block.obsidian,  hardstuff,  Block.obsidian},
@@ -1023,7 +1025,7 @@ public class ModuleData {
 		
 		//new ModuleData(98, "Pew Pew", ModuleShooterAdvSide.class, 1);
 		
-		new ModuleData(35, "Computer", ModuleComputer.class, 16);
+		//new ModuleData(35, "Computer", ModuleComputer.class, 16);
 			
 			
 		//System.out.println("Module Combinations: " + calculateCombinations());
@@ -1517,7 +1519,7 @@ public class ModuleData {
 	public static ArrayList<ItemStack> getModularItems(ItemStack cart) {
 		ArrayList<ItemStack> modules = new ArrayList<ItemStack>();
 		
-		if (cart != null && cart.getItem() == StevesCarts.carts && cart.getTagCompound() != null) {
+		if (cart != null && cart.getItem() == Items.carts && cart.getTagCompound() != null) {
 			NBTTagCompound info = cart.getTagCompound();
 			if (info.hasKey("Modules")) {
 				
@@ -1526,9 +1528,9 @@ public class ModuleData {
 				byte[] IDs = info.getByteArray("Modules");
 				for (int i = 0; i < IDs.length; i++) {
 					byte id = IDs[i];
-					ItemStack module =  new ItemStack(StevesCarts.modules, 1, id);
+					ItemStack module =  new ItemStack(Items.modules, 1, id);
 
-					StevesCarts.modules.addExtraDataToModule(module, info , i);
+					Items.modules.addExtraDataToModule(module, info , i);
 					
 					
 					modules.add(module);
@@ -1540,7 +1542,7 @@ public class ModuleData {
 	}	
 	
 	public static ItemStack createModularCart(MinecartModular parentcart) {
-		ItemStack cart = new ItemStack(StevesCarts.carts, 1);
+		ItemStack cart = new ItemStack(Items.carts, 1);
 			
 		NBTTagCompound save = new NBTTagCompound();
 		byte [] moduleIDs = new byte[parentcart.getModules().size()];
@@ -1553,7 +1555,7 @@ public class ModuleData {
 				}
 			}
 			
-			StevesCarts.modules.addExtraDataToModule(save, module , i);
+			Items.modules.addExtraDataToModule(save, module , i);
 			
 
 		}
@@ -1592,7 +1594,7 @@ public class ModuleData {
 	}*/
 	
 	public static ItemStack createModularCartFromItems(ArrayList<ItemStack> modules) {
-		ItemStack cart = new ItemStack(StevesCarts.carts, 1);
+		ItemStack cart = new ItemStack(Items.carts, 1);
 		
 		NBTTagCompound save = new NBTTagCompound();
 		byte [] moduleIDs = new byte[modules.size()];
@@ -1600,7 +1602,7 @@ public class ModuleData {
 			moduleIDs[i] =(byte) modules.get(i).getItemDamage();
 			
 	
-			StevesCarts.modules.addExtraDataToCart(save, modules.get(i) , i);
+			Items.modules.addExtraDataToCart(save, modules.get(i) , i);
 		}
 		save.setByteArray("Modules", moduleIDs);				
 		cart.setTagCompound(save);
@@ -1610,8 +1612,8 @@ public class ModuleData {
 	}
 	
 	public static boolean isItemOfModularType(ItemStack itemstack, Class<? extends ModuleBase> validClass) {
-		if (itemstack.getItem() == StevesCarts.modules) {
-			ModuleData module = StevesCarts.modules.getModuleData(itemstack);
+		if (itemstack.getItem() == Items.modules) {
+			ModuleData module = Items.modules.getModuleData(itemstack);
 			if (module != null) {
 				if (validClass.isAssignableFrom(module.moduleClass)) {
 					return true;
@@ -1640,14 +1642,14 @@ public class ModuleData {
 			if(recipes != null) {
 				hasRecipe = true;
 				for (Object[][] recipe : recipes) {
-					StevesCarts.addRecipe(getItemStack(),recipe);
+					RecipeHelper.addRecipe(getItemStack(), recipe);
 				}
 			}
 		}
 	}
 	
 	public ItemStack getItemStack() {
-		ItemStack module = new ItemStack(StevesCarts.instance.modules, 1, id);
+		ItemStack module = new ItemStack(Items.modules, 1, id);
 		
 		if (isUsingExtraData()) {
 			NBTTagCompound save = new NBTTagCompound("tag");
@@ -1663,9 +1665,9 @@ public class ModuleData {
 
 	
 	public static boolean isValidModuleItem(int validGroup, ItemStack itemstack) {
-		if (itemstack.getItem() == StevesCarts.modules) {
+		if (itemstack.getItem() == Items.modules) {
 
-			ModuleData module = StevesCarts.modules.getModuleData(itemstack);
+			ModuleData module = Items.modules.getModuleData(itemstack);
 			return isValidModuleItem(validGroup, module);
 		}
 		

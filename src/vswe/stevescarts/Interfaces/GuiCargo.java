@@ -8,6 +8,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
+import vswe.stevescarts.Blocks.Blocks;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Containers.ContainerCargo;
 import vswe.stevescarts.Helpers.CargoItemSelection;
@@ -158,7 +159,7 @@ public class GuiCargo extends GuiManager
 	
 	@Override
 	protected Block getBlock() {
-		return StevesCarts.instance.blockCargoManager;
+		return Blocks.CARGO_MANAGER.getBlock();
 	}
 
 	@Override

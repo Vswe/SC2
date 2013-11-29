@@ -69,7 +69,7 @@ public class BlockRailAdvDetector extends BlockRailBase
 		
 
 	
-		if (world.getBlockId(x, y-1, z) == StevesCarts.instance.blockDetector.blockID && DetectorType.getTypeFromMeta(world.getBlockMetadata(x, y-1, z)).canInteractWithCart()) {
+		if (world.getBlockId(x, y-1, z) == Blocks.DETECTOR_UNIT.getId() && DetectorType.getTypeFromMeta(world.getBlockMetadata(x, y-1, z)).canInteractWithCart()) {
 			
 			TileEntity tileentity = world.getBlockTileEntity(x, y-1, z);
 			
@@ -92,7 +92,7 @@ public class BlockRailAdvDetector extends BlockRailBase
 				if (Math.abs(i) != Math.abs(j)) {
 					
 					int blockId = world.getBlockId(x+i, y, z+j);
-					if (blockId == StevesCarts.instance.blockCargoManager.blockID || blockId == StevesCarts.instance.blockLiquidManager.blockID)
+					if (blockId == Blocks.CARGO_MANAGER.getId() || blockId == Blocks.LIQUID_MANAGER.getId())
 					{
 						TileEntity tileentity = world.getBlockTileEntity(x+i, y, z+j);
 						
@@ -105,7 +105,7 @@ public class BlockRailAdvDetector extends BlockRailBase
 						}
 						
 						return;						
-					}else if(blockId == StevesCarts.instance.blockActivator.blockID) {
+					}else if(blockId == Blocks.MODULE_TOGGLER.getId()) {
 						TileEntity tileentity = world.getBlockTileEntity(x+i, y, z+j);
 						
 						if (tileentity != null && tileentity instanceof TileEntityActivator) {
@@ -141,7 +141,7 @@ public class BlockRailAdvDetector extends BlockRailBase
 						
 						return;
 						
-					}else if(blockId == StevesCarts.instance.blockUpgrade.blockID) {
+					}else if(blockId == Blocks.UPGRADE.getId()) {
 						TileEntity tileentity = world.getBlockTileEntity(x+i, y, z+j);
 						
 						TileEntityUpgrade upgrade = (TileEntityUpgrade)tileentity;
@@ -204,8 +204,8 @@ public class BlockRailAdvDetector extends BlockRailBase
 	@Override
     public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
     {
-		if (world.getBlockId(i,j-1,k) == StevesCarts.instance.blockDetector.blockID) {
-			return StevesCarts.instance.blockDetector.onBlockActivated(world, i, j-1, k, entityplayer, par6, par7, par8, par9);
+		if (world.getBlockId(i,j-1,k) == Blocks.DETECTOR_UNIT.getId()) {
+			return Blocks.DETECTOR_UNIT.getBlock().onBlockActivated(world, i, j-1, k, entityplayer, par6, par7, par8, par9);
 		}
 		
         return false;

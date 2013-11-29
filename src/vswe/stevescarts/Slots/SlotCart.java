@@ -1,4 +1,5 @@
 package vswe.stevescarts.Slots;
+import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.StevesCarts;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -13,6 +14,6 @@ public class SlotCart extends Slot
 	@Override
     public boolean isItemValid(ItemStack itemstack)
     {
-        return itemstack != null && itemstack.getItem().itemID == StevesCarts.instance.carts.itemID && itemstack.getTagCompound() != null && !itemstack.getTagCompound().hasKey("maxTime");
+        return itemstack != null && itemstack.getItem().itemID == Items.carts.itemID && itemstack.getTagCompound() != null && !itemstack.getTagCompound().hasKey("maxTime");
     }
 }

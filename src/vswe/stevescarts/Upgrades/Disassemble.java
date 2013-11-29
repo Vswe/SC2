@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Containers.ContainerCartAssembler;
 import vswe.stevescarts.Helpers.TransferHandler;
@@ -125,7 +126,7 @@ public class Disassemble extends InventoryEffect {
 
 	private boolean updateCart(TileEntityUpgrade upgrade, ItemStack cart) {
 		if (upgrade.getMaster() != null) {
-			if (cart == null || cart.getItem() != StevesCarts.carts || cart.getTagCompound() == null || cart.getTagCompound().hasKey("maxTime")) {
+			if (cart == null || cart.getItem() != Items.carts || cart.getTagCompound() == null || cart.getTagCompound().hasKey("maxTime")) {
 				resetMaster(upgrade.getMaster(), false);
 				setLastCart(upgrade,null);
 				if (cart != null) {

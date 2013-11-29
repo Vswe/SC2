@@ -1,6 +1,7 @@
 package vswe.stevescarts.Helpers;
 
 import net.minecraft.item.ItemStack;
+import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Items.ItemCartComponent;
 import cpw.mods.fml.common.IFuelHandler;
@@ -15,7 +16,7 @@ public class WoodFuelHandler implements IFuelHandler {
 
 	@Override
 	public int getBurnTime(ItemStack fuel) {
-		if (fuel != null && fuel.getItem() != null && fuel.getItem() == StevesCarts.component) {
+		if (fuel != null && fuel.getItem() != null && fuel.getItem() == Items.component) {
 			if (ItemCartComponent.isWoodLog(fuel)) {
 				return 150;
 			}else if(ItemCartComponent.isWoodTwig(fuel)) {

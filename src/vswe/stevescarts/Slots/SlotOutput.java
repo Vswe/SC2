@@ -1,6 +1,7 @@
 package vswe.stevescarts.Slots;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.TileEntities.TileEntityCartAssembler;
 
@@ -27,7 +28,7 @@ public class SlotOutput extends SlotAssembler
 	@Override
     public boolean isItemValid(ItemStack itemstack)
     {
-		if (!getAssembler().getIsAssembling() && itemstack.getItem() == StevesCarts.carts) {
+		if (!getAssembler().getIsAssembling() && itemstack.getItem() == Items.carts) {
 			NBTTagCompound info = itemstack.getTagCompound();
 			if (info != null && info.hasKey("maxTime")) {	
 				return true;

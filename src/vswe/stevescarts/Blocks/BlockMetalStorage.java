@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
+import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.StevesCarts;
 
 public class BlockMetalStorage extends Block {
@@ -24,9 +25,9 @@ public class BlockMetalStorage extends Block {
     @SideOnly(Side.CLIENT)
 	@Override
     public Icon getIcon(int side, int meta) {
-    	meta %= StevesCarts.storages.icons.length;
+    	meta %= Items.storages.icons.length;
     	
-    	return StevesCarts.storages.icons[meta];
+    	return Items.storages.icons[meta];
     }
     
     public int damageDropped(int meta) {

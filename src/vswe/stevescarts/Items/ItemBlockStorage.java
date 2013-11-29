@@ -26,9 +26,9 @@ public class ItemBlockStorage extends ItemBlock
 	
 	public static void init() {
 		blocks = new StorageBlock[] {
-			new StorageBlock("Reinforced Metal Block", new ItemStack(StevesCarts.component, 1, 22)),	
-			new StorageBlock("Galgadorian Block", new ItemStack(StevesCarts.component, 1, 47)),	
-			new StorageBlock("Enhanced Galgadorian Block", new ItemStack(StevesCarts.component, 1, 49)),					
+			new StorageBlock("Reinforced Metal Block", new ItemStack(Items.component, 1, 22)),
+			new StorageBlock("Galgadorian Block", new ItemStack(Items.component, 1, 47)),
+			new StorageBlock("Enhanced Galgadorian Block", new ItemStack(Items.component, 1, 49)),
 		};		
 	}
 	

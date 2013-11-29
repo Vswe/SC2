@@ -12,6 +12,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Icon;
+import vswe.stevescarts.Blocks.Blocks;
+import vswe.stevescarts.Helpers.RecipeHelper;
+import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.TileEntities.TileEntityUpgrade;
 import cpw.mods.fml.relauncher.Side;
@@ -40,14 +43,14 @@ public class AssemblerUpgrade {
 	}
 	
 	public static void init() {
-		ItemStack base = new ItemStack(StevesCarts.instance.component, 1, 59);
-		ItemStack hardmetal = new ItemStack(StevesCarts.instance.component, 1 , 22);
-		ItemStack magicTingy = new ItemStack(StevesCarts.instance.component,1,45);
-		ItemStack pcb = new ItemStack(StevesCarts.instance.component, 1 , 9);
-		ItemStack advpcb = new ItemStack(StevesCarts.instance.component, 1 , 16);
-		ItemStack magicmetal = new ItemStack(StevesCarts.instance.component,1,47);
-		ItemStack magicmetalthing = new ItemStack(StevesCarts.instance.component,1,49);
-		ItemStack cleaningfan = new ItemStack(StevesCarts.instance.component,1,40);
+		ItemStack base = new ItemStack(Items.component, 1, 59);
+		ItemStack hardmetal = new ItemStack(Items.component, 1 , 22);
+		ItemStack magicTingy = new ItemStack(Items.component,1,45);
+		ItemStack pcb = new ItemStack(Items.component, 1 , 9);
+		ItemStack advpcb = new ItemStack(Items.component, 1 , 16);
+		ItemStack magicmetal = new ItemStack(Items.component,1,47);
+		ItemStack magicmetalthing = new ItemStack(Items.component,1,49);
+		ItemStack cleaningfan = new ItemStack(Items.component,1,40);
 		
 		AssemblerUpgrade batteries = 
 		new AssemblerUpgrade(0, "Batteries")
@@ -227,7 +230,7 @@ public class AssemblerUpgrade {
 		.addEffect(new TimeFlatCart(200))
 		.addRecipe(new Object[][] {
 				{Item.ingotIron, Item.enderPearl, Item.ingotIron},
-				{pcb, StevesCarts.instance.blockDistributor, pcb},
+				{pcb, Blocks.EXTERNAL_DISTRIBUTOR.getBlock(), pcb},
 				{Item.ingotIron, base, Item.ingotIron}
 			});			
 			
@@ -242,7 +245,7 @@ public class AssemblerUpgrade {
 			});			
 
 
-		ItemStack solarpanel = new ItemStack(StevesCarts.instance.component, 1 , 44);
+		ItemStack solarpanel = new ItemStack(Items.component, 1 , 44);
 		
 		new AssemblerUpgrade(19, "Solar Panel")
 			.addEffect(new Solar())
@@ -307,7 +310,7 @@ public class AssemblerUpgrade {
 	}
 
 	public AssemblerUpgrade addRecipe(int resultCount, Object[][] recipe) {
-		StevesCarts.addRecipe(getItemStack(resultCount),recipe);
+		RecipeHelper.addRecipe(getItemStack(resultCount), recipe);
 		return this;
 	}
 	
@@ -320,7 +323,7 @@ public class AssemblerUpgrade {
 	}
 	
 	protected ItemStack getItemStack(int count) {
-		return new ItemStack(StevesCarts.instance.upgrades, count, id);	
+		return new ItemStack(Items.upgrades, count, id);
 	}	
 	
 	public ArrayList<BaseEffect> getEffects() {

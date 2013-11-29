@@ -230,7 +230,7 @@ public class ItemCartComponent extends Item
 	}
 	
 	public static ItemStack getWood(int type, boolean isLog, int count) {
-		return new ItemStack(StevesCarts.component, count, 72 + type * 2 + (isLog ? 0 : 1));
+		return new ItemStack(Items.component, count, 72 + type * 2 + (isLog ? 0 : 1));
 	}
 	
 	public static boolean isWoodLog(ItemStack item) {

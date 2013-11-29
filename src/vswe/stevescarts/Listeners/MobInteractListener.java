@@ -10,6 +10,7 @@ import net.minecraft.village.MerchantRecipeList;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.EntityInteractEvent;
+import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Helpers.TradeHandler;
 import cpw.mods.fml.common.registry.VillagerRegistry;
@@ -33,7 +34,7 @@ public class MobInteractListener {
 				ItemStack item = player.getCurrentEquippedItem();
 
 				//if it's the santa hat :)
-				if (item != null && item.getItem() == StevesCarts.instance.component && item.getItemDamage() == 53)
+				if (item != null && item.getItem() == Items.component && item.getItemDamage() == 53)
 				{				
 					if (!player.capabilities.isCreativeMode)
 					{

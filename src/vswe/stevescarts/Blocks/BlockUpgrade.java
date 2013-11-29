@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.TileEntities.TileEntityCartAssembler;
 import vswe.stevescarts.TileEntities.TileEntityUpgrade;
@@ -79,7 +80,7 @@ public class BlockUpgrade extends BlockContainer
 	@Override
 	public void onBlockAdded(World world, int x, int y, int z) {
 		super.onBlockAdded(world, x, y, z);
-		StevesCarts.instance.blockAssembler.addUpgrade(world, x, y, z);
+        ((BlockCartAssembler)Blocks.CART_ASSEMBLER.getBlock()).addUpgrade(world, x, y, z);
 	}
 	@Override
     public void onBlockHarvested(World world, int x, int y, int z, int meta, EntityPlayer player)
@@ -104,7 +105,7 @@ public class BlockUpgrade extends BlockContainer
 		
 		
 			if (meta != 1) {
-				dropBlockAsItem_do(world, x, y, z, new ItemStack(StevesCarts.instance.upgrades, 1, getUpgradeId(world, x, y, z)));
+				dropBlockAsItem_do(world, x, y, z, new ItemStack(Items.upgrades, 1, getUpgradeId(world, x, y, z)));
 			}
 			
 			if (upgrade.hasInventory()) {
@@ -145,7 +146,7 @@ public class BlockUpgrade extends BlockContainer
 						
 		}
 		super.breakBlock(world, x, y, z, id, meta);
-		StevesCarts.instance.blockAssembler.removeUpgrade(world, x, y, z);	
+        ((BlockCartAssembler)Blocks.CART_ASSEMBLER.getBlock()).removeUpgrade(world, x, y, z);
     }
 
     /**

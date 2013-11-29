@@ -32,6 +32,8 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
+import vswe.stevescarts.Blocks.Blocks;
+import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Containers.ContainerMinecart;
 import vswe.stevescarts.Helpers.ActivatorOption;
@@ -782,13 +784,13 @@ public class MinecartModular extends EntityMinecart
     {
 		if (modules != null) {
 			ItemStack cart = ModuleData.createModularCart(this);	
-			if (name != null && !name.equals("") && !name.equals(StevesCarts.instance.carts.getName())) {
+			if (name != null && !name.equals("") && !name.equals(Items.carts.getName())) {
 				cart.setItemName(name);
 			}
 
 			return cart;
 		}else{
-			return new ItemStack(StevesCarts.carts);
+			return new ItemStack(Items.carts);
 		}
     }
 
@@ -1021,12 +1023,12 @@ public class MinecartModular extends EntityMinecart
 			cornerFlip = false;
 		}
 		
-       if (id != StevesCarts.instance.blockAdvDetector.blockID && isDisabled())
+       if (id != Blocks.ADVANCED_DETECTOR.getId() && isDisabled())
         {
             releaseCart();
         }
 
-        boolean canBeDisabled = id == StevesCarts.instance.blockAdvDetector.blockID && (idBelow != StevesCarts.instance.blockDetector.blockID || !DetectorType.getTypeFromMeta(metaBelow).canInteractWithCart() || DetectorType.getTypeFromMeta(metaBelow).shouldStopCart());
+        boolean canBeDisabled = id == Blocks.ADVANCED_DETECTOR.getId() && (idBelow != Blocks.DETECTOR_UNIT.getId() || !DetectorType.getTypeFromMeta(metaBelow).canInteractWithCart() || DetectorType.getTypeFromMeta(metaBelow).shouldStopCart());
         boolean forceUnDisable = (wasDisabled && disabledX == x && disabledY == y && disabledZ == z);
 
         if (!forceUnDisable && wasDisabled)

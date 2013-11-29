@@ -2,6 +2,7 @@ package vswe.stevescarts.Renders;
 
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
+import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.StevesCarts;
 
 import net.minecraft.entity.item.EntityItem;
@@ -18,7 +19,7 @@ import java.util.HashMap;
 import vswe.stevescarts.Models.Cart.ModelCartbase;
 public class RendererMinecartItem implements IItemRenderer {
 	public RendererMinecartItem() {
-		MinecraftForgeClient.registerItemRenderer(StevesCarts.instance.carts.itemID, this);
+		MinecraftForgeClient.registerItemRenderer(Items.carts.itemID, this);
 	}
 
   /** 

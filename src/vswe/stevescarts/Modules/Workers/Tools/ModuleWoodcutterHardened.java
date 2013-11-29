@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Carts.MinecartModular;
 import vswe.stevescarts.Items.ItemCartComponent;
@@ -57,7 +58,7 @@ public class ModuleWoodcutterHardened extends ModuleWoodcutter {
 	
 	@Override
 	public int getRepairItemUnits(ItemStack item) {
-		if (item != null && item.getItem() == StevesCarts.component && item.getItemDamage() == 22) {
+		if (item != null && item.getItem() == Items.component && item.getItemDamage() == 22) {
 			return 320000;
 		}
 		return 0;

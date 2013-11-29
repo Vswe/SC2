@@ -293,7 +293,7 @@ public class TileEntityDetector extends TileEntityBase
 			}
 			
 			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta, 3);
-			//worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, StevesCarts.instance.blockDetector.blockID);
+			//worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, StevesCarts.instance.detectorUnit.blockID);
 			
 
 		}

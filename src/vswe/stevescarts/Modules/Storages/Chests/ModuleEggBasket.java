@@ -1,6 +1,7 @@
 package vswe.stevescarts.Modules.Storages.Chests;
 import java.util.HashMap;
 
+import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Carts.MinecartModular;
 import vswe.stevescarts.Models.Cart.ModelCartbase;
@@ -56,7 +57,7 @@ public class ModuleEggBasket extends ModuleChest {
 		
 		java.util.Random rand = getCart().rand;
 		int eggs = 1 + rand.nextInt(4) + rand.nextInt(4); 		
-		ItemStack easterEgg = new ItemStack(StevesCarts.instance.component, eggs, 70);
+		ItemStack easterEgg = new ItemStack(Items.component, eggs, 70);
 		setStack(0, easterEgg);
 		
 		

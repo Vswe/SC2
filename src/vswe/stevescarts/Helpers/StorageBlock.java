@@ -3,6 +3,8 @@ package vswe.stevescarts.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import vswe.stevescarts.Blocks.Blocks;
+import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.StevesCarts;
 
 public class StorageBlock {
@@ -20,17 +22,17 @@ public class StorageBlock {
 	}
 
 	public void loadRecipe(int i) {
-		ItemStack block = new ItemStack(StevesCarts.instance.blockStorage, 1, i);
+		ItemStack block = new ItemStack(Blocks.STORAGE.getBlock(), 1, i);
 		
 		//compress
-		StevesCarts.addRecipe(block, new Object[][] {
+		RecipeHelper.addRecipe(block, new Object[][] {
 			{item, item, item},
 			{item, item, item},
 			{item, item, item}
 		});	
 		
 		//restore
-		StevesCarts.addRecipe(item, new Object[][] {
+        RecipeHelper.addRecipe(item, new Object[][] {
 				{block}
 		});
 	}

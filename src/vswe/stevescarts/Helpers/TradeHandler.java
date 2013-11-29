@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
+import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.StevesCarts;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 
@@ -31,7 +32,7 @@ public class TradeHandler implements VillagerRegistry.IVillageTradeHandler
 	 */
 	@Override
 	public void manipulateTradesForVillager(EntityVillager villager, MerchantRecipeList recipeList, Random random) {
-		recipeList.add(new MerchantRecipe(new ItemStack(StevesCarts.component, 3, 50), new ItemStack(StevesCarts.instance.component,1,51)));
+		recipeList.add(new MerchantRecipe(new ItemStack(Items.component, 3, 50), new ItemStack(Items.component,1,51)));
 	}
 	
 
