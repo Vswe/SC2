@@ -6,7 +6,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;

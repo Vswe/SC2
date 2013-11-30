@@ -12,6 +12,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.PacketHandler;
 import vswe.stevescarts.StevesCarts;
@@ -41,7 +42,7 @@ public class GuiCartAssembler extends GuiBase
 	@Override
     public void drawGuiForeground(int x, int y)
     {
-        fontRenderer.drawString("Cart Assembler", 8, 6, 0x404040);
+        fontRenderer.drawString(Localization.GUI.CART_ASSEMBLER.translate() , 8, 6, 0x404040);
 
 		if (assembler.isErrorListOutdated) {
 			updateErrorList();
@@ -74,28 +75,27 @@ public class GuiCartAssembler extends GuiBase
 	private void updateErrorList() {
 		ArrayList<TextWithColor> lines = new ArrayList<TextWithColor>();
 		if (assembler.getStackInSlot(0) == null) {
-			addText(lines,"To start making a cart, please add a Cart Hull of your choice to the Hull Slot.");
+			addText(lines, Localization.GUI.ASSEMBLE_INSTRUCTION.translate());
 			hasErrors = true;
 		}else{
 			ModuleData hulldata = Items.modules.getModuleData(assembler.getStackInSlot(0));
 			if (hulldata == null || !(hulldata instanceof ModuleDataHull)) {
-				addText(lines,"The Cart Hull added to the Hull Slot is not a valid Hull. This should not be possible so you've probably done something strange.",0x9E0B0E);
+				addText(lines, Localization.GUI.INVALID_HULL.translate() ,0x9E0B0E);
 				hasErrors = true;
 			}else{
 
 				ModuleDataHull hull = (ModuleDataHull)hulldata;
-				//addText(lines,"Cart Hull :" + StevesCarts.modules.getName(assembler.getStackInSlot(0)));
-				//addNewLine(lines);
-				addText(lines, "Hull capacity: " + hull.getCapacity()/*, 0xCFC400*/);
-				addText(lines, "Complexity cap: " + hull.getComplexityMax());
-				addText(lines,"Total cost: " + assembler.getTotalCost());
-				addText(lines,"Total Time: " + formatTime((int)(assembler.generateAssemblingTime() / assembler.getEfficiency())));				
+
+				addText(lines, Localization.GUI.HULL_CAPACITY.translate() + ": " + hull.getCapacity());
+				addText(lines, Localization.GUI.COMPLEXITY_CAP.translate() + ": " + hull.getComplexityMax());
+				addText(lines, Localization.GUI.TOTAL_COST.translate() + ": " + assembler.getTotalCost());
+				addText(lines, Localization.GUI.TOTAl_TIME.translate() + ": " + formatTime((int)(assembler.generateAssemblingTime() / assembler.getEfficiency())));
 				addNewLine(lines);
 				
 				ArrayList<String> errors = assembler.getErrors();
 				hasErrors = errors.size() > 0;
 				if (errors.size() == 0) {
-					addText(lines,"Ready to assemble cart!", 0x005826);
+					addText(lines, Localization.GUI.NO_ERROR.translate(), 0x005826);
 				}else {
 					for (String error : errors) {
 						addText(lines,error, 0x9E0B0E);
@@ -269,8 +269,8 @@ public class GuiCartAssembler extends GuiBase
 		String assemblingInfo;
 		if (assembler.getIsAssembling()) {	
 			assemblingProgress = assembler.getAssemblingTime() / (float)assembler.getMaxAssemblingTime();
-			assemblingInfo = "Progress: " + formatProgress(assemblingProgress);
-			assemblingInfo += "\nTime left: " + formatTime((int)((assembler.getMaxAssemblingTime() - assembler.getAssemblingTime()) / assembler.getEfficiency()));
+			assemblingInfo = Localization.GUI.ASSEMBLE_PROGRESS.translate() + ": " + formatProgress(assemblingProgress);
+			assemblingInfo += "\n" + Localization.GUI.TIME_LEFT.translate() +": " + formatTime((int)((assembler.getMaxAssemblingTime() - assembler.getAssemblingTime()) / assembler.getEfficiency()));
 			
 			//won't work, the client won't know about this
 			/*assemblingInfo += "\n\nModules:\n";
@@ -289,7 +289,7 @@ public class GuiCartAssembler extends GuiBase
 						
 			}*/
 		}else{
-			assemblingInfo = "The assembler is currently idle";
+			assemblingInfo = Localization.GUI.IDLE_MESSAGE.translate();
 		}
 		drawProgressBar(assemblingProgRect, assemblingProgress,22,x,y);
 		
@@ -301,13 +301,13 @@ public class GuiCartAssembler extends GuiBase
 
 		if (!hasErrors) {
 			if (isDisassembling) {
-				drawProgressBarInfo(assembleRect, x, y, "Modify cart");
+				drawProgressBarInfo(assembleRect, x, y, Localization.GUI.MODIFY_CART.translate());
 			}else{
-				drawProgressBarInfo(assembleRect, x, y, "Assemble cart");
+				drawProgressBarInfo(assembleRect, x, y,  Localization.GUI.ASSEMBLE_CART.translate());
 			}
 		}
 		drawProgressBarInfo(assemblingProgRect, x, y, assemblingInfo);
-		drawProgressBarInfo(fuelProgRect, x, y, "Fuel level: " + assembler.getFuelLevel() + "/" + assembler.getMaxFuelLevel());		
+		drawProgressBarInfo(fuelProgRect, x, y, Localization.GUI.FUEL_LEVEL.translate() + ": " + assembler.getFuelLevel() + "/" + assembler.getMaxFuelLevel());
     }
 
 	private String formatProgress(float progress) {
