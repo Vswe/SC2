@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 
 import org.lwjgl.opengl.GL11;
 
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Containers.ContainerManager;
 import vswe.stevescarts.Helpers.CargoItemSelection;
@@ -33,7 +34,7 @@ public abstract class GuiManager extends GuiBase
 	
 		int[] coords = getMiddleCoords();
         fontRenderer.drawString(getManagerName(), coords[0] - 34, 65, 0x404040);
-        fontRenderer.drawString("Manager", coords[0] + coords[2], 65, 0x404040);
+        fontRenderer.drawString(Localization.GUI.MANAGER.TITLE.translate(), coords[0] + coords[2], 65, 0x404040);
 
         for (int i = 0; i < 4; i++)
         {
@@ -48,13 +49,13 @@ public abstract class GuiManager extends GuiBase
         {
 			drawExtraOverlay(i, x, y);
 
-			drawMouseOver("Change transfer direction\nCurrently: " + (manager.toCart[i] ? "To the cart" : "From the cart"),x,y,getArrowCoords(i));			
-			drawMouseOver("Change turnback settings\nCurrently: " + (manager.color[i] == 5 ? "No side selected" : ( manager.doReturn[manager.color[i]-1] ? "Turn back after transfer" : "Continue along after transfer")),x,y,getReturnCoords(i));
-			drawMouseOver("Change transfer size\nCurrently: " + getMaxSizeOverlay(i),x,y,getTextCoords(i));
-			drawMouseOver("Change side\nCurrent side: " + (new String[] {"Red", "Blue", "Yellow", "Green", "Disabled"})[manager.color[i]-1],x,y,getColorpickerCoords(i));
+			drawMouseOver(Localization.GUI.MANAGER.CHANGE_TRANSFER_DIRECTION.translate() + "\n" + Localization.GUI.MANAGER.CURRENT_SETTING.translate() + ": " + (manager.toCart[i] ? Localization.GUI.MANAGER.DIRECTION_TO_CART.translate() : Localization.GUI.MANAGER.DIRECTION_FROM_CART.translate()),x,y,getArrowCoords(i));
+			drawMouseOver(Localization.GUI.MANAGER.CHANGE_TURN_BACK_SETTING.translate() + "\n" + Localization.GUI.MANAGER.CURRENT_SETTING.translate() + ": " + (manager.color[i] == 5 ? Localization.GUI.MANAGER.TURN_BACK_NOT_SELECTED.translate() : ( manager.doReturn[manager.color[i]-1] ? Localization.GUI.MANAGER.TURN_BACK_DO.translate() : Localization.GUI.MANAGER.TURN_BACK_DO_NOT.translate())),x,y,getReturnCoords(i));
+			drawMouseOver(Localization.GUI.MANAGER.CHANGE_TRANSFER_SIZE.translate() + "\n" + Localization.GUI.MANAGER.CURRENT_SETTING.translate() + ": " + getMaxSizeOverlay(i),x,y,getTextCoords(i));
+			drawMouseOver(Localization.GUI.MANAGER.CHANGE_SIDE.translate() + "\n" + Localization.GUI.MANAGER.CURRENT_SIDE.translate() + ": " + (new String[] {Localization.GUI.MANAGER.SIDE_RED.translate(), Localization.GUI.MANAGER.SIDE_BLUE.translate(), Localization.GUI.MANAGER.SIDE_YELLOW.translate(), Localization.GUI.MANAGER.SIDE_GREEN.translate(), Localization.GUI.MANAGER.SIDE_DISABLED.translate()})[manager.color[i]-1],x,y,getColorpickerCoords(i));
 			
 		}		
-		drawMouseOver(getLayoutString() + "\nCurrently: " +  getLayoutOption(manager.layoutType) ,x,y, getMiddleCoords());
+		drawMouseOver(getLayoutString() + "\n" + Localization.GUI.MANAGER.CURRENT_SETTING.translate() + ": " +  getLayoutOption(manager.layoutType) ,x,y, getMiddleCoords());
 		GL11.glEnable(GL11.GL_LIGHTING);
     }
 	

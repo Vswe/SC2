@@ -42,7 +42,7 @@ public class GuiCartAssembler extends GuiBase
 	@Override
     public void drawGuiForeground(int x, int y)
     {
-        fontRenderer.drawString(Localization.GUI.CART_ASSEMBLER.translate() , 8, 6, 0x404040);
+        fontRenderer.drawString(Localization.GUI.ASSEMBLER.TITLE.translate() , 8, 6, 0x404040);
 
 		if (assembler.isErrorListOutdated) {
 			updateErrorList();
@@ -75,27 +75,27 @@ public class GuiCartAssembler extends GuiBase
 	private void updateErrorList() {
 		ArrayList<TextWithColor> lines = new ArrayList<TextWithColor>();
 		if (assembler.getStackInSlot(0) == null) {
-			addText(lines, Localization.GUI.ASSEMBLE_INSTRUCTION.translate());
+			addText(lines, Localization.GUI.ASSEMBLER.ASSEMBLE_INSTRUCTION.translate());
 			hasErrors = true;
 		}else{
 			ModuleData hulldata = Items.modules.getModuleData(assembler.getStackInSlot(0));
 			if (hulldata == null || !(hulldata instanceof ModuleDataHull)) {
-				addText(lines, Localization.GUI.INVALID_HULL.translate() ,0x9E0B0E);
+				addText(lines, Localization.GUI.ASSEMBLER.INVALID_HULL.translate() ,0x9E0B0E);
 				hasErrors = true;
 			}else{
 
 				ModuleDataHull hull = (ModuleDataHull)hulldata;
 
-				addText(lines, Localization.GUI.HULL_CAPACITY.translate() + ": " + hull.getCapacity());
-				addText(lines, Localization.GUI.COMPLEXITY_CAP.translate() + ": " + hull.getComplexityMax());
-				addText(lines, Localization.GUI.TOTAL_COST.translate() + ": " + assembler.getTotalCost());
-				addText(lines, Localization.GUI.TOTAl_TIME.translate() + ": " + formatTime((int)(assembler.generateAssemblingTime() / assembler.getEfficiency())));
+				addText(lines, Localization.GUI.ASSEMBLER.HULL_CAPACITY.translate() + ": " + hull.getCapacity());
+				addText(lines, Localization.GUI.ASSEMBLER.COMPLEXITY_CAP.translate() + ": " + hull.getComplexityMax());
+				addText(lines, Localization.GUI.ASSEMBLER.TOTAL_COST.translate() + ": " + assembler.getTotalCost());
+				addText(lines, Localization.GUI.ASSEMBLER.TOTAl_TIME.translate() + ": " + formatTime((int)(assembler.generateAssemblingTime() / assembler.getEfficiency())));
 				addNewLine(lines);
 				
 				ArrayList<String> errors = assembler.getErrors();
 				hasErrors = errors.size() > 0;
 				if (errors.size() == 0) {
-					addText(lines, Localization.GUI.NO_ERROR.translate(), 0x005826);
+					addText(lines, Localization.GUI.ASSEMBLER.NO_ERROR.translate(), 0x005826);
 				}else {
 					for (String error : errors) {
 						addText(lines,error, 0x9E0B0E);
@@ -269,8 +269,8 @@ public class GuiCartAssembler extends GuiBase
 		String assemblingInfo;
 		if (assembler.getIsAssembling()) {	
 			assemblingProgress = assembler.getAssemblingTime() / (float)assembler.getMaxAssemblingTime();
-			assemblingInfo = Localization.GUI.ASSEMBLE_PROGRESS.translate() + ": " + formatProgress(assemblingProgress);
-			assemblingInfo += "\n" + Localization.GUI.TIME_LEFT.translate() +": " + formatTime((int)((assembler.getMaxAssemblingTime() - assembler.getAssemblingTime()) / assembler.getEfficiency()));
+			assemblingInfo = Localization.GUI.ASSEMBLER.ASSEMBLE_PROGRESS.translate() + ": " + formatProgress(assemblingProgress);
+			assemblingInfo += "\n" + Localization.GUI.ASSEMBLER.TIME_LEFT.translate() +": " + formatTime((int)((assembler.getMaxAssemblingTime() - assembler.getAssemblingTime()) / assembler.getEfficiency()));
 			
 			//won't work, the client won't know about this
 			/*assemblingInfo += "\n\nModules:\n";
@@ -289,7 +289,7 @@ public class GuiCartAssembler extends GuiBase
 						
 			}*/
 		}else{
-			assemblingInfo = Localization.GUI.IDLE_MESSAGE.translate();
+			assemblingInfo = Localization.GUI.ASSEMBLER.IDLE_MESSAGE.translate();
 		}
 		drawProgressBar(assemblingProgRect, assemblingProgress,22,x,y);
 		
@@ -301,13 +301,13 @@ public class GuiCartAssembler extends GuiBase
 
 		if (!hasErrors) {
 			if (isDisassembling) {
-				drawProgressBarInfo(assembleRect, x, y, Localization.GUI.MODIFY_CART.translate());
+				drawProgressBarInfo(assembleRect, x, y, Localization.GUI.ASSEMBLER.MODIFY_CART.translate());
 			}else{
-				drawProgressBarInfo(assembleRect, x, y,  Localization.GUI.ASSEMBLE_CART.translate());
+				drawProgressBarInfo(assembleRect, x, y,  Localization.GUI.ASSEMBLER.ASSEMBLE_CART.translate());
 			}
 		}
 		drawProgressBarInfo(assemblingProgRect, x, y, assemblingInfo);
-		drawProgressBarInfo(fuelProgRect, x, y, Localization.GUI.FUEL_LEVEL.translate() + ": " + assembler.getFuelLevel() + "/" + assembler.getMaxFuelLevel());
+		drawProgressBarInfo(fuelProgRect, x, y, Localization.GUI.ASSEMBLER.FUEL_LEVEL.translate() + ": " + assembler.getFuelLevel() + "/" + assembler.getMaxFuelLevel());
     }
 
 	private String formatProgress(float progress) {

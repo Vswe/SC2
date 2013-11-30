@@ -9,9 +9,9 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import vswe.stevescarts.Blocks.Blocks;
-import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Containers.ContainerCargo;
 import vswe.stevescarts.Helpers.CargoItemSelection;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Helpers.ResourceHelper;
 import vswe.stevescarts.TileEntities.TileEntityCargo;
 import cpw.mods.fml.relauncher.Side;
@@ -33,11 +33,11 @@ public class GuiCargo extends GuiManager
 		int type = getCargo().getAmountType(id);
 	
 		if (type == 0) {
-			return "Transfer as much as possible";
+			return Localization.GUI.CARGO.TRANSFER_ALL.translate();
 		}else if (type == 1) {
-			return "Transfer a maximum of " + amount + " item" + (amount == 1 ? "" : "s");
+			return Localization.GUI.CARGO.TRANSFER_ITEMS.translate(String.valueOf(amount), String.valueOf(amount));
 		}else{
-			return "Transfer a maximum of " + amount + " stack" + (amount == 1 ? "" : "s");
+			return Localization.GUI.CARGO.TRANSFER_STACKS.translate(String.valueOf(amount), String.valueOf(amount));
 		}
 	}
 	
@@ -47,15 +47,15 @@ public class GuiCargo extends GuiManager
 		int type = getCargo().getAmountType(id);
 
 		if (type == 0){
-			s = "MAX";
+			s = Localization.GUI.CARGO.TRANSFER_ALL_SHORT.translate();
 		}else{
 			int amount = getCargo().getAmount(id);
 			s = String.valueOf(amount);
 
 			if (type == 1){
-				s += " I";
+				s += " " + Localization.GUI.CARGO.TRANSFER_ITEMS_SHORT.translate();
 			}else{
-				s += " S";
+				s += " " + Localization.GUI.CARGO.TRANSFER_STACKS_SHORT.translate();
 			}
 		}
 		return s;
@@ -148,12 +148,12 @@ public class GuiCargo extends GuiManager
 		if (getCargo().target[id] >= 0 && getCargo().target[id] < getCargo().itemSelections.size()) {
 			CargoItemSelection item = getCargo().itemSelections.get(getCargo().target[id]);
 			if (item.getName() != null) {
-				drawMouseOver("Change part of the cart\nCurrently: " + item.getName(),x,y,getBoxCoords(id));	
+				drawMouseOver(Localization.GUI.CARGO.CHANGE_STORAGE_AREA.translate() + "\n" + Localization.GUI.MANAGER.CURRENT_SETTING.translate() + ": " + item.getName(),x,y,getBoxCoords(id));
 			}else{
-				drawMouseOver("Change part of the cart\nCurrently: Unknown option",x,y,getBoxCoords(id));	
+				drawMouseOver(Localization.GUI.CARGO.CHANGE_STORAGE_AREA.translate() + "\n" + Localization.GUI.MANAGER.CURRENT_SETTING.translate() + ": " + Localization.GUI.CARGO.UNKNOWN_AREA.translate(),x,y,getBoxCoords(id));
 			}
 		}else{
-			drawMouseOver("Change part of the cart\nCurrently: Unknown option",x,y,getBoxCoords(id));	
+			drawMouseOver(Localization.GUI.CARGO.CHANGE_STORAGE_AREA.translate() + "\n" + Localization.GUI.MANAGER.CURRENT_SETTING.translate() + ": " + Localization.GUI.CARGO.UNKNOWN_AREA.translate(),x,y,getBoxCoords(id));
 		}
 	}
 	
@@ -164,7 +164,7 @@ public class GuiCargo extends GuiManager
 
 	@Override
 	protected String getManagerName() {
-		return "Cargo";
+		return Localization.GUI.CARGO.TITLE.translate();
 	}
 	
     private int[] getInvCoords(int id) {
@@ -181,20 +181,19 @@ public class GuiCargo extends GuiManager
 	
 	@Override
 	protected String getLayoutString() {
-		return "Change slot layout";
+		return Localization.GUI.CARGO.CHANGE_SLOT_LAYOUT.translate();
 	}
 	
 	@Override
 	protected String getLayoutOption(int id) {
 		switch (id) {
+            default:
 			case 0:
-				return "All slots are shared by all sides";
+				return Localization.GUI.CARGO.LAYOUT_SHARED.translate();
 			case 1:
-				return "Each side has its own slots";
+				return Localization.GUI.CARGO.LAYOUT_SIDE.translate();
 			case 2:
-				return "Each color has its own slots";
-			default:
-				return "Invalid layout";
+				return Localization.GUI.CARGO.LAYOUT_COLOR.translate();
 		}
 	}
 }

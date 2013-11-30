@@ -4,6 +4,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.PacketHandler;
 import vswe.stevescarts.Containers.ContainerActivator;
 import vswe.stevescarts.Helpers.ActivatorOption;
@@ -28,7 +29,7 @@ public class GuiActivator extends GuiBase
     {
 		GL11.glDisable(GL11.GL_LIGHTING);
 	
-        fontRenderer.drawString("Module Toggler", 8, 6, 0x404040);
+        fontRenderer.drawString(Localization.GUI.TOGGLER.TITLE.translate(), 8, 6, 0x404040);
 		
 		for (int i = 0; i < activator.getOptions().size(); i++) {
 			ActivatorOption option = activator.getOptions().get(i);

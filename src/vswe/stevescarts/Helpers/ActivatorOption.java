@@ -5,16 +5,16 @@ public class ActivatorOption {
 
 	private Class<? extends ModuleBase> module;
 	private int id;
-	private String name;
+	private Localization.GUI.TOGGLER name;
 	private int option;
 	
-	public ActivatorOption(String name, Class<? extends ModuleBase> module, int id) {
+	public ActivatorOption(Localization.GUI.TOGGLER name, Class<? extends ModuleBase> module, int id) {
 		this.name = name;
 		this.module = module;
 		this.id = id;
 	}
 	
-	public ActivatorOption(String name, Class<? extends ModuleBase> module) {
+	public ActivatorOption(Localization.GUI.TOGGLER name, Class<? extends ModuleBase> module) {
 		this(name, module, 0);
 	}	
 	
@@ -23,7 +23,7 @@ public class ActivatorOption {
 	}
 		
 	public String getName() {
-		return name;
+		return name.translate();
 	}
 	
 	public int getOption() {
@@ -66,10 +66,10 @@ public class ActivatorOption {
 
 	public String getInfo() {
 		if (isDisabled()) {
-			return "Disabled";
+			return Localization.GUI.TOGGLER.SETTING_DISABLED.translate();
 		}else{
-			return "\u00a76Orange direction: " + (shouldActivate(true) ? "\u00a72Activate" : shouldDeactivate(true) ? "\u00a74Deactivate" : "\u00a7EToggle") + "\n" +
-				   "\u00a71Blue direction: " + (shouldActivate(false) ? "\u00a72Activate" : shouldDeactivate(false) ? "\u00a74Deactivate" : "\u00a7EToggle");
+			return "\u00a76" + Localization.GUI.TOGGLER.SETTING_ORANGE.translate() + ": " + (shouldActivate(true) ? "\u00a72" + Localization.GUI.TOGGLER.STATE_ACTIVATE.translate() : shouldDeactivate(true) ? "\u00a74" + Localization.GUI.TOGGLER.STATE_DEACTIVATE.translate() : "\u00a7E" + Localization.GUI.TOGGLER.STATE_TOGGLE.translate()) + "\n" +
+				   "\u00a71" + Localization.GUI.TOGGLER.SETTING_BLUE.translate() + ": " + (shouldActivate(false) ? "\u00a72" + Localization.GUI.TOGGLER.STATE_ACTIVATE.translate() : shouldDeactivate(false) ? "\u00a74" + Localization.GUI.TOGGLER.STATE_DEACTIVATE.translate() : "\u00a7E" + Localization.GUI.TOGGLER.STATE_TOGGLE.translate());
 		}
 	}
 }

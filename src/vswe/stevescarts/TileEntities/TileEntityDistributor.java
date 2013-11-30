@@ -18,6 +18,7 @@ import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.PacketHandler;
 import vswe.stevescarts.Containers.ContainerBase;
 import vswe.stevescarts.Containers.ContainerDistributor;
@@ -52,12 +53,12 @@ public class TileEntityDistributor extends TileEntityBase
     public TileEntityDistributor()
     {
 		sides = new ArrayList<DistributorSide>();
-		sides.add(new DistributorSide(0, "Orange", ForgeDirection.UP));		
-		sides.add(new DistributorSide(1, "Purple", ForgeDirection.DOWN));
-		sides.add(new DistributorSide(2, "Yellow", ForgeDirection.NORTH));	
-		sides.add(new DistributorSide(3, "Green", ForgeDirection.WEST));
-		sides.add(new DistributorSide(4, "Blue", ForgeDirection.SOUTH));	
-		sides.add(new DistributorSide(5, "Red", ForgeDirection.EAST));		
+		sides.add(new DistributorSide(0, Localization.GUI.DISTRIBUTOR.SIDE_ORANGE, ForgeDirection.UP));
+		sides.add(new DistributorSide(1, Localization.GUI.DISTRIBUTOR.SIDE_PURPLE, ForgeDirection.DOWN));
+		sides.add(new DistributorSide(2, Localization.GUI.DISTRIBUTOR.SIDE_YELLOW, ForgeDirection.NORTH));
+		sides.add(new DistributorSide(3, Localization.GUI.DISTRIBUTOR.SIDE_GREEN, ForgeDirection.WEST));
+		sides.add(new DistributorSide(4, Localization.GUI.DISTRIBUTOR.SIDE_BLUE, ForgeDirection.SOUTH));
+		sides.add(new DistributorSide(5, Localization.GUI.DISTRIBUTOR.SIDE_RED, ForgeDirection.EAST));
     }
 
 

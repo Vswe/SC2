@@ -6,11 +6,11 @@ public class DistributorSide {
 
 
 	private int id;
-	private String name;
+	private Localization.GUI.DISTRIBUTOR name;
 	private ForgeDirection side;
 	private int data;
 	
-	public DistributorSide(int id, String name, ForgeDirection side) {
+	public DistributorSide(int id, Localization.GUI.DISTRIBUTOR name, ForgeDirection side) {
 		this.name = name;
 		this.id = id;
 		this.side = side;
@@ -26,7 +26,7 @@ public class DistributorSide {
 	}
 		
 	public String getName() {
-		return name;
+		return name.translate();
 	}
 	
 	public ForgeDirection getSide() {
@@ -104,6 +104,6 @@ public class DistributorSide {
 	
 	
 	public String getInfo() {
-		return "Side: " + getName();
+        return Localization.GUI.DISTRIBUTOR.SIDE_TOOL_TIP.translate(getName());
 	}
 }

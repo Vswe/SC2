@@ -3,6 +3,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import vswe.stevescarts.Blocks.Blocks;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Containers.ContainerLiquid;
 import vswe.stevescarts.Helpers.ResourceHelper;
@@ -26,9 +27,9 @@ public class GuiLiquid extends GuiManager
 		int amount = getLiquid().getMaxAmount(id);
 	
 		if (!getLiquid().hasMaxAmount(id)) {
-			return "Transfer as much as possible";
+			return Localization.GUI.LIQUID.TRANSFER_ALL.translate();
 		}else{
-			return "Transfer a maximum of " + getMaxSizeText(id);
+			return Localization.GUI.LIQUID.TRANSFER_BUCKETS.translate(getMaxSizeText(id));
 		}
 	}
 	
@@ -37,7 +38,7 @@ public class GuiLiquid extends GuiManager
 
 
 		if (!getLiquid().hasMaxAmount(id)){
-			return "MAX";
+			return Localization.GUI.LIQUID.TRANSFER_ALL_SHORT.translate();
 		}else{
 			String B = String.valueOf(getLiquid().getMaxAmount(id) / 1000F);
 	
@@ -47,7 +48,7 @@ public class GuiLiquid extends GuiManager
 				B = B.substring(1);
 			}
 			
-			return B + "B";
+			return B + Localization.GUI.LIQUID.TRANSFER_BUCKET_SHORT.translate();
 		}
 	}	
 	
@@ -130,7 +131,7 @@ public class GuiLiquid extends GuiManager
 
 	@Override
 	protected String getManagerName() {
-		return "Liquid";
+		return Localization.GUI.LIQUID.TITLE.translate();
 	}
 	
     private int[] getTankCoords(int id) {
@@ -148,20 +149,19 @@ public class GuiLiquid extends GuiManager
 	
 	@Override
 	protected String getLayoutString() {
-		return "Change tank layout";
+		return Localization.GUI.LIQUID.CHANGE_LAYOUT.translate();
 	}
 	
 	@Override
 	protected String getLayoutOption(int id) {
 		switch (id) {
+            default:
 			case 0:
-				return "All tanks are shared by all sides";
+				return Localization.GUI.LIQUID.LAYOUT_ALL.translate();
 			case 1:
-				return "Each side has its own tank";
+				return Localization.GUI.LIQUID.LAYOUT_SIDE.translate();
 			case 2:
-				return "Each color has its own tank(s)";
-			default:
-				return "Invalid layout";
+				return Localization.GUI.LIQUID.LAYOUT_COLOR.translate();
 		}
 	}	
 }
