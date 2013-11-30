@@ -90,41 +90,7 @@ public final class Items {
         }
     }
 
-    public static void addNames() {
-        LanguageRegistry.addName(carts, carts.getName());
 
-
-        for (int i = 0; i < ItemCartComponent.size(); i++) {
-            ItemStack subcomponent = new ItemStack(component,1,i);
-            LanguageRegistry.addName(subcomponent, component.getName(subcomponent));
-        }
-        //invalid component
-        LanguageRegistry.addName(new ItemStack(component,1,255), component.getName(null));
-
-        for (ModuleData module : ModuleData.getList().values()) {
-            ItemStack submodule = new ItemStack(modules,1,module.getID());
-            LanguageRegistry.addName(submodule, modules.getName(submodule));
-        }
-
-        //invalid module
-        LanguageRegistry.addName(new ItemStack(modules,1,255), modules.getName(null));
-
-
-        for (int i = 0; i < ItemBlockStorage.blocks.length; i++) {
-            ItemStack storage = new ItemStack(storages, 1, i);
-            LanguageRegistry.addName(storage, storages.getName(storage));
-        }
-
-        for (AssemblerUpgrade upgrade : AssemblerUpgrade.getUpgradesList()) {
-            ItemStack upgradeStack = new ItemStack(upgrades, 1, upgrade.getId());
-            LanguageRegistry.addName(upgradeStack, upgrades.getName(upgradeStack));
-        }
-
-        for (DetectorType type : DetectorType.values()) {
-            ItemStack stack = new ItemStack(detectors, 1, type.getMeta());
-            LanguageRegistry.addName(stack, type.getName());
-        }
-    }
     public static void addRecipes() {
         for (ModuleData module : ModuleData.getList().values()) {
             ItemStack submodule = new ItemStack(modules,1,module.getID());

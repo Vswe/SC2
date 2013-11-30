@@ -66,7 +66,7 @@ public class StevesCarts {
 	public final String texturePath = "/assets/stevescarts/textures";
 	//public final String soundPath = "/assets/stevescarts/sounds";
 	public final String textureHeader = "stevescarts";
-	public static final String localStart = "SC2";
+	public static final String localStart = "SC2:";
 	
 
 	@SidedProxy(clientSide = "vswe.stevescarts.ClientProxy", serverSide = "vswe.stevescarts.CommonProxy")
@@ -157,9 +157,7 @@ public class StevesCarts {
 
 		TileEntityCargo.loadSelectionSettings();
 
-        Items.addNames();
         Items.addRecipes();
-        Blocks.addNames();
         Blocks.addRecipes();
 	}
 	

@@ -21,20 +21,19 @@ import vswe.stevescarts.TileEntities.*;
 import java.lang.reflect.Constructor;
 
 public enum Blocks {
-    CARGO_MANAGER("BlockCargoManager", "Cargo Manager", BlockCargoManager.class, "CargoManager", 901, TileEntityCargo.class, "cargo"),
-    JUNCTION("BlockJunction", "Junction Rail", BlockRailJunction.class, "Junctionrail", 903),
-    ADVANCED_DETECTOR("BlockAdvDetector", "Advanced Detector Rail", BlockRailAdvDetector.class, "AdvancedDetector", 904),
-    CART_ASSEMBLER("BlockCartAssembler", "Cart Assembler", BlockCartAssembler.class, "CartAssembler", 902, TileEntityCartAssembler.class, "assembler"),
-    MODULE_TOGGLER("BlockActivator", "Module Toggler", BlockActivator.class, "Toggler", 905, TileEntityActivator.class, "activator"),
-    EXTERNAL_DISTRIBUTOR("BlockDistributor", "External Distributor", BlockDistributor.class, "Distributor", 906, TileEntityDistributor.class, "distributor"),
-    DETECTOR_UNIT("BlockDetector", null, BlockDetector.class, "Detector", 907, TileEntityDetector.class, "detector", ItemBlockDetector.class),
-    UPGRADE("upgrade", null, BlockUpgrade.class, "Upgrade", 908, TileEntityUpgrade.class, "upgrade", ItemUpgrade.class),
-    LIQUID_MANAGER("BlockLiquidManager", "Liquid Manager", BlockLiquidManager.class, "LiquidManager", 909, TileEntityLiquid.class, "liquid"),
-    STORAGE("BlockMetalStorage", null, BlockMetalStorage.class, "StorageBlocks", 910, ItemBlockStorage.class);
+    CARGO_MANAGER("BlockCargoManager", BlockCargoManager.class, "CargoManager", 901, TileEntityCargo.class, "cargo"),
+    JUNCTION("BlockJunction", BlockRailJunction.class, "Junctionrail", 903),
+    ADVANCED_DETECTOR("BlockAdvDetector", BlockRailAdvDetector.class, "AdvancedDetector", 904),
+    CART_ASSEMBLER("BlockCartAssembler", BlockCartAssembler.class, "CartAssembler", 902, TileEntityCartAssembler.class, "assembler"),
+    MODULE_TOGGLER("BlockActivator", BlockActivator.class, "Toggler", 905, TileEntityActivator.class, "activator"),
+    EXTERNAL_DISTRIBUTOR("BlockDistributor", BlockDistributor.class, "Distributor", 906, TileEntityDistributor.class, "distributor"),
+    DETECTOR_UNIT("BlockDetector", BlockDetector.class, "Detector", 907, TileEntityDetector.class, "detector", ItemBlockDetector.class),
+    UPGRADE("upgrade", BlockUpgrade.class, "Upgrade", 908, TileEntityUpgrade.class, "upgrade", ItemUpgrade.class),
+    LIQUID_MANAGER("BlockLiquidManager", BlockLiquidManager.class, "LiquidManager", 909, TileEntityLiquid.class, "liquid"),
+    STORAGE("BlockMetalStorage", BlockMetalStorage.class, "StorageBlocks", 910, ItemBlockStorage.class);
 
 
     private final String name;
-    private final String displayName;
     private final Class<? extends Block> clazz;
     private final String configEntry;
     private final int defaultId;
@@ -44,21 +43,20 @@ public enum Blocks {
 
     private Block block;
 
-    Blocks(String name, String displayName, Class<? extends Block> clazz, String configEntry, int defaultId) {
-        this(name, displayName, clazz, configEntry, defaultId, null, null);
+    Blocks(String name, Class<? extends Block> clazz, String configEntry, int defaultId) {
+        this(name, clazz, configEntry, defaultId, null, null);
     }
 
-    Blocks(String name, String displayName, Class<? extends Block> clazz, String configEntry, int defaultId, Class<? extends TileEntity> tileEntityClazz, String tileEntityName) {
-        this(name, displayName, clazz, configEntry, defaultId, tileEntityClazz, tileEntityName, ItemBlock.class);
+    Blocks(String name, Class<? extends Block> clazz, String configEntry, int defaultId, Class<? extends TileEntity> tileEntityClazz, String tileEntityName) {
+        this(name, clazz, configEntry, defaultId, tileEntityClazz, tileEntityName, ItemBlock.class);
     }
 
-    Blocks(String name, String displayName, Class<? extends Block> clazz, String configEntry, int defaultId, Class<? extends ItemBlock> itemClazz) {
-        this(name, displayName, clazz, configEntry, defaultId, null, null, itemClazz);
+    Blocks(String name, Class<? extends Block> clazz, String configEntry, int defaultId, Class<? extends ItemBlock> itemClazz) {
+        this(name, clazz, configEntry, defaultId, null, null, itemClazz);
     }
 
-    Blocks(String name, String displayName, Class<? extends Block> clazz, String configEntry, int defaultId, Class<? extends TileEntity> tileEntityClazz, String tileEntityName, Class<? extends ItemBlock> itemClazz) {
+    Blocks(String name, Class<? extends Block> clazz, String configEntry, int defaultId, Class<? extends TileEntity> tileEntityClazz, String tileEntityName, Class<? extends ItemBlock> itemClazz) {
         this.name = name;
-        this.displayName = displayName;
         this.clazz = clazz;
         this.configEntry = configEntry;
         this.defaultId = defaultId;
@@ -95,13 +93,6 @@ public enum Blocks {
         STORAGE.block.setHardness(5.0F).setResistance(10.0F);
     }
 
-    public static void addNames() {
-        for (Blocks blockInfo : values()) {
-            if (blockInfo.displayName != null) {
-                LanguageRegistry.addName(blockInfo.block, blockInfo.displayName);
-            }
-        }
-    }
 
     public static void addRecipes() {
         String blue = "dyeBlue";
