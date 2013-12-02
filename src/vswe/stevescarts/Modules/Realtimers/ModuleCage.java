@@ -22,6 +22,7 @@ import net.minecraft.entity.passive.EntityWaterMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevescarts.Carts.MinecartModular;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Helpers.ResourceHelper;
 import vswe.stevescarts.Interfaces.GuiMinecart;
 import vswe.stevescarts.Modules.IActivatorModule;
@@ -56,7 +57,7 @@ public class ModuleCage extends ModuleBase implements IActivatorModule {
 
 	@Override
 	public void drawForeground(GuiMinecart gui) {
-	    drawString(gui,"Cage", 8, 6, 0x404040);
+	    drawString(gui, getModuleName(), 8, 6, 0x404040);
 	}
 	
 	
@@ -86,8 +87,8 @@ public class ModuleCage extends ModuleBase implements IActivatorModule {
 
 	@Override
 	public void drawMouseOver(GuiMinecart gui, int x, int y) {
-		drawStringOnMouseOver(gui, disablePickup ? "Activate auto pick up" : "Disable auto pick up", x,y, autoRect);
-		drawStringOnMouseOver(gui, isCageEmpty() ? "Grab nearby creature" : "Realease caged creature", x,y, manualRect);
+		drawStringOnMouseOver(gui, Localization.MODULES.ATTACHMENTS.CAGE_AUTO.translate(disablePickup ? "0" : "1"), x,y, autoRect);
+		drawStringOnMouseOver(gui, Localization.MODULES.ATTACHMENTS.CAGE.translate(isCageEmpty() ? "0" : "1"), x,y, manualRect);
 	}
 
 	private boolean isCageEmpty() {		

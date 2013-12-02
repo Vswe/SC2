@@ -1,6 +1,8 @@
 package vswe.stevescarts.Upgrades;
 
 
+import vswe.stevescarts.Helpers.Localization;
+
 public class Deployer extends BaseEffect {
 
 
@@ -11,7 +13,7 @@ public class Deployer extends BaseEffect {
 	
 	@Override
 	public String getName() {
-		return "Enables deployment of finished carts.";
+		return Localization.UPGRADES.DEPLOYER.translate();
 	}
 	
 

@@ -8,10 +8,6 @@ public class ModuleFrontTank extends ModuleTank{
 		super(cart);
 	}
 
-	@Override
-	protected String getTankName() {
-		return "Front Tank";
-	}
 	
 	@Override
 	protected int getTankSize() {

@@ -1,6 +1,8 @@
 package vswe.stevescarts.Upgrades;
 
 
+import vswe.stevescarts.Helpers.Localization;
+
 public class Manager extends BaseEffect {
 
 
@@ -11,7 +13,7 @@ public class Manager extends BaseEffect {
 	
 	@Override
 	public String getName() {
-		return "Connects the Assembler with a Manager.";
+		return Localization.UPGRADES.BRIDGE.translate();
 	}
 	
 

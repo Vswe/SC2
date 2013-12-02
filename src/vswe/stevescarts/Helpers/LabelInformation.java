@@ -2,22 +2,19 @@ package vswe.stevescarts.Helpers;
 
 public abstract class LabelInformation {
 
-	private String name;
-	private boolean isActive;
-	public LabelInformation(String name) {
+	private Localization.MODULES.ADDONS name;
+	public LabelInformation(Localization.MODULES.ADDONS name) {
 		this.name = name;
 	}
 	
 	
 	public String getName() {
-		return name;
+		return name.translate();
 	}
 	
 	public abstract String getLabel();
 
-	public void setActive(boolean val) {
-		isActive = val;
-	}
+
 	
 
 	

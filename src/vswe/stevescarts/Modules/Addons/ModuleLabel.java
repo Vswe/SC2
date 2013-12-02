@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevescarts.Carts.MinecartModular;
 import vswe.stevescarts.Helpers.LabelInformation;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Helpers.ResourceHelper;
 import vswe.stevescarts.Interfaces.GuiMinecart;
 import vswe.stevescarts.Modules.ModuleBase;
@@ -28,46 +29,46 @@ public class ModuleLabel extends ModuleAddon {
 		
 		labels = new ArrayList<LabelInformation>();
 		
-		labels.add(new LabelInformation("Name") {
+		labels.add(new LabelInformation(Localization.MODULES.ADDONS.NAME) {
 			@Override
 			public String getLabel() {
 				return getCart().getCartName();
 			}			
 		});
 			
-		labels.add(new LabelInformation("Distance") {
+		labels.add(new LabelInformation(Localization.MODULES.ADDONS.DISTANCE) {
 			@Override
 			public String getLabel() {
-				return "Distance: " + (int)getCart().getDistanceToEntity(getClientPlayer()) + "m";
+				return Localization.MODULES.ADDONS.DISTANCE_LONG.translate(String.valueOf((int)getCart().getDistanceToEntity(getClientPlayer())));
 			}			
 		});		
 		
-		labels.add(new LabelInformation("Position") {
+		labels.add(new LabelInformation(Localization.MODULES.ADDONS.POSITION) {
 			@Override
 			public String getLabel() {
-				return "X: " + getCart().x() + " Y: " + getCart().y() + " Z: " + getCart().z();
+				return Localization.MODULES.ADDONS.POSITION_LONG.translate(String.valueOf(getCart().x()), String.valueOf(getCart().y()), String.valueOf(getCart().z()));
 			}			
 		});	
 		
-		labels.add(new LabelInformation("Fuel left") {
+		labels.add(new LabelInformation(Localization.MODULES.ADDONS.FUEL) {
 			@Override
 			public String getLabel() {
 				int seconds =  getIntDw(1);
 				
 				if (seconds == -1) {
-					return "No consumption";
+					return Localization.MODULES.ADDONS.FUEL_NO_CONSUMPTION.translate();
 				}else{
 					int minutes = seconds / 60;
 					seconds -= minutes * 60;
 					int hours = minutes / 60;
 					minutes -= hours * 60;
 
-					return String.format("Fuel time left: %02d:%02d:%02d", hours, minutes, seconds);
+					return String.format(Localization.MODULES.ADDONS.FUEL_LONG.translate() + ": %02d:%02d:%02d", hours, minutes, seconds);
 				}
 			}			
 		});		
 		
-		labels.add(new LabelInformation("Used Storage") {
+		labels.add(new LabelInformation(Localization.MODULES.ADDONS.STORAGE) {
 			@Override
 			public String getLabel() {
 				int used = getDw(2);
@@ -75,7 +76,7 @@ public class ModuleLabel extends ModuleAddon {
 					used += 256;
 				}
 				
-				return storageSlots == null ? "" : "Used Storage: " + used + "/" + storageSlots.size() + (storageSlots.size() == 0 ? "" : "[" + (int)(100F * used / storageSlots.size()) + "%]");
+				return storageSlots == null ? "" : Localization.MODULES.ADDONS.STORAGE.translate() + ": " + used + "/" + storageSlots.size() + (storageSlots.size() == 0 ? "" : "[" + (int)(100F * used / storageSlots.size()) + "%]");
 			}			
 		});			
 	}
@@ -87,24 +88,24 @@ public class ModuleLabel extends ModuleAddon {
                 if (moduleBase instanceof ModuleTool) {
                     tool = (ModuleTool)moduleBase;
 
-                    labels.add(new LabelInformation("Durability") {
+                    labels.add(new LabelInformation(Localization.MODULES.ADDONS.DURABILITY) {
                         @Override
                         public String getLabel() {
                             if (tool.useDurability()) {
                                 int data = getIntDw(3);
                                 if (data == 0) {
-                                    return "Tool is broken";
+                                    return Localization.MODULES.ADDONS.BROKEN.translate();
                                 }else if(data > 0) {
-                                    return "Durability: " + data + " / " + tool.getMaxDurability() + " [" + ((100 * data) / tool.getMaxDurability()) + "%]";
+                                    return Localization.MODULES.ADDONS.DURABILITY.translate() + ": " + data + " / " + tool.getMaxDurability() + " [" + ((100 * data) / tool.getMaxDurability()) + "%]";
                                 }else if(data == -1) {
                                     return "";
                                 }else if (data == -2) {
-                                    return "Tool isn't damaged. Remove the material";
+                                    return Localization.MODULES.ADDONS.NOT_BROKEN.translate();
                                 }else{
-                                    return "Tool is being repaired [" + -(data + 3) + "%]";
+                                    return Localization.MODULES.ADDONS.REPAIR.translate() + " [" + -(data + 3) + "%]";
                                 }
                             }else{
-                                return "Tool is unbreakable";
+                                return Localization.MODULES.ADDONS.UNBREAKABLE.translate();
                             }
                         }
                     });
@@ -292,7 +293,7 @@ public class ModuleLabel extends ModuleAddon {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawForeground(GuiMinecart gui) {
-		drawString(gui, "Labels", 8, 6, 0x404040);
+		drawString(gui, Localization.MODULES.ADDONS.LABELS.translate(), 8, 6, 0x404040);
 		
 		for (int i = 0; i < labels.size(); i++) {
 			int[] rect = getBoxArea(i);

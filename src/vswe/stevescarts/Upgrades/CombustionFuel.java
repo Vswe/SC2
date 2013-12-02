@@ -1,6 +1,8 @@
 package vswe.stevescarts.Upgrades;
 
 
+import vswe.stevescarts.Helpers.Localization;
+
 public class CombustionFuel extends BaseEffect {
 
 
@@ -11,7 +13,7 @@ public class CombustionFuel extends BaseEffect {
 	
 	@Override
 	public String getName() {
-		return "Enabled standard fuel sources.";
+		return Localization.UPGRADES.COMBUSTION.translate();
 	}
 	
 

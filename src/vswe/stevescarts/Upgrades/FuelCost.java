@@ -1,6 +1,8 @@
 package vswe.stevescarts.Upgrades;
 
 
+import vswe.stevescarts.Helpers.Localization;
+
 public class FuelCost extends BaseEffect {
 
 
@@ -12,7 +14,7 @@ public class FuelCost extends BaseEffect {
 	
 	@Override
 	public String getName() {
-		return "Fuel cost " + (getPercentage() >= 0 ? "+" : "") + getPercentage() + "%";
+		return Localization.UPGRADES.FUEL_COST.translate((getPercentage() >= 0 ? "+" : "") + getPercentage());
 	}
 	
 	private int getPercentage() {

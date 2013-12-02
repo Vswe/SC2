@@ -1,6 +1,8 @@
 package vswe.stevescarts.Upgrades;
 
 
+import vswe.stevescarts.Helpers.Localization;
+
 public class TimeFlatCart extends BaseEffect {
 
 
@@ -12,7 +14,7 @@ public class TimeFlatCart extends BaseEffect {
 	
 	@Override
 	public String getName() {
-		return "Cart assembling time " + (getSeconds() >= 0 ? "+" : "") + getSeconds() + " seconds";
+        return Localization.UPGRADES.CART_FLAT.translate((getSeconds() >= 0 ? "+" : "") + getSeconds(), String.valueOf(getSeconds()));
 	}
 	
 	protected int getSeconds() {

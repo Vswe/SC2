@@ -2,6 +2,7 @@ package vswe.stevescarts.Upgrades;
 
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevescarts.Arcade.Unit.UPDATE_RESULT;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.TileEntities.TileEntityUpgrade;
 
 public class Recharger extends RechargerBase {
@@ -24,7 +25,7 @@ public class Recharger extends RechargerBase {
 	
 	@Override
 	public String getName() {
-		return "Generate " + amount + " unit" + (amount > 1 ? "s" : "") + " of power per minute";
+		return Localization.UPGRADES.GENERATOR.translate(String.valueOf(amount), String.valueOf(amount));
 	}
 	
 	

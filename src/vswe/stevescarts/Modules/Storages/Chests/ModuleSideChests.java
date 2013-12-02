@@ -19,9 +19,6 @@ public class ModuleSideChests extends ModuleChest {
 	protected int getInventoryHeight() {
 		return 3;
 	}
-	@Override
-	protected String getChestName() {
-		return "Side Chests";
-	}
+
 
 }

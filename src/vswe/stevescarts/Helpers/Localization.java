@@ -79,7 +79,21 @@ public final class Localization {
             TRANSFER_ITEMS_SHORT("transferItemsShort"),
             TRANSFER_STACKS_SHORT("transferStacksShort"),
             CHANGE_STORAGE_AREA("changeTransferCartArea"),
-            UNKNOWN_AREA("unknownAreaMessage");
+            UNKNOWN_AREA("unknownAreaMessage"),
+            AREA_ALL("cartAreaAll"),
+            AREA_ENGINE("cartAreaEngine"),
+            AREA_RAILER("cartAreaRailer"),
+            AREA_STORAGE("cartAreaStorage"),
+            AREA_TORCHES("cartAreaTorches"),
+            AREA_EXPLOSIVES("cartAreaExplosives"),
+            AREA_ARROWS("cartAreaArrows"),
+            AREA_BRIDGE("cartAreaBridge"),
+            AREA_SEEDS("cartAreaSeeds"),
+            AREA_FERTILIZER("cartAreaFertilizer"),
+            AREA_SAPLINGS("cartAreaSaplings"),
+            AREA_FIREWORK("cartAreaFirework"),
+            AREA_BUCKETS("cartAreaBuckets"),
+            AREA_CAKES("cartAreaCakes");
 
 
 
@@ -184,6 +198,372 @@ public final class Localization {
             }
         }
 
+        public static enum DETECTOR {
+            OUTPUT("operatorOutput"),
+            AND("operatorAnd"),
+            OR("operatorOr"),
+            NOT("operatorNot"),
+            XOR("operatorXor"),
+            TOP("operatorTopUnit"),
+            BOT("operatorBotUnit"),
+            NORTH("operatorNorthUnit"),
+            WEST("operatorWestUnit"),
+            SOUTH("operatorSouthUnit"),
+            EAST("operatorEastUnit"),
+            REDSTONE("operatorRedstone"),
+            REDSTONE_TOP("operatorRedstoneTop"),
+            REDSTONE_BOT("operatorRedstoneBot"),
+            REDSTONE_NORTH("operatorRedstoneNorth"),
+            REDSTONE_WEST("operatorRedstoneWest"),
+            REDSTONE_SOUTH("operatorRedstoneSouth"),
+            REDSTONE_EAST("operatorRedstoneEast"),
+            RAIL("stateRails"),
+            TORCH("stateTorches"),
+            SAPLING("stateSaplings"),
+            SEED("sateSeeds"),
+            BRIDGE("stateBridge"),
+            PROJECTILE("stateProjectiles"),
+            FERTILIZING("stateFertilizing"),
+            SHIELD("stateShield"),
+            CHUNK("stateChunk"),
+            INVISIBILITY("stateInvisibility"),
+            DRILL("stateDrill"),
+            CAGE("stateCage"),
+            STORAGE_FULL("stateStorageFull"),
+            STORAGE_EMPTY("stateStorageEmpty"),
+            PASSENGER("statePassenger"),
+            ANIMAL("stateAnimal"),
+            TAMEABLE("stateTameable"),
+            BREEDABLE("stateBreedable"),
+            HOSTILE("stateHostile"),
+            CREEPER("stateCreeper"),
+            SKELETON("stateSkeleton"),
+            SPIDER("stateSpider"),
+            ZOMBIE("stateZombie"),
+            PIG_MAN("stateZombiePigMan"),
+            SILVERFISH("stateSilverFish"),
+            BLAZE("stateBlaze"),
+            BAT("stateBat"),
+            WITCH("stateWitch"),
+            PIG("statePig"),
+            SHEEP("stateSheep"),
+            COW("stateCow"),
+            MOOSHROOM("stateMooshroom"),
+            CHICKEN("stateChicken"),
+            WOLF("stateWolf"),
+            SNOW_GOLEM("stateSnowGolem"),
+            OCELOT("stateOcelot"),
+            VILLAGER("stateVillager"),
+            PLAYER("statePlayer"),
+            ZOMBIE_VILLAGER("stateZombieVillager"),
+            CHILD("stateChild"),
+            TAMED("stateTamed"),
+            POWER_RED("statePowerRed"),
+            POWER_BLUE("statePowerBlue"),
+            POWER_GREEN("statePowerGreen"),
+            POWER_YELLOW("statePowerYellow"),
+            TANKS_FULL("stateTanksFull"),
+            TANKS_EMPTY("stateTanksEmpty"),
+            TANK_EMPTY("stateTankEmpty");
+
+
+
+
+
+
+            private String name;
+            DETECTOR(String name) {
+                this.name = name;
+            }
+
+            public String translate(String ... vars) {
+                return doTranslate("gui.SC2:" + name, vars);
+            }
+        }
+
+    }
+
+    public static enum MODULE_INFO {
+        ENGINE_GROUP("moduleGroupEngine"),
+        DRILL_GROUP("moduleGroupDrill"),
+        FARMER_GROUP("moduleGroupFarmer"),
+        CUTTER_GROUP("moduleGroupCutter"),
+        TANK_GROUP("moduleGroupTank"),
+        ENTITY_GROUP("moduleGroupEntity"),
+        SHOOTER_GROUP("moduleGroupShooter"),
+        TOOL_GROUP("moduleGroupTool"),
+        TOOL_OR_SHOOTER_GROUP("moduleGroupToolShooter"),
+        HULL_CATEGORY("moduleCategoryHull"),
+        ENGINE_CATEGORY("moduleCategoryEngine"),
+        TOOL_CATEGORY("moduleCategoryTool"),
+        STORAGE_CATEGORY("moduleCategoryStorage"),
+        ADDON_CATEGORY("moduleCategoryAddon"),
+        ATTACHMENT_CATEGORY("moduleCategoryAttachment"),
+        PIG_MESSAGE("pigExtraMessage"),
+        OCEAN_MESSAGE("oceanExtraMessage"),
+        ALPHA_MESSAGE("alphaExtraMessage"),
+        STORAGE_EMPTY("storageEmpty"),
+        STORAGE_FULL("storageFull"),
+        GIFT_STORAGE_FULL("giftStorageFull"),
+        EGG_STORAGE_FULL("eggStorageFull"),
+        MODULAR_COST("modularCost"),
+        SIDE_NONE("cartSideNone"),
+        SIDE_TOP("cartSideTop"),
+        SIDE_CENTER("cartSideCenter"),
+        SIDE_BOTTOM("cartSideBottom"),
+        SIDE_BACK("cartSideBack"),
+        SIDE_LEFT("cartSideLeft"),
+        SIDE_RIGHT("cartSideRight"),
+        SIDE_FRONT("cartSideFront"),
+        OCCUPIED_SIDES("occupiedSides"),
+        AND("sidesAnd"),
+        NO_SIDES("noSides"),
+        CONFLICT_HOWEVER("moduleConflictHowever"),
+        CONFLICT_ALSO("moduleConflictAlso"),
+        REQUIREMENT("moduleRequirement"),
+        MODULE_COUNT_1("moduleCount1"),
+        MODULE_COUNT_2("moduleCount2"),
+        MODULE_COUNT_3("moduleCount3"),
+        DUPLICATES("allowDuplicates"),
+        TYPE("moduleType"),
+        CAPACITY_ERROR("capacityOverloadError"),
+        COMBINATION_ERROR("impossibleCombinationError"),
+        COMPLEXITY_ERROR("complexityOverloadError"),
+        PARENT_ERROR("missingParentError"),
+        NEMESIS_ERROR("presentNemesisError"),
+        DUPLICATE_ERROR("presentDuplicateError"),
+        CLASH_ERROR("sideClashError");
+
+
+        private String name;
+        MODULE_INFO(String name) {
+            this.name = name;
+        }
+
+        public String translate(String ... vars) {
+            return doTranslate("info.SC2:" + name, vars);
+        }
+    }
+
+    public static enum UPGRADES {
+        BLUEPRINT("effectBlueprint"),
+        COMBUSTION("effectCombustionFuel"),
+        DEPLOYER("effectDeployer"),
+        DISASSEMBLE("effectDisassemble"),
+        FUEL_CAPACITY("effectFuelCapacity"),
+        FUEL_COST("effectFuelCost"),
+        INPUT_CHEST("effectInputChest"),
+        BRIDGE("effectManagerBridge"),
+        GENERATOR("effectGenerator"),
+        REDSTONE("effectRedstone"),
+        SOLAR("effectSolar"),
+        THERMAL("effectThermal"),
+        FLAT("effectTimeFlat"),
+        CART_FLAT("effectTimeFlatCart"),
+        FLAT_REMOVED("effectTimeFlatRemove"),
+        TRANSPOSER("effectTransposer"),
+        EFFICIENCY("effectEfficiency");
+
+
+
+        private String name;
+        UPGRADES(String name) {
+            this.name = name;
+        }
+
+        public String translate(String ... vars) {
+            return doTranslate("info.SC2:" + name, vars);
+        }
+    }
+
+    public static class MODULES {
+
+        public static enum ADDONS {
+            DETECTOR_ANIMALS("detectorAnimals"),
+            DETECTOR_BATS("detectorBats"),
+            DETECTOR_MONSTERS("detectorMonsters"),
+            DETECTOR_PLAYERS("detectorPlayers"),
+            DETECTOR_VILLAGERS("detectorVillagers"),
+            PLANTER_RANGE("planterRangeExtenderTitle"),
+            SAPLING_AMOUNT("saplingPlantAmount") ,
+            CONTROL_LEVER("controlLeverTitle") ,
+            LEVER_START("leverStartCart"),
+            LEVER_STOP("leverStopCart"),
+            LEVER_TURN("leverTurnAroundCart"),
+            COLOR_RED("colorizerRgbRed"),
+            COLOR_GREEN("colorizerRgbGreen"),
+            COLOR_BLUE("colorizerRgbBlue"),
+            LOCKED("intelligenceLockedBlock"),
+            CHANGE_INTELLIGENCE("intelligenceChange"),
+            CURRENT_INTELLIGENCE("intelligenceCurrent"),
+            ENCHANT_INSTRUCTION("enchanterInstruction"),
+            INVISIBILITY("invisibilityToggle"),
+            NAME("informationProviderLabelName"),
+            DISTANCE("informationProviderLabelDistance"),
+            DISTANCE_LONG("informationProviderMessageDistance"),
+            POSITION("informationProviderLabelPosition"),
+            POSITION_LONG("informationProviderMessagePosition"),
+            FUEL("informationProviderLabelFuel"),
+            FUEL_LONG("informationProviderMessageFuel"),
+            FUEL_NO_CONSUMPTION("informationProviderMessageNoConsumption"),
+            STORAGE("informationProviderLabelStorage"),
+            LABELS("informationProviderLabels"),
+            DURABILITY("informationProviderLabelDurability"),
+            BROKEN("informationProviderMessageToolBroken"),
+            NOT_BROKEN("informationProviderMessageToolNotBroken"),
+            REPAIR("informationProviderMessageRepair"),
+            UNBREAKABLE("informationProviderMessageUnbreakable"),
+            K("powerThousandSuffix"),
+            OBSERVER_INSTRUCTION("powerObserverInstruction"),
+            OBSERVER_REMOVE("powerObserverRemoveInstruction"),
+            OBSERVER_DROP("powerObserverDropInstruction"),
+            OBSERVER_CHANGE("powerObserverChangeInstruction"),
+            OBSERVER_CHANGE_10("powerObserverChangeInstruction10"),
+            RECIPE_OUTPUT("recipeOutput"),
+            CURRENT("recipeCurrentSelection"),
+            INVALID_OUTPUT("recipeInvalidOutput"),
+            RECIPE_MODE("recipeChangeMode"),
+            RECIPE_NO_LIMIT("recipeNoLimit"),
+            RECIPE_LIMIT("recipeLimit"),
+            RECIPE_DISABLED("recipeDisabled"),
+            RECIPE_CHANGE_AMOUNT("recipeChangeLimit"),
+            RECIPE_CHANGE_AMOUNT_10("recipeChangeLimit10"),
+            RECIPE_CHANGE_AMOUNT_64("recipeChangeLimit64"),
+            SHIELD("shieldToggle");
+
+            private String name;
+            ADDONS(String name) {
+                this.name = name;
+            }
+
+            public String translate(String ... vars) {
+                return doTranslate("modules.addons.SC2:" + name, vars);
+            }
+        }
+
+        public static enum ENGINES {
+            OVER_9000("creativePowerLevel"),
+            COAL("coalEngineTitle"),
+            NO_FUEL("outOfFuel"),
+            FUEL("fuelLevel"),
+            SOLAR("solarEngineTitle"),
+            NO_POWER("outOfPower"),
+            POWER("powerLevel"),
+            THERMAL("thermalEngineTitle"),
+            POWERED("thermalPowered"),
+            NO_WATER("outOfWater"),
+            NO_LAVA("outOfLava");
+
+
+
+
+            private String name;
+            ENGINES(String name) {
+                this.name = name;
+            }
+
+            public String translate(String ... vars) {
+                return doTranslate("modules.engines.SC2:" + name, vars);
+            }
+        }
+
+        public static enum TANKS {
+            CREATIVE_MODE("creativeTankMode"),
+            CHANGE_MODE("creativeTankChangeMode"),
+            RESET_MODE("creativeTankResetMode"),
+            LOCKED("tankLocked"),
+            LOCK("tankLock"),
+            UNLOCK("tankUnlock"),
+            EMPTY("tankEmpty"),
+            INVALID("tankInvalidFluid");
+
+            private String name;
+            TANKS(String name) {
+                this.name = name;
+            }
+
+            public String translate(String ... vars) {
+                return doTranslate("modules.tanks.SC2:" + name, vars);
+            }
+        }
+
+        public static enum TOOLS {
+            DURABILITY("toolDurability"),
+            BROKEN("toolBroken"),
+            REPAIRING("toolRepairing"),
+            DECENT("toolDecent"),
+            INSTRUCTION("toolRepairInstruction"),
+            UNBREAKABLE("toolUnbreakable"),
+            UNBREAKABLE_REPAIR("toolUnbreakableRepairError"),
+            DRILL("drillTitle"),
+            TOGGLE("drillToggle"),
+            DIAMONDS("repairDiamonds"),
+            IRON("repairIron"),
+            FARMER("farmerTitle"),
+            CUTTER("cutterTitle");
+
+
+            private String name;
+            TOOLS(String name) {
+                this.name = name;
+            }
+
+            public String translate(String ... vars) {
+                return doTranslate("modules.tools.SC2:" + name, vars);
+            }
+        }
+
+        public static enum ATTACHMENTS {
+            FERTILIZERS("fertilizers"),
+            RAILER("railerTitle"),
+            CONTROL_SYSTEM("controlSystemTitle"),
+            DISTANCES("controlSystemDistanceUnits"),
+            ODO("controlSystemOdoMeter"),
+            TRIP("controlSystemTripMeter"),
+            CAGE_AUTO("cageAutoPickUp"),
+            CAGE("cagePickUp"),
+            CAKE_SERVER("cakeServerTitle"),
+            CAKES("cakesLabel"),
+            SLICES("slicesLabel"),
+            EXPLOSIVES("explosivesTitle"),
+            EXPERIENCE("experienceTitle"),
+            EXPERIENCE_LEVEL("experienceLevel"),
+            EXPERIENCE_EXTRACT("experienceExtract"),
+            EXPERIENCE_PLAYER_LEVEL("experiencePlayerLevel"),
+            SHOOTER("shooterTitle"),
+            FREQUENCY("shooterFrequency"),
+            SECONDS("shooterSeconds"),
+            DELAY("shooterDelay"),
+            PIANO("notePiano"),
+            BASS_DRUM("noteBassDrum"),
+            SNARE_DRUM("noteSnareDrum"),
+            STICKS("noteSticks"),
+            BASS_GUITAR("noteBassGuitar"),
+            CREATE_TRACK("noteCreateTrack"),
+            REMOVE_TRACK("noteRemoveTrack"),
+            ACTIVATE_INSTRUMENT("noteActivateInstrument"),
+            DEACTIVATE_INSTRUMENT("noteDeactivateInstrument"),
+            NOTE_DELAY("noteDelay"),
+            ADD_NOTE("noteAdd"),
+            REMOVE_NOTE("noteRemove"),
+            VOLUME("noteVolume");
+
+
+
+
+
+
+
+            private String name;
+            ATTACHMENTS(String name) {
+                this.name = name;
+            }
+
+            public String translate(String ... vars) {
+                return doTranslate("modules.attachments.SC2:" + name, vars);
+            }
+        }
+
     }
 
     private static String doTranslate(String name, String...vars) {
@@ -197,14 +577,36 @@ public final class Localization {
                     String optionsStr = result.substring(index + pluralCheck.length(), endIndex);
                     String options[] = optionsStr.split("\\|");
 
-                    int optionId = vars[i].equals("1") ? 0 : 1;
+                    int optionId = (vars[i].equals("1") || vars[i].equals("-1")) ? 0 : 1;
                     if (optionId >= 0 && optionId < options.length) {
                         String option = options[optionId];
                         result = result.substring(0, index) + option + result.substring(endIndex + 1);
+
+                        //restart
+                        i--;
                     }
                 }
             }else{
-                result = result.replace("[%" + (i + 1) + "]", vars[i]);
+                String listCheck = "[%" + (i + 1) + "->";
+                int index2 = result.indexOf(listCheck);
+                if (index2 != -1) {
+                    int endIndex = result.indexOf("]", index2);
+                    if (endIndex != -1) {
+                        String optionsStr = result.substring(index2 + listCheck.length(), endIndex);
+                        String options[] = optionsStr.split("\\|");
+
+                        int optionId = Integer.parseInt(vars[i]);
+                        if (optionId >= 0 && optionId < options.length) {
+                            String option = options[optionId];
+                            result = result.substring(0, index2) + option + result.substring(endIndex + 1);
+
+                            //restart
+                            i--;
+                        }
+                    }
+                }else{
+                    result = result.replace("[%" + (i + 1) + "]", vars[i]);
+                }
             }
         }
         return result;

@@ -22,10 +22,6 @@ public class ModuleExtractingChests extends ModuleChest {
 	protected int getInventoryHeight() {
 		return 4;
 	}
-	@Override
-	protected String getChestName() {
-		return "Extracting Side Chests";
-	}
 
 	@Override
 	protected float chestFullyOpenAngle() {

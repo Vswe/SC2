@@ -3,6 +3,7 @@ package vswe.stevescarts.Modules.Addons.Plants;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevescarts.Carts.MinecartModular;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Helpers.ResourceHelper;
 import vswe.stevescarts.Interfaces.GuiMinecart;
 import vswe.stevescarts.Modules.Addons.ModuleAddon;
@@ -43,7 +44,7 @@ public class ModulePlantSize extends ModuleAddon {
 
 	@Override
 	public void drawForeground(GuiMinecart gui) {
-	    drawString(gui,"Planter Range", 8, 6, 0x404040);
+	    drawString(gui, Localization.MODULES.ADDONS.PLANTER_RANGE.translate(), 8, 6, 0x404040);
 	}	
 		
 	
@@ -66,7 +67,7 @@ public class ModulePlantSize extends ModuleAddon {
 	
 	@Override
 	public void drawMouseOver(GuiMinecart gui, int x, int y) {
-		drawStringOnMouseOver(gui, "Current sapling amount: " + size + "x" + size, x,y,boxrect);
+		drawStringOnMouseOver(gui, Localization.MODULES.ADDONS.SAPLING_AMOUNT.translate() + ": " + size + "x" + size, x,y,boxrect);
 	}
 	
 	@Override

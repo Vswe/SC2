@@ -1,6 +1,7 @@
 package vswe.stevescarts.Modules.Workers.Tools;
 
 import net.minecraft.item.ItemStack;
+import vswe.stevescarts.Helpers.ComponentTypes;
 import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Carts.MinecartModular;
@@ -35,7 +36,7 @@ public class ModuleDrillHardened extends ModuleDrill {
 	
 	@Override
 	public String getRepairItemName() {
-		return "Reinforced Metal";
+		return ComponentTypes.REINFORCED_METAL.getLocalizedName();
 	}
 	
 	@Override

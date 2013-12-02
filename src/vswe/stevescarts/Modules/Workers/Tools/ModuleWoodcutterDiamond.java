@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Carts.MinecartModular;
 import vswe.stevescarts.Items.ItemCartComponent;
@@ -51,7 +52,7 @@ public class ModuleWoodcutterDiamond extends ModuleWoodcutter {
 	}
 	@Override
 	public String getRepairItemName() {
-		return "Diamonds";
+		return Localization.MODULES.TOOLS.DIAMONDS.translate();
 	}
 	@Override
 	public int getRepairItemUnits(ItemStack item) {

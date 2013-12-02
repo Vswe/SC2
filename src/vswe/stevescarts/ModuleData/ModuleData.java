@@ -12,6 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Icon;
+import net.minecraft.util.StatCollector;
 import vswe.stevescarts.Helpers.*;
 import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.Models.Cart.*;
@@ -19,7 +20,7 @@ import vswe.stevescarts.Modules.Workers.*;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Carts.MinecartModular;
 import vswe.stevescarts.Modules.ModuleBase;
-import vswe.stevescarts.Modules.ModuleSmelterAdv;
+import vswe.stevescarts.Modules.Addons.ModuleSmelterAdv;
 import vswe.stevescarts.Modules.Addons.ModuleAddon;
 import vswe.stevescarts.Modules.Addons.ModuleBrake;
 import vswe.stevescarts.Modules.Addons.ModuleChunkLoader;
@@ -119,7 +120,7 @@ public class ModuleData {
 
 	private static HashMap<Byte,ModuleData> moduleList;		
 	private static Class[] moduleGroups;
-	private static String[] moduleGroupNames;
+	private static Localization.MODULE_INFO[] moduleGroupNames;
 	
 	public static HashMap<Byte,ModuleData> getList() {
 		return moduleList;
@@ -138,11 +139,11 @@ public class ModuleData {
 
 		
 		moduleGroups = new Class[] {ModuleHull.class, ModuleEngine.class, ModuleTool.class,ModuleStorage.class, ModuleAddon.class};
-		moduleGroupNames = new String[] {"Hull", "Engine", "Tool", "Storage", "Addon", "Attachment"};
+		moduleGroupNames = new Localization.MODULE_INFO[] {Localization.MODULE_INFO.HULL_CATEGORY, Localization.MODULE_INFO.ENGINE_CATEGORY, Localization.MODULE_INFO.TOOL_CATEGORY, Localization.MODULE_INFO.STORAGE_CATEGORY, Localization.MODULE_INFO.ADDON_CATEGORY, Localization.MODULE_INFO.ATTACHMENT_CATEGORY};
 	
 		moduleList = new HashMap<Byte,ModuleData> ();
 		
-		ModuleDataGroup engineGroup = new ModuleDataGroup("Engine");
+		ModuleDataGroup engineGroup = new ModuleDataGroup(Localization.MODULE_INFO.ENGINE_GROUP);
 		
 		ModuleData coalStandard = new ModuleData(0, "Coal Engine", ModuleCoalStandard.class,15)/*.addSide(SIDE.BACK)*/			
 			.addRecipe(new Object[][] {
@@ -252,7 +253,7 @@ public class ModuleData {
 							   {ComponentTypes.GALGADORIAN_METAL.getItemStack(),  ComponentTypes.ENHANCED_GALGADORIAN_METAL.getItemStack(), null}
 							  });	
 
-		ModuleDataGroup drillGroup = new ModuleDataGroup("Drill");
+		ModuleDataGroup drillGroup = new ModuleDataGroup(Localization.MODULE_INFO.DRILL_GROUP);
 		drillGroup.add(drill);
 		drillGroup.add(ironDrill);
 		drillGroup.add(hardeneddrill);
@@ -284,7 +285,7 @@ public class ModuleData {
 										{Item.ingotIron,null,null}	
 									});
 			
-		ModuleDataGroup farmerGroup = new ModuleDataGroup("Farmer");
+		ModuleDataGroup farmerGroup = new ModuleDataGroup(Localization.MODULE_INFO.FARMER_GROUP);
 		
 		ModuleData farmerbasic = new ModuleDataTool(14, "Basic Farmer", ModuleFarmerDiamond.class,36, false).addSide(SIDE.FRONT)
 			.addRecipe(new Object[][] {	{Item.diamond,Item.diamond,Item.diamond},
@@ -305,7 +306,7 @@ public class ModuleData {
 		farmerGroup.add(farmerbasic);
 		farmerGroup.add(farmergalg);
 	
-		ModuleDataGroup woodcutterGroup = new ModuleDataGroup("Wood Cutter");
+		ModuleDataGroup woodcutterGroup = new ModuleDataGroup(Localization.MODULE_INFO.CUTTER_GROUP);
 		
 		ModuleData woodcutter = new ModuleDataTool(15, "Basic Wood Cutter", ModuleWoodcutterDiamond.class,34, false).addSide(SIDE.FRONT)		
 			.addRecipe(new Object[][] {	{ComponentTypes.SAW_BLADE.getItemStack(),ComponentTypes.SAW_BLADE.getItemStack(),ComponentTypes.SAW_BLADE.getItemStack()},
@@ -338,7 +339,7 @@ public class ModuleData {
 		woodcutterGroup.add(woodcutterHardened);
 		woodcutterGroup.add(woodcutterGalgadorian);
 		
-		ModuleDataGroup tankGroup = new ModuleDataGroup("Tank");
+		ModuleDataGroup tankGroup = new ModuleDataGroup(Localization.MODULE_INFO.TANK_GROUP);
 		new ModuleData(16, "Hydrator", ModuleHydrater.class,6).addRequirement(tankGroup)		
 			.addRecipe(new Object[][] {	{Item.ingotIron,Item.glassBottle,Item.ingotIron},
 										{null,Block.fenceIron,null},
@@ -385,7 +386,7 @@ public class ModuleData {
 									  });			
 		
 		
-		ModuleDataGroup detectorGroup = new ModuleDataGroup("Entity Detector");
+		ModuleDataGroup detectorGroup = new ModuleDataGroup(Localization.MODULE_INFO.ENTITY_GROUP);
 		
 
 		
@@ -401,7 +402,7 @@ public class ModuleData {
 									   {Item.ingotIron, ComponentTypes.ENTITY_ANALYZER.getItemStack() ,Item.ingotIron}
 									  });		
 
-		ModuleDataGroup shooterGroup = new ModuleDataGroup("Shooter");
+		ModuleDataGroup shooterGroup = new ModuleDataGroup(Localization.MODULE_INFO.SHOOTER_GROUP);
 		shooterGroup.add(shooter);
 		shooterGroup.add(advshooter);
 		
@@ -509,10 +510,7 @@ public class ModuleData {
 									   {Item.porkRaw, Item.porkRaw, Item.porkRaw},
 									   {ComponentTypes.IRON_WHEELS.getItemStack(), null, ComponentTypes.IRON_WHEELS.getItemStack()}
 									  })
-		.addMessage("In memory of Vswe's Thunderpig")
-		.addMessage("arena victory. Thanks everyone")
-		.addMessage("who donated during the 2013")
-		.addMessage("Minecraft Marathon");
+		.addMessage(Localization.MODULE_INFO.PIG_MESSAGE);
 		
 		new ModuleDataHull(76, "Creative Hull", ModuleCheatHull.class).setCapacity(10000).setEngineMax(5).setAddonMax(12).setComplexityMax(150);
 
@@ -559,18 +557,18 @@ public class ModuleData {
 			@Override
 			public String getModuleInfoText(byte b) {
 				if (b == 0) {
-					return "Empty";
+					return Localization.MODULE_INFO.STORAGE_EMPTY.translate();
 				}else{
-					return "Might contain a surprise";
+					return Localization.MODULE_INFO.GIFT_STORAGE_FULL.translate();
 				}				
 			}
 			
 			@Override
 			public String getCartInfoText(String name, byte b) {
 				if (b == 0) {
-					return "Empty " + name;
+					return Localization.MODULE_INFO.STORAGE_EMPTY.translate() + " " + name;
 				}else{
-					return "Full " + name;
+					return Localization.MODULE_INFO.STORAGE_FULL.translate() + " " + name;
 				}
 			}		
 		}.addSides(new SIDE[] {SIDE.RIGHT, SIDE.LEFT}).useExtraData((byte)1)			
@@ -678,7 +676,7 @@ public class ModuleData {
 									  });	
 		
 		ModuleData creativeTank = new ModuleData(72, "Creative Tank", ModuleCheatTank.class, 1).setAllowDuplicate()
-			.addMessage("Room for an average sized ocean");		
+			.addMessage(Localization.MODULE_INFO.OCEAN_MESSAGE);
 		
 		ModuleData topTankOpen = new ModuleData(73, "Open Tank", ModuleOpenTank.class, 31).addSide(SIDE.TOP)		
 			.addRecipe(new Object[][] {{ComponentTypes.TANK_PANE.getItemStack(), null, ComponentTypes.TANK_PANE.getItemStack()},
@@ -722,22 +720,22 @@ public class ModuleData {
 		
 
 		ItemStack yellowWool = new ItemStack(Block.cloth, 1, 4);
-		ModuleData eggBasket = new ModuleData(74, "Egg ComponentTypes.BASKET.getItemStack()", ModuleEggBasket.class, 14) {
+		ModuleData eggBasket = new ModuleData(74, "Egg Basket", ModuleEggBasket.class, 14) {
 			@Override
 			public String getModuleInfoText(byte b) {
 				if (b == 0) {
-					return "Empty";
+					return Localization.MODULE_INFO.STORAGE_EMPTY.translate();
 				}else{
-					return "Full of Eggs";
+					return Localization.MODULE_INFO.EGG_STORAGE_FULL.translate();
 				}				
 			}
 			
 			@Override
 			public String getCartInfoText(String name, byte b) {
 				if (b == 0) {
-					return "Empty " + name;
+					return Localization.MODULE_INFO.STORAGE_EMPTY.translate() + " " + name;
 				}else{
-					return "Full " + name;
+					return Localization.MODULE_INFO.STORAGE_FULL.translate() + " " + name;
 				}
 			}
 		}.addSide(SIDE.TOP).useExtraData((byte)1)	
@@ -774,11 +772,11 @@ public class ModuleData {
 		
 
 		
-		ModuleDataGroup toolGroup = ModuleDataGroup.getCombinedGroup("Tool", drillGroup, woodcutterGroup);
+		ModuleDataGroup toolGroup = ModuleDataGroup.getCombinedGroup(Localization.MODULE_INFO.TOOL_GROUP, drillGroup, woodcutterGroup);
 		toolGroup.add(farmerGroup);
 
 		
-		ModuleDataGroup enchantableGroup = ModuleDataGroup.getCombinedGroup("Tool or Shooter", toolGroup, shooterGroup);
+		ModuleDataGroup enchantableGroup = ModuleDataGroup.getCombinedGroup(Localization.MODULE_INFO.TOOL_OR_SHOOTER_GROUP, toolGroup, shooterGroup);
 		
 		new ModuleData(82, "Enchanter", ModuleEnchants.class, 72).addRequirement(enchantableGroup)
 			.addRecipe(new Object[][] {{null, ComponentTypes.GALGADORIAN_METAL.getItemStack(), null},
@@ -866,11 +864,11 @@ public class ModuleData {
 		new ModuleData(97, "Creative Supplies", ModuleCreativeSupplies.class, 1);
 		
 		new ModuleData(99, "Cake Server", ModuleCakeServer.class, 10).addSide(SIDE.TOP)
-		.addMessage("1 year in alpha")
-		.addRecipe(new Object[][] {{null, Item.cake,  null},
-				{"slabWood", "slabWood", "slabWood"},
-			   {null, ComponentTypes.SIMPLE_PCB.getItemStack(), null}
-			  });	
+		.addMessage(Localization.MODULE_INFO.ALPHA_MESSAGE)
+		.addRecipe(new Object[][]{{null, Item.cake, null},
+                {"slabWood", "slabWood", "slabWood"},
+                {null, ComponentTypes.SIMPLE_PCB.getItemStack(), null}
+        });
 		
 		ModuleData trickOrTreat = new ModuleData(100, "Trick-or-Treat Cake Server", ModuleCakeServerDynamite.class, 15).addSide(SIDE.TOP)
 			.addRecipe(new Object[][] {{null, Item.cake,  null},
@@ -1126,7 +1124,7 @@ public class ModuleData {
 	private boolean isLocked;
 	private boolean defaultLock;
 	private boolean hasRecipe;
-	private ArrayList<String> message;
+	private ArrayList<Localization.MODULE_INFO> message;
 	private HashMap<String,ModelCartbase> models;
 	private HashMap<String,ModelCartbase> modelsPlaceholder;
 	private ArrayList<String> removedModels;
@@ -1241,9 +1239,9 @@ public class ModuleData {
 		return this;
 	}	
 	
-	protected ModuleData addMessage(String s) {
+	protected ModuleData addMessage(Localization.MODULE_INFO s) {
 		if (message == null) {
-			message = new ArrayList<String>();
+			message = new ArrayList<Localization.MODULE_INFO>();
 		}
 		message.add(s);
 		
@@ -1340,7 +1338,7 @@ public class ModuleData {
 	}
 
 	public String getName() {
-		return name;
+		return StatCollector.translateToLocal("item." + StevesCarts.localStart + getRawName() + ".name");
 	}
 
 	public byte getID() {
@@ -1572,17 +1570,38 @@ public class ModuleData {
 		return true;
 	}
 
+    private static final int MAX_MESSAGE_ROW_LENGTH = 30;
 	public void addExtraMessage(List list) {
 		if (message != null) {
 			list.add("");
-			for (String s : message) {
-				list.add(ColorHelper.GRAY + "\u00a7o" + s + "\u00a7r");		
+			for (Localization.MODULE_INFO m : message) {
+			    String str = m.translate();
+                if (str.length() <= MAX_MESSAGE_ROW_LENGTH) {
+                    addExtraMessage(list, str);
+                }else{
+                    String[] words = str.split(" ");
+                    String row = "";
+                    for (String word : words) {
+                        String next = (row + " " + word).trim();
+                        if (next.length() <= MAX_MESSAGE_ROW_LENGTH) {
+                            row = next;
+                        }else{
+                            addExtraMessage(list, row);
+                            row = word;
+                        }
+                    }
+                    addExtraMessage(list, row);
+                }
 			}
 		}
-	}	
+	}
+
+    private void addExtraMessage(List list, String str) {
+        list.add(ColorHelper.GRAY + "\u00a7o" + str + "\u00a7r");
+    }
 	
 	public void addSpecificInformation(List list) {
-		list.add(ColorHelper.LIGHTGRAY + "Modular cost: " + modularCost);
+		list.add(ColorHelper.LIGHTGRAY + Localization.MODULE_INFO.MODULAR_COST.translate() + ": " + modularCost);
 	}
 	
 	public final void addInformation(List list, NBTTagCompound compound) {
@@ -1598,35 +1617,30 @@ public class ModuleData {
 		if (GuiScreen.isShiftKeyDown()) {
 			
 			if (getRenderingSides() == null || getRenderingSides().size() == 0) {
-				list.add(ColorHelper.CYAN + "Won't occupy any sides");
+				list.add(ColorHelper.CYAN + Localization.MODULE_INFO.NO_SIDES.translate());
 			}else{
-				String str = ColorHelper.CYAN + "Will occupy the ";
-				
+                String sides = "";
 				for (int i = 0; i < getRenderingSides().size(); i++) {
 					SIDE side = getRenderingSides().get(i);
 					
-					if(i == 0) {	
-						str += side.toString();					
+					if(i == 0) {
+                        sides += side.toString();
 					}else if (i == getRenderingSides().size() - 1) {
-						str += " and " + side.toString();			
+                        sides += " " + Localization.MODULE_INFO.AND.translate() + " " + side.toString();
 					}else{
-						str += ", " + side.toString();
+                        sides += ", " + side.toString();
 					}
 				}
-				if (getRenderingSides().size() == 1) {
-					str += " side";
-				}else{
-					str += " sides";
-				}
+
 				
-				list.add(str);
+				list.add(ColorHelper.CYAN + Localization.MODULE_INFO.OCCUPIED_SIDES.translate(sides, String.valueOf(getRenderingSides().size())));
 			}
 			
 			if (getNemesis() != null && getNemesis().size() != 0) {
 				if (getRenderingSides() == null || getRenderingSides().size() == 0) {
-					list.add(ColorHelper.RED + "Will however conflict with:");
+					list.add(ColorHelper.RED + Localization.MODULE_INFO.CONFLICT_HOWEVER.translate() + ":");
 				}else{
-					list.add(ColorHelper.RED + "Will also conflict with:");
+					list.add(ColorHelper.RED + Localization.MODULE_INFO.CONFLICT_ALSO.translate() + ":");
 				}
 				for (ModuleData module : getNemesis()) {
 					list.add(ColorHelper.RED + module.getName());
@@ -1634,82 +1648,74 @@ public class ModuleData {
 			}
 			
 			if (parent != null) {
-				list.add(ColorHelper.YELLOW + "Requires " + parent.getName());	
+				list.add(ColorHelper.YELLOW + Localization.MODULE_INFO.REQUIREMENT.translate() + " " + parent.getName());
 			}
 			
 			if (getRequirement() != null && getRequirement().size() != 0) {
 				for (ModuleDataGroup group : getRequirement()) {
-					list.add(ColorHelper.YELLOW + "Requires " + group.getCountName() + " " + group.getName() + ( group.getCount() > 1 ? "s" : ""));	
+					list.add(ColorHelper.YELLOW + Localization.MODULE_INFO.REQUIREMENT.translate() + " " + group.getCountName() + " " + group.getName());
 				}
 			}
 			
 			if (getAllowDuplicate()) {
-				list.add(ColorHelper.LIME + "Duplicates are allowed");
+				list.add(ColorHelper.LIME + Localization.MODULE_INFO.DUPLICATES.translate());
 			}
 			
 		}
 		
-		list.add(ColorHelper.LIGHTBLUE + "Type: " + moduleGroupNames[groupID]);	
+		list.add(ColorHelper.LIGHTBLUE + Localization.MODULE_INFO.TYPE.translate() + ": " + moduleGroupNames[groupID].translate());
 		addExtraMessage(list);
 	}
 	
 	
-	/*
-		0 -	Black
-		1 - Blue
-		2 - Green
-		3 - Cyan
-		4 - Red
-		5 - Purple
-		6 - Orange
-		7 - Light Gray
-		8 - Gray
-		9 - Light blue
-		10 - Lime
-		11 - Turquise
-		12 - Pink
-		13 - Magenta
-		14 - Yellow
-		15 - White
-	*/
-	/*@Deprecated
-	protected String getColorTag(int colorId) {
-		if (colorId < 0) {
-			colorId = 0;
-		}else if(colorId > 15) {
-			colorId = 15;
-		}
-		
-		return "\u00a7" + Integer.toHexString(colorId);
-	}*/
 
 	
 	//Sides that the different modules will claim that they occupy
-	public enum SIDE {NONE, TOP, CENTER, BOTTOM, BACK, LEFT, RIGHT, FRONT}
+	public enum SIDE {
+        NONE(Localization.MODULE_INFO.SIDE_NONE),
+        TOP(Localization.MODULE_INFO.SIDE_TOP),
+        CENTER(Localization.MODULE_INFO.SIDE_CENTER),
+        BOTTOM(Localization.MODULE_INFO.SIDE_BOTTOM),
+        BACK(Localization.MODULE_INFO.SIDE_BACK),
+        LEFT(Localization.MODULE_INFO.SIDE_LEFT),
+        RIGHT(Localization.MODULE_INFO.SIDE_RIGHT),
+        FRONT(Localization.MODULE_INFO.SIDE_FRONT);
+
+        private Localization.MODULE_INFO name;
+        private SIDE(Localization.MODULE_INFO name) {
+            this.name = name;
+        }
+
+
+        @Override
+        public String toString() {
+            return name.translate();
+        }
+    }
 	
 	
 	public static String checkForErrors(ModuleDataHull hull, ArrayList<ModuleData> modules) {
 		//Normal errors here	
 		if (getTotalCost(modules) > hull.getCapacity()) {
-			return "Your cost is greater than the capacity of the hull.";			
+			return Localization.MODULE_INFO.CAPACITY_ERROR.translate();
 		}				
 		
 		if (!isValidModuleCombo(hull,modules)) {
-			return "The combination of module types of the modules given are not valid. This shouldn't be possible.";
+			return Localization.MODULE_INFO.COMBINATION_ERROR.translate();
 		}
 
 		for (int i = 0; i < modules.size(); i++) {
 			ModuleData mod1 = modules.get(i);
 			if (mod1.getCost() > hull.getComplexityMax()) {
-				return mod1.getName() + " is too complex for this hull.";
+				return Localization.MODULE_INFO.COMPLEXITY_ERROR.translate(mod1.getName());
 			}
 			if (mod1.getParent() != null && !modules.contains(mod1.getParent())) {
-				return mod1.getName() + " requires " + mod1.getParent().getName() + " to work!";			
+				return Localization.MODULE_INFO.PARENT_ERROR.translate(mod1.getName(), mod1.getParent().getName());
 			}
 			if (mod1.getNemesis() != null) {
-				for (ModuleData nemisis : mod1.getNemesis()) {
-					if (modules.contains(nemisis)) {
-						return mod1.getName() + " won't work with " + nemisis.getName() + "!";			
+				for (ModuleData nemesis : mod1.getNemesis()) {
+					if (modules.contains(nemesis)) {
+						return Localization.MODULE_INFO.NEMESIS_ERROR.translate(mod1.getName(), nemesis.getName());
 					}
 				}			
 			}
@@ -1724,7 +1730,7 @@ public class ModuleData {
 						}
 					}
 					if (count < group.getCount()) {
-						return mod1.getName() + " requires " + group.getCountName() + " " + group.getName() + ( group.getCount() > 1 ? "s" : "") +" to work!";			
+						return Localization.MODULE_INFO.PARENT_ERROR.translate(mod1.getName(), group.getCountName() + " " + group.getName());
 					}
 				}
 			}
@@ -1734,7 +1740,7 @@ public class ModuleData {
 				
 				if (mod1 == mod2) {
 					if (!mod1.getAllowDuplicate()) {
-						return mod1.getName() + " is not allowed to be added twice.";
+						return Localization.MODULE_INFO.DUPLICATE_ERROR.translate(mod1.getName());
 					}
 				}else if (mod1.getRenderingSides() != null && mod2.getRenderingSides() != null) {
 					SIDE clash = SIDE.NONE;
@@ -1750,7 +1756,7 @@ public class ModuleData {
 						}
 					}
 					if (clash != SIDE.NONE) {
-						return mod1.getName() + " and " + mod2.getName() + " will clash at the " + clash.toString();
+						return Localization.MODULE_INFO.CLASH_ERROR.translate(mod1.getName(), mod2.getName(), clash.toString());
 					}
 				}					
 			}

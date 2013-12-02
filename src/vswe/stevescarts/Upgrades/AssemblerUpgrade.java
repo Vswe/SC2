@@ -12,6 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Icon;
+import net.minecraft.util.StatCollector;
 import vswe.stevescarts.Blocks.Blocks;
 import vswe.stevescarts.Helpers.ComponentTypes;
 import vswe.stevescarts.Helpers.RecipeHelper;
@@ -292,7 +293,7 @@ public class AssemblerUpgrade {
 	}
 	
 	public String getName() {
-		return "Upgrade: " + name;
+		return StatCollector.translateToLocal("item." + StevesCarts.localStart + getRawName() + ".name");
 	}
 	
 	public AssemblerUpgrade addEffect(BaseEffect effect) {

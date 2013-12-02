@@ -25,10 +25,6 @@ public class ModuleGiftStorage extends ModuleChest {
 	protected int getInventoryHeight() {
 		return 4;
 	}
-	@Override
-	protected String getChestName() {
-		return "Gift Storage";
-	}
 
 	@Override
 	public byte getExtraData() {

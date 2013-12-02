@@ -22,10 +22,6 @@ public class ModuleEggBasket extends ModuleChest {
 	protected int getInventoryHeight() {
 		return 4;
 	}
-	@Override
-	protected String getChestName() {
-		return "Egg Basket";
-	}
 
 	@Override
 	protected boolean playChestSound() {

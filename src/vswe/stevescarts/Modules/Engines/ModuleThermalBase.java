@@ -2,6 +2,7 @@ package vswe.stevescarts.Modules.Engines;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidRegistry;
 import vswe.stevescarts.Carts.MinecartModular;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Interfaces.GuiMinecart;
 
 public abstract class ModuleThermalBase extends ModuleEngine {
@@ -127,7 +128,7 @@ public abstract class ModuleThermalBase extends ModuleEngine {
 
 	@Override
 	public void drawForeground(GuiMinecart gui) {
-	    drawString(gui,"Thermal Engine", 8, 6, 0x404040);
+	    drawString(gui, Localization.MODULES.ENGINES.THERMAL.translate(), 8, 6, 0x404040);
 		String str;
 		int consumption = getCart().getConsumption();
 		if (consumption == 0) {
@@ -135,11 +136,11 @@ public abstract class ModuleThermalBase extends ModuleEngine {
 		}
 
         if (getFuelLevel() >= consumption && (!requiresCoolant() || getCoolantLevel() >= consumption)) {
-			str = "Powered";
+			str = Localization.MODULES.ENGINES.POWERED.translate();
 		}else if (getFuelLevel() >= consumption){
-			str = "Out of Water";
+			str = Localization.MODULES.ENGINES.NO_WATER.translate();
 		}else{
-			str = "Out of Lava";
+			str = Localization.MODULES.ENGINES.NO_LAVA.translate();
 		}
 		
 		drawString(gui, str, 8, 22, 0x404040);

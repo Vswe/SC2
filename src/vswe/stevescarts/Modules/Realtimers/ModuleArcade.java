@@ -82,7 +82,7 @@ public class ModuleArcade extends ModuleBase {
 			
 			currentGame.drawForeground(gui);
 		}else{
-		    drawString(gui,"Steve's Arcade", 8, 6, 0x404040);		
+		    drawString(gui,getModuleName(), 8, 6, 0x404040);
 		    
 			for (int i = 0; i < games.size(); i++) {
 				int[] text = getButtonTextArea(i);

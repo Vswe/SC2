@@ -7,11 +7,6 @@ public class ModuleAdvancedTank extends ModuleTank{
 	public ModuleAdvancedTank(MinecartModular cart) {
 		super(cart);
 	}
-
-	@Override
-	protected String getTankName() {
-		return "Advanced Tank";
-	}
 	
 	@Override
 	protected int getTankSize() {

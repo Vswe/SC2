@@ -1,5 +1,6 @@
 package vswe.stevescarts.Upgrades;
 
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.TileEntities.TileEntityUpgrade;
 import net.minecraft.nbt.NBTTagByteArray;
 import net.minecraft.nbt.NBTTagCompound;
@@ -23,7 +24,7 @@ public class Blueprint extends SimpleInventoryEffect {
 	
 	@Override
 	public String getName() {
-		return "Enable the use of Blueprint carts.";
+		return Localization.UPGRADES.BLUEPRINT.translate();
 	}
 	
 	public boolean isValidForBluePrint(TileEntityUpgrade upgrade, ArrayList<ModuleData> modules, ModuleData module) {

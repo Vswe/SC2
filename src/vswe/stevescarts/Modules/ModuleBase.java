@@ -1630,7 +1630,9 @@ public abstract class ModuleBase {
 	public void postUpdate() {
 
 	}
-	
 
+    public String getModuleName() {
+        return ModuleData.getList().get(getModuleId()).getName();
+    }
 	
 }

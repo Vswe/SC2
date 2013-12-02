@@ -154,7 +154,7 @@ public class ModuleSmelter extends ModuleRecipe {
 	@Override
 	public void drawForeground(GuiMinecart gui) {
 		super.drawForeground(gui);
-	    drawString(gui,"Smelter", 8, 6, 0x404040);
+	    drawString(gui,getModuleName(), 8, 6, 0x404040);
 	}		
 	
 	@Override

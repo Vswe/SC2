@@ -7,6 +7,7 @@ import vswe.stevescarts.Carts.MinecartModular;
 import vswe.stevescarts.Helpers.EnchantmentData;
 import vswe.stevescarts.Helpers.EnchantmentInfo;
 import vswe.stevescarts.Helpers.EnchantmentInfo.ENCHANTMENT_TYPE;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Helpers.ResourceHelper;
 import vswe.stevescarts.Interfaces.GuiMinecart;
 import vswe.stevescarts.Slots.SlotBase;
@@ -77,7 +78,7 @@ public class ModuleEnchants extends ModuleAddon  {
 
 	@Override
 	public void drawForeground(GuiMinecart gui) {
-	    drawString(gui,"Enchanter", 8, 6, 0x404040);
+	    drawString(gui, getModuleName(), 8, 6, 0x404040);
 	}	
 	
 	@Override
@@ -204,7 +205,7 @@ public class ModuleEnchants extends ModuleAddon  {
 			if (data != null) {
 				str = data.getInfoText();
 			}else{
-				str = "Add an Enchanted Book\nin the slot to the left.";
+				str = Localization.MODULES.ADDONS.ENCHANT_INSTRUCTION.translate();
 			}
 			
 			

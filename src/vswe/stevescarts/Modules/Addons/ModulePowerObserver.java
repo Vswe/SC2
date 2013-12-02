@@ -1,9 +1,11 @@
 package vswe.stevescarts.Modules.Addons;
 
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import vswe.stevescarts.Carts.MinecartModular;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Helpers.ResourceHelper;
 import vswe.stevescarts.Interfaces.GuiMinecart;
 import vswe.stevescarts.Modules.Engines.ModuleEngine;
@@ -38,12 +40,12 @@ public class ModulePowerObserver extends ModuleAddon {
 	
 	@Override
 	public void drawForeground(GuiMinecart gui) {
-	    drawString(gui,"Power Observer", 8, 6, 0x404040);	
+	    drawString(gui,getModuleName(), 8, 6, 0x404040);
 	    
 	    for (int i = 0; i < 4; i++) {
 	    	int[] rect = getPowerRect(i);
 	    	
-	    	drawString(gui, powerLevel[i] + "K", rect, 0x404040);	
+	    	drawString(gui, powerLevel[i] + Localization.MODULES.ADDONS.K.translate(), rect, 0x404040);
 	    }
 	}
 	
@@ -141,7 +143,7 @@ public class ModulePowerObserver extends ModuleAddon {
 			if (!removeOnPickup() || currentEngine != i) {
 				ModuleEngine engine = getCart().getEngines().get(i);
 
-				drawStringOnMouseOver(gui, engine.getData().getName() + "\nClick and drag to place in desired area.", x, y, getEngineRect(i));
+				drawStringOnMouseOver(gui, engine.getData().getName() + "\n" + Localization.MODULES.ADDONS.OBSERVER_INSTRUCTION.translate(), x, y, getEngineRect(i));
 			}
 		}
 		
@@ -151,15 +153,15 @@ public class ModulePowerObserver extends ModuleAddon {
 				if ((areaData[i] & (1 << j)) != 0) {
 					ModuleEngine engine = getCart().getEngines().get(j);
 
-					drawStringOnMouseOver(gui, engine.getData().getName() + "\nRight click to remove.", x, y, getEngineRectInArea(i, count));
+					drawStringOnMouseOver(gui, engine.getData().getName() + "\n" + Localization.MODULES.ADDONS.OBSERVER_REMOVE.translate(), x, y, getEngineRectInArea(i, count));
 					count++;
 				}
 			}	
 		
 			if (currentEngine != -1) {
-				drawStringOnMouseOver(gui, "Drop the engine here.", x, y, getAreaRect(i));
+				drawStringOnMouseOver(gui, Localization.MODULES.ADDONS.OBSERVER_DROP.translate(), x, y, getAreaRect(i));
 			}
-			drawStringOnMouseOver(gui, "Click to change power limit\nShift click to change by 10K", x, y, getPowerRect(i));
+			drawStringOnMouseOver(gui, Localization.MODULES.ADDONS.OBSERVER_CHANGE.translate() + "\n" + Localization.MODULES.ADDONS.OBSERVER_CHANGE_10.translate(), x, y, getPowerRect(i));
 		}
 	}	
 	
@@ -255,7 +257,7 @@ public class ModulePowerObserver extends ModuleAddon {
 			int[] rect = getPowerRect(i);
 		
 			if (inRect(x, y, rect)) {
-				sendPacket(2, new byte[] {(byte)i, (byte)(button | (gui.isShiftKeyDown() ? 2 : 0))});
+				sendPacket(2, new byte[] {(byte)i, (byte)(button | (GuiScreen.isShiftKeyDown() ? 2 : 0))});
 				break;
 			}
 		}				

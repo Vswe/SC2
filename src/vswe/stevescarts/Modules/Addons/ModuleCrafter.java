@@ -174,7 +174,7 @@ public class ModuleCrafter extends ModuleRecipe {
 	@Override
 	public void drawForeground(GuiMinecart gui) {
 		super.drawForeground(gui);
-	    drawString(gui,"Crafter", 8, 6, 0x404040);
+	    drawString(gui, getModuleName(), 8, 6, 0x404040);
 	}		
 	
 	@Override

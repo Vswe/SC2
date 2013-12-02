@@ -1,5 +1,6 @@
 package vswe.stevescarts.Upgrades;
 
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.TileEntities.TileEntityUpgrade;
 
 public class Redstone extends BaseEffect {
@@ -12,7 +13,7 @@ public class Redstone extends BaseEffect {
 	
 	@Override
 	public String getName() {
-		return "Enables redstone controlled assembling";
+		return Localization.UPGRADES.REDSTONE.translate();
 	}
 	
 	@Override

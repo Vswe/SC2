@@ -182,7 +182,7 @@ public class Tank implements IFluidTank {
 
 	
 	public String getMouseOver() {
-		String name = "Empty";
+		String name = Localization.MODULES.TANKS.EMPTY.translate();
 		int amount = 0;
 		if (fluid != null) {
 			//different mods store the name in different ways apparently
@@ -194,7 +194,7 @@ public class Tank implements IFluidTank {
 			if (name != null && !name.equals("")) {
 				name = Character.toUpperCase(name.charAt(0)) + name.substring(1);
 			}else{
-				name = "Unknown";
+				name = Localization.MODULES.TANKS.INVALID.translate();
 			}
 			amount = fluid.amount;
 		}

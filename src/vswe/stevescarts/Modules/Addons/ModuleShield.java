@@ -3,6 +3,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import vswe.stevescarts.Carts.MinecartModular;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Helpers.ResourceHelper;
 import vswe.stevescarts.Interfaces.GuiMinecart;
 import vswe.stevescarts.Modules.IActivatorModule;
@@ -90,7 +91,7 @@ public class ModuleShield extends ModuleAddon implements IActivatorModule {
 
 	@Override
 	public void drawForeground(GuiMinecart gui) {
-	    drawString(gui,"Shield", 8, 6, 0x404040);
+	    drawString(gui,getModuleName(), 8, 6, 0x404040);
 	}
 
 	public void setShieldStatus(boolean val) {
@@ -136,11 +137,7 @@ public class ModuleShield extends ModuleAddon implements IActivatorModule {
 
 
 	private String getStateName() {
-		if (!getShieldStatus()) {
-			return "Activate shield";
-		}else{
-			return "Deactivate shield";
-		}
+        return Localization.MODULES.ADDONS.SHIELD.translate(getShieldStatus() ? "1" : "0");
 	}
 
 	@Override

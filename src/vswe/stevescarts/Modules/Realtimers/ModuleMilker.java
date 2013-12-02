@@ -97,7 +97,7 @@ public class ModuleMilker extends ModuleBase {
 	
 	@Override
 	public void drawForeground(GuiMinecart gui) {
-	    drawString(gui,"Milker", 8, 6, 0x404040);
+	    drawString(gui,getModuleName(), 8, 6, 0x404040);
 	}	
 	
 	@Override

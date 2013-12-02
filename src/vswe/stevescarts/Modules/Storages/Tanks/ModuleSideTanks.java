@@ -9,11 +9,6 @@ public class ModuleSideTanks extends ModuleTank{
 	}
 
 	@Override
-	protected String getTankName() {
-		return "Side Tanks";
-	}
-	
-	@Override
 	protected int getTankSize() {
 		return 8000;
 	}

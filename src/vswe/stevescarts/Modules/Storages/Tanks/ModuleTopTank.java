@@ -9,11 +9,6 @@ public class ModuleTopTank extends ModuleTank{
 	public ModuleTopTank(MinecartModular cart) {
 		super(cart);
 	}
-
-	@Override
-	protected String getTankName() {
-		return "Top Tank";
-	}
 	
 	@Override
 	protected int getTankSize() {

@@ -2,6 +2,7 @@ package vswe.stevescarts.Modules.Addons;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevescarts.Carts.MinecartModular;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Helpers.ResourceHelper;
 import vswe.stevescarts.Interfaces.GuiMinecart;
 import vswe.stevescarts.Modules.IActivatorModule;
@@ -35,7 +36,7 @@ public class ModuleInvisible extends ModuleAddon implements IActivatorModule {
 
 	@Override
 	public void drawForeground(GuiMinecart gui) {
-	    drawString(gui,"Invisibility", 8, 6, 0x404040);
+	    drawString(gui, getModuleName(), 8, 6, 0x404040);
 	}
 
 	
@@ -81,11 +82,7 @@ public class ModuleInvisible extends ModuleAddon implements IActivatorModule {
 	}
 
 	private String getStateName() {
-		if (isVisible()) {
-			return "Activate invisbility core";
-		}else{
-			return "Deactivate invisbility core";
-		}
+        return Localization.MODULES.ADDONS.INVISIBILITY.translate(isVisible() ? "0" : "1");
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package vswe.stevescarts.Modules.Engines;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevescarts.Carts.MinecartModular;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Helpers.ResourceHelper;
 import vswe.stevescarts.Interfaces.GuiMinecart;
 import cpw.mods.fml.relauncher.Side;
@@ -94,12 +95,12 @@ public abstract class ModuleSolarBase extends ModuleEngine {
 
 	@Override
 	public void drawForeground(GuiMinecart gui) {
-	    drawString(gui,"Solar Engine", 8, 6, 0x404040);
-        String strfuel = "Out of power";
+	    drawString(gui, Localization.MODULES.ENGINES.SOLAR.translate(), 8, 6, 0x404040);
+        String strfuel = Localization.MODULES.ENGINES.NO_POWER.translate();
 
         if (getFuelLevel() > 0)
         {
-            strfuel = "Power: " + getFuelLevel();
+            strfuel = Localization.MODULES.ENGINES.POWER.translate(String.valueOf(getFuelLevel()));
         }
 
         drawString(gui,strfuel, 8, 42, 0x404040);

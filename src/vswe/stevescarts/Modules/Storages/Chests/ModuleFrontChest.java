@@ -19,9 +19,6 @@ public class ModuleFrontChest extends ModuleChest {
 	protected int getInventoryHeight() {
 		return 3;
 	}
-	@Override
-	protected String getChestName() {
-		return "Front Chest";
-	}
+
 
 }

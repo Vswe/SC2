@@ -26,7 +26,7 @@ public class ModuleTorch extends ModuleWorker implements ISuppliesModule  {
 
 	@Override
 	public void drawForeground(GuiMinecart gui) {
-	    drawString(gui,"Torches", 8, 6, 0x404040);
+	    drawString(gui,getModuleName(), 8, 6, 0x404040);
 	}
 
 	//lower numbers are prioritized

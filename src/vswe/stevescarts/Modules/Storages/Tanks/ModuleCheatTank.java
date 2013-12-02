@@ -4,6 +4,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
 import vswe.stevescarts.Carts.MinecartModular;
 import vswe.stevescarts.Helpers.ColorHelper;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Interfaces.GuiMinecart;
 
 
@@ -12,24 +13,20 @@ public class ModuleCheatTank extends ModuleTank{
 		super(cart);
 	}
 
-	private static final String[] modes = {ColorHelper.YELLOW + "Normal", ColorHelper.GREEN + "Always full", ColorHelper.RED + "Always empty", ColorHelper.ORANGE + "Always half"};
+	private static final ColorHelper[] colors = {ColorHelper.YELLOW, ColorHelper.GREEN, ColorHelper.RED, ColorHelper.ORANGE};
 	
 	private int mode;
 	
 	@Override
 	protected String getTankInfo() {
 		String str = super.getTankInfo();
-		str += "\n\nCurrent creative mode: " + modes[mode] + "\nRight-click to change";
+		str += "\n\n" + Localization.MODULES.TANKS.CREATIVE_MODE.translate(colors[mode].toString(), String.valueOf(mode)) + "\n" + Localization.MODULES.TANKS.CHANGE_MODE.translate();
 		if (mode != 0) {
-			str += "\nShift and right-click to go back to normal";
+			str += "\n" + Localization.MODULES.TANKS.RESET_MODE.translate();
 		}
 		return str;
 	}
-	
-	@Override
-	protected String getTankName() {
-		return "Creative Tank";
-	}
+
 	
 	@Override
 	protected int getTankSize() {
@@ -47,7 +44,7 @@ public class ModuleCheatTank extends ModuleTank{
 		if (id == 0 && (data[0] & 1) != 0) {
 			if (mode != 0 && (data[0] & 2) != 0) {
 				mode = 0;
-			}else if (++mode == modes.length) {
+			}else if (++mode == colors.length) {
 				mode = 1;
 			}
 			

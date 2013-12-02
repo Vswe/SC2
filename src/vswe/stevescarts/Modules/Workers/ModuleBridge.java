@@ -32,7 +32,7 @@ public class ModuleBridge extends ModuleWorker implements ISuppliesModule {
 	}
 	@Override
 	public void drawForeground(GuiMinecart gui) {
-	    drawString(gui,"Bridge", 8, 6, 0x404040);
+	    drawString(gui, getModuleName(), 8, 6, 0x404040);
 	}
 
 	//lower numbers are prioritized

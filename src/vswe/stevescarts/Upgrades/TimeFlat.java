@@ -1,6 +1,8 @@
 package vswe.stevescarts.Upgrades;
 
 
+import vswe.stevescarts.Helpers.Localization;
+
 public class TimeFlat extends BaseEffect {
 
 
@@ -12,7 +14,7 @@ public class TimeFlat extends BaseEffect {
 	
 	@Override
 	public String getName() {
-		return "Module assembling time " + (getSeconds() >= 0 ? "+" : "") + getSeconds() + " seconds";
+		return Localization.UPGRADES.FLAT.translate((getSeconds() >= 0 ? "+" : "") + getSeconds(), String.valueOf(getSeconds()));
 	}
 	
 	protected int getSeconds() {

@@ -2,6 +2,7 @@ package vswe.stevescarts.Upgrades;
 
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.TileEntities.TileEntityUpgrade;
 
 public class ThermalFuel extends TankEffect {
@@ -17,7 +18,7 @@ public class ThermalFuel extends TankEffect {
 
 	@Override
 	public String getName() {
-		return "Power the Cart Assembler with lava in internal tank";
+		return Localization.UPGRADES.THERMAL.translate();
 	}
 	
 	public static final int LAVA_EFFICIENCY = 3;

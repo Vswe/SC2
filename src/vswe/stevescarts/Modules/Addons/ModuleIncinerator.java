@@ -48,7 +48,7 @@ public class ModuleIncinerator extends ModuleAddon {
 	
 	@Override
 	public void drawForeground(GuiMinecart gui) {
-	    drawString(gui,"Incinerator", 8, 6, 0x404040);
+	    drawString(gui, getModuleName(), 8, 6, 0x404040);
 	}
 	
 	@Override

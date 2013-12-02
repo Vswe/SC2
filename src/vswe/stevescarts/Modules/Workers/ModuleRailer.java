@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Vec3;
 import vswe.stevescarts.Carts.MinecartModular;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Interfaces.GuiMinecart;
 import vswe.stevescarts.Modules.ISuppliesModule;
 import vswe.stevescarts.Slots.SlotBase;
@@ -28,7 +29,7 @@ public class ModuleRailer extends ModuleWorker implements ISuppliesModule {
 	}
 	@Override
 	public void drawForeground(GuiMinecart gui) {
-	    drawString(gui,"Railer", 8, 6, 0x404040);
+	    drawString(gui, Localization.MODULES.ATTACHMENTS.RAILER.translate(), 8, 6, 0x404040);
 	}
 
 	//lower numbers are prioritized

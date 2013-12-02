@@ -1,6 +1,8 @@
 package vswe.stevescarts.Upgrades;
 
 
+import vswe.stevescarts.Helpers.Localization;
+
 public class TimeFlatRemoved extends TimeFlat {
 
 
@@ -10,7 +12,7 @@ public class TimeFlatRemoved extends TimeFlat {
 	
 	@Override
 	public String getName() {
-		return "Module disassembling time " + (getSeconds() >= 0 ? "+" : "") + getSeconds() + " seconds";
+		return Localization.UPGRADES.FLAT_REMOVED.translate((getSeconds() >= 0 ? "+" : "") + getSeconds(), String.valueOf(getSeconds()));
 	}
 	
 

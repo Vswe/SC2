@@ -7,6 +7,7 @@ import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevescarts.Carts.MinecartModular;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Helpers.ResourceHelper;
 import vswe.stevescarts.Interfaces.GuiMinecart;
 import vswe.stevescarts.Modules.ModuleBase;
@@ -51,7 +52,7 @@ public class ModuleExperience extends ModuleBase {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawMouseOver(GuiMinecart gui, int x, int y) {
-		drawStringOnMouseOver(gui, "Experience level: " + experienceAmount + "/" + MAX_EXPERIENCE_AMOUNT + "\nClick to extract 50xp\nYour current level is " + getClientPlayer().experienceLevel, x, y, getContainerRect());
+		drawStringOnMouseOver(gui, Localization.MODULES.ATTACHMENTS.EXPERIENCE_LEVEL.translate(String.valueOf(experienceAmount), String.valueOf(MAX_EXPERIENCE_AMOUNT))  + "\n" + Localization.MODULES.ATTACHMENTS.EXPERIENCE_EXTRACT.translate() + "\n" + Localization.MODULES.ATTACHMENTS.EXPERIENCE_PLAYER_LEVEL.translate(String.valueOf(getClientPlayer().experienceLevel)), x, y, getContainerRect());
 	}
 	
 	@Override
@@ -75,7 +76,7 @@ public class ModuleExperience extends ModuleBase {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawForeground(GuiMinecart gui) {
-		drawString(gui, "Experience", 8, 6, 0x404040);
+		drawString(gui, Localization.MODULES.ATTACHMENTS.EXPERIENCE.translate(), 8, 6, 0x404040);
 	}
 	
 	private int[] getContainerRect() {

@@ -3,6 +3,7 @@ package vswe.stevescarts.Modules.Workers.Tools;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import vswe.stevescarts.Carts.MinecartModular;
+import vswe.stevescarts.Helpers.Localization;
 
 public class ModuleFarmerDiamond extends ModuleFarmer {
 
@@ -17,7 +18,7 @@ public class ModuleFarmerDiamond extends ModuleFarmer {
 	
 	@Override
 	public String getRepairItemName() {
-		return "Diamonds";
+		return Localization.MODULES.TOOLS.DIAMONDS.translate();
 	}
 	
 	@Override

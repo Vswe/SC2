@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevescarts.Carts.MinecartModular;
 import vswe.stevescarts.Helpers.EnchantmentInfo.ENCHANTMENT_TYPE;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Helpers.ResourceHelper;
 import vswe.stevescarts.Interfaces.GuiMinecart;
 import vswe.stevescarts.Modules.ModuleBase;
@@ -111,9 +112,9 @@ public abstract class ModuleTool extends ModuleWorker {
 		String str;
 		
 		if (useDurability()) {
-			str = "Durability: " + currentDurability + "/" + getMaxDurability();
+			str = Localization.MODULES.TOOLS.DURABILITY.translate() + ": " + currentDurability + "/" + getMaxDurability();
 			if (isBroken()) {
-				str += " [Broken]";
+				str += " [" + Localization.MODULES.TOOLS.BROKEN.translate() + "]";
 			}else{
 				str += " [" + (100 * currentDurability) / getMaxDurability() + "%]";
 			}
@@ -122,17 +123,17 @@ public abstract class ModuleTool extends ModuleWorker {
 			
 			if (isRepairing()) {
 				if (isActuallyRepairing()) {
-					str += "Currently repairing tool [" + getRepairPercentage() + "%]";
+					str += " [" + getRepairPercentage() + "%]";
 				}else{
-					str += "Remove the repair materials, this tool is still pretty decent.";
+					str += Localization.MODULES.TOOLS.DECENT.translate();
 				}
 			}else{
-				str += "Repair this tool with " + getRepairItemName();
+				str += Localization.MODULES.TOOLS.INSTRUCTION.translate(getRepairItemName());
 			}
 		}else{
-			str = "This tool will never break";
+			str = Localization.MODULES.TOOLS.UNBREAKABLE.translate();
 			if (isRepairing() && !isActuallyRepairing()) {
-				str += "Remove the repair materials.";
+				str += " " + Localization.MODULES.TOOLS.UNBREAKABLE_REPAIR.translate();
 			}
 		}
 		

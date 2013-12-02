@@ -7,10 +7,6 @@ public class ModuleInternalTank extends ModuleTank{
 		super(cart);
 	}
 
-	@Override
-	protected String getTankName() {
-		return "Internal Tank";
-	}
 	
 	@Override
 	protected int getTankSize() {

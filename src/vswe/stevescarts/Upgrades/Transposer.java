@@ -1,6 +1,8 @@
 package vswe.stevescarts.Upgrades;
 
 
+import vswe.stevescarts.Helpers.Localization;
+
 public class Transposer extends BaseEffect {
 
 
@@ -11,7 +13,7 @@ public class Transposer extends BaseEffect {
 	
 	@Override
 	public String getName() {
-		return "Can pick up carts for modifying";
+		return Localization.UPGRADES.TRANSPOSER.translate();
 	}
 	
 

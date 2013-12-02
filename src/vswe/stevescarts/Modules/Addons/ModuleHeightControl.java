@@ -41,7 +41,7 @@ public class ModuleHeightControl extends ModuleAddon {
 
 	@Override
 	public void drawForeground(GuiMinecart gui) {
-	    drawString(gui,"Height control", 8, 6, 0x404040);
+	    drawString(gui, getModuleName(), 8, 6, 0x404040);
 
         String s = String.valueOf(getYTarget());
         int x = levelNumberBoxX + 6;

@@ -3,6 +3,7 @@ package vswe.stevescarts.Modules.Addons;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevescarts.Carts.MinecartModular;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Helpers.ResourceHelper;
 import vswe.stevescarts.Interfaces.GuiMinecart;
 import vswe.stevescarts.Modules.ModuleBase;
@@ -45,7 +46,7 @@ public class ModuleDrillIntelligence extends ModuleAddon {
 	
 	@Override
 	public void drawForeground(GuiMinecart gui) {
-	    drawString(gui,"Drill Intelligence", 8, 6, 0x404040);	
+	    drawString(gui, getModuleName(), 8, 6, 0x404040);
 	}
 	
 	private int getDrillWidth() {
@@ -185,7 +186,7 @@ public class ModuleDrillIntelligence extends ModuleAddon {
 			for (int j = 0; j < h; j++) {
 				int[] rect = getSettingRect(i, j);
 				
-				String str = isLocked(j*w+i) ? "The drill will always remove this block" : "Change drill intelligence\nCurrently: " + (isActive(j*w+i) ? "Enabled" : "Disabled");
+				String str = isLocked(j*w+i) ? Localization.MODULES.ADDONS.LOCKED.translate() : Localization.MODULES.ADDONS.CHANGE_INTELLIGENCE.translate() + "\n" + Localization.MODULES.ADDONS.CURRENT_INTELLIGENCE.translate((isActive(j*w+i) ? "0" : "1"));
 				
 				drawStringOnMouseOver(gui, str, x, y, rect);
 			}

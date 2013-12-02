@@ -1,4 +1,5 @@
 package vswe.stevescarts.Modules.Storages.Tanks;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -7,10 +8,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidTank;
 import vswe.stevescarts.Carts.MinecartModular;
-import vswe.stevescarts.Helpers.ColorHelper;
-import vswe.stevescarts.Helpers.ITankHolder;
-import vswe.stevescarts.Helpers.ResourceHelper;
-import vswe.stevescarts.Helpers.Tank;
+import vswe.stevescarts.Helpers.*;
 import vswe.stevescarts.Interfaces.GuiBase;
 import vswe.stevescarts.Interfaces.GuiMinecart;
 import vswe.stevescarts.Modules.Storages.ModuleStorage;
@@ -27,7 +25,7 @@ public abstract class ModuleTank extends ModuleStorage implements IFluidTank, IT
 		tank = new Tank(this, getTankSize(), 0);
 	}
 
-	protected abstract String getTankName();
+
 	protected abstract int getTankSize();
 	
 	protected Tank tank;
@@ -49,7 +47,7 @@ public abstract class ModuleTank extends ModuleStorage implements IFluidTank, IT
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawForeground(GuiMinecart gui) {
-	    drawString(gui,getTankName() , 8, 6, 0x404040);
+	    drawString(gui, getModuleName() , 8, 6, 0x404040);
 	}
 
 	@Override
@@ -155,9 +153,9 @@ public abstract class ModuleTank extends ModuleStorage implements IFluidTank, IT
 	protected String getTankInfo() {
 		String str = tank.getMouseOver();
 		if (tank.isLocked()) {
-			str += "\n\n" + ColorHelper.GREEN + "Locked to this fluid\nClick to unlock.";
+			str += "\n\n" + ColorHelper.GREEN + Localization.MODULES.TANKS.LOCKED.translate() + "\n" + Localization.MODULES.TANKS.UNLOCK.translate();
 		}else if (tank.getFluid() != null){
-			str += "\n\nClick to lock to this fluid";
+			str += "\n\n" + Localization.MODULES.TANKS.LOCK.translate();
 		}
 		return str;
 	}
@@ -307,7 +305,7 @@ public abstract class ModuleTank extends ModuleStorage implements IFluidTank, IT
 	public void mouseClicked(GuiMinecart gui, int x, int y, int button) {
 		if (inRect(x, y, tankBounds)) {
 			byte data = (byte)button;
-			if (gui.isShiftKeyDown()) {
+			if (GuiScreen.isShiftKeyDown()) {
 				data |= 2;
 			}
 			sendPacket(0, data);

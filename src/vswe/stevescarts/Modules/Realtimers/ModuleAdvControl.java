@@ -8,6 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import org.lwjgl.opengl.GL11;
 
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.PacketHandler;
 import vswe.stevescarts.Carts.MinecartModular;
 import vswe.stevescarts.Helpers.ResourceHelper;
@@ -97,9 +98,9 @@ public class ModuleAdvControl extends ModuleBase implements ILeverModule {
 		
 		
 		
-	    minecraft.fontRenderer.drawString("ODO", 5 + 2, enginesEndAt +52 + 2, 0x404040);
+	    minecraft.fontRenderer.drawString(Localization.MODULES.ATTACHMENTS.ODO.translate(), 5 + 2, enginesEndAt +52 + 2, 0x404040);
         minecraft.fontRenderer.drawString(distToString(odo), 5 + 2, enginesEndAt +52 + 11, 0x404040);		
-        minecraft.fontRenderer.drawString("TRIP", 5 + 2, enginesEndAt +52 + 22, 0x404040);
+        minecraft.fontRenderer.drawString(Localization.MODULES.ATTACHMENTS.TRIP.translate(), 5 + 2, enginesEndAt +52 + 22, 0x404040);
         minecraft.fontRenderer.drawString(distToString(trip), 5 + 2, enginesEndAt +52 + 31, 0x404040);
 		
 		RenderItem itemRenderer = new RenderItem();
@@ -156,35 +157,7 @@ public class ModuleAdvControl extends ModuleBase implements ILeverModule {
             }
         }
 
-        switch (i)
-        {
-            case 0:
-                s += "m";
-                break;
-
-            case 1:
-                s += "km";
-                break;
-
-            case 2:
-                s += "Mm";
-                break;
-
-            case 3:
-                s += "Gm";
-                break;
-
-            case 4:
-                s += "Tm";
-                break;
-
-            case 5:
-                s += "Pm";
-                break;
-
-            default:
-                s += "??";
-        }
+        s += Localization.MODULES.ATTACHMENTS.DISTANCES.translate(String.valueOf(i));
 
         return s;
     }	
@@ -543,7 +516,7 @@ public class ModuleAdvControl extends ModuleBase implements ILeverModule {
 	
 	@Override
 	public void drawForeground(GuiMinecart gui) {
-	    drawString(gui,"Adv Control Sys", 8, 6, 0x404040);
+	    drawString(gui, Localization.MODULES.ATTACHMENTS.CONTROL_SYSTEM.translate(), 8, 6, 0x404040);
 	}
 	
 	

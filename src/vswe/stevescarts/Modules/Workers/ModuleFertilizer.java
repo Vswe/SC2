@@ -6,6 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Vec3;
 import vswe.stevescarts.Carts.MinecartModular;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Helpers.ResourceHelper;
 import vswe.stevescarts.Interfaces.GuiMinecart;
 import vswe.stevescarts.Modules.ISuppliesModule;
@@ -63,12 +64,12 @@ public class ModuleFertilizer extends ModuleWorker implements ISuppliesModule {
 
 	@Override
 	public void drawMouseOver(GuiMinecart gui, int x, int y) {
-		drawStringOnMouseOver(gui, "Fertilizing: " + fert + " / " + getMaxFert(), x,y, tankPosX, tankPosY, 18, 27);
+		drawStringOnMouseOver(gui, Localization.MODULES.ATTACHMENTS.FERTILIZERS.translate() + ": " + fert + " / " + getMaxFert(), x,y, tankPosX, tankPosY, 18, 27);
 	}
 
 	@Override
 	public void drawForeground(GuiMinecart gui) {
-	    drawString(gui,"Fertilizing", 8, 6, 0x404040);
+	    drawString(gui,getModuleName(), 8, 6, 0x404040);
 	}
 
 	@Override

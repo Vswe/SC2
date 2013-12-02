@@ -2,6 +2,7 @@ package vswe.stevescarts.Upgrades;
 
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevescarts.Arcade.Unit.UPDATE_RESULT;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.TileEntities.TileEntityUpgrade;
 
 public class Solar extends RechargerBase {
@@ -25,7 +26,7 @@ public class Solar extends RechargerBase {
 
 	@Override
 	public String getName() {
-		return "Generate power while in the sun";
+		return Localization.UPGRADES.SOLAR.translate();
 	}
 	
 	

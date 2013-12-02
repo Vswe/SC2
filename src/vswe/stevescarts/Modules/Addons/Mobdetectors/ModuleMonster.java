@@ -8,6 +8,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.passive.EntityWolf;
 import vswe.stevescarts.Carts.MinecartModular;
+import vswe.stevescarts.Helpers.Localization;
 
 public class ModuleMonster extends ModuleMobdetector {
 	public ModuleMonster(MinecartModular cart) {
@@ -15,7 +16,7 @@ public class ModuleMonster extends ModuleMobdetector {
 	}
 
 	public String getName() {
-		return "Monsters";
+		return Localization.MODULES.ADDONS.DETECTOR_PLAYERS.translate();
 	}
 	public boolean isValidTarget(Entity target) {
 		return

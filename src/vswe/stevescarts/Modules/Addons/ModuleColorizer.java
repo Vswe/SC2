@@ -5,6 +5,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import org.lwjgl.opengl.GL11;
 
 import vswe.stevescarts.Carts.MinecartModular;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Helpers.ResourceHelper;
 import vswe.stevescarts.Interfaces.GuiMinecart;
 
@@ -26,7 +27,7 @@ public class ModuleColorizer extends ModuleAddon {
 	
 	@Override
 	public void drawForeground(GuiMinecart gui) {
-	    drawString(gui,"Colorize", 8, 6, 0x404040);
+	    drawString(gui, getModuleName(), 8, 6, 0x404040);
 		
 		
 	}
@@ -69,7 +70,7 @@ public class ModuleColorizer extends ModuleAddon {
 	
 	@Override
 	public void drawMouseOver(GuiMinecart gui, int x, int y) {
-		String[] colorNames = new String[] {"Red","Green", "Blue"};
+		String[] colorNames = new String[] {Localization.MODULES.ADDONS.COLOR_RED.translate(),Localization.MODULES.ADDONS.COLOR_GREEN.translate(), Localization.MODULES.ADDONS.COLOR_BLUE.translate()};
 		for (int i = 0; i < 3; i++) {
 			drawStringOnMouseOver(gui, colorNames[i] + ": " + getColorVal(i), x,y, getArea(i));
 		}

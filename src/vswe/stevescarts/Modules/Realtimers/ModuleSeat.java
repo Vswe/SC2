@@ -36,7 +36,7 @@ public class ModuleSeat extends ModuleBase {
 
 	@Override
 	public void drawForeground(GuiMinecart gui) {
-	    drawString(gui,"Traveling", 8, 6, 0x404040);
+	    drawString(gui,getModuleName(), 8, 6, 0x404040);
 	}
 
 	

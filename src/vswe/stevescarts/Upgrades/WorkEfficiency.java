@@ -1,6 +1,8 @@
 package vswe.stevescarts.Upgrades;
 
 
+import vswe.stevescarts.Helpers.Localization;
+
 public class WorkEfficiency extends BaseEffect {
 
 
@@ -12,7 +14,7 @@ public class WorkEfficiency extends BaseEffect {
 	
 	@Override
 	public String getName() {
-		return "Assembling efficiency " + (getPercentage() >= 0 ? "+" : "") + getPercentage() + "%";
+		return Localization.UPGRADES.EFFICIENCY.translate((getPercentage() >= 0 ? "+" : "") + getPercentage());
 	}
 	
 	private int getPercentage() {

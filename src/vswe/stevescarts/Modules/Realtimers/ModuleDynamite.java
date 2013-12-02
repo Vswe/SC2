@@ -2,6 +2,7 @@ package vswe.stevescarts.Modules.Realtimers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevescarts.Helpers.ComponentTypes;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Carts.MinecartModular;
@@ -18,7 +19,7 @@ public class ModuleDynamite extends ModuleBase {
 
 	@Override
 	public void drawForeground(GuiMinecart gui) {
-	    drawString(gui,"Explosives", 8, 6, 0x404040);
+	    drawString(gui, Localization.MODULES.ATTACHMENTS.EXPLOSIVES.translate(), 8, 6, 0x404040);
 	}
 
 	@Override

@@ -5,9 +5,9 @@ public class CargoItemSelection {
 
 	private Class validSlot;
 	private ItemStack icon;
-	private String name;
+	private Localization.GUI.CARGO name;
 	
-	public CargoItemSelection(String name, Class validSlot, ItemStack icon) {
+	public CargoItemSelection(Localization.GUI.CARGO name, Class validSlot, ItemStack icon) {
 		this.name = name;
 		this.validSlot = validSlot;
 		this.icon = icon;
@@ -22,7 +22,11 @@ public class CargoItemSelection {
 	}
 	
 	public String getName() {
-		return	name;
+        if (name == null) {
+            return null;
+        }else{
+		    return	name.translate();
+        }
 	}
 	
 }

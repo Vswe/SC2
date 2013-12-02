@@ -5,6 +5,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevescarts.Carts.MinecartModular;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Helpers.ResourceHelper;
 import vswe.stevescarts.Interfaces.GuiMinecart;
 import vswe.stevescarts.Modules.ModuleBase;
@@ -93,7 +94,7 @@ public class ModuleCakeServer extends ModuleBase {
 	
 	@Override
 	public void drawForeground(GuiMinecart gui) {
-	    drawString(gui,"Cake Server", 8, 6, 0x404040);
+	    drawString(gui, Localization.MODULES.ATTACHMENTS.CAKE_SERVER.translate(), 8, 6, 0x404040);
 	}	
 	
 	@Override
@@ -109,7 +110,7 @@ public class ModuleCakeServer extends ModuleBase {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawMouseOver(GuiMinecart gui, int x, int y) {
-		drawStringOnMouseOver(gui, "Cakes: " + getCakes() + " / " + MAX_CAKES + "\nSlices: " + getSlices() + " / " + SLICES_PER_CAKE, x, y, rect);
+		drawStringOnMouseOver(gui, Localization.MODULES.ATTACHMENTS.CAKES.translate(String.valueOf(getCakes()), String.valueOf(MAX_CAKES)) + "\n" + Localization.MODULES.ATTACHMENTS.SLICES.translate(String.valueOf(getSlices()), String.valueOf(SLICES_PER_CAKE)), x, y, rect);
 	}
 	
 	private int getCakes() {

@@ -15,10 +15,7 @@ public class ModuleInternalStorage extends ModuleChest {
 	protected int getInventoryHeight() {
 		return 3;
 	}
-	@Override
-	protected String getChestName() {
-		return "Internal Chest";
-	}
+
 	@Override
 	protected boolean hasVisualChest() {
 		return false;

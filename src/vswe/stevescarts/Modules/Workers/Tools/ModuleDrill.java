@@ -13,6 +13,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
 import vswe.stevescarts.Blocks.Blocks;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Carts.MinecartModular;
 import vswe.stevescarts.Helpers.BlockCoord;
@@ -587,7 +588,7 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
 
 	@Override
 	public void drawForeground(GuiMinecart gui) {
-	    drawString(gui,"Drill", 8, 6, 0x404040);
+	    drawString(gui, Localization.MODULES.TOOLS.DRILL.translate(), 8, 6, 0x404040);
 	}
 
 
@@ -620,11 +621,7 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
 	}	
 	
 	private String getStateName() {
-		if (!isDrillEnabled()) {
-			return "Enable drill";
-		}else{
-			return "Disable drill";
-		}
+        return Localization.MODULES.TOOLS.TOGGLE.translate(isDrillEnabled() ? "1" : "0");
 	}	
 	
 	@Override

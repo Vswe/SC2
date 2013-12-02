@@ -12,6 +12,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import vswe.stevescarts.Carts.MinecartModular;
 import vswe.stevescarts.Helpers.EnchantmentInfo.ENCHANTMENT_TYPE;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Helpers.ResourceHelper;
 import vswe.stevescarts.Interfaces.GuiMinecart;
 import vswe.stevescarts.Modules.ISuppliesModule;
@@ -68,16 +69,16 @@ public class ModuleShooter extends ModuleBase implements ISuppliesModule {
 
 	@Override
 	public void drawForeground(GuiMinecart gui) {
-	    drawString(gui,"Shooter", 8, 6, 0x404040);
+	    drawString(gui, Localization.MODULES.ATTACHMENTS.SHOOTER.translate(), 8, 6, 0x404040);
 
 		int delay = AInterval[arrowInterval];
         double freq = 20D / (delay+1);
 
         String s = String.valueOf((((int)(freq * 1000)) / 1000D));
-        drawString(gui,"#/s:", intervalDragArea[0] + intervalDragArea[2] + 5, 15, 0x404040);
+        drawString(gui, Localization.MODULES.ATTACHMENTS.FREQUENCY.translate() + ":", intervalDragArea[0] + intervalDragArea[2] + 5, 15, 0x404040);
 		drawString(gui,s, intervalDragArea[0] + intervalDragArea[2] + 5, 23, 0x404040);
-        s =  String.valueOf((delay / 20D) + "s");
-        drawString(gui,"Delay:", intervalDragArea[0] + intervalDragArea[2] + 5, 35, 0x404040);
+        s =  String.valueOf((delay / 20D) + Localization.MODULES.ATTACHMENTS.SECONDS.translate());
+        drawString(gui, Localization.MODULES.ATTACHMENTS.DELAY.translate() + ":", intervalDragArea[0] + intervalDragArea[2] + 5, 35, 0x404040);
 		drawString(gui,s, intervalDragArea[0] + intervalDragArea[2] + 5, 43, 0x404040);
 	}
 

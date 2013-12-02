@@ -4,6 +4,7 @@ import java.util.HashMap;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevescarts.Carts.MinecartModular;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Interfaces.GuiMinecart;
 import vswe.stevescarts.Models.Cart.ModelCartbase;
 import vswe.stevescarts.Models.Cart.ModelEngineFrame;
@@ -126,12 +127,12 @@ public abstract class ModuleCoalBase extends ModuleEngine {
 
 	@Override
 	public void drawForeground(GuiMinecart gui) {
-	    drawString(gui,"Engine", 8, 6, 0x404040);
-        String strfuel = "Out of fuel";
+	    drawString(gui, Localization.MODULES.ENGINES.COAL.translate(), 8, 6, 0x404040);
+        String strfuel = Localization.MODULES.ENGINES.NO_FUEL.translate();
 
         if (getFuelLevel() > 0)
         {
-            strfuel = "Fuel: " + getFuelLevel();
+            strfuel = Localization.MODULES.ENGINES.FUEL.translate(String.valueOf(getFuelLevel()));
         }
 
         drawString(gui,strfuel, 8, 42, 0x404040);

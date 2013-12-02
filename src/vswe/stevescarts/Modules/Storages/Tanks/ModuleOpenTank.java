@@ -8,11 +8,7 @@ public class ModuleOpenTank extends ModuleTank{
 		super(cart);
 	}
 
-	@Override
-	protected String getTankName() {
-		return "Open Tank";
-	}
-	
+
 	@Override
 	protected int getTankSize() {
 		return 7000;

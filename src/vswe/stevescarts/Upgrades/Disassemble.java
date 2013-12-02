@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Containers.ContainerCartAssembler;
@@ -62,7 +63,7 @@ public class Disassemble extends InventoryEffect {
 	
 	@Override
 	public String getName() {
-		return "Allows you to disassemble and modify carts.";
+		return Localization.UPGRADES.DISASSEMBLE.translate();
 	}
 	
 	@Override

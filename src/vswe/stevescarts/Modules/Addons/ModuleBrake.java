@@ -2,6 +2,7 @@ package vswe.stevescarts.Modules.Addons;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevescarts.Carts.MinecartModular;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Helpers.ResourceHelper;
 import vswe.stevescarts.Interfaces.GuiMinecart;
 import vswe.stevescarts.Modules.ILeverModule;
@@ -35,7 +36,7 @@ public class ModuleBrake extends ModuleAddon implements ILeverModule {
 
 	@Override
 	public void drawForeground(GuiMinecart gui) {
-	    drawString(gui,"Control lever", 8, 6, 0x404040);
+	    drawString(gui, Localization.MODULES.ADDONS.CONTROL_LEVER.translate(), 8, 6, 0x404040);
 	}
 
 
@@ -82,8 +83,8 @@ public class ModuleBrake extends ModuleAddon implements ILeverModule {
 
 	@Override
 	public void drawMouseOver(GuiMinecart gui, int x, int y) {
-		drawStringOnMouseOver(gui, isForceStopping() ? "Start the cart" : "Stop the cart", x,y,startstopRect);
-		drawStringOnMouseOver(gui, "Turn cart around", x,y,turnbackRect);
+		drawStringOnMouseOver(gui, isForceStopping() ? Localization.MODULES.ADDONS.LEVER_START.translate() : Localization.MODULES.ADDONS.LEVER_STOP.translate(), x,y,startstopRect);
+		drawStringOnMouseOver(gui, Localization.MODULES.ADDONS.LEVER_TURN.translate(), x,y,turnbackRect);
 	}
 
 	@Override

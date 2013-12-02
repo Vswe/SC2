@@ -7,6 +7,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import org.lwjgl.opengl.GL11;
 
 import vswe.stevescarts.Carts.MinecartModular;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Helpers.ResourceHelper;
 import vswe.stevescarts.Interfaces.GuiMinecart;
 import vswe.stevescarts.Modules.ModuleBase;
@@ -21,7 +22,7 @@ public class ModuleNote extends ModuleBase {
 
 	private int[] instrumentColors = new int[] {0x404040, 0xFF0000, 0x00FF00, 0x0000FF, 0xFFFF00, 0x00FFFF};
 	private String[] pitchNames = new String[] {"F#", "G", "G#", "A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#"};
-	private String [] instrumentNames = new String[] {"Piano", "Bass Drum", "Snare drum", "Sticks", "Bass Guitar"};
+	private Localization.MODULES.ATTACHMENTS [] instrumentNames = new Localization.MODULES.ATTACHMENTS[] {Localization.MODULES.ATTACHMENTS.PIANO, Localization.MODULES.ATTACHMENTS.BASS_DRUM, Localization.MODULES.ATTACHMENTS.SNARE_DRUM, Localization.MODULES.ATTACHMENTS.STICKS, Localization.MODULES.ATTACHMENTS.BASS_GUITAR};
 
 	
 	private ArrayList<Track> tracks;
@@ -73,10 +74,10 @@ public class ModuleNote extends ModuleBase {
 		if (getCart().worldObj.isRemote) {
 			buttons = new ArrayList<Button>();
 			createTrack = new Button(notemapX-60, notemapY - 20);
-			createTrack.text = "Create new track";
+			createTrack.text = Localization.MODULES.ATTACHMENTS.CREATE_TRACK.translate();
 			createTrack.imageID = 0;
 			removeTrack = new Button(notemapX-40, notemapY - 20);
-			removeTrack.text = "Remove bottom track";
+			removeTrack.text = Localization.MODULES.ATTACHMENTS.REMOVE_TRACK.translate();
 			removeTrack.imageID = 1;
 			speedButton = new Button(notemapX-20, notemapY - 20);
 			updateSpeedButton();
@@ -85,9 +86,9 @@ public class ModuleNote extends ModuleBase {
 				Button tempButton = new Button(notemapX-20 + (i+1)*20, notemapY - 20);
 				instrumentbuttons.add(tempButton);
 				if (i > 0) {
-					tempButton.text = "Activate " + instrumentNames[i-1];
+					tempButton.text = Localization.MODULES.ATTACHMENTS.ACTIVATE_INSTRUMENT.translate(instrumentNames[i-1].translate());
 				}else{
-					tempButton.text = "Remove NoteBlock setting";
+					tempButton.text = Localization.MODULES.ATTACHMENTS.DEACTIVATE_INSTRUMENT.translate();
 				}
 				tempButton.color = instrumentColors[i];
 			}
@@ -97,13 +98,13 @@ public class ModuleNote extends ModuleBase {
 	private void updateSpeedButton() {
 		if (getCart().worldObj.isRemote) {
 			speedButton.imageID = 14 - speedSetting;
-			speedButton.text = "Change delay. Current Delay: " + getTickDelay();	
+			speedButton.text = Localization.MODULES.ATTACHMENTS.NOTE_DELAY.translate(String.valueOf(getTickDelay()));
 		}
 	}
 	
 	@Override
 	public void drawForeground(GuiMinecart gui) {
-	    drawString(gui,"Notes", 8, 6, 0x404040);
+	    drawString(gui,getModuleName(), 8, 6, 0x404040);
 		
 		
 		for(int i = getScrollY(); i < Math.min(tracks.size(), getScrollY() + tracksInView); i++) {
@@ -494,7 +495,7 @@ public class ModuleNote extends ModuleBase {
 			if (instrumentId == 0) {
 				return "Unknown instrument";
 			}else{
-				return instrumentNames[instrumentId-1] + " " + pitchNames[pitch];
+				return instrumentNames[instrumentId-1].translate() + " " + pitchNames[pitch];
 			}
 		}
 		
@@ -516,10 +517,10 @@ public class ModuleNote extends ModuleBase {
 			if (getCart().worldObj.isRemote) {
 				int ID = (tracks.size() + 1);
 				addButton = new TrackButton(notemapX - 60, ID - 1);
-				addButton.text = "Add note to track #" + ID;
+				addButton.text = Localization.MODULES.ATTACHMENTS.ADD_NOTE.translate(String.valueOf(ID));
 				addButton.imageID = 2;
 				removeButton = new TrackButton(notemapX - 40, ID - 1);
-				removeButton.text = "Remove rightmost note from track #" + ID;
+				removeButton.text = Localization.MODULES.ATTACHMENTS.REMOVE_NOTE.translate(String.valueOf(ID));
 				removeButton.imageID = 3;
 				volumeButton = new TrackButton(notemapX - 20, ID - 1);
 				volumeButton.text = getVolumeText();
@@ -532,21 +533,7 @@ public class ModuleNote extends ModuleBase {
 		
 		
 		private String getVolumeText() {
-			String str =  "Track volume: ";
-			switch (volume) {
-				case 0:
-					str += "Muted";
-					break;
-				case 1:
-					str += "Low";
-					break;
-				case 2:
-					str += "Meduim";
-					break;
-				default:
-					str += "High";
-			}
-			return str;
+            return Localization.MODULES.ATTACHMENTS.VOLUME.translate(String.valueOf(volume));
 		}
 		
 		public void unload() {

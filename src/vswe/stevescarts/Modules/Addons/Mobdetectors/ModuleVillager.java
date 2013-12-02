@@ -3,6 +3,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityGolem;
 import net.minecraft.entity.passive.EntityVillager;
 import vswe.stevescarts.Carts.MinecartModular;
+import vswe.stevescarts.Helpers.Localization;
 
 public class ModuleVillager extends ModuleMobdetector {
 	public ModuleVillager(MinecartModular cart) {
@@ -10,7 +11,7 @@ public class ModuleVillager extends ModuleMobdetector {
 	}
 
 	public String getName() {
-		return "Villagers";
+		return Localization.MODULES.ADDONS.DETECTOR_VILLAGERS.translate();
 	}
 	public boolean isValidTarget(Entity target) {
 		return

@@ -10,14 +10,12 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevescarts.Helpers.*;
 import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Containers.ContainerBase;
 import vswe.stevescarts.Containers.ContainerCargo;
 import vswe.stevescarts.Containers.ContainerManager;
-import vswe.stevescarts.Helpers.CargoItemSelection;
-import vswe.stevescarts.Helpers.ManagerTransfer;
-import vswe.stevescarts.Helpers.TransferHandler;
 import vswe.stevescarts.Helpers.TransferHandler.TRANSFER_TYPE;
 import vswe.stevescarts.Interfaces.GuiBase;
 import vswe.stevescarts.Interfaces.GuiCargo;
@@ -60,21 +58,21 @@ public class TileEntityCargo extends TileEntityManager
 	
 	public static void loadSelectionSettings() {
 		itemSelections = new ArrayList<CargoItemSelection>();
-		itemSelections.add(new CargoItemSelection("All slots", Slot.class, new ItemStack(Items.carts, 1, 0)));
-		itemSelections.add(new CargoItemSelection("Engine", SlotFuel.class, new ItemStack(Items.modules, 1, 0)));
-		itemSelections.add(new CargoItemSelection("Railers", SlotBuilder.class, new ItemStack(Items.modules, 1, 10)));
-		itemSelections.add(new CargoItemSelection("Storage slots", SlotChest.class, new ItemStack(Block.chest, 1)));
-		itemSelections.add(new CargoItemSelection("Torches", SlotTorch.class, new ItemStack(Block.torchWood, 1)));
-		itemSelections.add(new CargoItemSelection("Explosives", ISlotExplosions.class, new ItemStack(Block.tnt, 1)));
-		itemSelections.add(new CargoItemSelection("Arrows", SlotArrow.class, new ItemStack(Item.arrow, 1)));
-		itemSelections.add(new CargoItemSelection("Bridge material", SlotBridge.class, new ItemStack(Block.brick, 1)));
-		itemSelections.add(new CargoItemSelection("Seeds", SlotSeed.class, new ItemStack(Item.seeds, 1)));
-		itemSelections.add(new CargoItemSelection("Fertilizer", SlotFertilizer.class, new ItemStack(Item.dyePowder, 1, 15)));
+		itemSelections.add(new CargoItemSelection(Localization.GUI.CARGO.AREA_ALL, Slot.class, new ItemStack(Items.carts, 1, 0)));
+		itemSelections.add(new CargoItemSelection(Localization.GUI.CARGO.AREA_ENGINE, SlotFuel.class, new ItemStack(Items.modules, 1, 0)));
+		itemSelections.add(new CargoItemSelection(Localization.GUI.CARGO.AREA_RAILER, SlotBuilder.class, new ItemStack(Items.modules, 1, 10)));
+		itemSelections.add(new CargoItemSelection(Localization.GUI.CARGO.AREA_STORAGE, SlotChest.class, new ItemStack(Block.chest, 1)));
+		itemSelections.add(new CargoItemSelection(Localization.GUI.CARGO.AREA_TORCHES, SlotTorch.class, new ItemStack(Block.torchWood, 1)));
+		itemSelections.add(new CargoItemSelection(Localization.GUI.CARGO.AREA_EXPLOSIVES, ISlotExplosions.class, ComponentTypes.DYNAMITE.getItemStack()));
+		itemSelections.add(new CargoItemSelection(Localization.GUI.CARGO.AREA_ARROWS, SlotArrow.class, new ItemStack(Item.arrow, 1)));
+		itemSelections.add(new CargoItemSelection(Localization.GUI.CARGO.AREA_BRIDGE, SlotBridge.class, new ItemStack(Block.brick, 1)));
+		itemSelections.add(new CargoItemSelection(Localization.GUI.CARGO.AREA_SEEDS, SlotSeed.class, new ItemStack(Item.seeds, 1)));
+		itemSelections.add(new CargoItemSelection(Localization.GUI.CARGO.AREA_FERTILIZER, SlotFertilizer.class, new ItemStack(Item.dyePowder, 1, 15)));
 		itemSelections.add(new CargoItemSelection(null, null, null));
-		itemSelections.add(new CargoItemSelection("Saplings", SlotSapling.class, new ItemStack(Block.sapling, 1)));	
-		itemSelections.add(new CargoItemSelection("Firework", SlotFirework.class, new ItemStack(Item.firework, 1)));	
-		itemSelections.add(new CargoItemSelection("Buckets (for milker)", SlotMilker.class, new ItemStack(Item.bucketEmpty, 1)));
-		itemSelections.add(new CargoItemSelection("Cakes", SlotCake.class, new ItemStack(Item.cake, 1)));
+		itemSelections.add(new CargoItemSelection(Localization.GUI.CARGO.AREA_SAPLINGS, SlotSapling.class, new ItemStack(Block.sapling, 1)));
+		itemSelections.add(new CargoItemSelection(Localization.GUI.CARGO.AREA_FIREWORK, SlotFirework.class, new ItemStack(Item.firework, 1)));
+		itemSelections.add(new CargoItemSelection(Localization.GUI.CARGO.AREA_BUCKETS, SlotMilker.class, new ItemStack(Item.bucketEmpty, 1)));
+		itemSelections.add(new CargoItemSelection(Localization.GUI.CARGO.AREA_CAKES, SlotCake.class, new ItemStack(Item.cake, 1)));
 	}
 	
 	

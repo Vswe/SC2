@@ -1,18 +1,20 @@
 package vswe.stevescarts.ModuleData;
+import vswe.stevescarts.Helpers.Localization;
+
 import java.util.ArrayList;
 
 public class ModuleDataGroup {
-	private String name;
+	private Localization.MODULE_INFO name;
 	private ArrayList<ModuleData> modules;
 	private int count;
-	public ModuleDataGroup(String name) {
+	public ModuleDataGroup(Localization.MODULE_INFO name) {
 		this.name = name;
 		count = 1;
 		modules = new ArrayList<ModuleData>();
 	}	
 
 	public String getName() {
-		return name;
+		return name.translate(String.valueOf(getCount()));
 	}
 	
 	public ArrayList<ModuleData> getModules() {
@@ -36,7 +38,7 @@ public class ModuleDataGroup {
 	}	
 	
 	public ModuleDataGroup copy() {
-		ModuleDataGroup newObj = new ModuleDataGroup(getName()).setCount(getCount());
+		ModuleDataGroup newObj = new ModuleDataGroup(name).setCount(getCount());
 		for (ModuleData obj : getModules()) {
 			newObj.add(obj);
 		}
@@ -44,7 +46,7 @@ public class ModuleDataGroup {
 	}
 	
 	public ModuleDataGroup copy(int count) {
-		ModuleDataGroup newObj = new ModuleDataGroup(getName()).setCount(count);
+		ModuleDataGroup newObj = new ModuleDataGroup(name).setCount(count);
 		for (ModuleData obj : getModules()) {
 			newObj.add(obj);
 		}
@@ -54,30 +56,18 @@ public class ModuleDataGroup {
 	public String getCountName() {
 		switch (count) {
 			case 1:
-				return "one";
+				return Localization.MODULE_INFO.MODULE_COUNT_1.translate();
 			case 2:
-				return "two";
+				return Localization.MODULE_INFO.MODULE_COUNT_2.translate();
 			case 3:
-				return "three";
-			case 4:
-				return "four";
-			case 5:
-				return "five";
-			case 6:
-				return "six";
-			case 7:
-				return "seven";
-			case 8:
-				return "eight";
-			case 9:
-				return "nine";
+				return Localization.MODULE_INFO.MODULE_COUNT_3.translate();
 			default:
-				return "unknown";
+				return "???";
 		}
 	}
 	
 	
-	public static ModuleDataGroup getCombinedGroup(String name,  ModuleDataGroup group1, ModuleDataGroup group2) {
+	public static ModuleDataGroup getCombinedGroup(Localization.MODULE_INFO name,  ModuleDataGroup group1, ModuleDataGroup group2) {
 		ModuleDataGroup newgroup = group1.copy();
 		
 

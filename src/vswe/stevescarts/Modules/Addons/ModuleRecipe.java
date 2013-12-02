@@ -2,11 +2,13 @@ package vswe.stevescarts.Modules.Addons;
 
 import java.util.ArrayList;
 
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevescarts.Carts.MinecartModular;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Helpers.ResourceHelper;
 import vswe.stevescarts.Interfaces.GuiMinecart;
 import vswe.stevescarts.Modules.ModuleBase;
@@ -109,9 +111,9 @@ public abstract class ModuleRecipe extends ModuleAddon {
 	@SideOnly(Side.CLIENT)
 	public void drawMouseOver(GuiMinecart gui, int x, int y) {
 		if (canUseAdvancedFeatures()) {
-			String str = "Change the output location\nCurrently: ";
+			String str = Localization.MODULES.ADDONS.RECIPE_OUTPUT.translate() + "\n" + Localization.MODULES.ADDONS.CURRENT.translate() + ": ";
 			if (isTargetInvalid()) {
-				str += "Unknown";
+				str += Localization.MODULES.ADDONS.INVALID_OUTPUT.translate();
 			}else{
 				str += TileEntityCargo.itemSelections.get(target).getName();
 			}
@@ -121,21 +123,21 @@ public abstract class ModuleRecipe extends ModuleAddon {
 				
 				
 				if (i == 1) {
-					str = "Change current mode\nCurrently: ";
+					str = Localization.MODULES.ADDONS.RECIPE_MODE.translate() + "\n" + Localization.MODULES.ADDONS.CURRENT.translate() + ": ";
 					switch (mode) {
 						case 0:
-							str += "No upper limit";
+							str += Localization.MODULES.ADDONS.RECIPE_NO_LIMIT.translate();
 							break;
 						case 1:
-							str += "Limit stocked items";
+							str += Localization.MODULES.ADDONS.RECIPE_LIMIT.translate();
 							break;
 						default:
-							str += "Don't produce anything";
+							str += Localization.MODULES.ADDONS.RECIPE_DISABLED.translate();
 					}
 				}else if (mode != 1){
 					str = null;
 				}else{
-					str = (i == 0 ? "Increase" : "Decrease") + " items to keep stocked.\nShift click to change by 10.\nCtrl click to change by 64.";
+					str = Localization.MODULES.ADDONS.RECIPE_CHANGE_AMOUNT.translate(i == 0 ? "0" : "1") + "\n" + Localization.MODULES.ADDONS.RECIPE_CHANGE_AMOUNT_10.translate() + "\n" + Localization.MODULES.ADDONS.RECIPE_CHANGE_AMOUNT_64.translate();
 				}
 				
 				if (str != null) {
@@ -190,9 +192,9 @@ public abstract class ModuleRecipe extends ModuleAddon {
 							sendPacket(1, (byte)button);
 						}else{
 							byte encodedData = (byte)(i == 0 ? 0 : 1);
-							if (gui.isCtrlKeyDown()) {
+							if (GuiScreen.isCtrlKeyDown()) {
 								encodedData |= 2;
-							}else if (gui.isShiftKeyDown()) {
+							}else if (GuiScreen.isShiftKeyDown()) {
 								encodedData |= 4;
 							}
 							sendPacket(2, (byte)encodedData);

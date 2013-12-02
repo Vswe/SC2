@@ -3,6 +3,7 @@ package vswe.stevescarts.Modules.Workers.Tools;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import vswe.stevescarts.Carts.MinecartModular;
+import vswe.stevescarts.Helpers.Localization;
 
 public class ModuleDrillIron extends ModuleDrill {
 	public ModuleDrillIron(MinecartModular cart) {
@@ -30,7 +31,7 @@ public class ModuleDrillIron extends ModuleDrill {
 	}
 	@Override
 	public String getRepairItemName() {
-		return "Iron Ingots";
+		return Localization.MODULES.TOOLS.IRON.translate();
 	}
 	@Override
 	public int getRepairItemUnits(ItemStack item) {

@@ -10,8 +10,6 @@ public abstract class ModuleChest extends ModuleStorage {
 		super(cart);
 	}
 
-	protected abstract String getChestName();
-
 	//called to update the module's actions. Called by the cart's update code.
 	@Override
 	public void update() {
@@ -31,7 +29,7 @@ public abstract class ModuleChest extends ModuleStorage {
 
 	@Override
 	public void drawForeground(GuiMinecart gui) {
-	    drawString(gui,getChestName(), 8, 6, 0x404040);
+	    drawString(gui, getModuleName(), 8, 6, 0x404040);
 	}
 
 	@Override

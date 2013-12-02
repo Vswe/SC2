@@ -6,6 +6,7 @@ import net.minecraft.block.BlockBaseRailLogic;
 import net.minecraft.block.BlockRailBase;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.util.Icon;
+import net.minecraft.util.StatCollector;
 import vswe.stevescarts.Blocks.Blocks;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Carts.MinecartModular;
@@ -14,7 +15,7 @@ import vswe.stevescarts.TileEntities.TileEntityDetector;
 
 
 public enum DetectorType {
-	NORMAL("Detector Manager", 0, true, false, true,
+	NORMAL(0, true, false, true,
 			"detector_manager_bot",
 			"detector_manager_top",
 			"detector_manager_yellow",
@@ -22,7 +23,7 @@ public enum DetectorType {
 			"detector_manager_green",
 			"detector_manager_red"),
 			
-	UNIT("Detector Unit", 1, false, false, false,
+	UNIT(1, false, false, false,
 		"detector_manager_bot",
 		"detector_manager_bot",
 		"detector_unit_yellow",
@@ -31,7 +32,7 @@ public enum DetectorType {
 		"detector_unit_red"),	
 	
 		
-	STOP("Detector Station", 2, true, true, false,
+	STOP(2, true, true, false,
 		"detector_manager_bot",
 		"detector_station_top",
 		"detector_station_yellow",
@@ -46,7 +47,7 @@ public enum DetectorType {
 		
 	},
 		
-	JUNCTION("Detector Junction", 3, true, false, false,		
+	JUNCTION(3, true, false, false,
 			"detector_manager_bot",
 			"detector_junction_top",
 			"detector_junction_yellow",
@@ -72,7 +73,7 @@ public enum DetectorType {
 		}
 	},
 	
-	REDSTONE("Detector Redstone Unit", 4, false, false, false,
+	REDSTONE(4, false, false, false,
 			"detector_redstone_bot",
 			"detector_redstone_bot",
 			"detector_redstone_yellow",
@@ -84,18 +85,18 @@ public enum DetectorType {
 			public void initOperators(HashMap<Byte, OperatorObject> operators) {
 				super.initOperators(operators);
 				
-				new OperatorObject.OperatorObjectRedstone(operators, 11, "Redstone Input", 0, 0, 0);
-				new OperatorObject.OperatorObjectRedstone(operators, 12, "Top Redstone Input", 0, 1, 0);
-				new OperatorObject.OperatorObjectRedstone(operators, 13, "Bottom Redstone Input", 0, -1, 0);
-				new OperatorObject.OperatorObjectRedstone(operators, 14, "North Redstone Input", 0, 0, -1);
-				new OperatorObject.OperatorObjectRedstone(operators, 15, "West Redstone Input", -1, 0, 0);
-				new OperatorObject.OperatorObjectRedstone(operators, 16, "South Redstone Input", 0, 0, 1);
-				new OperatorObject.OperatorObjectRedstone(operators, 17, "East Redstone Input", 1, 0, 0);			
+				new OperatorObject.OperatorObjectRedstone(operators, 11, Localization.GUI.DETECTOR.REDSTONE, 0, 0, 0);
+				new OperatorObject.OperatorObjectRedstone(operators, 12, Localization.GUI.DETECTOR.REDSTONE_TOP, 0, 1, 0);
+				new OperatorObject.OperatorObjectRedstone(operators, 13, Localization.GUI.DETECTOR.REDSTONE_BOT, 0, -1, 0);
+				new OperatorObject.OperatorObjectRedstone(operators, 14, Localization.GUI.DETECTOR.REDSTONE_NORTH, 0, 0, -1);
+				new OperatorObject.OperatorObjectRedstone(operators, 15, Localization.GUI.DETECTOR.REDSTONE_WEST, -1, 0, 0);
+				new OperatorObject.OperatorObjectRedstone(operators, 16, Localization.GUI.DETECTOR.REDSTONE_SOUTH, 0, 0, 1);
+				new OperatorObject.OperatorObjectRedstone(operators, 17, Localization.GUI.DETECTOR.REDSTONE_EAST, 1, 0, 0);
 			}	
 			
 		};	
 
-	private String name;
+
 	private int meta;
 	private String[] textures;
 	private Icon[] icons;
@@ -104,8 +105,8 @@ public enum DetectorType {
 	private boolean emitRedstone;
 	private HashMap<Byte, OperatorObject> operators;
 	
-	DetectorType(String name, int meta, boolean acceptCart, boolean stopCart, boolean emitRedstone, String ... textures) {
-		this.name = name;
+	DetectorType(int meta, boolean acceptCart, boolean stopCart, boolean emitRedstone, String ... textures) {
+
 		this.meta = meta;
 		this.textures = textures;
 		this.acceptCart = acceptCart;
@@ -119,7 +120,7 @@ public enum DetectorType {
 	}
 
 	public String getName() {
-		return name;
+		return StatCollector.translateToLocal("item." + StevesCarts.instance.localStart + "BlockDetector" + meta + ".name");
 	}
 
 
