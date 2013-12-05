@@ -8,6 +8,7 @@ import org.lwjgl.opengl.GL11;
 import vswe.stevescarts.Arcade.Piece.CONTROLLED_BY;
 import vswe.stevescarts.Arcade.Place.PLACE_STATE;
 import vswe.stevescarts.Carts.MinecartModular;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Helpers.ResourceHelper;
 import vswe.stevescarts.Interfaces.GuiMinecart;
 import vswe.stevescarts.Modules.Realtimers.ModuleArcade;
@@ -66,7 +67,7 @@ public class ArcadeMonopoly extends ArcadeGame {
 	public static final float SCALE = 0.17F;
 	
 	public ArcadeMonopoly(ModuleArcade module) {
-		super(module, "ForgeCraft Madness");
+		super(module, Localization.ARCADE.MADNESS);
 		
 		pieces = new ArrayList<Piece>();
 		pieces.add(new Piece(this, 0, Piece.CONTROLLED_BY.PLAYER));

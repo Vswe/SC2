@@ -18,10 +18,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraft.client.Minecraft;
 import vswe.stevescarts.Arcade.TrackOrientation.DIRECTION;
+import vswe.stevescarts.Helpers.Localization;
 
 public class TrackLevel {
 
-	public static final TrackLevel editor =  new TrackLevel("Map Editor", 0, 0, DIRECTION.RIGHT, 26, 9);	
+	public static final TrackLevel editor =  new TrackLevel(Localization.STORIES.THE_BEGINNING.MAP_EDITOR, 0, 0, DIRECTION.RIGHT, 26, 9);
 
 	
 	//length of name [1 byte]
@@ -112,7 +113,7 @@ public class TrackLevel {
 		int itemY = (header >> 16) & 15; //4 bits
 		int tracksize = (header >> 20) & 511; //9 bits
 
-		TrackLevel map = new TrackLevel(name, playerX, playerY, playerDir, itemX, itemY);
+		TrackLevel map = new TrackLevel(null, playerX, playerY, playerDir, itemX, itemY);
 		
 		
 		for (int i = 0; i < tracksize; i++) {
@@ -253,7 +254,7 @@ public class TrackLevel {
 	
 
 	
-	private String name;
+	private Localization.STORIES.THE_BEGINNING name;
 	private int playerX;
 	private int playerY;
 	private DIRECTION playerDir;
@@ -263,7 +264,7 @@ public class TrackLevel {
 	private ArrayList<LevelMessage> messages;
 
 	
-	public TrackLevel(String name, int playerX, int playerY, DIRECTION playerDir, int itemX, int itemY) {
+	public TrackLevel(Localization.STORIES.THE_BEGINNING name, int playerX, int playerY, DIRECTION playerDir, int itemX, int itemY) {
 		this.name = name;
 		this.playerX = playerX;
 		this.playerY = playerY;
@@ -277,8 +278,12 @@ public class TrackLevel {
 	
 	
 	public String getName() {
-		return name;
+		return name.translate();
 	}
+
+    public void setName(Localization.STORIES.THE_BEGINNING name) {
+        this.name = name;
+    }
 		
 	public int getPlayerStartX() {
 		return playerX;

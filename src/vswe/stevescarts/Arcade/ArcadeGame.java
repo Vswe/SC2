@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.item.SoundUpdaterMinecart;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Carts.MinecartModular;
 import vswe.stevescarts.Helpers.SoundHandler;
@@ -17,17 +18,17 @@ import cpw.mods.fml.relauncher.SideOnly;
 public abstract class ArcadeGame {
 	
 	private ModuleArcade module;
-	private String name;
+	private Localization.ARCADE name;
 
 	
-	public ArcadeGame(ModuleArcade module, String name) {
+	public ArcadeGame(ModuleArcade module, Localization.ARCADE name) {
 		this.name = name;
 		this.module = module;
 	}
 
 	
 	public String getName() {
-		return name;
+		return name.translate();
 	}
 	
 	public ModuleArcade getModule() {

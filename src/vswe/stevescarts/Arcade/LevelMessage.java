@@ -1,16 +1,18 @@
 package vswe.stevescarts.Arcade;
 
+import vswe.stevescarts.Helpers.Localization;
+
 public class LevelMessage {
 	private int x;
 	private int y;
 	private int w;
-	private String message;
+	private Localization.STORIES.THE_BEGINNING message;
 	
 	private int isRunning;
 	private int isStill;
 	private int isDone;
 	
-	public LevelMessage(int x, int y, int w, String message) {
+	public LevelMessage(int x, int y, int w, Localization.STORIES.THE_BEGINNING message) {
 		this.x = x;
 		this.y = y;
 		this.w = w;
@@ -30,7 +32,7 @@ public class LevelMessage {
 	}
 	
 	public String getMessage() {
-		return message;
+		return message.translate();
 	}
 	
 	public LevelMessage setMustBeRunning() {

@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevescarts.Arcade.TetrisPiece.MOVE_RESULT;
 import vswe.stevescarts.Carts.MinecartModular;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Helpers.ResourceHelper;
 import vswe.stevescarts.Interfaces.GuiMinecart;
 import vswe.stevescarts.Modules.Realtimers.ModuleArcade;
@@ -14,7 +15,7 @@ public class ArcadeTetris extends ArcadeGame {
 
 	
 	public ArcadeTetris(ModuleArcade module) {
-		super(module, "Mob Stacker");
+		super(module, Localization.ARCADE.STACKER);
 		
 		newgame();
 	}
@@ -194,20 +195,21 @@ public class ArcadeTetris extends ArcadeGame {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawForeground(GuiMinecart gui) {
-		getModule().drawString(gui, "Highscore: " + highscore, 10, 20, 0x404040);
-		getModule().drawString(gui, "Score: " + score, 10, 40, 0x404040);
-		getModule().drawString(gui, "Removed lines: " + removed, 10, 60, 0x404040);
-		getModule().drawString(gui, "Removed single lines: " + removedByAmount[0], 10, 80, 0x404040);
-		getModule().drawString(gui, "Removed double lines: " + removedByAmount[1], 10, 90, 0x404040);
-		getModule().drawString(gui, "Removed triple lines: " + removedByAmount[2], 10, 100, 0x404040);
-		getModule().drawString(gui, "Removed quadruple lines: " + removedByAmount[3], 10, 110, 0x404040);
+		getModule().drawString(gui, Localization.ARCADE.HIGH_SCORE.translate(String.valueOf(highscore)), 10, 20, 0x404040);
+		getModule().drawString(gui, Localization.ARCADE.SCORE.translate(String.valueOf(score)), 10, 40, 0x404040);
+		getModule().drawString(gui, Localization.ARCADE.REMOVED_LINES.translate(String.valueOf(removed)), 10, 60, 0x404040);
+
+        for (int i = 0; i < 4; i++) {
+            getModule().drawString(gui, Localization.ARCADE.REMOVED_LINES_COMBO.translate(String.valueOf(i), String.valueOf(removedByAmount[i])), 10, 80 + i * 10, 0x404040);
+        }
+
 		
-		getModule().drawString(gui, "W - Rotate", 340, 20, 0x404040);
-		getModule().drawString(gui, "A - Move Left", 340, 30, 0x404040);
-		getModule().drawString(gui, "S - Drop", 340, 40, 0x404040);
-		getModule().drawString(gui, "D - Move Right", 340, 50, 0x404040);
+		getModule().drawString(gui, "W - " + Localization.ARCADE.INSTRUCTION_ROTATE.translate(), 340, 20, 0x404040);
+		getModule().drawString(gui, "A - " + Localization.ARCADE.INSTRUCTION_LEFT.translate(), 340, 30, 0x404040);
+		getModule().drawString(gui, "S - " + Localization.ARCADE.INSTRUCTION_DROP.translate(), 340, 40, 0x404040);
+		getModule().drawString(gui, "D - " + Localization.ARCADE.INSTRUCTION_RIGHT.translate(),  340, 50, 0x404040);
 		
-		getModule().drawString(gui, "R - Restart", 340, 70, 0x404040);
+		getModule().drawString(gui, "R - " + Localization.ARCADE.INSTRUCTION_RESTART.translate(), 340, 70, 0x404040);
 
 	}
 	

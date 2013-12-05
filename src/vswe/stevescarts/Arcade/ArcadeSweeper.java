@@ -5,6 +5,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevescarts.Arcade.Tile.TILE_OPEN_RESULT;
 import vswe.stevescarts.Arcade.Tile.TILE_STATE;
 import vswe.stevescarts.Carts.MinecartModular;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Helpers.ResourceHelper;
 import vswe.stevescarts.Interfaces.GuiMinecart;
 import vswe.stevescarts.Modules.Realtimers.ModuleArcade;
@@ -14,7 +15,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ArcadeSweeper extends ArcadeGame {
 
 	public ArcadeSweeper(ModuleArcade module) {
-		super(module, "Creeper Sweeper");
+		super(module, Localization.ARCADE.CREEPER);
 		highscore = new int[] {999,999,999};
 		newGame(currentGameType);
 	}
@@ -247,20 +248,20 @@ public class ArcadeSweeper extends ArcadeGame {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawForeground(GuiMinecart gui) {
-		String[] mapnames = new String[] {"Tiny", "Medium", "Large"};
+		String[] mapnames = new String[] {Localization.ARCADE.MAP_1.translate(), Localization.ARCADE.MAP_2.translate(), Localization.ARCADE.MAP_3.translate()};
 		
-		getModule().drawString(gui, "Creepers left: " + creepersLeft, 10, 180, 0x404040);
-		getModule().drawString(gui, "Time spent: " + ticks / 20 + "s", 10, 190, 0x404040);		
+		getModule().drawString(gui, Localization.ARCADE.LEFT.translate(String.valueOf(creepersLeft)), 10, 180, 0x404040);
+		getModule().drawString(gui, Localization.ARCADE.TIME.translate(String.valueOf(ticks / 20)), 10, 190, 0x404040);
 		
-		getModule().drawString(gui, "R - Restart", 10, 210, 0x404040);
+		getModule().drawString(gui, "R - " + Localization.ARCADE.INSTRUCTION_RESTART.translate(), 10, 210, 0x404040);
 		
-		getModule().drawString(gui, "T - Change map size", 10, 230, 0x404040);
-		getModule().drawString(gui, "Current " + mapnames[currentGameType], 10, 240, 0x404040);
+		getModule().drawString(gui, "T - " + Localization.ARCADE.INSTRUCTION_CHANGE_MAP.translate(), 10, 230, 0x404040);
+		getModule().drawString(gui, Localization.ARCADE.MAP.translate(mapnames[currentGameType]), 10, 240, 0x404040);
 		
 		
-		getModule().drawString(gui, "Highscores", 330, 180, 0x404040);
+		getModule().drawString(gui, Localization.ARCADE.HIGH_SCORES.translate(), 330, 180, 0x404040);
 		for (int i = 0; i < 3; i++) {
-			getModule().drawString(gui, mapnames[i] + ": " + highscore[i] + "s", 330, 190 + i * 10, 0x404040);
+			getModule().drawString(gui, Localization.ARCADE.HIGH_SCORE_ENTRY.translate(mapnames[i], String.valueOf(highscore[i])), 330, 190 + i * 10, 0x404040);
 		}
 
 	}

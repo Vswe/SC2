@@ -3,6 +3,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import vswe.stevescarts.Carts.MinecartModular;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Helpers.ResourceHelper;
 import vswe.stevescarts.Interfaces.GuiMinecart;
 import vswe.stevescarts.Modules.ModuleBase;
@@ -80,14 +81,7 @@ public class ModuleSeat extends ModuleBase {
 	}
 
 	private String getStateName() {
-		switch(getState()) {
-			case 1:
-				return "Mount cart";
-			case 2:
-				return "Dismount cart";
-			default:
-				return "This cart is occupied";
-		}
+        return Localization.MODULES.ATTACHMENTS.SEAT_MESSAGE.translate(String.valueOf(getState()));
 	}
 
 	@Override

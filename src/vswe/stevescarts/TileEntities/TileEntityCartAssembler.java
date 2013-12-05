@@ -15,17 +15,13 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import vswe.stevescarts.Blocks.BlockCartAssembler;
 import vswe.stevescarts.Blocks.Blocks;
+import vswe.stevescarts.Helpers.*;
 import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Carts.MinecartModular;
 import vswe.stevescarts.Containers.ContainerBase;
 import vswe.stevescarts.Containers.ContainerCartAssembler;
 import vswe.stevescarts.Containers.ContainerUpgrade;
-import vswe.stevescarts.Helpers.DropDownMenuItem;
-import vswe.stevescarts.Helpers.ManagerTransfer;
-import vswe.stevescarts.Helpers.SimulationInfo;
-import vswe.stevescarts.Helpers.TitleBox;
-import vswe.stevescarts.Helpers.TransferHandler;
 import vswe.stevescarts.Interfaces.GuiBase;
 import vswe.stevescarts.Interfaces.GuiCartAssembler;
 import vswe.stevescarts.Items.ItemCarts;
@@ -744,16 +740,16 @@ public class TileEntityCartAssembler extends TileEntityBase
 		ArrayList<String> errors = new ArrayList<String>();
 		
 		if (hullSlot.getStack() == null) {
-			errors.add("You have no hull");
+			errors.add(Localization.GUI.ASSEMBLER.HULL_ERROR.translate());
 		}else{
 			ModuleData hulldata = Items.modules.getModuleData(getStackInSlot(0));
 			if (hulldata == null || !(hulldata instanceof ModuleDataHull)) {
-				errors.add("The hull added is not a hull!");
+				errors.add(Localization.GUI.ASSEMBLER.INVALID_HULL_SHORT.translate());
 			}else{
 				if (isAssembling) {
-					errors.add("The Assembler is busy!");		
+					errors.add(Localization.GUI.ASSEMBLER.BUSY.translate());
 				}else if (outputSlot != null && outputSlot.getStack() != null) {
-					errors.add("There's a Cart in the Departure Bay.");
+					errors.add(Localization.GUI.ASSEMBLER.DEPARTURE_BAY.translate());
 				}
 			
 			

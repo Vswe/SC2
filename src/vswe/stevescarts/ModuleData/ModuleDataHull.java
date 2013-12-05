@@ -2,6 +2,7 @@ package vswe.stevescarts.ModuleData;
 import java.util.List;
 
 import vswe.stevescarts.Helpers.ColorHelper;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Modules.ModuleBase;
 
 
@@ -58,10 +59,10 @@ public class ModuleDataHull extends ModuleData {
 		
 	@Override		
 	public void addSpecificInformation(List list) {
-		list.add(ColorHelper.YELLOW + "Modular capacity: " + modularCapacity);
-		list.add(ColorHelper.PURPLE + "Module complexity cap: " + complexityMax);		
-		list.add(ColorHelper.ORANGE + "Max engines count: " + engineMaxCount);
-		list.add(ColorHelper.GREEN + "Max Addon count: " + addonMaxCount);
+		list.add(ColorHelper.YELLOW + Localization.MODULE_INFO.MODULAR_CAPACITY.translate(String.valueOf(modularCapacity)));
+		list.add(ColorHelper.PURPLE + Localization.MODULE_INFO.COMPLEXITY_CAP.translate(String.valueOf(complexityMax)));
+		list.add(ColorHelper.ORANGE + Localization.MODULE_INFO.MAX_ENGINES.translate(String.valueOf(engineMaxCount)));
+		list.add(ColorHelper.GREEN + Localization.MODULE_INFO.MAX_ADDONS.translate(String.valueOf(addonMaxCount)));
 	}	
 	
 

@@ -9,6 +9,7 @@ import org.lwjgl.input.Keyboard;
 
 import vswe.stevescarts.Arcade.Unit.UPDATE_RESULT;
 import vswe.stevescarts.Carts.MinecartModular;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Helpers.ResourceHelper;
 import vswe.stevescarts.Interfaces.GuiMinecart;
 import vswe.stevescarts.Modules.Realtimers.ModuleArcade;
@@ -18,7 +19,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ArcadeInvaders extends ArcadeGame {
 
 	public ArcadeInvaders(ModuleArcade module) {
-		super(module, "Ghast Invaders");
+		super(module, Localization.ARCADE.GHAST);
 		
 		invaders = new ArrayList<Unit>();		
 		buildings = new ArrayList<Unit>();
@@ -244,14 +245,14 @@ public class ArcadeInvaders extends ArcadeGame {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawForeground(GuiMinecart gui) {
-		getModule().drawString(gui, "Extra lives:", 10, 180, 0x404040);
-		getModule().drawString(gui, "HighScore: " + highscore, 10, 210, 0x404040);
-		getModule().drawString(gui, "Score: " + score, 10, 220, 0x404040);
+		getModule().drawString(gui, Localization.ARCADE.EXTRA_LIVES.translate() + ":", 10, 180, 0x404040);
+		getModule().drawString(gui, Localization.ARCADE.HIGH_SCORE.translate(String.valueOf(highscore)), 10, 210, 0x404040);
+		getModule().drawString(gui, Localization.ARCADE.SCORE.translate(String.valueOf(score)), 10, 220, 0x404040);
 		
-		getModule().drawString(gui, "W - Shoot", 330, 180, 0x404040);
-		getModule().drawString(gui, "A - Move left", 330, 190, 0x404040);
-		getModule().drawString(gui, "D - Move right", 330, 200, 0x404040);
-		getModule().drawString(gui, "R - Restart", 330, 220, 0x404040);
+		getModule().drawString(gui, "W - " + Localization.ARCADE.INSTRUCTION_SHOOT.translate(), 330, 180, 0x404040);
+		getModule().drawString(gui, "A - " + Localization.ARCADE.INSTRUCTION_LEFT.translate(), 330, 190, 0x404040);
+		getModule().drawString(gui, "D - " + Localization.ARCADE.INSTRUCTION_RIGHT.translate(), 330, 200, 0x404040);
+		getModule().drawString(gui, "R - " + Localization.ARCADE.INSTRUCTION_RESTART.translate(), 330, 220, 0x404040);
 	}
 	
 	@Override

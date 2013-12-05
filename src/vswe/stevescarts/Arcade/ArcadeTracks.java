@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Arcade.TrackOrientation.DIRECTION;
 import vswe.stevescarts.Carts.MinecartModular;
@@ -16,7 +17,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ArcadeTracks extends ArcadeGame {
 
 	public ArcadeTracks(ModuleArcade module) {
-		super(module, "Track Operator");
+		super(module, Localization.ARCADE.OPERATOR);
 		
 		carts = new ArrayList<Cart>();
 		
@@ -253,9 +254,9 @@ public class ArcadeTracks extends ArcadeGame {
 		if (isSaveMenuOpen) {
 			int[] menu = getSaveMenuArea();
 			if (failedToSave) {
-				getModule().drawString(gui, "Failed to save", menu[0] + 3, menu[1] + 3, 0xFF0000);
+				getModule().drawString(gui, Localization.ARCADE.SAVE_ERROR.translate(), menu[0] + 3, menu[1] + 3, 0xFF0000);
 			}else{
-				getModule().drawString(gui, "Save", menu[0] + 3, menu[1] + 3, 0x404040);
+				getModule().drawString(gui, Localization.ARCADE.SAVE.translate(), menu[0] + 3, menu[1] + 3, 0x404040);
 			}
 			getModule().drawString(gui, saveName + (saveName.length() < 15 && getModule().getCart().worldObj.getWorldTime() % 20 < 10 ? "|" : ""), menu[0] + 5, menu[1] + 16, 0xFFFFFF);
 			
@@ -269,17 +270,17 @@ public class ArcadeTracks extends ArcadeGame {
 				
 				String str;
 				if (currentMenuTab == 1) {
-					str = "User created maps";
+					str = Localization.ARCADE.USER_MAPS.translate();
 				}else if (storySelected) {
 					str = TrackStory.stories.get(storyList.getSelectedIndex()).getName();
 				}else{
-					str = "Stories";
+					str = Localization.ARCADE.STORIES.translate();
 				}
 				getModule().drawString(gui, str, menu[0] + 5, menu[1] + 32, 0x404040);
 			}else{
 				int[] menu = getMenuArea();
-				
-				getModule().drawSplitString(gui, "For information on how to play just go into the Story mode and start 'The Beginning' story.\n\nTo make your own map, go into the map editor and create a new map. Further instructions will be in there. Click on a detector rail and then on a junction if you want them to be connected.\n\nIf you need more info, check the wiki.", menu[0] + 10, menu[1] + 20, menu[2] - 20, 0x404040);
+
+				getModule().drawSplitString(gui, Localization.ARCADE.HELP.translate(), menu[0] + 10, menu[1] + 20, menu[2] - 20, 0x404040);
 			}
 		}else{
 			for(LevelMessage message : currentMap.getMessages()) {
@@ -289,18 +290,18 @@ public class ArcadeTracks extends ArcadeGame {
 			}
 			
 			if (isUsingEditor()) {
-				getModule().drawString(gui, "1-5 - Select track shape", 10, 180, 0x404040);
-				getModule().drawString(gui, "r - Rotate track", 10, 190, 0x404040);
-				getModule().drawString(gui, "f - Flip track", 10, 200, 0x404040);
-				getModule().drawString(gui, "a - Change default direction", 10, 210, 0x404040);
-				getModule().drawString(gui, "t - Change track type", 10, 220, 0x404040);
-				getModule().drawString(gui, "d - Delete track", 10, 230, 0x404040);
-				getModule().drawString(gui, "c - Copy track", 10, 240, 0x404040);
+				getModule().drawString(gui, "1-5 - " + Localization.ARCADE.INSTRUCTION_SHAPE.translate(), 10, 180, 0x404040);
+				getModule().drawString(gui, "R - " + Localization.ARCADE.INSTRUCTION_ROTATE_TRACK.translate(), 10, 190, 0x404040);
+				getModule().drawString(gui, "F - " + Localization.ARCADE.INSTRUCTION_FLIP_TRACK.translate(), 10, 200, 0x404040);
+				getModule().drawString(gui, "A - " + Localization.ARCADE.INSTRUCTION_DEFAULT_DIRECTION.translate(), 10, 210, 0x404040);
+				getModule().drawString(gui, "T - " + Localization.ARCADE.INSTRUCTION_TRACK_TYPE.translate(), 10, 220, 0x404040);
+				getModule().drawString(gui, "D - " + Localization.ARCADE.INSTRUCTION_DELETE_TRACK.translate(), 10, 230, 0x404040);
+				getModule().drawString(gui, "C - " + Localization.ARCADE.INSTRUCTION_COPY_TRACK.translate(), 10, 240, 0x404040);
 				
-				getModule().drawString(gui, "s - Move or rotate Steve", 330, 180, 0x404040);
-				getModule().drawString(gui, "x - Move map", 330, 190, 0x404040);
-				getModule().drawString(gui, "LMouse - Place track", 330, 200, 0x404040);
-				getModule().drawString(gui, "RMouse - Deselect track", 330, 210, 0x404040);
+				getModule().drawString(gui, "S - " + Localization.ARCADE.INSTRUCTION_STEVE.translate(), 330, 180, 0x404040);
+				getModule().drawString(gui, "X - " + Localization.ARCADE.INSTRUCTION_MAP.translate(), 330, 190, 0x404040);
+				getModule().drawString(gui, Localization.ARCADE.LEFT_MOUSE.translate() + " - " + Localization.ARCADE.INSTRUCTION_PLACE_TRACK.translate(), 330, 200, 0x404040);
+				getModule().drawString(gui, Localization.ARCADE.RIGHT_MOUSE.translate() + " - " + Localization.ARCADE.INSTRUCTION_DESELECT_TRACK.translate(), 330, 210, 0x404040);
 			}
 		}
 	}	
@@ -687,33 +688,33 @@ public class ArcadeTracks extends ArcadeGame {
 	private String getButtonText(int id) {
 		switch (id) {
 			case 0:
-				return "Start";
+				return Localization.ARCADE.BUTTON_START.translate();
 			case 1:
-				return "Menu";
+				return Localization.ARCADE.BUTTON_MENU.translate();
 			case 2:
-				return "Stop";	
+				return Localization.ARCADE.BUTTON_STOP.translate();
 			case 3:
-				return "Next Level";
+				return Localization.ARCADE.BUTTON_NEXT.translate();
 			case 4:
-				return storySelected ? "Start Level" : "Select Story";
+				return storySelected ? Localization.ARCADE.BUTTON_START_LEVEL.translate() : Localization.ARCADE.BUTTON_SELECT_STORY.translate();
 			case 5:
-				return "Select another Story";
+				return Localization.ARCADE.BUTTON_SELECT_OTHER_STORY.translate();
 			case 6:
-				return "Start Level";
+				return Localization.ARCADE.BUTTON_START_LEVEL.translate();
 			case 7:
-				return "Create Level";
+				return Localization.ARCADE.BUTTON_CREATE_LEVEL.translate();
 			case 8:
-				return "Edit Level";
+				return Localization.ARCADE.BUTTON_EDIT_LEVEL.translate();
 			case 9:
-				return "Refresh List";
+				return Localization.ARCADE.BUTTON_REFRESH.translate();
 			case 10:
-				return "Save";
+				return Localization.ARCADE.BUTTON_START.translate();
 			case 11:
-				return "Save as...";
+				return Localization.ARCADE.BUTTON_SAVE_AS.translate();
 			case 12:
-				return "Cancel";
+				return Localization.ARCADE.BUTTON_CANCEL.translate();
 			case 13:
-				return "Save";
+				return Localization.ARCADE.BUTTON_SAVE.translate();
 			default:
 				return "Hello, I'm a button";
 		}

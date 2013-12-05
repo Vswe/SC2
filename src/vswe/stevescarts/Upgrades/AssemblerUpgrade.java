@@ -229,7 +229,7 @@ public class AssemblerUpgrade {
 			});			
 			
 
-		new AssemblerUpgrade(18, "Thermal Engine")
+		new AssemblerUpgrade(18, "Thermal Engine Upgrade")
 		.addEffect(new ThermalFuel())
 		.addEffect(new FuelCost(0.05F))
 		.addRecipe(new Object[][] {
@@ -403,7 +403,7 @@ public class AssemblerUpgrade {
 	
 	@SideOnly(Side.CLIENT)
 	public void createIcon(IconRegister register) {
-		icon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + getRawName() + "_icon");	
+		icon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + getRawName().replace("_upgrade", "") + "_icon");
 	}
 	
 	@SideOnly(Side.CLIENT)

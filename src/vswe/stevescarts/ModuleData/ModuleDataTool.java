@@ -1,5 +1,6 @@
 package vswe.stevescarts.ModuleData;
 
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Modules.ModuleBase;
 
 public class ModuleDataTool extends ModuleData {
@@ -17,9 +18,9 @@ public class ModuleDataTool extends ModuleData {
 	@Override
 	public String getModuleInfoText(byte b) {
 		if (unbreakable) {
-			return "Unbreakable";
+			return Localization.MODULE_INFO.TOOL_UNBREAKABLE.translate();
 		}else{
-			return "Durability: " + b + "%";
+			return Localization.MODULE_INFO.TOOL_DURABILITY.translate(String.valueOf(b));
 		}
 	}
 	

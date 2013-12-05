@@ -2,6 +2,7 @@ package vswe.stevescarts.Modules.Engines;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevescarts.Carts.MinecartModular;
+import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Helpers.ResourceHelper;
 import vswe.stevescarts.Interfaces.GuiMinecart;
 import vswe.stevescarts.Modules.ModuleBase;
@@ -113,16 +114,11 @@ public abstract class ModuleEngine extends ModuleBase {
 	}
 
 	private String getPriorityText() {
-		switch (getPriority()) {
-			case 0:
-				return "High priority";
-			case 1:
-				return "Medium priority";
-			case 2:
-				return "Low priority";
-			default:
-				return "Disabled";
-		}
+        if (isDisabled()) {
+            return Localization.MODULES.ENGINES.ENGINE_DISABLED.translate();
+        }else{
+            return Localization.MODULES.ENGINES.ENGINE_PRIORITY.translate(String.valueOf(getPriority()));
+        }
 	}
 
 	@Override
