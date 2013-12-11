@@ -1338,8 +1338,12 @@ public class ModuleData {
 	}
 
 	public String getName() {
-		return StatCollector.translateToLocal("item." + StevesCarts.localStart + getRawName() + ".name");
+		return StatCollector.translateToLocal(getUnlocalizedName());
 	}
+
+    public String getUnlocalizedName() {
+        return "item." + StevesCarts.localStart + getRawName() + ".name";
+    }
 
 	public byte getID() {
 		return id;

@@ -109,7 +109,7 @@ public class ItemCarts extends ItemMinecart
 					if (!found) {
 						ModuleCountPair count = new ModuleCountPair(module);
 						if (info.hasKey("Data" + i)) {
-							count.setName(module.getCartInfoText(module.getName(), info.getByte("Data" + i)));
+							count.setExtraData(info.getByte("Data" + i));
 						}						
 						counts.add(count);
 					}

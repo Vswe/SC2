@@ -1,5 +1,6 @@
 package vswe.stevescarts.Helpers;
 
+import net.minecraft.util.StatCollector;
 import vswe.stevescarts.ModuleData.ModuleData;
 
 public class ModuleCountPair {
@@ -7,11 +8,12 @@ public class ModuleCountPair {
 	private ModuleData data;
 	private int count;
 	private String name;
+    private byte extraData;
 	
 	public ModuleCountPair(ModuleData data) {
 		this.data = data;
 		count = 1;
-		name = data.getName();
+		name = data.getUnlocalizedName();
 	}
 	
 	public int getCount() {
@@ -33,9 +35,13 @@ public class ModuleCountPair {
 	public ModuleData getData() {
 		return data;
 	}
+
+    public void setExtraData(byte b) {
+        extraData = b;
+    }
 	
 	public String toString() {
-		String ret = name;
+		String ret = data.getCartInfoText(StatCollector.translateToLocal(name), extraData);
 		if (count != 1) {
 			ret += " x" + count;
 		}
