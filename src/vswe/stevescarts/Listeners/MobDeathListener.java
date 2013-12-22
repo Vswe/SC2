@@ -24,18 +24,17 @@ public class MobDeathListener {
 	public void onEntityLivingDeath(LivingDeathEvent event) {
 		EntityLivingBase monster = event.entityLiving;
 		
-		if (monster.worldObj.isRemote) {
+		if (monster.worldObj.isRemote || !event.source.getDamageType().equals("player")) {
 			return;
 		}
-		
-		if (event.source.getDamageType().equals("player")) {
-			if (monster instanceof EntityMob) {
 
-				if (Math.random() < 0.10d) {							
-					dropItem(monster, ComponentTypes.STOLEN_PRESENT.getItemStack());
-				}
-			}			
-		}
+        if (monster instanceof EntityMob) {
+
+            if (Math.random() < 0.10d) {
+                dropItem(monster, ComponentTypes.STOLEN_PRESENT.getItemStack());
+            }
+        }
+
 		
 		/*if (monster instanceof EntityWitch) {
 			double rand = Math.random();

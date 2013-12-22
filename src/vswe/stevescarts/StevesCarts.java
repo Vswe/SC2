@@ -56,7 +56,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 public class StevesCarts {
 
 	public static boolean hasGreenScreen = false;
-	public static boolean isChristmas = false;
+	public static boolean isChristmas = true;
 	public static boolean isHalloween = false;
 	public static boolean isEaster = false;	
 	public static boolean freezeCartSimulation = false;
