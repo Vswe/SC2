@@ -14,13 +14,17 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 public class TradeHandler implements VillagerRegistry.IVillageTradeHandler
 {
 	public static int santaId = 523;
-	private static ResourceLocation texture = ResourceHelper.getResource("/models/santa.png");
 	
     public TradeHandler()
     {
     	VillagerRegistry.instance().registerVillagerId(santaId);
-	    VillagerRegistry.instance().registerVillagerSkin(santaId, texture);
+
 		VillagerRegistry.instance().registerVillageTradeHandler(santaId,this);		
+    }
+
+
+    public void registerSkin() {
+        VillagerRegistry.instance().registerVillagerSkin(santaId, ResourceHelper.getResource("/models/santa.png"));
     }
 
 	/**

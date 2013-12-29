@@ -124,7 +124,7 @@ public class StevesCarts {
         config.save();
 	}
 
-
+    public TradeHandler tradeHandler;
 
 	 @EventHandler
 	public void load(FMLInitializationEvent evt) {
@@ -140,7 +140,7 @@ public class StevesCarts {
 		new WoodFuelHandler();
 		//new TestListener();
 		if (isChristmas) {
-			new TradeHandler();
+            tradeHandler = new TradeHandler();
 			new MobDeathListener();
 			new MobInteractListener();
 			new PlayerSleepListener();

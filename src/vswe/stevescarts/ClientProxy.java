@@ -25,6 +25,9 @@ public class ClientProxy extends CommonProxy{
 		new RendererMinecartItem();
 		RenderingRegistry.registerEntityRenderingHandler(EntityCake.class, new RenderSnowball(Item.cake));
 		ModuleData.initModels();
+        if (StevesCarts.instance.tradeHandler != null) {
+            StevesCarts.instance.tradeHandler.registerSkin();
+        }
 	}
 	
 	@Override

@@ -141,10 +141,11 @@ public class TileEntityLiquid extends TileEntityManager  implements IFluidHandle
 			ret.amount = 0;
 		}
 		for (int i = 0; i < 4; i++) {
-			FluidStack temp = null;
-			temp = tanks[i].drain(maxDrain, doDrain, worldObj.isRemote);
+			FluidStack temp = tanks[i].drain(maxDrain, false, worldObj.isRemote);
 			
 			if (temp != null && (ret == null || ret.isFluidEqual(temp))) {
+                temp = tanks[i].drain(maxDrain, doDrain, worldObj.isRemote);
+
 				if (ret == null) {
 					ret = temp;
 				}else{
