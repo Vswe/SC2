@@ -95,9 +95,7 @@ public class ModuleFirework extends ModuleBase {
 				if (item.getItem().itemID == Item.firework.itemID) {
 					ItemStack firework = item.copy();
 					firework.stackSize = 1;
-					if (--item.stackSize <= 0) {
-						setStack(i, null);
-					}
+                    removeItemStack(item, 1, i);
 					
 					return firework;
 				}else if(item.getItem().itemID == Item.paper.itemID) {
@@ -123,19 +121,13 @@ public class ModuleFirework extends ModuleBase {
 				
 				if (item != null) {
 					if(item.getItem().itemID == Item.paper.itemID && !removedPaper) {
-						if (--item.stackSize <= 0) {
-							setStack(i, null);
-						}
+                        removeItemStack(item, 1, i);
 						removedPaper = true;
 					}else if(item.getItem().itemID == Item.gunpowder.itemID && countGunpowder < maxGunpowder) {
 						while (item.stackSize > 0 && countGunpowder < maxGunpowder) {
 							countGunpowder++;
-							item.stackSize--;
+                            removeItemStack(item, 1, i);
 						}
-						
-						if (item.stackSize <= 0) {
-							setStack(i, null);
-						}					
 					}
 				}
 			}
@@ -181,9 +173,7 @@ public class ModuleFirework extends ModuleBase {
 				if (item.getItem().itemID == Item.fireworkCharge.itemID) {
 					ItemStack charge = item.copy();
 					charge.stackSize = 1;
-					if (--item.stackSize <= 0) {
-						setStack(i, null);
-					}
+                    removeItemStack(item, 1, i);
 					
 					return charge;
 				}
@@ -210,20 +200,14 @@ public class ModuleFirework extends ModuleBase {
 			
 			if (item != null) {
 				if(item.getItem().itemID == Item.gunpowder.itemID && !removedGunpowder) {
-					if (--item.stackSize <= 0) {
-						setStack(i, null);
-					}	
+                    removeItemStack(item, 1, i);
 					removedGunpowder = true;
 				}else if(item.getItem().itemID == Item.glowstone.itemID && canHasFlicker && !removedGlow) {
-					if (--item.stackSize <= 0) {
-						setStack(i, null);
-					}						
+                    removeItemStack(item, 1, i);
 					removedGlow = true;
 					explosionNBT.setBoolean("Flicker", true);
 				}else if(item.getItem().itemID == Item.diamond.itemID && canHasTrail && !removedDiamond) {
-					if (--item.stackSize <= 0) {
-						setStack(i, null);
-					}						
+                    removeItemStack(item, 1, i);
 					removedDiamond = true;
 					explosionNBT.setBoolean("Trail", true);
 				}else if(canHasModifier && !removedModifier && (
@@ -235,9 +219,7 @@ public class ModuleFirework extends ModuleBase {
 				
 				
 				) {
-					if (--item.stackSize <= 0) {
-						setStack(i, null);
-					}						
+                    removeItemStack(item, 1, i);
 					removedModifier = true;		
 					type = modifierType;
 				}
@@ -326,10 +308,6 @@ public class ModuleFirework extends ModuleBase {
 					if (currentColors[item.getItemDamage()] > 0) {
 						int count = Math.min(currentColors[item.getItemDamage()], item.stackSize);
 						currentColors[item.getItemDamage()] -= count;
-						item.stackSize -= count;
-						if (item.stackSize <= 0) {
-							setStack(i, null);
-						}
 					}
 				}
 			}
@@ -339,7 +317,14 @@ public class ModuleFirework extends ModuleBase {
 	}
 	
 
-	
+	private void removeItemStack(ItemStack item, int count,  int id) {
+        if (!getCart().hasCreativeSupplies()) {
+            item.stackSize -= count;
+            if (item.stackSize <= 0) {
+                setStack(id, null);
+            }
+        }
+    }
 	
 	private void launchFirework(ItemStack firework) {
 		EntityFireworkRocket rocket = new EntityFireworkRocket(getCart().worldObj, getCart().posX, getCart().posY + 1, getCart().posZ, firework);
