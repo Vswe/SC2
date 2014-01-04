@@ -8,13 +8,14 @@ import vswe.stevescarts.Carts.MinecartModular;
 import vswe.stevescarts.Helpers.Localization;
 import vswe.stevescarts.Helpers.ResourceHelper;
 import vswe.stevescarts.Interfaces.GuiMinecart;
+import vswe.stevescarts.Modules.ISuppliesModule;
 import vswe.stevescarts.Modules.ModuleBase;
 import vswe.stevescarts.Slots.SlotBase;
 import vswe.stevescarts.Slots.SlotCake;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ModuleCakeServer extends ModuleBase {
+public class ModuleCakeServer extends ModuleBase implements ISuppliesModule {
 
 	public ModuleCakeServer(MinecartModular cart) {
 		super(cart);
@@ -176,5 +177,10 @@ public class ModuleCakeServer extends ModuleBase {
 		}
 		return count;
 	}
+
+    @Override
+    public boolean haveSupplies() {
+        return getCakeBuffer() > 0;
+    }
 }
 

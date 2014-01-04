@@ -268,7 +268,8 @@ public final class Localization {
             POWER_YELLOW("statePowerYellow"),
             TANKS_FULL("stateTanksFull"),
             TANKS_EMPTY("stateTanksEmpty"),
-            TANK_EMPTY("stateTankEmpty");
+            TANK_EMPTY("stateTankEmpty"),
+            CAKE("stateCake");
 
 
 

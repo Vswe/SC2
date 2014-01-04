@@ -37,6 +37,7 @@ import vswe.stevescarts.Modules.Addons.ModuleInvisible;
 import vswe.stevescarts.Modules.Addons.ModulePowerObserver;
 import vswe.stevescarts.Modules.Addons.ModuleShield;
 import vswe.stevescarts.Modules.Realtimers.ModuleCage;
+import vswe.stevescarts.Modules.Realtimers.ModuleCakeServer;
 import vswe.stevescarts.Modules.Realtimers.ModuleShooter;
 import vswe.stevescarts.Modules.Storages.Chests.ModuleChest;
 import vswe.stevescarts.Modules.Storages.Tanks.ModuleTank;
@@ -71,7 +72,8 @@ public class ModuleState {
 		new ModuleState(5, ModuleBridge.class, Localization.GUI.DETECTOR.BRIDGE, STATETYPE.SUPPLY);
 		new ModuleState(40, ModuleShooter.class, Localization.GUI.DETECTOR.PROJECTILE, STATETYPE.SUPPLY);
 		new ModuleState(41, ModuleFertilizer.class,Localization.GUI.DETECTOR.FERTILIZING, STATETYPE.SUPPLY);
-		
+        new ModuleState(49, ModuleCakeServer.class, Localization.GUI.DETECTOR.CAKE, STATETYPE.SUPPLY);
+
 		new ModuleState(6, ModuleShield.class, Localization.GUI.DETECTOR.SHIELD, STATETYPE.ACTIVATION);
 		new ModuleState(7, ModuleChunkLoader.class, Localization.GUI.DETECTOR.CHUNK, STATETYPE.ACTIVATION);
 		new ModuleState(8, ModuleInvisible.class, Localization.GUI.DETECTOR.INVISIBILITY, STATETYPE.ACTIVATION);
@@ -132,6 +134,8 @@ public class ModuleState {
 		new ModuleStateTank(46, Localization.GUI.DETECTOR.TANKS_FULL, true, false);
 		new ModuleStateTank(47, Localization.GUI.DETECTOR.TANKS_EMPTY, false, false);
 		new ModuleStateTank(48, Localization.GUI.DETECTOR.TANK_EMPTY, false, true);
+
+
 	}
 	
 
