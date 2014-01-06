@@ -109,9 +109,20 @@ public class BlockDetector extends BlockContainer
     public boolean canProvidePower()
     {
         return true;
-    }	
+    }
 
-	@Override
+    @Override
+    public boolean canConnectRedstone(IBlockAccess world, int x, int y, int z, int side) {
+        if (side == -1) {
+            return false;
+        }else{
+            DetectorType type = DetectorType.getTypeFromMeta(world.getBlockMetadata(x, y, z));
+
+            return type.shouldEmitRedstone() || type == DetectorType.REDSTONE;
+        }
+    }
+
+    @Override
     public TileEntity createNewTileEntity(World world)
     {
         return new TileEntityDetector();

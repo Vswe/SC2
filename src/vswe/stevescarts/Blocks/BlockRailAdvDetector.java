@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Carts.MinecartModular;
@@ -189,6 +190,51 @@ public class BlockRailAdvDetector extends BlockRailBase
 			cart.releaseCart();
 		}			
 
+    }
+
+    @Override
+    public boolean canConnectRedstone(IBlockAccess world, int x, int y, int z, int side) {
+        //check if any block is using this detector for something else
+
+        if (world.getBlockId(x, y-1, z) == Blocks.DETECTOR_UNIT.getId() && DetectorType.getTypeFromMeta(world.getBlockMetadata(x, y-1, z)).canInteractWithCart()) {
+            return false;
+        }
+
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                if (Math.abs(i) != Math.abs(j)) {
+
+                    int blockId = world.getBlockId(x+i, y, z+j);
+                    if (blockId == Blocks.CARGO_MANAGER.getId() || blockId == Blocks.LIQUID_MANAGER.getId() || blockId == Blocks.MODULE_TOGGLER.getId()) {
+                        return false;
+                    }else if(blockId == Blocks.UPGRADE.getId()) {
+                        TileEntity tileentity = world.getBlockTileEntity(x+i, y, z+j);
+
+                        TileEntityUpgrade upgrade = (TileEntityUpgrade)tileentity;
+                        if(upgrade != null && upgrade.getUpgrade() != null) {
+                            for (BaseEffect effect : upgrade.getUpgrade().getEffects()) {
+                                if (effect instanceof Transposer) {
+                                    if (upgrade.getMaster() != null) {
+                                        for (TileEntityUpgrade tile : upgrade.getMaster().getUpgradeTiles()) {
+                                            if (tile.getUpgrade() != null) {
+                                                for (BaseEffect effect2 : tile.getUpgrade().getEffects()) {
+                                                    if (effect2 instanceof Disassemble) {
+                                                        return false;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        //if nothing else used this activator it can be controlled by redstone
+        return true;
     }
 	
 	private boolean isCartReadyForAction(MinecartModular cart, int x, int y, int z) {

@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import vswe.stevescarts.Helpers.DetectorType;
 import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.TileEntities.TileEntityCartAssembler;
@@ -58,7 +59,7 @@ public class BlockUpgrade extends BlockContainer
         return super.collisionRayTrace(par1World, par2, par3, par4, par5Vec3, par6Vec3);
     }	
 	
-	private int getUpgradeId(World world, int x, int y, int z) {
+	private int getUpgradeId(IBlockAccess world, int x, int y, int z) {
 		TileEntity tile = world.getBlockTileEntity(x,y,z);
 		if (tile != null && tile instanceof TileEntityUpgrade) {
 			TileEntityUpgrade upgrade = (TileEntityUpgrade)tile;
@@ -75,6 +76,11 @@ public class BlockUpgrade extends BlockContainer
 	
 	@Override
 	public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7) {}
+
+    @Override
+    public boolean canConnectRedstone(IBlockAccess world, int x, int y, int z, int side) {
+        return side != -1 && getUpgradeId(world, x, y, z) == 13;
+    }
 	
 	
 	@Override
