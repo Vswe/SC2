@@ -3,7 +3,6 @@ package vswe.stevescarts.Helpers;
 
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -55,7 +54,7 @@ public class CapeHandler implements Runnable, ITickHandler {
 			connection.setConnectTimeout(2147483647);
 			connection.setDoInput(true);
 			connection.connect();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("C:\\Users\\Vswe\\Dropbox\\Public\\RemoteInfo.txt")/*connection.getInputStream()*/));
+			BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			String line;
 
 

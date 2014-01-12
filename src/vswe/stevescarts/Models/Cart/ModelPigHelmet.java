@@ -57,17 +57,17 @@ public class ModelPigHelmet extends ModelCartbase
 	@Override
 	public void render(Render render,ModuleBase module, float yaw, float pitch, float roll, float mult, float partialtime)
     {
-		if (render == null || module == null) {
+
+        if (render == null || module == null) {
 			return;
 		}
-	
+
 		ModulePig pig = (ModulePig)module;
 		
 		
 		if (!pig.hasHelment() || (isOverlay && !pig.getHelmetMultiRender())) {
 			return;
 		}
-		
 
 		final float sizemult = 1F + 1F / 16F + 1F / 32F + (isOverlay ? 1F / 48F : 0);
 		GL11.glScalef(sizemult, sizemult, sizemult);

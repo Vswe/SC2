@@ -1,8 +1,11 @@
 package vswe.stevescarts.Modules.Hull;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -34,11 +37,10 @@ public class ModulePig extends ModuleHull {
 			oinkTimer--;
 		}
 	}
-	
 	private ItemStack getHelmet() {
 		Entity rider = getCart().riddenByEntity;
-		if (rider != null && rider instanceof EntityLiving) {	
-			return ((EntityLiving)rider).getCurrentItemOrArmor(4);
+		if (rider != null && rider instanceof EntityLivingBase) {
+			return ((EntityLivingBase)rider).getCurrentItemOrArmor(4);
 		}
 		
 		return null;
@@ -47,26 +49,28 @@ public class ModulePig extends ModuleHull {
 
 
 	public boolean hasHelment() {
+
 		ItemStack item = getHelmet();
 		if (item != null) {
 			if (item.getItem() instanceof ItemArmor) {
-				if (((ItemArmor)item.getItem()).armorType == 0) {
+                if (((ItemArmor)item.getItem()).armorType == 0) {
 					return true;
 				}
 			}
 		}
+
 		return false;
 	}
-	
+
+    @SideOnly(Side.CLIENT)
 	public ResourceLocation getHelmetResource(boolean isOverlay) {
 		if (hasHelment()) {
 			ItemStack item = getHelmet();
-			
 			if ((ItemArmor)item.getItem() == null) {
 				return null;
-			}	
-				
-			return RenderBiped.getArmorResource((AbstractClientPlayer)null, item, 0, (String)null);
+			}
+
+            return RenderBiped.getArmorResource((AbstractClientPlayer)null, item, 0, isOverlay ? "overlay" : (String)null);
 			
 			//old code left here for reference
 			/*if (item.getItem() instanceof IArmorTextureProvider) {
@@ -89,26 +93,29 @@ public class ModulePig extends ModuleHull {
 		}
 		return null;
 	}
-	
+
+    @SideOnly(Side.CLIENT)
 	public boolean hasHelmetColor(boolean isOverlay) {
 		return getHelmetColor(isOverlay) != -1;
 	}
-	
+
+    @SideOnly(Side.CLIENT)
 	public int getHelmetColor(boolean isOverlay) {		
 		if (hasHelment()) {
 			ItemStack item = getHelmet();
 			return ((ItemArmor)item.getItem()).getColorFromItemStack(item, isOverlay ? 1 : 0);
 		}
 		return -1;
-	}	
-	
+	}
+
+    @SideOnly(Side.CLIENT)
 	public boolean getHelmetMultiRender() {
 		if (hasHelment()) {
 			ItemStack item = getHelmet();
-			return ((ItemArmor)item.getItem()).requiresMultipleRenderPasses();
-		}	
-		
-		return false;
+            return ((ItemArmor)item.getItem()).requiresMultipleRenderPasses();
+		}
+
+        return false;
 	}
 	
 
