@@ -71,9 +71,8 @@ public class ModuleCleaner extends ModuleBase {
             {
                 EntityItem eItem = (EntityItem)list.get(e);
 
-                if (eItem.delayBeforeCanPickup <= 10)
+                if (eItem.delayBeforeCanPickup <= 10 && !eItem.isDead)
 				{
-					eItem.delayBeforeCanPickup = 20;
                     int stackSize = eItem.getEntityItem().stackSize;
                     getCart().addItemToChest(eItem.getEntityItem());
 
@@ -98,7 +97,7 @@ public class ModuleCleaner extends ModuleBase {
             {
                 EntityArrow eItem = (EntityArrow)list.get(e);
 
-                if (Math.pow(eItem.motionX,2) + Math.pow(eItem.motionY,2) + Math.pow(eItem.motionZ,2) < 0.2D && eItem.arrowShake <= 0)
+                if (Math.pow(eItem.motionX,2) + Math.pow(eItem.motionY,2) + Math.pow(eItem.motionZ,2) < 0.2D && eItem.arrowShake <= 0 && !eItem.isDead)
                 {
                     eItem.arrowShake = 3;
                     ItemStack iItem = new ItemStack(Item.arrow, 1);
