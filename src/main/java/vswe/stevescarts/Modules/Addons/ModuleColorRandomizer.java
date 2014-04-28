@@ -37,12 +37,12 @@ public class ModuleColorRandomizer extends ModuleAddon {
 
 	@Override
 	public int guiWidth() {
-		return 26;
+		return 28;
 	}
 
 	@Override
 	public int guiHeight() {
-		return 36;
+		return 38;
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public class ModuleColorRandomizer extends ModuleAddon {
 	public void mouseClicked(GuiMinecart gui, int x, int y, int button) {
 		if (button == 0) {
 			if (inRect(x,y, this.button)) {
-				randomizeColor();
+				sendPacket(0);
 			}
 		}
 	}
@@ -88,15 +88,9 @@ public class ModuleColorRandomizer extends ModuleAddon {
 		int green = random.nextInt(256);
 		int blue = random.nextInt(256);
 
-		if (getCart().worldObj.isRemote) {
-			sendPacket(0, (byte) red);
-			sendPacket(1, (byte) green);
-			sendPacket(2, (byte) blue);
-		} else {
-			setColorVal(0, (byte) red);
-			setColorVal(1, (byte) green);
-			setColorVal(2, (byte) blue);
-		}
+		setColorVal(0, (byte) red);
+		setColorVal(1, (byte) green);
+		setColorVal(2, (byte) blue);
 	}
 
 	@Override
@@ -119,8 +113,8 @@ public class ModuleColorRandomizer extends ModuleAddon {
 
 	@Override
 	protected void receivePacket(int id, byte[] data, EntityPlayer player) {
-		if (id >= 0 && id < 3) {
-			setColorVal(id, data[0]);
+		if (id == 0) {
+			randomizeColor();
 		}
 	}
 
