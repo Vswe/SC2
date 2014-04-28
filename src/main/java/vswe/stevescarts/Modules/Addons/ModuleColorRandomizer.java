@@ -13,6 +13,7 @@ import java.util.Random;
 public class ModuleColorRandomizer extends ModuleAddon {
 	private int[] button = new int[] {10, 20, 16, 16};
 	private int cooldown;
+	private boolean hover;
 	private Random random;
 
 	public ModuleColorRandomizer(MinecartModular cart) {
@@ -37,26 +38,37 @@ public class ModuleColorRandomizer extends ModuleAddon {
 
 	@Override
 	public int guiWidth() {
-		return 28;
+		return 100;
 	}
 
 	@Override
 	public int guiHeight() {
-		return 38;
+		return 50;
 	}
 
 	@Override
 	public void drawBackground(GuiMinecart gui, int x, int y) {
 		ResourceHelper.bindResource("/gui/color_randomizer.png");
 
+		float[] color = getColor();
+		GL11.glColor4f(color[0], color[1], color[2], 1.0F);
+		drawImage(gui, 50, 20, 0, 16, 28, 28);
+
 		GL11.glColor4f(1, 1, 1, 1);
-		drawImage(gui, button, 0, 0);
+		if (inRect(x, y, button)) {
+			drawImage(gui, 10, 26, 32, 0, 16, 16);
+		} else {
+			drawImage(gui, 10, 26, 16, 0, 16, 16);
+		}
+		drawImage(gui, 10, 26, 0, 0 ,16, 16);
 	}
 
 	@Override
 	public void drawMouseOver(GuiMinecart gui, int x, int y) {
-		String randomizeString = Localization.MODULES.ADDONS.BUTTON_RANDOMIZE.translate();
-		drawStringOnMouseOver(gui, randomizeString, x, y, button);
+		if (inRect(x, y, button)) {
+			String randomizeString = Localization.MODULES.ADDONS.BUTTON_RANDOMIZE.translate();
+			drawStringOnMouseOver(gui, randomizeString, x, y, button);
+		}
 	}
 
 	@Override
