@@ -390,6 +390,7 @@ public final class Localization {
     public static class MODULES {
 
         public static enum ADDONS {
+            BUTTON_RANDOMIZE("buttonRandomize"),
             DETECTOR_ANIMALS("detectorAnimals"),
             DETECTOR_BATS("detectorBats"),
             DETECTOR_MONSTERS("detectorMonsters"),

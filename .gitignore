@@ -18,3 +18,6 @@ bin
 
 #Ignore gradle logs
 .gradle
+
+#Ignore language files
+lang

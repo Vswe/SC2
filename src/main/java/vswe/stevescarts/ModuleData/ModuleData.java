@@ -16,33 +16,11 @@ import net.minecraft.util.StatCollector;
 import vswe.stevescarts.Helpers.*;
 import vswe.stevescarts.Items.Items;
 import vswe.stevescarts.Models.Cart.*;
+import vswe.stevescarts.Modules.Addons.*;
 import vswe.stevescarts.Modules.Workers.*;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Carts.MinecartModular;
 import vswe.stevescarts.Modules.ModuleBase;
-import vswe.stevescarts.Modules.Addons.ModuleSmelterAdv;
-import vswe.stevescarts.Modules.Addons.ModuleAddon;
-import vswe.stevescarts.Modules.Addons.ModuleBrake;
-import vswe.stevescarts.Modules.Addons.ModuleChunkLoader;
-import vswe.stevescarts.Modules.Addons.ModuleColorizer;
-import vswe.stevescarts.Modules.Addons.ModuleCrafter;
-import vswe.stevescarts.Modules.Addons.ModuleCrafterAdv;
-import vswe.stevescarts.Modules.Addons.ModuleCreativeIncinerator;
-import vswe.stevescarts.Modules.Addons.ModuleCreativeSupplies;
-import vswe.stevescarts.Modules.Addons.ModuleDrillIntelligence;
-import vswe.stevescarts.Modules.Addons.ModuleEnchants;
-import vswe.stevescarts.Modules.Addons.ModuleHeightControl;
-import vswe.stevescarts.Modules.Addons.ModuleIncinerator;
-import vswe.stevescarts.Modules.Addons.ModuleInvisible;
-import vswe.stevescarts.Modules.Addons.ModuleLabel;
-import vswe.stevescarts.Modules.Addons.ModuleLiquidSensors;
-import vswe.stevescarts.Modules.Addons.ModuleMelter;
-import vswe.stevescarts.Modules.Addons.ModuleMelterExtreme;
-import vswe.stevescarts.Modules.Addons.ModuleOreTracker;
-import vswe.stevescarts.Modules.Addons.ModulePowerObserver;
-import vswe.stevescarts.Modules.Addons.ModuleShield;
-import vswe.stevescarts.Modules.Addons.ModuleSmelter;
-import vswe.stevescarts.Modules.Addons.ModuleSnowCannon;
 import vswe.stevescarts.Modules.Addons.Mobdetectors.ModuleAnimal;
 import vswe.stevescarts.Modules.Addons.Mobdetectors.ModuleBat;
 import vswe.stevescarts.Modules.Addons.Mobdetectors.ModuleMonster;
@@ -536,12 +514,21 @@ public class ModuleData {
 									  
 
 		
-		new ModuleData(41, "Colorizer", ModuleColorizer.class, 15)
+		ModuleData colorizer = new ModuleData(41, "Colorizer", ModuleColorizer.class, 15)
 			.addRecipe(new Object[][] {
 									   {ComponentTypes.RED_PIGMENT.getItemStack(), ComponentTypes.GREEN_PIGMENT.getItemStack(), ComponentTypes.BLUE_PIGMENT.getItemStack()},
 									   {Item.ingotIron, Item.redstone, Item.ingotIron},
 									   {null, Item.ingotIron, null}
-									  });			
+									  });
+
+		ModuleData colorRandomizer = new ModuleData(101, "Color Randomizer", ModuleColorRandomizer.class, 20)
+			.addRecipe(new Object[][] {
+									   {colorizer.getItemStack()},
+									   {ComponentTypes.SIMPLE_PCB.getItemStack()}
+									  });
+
+		// Having two modules try to set the color doesn't sound like a good idea
+		addNemesis(colorizer, colorRandomizer);
 		
 		//new ModuleData(46, "Commander", realtimeModuleCommand.class, 15);
 		
