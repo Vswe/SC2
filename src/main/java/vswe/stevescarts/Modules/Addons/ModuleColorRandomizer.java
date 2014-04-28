@@ -11,7 +11,7 @@ import vswe.stevescarts.Interfaces.GuiMinecart;
 import java.util.Random;
 
 public class ModuleColorRandomizer extends ModuleAddon {
-	private int[] button = new int[] {10, 20, 16, 16};
+	private int[] button = new int[] {10, 26, 16, 16};
 	private int cooldown;
 	private boolean hover;
 	private Random random;

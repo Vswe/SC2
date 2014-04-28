@@ -1,0 +1,650 @@
+# ======================================
+                                BLOCK GUI
+# ======================================
+
+# Cart assembler gui localization
+gui.SC2:cartAssembler=Vogn Montør
+gui.SC2:basicAssembleInstruction=For å begynne å lage en vogn, tilføy et Vognskrog av ditt eget valg til Skrogfeltet.
+gui.SC2:invalidHullError=Det tilførte Vognskroget er ikke et gyldig Skrog. Dette skal ikke være mulig, så du må ha laget noe rart.
+gui.SC2:hullCapacity=Skrogkapasitet
+gui.SC2:complexityCap=Kompleksitetsgrense
+gui.SC2:totalCost=Totale kostnader
+gui.SC2:totalTime=Total tid
+gui.SC2:readyMessage=Klar til bygging av vogn
+gui.SC2:assembleProgress=Fremskritt
+gui.SC2:timeLeft=Gjenstående tid
+gui.SC2:idleAssemblerMessage=Montøren er ikke i bruk
+gui.SC2:modifyCart=Modifiser vogn
+gui.SC2:assembleCart=Bygg vogn
+gui.SC2:fuelLevel=Drivstoffsnivå
+
+
+# Cargo manager and Liquid manager shared gui localization
+gui.SC2:manager=Bestyrer
+gui.SC2:currentSetting=Nåværende
+gui.SC2:changeTransferDirection=Endre overførselsretning
+gui.SC2:directionToCart=Til vognen
+gui.SC2:directionFromCart=Fra vognen
+gui.SC2:changeTurnBack=Endre tilbakevendingsinstilling
+gui.SC2:turnBackDisabled=Ingen side valgt
+gui.SC2:turnBack=Dra tilbake etter overførsel
+gui.SC2:continueForward=Fortsett etter overførsel
+gui.SC2:changeTransferSize=Endre overførselsstørrelse
+gui.SC2:changeSide=Endre side
+gui.SC2:currentSide=Nåværende side
+gui.SC2:sideRed=Rød
+gui.SC2:sideBlue=Blå
+gui.SC2:sideYellow=Gul
+gui.SC2:sideGreen=Grønn
+gui.SC2:sideDisabled=Deaktivert
+
+# Cargo manager gui localization
+gui.SC2:cargoManager=Last
+gui.SC2:changeSlotLayout=Endre feltinndeling
+gui.SC2:layoutShared=Alle felter er delt på alle sider
+gui.SC2:layoutSide=Hver side har sitt eget felt
+gui.SC2:layoutColor=Hver farge har sitt eget felt
+gui.SC2:transferAll=Overfør så mye som mulig
+gui.SC2:transferItems=Overfør maks [%1] [%2:Item|Item]
+gui.SC2:transferStacks=Overfør maks [%1] [%2:Stack|Stacks]
+gui.SC2:transferAllShort=MAKS
+gui.SC2:transferItemsShort=I
+gui.SC2:transferStacksShort=S
+gui.SC2:changeTransferCartArea=Endre en del av vognen
+gui.SC2:unknownAreaMessage=Ukjent mulighet
+gui.SC2:cartAreaAll=Alle felter
+gui.SC2:cartAreaEngine=Motor
+gui.SC2:cartAreaRailer=Sporlegger
+gui.SC2:cartAreaStorage=Lagerfelter
+gui.SC2:cartAreaTorches=Fakler
+gui.SC2:cartAreaExplosives=Eksplosiver
+gui.SC2:cartAreaArrows=Piler
+gui.SC2:cartAreaBridge=Bromateriale
+gui.SC2:cartAreaSeeds=Frø
+gui.SC2:cartAreaFertilizer=Gjødsel
+gui.SC2:cartAreaSaplings=Spirer
+gui.SC2:cartAreaFirework=Fyrværkeri
+gui.SC2:cartAreaBuckets=Bøtter (til melker)
+gui.SC2:cartAreaCakes=Kaker
+
+
+
+# Liquid manager gui localization
+gui.SC2:liquidManager=Væske
+gui.SC2:changeTankLayout=Endre tankinndeling
+gui.SC2:layoutSharedTanks=Alle tanker er delt på alle sider
+gui.SC2:layoutSidedTanks=Hver side har sin egen tank
+gui.SC2:layoutColorTanks=Hver farge har sin(e) egen/egne tank(er)
+gui.SC2:transferAllLiquid=Overfør så mye som mulig
+gui.SC2:transferBuckets=Overfør maks [%1]
+gui.SC2:transferAllLiquidShort=MAKS
+gui.SC2:transferBucketShort=B
+
+# Module Toggler gui localization
+gui.SC2:moduleToggler=Modulbytter
+gui.SC2:optionDrill=Borr
+gui.SC2:optionShield=Skjold
+gui.SC2:optionInvisibility=Usynlighet
+gui.SC2:optionChunk=Chunk innlesning
+gui.SC2:optionCageAuto=Bur auto-oppsamling
+gui.SC2:optionCage=Bur oppsamling
+gui.SC2:settingDisabled=Deaktivert
+gui.SC2:settingOrange=Oransje retning
+gui.SC2:settingBlue=Blå retning
+gui.SC2:stateActivate=Aktiver
+gui.SC2:stateDeactivate=Deaktiver
+gui.SC2:stateToggle=Bytt
+
+# External Distributer gui localization
+gui.SC2:externalDistributor=Ekstern Fordeler
+gui.SC2:distributorNotConnected=Ikke forbundet til noen Bestyrere!
+gui.SC2:sideName=[%1] side
+gui.SC2:dropInstruction=Slipp her for å legge til denne innstillingen.
+gui.SC2:removeInstruction=Høyreklikk for å fjerne
+gui.SC2:distributorAll=Alle
+gui.SC2:distributorRed=Rød
+gui.SC2:distributorBlue=Blå
+gui.SC2:distributorYellow=Gul
+gui.SC2:distributorGreen=Grønn
+gui.SC2:distributorTopLeft=Øverst til venstre
+gui.SC2:distributorTopRight=Øverst til høyre
+gui.SC2:distributorBottomLeft=Nederst til venstre
+gui.SC2:distributorBottomRight=Nederst til høyre
+gui.SC2:distributorToCart=Til Vogn
+gui.SC2:distributorFromCart=Fra Vogn
+gui.SC2:managerTop=Øverste Bestyrer
+gui.SC2:managerBot=Nederste Bestyrer
+gui.SC2:distributorSideOrange=Oransje
+gui.SC2:distributorSidePurple=Lilla
+gui.SC2:distributorSideYellow=Gul
+gui.SC2:distributorSideGreen=Grønn
+gui.SC2:distributorSideBlue=Blå
+gui.SC2:distributorSideRed=Rød
+gui.SC2:sideToolTip=Side: [%1]
+
+# Detector Units gui localization
+gui.SC2:operatorOutput=OUTPUT
+gui.SC2:operatorAnd=AND
+gui.SC2:operatorOr=OR
+gui.SC2:operatorNot=NOT
+gui.SC2:operatorXor=XOR
+gui.SC2:operatorTopUnit=Øverste Enhet
+gui.SC2:operatorBotUnit=Nederste Enhet
+gui.SC2:operatorNorthUnit=Nordlige Enhet
+gui.SC2:operatorWestUnit=Vestlige Enhet
+gui.SC2:operatorSouthUnit=Sydlige Enhet
+gui.SC2:operatorEastUnit=Østlige Enhet
+gui.SC2:operatorRedstone=Rødssteinsinngang
+gui.SC2:operatorRedstoneTop=Øverste Rødsteinsinngang
+gui.SC2:operatorRedstoneBot=Nederste Rødsteinsinngang
+gui.SC2:operatorRedstoneNorth=Nordlige Rødsteinsinngang
+gui.SC2:operatorRedstoneWest=Vestlige Rødsteinsinngang
+gui.SC2:operatorRedstoneSouth=Sydlige Rødsteinsinngang
+gui.SC2:operatorRedstoneEast=Østlige Rødsteinsinngang
+gui.SC2:stateRails=Har sporforsyninger
+gui.SC2:stateTorches=Har fakkelforsyninger
+gui.SC2:stateSaplings=Har spireforsyninger
+gui.SC2:sateSeeds=Har frøforsyninger
+gui.SC2:stateBridge=Har broforsyninger
+gui.SC2:stateProjectiles=Har projektilforsyninger
+gui.SC2:stateFertilizing=Har gjødselsforsyninger
+gui.SC2:stateShield=Er skjold er aktivert
+gui.SC2:stateChunk=Er chunklaster aktivert
+gui.SC2:stateInvisibility=Er usynlighetskjerne aktiv
+gui.SC2:stateDrill=Er borr aktiv
+gui.SC2:stateCage=Er auto-oppsamlig aktiv
+gui.SC2:stateStorageFull=Er lager helt fullt
+gui.SC2:stateStorageEmpty=Er lager helt tomt
+gui.SC2:statePassenger=Har passasjer
+gui.SC2:stateAnimal=Har dyrepassasjer
+gui.SC2:stateTameable=Har temmbare passasjer
+gui.SC2:stateBreedable=Har avlbare passasjer
+gui.SC2:stateHostile=Har fiendtlige passasjer
+gui.SC2:stateCreeper=Har creeper-passasjer
+gui.SC2:stateSkeleton=Har skjelett-passasjer
+gui.SC2:stateSpider=Har edderkopp-passasjer
+gui.SC2:stateZombie=Har zombie-passasjer
+gui.SC2:stateZombiePigMan=Har zombie grisemann-passasjer
+gui.SC2:stateSilverFish=Has sølvkre-passasjer
+gui.SC2:stateBlaze=Has flammeskrømt-passasjer
+gui.SC2:stateBat=Har flaggermus-passasjer
+gui.SC2:stateWitch=Har heksepassasjer
+gui.SC2:statePig=Har grisepassasjer
+gui.SC2:stateSheep=Har sauepassasjer
+gui.SC2:stateCow=Har kupassasjer
+gui.SC2:stateMooshroom=Har soppkupassasjer
+gui.SC2:stateChicken=Har kyllingpassasjer
+gui.SC2:stateWolf=Har ulvepassasjer
+gui.SC2:stateSnowGolem=Har snømannpassasjer
+gui.SC2:stateOcelot=Har ocelotpassasjer
+gui.SC2:stateVillager=Har landsbybeboer-passasjer
+gui.SC2:statePlayer=Har spiller-passasjer
+gui.SC2:stateZombieVillager=Har zombie landsbeboer-passasjer
+gui.SC2:stateChild=Har barnepassasjer
+gui.SC2:stateTamed=Har temt passasjer
+gui.SC2:statePowerRed=Er [Red] aktiv
+gui.SC2:statePowerBlue=Er strømobservator[Blue] aktiv
+gui.SC2:statePowerGreen=Er strømobservator[Green] aktiv
+gui.SC2:statePowerYellow=Er strømobservator[Yellow] aktiv
+gui.SC2:stateTanksFull=Er tankene helt fulle
+gui.SC2:stateTanksEmpty=Er tankene helt tomme
+gui.SC2:stateTankEmpty=Finnes det en helt tom tank
+
+
+# ======================================
+                                ITEMS
+# ======================================
+
+# Carts
+item.SC2:ModularCart.name=Modulerbar Vogn
+
+# Modules
+item.SC2:unknownmodule.name=Ukjent SC2 modul
+item.SC2:coal_engine.name=Kullmotor 
+item.SC2:solar_engine.name=Solenergimotor
+item.SC2:side_chests.name=Sidekiste
+item.SC2:top_chest.name=Toppkiste
+item.SC2:front_chest.name=Frontkiste
+item.SC2:internal_storage.name=Intern Kiste
+item.SC2:extracting_chests.name=Ekstrakterende Kiste
+item.SC2:torch_placer.name=Fakkelplasserer
+item.SC2:basic_drill.name=Borr
+item.SC2:galgadorian_drill.name=Galgadoriansk Borr
+item.SC2:railer.name=Skinneslager
+item.SC2:large_railer.name=Stor Skinneslager
+item.SC2:bridge_builder.name=Brobygger
+item.SC2:track_remover.name=Skinnefjerner
+item.SC2:basic_farmer.name=Simpel Dyrker
+item.SC2:basic_wood_cutter.name=Trehugger
+item.SC2:hydrator.name=Hydrator
+item.SC2:height_controller.name=Høydemåler
+item.SC2:fertilizer.name=Gjødsel
+item.SC2:entity_detector_animal.name=Detektor: Dyr
+item.SC2:liquid_sensors.name=Vannsensor
+item.SC2:entity_detector_villager.name=Detektor: Landsbybeboer 
+item.SC2:entity_detector_player.name=Detektor: Spillere
+item.SC2:seat.name=Sete
+item.SC2:entity_detector_monster.name=Detektor: Monstre
+item.SC2:advanced_control_system.name=Avansert Kontrollsystem
+item.SC2:brake_handle.name=Bremsespak
+item.SC2:advanced_shooter.name=Avansert Skyter
+item.SC2:shooter.name=Skyter
+item.SC2:dynamite_carrier.name=Dynamittbærer
+item.SC2:cleaning_machine.name=Vaskemaskin
+item.SC2:extreme_melter.name=Ekstrem Smelter
+item.SC2:divine_shield.name=Guddommelig Skjold
+item.SC2:melter.name=Smelter
+item.SC2:standard_hull.name=Vanlig Skrog
+item.SC2:reinforced_hull.name=Forsterket Skrog
+item.SC2:invisibility_core.name=Usynlighetskjerne 
+item.SC2:wooden_hull.name=Tre Skrog
+item.SC2:iron_drill.name=Metall Borr
+item.SC2:hardened_drill.name=Herdet Borr
+item.SC2:note_sequencer.name=Note sekvenser
+item.SC2:colorizer.name=Fargelegger
+item.SC2:pumpkin_chariot.name=Gresskar Vogn
+item.SC2:tiny_coal_engine.name=Liten Kullmotor
+item.SC2:basic_solar_engine.name=Simpel Solenergimotor
+item.SC2:projectile_potion.name=Prosjektil:Eliksir
+item.SC2:gift_storage.name=Presanglager
+item.SC2:chunk_loader.name=Chunklader
+item.SC2:entity_detector_bat.name=Detektor: Flaggermus
+item.SC2:freezer.name=Fryser
+item.SC2:projectile_snowball.name=Prosjektil: Snøball
+item.SC2:projectile_egg.name=Prosjektil: Egg
+item.SC2:projectile_fire_charge.name=Prosjektil: Ildladning
+item.SC2:firework_display.name=Fyrverkerishow
+item.SC2:crop_nether_wart.name=Vekst: Nethervorte
+item.SC2:cage.name=Bur
+item.SC2:compact_solar_engine.name=Kompakt Solcellemotor
+item.SC2:internal_tank.name=Intern Tank
+item.SC2:mechanical_pig.name=Mekanisk Gris
+item.SC2:creative_engine.name=Kreativ Motor
+item.SC2:incinerator.name=Forbrenningsovn
+item.SC2:thermal_engine.name=Termisk Motor
+item.SC2:advanced_thermal_engine.name=Avansert Termisk Motor 
+item.SC2:liquid_cleaner.name=Vannrenser 
+item.SC2:side_tanks.name=Sidetank
+item.SC2:top_tank.name=Topptank
+item.SC2:advanced_tank.name=Avansert Tank
+item.SC2:front_tank.name=Fronttank
+item.SC2:creative_hull.name=Creativ Skrog
+item.SC2:power_observer.name=Kraftobservatør
+item.SC2:steves_arcade.name=Steve's Spillmaskin
+item.SC2:hardened_wood_cutter.name=Herdet Trehugger
+item.SC2:creative_tank.name=Kreativ Tank
+item.SC2:open_tank.name=Åpen Tank
+item.SC2:egg_basket=Eggekurv
+item.SC2:drill_intelligence.name=Borrintelligens
+item.SC2:lawn_mower.name=Gressklipper
+item.SC2:galgadorian_farmer.name=Galgadoriansk Dyrker
+item.SC2:crafter.name=Skaper
+item.SC2:milker.name=Melker
+item.SC2:galgadorian_hull.name=Galgadoriansk Skrog
+item.SC2:galgadorian_wood_cutter.name=Galgadoriansk Trehugger
+item.SC2:ore_extractor.name=Malmutdrager
+item.SC2:enchanter.name=Forhekser
+item.SC2:advanced_smelter.name=Avansert Smelter
+item.SC2:advanced_crafter.name=Avansert Tilvirker
+item.SC2:experience_bank.name=Exp-bank
+item.SC2:information_provider.name=Informasjonsgiver
+item.SC2:planter_range_extender.name=Planterekevideforlenger
+item.SC2:tree_exotic.name=Tre: Eksotisk
+item.SC2:smelter.name=Smelter
+item.SC2:projectile_cake.name=Prosjektil: Kake
+item.SC2:trick_or_treat_cake_server.name=Knask-eller-Knep Kakeserver
+item.SC2:cake_server.name=Kakeserver
+item.SC2:creative_incinerator.name=Kreativ Forbrenningsovn
+item.SC2:creative_supplies.name=Kreativ Forsyninger
+
+# Components
+item.SC2:unknowncomponent.name=Ukjent SC2 Komponent
+item.SC2:wooden_wheels.name=Trehjul
+item.SC2:iron_wheels.name=Jernhjul
+item.SC2:red_pigment.name=Rødt Pigment
+item.SC2:green_pigment.name=Grønt Pigment
+item.SC2:blue_pigment.name=Blått Pigment
+item.SC2:glass_o'magic.name=Magisk Glass
+item.SC2:dynamite.name=Dynamitt 
+item.SC2:simple_pcb.name=Simpelt Kretskort
+item.SC2:graphical_interface.name=Grensesnitt
+item.SC2:raw_handle.name=Håndtak
+item.SC2:refined_handle.name=Raffinert  Håndtak
+item.SC2:speed_handle.name=Fartshåndtak
+item.SC2:wheel.name=Hjul
+item.SC2:saw_blade.name=Sagblad
+item.SC2:advanced_pcb.name=Avansert Kretskort
+item.SC2:wood_cutting_core.name=Trehuggerkjerne
+item.SC2:raw_hardener.name=Rå Forsterkning
+item.SC2:refined_hardener.name=Raffinert Forsterkning
+item.SC2:hardened_mesh.name=Herdet Blanding
+item.SC2:stabilized_metal.name=Stabilisert  Metall
+item.SC2:reinforced_metal.name=Forsterket Metall
+item.SC2:reinforced_wheels.name=Forsterkede Hjul
+item.SC2:pipe.name=Rør
+item.SC2:shooting_station.name=Skytestasjon
+item.SC2:entity_scanner.name=Entitetsscanner
+item.SC2:entity_analyzer.name=Entitetsanalysator
+item.SC2:empty_disk.name=Tom Disk
+item.SC2:tri-torch.name=Trippelfakkel
+item.SC2:chest_pane.name=Kistpanel
+item.SC2:large_chest_pane.name=Stort Kistepanel
+item.SC2:huge_chest_pane.name=Enormt Kistepanel
+item.SC2:chest_lock.name=Kirstelås
+item.SC2:iron_pane.name=Jernpanel
+item.SC2:large_iron_pane.name=Stort Jernpanel
+item.SC2:huge_iron_pane.name=Enormt Jernpanel
+item.SC2:dynamic_pane.name=Dynamisk panel
+item.SC2:large_dynamic_pane.name=Stort Dynamisk panel
+item.SC2:huge_dynamic_pane.name=Enormt Dynamisk panel
+item.SC2:cleaning_fan.name=Rengjøringsvifte
+item.SC2:cleaning_core.name=Rengjøringskjerne
+item.SC2:cleaning_tube.name=Rengjøringsrør
+item.SC2:fuse.name=Sikring
+item.SC2:solar_panel.name=Solcellepanel
+item.SC2:eye_of_galgador.name=Galgador’s Øye
+item.SC2:lump_of_galgador.name=Galgador’s Kul
+item.SC2:galgadorian_metal.name=Galgador’s Metall
+item.SC2:large_lump_of_galgador.name=Galgador’s Store Kul
+item.SC2:enhanced_galgadorian_metal.name=Forbedret Galgadoriansk Metall
+item.SC2:stolen_present.name=Stjålet Presang
+item.SC2:green_wrapping_paper.name=Grønnt Innpakningpapir
+item.SC2:red_wrapping_paper.name=Rødt Innpakningpapir
+item.SC2:warm_hat.name=Varm Hatt
+item.SC2:red_gift_ribbon.name=Rødt Gavebånd
+item.SC2:yellow_gift_ribbon.name=Gult Gavebånd
+item.SC2:sock.name=Sokk
+item.SC2:stuffed_sock.name=Fylt Sokk
+item.SC2:advanced_solar_panel.name=Avansert Solpanel
+item.SC2:blank_upgrade.name=Blank Oppgradering
+item.SC2:tank_valve.name=Tankventil
+item.SC2:tank_pane.name=Tankpanel
+item.SC2:large_tank_pane.name=Stort Tankpanel
+item.SC2:huge_tank_pane.name=Enormt Tankpanel
+item.SC2:liquid_cleaning_core.name=Vannrensingkjerne
+item.SC2:liquid_cleaning_tube.name=Vannrensingrør
+item.SC2:explosive_easter_egg.name=Eksplosivt Påskeegg
+item.SC2:burning_easter_egg.name=Brennende Påskeegg
+item.SC2:glistering_easter_egg.name=Glinsende Påskeegg
+item.SC2:chocolate_easter_egg.name=Sjokolade Påskeegg
+item.SC2:painted_easter_egg.name=Malt Påskeegg
+item.SC2:basket.name=Kurv
+item.SC2:oak_log.name=Eikestokk
+item.SC2:oak_twig.name=Eikekvist
+item.SC2:spruce_log.name=Granstokk
+item.SC2:spruce_twig.name=Grankvist
+item.SC2:birch_log.name=Bjørkestokk
+item.SC2:birch_twig.name=Bjørkestamme
+item.SC2:jungle_log.name=Jungelstokk
+item.SC2:jungle_twig.name=Jungelkvist
+item.SC2:hardened_saw_blade.name=Herdet Sagblad
+item.SC2:galgadorian_saw_blade.name=Galgadoriansk Sagblad
+item.SC2:galgadorian_wheels.name=Galgadorianske Hjul
+item.SC2:iron_blade.name=Jernblad
+item.SC2:blade_arm.name=Bladarm
+
+
+
+# ======================================
+                                BLOCKS
+# ======================================
+
+tile.SC2:BlockCargoManager.name=Lastbestyrer
+tile.SC2:BlockJunction.name=Krysskinne
+tile.SC2:BlockAdvDetector.name=Avansert Detektorskinne
+tile.SC2:BlockCartAssembler.name=Vognmontør
+tile.SC2:BlockActivator.name=Modulbytter
+tile.SC2:BlockDistributor.name=Ekstern Distributør
+tile.SC2:BlockLiquidManager.name=Væskebestyrer
+
+# Storage
+item.SC2:BlockStorage0.name=Forsterket metallblokk
+item.SC2:BlockStorage1.name=Galgadoriansk Blokk
+item.SC2:BlockStorage2.name=Forbedret Galgadoriansk Blokk
+
+# Upgrades
+item.SC2:batteries.name=Oppgradering: Batterier
+item.SC2:power_crystal.name=Oppgradering: Strømkrystall
+item.SC2:module_knowledge.name=Oppgradering: Modulkunnskap
+item.SC2:industrial_espionage.name=Oppgradering: Industriell spionasje
+item.SC2:experienced_assembler.name=Oppgradering: Erfart montør
+item.SC2:new_era.name=Oppgradering: Ny Æra
+item.SC2:co2_friendly.name=Oppgradering: CO2-vennlig
+item.SC2:generic_engine.name=Oppgradering: Generisk motor
+item.SC2:module_input.name=Oppgradering: Modul inngang
+item.SC2:production_line.name=Oppgradering: Produksjonslinje
+item.SC2:cart_deployer.name=Oppgradering: Vogn Plasserer
+item.SC2:cart_modifier.name=Oppgradering: Vogn Modifikator
+item.SC2:cart_crane.name=Oppgradering: Vognkran
+item.SC2:redstone_control.name=Oppgradering: Rødsteinskontroll
+item.SC2:creative_mode.name=Oppgradering: Kreativ modus
+item.SC2:quick_demolisher.name=Oppgradering: Rast Nedbryter
+item.SC2:manager_bridge.name=Oppgradering: Bestyrerbro
+item.SC2:entropy.name=Oppgradering: Entropi
+item.SC2:solar_panel.name=Oppgradering: Solcellepanel
+item.SC2:thermal_engine_upgrade.name=Oppgradering: Termisk Motor
+
+# Detector Units
+item.SC2:BlockDetector0.name=Detektorbestyrer
+item.SC2:BlockDetector1.name=Detektorenhet
+item.SC2:BlockDetector2.name=Detektorstasjon
+item.SC2:BlockDetector3.name=Detektorkryss
+item.SC2:BlockDetector4.name=Detektor-rødsteinsenhet
+
+
+
+# ======================================
+                                MODULE MISC
+# ======================================
+
+# Categories
+info.SC2:moduleCategoryHull=Skrog
+info.SC2:moduleCategoryEngine=Motor
+info.SC2:moduleCategoryTool=Verktøy
+info.SC2:moduleCategoryStorage=Lagring
+info.SC2:moduleCategoryAddon=Påbygg
+info.SC2:moduleCategoryAttachment=Tillegg
+
+# Groups
+info.SC2:moduleGroupEngine=[%1:Motor|Motorer]
+info.SC2:moduleGroupDrill=[%1:Borr|Borr]
+info.SC2:moduleGroupFarmer=[%1:Dyrker|Dyrkere]
+info.SC2:moduleGroupCutter=[%1:Trehugger|Trehuggere]
+info.SC2:moduleGroupTank=[%1:Tank|Tanker]
+info.SC2:moduleGroupEntity=[%1:Entitetdektor|Entitetdetektorer]
+info.SC2:moduleGroupShooter=[%1:Skyter|Skytere]
+info.SC2:moduleGroupTool=[%1:Verktøy|Verktøy]
+info.SC2:moduleGroupToolShooter=[%1:Verktøy|Verktøy] or [%1:Skyter|Skytere]
+
+# Messages
+info.SC2:pigExtraMessage=I minne om Vswes Thunderpig arenaseier. Takk til alle som donerte under Minecraft Maratonet 2013.
+info.SC2:oceanExtraMessage=Plass til en gjennomsnittlig sjø
+info.SC2:alphaExtraMessage=1 år i alfa
+info.SC2:storageEmpty=Tom
+info.SC2:storageFull=Full
+info.SC2:giftStorageFull=Kan inneholde en overraskelse
+info.SC2:eggStorageFull=Full av egg
+
+# Labels
+info.SC2:modularCost=Modulkostnad
+info.SC2:cartSideTop=Topp
+info.SC2:cartSideCenter=Senter
+info.SC2:cartSideBottom=Bunn
+info.SC2:cartSideBack=Bak
+info.SC2:cartSideLeft=Venstre
+info.SC2:cartSideRight=Høyre
+info.SC2:cartSideFront=Foran
+info.SC2:occupiedSides=Vil ta opp[%1] [%2:side|sider]
+info.SC2:sidesAnd=og
+info.SC2:noSides=Vil ikke ta opp noen sider
+info.SC2:moduleConflictHowever=Vil derimot komme i konflikt med
+info.SC2:moduleConflictAlso=Vil også komme i konflikt med
+info.SC2:moduleRequirement=Krever
+info.SC2:moduleCount1=en
+info.SC2:moduleCount2=to
+info.SC2:moduleCount3=tre
+info.SC2:allowDuplicates=Duplikater er tillatt
+info.SC2:moduleType=Type
+info.SC2:capacityOverloadError=Kostnaden er større enn kapasiteten til skroget.
+info.SC2:impossibleCombinationError=Kombinasjonen av modultyper av de gitte modulene er ikke gyldig. Dette skal ikke være mulig.
+info.SC2:complexityOverloadError=[%1] er for kompleks for dette skroget.
+info.SC2:missingParentError=[%1] krever[%2] for å fungererk!
+info.SC2:presentNemesisError=[%1] vil ikke fungere med[%2]
+info.SC2:presentDuplicateError[%1] kan ikke bli lagt til to ganger.
+info.SC2:sideClashError=[%1] og[%2] vil skape konflikt ved[%3]
+
+
+# ======================================
+                                UPGRADES
+# ======================================
+
+info.SC2:effectBlueprint=Tillat bruk av skisse-vogn.
+info.SC2:effectCombustionFuel=Tillat vanlige drivstoff-kilder.
+info.SC2:effectDeployer=Tillater plassering av ferdigstilte vogner.
+info.SC2:effectDisassemble=Tillater deg å demontere og modifisere vogner.
+info.SC2:effectFuelCapacity=Drivstoffkapasitet [%1].
+info.SC2:effectFuelCost=Drivstoffskostnad [%1]%.
+info.SC2:effectInputChest=inngangkiste med [%1] felter.
+info.SC2:effectManagerBridge=Kobler montøren til en bestyrer.
+info.SC2:effectGenerator=Genererer [%1] [%2:enhet|enheter] strøm per minutt.
+info.SC2:effectRedstone=Tillater rødsteinkontrollert vognmontering.
+info.SC2:effectSolar=Genererer strøm i solen..
+info.SC2:effectThermal=Gi strøm til Vognmontøren med lava med en intern tank.
+info.SC2:effectTimeFlat=Modulmonteringstid [%1] [%1:sekund|sekunder].
+info.SC2:effectTimeFlatCart=Vognmonteringstid [%1] [%1:sekund|sekunder].
+info.SC2:effectTimeFlatRemove=Modul-demonteringstid [%1] [%1:sekund|sekunder].
+info.SC2:effectTransposer=Kan plukke opp vogner for modifisering
+info.SC2:effectEfficiency=Monteringseffektivitet [%1]%.
+
+
+# ======================================
+                                MODULES
+# ======================================
+
+# Addons
+modules.addons.SC2:detectorAnimals=Dyr
+modules.addons.SC2:detectorBats=Flaggermus
+modules.addons.SC2:detectorMonsters=Monstrer
+modules.addons.SC2:detectorPlayers=Spillere
+modules.addons.SC2:detectorVillagers=Landsbybeboere
+modules.addons.SC2:planterRangeExtenderTitle=Dyrkers Rekkevidde
+modules.addons.SC2:saplingPlantAmount=Nåværende spiremengde
+modules.addons.SC2:controlLeverTitle=Kontrollspake
+modules.addons.SC2:leverStartCart=Start vognen
+modules.addons.SC2:leverStopCart=Stopp vognen
+modules.addons.SC2:leverTurnAroundCart=Snu vognen
+modules.addons.SC2:colorizerRgbRed=Rød
+modules.addons.SC2:colorizerRgbGreen=Grønn
+modules.addons.SC2:colorizerRgbBlue=Blå
+modules.addons.SC2:intelligenceLockedBlock=Borren vil alltid fjerne denne blokken
+modules.addons.SC2:intelligenceChange=Endre borrintelligens
+modules.addons.SC2:intelligenceCurrent=For øyeblikket: [%1->Aktivert|Deaktivert]
+modules.addons.SC2:enchanterInstruction=Legg en Fortryllet bok i venstre felt.
+modules.addons.SC2:invisibilityToggle=[%1->Aktiver|Deaktiver] usynlighetskjerne
+modules.addons.SC2:informationProviderLabelName=Navn
+modules.addons.SC2:informationProviderLabelDistance=Distanse
+modules.addons.SC2:informationProviderMessageDistance=Distanse: [%1]m
+modules.addons.SC2:informationProviderLabelPosition=Posisjon
+modules.addons.SC2:informationProviderMessagePosition=X: [%1] Y: [%2] Z: [%3]
+modules.addons.SC2:informationProviderLabelFuel=Gjenværende drivstoff
+modules.addons.SC2:informationProviderMessageFuel=Gjenværende tid på drivstoff
+modules.addons.SC2:informationProviderMessageNoConsumption=Ingen forbruk
+modules.addons.SC2:informationProviderLabelStorage=Brukt lagringsplass
+modules.addons.SC2:informationProviderLabelDurability=Levetid
+modules.addons.SC2:informationProviderMessageToolBroken=Verktøyet er skadd
+modules.addons.SC2:informationProviderMessageToolNotBroken=Verktøyet er ikke skadd. Fjern materialet
+modules.addons.SC2:informationProviderMessageRepair=Verktøyet blir reparert
+modules.addons.SC2:informationProviderMessageUnbreakable=Verktøyet er uknuselig
+modules.addons.SC2:informationProviderLabels=Etiketter
+modules.addons.SC2:powerThousandSuffix=K
+modules.addons.SC2:powerObserverInstruction=Klikk og dra for å plassere i ønsket område.
+modules.addons.SC2:powerObserverRemoveInstruction=Høyreklikk for å fjerne.
+modules.addons.SC2:powerObserverDropInstruction=Slipp motoren her.
+modules.addons.SC2:powerObserverChangeInstruction=Klikk for å endre strømgrense
+modules.addons.SC2:powerObserverChangeInstruction10=Klikk for å endre med 10K
+modules.addons.SC2:recipeOutput=Endre utgangsplassering
+modules.addons.SC2:recipeCurrentSelection=I øyeblikket
+modules.addons.SC2:recipeInvalidOutput=Ukjent
+modules.addons.SC2:recipeChangeMode=Endre nåværende modus
+modules.addons.SC2:recipeNoLimit=Ingen øvre grense
+modules.addons.SC2:recipeLimit=Begrens stablede ting
+modules.addons.SC2:recipeDisabled=Ikke produser noe
+modules.addons.SC2:recipeChangeLimit=[%1->Øk|Minsk] antall lagrede ting.
+modules.addons.SC2:recipeChangeLimit10=Skift-klikk for å endre med 10.
+modules.addons.SC2:recipeChangeLimit64=Skift-klikk for å endre med 64.
+modules.addons.SC2:shieldToggle=[%1->Aktiver|Deaktiver] skjold
+
+# Engines
+modules.engines.SC2:creativePowerLevel=Strømnivå: [%1]
+modules.engines.SC2:coalEngineTitle=Kullmotor
+modules.engines.SC2:outOfFuel=Tom for drivstoff
+modules.engines.SC2:fuelLevel=Fuel: [%1]
+modules.engines.SC2:solarEngineTitle=Solcellemotor
+modules.engines.SC2:outOfPower=Tom for strøm
+modules.engines.SC2:powerLevel=Power: [%1]
+modules.engines.SC2:thermalEngineTitle=Thermisk motor
+modules.engines.SC2:thermalPowered=I drift
+modules.engines.SC2:outOfWater=Tom for Vann
+modules.engines.SC2:outOfLava=Tom for Lava
+
+# Tanks
+modules.tanks.SC2:creativeTankMode=Nåværende kreativ modus: [%1][%2->Normal|Alltid full|Alltid tom|Alltid halvfull]
+modules.tanks.SC2:creativeTankChangeMode=Høyreklikk for å endre
+modules.tanks.SC2:creativeTankResetMode=Skift og høyreklikk for å gå tilbake til normal
+modules.tanks.SC2:tankLocked=Låst til denne væsken
+modules.tanks.SC2:tankLock=Klikk for å låse til denne væsken
+modules.tanks.SC2:tankUnlock=Klikk for å låse opp
+modules.tanks.SC2:tankEmpty=Tom
+modules.tanks.SC2:tankInvalidFluid=Ukjent
+
+# Tools
+modules.tools.SC2:toolDurability=Levetid
+modules.tools.SC2:toolBroken=Skadet
+modules.tools.SC2:toolRepairing=Verktøyet blir reparert
+modules.tools.SC2:toolDecent=Fjern reparasjonsmaterialer, dette verktøyet er fortsatt i god stand.
+modules.tools.SC2:toolRepairInstruction=Reparer dette verktøyet med [%1]
+modules.tools.SC2:toolUnbreakable=Dette verktøyet er uknuselig
+modules.tools.SC2:toolUnbreakableRepairError=Fjern reparasjonsmaterialer.
+modules.tools.SC2:drillTitle=Borr
+modules.tools.SC2:drillToggle=[%1->Aktiver|Deaktiver] borr
+modules.tools.SC2:repairDiamonds=Diamanter
+modules.tools.SC2:repairIron=Jernbarrer
+modules.tools.SC2:farmerTitle=Dyrker
+modules.tools.SC2:cutterTitle=Trehugger
+
+# Attachments
+modules.attachments.SC2:fertilizers=Gjødsler
+modules.attachments.SC2:railerTitle=Skinnelegger
+modules.attachments.SC2:controlSystemTitle=Avansert Kontrollsystem
+modules.attachments.SC2:controlSystemDistanceUnits=[%1->|k|M|G|T|P]m
+modules.attachments.SC2:controlSystemOdoMeter=ODO
+modules.attachments.SC2:controlSystemTripMeter=TRIP
+modules.attachments.SC2:cageAutoPickUp=[%1->Aktiver|Deaktiver] automatisk oppsamling
+modules.attachments.SC2:cagePickUp=[%1->Fang nærliggende|Slipp løs fanget] skapning
+modules.attachments.SC2:cakeServerTitle=Kakeserver
+modules.attachments.SC2:cakesLabel=Cakes: [%1] / [%2]
+modules.attachments.SC2:slicesLabel=Slices: [%1] / [%2]
+modules.attachments.SC2:explosivesTitle=Eksplosiv
+modules.attachments.SC2:experienceTitle=Experience
+modules.attachments.SC2:experienceLevel=Experience nivå: [%1] / [%2]
+modules.attachments.SC2:experienceExtract=Klikk for å ta ut 50xp
+modules.attachments.SC2:experiencePlayerLevel=Ditt nåværende nivå er [%1]
+modules.attachments.SC2:shooterTitle=Skyter
+modules.attachments.SC2:shooterFrequency=#/s
+modules.attachments.SC2:shooterSeconds=s
+modules.attachments.SC2:shooterDelay=Forsinkelse
+modules.attachments.SC2:notePiano=Piano
+modules.attachments.SC2:noteBassDrum=Basstromme
+modules.attachments.SC2:noteSnareDrum=Skarptromme
+modules.attachments.SC2:noteSticks=Pinner
+modules.attachments.SC2:noteBassGuitar=Bassgitar
+modules.attachments.SC2:noteCreateTrack=Lag nytt spor
+modules.attachments.SC2:noteRemoveTrack=Fjern det nederste sporet
+modules.attachments.SC2:noteActivateInstrument=Aktiver [%1]
+modules.attachments.SC2:noteDeactivateInstrument=Fjern Noteblokk instilling
+modules.attachments.SC2:noteDelay=Endre forsinkelse. Nåværende forsinkelse: [%1]
+modules.attachments.SC2:noteAdd=Legg til note til spor #[%1]
+modules.attachments.SC2:noteRemove=Fjern noten lengst til høyre fra spor #[%1]
+modules.attachments.SC2:noteVolume=Sporvolum: [%1->Dempet|Lavt|Middels|Høyt]
+
+

@@ -1,0 +1,747 @@
+# Cart assembler gui localization
+gui.SC2:cartAssembler=Vagnsverkstad
+gui.SC2:basicAssembleInstruction=Var vänlig och placera valfritt vagnsskrov på skrovplatsen för att börja skapa en vagn.
+gui.SC2:invalidHullError=Vagnsskrovet som placerats på skrovplatsen är inte ett giltigt skrov. Detta ska inte ske så du har antagligen gjort något dumt.
+gui.SC2:hullCapacity=Skrovkapacitet
+gui.SC2:complexityCap=Komplexitetsgräns
+gui.SC2:totalCost=Total Kostnad
+gui.SC2:totalTime=Total Tid
+gui.SC2:readyMessage=Redo att konstruera vagnen!
+gui.SC2:assembleProgress=Färdigställande
+gui.SC2:timeLeft=Återstående tid
+gui.SC2:idleAssemblerMessage=Vagnverkstaden används inte just nu
+gui.SC2:modifyCart=Modifiera vagnen
+gui.SC2:assembleCart=Konstruera vagnen
+gui.SC2:fuelLevel=Bränslenivå
+gui.SC2:noHullError=Inget skrov!
+gui.SC2:invalidHullErrorShort=Skrovet du lagt i är inte ett riktigt skrov.
+gui.SC2:busyAssemblerError=Verkstaden jobbar redan!
+gui.SC2:departureBayError=Det finns en vagn i vagnsplaceraren.
+
+# Cargo manager and Liquid manager shared gui localization
+gui.SC2:manager=Hanterare
+gui.SC2:currentSetting=Nuvarande
+gui.SC2:changeTransferDirection=Ändra riktning
+gui.SC2:directionToCart=Till vagn
+gui.SC2:directionFromCart=Från vagn
+gui.SC2:changeTurnBack=Ändra återvändningsinställning
+gui.SC2:turnBackDisabled=Ingen sida vald
+gui.SC2:turnBack=Återvänd efter överföring
+gui.SC2:continueForward=Fortsätt efter överföring
+gui.SC2:changeTransferSize=Ändra överföringsstorlek
+gui.SC2:changeSide=Ändra sida
+gui.SC2:currentSide=Nuvarande sida
+gui.SC2:sideRed=Röd
+gui.SC2:sideBlue=Blå
+gui.SC2:sideYellow=Gul
+gui.SC2:sideGreen=Grön
+gui.SC2:sideDisabled=Avstängd
+
+# Cargo manager gui localization
+gui.SC2:cargoManager=Last
+gui.SC2:changeSlotLayout=Ändra utrymmeslayout
+gui.SC2:layoutShared=Alla utrymmen delas av alla sidor
+gui.SC2:layoutSide=Varje sida har sitt eget utrymme
+gui.SC2:layoutColor=Varje färg har sina egna utrymmen
+gui.SC2:transferAll=Överför så mycket som möjligt
+gui.SC2:transferItems=Överför max [%1] [%2:sak|saker]
+gui.SC2:transferStacks=Överför max [%1] [%2:stack|stacks]
+gui.SC2:transferAllShort=MAX
+gui.SC2:transferItemsShort=I
+gui.SC2:transferStacksShort=S
+gui.SC2:changeTransferCartArea=Ändra område i vagnen
+gui.SC2:unknownAreaMessage=Okänt område
+gui.SC2:cartAreaAll=Överallt
+gui.SC2:cartAreaEngine=Motor
+gui.SC2:cartAreaRailer=Spårläggare
+gui.SC2:cartAreaStorage=Förrådsutrymmen
+gui.SC2:cartAreaTorches=Facklor
+gui.SC2:cartAreaExplosives=Sprängmedel
+gui.SC2:cartAreaArrows=Pilar
+gui.SC2:cartAreaBridge=Bromaterial
+gui.SC2:cartAreaSeeds=Frön
+gui.SC2:cartAreaFertilizer=Gödsel
+gui.SC2:cartAreaSaplings=Plantor
+gui.SC2:cartAreaFirework=Fyrverkerier
+gui.SC2:cartAreaBuckets=Hinkar (för mjölkare)
+gui.SC2:cartAreaCakes=Tårtor
+
+# Liquid manager gui localization
+gui.SC2:liquidManager=Vätska
+gui.SC2:changeTankLayout=Ändra tanklayout
+gui.SC2:layoutSharedTanks=Alla tankar delas av alla sidor
+gui.SC2:layoutSidedTanks=Varje sida har sin egna tank
+gui.SC2:layoutColorTanks=Varje färg har sin/sina egna tank/tanker
+gui.SC2:transferAllLiquid=Överför så mycket som möjligt
+gui.SC2:transferBuckets=Överför max [%1]
+gui.SC2:transferAllLiquidShort=MAX
+gui.SC2:transferBucketShort=H
+
+# Module Toggler gui localization
+gui.SC2:moduleToggler:Modul på/av
+gui.SC2:optionDrill=Borr
+gui.SC2:optionShield=Sköld
+gui.SC2:optionInvisibility=Osynlighet
+gui.SC2:optionChunk=Chunkladdare
+gui.SC2:optionCageAuto=Bur autoupplockning
+gui.SC2:optionCage=Bur upplockning
+gui.SC2:settingDisabled=Av
+gui.SC2:settingOrange=Orange riktning
+gui.SC2:settingBlue=Blå riktning
+gui.SC2:stateActivate=Aktivera
+gui.SC2:stateDeactivate=Deaktivera
+gui.SC2:stateToggle=Slå på/av
+
+# External Distributer gui localization
+gui.SC2:externalDistributor=Distributör
+gui.SC2:distributorNotConnected=Ej kopplad till någon distributör!
+gui.SC2:sideName=[%1] sida
+gui.SC2:dropInstruction= Släpp här för att lägga till denna instruktion
+gui.SC2:removeInstruction=Högerklicka för att ta bort
+gui.SC2:distributorAll=Alla
+gui.SC2:distributorRed=Röd
+gui.SC2:distributorBlue=Blå
+gui.SC2:distributorYellow=Gul
+gui.SC2:distributorGreen=Grön
+gui.SC2:distributorTopLeft=Upp till vänster
+gui.SC2:distributorTopRight=Upp till höger
+gui.SC2:distributorBottomLeft=Ner till vänster
+gui.SC2:distributorBottomRight=Ner till höger
+gui.SC2:distributorToCart=Till vagn
+gui.SC2:distributorFromCart=Från vagn
+gui.SC2:managerTop=Övre distributör
+gui.SC2:managerBot=Nedre distributör
+gui.SC2:distributorSideOrange=Orange
+gui.SC2:distributorSidePurple=Lila
+gui.SC2:distributorSideYellow=Gul
+gui.SC2:distributorSideGreen=Grön
+gui.SC2:distributorSideBlue=Blå
+gui.SC2:distributorSideRed=Röd
+gui.SC2:sideToolTip=Sida: [%1]
+
+# Detector Units gui localization
+gui.SC2:operatorOutput=GE
+gui.SC2:operatorAnd=OCH
+gui.SC2:operatorOr=ELLER
+gui.SC2:operatorNot=INTE
+gui.SC2:operatorXor=ANTINGEN ELLER
+gui.SC2:operatorTopUnit=Toppenhet
+gui.SC2:operatorBotUnit=Bottenenhet
+gui.SC2:operatorNorthUnit=Norra enheten
+gui.SC2:operatorWestUnit=Västra enheten
+gui.SC2:operatorSouthUnit=Södra enheten
+gui.SC2:operatorEastUnit=Östra enheten
+gui.SC2:operatorRedstone=Rödsten in
+gui.SC2:operatorRedstoneTop=Topp rödsten in
+gui.SC2:operatorRedstoneBot=Botten rödsten in
+gui.SC2:operatorRedstoneNorth=Norr rödsten in
+gui.SC2:operatorRedstoneWest=Väst rödsten in
+gui.SC2:operatorRedstoneSouth=Syd rödsten in
+gui.SC2:operatorRedstoneEast=Öst rödsten in
+gui.SC2:stateRails=Har räls
+gui.SC2:stateTorches=Har facklor
+gui.SC2:stateSaplings=Har plantor
+gui.SC2:sateSeeds=Har frön
+gui.SC2:stateBridge=Har broblock
+gui.SC2:stateProjectiles=Har projektiler
+gui.SC2:stateFertilizing=Har gödsel
+gui.SC2:stateShield=Sköld aktiv
+gui.SC2:stateChunk=Chunkladdare aktiv
+gui.SC2:stateInvisibility=Osynlighetskärna aktiv
+gui.SC2:stateDrill=Borr aktiv
+gui.SC2:stateCage=Autoupplockning på
+gui.SC2:stateStorageFull=Förråd helt fulla
+gui.SC2:stateStorageEmpty=Förråd helt tomma
+gui.SC2:statePassenger=Har passagerare
+gui.SC2:stateAnimal=Har djurpassagerare
+gui.SC2:stateTameable=Har tämjbar passagerare
+gui.SC2:stateBreedable=Har uppfödbar passagerare
+gui.SC2:stateHostile=Har fientlig passagerare
+gui.SC2:stateCreeper=Har smygarpassagerare
+gui.SC2:stateSkeleton=Har skelettpassagerare
+gui.SC2:stateSpider=Has spindelpassagerare
+gui.SC2:stateZombie=Has zombiepassagerare
+gui.SC2:stateZombiePigMan=Har zombiegrispassagerare
+gui.SC2:stateSilverFish=Har silverfiskpassagerare
+gui.SC2:stateBlaze=Har brännarpassagerare
+gui.SC2:stateBat=Har fladdermuspassagerare
+gui.SC2:stateWitch=Har häxpassagerare
+gui.SC2:statePig=Har grispassagerare
+gui.SC2:stateSheep=Har fårpassagerare
+gui.SC2:stateCow=Har kopassagerare
+gui.SC2:stateMooshroom=Har svampkopassagerare
+gui.SC2:stateChicken=Har kycklingpassagerare
+gui.SC2:stateWolf=Har vargpassagerare
+gui.SC2:stateSnowGolem=Har snömanspassagerare
+gui.SC2:stateOcelot=Har ozelotpassagerare
+gui.SC2:stateVillager=Har bybopassagerare
+gui.SC2:statePlayer=Har spelarpassagerare
+gui.SC2:stateZombieVillager=Har zombiebybopassagerare
+gui.SC2:stateChild=Har barnpassagerare
+gui.SC2:stateTamed=Har tämjd passagerare
+gui.SC2:statePowerRed=Är energigövervakare[röd] aktiv
+gui.SC2:statePowerBlue=Är energigövervakare[blå] aktiv
+gui.SC2:statePowerGreen=Är energigövervakare[grön] aktiv
+gui.SC2:statePowerYellow=Är energigövervakare[gul] aktiv
+gui.SC2:stateTanksFull=Är tankarna helt fulla
+gui.SC2:stateTanksEmpty=Är tankarna helt tomma
+gui.SC2:stateTankEmpty=Finns det en tom tank
+
+
+# ======================================
+                                ITEMS
+# ======================================
+
+# Carts
+item.SC2:ModularCart.name=Modulär vagn
+
+# Modules
+item.SC2:unknownmodule.name=Okänd SC2 modul
+item.SC2:coal_engine.name=Kolmotor
+item.SC2:solar_engine.name=Solpanelsmotor
+item.SC2:side_chests.name=Sidokistor
+item.SC2:top_chest.name=Toppkista
+item.SC2:front_chest.name=Frontkista
+item.SC2:internal_storage.name=Intern kista
+item.SC2:extracting_chests.name=Extraherande kista
+item.SC2:torch_placer.name=Fackelplacerare
+item.SC2:basic_drill.name=Normal borr
+item.SC2:galgadorian_drill.name=Galgadorisk borr 
+item.SC2:railer.name=Rälsläggare
+item.SC2:large_railer.name=Stor rälsläggare
+item.SC2:bridge_builder.name=Brobyggare
+item.SC2:track_remover.name=Rälsborttagare
+item.SC2:basic_farmer.name=Normal odlare
+item.SC2:basic_wood_cutter.name=Normal trähuggare
+item.SC2:hydrator.name=Hydrator
+item.SC2:height_controller.name=Höjdkontroll
+item.SC2:fertilizer.name=Gödsel
+item.SC2:entity_detector_animal.name=Detektor: djur
+item.SC2:liquid_sensors.name=Vätskesensor
+item.SC2:entity_detector_villager.name=Detektor: bybo
+item.SC2:entity_detector_player.name=Detektor: spelare
+item.SC2:seat.name=Säte
+item.SC2:entity_detector_monster.name=Detektor: monster
+item.SC2:advanced_control_system.name=Avancerat kontrollsystem
+item.SC2:brake_handle.name=Handbroms
+item.SC2:advanced_shooter.name=Avancerad skytt
+item.SC2:shooter.name=Skytt
+item.SC2:dynamite_carrier.name=Dynamit
+item.SC2:cleaning_machine.name=Reningsmaskin
+item.SC2:extreme_melter.name=Extrem masugn
+item.SC2:divine_shield.name=Himmelsk sköld
+item.SC2:melter.name=Smältare
+item.SC2:standard_hull.name=Standardskrov
+item.SC2:reinforced_hull.name=Armerat skrov
+item.SC2:invisibility_core.name=Osynlighetskärna
+item.SC2:wooden_hull.name=Träskrov
+item.SC2:iron_drill.name=Järnborr
+item.SC2:hardened_drill.name=Härdad borr
+item.SC2:note_sequencer.name=Musikspelare
+item.SC2:colorizer.name=Färgare
+item.SC2:pumpkin_chariot.name=Pumpvagn
+item.SC2:tiny_coal_engine.name=Liten kolmotor
+item.SC2:basic_solar_engine.name=Liten solpanelsmotor
+item.SC2:projectile_potion.name=Projektil: dryck
+item.SC2:gift_storage.name=Gåvoförråd
+item.SC2:chunk_loader.name=Chunkladdare
+item.SC2:entity_detector_bat.name=Detektor: fladdermus
+item.SC2:freezer.name=Nedkylare
+item.SC2:projectile_snowball.name=Projektil: snöboll
+item.SC2:projectile_egg.name=Projektil: ägg
+item.SC2:projectile_fire_charge.name=Projektil: eldladdning
+item.SC2:firework_display.name=Fyverkerishow
+item.SC2:crop_nether_wart.name=Planta: nedervårta
+item.SC2:cage.name=Bur
+item.SC2:compact_solar_engine.name=Kompakt solpanelsmotor
+item.SC2:internal_tank.name=Intern tank
+item.SC2:mechanical_pig.name=Mekanisk gris
+item.SC2:creative_engine.name=Kreativ motor
+item.SC2:incinerator.name=Brännare
+item.SC2:thermal_engine.name=Termisk motor
+item.SC2:advanced_thermal_engine.name=Avancerad Termisk motor
+item.SC2:liquid_cleaner.name=Vätskerenare
+item.SC2:side_tanks.name=Sidotankar
+item.SC2:top_tank.name=Topptank
+item.SC2:advanced_tank.name=Avancerad tank
+item.SC2:front_tank.name=Fronttank
+item.SC2:creative_hull.name=Kreativt skrov
+item.SC2:power_observer.name=Energiövervakare
+item.SC2:steves_arcade.name=Steves spelmaskin
+item.SC2:hardened_wood_cutter.name=Härdad trähuggare
+item.SC2:creative_tank.name=Kreativ tank
+item.SC2:open_tank.name=Öppen tank
+item.SC2:egg_basket=Äggkorg
+item.SC2:drill_intelligence.name=Borrintelligens
+item.SC2:lawn_mower.name=Gräsklippare
+item.SC2:galgadorian_farmer.name=Galgadorisk Odlare
+item.SC2:crafter.name=Skapare
+item.SC2:milker.name=Mjölkare
+item.SC2:galgadorian_hull.name=Galgadoriskt skrov
+item.SC2:galgadorian_wood_cutter.name=Galgadorisk trähuggare
+item.SC2:ore_extractor.name=Malmutvinnare
+item.SC2:enchanter.name=Förtrollare
+item.SC2:advanced_smelter.name=Avancerad masugn
+item.SC2:advanced_crafter.name=Avancerad skapare
+item.SC2:experience_bank.name=XP-bank
+item.SC2:information_provider.name=Informations förråd
+item.SC2:planter_range_extender.name=Odlingsräckviddsförlängare
+item.SC2:tree_exotic.name=Träd: exotiskt
+item.SC2:smelter.name=Masugn
+item.SC2:projectile_cake.name=Projektil: tårta
+item.SC2:trick_or_treat_cake_server.name=Bus eller godis tårtserverare
+item.SC2:cake_server.name=Tårtserverare
+item.SC2:creative_incinerator.name=Kreativ brännare
+item.SC2:creative_supplies.name=Kreativt förråd
+
+# Components
+item.SC2:unknowncomponent.name=Okänd SC2 komponent
+item.SC2:wooden_wheels.name=Trähjul
+item.SC2:iron_wheels.name=Järnhjul
+item.SC2:red_pigment.name=Rött pigment
+item.SC2:green_pigment.name=Grönt pigment
+item.SC2:blue_pigment.name=Blått pigment
+item.SC2:glass_o'magic.name=Magiskt glas
+item.SC2:dynamite.name=Dynamit
+item.SC2:unknowncomponent.name=Okänd SC2 komponent
+item.SC2:unknowncomponent.name=Okänd SC2 komponent
+item.SC2:simple_pcb.name=Simpelt kretskort
+item.SC2:graphical_interface.name=Gränssnitt
+item.SC2:raw_handle.name=Handtag
+item.SC2:refined_handle.name=Raffinerat handtag
+item.SC2:speed_handle.name=Gasspak
+item.SC2:wheel.name=Hjul
+item.SC2:saw_blade.name=Sågblad
+item.SC2:advanced_pcb.name=Avancerat kretskort
+item.SC2:wood_cutting_core.name=Tråhuggningskärna
+item.SC2:raw_hardener.name=Rå förstärkning
+item.SC2:refined_hardener.name=Raffinerad förstärkning
+item.SC2:hardened_mesh.name=Förstärkt blandning
+item.SC2:stabilized_metal.name=Stabiliserad metall
+item.SC2:reinforced_metal.name=Förstärkt metall
+item.SC2:reinforced_wheels.name=Förstärkta hjul
+item.SC2:pipe.name=Rör
+item.SC2:shooting_station.name=Skyttesstation
+item.SC2:entity_scanner.name=Entitetsscanner
+item.SC2:entity_analyzer.name=Entitetsanalysator
+item.SC2:empty_disk.name=Tom skiva
+item.SC2:tri-torch.name=Trifackla
+item.SC2:chest_pane.name=Kistpanel
+item.SC2:large_chest_pane.name=Stor kistpanel
+item.SC2:huge_chest_pane.name=Enorm kistpanel
+item.SC2:chest_lock.name=Kistlås
+item.SC2:iron_pane.name=Järnpanel
+item.SC2:large_iron_pane.name=Stor järnpanel
+item.SC2:huge_iron_pane.name=Enorm järnpanel
+item.SC2:dynamic_pane.name=Dynamisk panel
+item.SC2:large_dynamic_pane.name=Stor dynamisk panel
+item.SC2:huge_dynamic_pane.name=Enorm dynamisk panel
+item.SC2:cleaning_fan.name=Städningsfläkt
+item.SC2:cleaning_core.name=Städningskärna
+item.SC2:cleaning_tube.name=Städningsrör
+item.SC2:fuse.name=Stubin
+item.SC2:solar_panel.name=Solpanel
+item.SC2:eye_of_galgador.name=Galgadoröga
+item.SC2:lump_of_galgador.name=Galgadorklump
+item.SC2:galgadorian_metal.name=Galgadormetall
+item.SC2:large_lump_of_galgador.name=Stor galgadorklump
+item.SC2:enhanced_galgadorian_metal.name=Förbättrad galgadormetall
+item.SC2:stolen_present.name=Stulen present
+item.SC2:green_wrapping_paper.name=Grönt omslagspapper
+item.SC2:red_wrapping_paper.name=Rött omslagspapper
+item.SC2:warm_hat.name=Varm hatt
+item.SC2:red_gift_ribbon.name=Rött omslagsband
+item.SC2:yellow_gift_ribbon.name=Gult omslagsband
+item.SC2:sock.name=Socka
+item.SC2:stuffed_sock.name=Fylld socka
+item.SC2:advanced_solar_panel.name=Avancerad solpanel
+item.SC2:blank_upgrade.name=Tom uppgradering
+item.SC2:tank_valve.name=Tankventil
+item.SC2:tank_pane.name=Tankpanel
+item.SC2:large_tank_pane.name=Stor tankpanel
+item.SC2:huge_tank_pane.name=Enorm tankpanel
+item.SC2:liquid_cleaning_core.name=Vätskereningskärna
+item.SC2:liquid_cleaning_tube.name=Vätskereningsrör
+item.SC2:explosive_easter_egg.name=Explosivt påskägg
+item.SC2:burning_easter_egg.name=Brinnande påskägg
+item.SC2:glistering_easter_egg.name=Glimrande påskägg
+item.SC2:chocolate_easter_egg.name=Chokladpåskägg
+item.SC2:painted_easter_egg.name=Målat påskägg
+item.SC2:basket.name=Korg
+item.SC2:oak_log.name=Ekstock
+item.SC2:oak_twig.name=Ekkvist
+item.SC2:spruce_log.name=Granstock
+item.SC2:spruce_twig.name=Grankvist
+item.SC2:birch_log.name=Björkstock
+item.SC2:birch_twig.name=Björkkvist
+item.SC2:jungle_log.name=Djungelstock
+item.SC2:jungle_twig.name=Djungelstock
+item.SC2:hardened_saw_blade.name=Härdat sågblad
+item.SC2:galgadorian_saw_blade.name=Galgadoriskt sågblad
+item.SC2:galgadorian_wheels.name=Galgadoriska hjul
+item.SC2:iron_blade.name=Järnblad
+item.SC2:blade_arm.name=Bladarm
+
+
+
+# ======================================
+                                BLOCKS
+# ======================================
+
+tile.SC2:BlockCargoManager.name=Lasthanterare
+tile.SC2:BlockJunction.name=Spårkorsning
+tile.SC2:BlockAdvDetector.name=Avancerad detektorsräls
+tile.SC2:BlockCartAssembler.name=Vagnsverkstad
+tile.SC2:BlockActivator.name=Modulsaktiverare
+tile.SC2:BlockDistributor.name=Distributör
+tile.SC2:BlockLiquidManager.name=Vätskehanterare
+
+# Storage
+item.SC2:BlockStorage0.name=Förstärkt Metallblock
+item.SC2:BlockStorage1.name=Galgadoriskt block
+item.SC2:BlockStorage2.name=Förbättrat Galgadoriskt block
+
+# Upgrades
+item.SC2:batteries.name=Uppgradering: Batterier
+item.SC2:power_crystal.name=Uppgradering: Energikristall
+item.SC2:module_knowledge.name=Uppgradering: modulkunskap
+item.SC2:industrial_espionage.name=Uppgradering: industriellt spionage
+item.SC2:experienced_assembler.name=Uppgradering: erfaren monterare
+item.SC2:new_era.name=Uppgradering: ny era
+item.SC2:co2_friendly.name=Uppgradering: miljövänlig
+item.SC2:generic_engine.name=Uppgradering: normal motor
+item.SC2:module_input.name=Uppgradering: modulingång
+item.SC2:production_line.name=Uppgradering: löpande band
+item.SC2:cart_deployer.name=Uppgradering: vagnplacerare
+item.SC2:cart_modifier.name=Uppgradering: vagnmodifierare
+item.SC2:cart_crane.name=Uppgradering: vagnskran
+item.SC2:redstone_control.name=Uppgradering: rödstenskontroll
+item.SC2:creative_mode.name=Uppgradering: kreativt läge
+item.SC2:quick_demolisher.name=Uppgradering: snabb demontör
+item.SC2:manager_bridge.name=Uppgradering: hanterarbrygga
+item.SC2:entropy.name=Uppgradering: entropi
+item.SC2:solar_panel.name=Uppgradering: Solpanel
+item.SC2:thermal_engine_upgrade.name=Uppgradering: termisk motor
+
+# Detector Units
+item.SC2:BlockDetector0.name=Detektorhanterare
+item.SC2:BlockDetector1.name=Detektorenhet
+item.SC2:BlockDetector2.name=Detektorstation
+item.SC2:BlockDetector3.name=Detektorkorsning
+item.SC2:BlockDetector4.name=Detektorrödstensenhet					
+
+
+
+# ======================================
+                                MODULE MISC
+# ======================================
+
+# Categories
+info.SC2:moduleCategoryHull=Skrov
+info.SC2:moduleCategoryEngine=Motor
+info.SC2:moduleCategoryTool=Verktyg
+info.SC2:moduleCategoryStorage=Lagring
+info.SC2:moduleCategoryAddon=Tillägg
+info.SC2:moduleCategoryAttachment=Tillbehör
+
+# Groups
+info.SC2:moduleGroupEngine=[%1:Motor|Motorer]
+info.SC2:moduleGroupDrill=[%1:Borr|Borrar]
+info.SC2:moduleGroupFarmer=[%1:Odlare|Odlare]
+info.SC2:moduleGroupCutter=[%1:Trähuggare|Trähuggare]
+info.SC2:moduleGroupTank=[%1:Tank|Tankar]
+info.SC2:moduleGroupEntity=[%1:Entitetsscanner|Entitetsscannrar]
+info.SC2:moduleGroupShooter=[%1:Skytt|Skyttar]
+info.SC2:moduleGroupTool=[%1:Verktyg|Verktyg]
+info.SC2:moduleGroupToolShooter=[%1:Verktyg|Vergtyg] eller [%1:Skytt|Skyttar]
+
+# Messages
+info.SC2:pigExtraMessage=Till minne av Vswes "Thunderpig arena" vinst. Tack till alla som donerade under 2013 Minecraft maraton
+info.SC2:oceanExtraMessage=Utrymme för en genomsnittlig ocean
+info.SC2:alphaExtraMessage=1 år i alpha
+info.SC2:storageEmpty=Tom
+info.SC2:storageFull=Full
+info.SC2:giftStorageFull=Kan innehålla en överraskning
+info.SC2:eggStorageFull=Full av ägg
+
+# Labels
+info.SC2:modularCost=Modulkostnad
+info.SC2:cartSideTop=Topp
+info.SC2:cartSideCenter=Mitt
+info.SC2:cartSideBottom=Botten
+info.SC2:cartSideBack=Bak
+info.SC2:cartSideLeft=Vänster
+info.SC2:cartSideRight=Höger
+info.SC2:cartSideFront=Front
+info.SC2:occupiedSides=Kommer att ockupera [%1] [%2:sida|sidor]
+info.SC2:sidesAnd=och
+info.SC2:noSides=Kommer inte ockupera några sidor
+info.SC2:moduleConflictHowever=Kommer däremot att krocka med
+info.SC2:moduleConflictAlso=Kommer även krocka med
+info.SC2:moduleRequirement=Kräver
+info.SC2:moduleCount1=en
+info.SC2:moduleCount2=två
+info.SC2:moduleCount3=tre
+info.SC2:allowDuplicates=Dubbletter är tillåtna
+info.SC2:moduleType=Typ
+info.SC2:capacityOverloadError=Din kostnad är högre än skrovets kapacitet.
+info.SC2:impossibleCombinationError=Kombinationen av de giva modulernas modultyperna är ej tillåtna, detta skall ej kunna hända.
+info.SC2:complexityOverloadError=[%1] är för komplext för detta skrov.
+info.SC2:missingParentError=[%1] kräver [%2] för att fungera!
+info.SC2:presentNemesisError=[%1] kommer ej funka med [%2]
+info.SC2:presentDuplicateError[%1] får ej läggas till flera gånger.
+info.SC2:sideClashError=[%1] och [%2] kommer krocka vid [%3]
+info.SC2:toolUnbreakable=Oförstörbar
+info.SC2:toolDurability=Hållbarhet: [%1]%
+info.SC2:modularCapacity=Modulär kapacitet: [%1]
+info.SC2:complexityCap=Modulskomplexitetsmaximum: [%1]
+info.SC2:maxEngineCount=Max antal motorer: [%1]
+info.SC2:maxAddonCount=Max antal tillägg: [%1]
+
+
+# ======================================
+                                UPGRADES
+# ======================================
+
+info.SC2:effectBlueprint=Tillåter konstruktion av vagnar med ritningar
+info.SC2:effectCombustionFuel=Tillåtna standardbränslen
+info.SC2:effectDeployer=Aktiverar placering av färdig vagn
+info.SC2:effectDisassemble=Tillåter demontering och modifikation
+info.SC2:effectFuelCapacity=Bränslekapacitet [%1]
+info.SC2:effectFuelCost=Bränslekostnad [%1]%
+info.SC2:effectInputChest=Ingångskista med [%1] utrymmen
+info.SC2:effectManagerBridge=Kopplar ihop en verkstad och en hanterare
+info.SC2:effectGenerator=Genererar [%1] [%2:enhet|enheter] med kraft per minut
+info.SC2:effectRedstone=Tillåter rödstenskontrollerad byggnad av vagnar
+info.SC2:effectSolar=Genererar kraft när i solen.
+info.SC2:effectThermal=Driv verkstaden med kraft från lava i en intern tank
+info.SC2:effectTimeFlat=Tid per påsatt modul [%1] [%1:sekund|sekunder].
+info.SC2:effectTimeFlatCart=Total tid [%1] [%1:sekund|sekunder].
+info.SC2:effectTimeFlatRemove=Tid per avtagen modul [%1] [%1:sekund|sekunder].
+info.SC2:effectTransposer=Kan plocka upp vagnar för modifikation
+info.SC2:effectEfficiency=Byggnadseffektivitet [%1]%.
+
+
+# ======================================
+                                MODULES
+# ======================================
+
+# Addons
+modules.addons.SC2:detectorAnimals=Djur
+modules.addons.SC2:detectorBats=Fladdermöss
+modules.addons.SC2:detectorMonsters=Monster
+modules.addons.SC2:detectorPlayers=Spelare
+modules.addons.SC2:detectorVillagers=Bybor
+modules.addons.SC2:planterRangeExtenderTitle=Odlingsräckvidd
+modules.addons.SC2:saplingPlantAmount=Nuvarande plantantal
+modules.addons.SC2:controlLeverTitle=Kontrollspak
+modules.addons.SC2:leverStartCart=Starta vagnen
+modules.addons.SC2:leverStopCart=Stoppa vagnen
+modules.addons.SC2:leverTurnAroundCart=Vänd vagnen
+modules.addons.SC2:colorizerRgbRed=Röd
+modules.addons.SC2:colorizerRgbGreen=Grön
+modules.addons.SC2:colorizerRgbBlue=Blå
+modules.addons.SC2:intelligenceLockedBlock=Borren kommer alltid ta bor detta block
+modules.addons.SC2:intelligenceChange=Ändra beteende
+modules.addons.SC2:intelligenceCurrent=Nuvarande: [%1->På|Av]
+modules.addons.SC2:enchanterInstruction=Lägg till en förtrollad bok till det vänstra utrymmet
+modules.addons.SC2:invisibilityToggle=[%1->Sätt på|Stäng av] osynlighetskärna
+modules.addons.SC2:informationProviderLabelName=Namn
+modules.addons.SC2:informationProviderLabelDistance=Avstånd
+modules.addons.SC2:informationProviderMessageDistance=Avstånd: [%1]m
+modules.addons.SC2:informationProviderLabelPosition=Position
+modules.addons.SC2:informationProviderMessagePosition=X: [%1] Y: [%2] Z: [%3]
+modules.addons.SC2:informationProviderLabelFuel=Bränsle kvar
+modules.addons.SC2:informationProviderMessageFuel=Tid kvar på bränsle
+modules.addons.SC2:informationProviderMessageNoConsumption=Ingen konsumtion
+modules.addons.SC2:informationProviderLabelStorage=Använd utrymme
+modules.addons.SC2:informationProviderLabelDurability=Hållbarhet
+modules.addons.SC2:informationProviderMessageToolBroken=Verktyg är trasigt
+modules.addons.SC2:informationProviderMessageToolNotBroken=Verktyget är inte skadat. Ta ur material
+modules.addons.SC2:informationProviderMessageRepair=Verktyg repareras...
+modules.addons.SC2:informationProviderMessageUnbreakable=Verktyg är oförstörbart
+modules.addons.SC2:informationProviderLabels=Etiketter
+modules.addons.SC2:powerThousandSuffix=k
+modules.addons.SC2:powerObserverInstruction=Klicka och dra för att placera i önskat område.
+modules.addons.SC2:powerObserverRemoveInstruction=Högerklicka för att ta bort.
+modules.addons.SC2:powerObserverDropInstruction=Släpp motor här.
+modules.addons.SC2:powerObserverChangeInstruction=Klicka för att ändra energigräns
+modules.addons.SC2:powerObserverChangeInstruction10=Shift-klicka för att öka med 10.000
+modules.addons.SC2:recipeOutput=Ändra utmatningsplats
+modules.addons.SC2:recipeCurrentSelection=Nuvarande
+modules.addons.SC2:recipeInvalidOutput=Okänt område
+modules.addons.SC2:recipeChangeMode=Ändra nuvarande läge
+modules.addons.SC2:recipeNoLimit=Ingen övre gräns
+modules.addons.SC2:recipeLimit=Begränsa lagring av saker
+modules.addons.SC2:recipeDisabled=Producera inte
+modules.addons.SC2:recipeChangeLimit=[%1->Öka|Minska] antalet saker att alltid ha lagrade.
+modules.addons.SC2:recipeChangeLimit10=Shift-klicka för att ändra med 10.
+modules.addons.SC2:recipeChangeLimit64=Ctrl-klicka för att ändra med 64.
+modules.addons.SC2:shieldToggle=[%1->Sätt på|Stäng av] sköld
+
+# Engines
+modules.engines.SC2:creativePowerLevel=Energinivå: [%1]
+modules.engines.SC2:coalEngineTitle=Kolmotor
+modules.engines.SC2:outOfFuel=Slut på bränsle
+modules.engines.SC2:fuelLevel=Bränsle: [%1]
+modules.engines.SC2:solarEngineTitle=Solpanelsmotor
+modules.engines.SC2:outOfPower=Slut på kraft
+modules.engines.SC2:powerLevel=Energi: [%1]
+modules.engines.SC2:thermalEngineTitle=Termisk motor
+modules.engines.SC2:thermalPowered=Har kraft
+modules.engines.SC2:outOfWater=Slut på vatten
+modules.engines.SC2:outOfLava=Slut på lava
+modules.engines.SC2:engineDisabledMessage=Av
+modules.engines.SC2:enginePriorityMessage=[%1->Hög|Medium|Låg] prioritet
+
+
+# Tanks
+modules.tanks.SC2:creativeTankMode=Nuvarande kreativt läge: [%1][%2->normal|alltid full|alltid tom|alltid halv]
+modules.tanks.SC2:creativeTankChangeMode=Höger-klicka för att ändra
+modules.tanks.SC2:creativeTankResetMode=håll shift och höger-klicka för att gå till normalt läge
+modules.tanks.SC2:tankLocked=Låst till denna vätska
+modules.tanks.SC2:tankLock=Klicka för att låsa till denna vätska
+modules.tanks.SC2:tankUnlock=Klicka för att låsa upp
+modules.tanks.SC2:tankEmpty=Tom
+modules.tanks.SC2:tankInvalidFluid=Okänd
+
+# Tools
+modules.tools.SC2:toolDurability=Hållbarhet
+modules.tools.SC2:toolBroken=Trasig
+modules.tools.SC2:toolRepairing=Reparerar verktyg...
+modules.tools.SC2:toolDecent=Ta ur material, redskapet är fortfarande i gott skick
+modules.tools.SC2:toolRepairInstruction=Reparera detta verktyg med [%1]
+modules.tools.SC2:toolUnbreakable=Detta verktyg kommer aldrig gå sönder.
+modules.tools.SC2:toolUnbreakableRepairError=Ta ur reparationsmaterialen
+modules.tools.SC2:drillTitle=Borr
+modules.tools.SC2:drillToggle=[%1->Sätt på|Stäng av] borr
+modules.tools.SC2:repairDiamonds=Diamanter
+modules.tools.SC2:repairIron=Järntackor
+modules.tools.SC2:farmerTitle=Odlare
+modules.tools.SC2:cutterTitle=Trähuggare
+
+# Attachments
+modules.attachments.SC2:fertilizers=Gödsel
+modules.attachments.SC2:railerTitle=Rälsläggare
+modules.attachments.SC2:controlSystemTitle=Advancerat kontrollsystem
+modules.attachments.SC2:controlSystemDistanceUnits=[%1->|k|M|G|T|P]m
+modules.attachments.SC2:controlSystemOdoMeter=ODO
+modules.attachments.SC2:controlSystemTripMeter=TRIP
+modules.attachments.SC2:cageAutoPickUp=[%1->Sätt på|Stäng av] auto-upplockning
+modules.attachments.SC2:cagePickUp=[%1->Ta upp varelse i närheten|Släpp ut fångad varelse]
+modules.attachments.SC2:cakeServerTitle=Tårtserverare
+modules.attachments.SC2:cakesLabel=Cakes: [%1] / [%2]
+modules.attachments.SC2:slicesLabel=Slices: [%1] / [%2]
+modules.attachments.SC2:explosivesTitle=Sprängmedel
+modules.attachments.SC2:experienceTitle=XP
+modules.attachments.SC2:experienceLevel=XP-nivå: [%1] / [%2]
+modules.attachments.SC2:experienceExtract=Tryck för att ta ut 50XP
+modules.attachments.SC2:experiencePlayerLevel=Din nuvarande nivå är [%1]
+modules.attachments.SC2:shooterTitle=Skytt
+modules.attachments.SC2:shooterFrequency=#/s
+modules.attachments.SC2:shooterSeconds=s
+modules.attachments.SC2:shooterDelay=Fördröjning
+modules.attachments.SC2:notePiano=Piano
+modules.attachments.SC2:noteBassDrum=Bastrumma
+modules.attachments.SC2:noteSnareDrum=Virveltrumma
+modules.attachments.SC2:noteSticks=Slagverk
+modules.attachments.SC2:noteBassGuitar=Basgitarr
+modules.attachments.SC2:noteCreateTrack=Skapa nytt spår
+modules.attachments.SC2:noteRemoveTrack=Ta bort bottenspår
+modules.attachments.SC2:noteActivateInstrument=Aktivera [%1]
+modules.attachments.SC2:noteDeactivateInstrument=Ta bort notblocksinställning
+modules.attachments.SC2:noteDelay=Ändra fördröjning. Nuvarande fördröjning: [%1]
+modules.attachments.SC2:noteAdd=Lägg till not på spår [%1]
+modules.attachments.SC2:noteRemove=Ta bort högra noten på spår [%1]
+modules.attachments.SC2:noteVolume=Spårvolym: [%1->tyst|låg|medium|Hög]
+modules.attachments.SC2:seatStateMessage=[%1->Den här vagnen är upptagen|Kliv i|Kliv ur]
+modules.attachments.SC2:controlSystemReset=Återställ trip-mätare
+
+
+# ======================================
+                                Steve's Arcade 
+# ======================================
+# Ghast Invaders
+arcade.SC2:ghastInvaders=Spökinvasion
+arcade.SC2:ghastLives=Extra liv
+arcade.SC2:highScore=Högsta poäng: [%1]
+arcade.SC2:score=Poäng: [%1]
+arcade.SC2:instructionShoot=Skutt
+arcade.SC2:instructionLeft=Vänster
+arcade.SC2:instructionRight=Höger
+arcade.SC2:instructionRestart=Börja om
+arcade.SC2:creeperSweeper=Minröjning
+arcade.SC2:creeperMapName1=Liten
+arcade.SC2:creeperMapName2=Medium
+arcade.SC2:creeperMapName3=Stor
+arcade.SC2:creepersLeft=Smygare kvar:  [%1]
+arcade.SC2:creeperTime=Tid: [%1]s
+arcade.SC2:instructionChangeMap=Ändra storlek
+arcade.SC2:creeperCurrentMap=Nuvarande [%1]
+arcade.SC2:creeperHighScores=Högsta poäng
+arcade.SC2:creeperHighScore=[%1]: [%2]s
+arcade.SC2:mobStacker=Varelsetetris
+arcade.SC2:stackerRemovedLines=Borttagna linjer: [%1]
+arcade.SC2:stackerRemovedLinesCombo=Borttagna [%1->enkla|dubbla|tredubbla|fyrdubbla] linjer: [%2]
+arcade.SC2:instructionRotate=Rotera
+arcade.SC2:instructionDrop=Släpp
+arcade.SC2:trackOperator=Rälsoperatör
+arcade.SC2:operatorSaveError=Sparning misslyckades
+arcade.SC2:operatorSave=Spara
+arcade.SC2:operatorUserCreatedMaps=Användarskapade kartor
+arcade.SC2:operatorStories=Historier
+arcade.SC2:operatorHelp=För information om hur man spelar spelet gå in i historieläget och börja "Början". För att göra en egen bana gå in i nivåredigeraren och gör en bana. Ytterligare information finns där. Klicka på en  detektorräls och sen på en järnvägsknut för att binda ihop dem. Om du behöver mer information, titta på wikin (på engelska).
+arcade.SC2:instructionTrackShape=Välj form på räls
+arcade.SC2:instructionRotateTrack=Rotera räls
+arcade.SC2:instructionFlipTrack=Vänd räls
+arcade.SC2:instructionDefaultDirection=Ändra standardriktning
+arcade.SC2:instructionTrackType=Ändra spårtyp
+arcade.SC2:instructionDeleteTrack=Ta bort spår
+arcade.SC2:instructionCopyTrack=Kopiera räls
+arcade.SC2:instructionMoveSteve=Flytta eller rotera Steve
+arcade.SC2:instructionMoveMap=Flytta nivå
+arcade.SC2:instructionPlaceTrack=Placera räls
+arcade.SC2:instructionDeselectTrack=Ta bort markering
+arcade.SC2:leftMouseButton=Vänsterklick
+arcade.SC2:rightMouseButton=Högerklick
+arcade.SC2:buttonStart=Starta
+arcade.SC2:buttonMenu=Meny
+arcade.SC2:buttonStop=Stop
+arcade.SC2:buttonNextLevel=Nästa nivå
+arcade.SC2:buttonStartLevel=Starta nivå
+arcade.SC2:buttonSelectStory=Välj historia
+arcade.SC2:buttonSelectStoryOther=Välj annan historia
+arcade.SC2:buttonCreateLevel=Gör nivå
+arcade.SC2:buttonEditLevel=Ändra nivå
+arcade.SC2:buttonRefreshList=Uppdatera lista
+arcade.SC2:buttonSave=Spara
+arcade.SC2:buttonSaveAs=Spara som...
+arcade.SC2:buttonCancel=Avbryt
+stories.beginning.SC2:mapEditor=Nivåbyggare
+
+# Story - The beginning
+stories.beginning.SC2:title=Början
+stories.beginning.SC2:mission=Steve har ett uppdrag, han måste ta sig till andra änden av rälsen för att komma till nästa nivå.
+stories.beginning.SC2:start=Tryck på startknappen till höger.
+stories.beginning.SC2:stop=Du kan nu trycka på stopknappen för att stoppa Steve.
+stories.beginning.SC2:map=Steve har nu kartan, tryck på nästa nivå-knappen för att gå vidare.
+stories.beginning.SC2:trackOperator=Du är en rälsoperatör, ditt jobb är att se till all räls är rätt inställd. Klicka på knutarna för att ändra åt vilket håll de går.
+stories.beginning.SC2:goodJob=Bra, det är så det skall göras.
+stories.beginning.SC2:changeJunctions=Du kan alltid trycka på stop och ändra inställningarna.
+stories.beginning.SC2:blast=Steve tycker att det är väldigt kul att åka i sin vagn, men ibland blir det för mycket även för honom. T.ex. när han fastnar i oändlig rundgång. Lycka till.
+stories.beginning.SC2:steel=Det finns alltid gupp på vägen, för en rälsoperatör kallas dessa stålräls. Stålrälsknutar kan ej ändras, Lycka till.
+stories.beginning.SC2:detector=Detektorrälser kan vara både dina vänner. När Steve åker över en detektorräls ändrar den en knut, även en stålknut. För att se vilken knut en detektor kommer påverka, hovra över rälsen med musen.
+stories.beginning.SC2:outOfReach=Precis utom räckhåll...
+stories.beginning.SC2:outOfReach2=...men det stoppar inte dig.
+stories.beginning.SC2:longJourney=Efter en lång resa kan Steve äntligen se slutet på sin resa...
+stories.beginning.SC2:end=... men saker går inte alltid som planerat. Medans du väntar på fler historier kan du bygga och dela dina egna nivåer. För att göra en nivå gå in på nivåredigeraren.
+stories.beginning.SC2:thanks=Tack för att du spelade! :)
+stories.beginning.SC2:level1=En ny dag
+stories.beginning.SC2:level2=Operatören
+stories.beginning.SC2:level3=Fly från rundgången
+stories.beginning.SC2:level4=Hårt som stål
+stories.beginning.SC2:level5=En värld i rörelse
+stories.beginning.SC2:level6=Kodlåset
+stories.beginning.SC2:level7=Så nära
+stories.beginning.SC2:level8=Galenskap
+stories.beginning.SC2:level9=Tårtan

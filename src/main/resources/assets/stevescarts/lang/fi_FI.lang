@@ -1,0 +1,751 @@
+# ======================================
+				BLOCK GUI
+# ======================================
+
+# Cart assembler gui localization
+gui.SC2:cartAssembler=Vaunun kokooja
+gui.SC2:basicAssembleInstruction=Jotta voit aloittaa vaunun kokoamisen, lisää valitsemasi Vaunun Runko rungolle varattuun kohtaan.
+gui.SC2:invalidHullError=Vaunun Runko rungolle varatussa kohdassa ei ole sopiva Runko. Tämän ei pitäisi olla mahdollista joten olet tehnyt jotain outoa.
+gui.SC2:hullCapacity=Rungon kapasiteetti
+gui.SC2:complexityCap=Monimutkaisuusraja
+gui.SC2:totalCost=Kokonaishinta
+gui.SC2:totalTime=Kokonaisaika
+gui.SC2:readyMessage=Vakmis kokoamaan vaunun!
+gui.SC2:assembleProgress=Edistyminen
+gui.SC2:timeLeft=Aikaa jäljellä
+gui.SC2:idleAssemblerMessage=Kokooja on toimeton
+gui.SC2:modifyCart=Muokkaa vaunua
+gui.SC2:assembleCart=Kokoa vaunu
+gui.SC2:fuelLevel=Polttoaineen määrä
+# need beta 3 for these ones to show up (remove this note)
+gui.SC2:noHullError=Sinulla ei ole runkoa!
+gui.SC2:invalidHullErrorShort=Lisätty runko ei ole runko!
+gui.SC2:busyAssemblerError=Kokooja on kiireinen!
+gui.SC2:departureBayError=Lähtölokerossa on vaunu.
+# end of beta 3 requirement (remove this note)
+
+# Cargo manager and Liquid manager shared gui localization
+gui.SC2:manager=Hallitsija
+gui.SC2:currentSetting=Tällä hetkellä
+gui.SC2:changeTransferDirection=Muuta siirtosuuntaa
+gui.SC2:directionToCart=Vaunuun
+gui.SC2:directionFromCart=Vaunusta
+gui.SC2:changeTurnBack=Muuta käänny takaisin asetusta
+gui.SC2:turnBackDisabled=Ei sivua valittuna
+gui.SC2:turnBack=Käänny takaisin siirron jälkeen
+gui.SC2:continueForward=Jatka eteenpäin siirron jälkeen
+gui.SC2:changeTransferSize=Vaihda siirtokokoa
+gui.SC2:changeSide=Vaihda puolta
+gui.SC2:currentSide=Tämänhetkinen puoli
+gui.SC2:sideRed=Punainen
+gui.SC2:sideBlue=Sininen
+gui.SC2:sideYellow=Keltainen
+gui.SC2:sideGreen=Vihreä
+gui.SC2:sideDisabled=Poista
+
+# Cargo manager gui localization
+gui.SC2:cargoManager=Lasti
+gui.SC2:changeSlotLayout=Vaihda kolojen asettelua
+gui.SC2:layoutShared=Kaikki kolot ovat jaettuna kaikkien sivujen kesken
+gui.SC2:layoutSide=Jokaisella sivulla on oma kolonsa
+gui.SC2:layoutColor=Jokaisella värillä on oma kolonsa
+gui.SC2:transferAll=Siirrä niin paljon kuin mahdollista
+gui.SC2:transferItems=Siirrä enintään [%1] [%2:esine|esinettä]
+gui.SC2:transferStacks=Siirrä enintään [%1] [%2:pino|pinoa]
+gui.SC2:transferAllShort=MAKSIMI
+gui.SC2:transferItemsShort=E
+gui.SC2:transferStacksShort=P
+gui.SC2:changeTransferCartArea=Muuta osaa vaunusta
+gui.SC2:unknownAreaMessage=Tuntematon valinta
+gui.SC2:cartAreaAll=Kaikki kolot
+gui.SC2:cartAreaEngine=Moottori
+gui.SC2:cartAreaRailer=Raiteet
+gui.SC2:cartAreaStorage=Varastotilat
+gui.SC2:cartAreaTorches=Soihdut
+gui.SC2:cartAreaExplosives=Räjähteet
+gui.SC2:cartAreaArrows=Nuolet
+gui.SC2:cartAreaBridge=Siltamateriaalit
+gui.SC2:cartAreaSeeds=Siemenet
+gui.SC2:cartAreaFertilizer=Lannoite
+gui.SC2:cartAreaSaplings=Taimet
+gui.SC2:cartAreaFirework=Ilotulitteet
+gui.SC2:cartAreaBuckets=Ämpärit (lypsäjälle)
+gui.SC2:cartAreaCakes=Kakut
+
+
+
+# Liquid manager gui localization
+gui.SC2:liquidManager=Neste
+gui.SC2:changeTankLayout=Muuta tankkien asettelua
+gui.SC2:layoutSharedTanks=Kaikki tankit ovat jaettuna kaikkien sivujen kesken
+gui.SC2:layoutSidedTanks=Jokaisella sivulla on oma kolonsa
+gui.SC2:layoutColorTanks=Jokaisella värillä on oma(t) tankkinsa
+gui.SC2:transferAllLiquid=Siirrä niin paljon kuin mahdollista
+gui.SC2:transferBuckets=Siirrä enintään [%1]
+gui.SC2:transferAllLiquidShort=MAKSIMI
+gui.SC2:transferBucketShort=Ä
+
+# Module Toggler gui localization
+gui.SC2:moduleToggler=Moduulikytkin
+gui.SC2:optionDrill=Pora
+gui.SC2:optionShield=Kilpi
+gui.SC2:optionInvisibility=Näkymättömyys
+gui.SC2:optionChunk=Chunkkien lataaja
+gui.SC2:optionCageAuto=Häkin automaattinen poiminta
+gui.SC2:optionCage=Häkin poiminta
+gui.SC2:settingDisabled=Pois päältä
+gui.SC2:settingOrange=Oranssi suunta
+gui.SC2:settingBlue=Sininen suunta
+gui.SC2:stateActivate=Aktivoi
+gui.SC2:stateDeactivate=Deaktivoi
+gui.SC2:stateToggle=Kytke
+
+# External Distributer gui localization
+gui.SC2:externalDistributor=Ulkoinen jakelija
+gui.SC2:distributorNotConnected=Ei liitettynä yhteenkään Hallitsijaan!
+gui.SC2:sideName=[%1] sivu
+gui.SC2:dropInstruction=Tiputa tähän lisääksesi asetuksen
+gui.SC2:removeInstruction=Klikkaa oikealla poistaaksesi
+gui.SC2:distributorAll=Kaikki
+gui.SC2:distributorRed=Punainen
+gui.SC2:distributorBlue=Sininen
+gui.SC2:distributorYellow=Keltainen
+gui.SC2:distributorGreen=Vihreä
+gui.SC2:distributorTopLeft=Vasen Yläkulma
+gui.SC2:distributorTopRight=Oikea Yläkulma
+gui.SC2:distributorBottomLeft=Vasen Alakulma
+gui.SC2:distributorBottomRight=Oikea Alakulma
+gui.SC2:distributorToCart=Vaunuun
+gui.SC2:distributorFromCart=Vaunusta
+gui.SC2:managerTop=Ylähallitsija
+gui.SC2:managerBot=Alahallitsija
+gui.SC2:distributorSideOrange=Oranssi
+gui.SC2:distributorSidePurple=Violetti
+gui.SC2:distributorSideYellow=Keltainen
+gui.SC2:distributorSideGreen=Vihreä
+gui.SC2:distributorSideBlue=Sininen
+gui.SC2:distributorSideRed=Punainen
+gui.SC2:sideToolTip=Side: [%1]
+
+# Detector Units gui localization
+gui.SC2:operatorOutput=ULOSTULO
+gui.SC2:operatorAnd=JA
+gui.SC2:operatorOr=TAI
+gui.SC2:operatorNot=EI
+gui.SC2:operatorXor=ERI
+gui.SC2:operatorTopUnit=Yläyksikkö
+gui.SC2:operatorBotUnit=Alayksikkö
+gui.SC2:operatorNorthUnit=Pohjoisyksikkö
+gui.SC2:operatorWestUnit=Länsiyksikkö
+gui.SC2:operatorSouthUnit=Eteläyksikkö
+gui.SC2:operatorEastUnit=Itäyksikkö
+gui.SC2:operatorRedstone=Punakivisisääntulo
+gui.SC2:operatorRedstoneTop=Ylä punakivisisääntulo
+gui.SC2:operatorRedstoneBot=Ala punakivisisääntulo
+gui.SC2:operatorRedstoneNorth=Pohjois punakivisisääntulo
+gui.SC2:operatorRedstoneWest=Länsi punakivisisääntulo
+gui.SC2:operatorRedstoneSouth=Etelä punakivisisääntulo
+gui.SC2:operatorRedstoneEast=Itä punakivisisääntulo
+gui.SC2:stateRails=Sisältää raidetarvikkeita
+gui.SC2:stateTorches=Sisältää soihtutarvikkeita
+gui.SC2:stateSaplings=Sisältää taimitarvikkeita
+gui.SC2:sateSeeds=Sisältää siementarvikkeita
+gui.SC2:stateBridge=Sisältää siltatarvikkeita
+gui.SC2:stateProjectiles=Sisältää ammustarvikkeita
+gui.SC2:stateFertilizing=Sisältää lannoitustarvikkeita
+gui.SC2:stateShield=Onko kilpi päällä
+gui.SC2:stateChunk=Onko chunkkienlataaja päällä
+gui.SC2:stateInvisibility=Onko näkymättömyysydin päällä
+gui.SC2:stateDrill=Onko pora päällä
+gui.SC2:stateCage=Onko automaattinen poiminta päällä
+gui.SC2:stateStorageFull=Onko varastotila täynnä
+gui.SC2:stateStorageEmpty=Onko varastotila kokonaan tyhjä
+gui.SC2:statePassenger=On matkustaja
+gui.SC2:stateAnimal=On eläinmatkustaja
+gui.SC2:stateTameable=On kesytettävä matkustaja
+gui.SC2:stateBreedable=On lisäännytettävä matkustaja
+gui.SC2:stateHostile=On vihollismatkustaja
+gui.SC2:stateCreeper=On hiipijämatkustaja
+gui.SC2:stateSkeleton=On luurankomatkustaja
+gui.SC2:stateSpider=On hämähäkkimatkustaja
+gui.SC2:stateZombie=On zombimatkustaja
+gui.SC2:stateZombiePigMan=On zombi-sikamatkustaja
+gui.SC2:stateSilverFish=On sokeritoukkamatkustaja
+gui.SC2:stateBlaze=On roihumatkustaja
+gui.SC2:stateBat=On lepakkomatkustaja
+gui.SC2:stateWitch=On noitamatkustaja
+gui.SC2:statePig=On possumatkustaja
+gui.SC2:stateSheep=On lammasmatkustaja
+gui.SC2:stateCow=On lehmämatkustaja
+gui.SC2:stateMooshroom=On sienilehmämatkustaja
+gui.SC2:stateChicken=On kanamatkustaja
+gui.SC2:stateWolf=On susimatkustaja
+gui.SC2:stateSnowGolem=On lumigolemmatkustaja
+gui.SC2:stateOcelot=On oselottimatkustaja
+gui.SC2:stateVillager=On kyläläismatkustaja
+gui.SC2:statePlayer=On pelaajamatkustaja
+gui.SC2:stateZombieVillager=On zombikyläläismatkustaja
+gui.SC2:stateChild=On lapsimatkustaja
+gui.SC2:stateTamed=On kesytetty matkustaja
+gui.SC2:statePowerRed=Onko voimatutkain[Punainen] päällä
+gui.SC2:statePowerBlue=Onko voimatutkain[Sininen] päällä
+gui.SC2:statePowerGreen=Onko voimatutkain[Vihreä] päällä
+gui.SC2:statePowerYellow=Onko voimatutkain[Keltainen] päällä
+gui.SC2:stateTanksFull=Ovatko tankit täysin täynnä
+gui.SC2:stateTanksEmpty=Ovatko tankit täysin tyhjiä
+gui.SC2:stateTankEmpty=Onko yhtään täysin tyhjää tankkia
+
+
+# ======================================
+				ITEMS
+# ======================================
+
+# Carts
+item.SC2:ModularCart.name=Modulaarinen vaunu
+# Modules
+item.SC2:unknownmodule.name=Tuntematon SC2 moduuli
+item.SC2:coal_engine.name=Hiilimoottori
+item.SC2:solar_engine.name=Aurinkomoottori
+item.SC2:side_chests.name=Sivuarkut
+item.SC2:top_chest.name=Päällisarkku
+item.SC2:front_chest.name=Etuarkku
+item.SC2:internal_storage.name=Sisäinen varasto
+item.SC2:extracting_chests.name=Poiminta-arkut
+item.SC2:torch_placer.name=Soihdunlaittaja
+item.SC2:basic_drill.name=Tavallinen Pora
+item.SC2:galgadorian_drill.name=Galgadorinen Pora
+item.SC2:railer.name=Raideistaja
+item.SC2:large_railer.name=Suuri Raideistaja
+item.SC2:bridge_builder.name=Sillan Rakentaja
+item.SC2:track_remover.name=Raiteenpoistaja
+item.SC2:basic_farmer.name=Tavallinen farmaaja
+item.SC2:basic_wood_cutter.name=Tavallinen Puunhakkaaja
+item.SC2:hydrator.name=Hydraattori
+item.SC2:height_controller.name=Korkeussäädin
+item.SC2:fertilizer.name=Lannoittaja
+item.SC2:entity_detector_animal.name=Olevaisuustunnistin: Eläin
+item.SC2:liquid_sensors.name=Nestesensorit
+item.SC2:entity_detector_villager.name=Olevaisuustunnistin: Kyläläinen
+item.SC2:entity_detector_player.name=Olevaisuustunnistin: Pelaaja
+item.SC2:seat.name=Istuin
+item.SC2:entity_detector_monster.name=Olevaisuustunnistin: Hirviö
+item.SC2:advanced_control_system.name=Kehittynyt Ohjausjärjestelmä
+item.SC2:brake_handle.name=Käsijarru
+item.SC2:advanced_shooter.name=Kehittynyt Ampuja
+item.SC2:shooter.name=Ampuja
+item.SC2:dynamite_carrier.name=Dynamiitinkuljettaja
+item.SC2:cleaning_machine.name=Siivouskone
+item.SC2:extreme_melter.name=Äärimmäisyyssulatto
+item.SC2:divine_shield.name=Jumalallinen Kilpi
+item.SC2:melter.name=Sulattaja
+item.SC2:standard_hull.name=Vakio Runko
+item.SC2:reinforced_hull.name=Vahvistettu Runko
+item.SC2:invisibility_core.name=Näkymättömyysydin
+item.SC2:wooden_hull.name=Puinen Runko
+item.SC2:iron_drill.name=Rautapora
+item.SC2:hardened_drill.name=Karkaistu Pora
+item.SC2:note_sequencer.name=Sävelsarjain
+item.SC2:colorizer.name=Värittäjä
+item.SC2:pumpkin_chariot.name=Kurpitsavaunut
+item.SC2:tiny_coal_engine.name=Pikkuruinen Hiilimoottori
+item.SC2:basic_solar_engine.name=Tavallinen Aurinkomoottori
+item.SC2:projectile_potion.name=Ammus: Taikajuoma
+item.SC2:gift_storage.name=Lahjavarasto
+item.SC2:chunk_loader.name=Chunkkienlataaja
+item.SC2:entity_detector_bat.name=Olevaisuustunnistin: Lepakko
+item.SC2:freezer.name=Pakastin
+item.SC2:projectile_snowball.name=Ammus: Lumipallo
+item.SC2:projectile_egg.name=Ammus: Kananmuna
+item.SC2:projectile_fire_charge.name=Ammus: Tulipallo
+item.SC2:firework_display.name=Ilotulitus
+item.SC2:crop_nether_wart.name=Kasvi: Hornanpahka
+item.SC2:cage.name=Häkki
+item.SC2:compact_solar_engine.name=Kompakti Aurinkomoottori
+item.SC2:internal_tank.name=Sisäinen Tankki
+item.SC2:mechanical_pig.name=Mekaaninen possu
+item.SC2:creative_engine.name=Luova Moottori
+item.SC2:incinerator.name=Polttaja
+item.SC2:thermal_engine.name=Lämpömoottori
+item.SC2:advanced_thermal_engine.name=Kehittynyt Lämpömoottori
+item.SC2:liquid_cleaner.name=Nesteenpuhdistaja
+item.SC2:side_tanks.name=Sivutakit
+item.SC2:top_tank.name=Päällistankki
+item.SC2:advanced_tank.name=Kehittynyt tankki
+item.SC2:front_tank.name=Etutankki
+item.SC2:creative_hull.name=Luova Runko
+item.SC2:power_observer.name=Voimatarkkailija
+item.SC2:steves_arcade.name=Steven Arkadi
+item.SC2:hardened_wood_cutter.name=Karkaistu Puunhakkaaja
+item.SC2:creative_tank.name=Luova Tankki
+item.SC2:open_tank.name=Avonainen Tankki
+item.SC2:egg_basket=Kananmunakori
+item.SC2:drill_intelligence.name=Poran Älykkyys
+item.SC2:lawn_mower.name=Ruohonleikkuri
+item.SC2:galgadorian_farmer.name=Galgadorinen Farmaaja
+item.SC2:crafter.name=Craftaaja
+item.SC2:milker.name=Lypsäjä
+item.SC2:galgadorian_hull.name=Galgadorinen Runko
+item.SC2:galgadorian_wood_cutter.name=Galgadorinen Puunhakkaaja
+item.SC2:ore_extractor.name=Malmilinko
+item.SC2:enchanter.name=Lumoaja
+item.SC2:advanced_smelter.name=Kehittynyt Sulatto
+item.SC2:advanced_crafter.name=Kehittynyt Craftaaja
+item.SC2:experience_bank.name=Kokemuspankki
+item.SC2:information_provider.name=Informaation hankkija
+item.SC2:planter_range_extender.name=Istuttajan alueen suurentaja
+item.SC2:tree_exotic.name=Puu: Eksoottinen
+item.SC2:smelter.name=Sulatto
+item.SC2:projectile_cake.name=Ammus: Kakku
+item.SC2:trick_or_treat_cake_server.name=Karkki tai Kepponen kakuntarjoilija
+item.SC2:cake_server.name=Kakuntarjoilija
+item.SC2:creative_incinerator.name=Luova Polttaja
+item.SC2:creative_supplies.name=Luovat Tarvikkeet
+
+# Components
+item.SC2:unknowncomponent.name=Tuntematon SC2 komponentti
+item.SC2:wooden_wheels.name=Puiset Renkaat
+item.SC2:iron_wheels.name=Rautarenkaat
+item.SC2:red_pigment.name=Punainen Pigmentti
+item.SC2:green_pigment.name=Vihreä Pigmentti
+item.SC2:blue_pigment.name=Sininen Pigmentti
+item.SC2:glass_o'magic.name=Taikaikkuna
+item.SC2:dynamite.name=Dynamiitti
+item.SC2:simple_pcb.name=Simppeli PCB
+item.SC2:graphical_interface.name=Graafinen liitäntä
+item.SC2:raw_handle.name=Raaka kahva
+item.SC2:refined_handle.name=Jalostettu Kahva
+item.SC2:speed_handle.name=Nopeuskahva
+item.SC2:wheel.name=Rengas
+item.SC2:saw_blade.name=Sahanterä
+item.SC2:advanced_pcb.name=Kehittynyt PCB
+item.SC2:wood_cutting_core.name=Puunhakkausydin
+item.SC2:raw_hardener.name=Raaka Kovete
+item.SC2:refined_hardener.name=Jalostettu Kovete
+item.SC2:hardened_mesh.name=Karkaistu Verkko
+item.SC2:stabilized_metal.name=Lujittunut Metalli
+item.SC2:reinforced_metal.name=Vahvistettu Metalli
+item.SC2:reinforced_wheels.name=Vahvistetut Renkaat
+item.SC2:pipe.name=Putki
+item.SC2:shooting_station.name=Ampuma-asema
+item.SC2:entity_scanner.name=Olevaisuusskanneri
+item.SC2:entity_analyzer.name=Olevaisuusanalysaattori
+item.SC2:empty_disk.name=Tyhjä Levy
+item.SC2:tri-torch.name=Kolmi-soihtu
+item.SC2:chest_pane.name=Arkkupaneeli
+item.SC2:large_chest_pane.name=Suuri Arkkupaneeli
+item.SC2:huge_chest_pane.name=Valtava Arkkupaneeli
+item.SC2:chest_lock.name=Arkun Lukko
+item.SC2:iron_pane.name=Rautapaneeli
+item.SC2:large_iron_pane.name=Suuri Rautapaneeli
+item.SC2:huge_iron_pane.name=Valtava Rautapaneeli
+item.SC2:dynamic_pane.name=Dynaaminen Paneeli
+item.SC2:large_dynamic_pane.name=Suuri Dynaaminen Paneeli
+item.SC2:huge_dynamic_pane.name=Valtava Dynaaminen Paneeli
+item.SC2:cleaning_fan.name=Puhdistustuuletin
+item.SC2:cleaning_core.name=Puhdistusydin
+item.SC2:cleaning_tube.name=Puhdistusputki
+item.SC2:fuse.name=Sulattaa
+item.SC2:solar_panel.name=Aurinkopaneeli
+item.SC2:eye_of_galgador.name=Galgadorin silmä
+item.SC2:lump_of_galgador.name=Galgadorimöykky
+item.SC2:galgadorian_metal.name=Galgadorinen Metalli
+item.SC2:large_lump_of_galgador.name=Suuri Galgadorimöykky
+item.SC2:enhanced_galgadorian_metal.name=Tehostettu Galgadorinen Metalli
+item.SC2:stolen_present.name=Varastettu Lahja
+item.SC2:green_wrapping_paper.name=Vihreä Lahjapaperi
+item.SC2:red_wrapping_paper.name=Punainen Lahjapaperi
+item.SC2:warm_hat.name=Lämmin Hattu
+item.SC2:red_gift_ribbon.name=Punainen Lahjanauha
+item.SC2:yellow_gift_ribbon.name=Keltainen Lahjanauha
+item.SC2:sock.name=Sukka
+item.SC2:stuffed_sock.name=Täytetty Sukka
+item.SC2:advanced_solar_panel.name=Kehittynyt Aurinkopaneeli
+item.SC2:blank_upgrade.name=Tyhjä Parannus
+item.SC2:tank_valve.name=Tankin Venttiili
+item.SC2:tank_pane.name=Tankkipaneeli
+item.SC2:large_tank_pane.name=Suuri Tankkipaneeli
+item.SC2:huge_tank_pane.name=Valtava Tankkipaneeli
+item.SC2:liquid_cleaning_core.name=Nestepuhdistusydin
+item.SC2:liquid_cleaning_tube.name=Nestepuhdistusputki
+item.SC2:explosive_easter_egg.name=Räjähtävä Pääsiäismuna
+item.SC2:burning_easter_egg.name=Palava Pääsiäismuna
+item.SC2:glistering_easter_egg.name=Kimalteleva Pääsiäismuna
+item.SC2:chocolate_easter_egg.name=Suklainen Pääsiäismuna
+item.SC2:painted_easter_egg.name=Maalattu Pääsiäismuna
+item.SC2:basket.name=Kori
+item.SC2:oak_log.name=Tammitukki
+item.SC2:oak_twig.name=Tammenoksa
+item.SC2:spruce_log.name=Kuusitukki
+item.SC2:spruce_twig.name=Kuusenoksa
+item.SC2:birch_log.name=Koivutukki
+item.SC2:birch_twig.name=Koivunoksa
+item.SC2:jungle_log.name=Viidakkopuutukki
+item.SC2:jungle_twig.name=Viidakkopuunoksa
+item.SC2:hardened_saw_blade.name=Karkaistu Sahanterä
+item.SC2:galgadorian_saw_blade.name=Galgadorinen Sahanterä
+item.SC2:galgadorian_wheels.name=Galgadoriset Renkaat
+item.SC2:iron_blade.name=Rautaterä
+item.SC2:blade_arm.name=Terän Varsi
+
+
+
+# ======================================
+				BLOCKS
+# ======================================
+
+tile.SC2:BlockCargoManager.name=Lastin Hallitsija
+tile.SC2:BlockJunction.name=Risteysraide
+tile.SC2:BlockAdvDetector.name=Kehittynyt Tunnistinraide
+tile.SC2:BlockCartAssembler.name=Vaununkokooja
+tile.SC2:BlockActivator.name=Moduulikytkin
+tile.SC2:BlockDistributor.name=Ulkonen Jakelija
+tile.SC2:BlockLiquidManager.name=Neste Hallitsija
+# Storage
+item.SC2:BlockStorage0.name=Vahvistettu Metallikuutio
+item.SC2:BlockStorage1.name=Galgadorinen Kuutio
+item.SC2:BlockStorage2.name=Tehostettu Galgadorinen Kuutio
+
+# Upgrades
+item.SC2:batteries.name=Parannus: Paristot
+item.SC2:power_crystal.name=Parannus: Voimakristalli
+item.SC2:module_knowledge.name=Parannus: Moduuliälykkyys
+item.SC2:industrial_espionage.name=Parannus: Teollisuusvakoilu
+item.SC2:experienced_assembler.name=Parannus: Kokenut Kokooja
+item.SC2:new_era.name=Parannus: Uusi Aikakausi
+item.SC2:co2_friendly.name=Parannus: CO2 ystävällinen
+item.SC2:generic_engine.name=Parannus: Yleinen Moottori
+item.SC2:module_input.name=Parannus: Moduulisisääntulo
+item.SC2:production_line.name=Parannus: Valmistuslinja
+item.SC2:cart_deployer.name=Parannus: Vaununlaukaisija
+item.SC2:cart_modifier.name=Parannus: Vaununmuokkain
+item.SC2:cart_crane.name=Parannus: Vaununosturi
+item.SC2:redstone_control.name=Parannus: Punakiviohjaus
+item.SC2:creative_mode.name=Parannus: Luova Pelimuoto
+item.SC2:quick_demolisher.name=Parannus: Nopea Purkaja
+item.SC2:manager_bridge.name=Parannus: Hallitsijasilta
+item.SC2:entropy.name=Parannus: Entropia
+item.SC2:solar_panel.name=Parannus: Aurinkopaneeli
+item.SC2:thermal_engine_upgrade.name=Parannus: Lämpomoottori
+
+# Detector Units
+item.SC2:BlockDetector0.name=Ilmaisin Hallitsija
+item.SC2:BlockDetector1.name=Ilmaisin Yksikkö
+item.SC2:BlockDetector2.name=Ilmaisin Asema
+item.SC2:BlockDetector3.name=Ilmaisin Risteys
+item.SC2:BlockDetector4.name=Ilmaisin Punakiviyksikkö
+
+
+
+# ======================================
+				MODULE MISC
+# ======================================
+
+# Categories
+info.SC2:moduleCategoryHull=Runko
+info.SC2:moduleCategoryEngine=Moottori
+info.SC2:moduleCategoryTool=Työkalu
+info.SC2:moduleCategoryStorage=Varasto
+info.SC2:moduleCategoryAddon=Lisäys
+info.SC2:moduleCategoryAttachment=Lisälaite
+
+# Groups
+info.SC2:moduleGroupEngine=[%1:Moottori|Moottorit]
+info.SC2:moduleGroupDrill=[%1:Pora|Porat]
+info.SC2:moduleGroupFarmer=[%1:Farmaaja|Farmaajat]
+info.SC2:moduleGroupCutter=[%1:Puunhakkaaja|Puunhakkaajat]
+info.SC2:moduleGroupTank=[%1:Tankki|Tankit]
+info.SC2:moduleGroupEntity=[%1:Olevaisuustunnistin|Olevaisuustunnistimet]
+info.SC2:moduleGroupShooter=[%1:Ampuja|Ampujat]
+info.SC2:moduleGroupTool=[%1:Työkalu|Työkalut]
+info.SC2:moduleGroupToolShooter=[%1:Työkalu|Työkalut] tai [%1:Ampuja|Ampujat]
+
+# Messages
+info.SC2:pigExtraMessage=Vswen Thunderpigin areenavoiton muistoksi. Kiitos kaikille jotka lahjoittivat rahaa 2013 Minecraft Marathonin aikana.
+info.SC2:oceanExtraMessage=Tilaa keskisuurelle merelle.
+info.SC2:alphaExtraMessage=Yhden vuoden alpha-tilassa
+info.SC2:storageEmpty=Tyhjä
+info.SC2:storageFull=Täynnä
+info.SC2:giftStorageFull=Saattaa sisältää yllätyksen
+info.SC2:eggStorageFull=Täynnä kananmunia
+
+# Labels
+info.SC2:modularCost=Modulaarinen hinta
+info.SC2:cartSideTop=Ylä
+info.SC2:cartSideCenter=Keski
+info.SC2:cartSideBottom=Ala
+info.SC2:cartSideBack=Taka
+info.SC2:cartSideLeft=Vasen
+info.SC2:cartSideRight=Oikea
+info.SC2:cartSideFront=Etu
+info.SC2:occupiedSides=Vie [%1] [%2:puolen|puolet]
+info.SC2:sidesAnd=ja
+info.SC2:noSides=Ei vie mitään puolta
+info.SC2:moduleConflictHowever=Mutta on ristiriidassa
+info.SC2:moduleConflictAlso=Mutta on ristiriidassa myös
+info.SC2:moduleRequirement=Tarvitsee
+info.SC2:moduleCount1=yksi
+info.SC2:moduleCount2=kaksi
+info.SC2:moduleCount3=kolme
+info.SC2:allowDuplicates=Kaksoiskappaleet ovat mahdollisia
+info.SC2:moduleType=Tyyppi
+info.SC2:capacityOverloadError=Hinta on suurempi kuin rungon kapasiteetti.
+info.SC2:impossibleCombinationError=Annettujen moduulien yhdistelmä ei ole sopiva. Tämän ei pitäisi olla mahdollista.
+info.SC2:complexityOverloadError=[%1] on liian monimutkainen tälle rungolle.
+info.SC2:missingParentError=[%1] tarvitsee [%2] toimiakseen!
+info.SC2:presentNemesisError=[%1] ei toimi [%2] kanssa.
+info.SC2:presentDuplicateError[%1] ei ole sallittu lisätä toista kertaa.
+info.SC2:sideClashError=[%1] ja [%2] yhteentörmää [%3]
+# need beta 3 for these ones to show up (remove this note)
+info.SC2:toolUnbreakable=Hajoamaton
+info.SC2:toolDurability=Kestävyys: [%1]%
+info.SC2:modularCapacity=Modulaarinen kapasiteetti: [%1]
+info.SC2:complexityCap=Moduulin monimutkaisuusraja: [%1]
+info.SC2:maxEngineCount=Maksimi moottorien määrä: [%1]
+info.SC2:maxAddonCount=Maksimi Lisäysten määrä: [%1]
+# end of beta 3 requirement (remove this note)
+
+# ======================================
+				UPGRADES
+# ======================================
+
+info.SC2:effectBlueprint=Mahdollistaa suunnitelmavaunujen käytön.
+info.SC2:effectCombustionFuel=Mahdolliset vakiopolttoaineet
+info.SC2:effectDeployer=Mahdollistaa valmiiden vaunujen käyttöönoton.
+info.SC2:effectDisassemble=Sallii vaunujen purkamisen ja muokkaamisen.
+info.SC2:effectFuelCapacity=Polttoainekapasiteetti [%1].
+info.SC2:effectFuelCost=Polttoainehinta [%1]%.
+info.SC2:effectInputChest=Sisääntuloarkku [%1] kololla.
+info.SC2:effectManagerBridge=Yhdistää Kokoojan Hallitsijaan.
+info.SC2:effectGenerator=Generoi [%1] [%2:yksikön|yksikköä] voimaa minuutissa.
+info.SC2:effectRedstone=Mahdollistaa punakiviohjattavan kokoamisen.
+info.SC2:effectSolar=Generoi voimaa auringossa.
+info.SC2:effectThermal=Käytä Vaunun Kokoojaa laavalla sisäisessä tankissa.
+info.SC2:effectTimeFlat=Moduulin kokoamisaika [%1] [%1:sekunti|sekuntia].
+info.SC2:effectTimeFlatCart=Vaunun kokoamisaika [%1] [%1:sekunti|sekuntia].
+info.SC2:effectTimeFlatRemove=Moduulin purkamisaika [%1] [%1:sekunti|sekuntia].
+info.SC2:effectTransposer=Voi poimia Vaunuja kokoamista varten
+info.SC2:effectEfficiency=Kokoamistehokkuus [%1]%.
+
+
+# ======================================
+				MODULES
+# ======================================
+
+# Addons
+modules.addons.SC2:detectorAnimals=Eläimet
+modules.addons.SC2:detectorBats=Lepakot
+modules.addons.SC2:detectorMonsters=Hirviöt
+modules.addons.SC2:detectorPlayers=Pelaajat
+modules.addons.SC2:detectorVillagers=Kyläläiset
+modules.addons.SC2:planterRangeExtenderTitle=Istuttajan kantama 
+modules.addons.SC2:saplingPlantAmount=Tämänhetkinen taimenien määrä
+modules.addons.SC2:controlLeverTitle=Kontrollointivipu
+modules.addons.SC2:leverStartCart=Käynnistä vaunu
+modules.addons.SC2:leverStopCart=Pysäytä vaunu
+modules.addons.SC2:leverTurnAroundCart=Käännä vaunu ympäri
+modules.addons.SC2:colorizerRgbRed=Punainen
+modules.addons.SC2:colorizerRgbGreen=Vihreä
+modules.addons.SC2:colorizerRgbBlue=Sininen
+modules.addons.SC2:intelligenceLockedBlock=Pora poistaa aina tämän kuution.
+modules.addons.SC2:intelligenceChange=Muuta poran älykkyyttä
+modules.addons.SC2:intelligenceCurrent=Nyt: [%1->Päällä|Pois päältä]
+modules.addons.SC2:enchanterInstruction=Lisää Lumottu Kirja vasempaan koloon.
+modules.addons.SC2:invisibilityToggle=[%1->Aktivoi|Deaktivoi] näkymättömyysydin
+modules.addons.SC2:informationProviderLabelName=Nimi
+modules.addons.SC2:informationProviderLabelDistance=Matka
+modules.addons.SC2:informationProviderMessageDistance=Matka: [%1]m
+modules.addons.SC2:informationProviderLabelPosition=Paikka
+modules.addons.SC2:informationProviderMessagePosition=X: [%1] Y: [%2] Z: [%3]
+modules.addons.SC2:informationProviderLabelFuel=Polttoainetta jäljellä
+modules.addons.SC2:informationProviderMessageFuel=Polttoaineen aikaa jäljellä
+modules.addons.SC2:informationProviderMessageNoConsumption=Ei kulutusta
+modules.addons.SC2:informationProviderLabelStorage=Käytetty varastotila
+modules.addons.SC2:informationProviderLabelDurability=Kestävyys
+modules.addons.SC2:informationProviderMessageToolBroken=Työkalu on rikki
+modules.addons.SC2:informationProviderMessageToolNotBroken=Työkalu ei ole vahingoittunut. Poista materiaali.
+modules.addons.SC2:informationProviderMessageRepair=Työkalua korjataan
+modules.addons.SC2:informationProviderMessageUnbreakable=Työkalu on tuhoutumaton
+modules.addons.SC2:informationProviderLabels=Merkit
+modules.addons.SC2:powerThousandSuffix=K
+modules.addons.SC2:powerObserverInstruction=Klikkaa ja vedä haluttuun alueeseen.
+modules.addons.SC2:powerObserverRemoveInstruction=Klikkaa oikealla poistaaksesi.
+modules.addons.SC2:powerObserverDropInstruction=Tiputa moottori tähän.
+modules.addons.SC2:powerObserverChangeInstruction=Klikkaa muuttaaksesi voimarajaa.
+modules.addons.SC2:powerObserverChangeInstruction10=Paina VAIHTO ja klikkaa vaihtaaksesi 10K.
+modules.addons.SC2:recipeOutput=Muuta ulostulon sijaintia.
+modules.addons.SC2:recipeCurrentSelection=Tällä hetkellä
+modules.addons.SC2:recipeInvalidOutput=Tuntematon
+modules.addons.SC2:recipeChangeMode=Vaihda tämänhetkistä tilaa
+modules.addons.SC2:recipeNoLimit=Ei ylärajaa
+modules.addons.SC2:recipeLimit=Rajoita varastoituja esineitä
+modules.addons.SC2:recipeDisabled=Ei tuota mitään
+modules.addons.SC2:recipeChangeLimit=[%1->Suurenna|Pienennä] varastoitujen esineiden määrää.
+modules.addons.SC2:recipeChangeLimit10=Paina Vaihto ja klikkaa vaihtaaksesi 10.
+modules.addons.SC2:recipeChangeLimit64=Paina Ctrl ja klikkaa vaihtaaksesi 64.
+modules.addons.SC2:shieldToggle=[%1->Aktivoi|Deaktivoi] kilpi
+
+# Engines
+modules.engines.SC2:creativePowerLevel=Voimataso: [%1]
+modules.engines.SC2:coalEngineTitle=Hiilimoottori
+modules.engines.SC2:outOfFuel=Polttoaine loppu
+modules.engines.SC2:fuelLevel=Polttoaine: [%1]
+modules.engines.SC2:solarEngineTitle=Aurinkomoottori
+modules.engines.SC2:outOfPower=Voima loppu
+modules.engines.SC2:powerLevel=Voima: [%1]
+modules.engines.SC2:thermalEngineTitle=Lämpömoottori
+modules.engines.SC2:thermalPowered=Voimistettu
+modules.engines.SC2:outOfWater=Vesi loppunut
+modules.engines.SC2:outOfLava=Laava loppunut
+
+# Tanks
+modules.tanks.SC2:creativeTankMode=Tämänhetkinen luova tila: [%1][%2->Normaali|Koko ajan täynnä|Koko ajan tyhjä|Koko ajan puolillaan]
+modules.tanks.SC2:creativeTankChangeMode=Klikkaa oikealla muuttaaksesi
+modules.tanks.SC2:creativeTankResetMode=Paina Vaihto ja klikkaa oikealla vaihtaaksesi normaaliksi
+modules.tanks.SC2:tankLocked=Lukittu tähän nesteeseen
+modules.tanks.SC2:tankLock=Klikkaa lukitaksesi tähän nesteeseen
+modules.tanks.SC2:tankUnlock=Klikkaa poistaaksesi lukituksen
+modules.tanks.SC2:tankEmpty=Tyhjä
+modules.tanks.SC2:tankInvalidFluid=Tuntematon
+
+# Tools
+modules.tools.SC2:toolDurability=Kestävyys
+modules.tools.SC2:toolBroken=Rikki
+modules.tools.SC2:toolRepairing=Korjaamassa työkalua
+modules.tools.SC2:toolDecent=Poista korjausmateriaalit, työkalu on vielä käyttökelpoinen.
+modules.tools.SC2:toolRepairInstruction=Korjaa tämä työkalu [%1]
+modules.tools.SC2:toolUnbreakable=Tämä työkalu ei hajoa.
+modules.tools.SC2:toolUnbreakableRepairError=Poista korjausmateriaalit
+modules.tools.SC2:drillTitle=Pora
+modules.tools.SC2:drillToggle=[%1->Käynnistä|Sammuta] pora
+modules.tools.SC2:repairDiamonds=Timanteilla
+modules.tools.SC2:repairIron=Rautaharkoilla
+modules.tools.SC2:farmerTitle=Farmaaja
+modules.tools.SC2:cutterTitle=Puunhakkaaja
+
+# Attachments
+modules.attachments.SC2:fertilizers=Lannoittajat
+modules.attachments.SC2:railerTitle=Raiteistajat
+modules.attachments.SC2:controlSystemTitle=Keh Ohjaus Syst.
+modules.attachments.SC2:controlSystemDistanceUnits=[%1->|k|M|G|T|P]m
+modules.attachments.SC2:controlSystemOdoMeter=ODO
+modules.attachments.SC2:controlSystemTripMeter=MATKA
+modules.attachments.SC2:cageAutoPickUp=[%1->Aktiovoi|Deaktivoi] automaattinen poiminta
+modules.attachments.SC2:cagePickUp=[%1->Vangitse läheinen|Vapauta vangittu] olento
+modules.attachments.SC2:cakeServerTitle=Kakun jakaja
+modules.attachments.SC2:cakesLabel=Cakes: [%1] / [%2]
+modules.attachments.SC2:slicesLabel=Slices: [%1] / [%2]
+modules.attachments.SC2:explosivesTitle=Räjähteet
+modules.attachments.SC2:experienceTitle=Kokemus
+modules.attachments.SC2:experienceLevel=Kokemustaso: [%1] / [%2]
+modules.attachments.SC2:experienceExtract=Paina uuttaaksesi 50xp
+modules.attachments.SC2:experiencePlayerLevel=Tämänhetkinen levelisi on [%1]
+modules.attachments.SC2:shooterTitle=Ampuja
+modules.attachments.SC2:shooterFrequency=#/s
+modules.attachments.SC2:shooterSeconds=s
+modules.attachments.SC2:shooterDelay=Viive
+modules.attachments.SC2:notePiano=Piano
+modules.attachments.SC2:noteBassDrum=Bassorumpu
+modules.attachments.SC2:noteSnareDrum=Virveli
+modules.attachments.SC2:noteSticks=Tikut
+modules.attachments.SC2:noteBassGuitar=Basso
+modules.attachments.SC2:noteCreateTrack=Luo uusi raita
+modules.attachments.SC2:noteRemoveTrack=Poista alin raita
+modules.attachments.SC2:noteActivateInstrument=Aktivoi [%1]
+modules.attachments.SC2:noteDeactivateInstrument=Poista sointukuution asetus
+modules.attachments.SC2:noteDelay=Vaihda viivettä. Tämänhetkinen viive: [%1]
+modules.attachments.SC2:noteAdd=Lisää raitaan #[%1]
+modules.attachments.SC2:noteRemove=Poista sävel oikealta #[%1]
+modules.attachments.SC2:noteVolume=Raidan äänenvoimakkuus: [%1->Vaimennettu|Matala|Keskitasoinen|Korkea]
+
+
+# ======================================
+				Steve's Arcade 
+# ======================================
+# need beta 3 for these ones to show up (remove this note)
+# Ghast Invaders
+arcade.SC2:ghastInvaders=Hornanhenki hyökkääjät
+arcade.SC2:ghastLives=Extra elämät
+arcade.SC2:highScore=Paras tulos: [%1]
+arcade.SC2:score=Pisteet: [%1]
+arcade.SC2:instructionShoot=Ammu
+arcade.SC2:instructionLeft=Liiku vasemmalle
+arcade.SC2:instructionRight=Liiku oikealle
+arcade.SC2:instructionRestart=Aloita uudelleen
+arcade.SC2:creeperSweeper=Hiipijän lakaisija
+arcade.SC2:creeperMapName1=Pikkuruinen
+arcade.SC2:creeperMapName2=Keskisuuri
+arcade.SC2:creeperMapName3=Valtava
+arcade.SC2:creepersLeft=Hiipijöitä jäljellä:  [%1]
+arcade.SC2:creeperTime=Aikaa kulunut: [%1]s
+arcade.SC2:instructionChangeMap=Muuta kartan kokoa
+arcade.SC2:creeperCurrentMap=Tämänhetkinen [%1]
+arcade.SC2:creeperHighScores=Parhaat Tulokset
+arcade.SC2:creeperHighScore=[%1]: [%2]s
+arcade.SC2:mobStacker=Mobien kasaaja
+arcade.SC2:stackerRemovedLines=Poistetut linjat: [%1]
+arcade.SC2:stackerRemovedLinesCombo=Poistetut [%1->ainut|tupla|tripla|quadrupla]linjat [%2]
+arcade.SC2:instructionRotate=Kierrä
+arcade.SC2:instructionDrop=Pudota
+arcade.SC2:trackOperator=Raide Operaattori
+arcade.SC2:operatorSaveError=Tallentaminen epäonnistui
+arcade.SC2:operatorSave=Tallenna
+arcade.SC2:operatorUserCreatedMaps=Käyttäjien tekemät kartat
+arcade.SC2:operatorStories=Tarinat
+arcade.SC2:operatorHelp=Jos haluat tietää miten pelata mene Tarinatilaan ja aloita 'Alku'tarina. Jotta voit tehdä oman kartan, mene karttamuokkaimeen ja luo uusi kartta.Eteenpäin ohjaavat ohjeet ovat siellä. Klikkaa tunnistinraiteesta ja sitten risteyksestä jos haluat yhdistää ne. Jos tarvitset lisätietoa, käy wiki-sivulla.
+arcade.SC2:instructionTrackShape=Valitse raiteen muoto
+arcade.SC2:instructionRotateTrack=Kierrä raidetta
+arcade.SC2:instructionFlipTrack=Käännä raidetta
+arcade.SC2:instructionDefaultDirection=Vaihda oletussuunta
+arcade.SC2:instructionTrackType=Vaihda raiteen tyyppi
+arcade.SC2:instructionDeleteTrack=Poista raide
+arcade.SC2:instructionCopyTrack=Kopio raide
+arcade.SC2:instructionMoveSteve=Siirrä tai kierrä Steveä
+arcade.SC2:instructionMoveMap=Siirrä karttaa
+arcade.SC2:instructionPlaceTrack=Laita raide
+arcade.SC2:instructionDeselectTrack=Poista raiteen valinta
+arcade.SC2:leftMouseButton=VHiiri
+arcade.SC2:rightMouseButton=OHiiri
+arcade.SC2:buttonStart=Aloita
+arcade.SC2:buttonMenu=Menu
+arcade.SC2:buttonStop=Pysäytä
+arcade.SC2:buttonNextLevel=Seuraava kenttä
+arcade.SC2:buttonStartLevel=Aloita kenttä
+arcade.SC2:buttonSelectStory=Valitse Tarina
+arcade.SC2:buttonSelectStoryOther=Valitse toinen Tarina
+arcade.SC2:buttonCreateLevel=Luo Kenttä
+arcade.SC2:buttonEditLevel=Muokkaa kenttää
+arcade.SC2:buttonRefreshList=Lataa lista uudelleen
+arcade.SC2:buttonSave=Tallenna
+arcade.SC2:buttonSaveAs=Tallenna nimellä...
+arcade.SC2:buttonCancel=Peruuta
+#This one is slightly ugly, will probably be re-named later
+stories.beginning.SC2:mapEditor=Karttamuokkain
+
+# Story - The beginning
+stories.beginning.SC2:title=Aloitus
+stories.beginning.SC2:mission=Stevellä on tehtävä,hänen täytyy saada kartta löytääkseen seuraavan levelin.
+stories.beginning.SC2:start=Paina Aloita näppäintä oikealle
+stories.beginning.SC2:stop=Jos haluat, voit painaa Pysäytä näppäintä pysäyttääksesi hänet.
+stories.beginning.SC2:map=Stevellä on nyt kartta, paina Seuraava kenttä jatkaaksesi.
+stories.beginning.SC2:trackOperator=Olet nyt Raide Operaattori, tehtäväsi on varmistaa että radat on laitettu oikein. Paina risteyksistä vaihtaaksesi niiden suuntaa ennen kuin painat Aloita näppäintä.
+stories.beginning.SC2:goodJob=Hyvää työtä. Niin ne hommat hoidetaan
+stories.beginning.SC2:changeJunctions=Voit aina painaa Pysäytä näppäintä muuttaaksesi kuinka risteykset on suunnattu.
+stories.beginning.SC2:blast=Steven mielestä on todella mahtavaa kulkea vaunulla, mutta välillä hänkin saa kyllikseen. Esimerkiksi silloin kun hän kiertää samaa rataa ikuisesti. Onnea.
+stories.beginning.SC2:steel=Tiellä on aina välillä kuoppia, Raide Operaattorille ne ovat nimeltään Teräsraiteita. Teräsraideristeyksien suuntaa ei voi muuttaa, onnea.
+stories.beginning.SC2:detector=Tunnistinraiteet voivat olla ystäviäsi ja vihollisiasi. Kun Steve kulkee Tunnistinraiteen yli, monet risteykset voivat vaihtaa suuntaa, jopa Teräsristeykset. Nähdäksesi mihin risteyksiin Tunnistinraide vaikuttaa, pidä hiirtä Tunnistinraiteen yläpuolella.
+stories.beginning.SC2:outOfReach=Juuri ja juuri ulottumattomissa...
+stories.beginning.SC2:outOfReach2=...mutta se ei estä sinua.
+stories.beginning.SC2:longJourney=Pitkän matkan jälkeen Steve voi nähdä tiensä päättyneen...
+stories.beginning.SC2:end=...mutta kaikki ei mene aina niinkuin on suunniteltu.Sillä välin kuin odotat uusia tarinoita voit luoda ja jakaa omia kenttiäsi. Mene karttamuokkaimeen alkuvalikossa jotta voit aloittaa omien kenttiesi luomisen.
+stories.beginning.SC2:thanks=Kiitos pelaamisesta! :)
+stories.beginning.SC2:level1=Uusi päivä
+stories.beginning.SC2:level2=Operaattori
+stories.beginning.SC2:level3=Pakene silmikasta
+stories.beginning.SC2:level4=Teräksen kova
+stories.beginning.SC2:level5=Liikkuva maailma
+stories.beginning.SC2:level6=Koodilukko
+stories.beginning.SC2:level7=Niin lähellä
+stories.beginning.SC2:level8=Hulluus
+stories.beginning.SC2:level9=Kakku
+
+
