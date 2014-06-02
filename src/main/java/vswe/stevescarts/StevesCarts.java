@@ -7,7 +7,7 @@ import net.minecraft.item.ItemBlockWithMetadata;
 import net.minecraft.item.ItemEnchantedBook;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import vswe.stevescarts.Blocks.*;
 import vswe.stevescarts.Carts.MinecartModular;
@@ -45,16 +45,13 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid = "StevesCarts", name = "Steve's Carts 2", version = GeneratedInfo.version)
-@NetworkMod(channels = { "SC2" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 public class StevesCarts {
-
 	public static boolean hasGreenScreen = false;
 	public static boolean isChristmas = false;
 	public static boolean isHalloween = false;
@@ -67,7 +64,6 @@ public class StevesCarts {
 	//public final String soundPath = "/assets/stevescarts/sounds";
 	public final String textureHeader = "stevescarts";
 	public static final String localStart = "SC2:";
-	
 
 	@SidedProxy(clientSide = "vswe.stevescarts.ClientProxy", serverSide = "vswe.stevescarts.CommonProxy")
 	public static CommonProxy proxy;
@@ -78,11 +74,7 @@ public class StevesCarts {
 	public static CreativeTabSC2 tabsSC2Components = new CreativeTabSC2("SC2Items");
 	public static CreativeTabSC2 tabsSC2Blocks = new CreativeTabSC2("SC2Blocks");
 	
-
-	
 	public ISimpleBlockRenderingHandler blockRenderer;
-	
-	
 
 	public int maxDynamites = 50;
 	public boolean useArcadeSounds;
@@ -92,21 +84,10 @@ public class StevesCarts {
 	public void preInit(FMLPreInitializationEvent event) {
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 		config.load();
-		
 
-
-		
-		
-
-
-		
 		maxDynamites = Math.min(maxDynamites, config.get("Settings", "MaximumNumberOfDynamites", maxDynamites).getInt(maxDynamites));	
 		useArcadeSounds = config.get("Settings", "useArcadeSounds", true).getBoolean(true);	
 		useArcadeMobSounds = config.get("Settings", "useTetrisMobSounds", true).getBoolean(true);	
-		
-
-
-
 
         Items.preBlockInit(config);
         ItemBlockStorage.init();
@@ -126,7 +107,7 @@ public class StevesCarts {
 
     public TradeHandler tradeHandler;
 
-	 @EventHandler
+    @EventHandler
 	public void load(FMLInitializationEvent evt) {
 
 		LanguageRegistry.instance().addStringLocalization("itemGroup.SC2Modules", "en_US", "Steve's Carts 2 Modules");
@@ -138,7 +119,6 @@ public class StevesCarts {
 		new ChunkListener();
 		new CraftingHandler();
 		new WoodFuelHandler();
-		//new TestListener();
 		if (isChristmas) {
             tradeHandler = new TradeHandler();
 			new MobDeathListener();
@@ -146,12 +126,10 @@ public class StevesCarts {
 			new PlayerSleepListener();
 		}
 
-
 		GiftItem.init();
 
-		NetworkRegistry.instance().registerGuiHandler(instance, proxy);
+        NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
 		proxy.renderInit();
-		
 
 		tabsSC2Blocks.setIcon(new ItemStack(Blocks.CART_ASSEMBLER.getBlock(), 1));
 
@@ -165,19 +143,4 @@ public class StevesCarts {
 		EntityRegistry.registerModEntity(cart, "Minecart.Vswe." + ID, ID, instance, 80, 3, true);
 		//MinecartRegistry.registerMinecart(cart, new ItemStack(carts, 1, ID));
 	}
-	
-
-
-	@EventHandler
-	public void modsLoaded(FMLPostInitializationEvent event) {
-
-    }
-	
-
-
-
-
-
-
-
 }
