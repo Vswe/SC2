@@ -1,18 +1,18 @@
 package vswe.stevescarts.Helpers;
 
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 
 public class IconData {
-	private Icon icon;
+	private IIcon icon;
 	private String texture;
 	
-	public IconData(Icon icon, String texture) {
+	public IconData(IIcon icon, String texture) {
 		this.icon = icon;
 		this.texture = texture;
 	}
 	
-	public Icon getIcon() {
+	public IIcon getIcon() {
 		return icon;
 	}
 	

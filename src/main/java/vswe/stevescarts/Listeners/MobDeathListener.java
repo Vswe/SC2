@@ -1,6 +1,5 @@
 package vswe.stevescarts.Listeners;
 
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityBlaze;
@@ -10,8 +9,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import vswe.stevescarts.Helpers.ComponentTypes;
-import vswe.stevescarts.Items.Items;
-import vswe.stevescarts.StevesCarts;
 
 public class MobDeathListener {
 

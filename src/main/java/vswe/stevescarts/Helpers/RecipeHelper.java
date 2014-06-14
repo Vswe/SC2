@@ -7,14 +7,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemEnchantedBook;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.ShapedOreRecipe;
-import vswe.stevescarts.Items.Items;
+import vswe.stevescarts.Items.ModItems;
 
 import java.util.ArrayList;
 
 public final class RecipeHelper {
     public static void addRecipe(ItemStack item, Object[][] recipe) {
         if (recipe != null && item != null) {
-            if (item.getItem() == Items.component && !Items.component.isValid(item)) {
+            if (item.getItem() == ModItems.component && !ModItems.component.isValid(item)) {
                 return;
             }
 

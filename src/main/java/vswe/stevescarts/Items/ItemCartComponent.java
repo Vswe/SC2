@@ -1,19 +1,18 @@
 package vswe.stevescarts.Items;
 import java.util.List;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 import vswe.stevescarts.Helpers.ComponentTypes;
 import vswe.stevescarts.StevesCarts;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.util.Icon;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.world.World;
-import net.minecraft.util.FoodStats;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import vswe.stevescarts.Helpers.EntityEasterEgg;
@@ -21,14 +20,14 @@ public class ItemCartComponent extends Item
 {
 
 
-	private Icon icons[];
-	private Icon unknownIcon;
+	private IIcon icons[];
+	private IIcon unknownIcon;
 	public static int size () {
 		return ComponentTypes.values().length;
 	}
 
-    public ItemCartComponent(int i) {
-        super(i);
+    public ItemCartComponent() {
+        super();
         setHasSubtypes(true);
         setMaxDamage(0);
         setCreativeTab(StevesCarts.tabsSC2Components);	
@@ -49,7 +48,7 @@ public class ItemCartComponent extends Item
 
 	@Override
     @SideOnly(Side.CLIENT)
-    public Icon getIconFromDamage(int dmg)
+    public IIcon getIconFromDamage(int dmg)
     {
 		if (dmg < 0 || dmg >= icons.length || icons[dmg] == null) {
 			return unknownIcon;
@@ -61,12 +60,12 @@ public class ItemCartComponent extends Item
 	private String getRawName(int i) {
 		return getName(i).replace(":","").replace(" ","_").toLowerCase();
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister register)
+    public void registerIcons(IIconRegister register)
     {
-		icons = new Icon[size()];
+		icons = new IIcon[size()];
 		for (int i = 0; i < icons.length; i++) {
 			if (getName(i) != null) {
 				icons[i] = register.registerIcon(StevesCarts.instance.textureHeader + ":" + getRawName(i) + "_icon");
@@ -81,14 +80,14 @@ public class ItemCartComponent extends Item
 		if (item == null || item.getItemDamage() < 0 || item.getItemDamage() >= size() || getName(item.getItemDamage()) == null) {
 			return getUnlocalizedName();
 		}else{
-			return "item." + StevesCarts.instance.localStart + getRawName(item.getItemDamage());
+			return "item." + StevesCarts.localStart + getRawName(item.getItemDamage());
 		}
     }
 	
 	@Override
     public String getUnlocalizedName() {
 	
-		return "item." + StevesCarts.instance.localStart + "unknowncomponent";	
+		return "item." + StevesCarts.localStart + "unknowncomponent";
 	}	
 	
     public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
@@ -106,7 +105,7 @@ public class ItemCartComponent extends Item
     /**
      * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
      */
-    public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List)
+    public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List)
     {
 		for (int i = 0; i < size(); i++) {
 			ItemStack iStack = new ItemStack(par1, 1, i);
@@ -143,7 +142,7 @@ public class ItemCartComponent extends Item
 	}
 	
 	public static ItemStack getWood(int type, boolean isLog, int count) {
-		return new ItemStack(Items.component, count, 72 + type * 2 + (isLog ? 0 : 1));
+		return new ItemStack(ModItems.component, count, 72 + type * 2 + (isLog ? 0 : 1));
 	}
 	
 	public static boolean isWoodLog(ItemStack item) {

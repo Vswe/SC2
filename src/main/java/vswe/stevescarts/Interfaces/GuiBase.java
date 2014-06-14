@@ -7,7 +7,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.inventory.Container;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -49,7 +49,7 @@ public abstract class GuiBase extends GuiNEIKiller
         while (var6.hasNext())
         {
             String var7 = (String)var6.next();
-            int var8 = this.fontRenderer.getStringWidth(var7);
+            int var8 = this.getFontRenderer().getStringWidth(var7);
 
             if (var8 > var5)
             {
@@ -67,7 +67,7 @@ public abstract class GuiBase extends GuiNEIKiller
         }
 
         this.zLevel = 300.0F;
-        itemRenderer.zLevel = 300.0F;
+        itemRender.zLevel = 300.0F;
         int var10 = -267386864;
         this.drawGradientRect(var15 - 3, var16 - 4, var15 + var5 + 3, var16 - 3, var10, var10);
         this.drawGradientRect(var15 - 3, var16 + var9 + 3, var15 + var5 + 3, var16 + var9 + 4, var10, var10);
@@ -85,7 +85,7 @@ public abstract class GuiBase extends GuiNEIKiller
         {
             String var14 = (String)text.get(var13);
 
-            this.fontRenderer.drawStringWithShadow(var14, var15, var16, -1);
+            this.getFontRenderer().drawStringWithShadow(var14, var15, var16, -1);
 
             if (var13 == 0)
             {
@@ -96,7 +96,7 @@ public abstract class GuiBase extends GuiNEIKiller
         }
 
         this.zLevel = 0.0F;
-        itemRenderer.zLevel = 0.0F;		
+        itemRender.zLevel = 0.0F;
 		
 
 
@@ -111,7 +111,7 @@ public abstract class GuiBase extends GuiNEIKiller
 	}
 			
 	public FontRenderer getFontRenderer() {
-		return fontRenderer;
+		return fontRendererObj;
 	}
 	
 	public void setXSize(int val) {
@@ -330,7 +330,7 @@ public abstract class GuiBase extends GuiNEIKiller
 		return zLevel;
 	}
 	
-	public void drawIcon(Icon icon, int targetX, int targetY, float sizeX, float sizeY, float offsetX, float offsetY) {
+	public void drawIcon(IIcon icon, int targetX, int targetY, float sizeX, float sizeY, float offsetX, float offsetY) {
 		Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
 		

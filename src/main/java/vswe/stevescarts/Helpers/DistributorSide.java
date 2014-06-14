@@ -1,5 +1,5 @@
 package vswe.stevescarts.Helpers;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import vswe.stevescarts.TileEntities.TileEntityDistributor;
 	
 public class DistributorSide {

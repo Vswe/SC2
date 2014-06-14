@@ -7,14 +7,16 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import vswe.stevescarts.Helpers.*;
-import vswe.stevescarts.Items.Items;
+import vswe.stevescarts.Items.ModItems;
 import vswe.stevescarts.Models.Cart.*;
 import vswe.stevescarts.Modules.Addons.*;
 import vswe.stevescarts.Modules.Workers.*;
@@ -111,8 +113,8 @@ public class ModuleData {
 	public static void init() {
 		String planks = "plankWood"; //ore dict
 		String wood = "logWood"; //ore dict
-		ItemStack woodSingleSlab = new ItemStack(Block.woodSingleSlab, 1, -1);
-		ItemStack bonemeal = new ItemStack(Item.dyePowder, 1, 15);
+		ItemStack woodSingleSlab = new ItemStack(Blocks.wooden_slab, 1, -1);
+		ItemStack bonemeal = new ItemStack(Items.dye, 1, 15);
 
 
 		
@@ -125,15 +127,15 @@ public class ModuleData {
 		
 		ModuleData coalStandard = new ModuleData(0, "Coal Engine", ModuleCoalStandard.class,15)/*.addSide(SIDE.BACK)*/			
 			.addRecipe(new Object[][] {
-				{Item.ingotIron,Item.ingotIron,Item.ingotIron},
-				{Item.ingotIron,Block.furnaceIdle,Item.ingotIron},
-				{Block.pistonBase,null,Block.pistonBase}
+				{Items.iron_ingot,Items.iron_ingot,Items.iron_ingot},
+				{Items.iron_ingot,Blocks.furnace,Items.iron_ingot},
+				{Blocks.piston,null,Blocks.piston}
 			});		
 			
 		ModuleData coalTiny = new ModuleData(44, "Tiny Coal Engine", ModuleCoalTiny.class,2)/*.addSide(SIDE.BACK)*/
 			.addRecipe(new Object[][] {
-				{Item.ingotIron,Block.furnaceIdle,Item.ingotIron},
-				{null,Block.pistonBase,null}
+				{Items.iron_ingot,Blocks.furnace,Items.iron_ingot},
+				{null,Blocks.piston,null}
 			});	
 			
 		addNemesis(coalTiny, coalStandard);
@@ -142,25 +144,25 @@ public class ModuleData {
 		ModuleData solar1 = new ModuleData(1, "Solar Engine", ModuleSolarStandard.class, 20).addSides(new SIDE[] {SIDE.CENTER, SIDE.TOP})	
 			.removeModel("Top")		
 			.addRecipe(new Object[][] {
-				{Item.ingotIron,ComponentTypes.SOLAR_PANEL.getItemStack(),Item.ingotIron},
+				{Items.iron_ingot,ComponentTypes.SOLAR_PANEL.getItemStack(),Items.iron_ingot},
 				{ComponentTypes.SOLAR_PANEL.getItemStack(),ComponentTypes.ADVANCED_PCB.getItemStack(),ComponentTypes.SOLAR_PANEL.getItemStack()},
-				{Block.pistonBase,ComponentTypes.SOLAR_PANEL.getItemStack(),Block.pistonBase}
+				{Blocks.piston,ComponentTypes.SOLAR_PANEL.getItemStack(),Blocks.piston}
 			});			
 		
 		ModuleData solar0 = new ModuleData(45, "Basic Solar Engine", ModuleSolarBasic.class, 12).addSides(new SIDE[] {SIDE.CENTER, SIDE.TOP})
 			.removeModel("Top")			
 			.addRecipe(new Object[][] {
-				{ComponentTypes.SOLAR_PANEL.getItemStack(),Item.ingotIron,ComponentTypes.SOLAR_PANEL.getItemStack()},
-				{Item.ingotIron,ComponentTypes.SIMPLE_PCB.getItemStack(),Item.ingotIron},
-				{null,Block.pistonBase,null}
+				{ComponentTypes.SOLAR_PANEL.getItemStack(),Items.iron_ingot,ComponentTypes.SOLAR_PANEL.getItemStack()},
+				{Items.iron_ingot,ComponentTypes.SIMPLE_PCB.getItemStack(),Items.iron_ingot},
+				{null,Blocks.piston,null}
 			});
 
 		
 		ModuleData compactsolar = new ModuleData(56, "Compact Solar Engine", ModuleSolarCompact.class, 32).addSides(new SIDE[] {SIDE.RIGHT, SIDE.LEFT})
 			.addRecipe(new Object[][] {
-				{ComponentTypes.ADVANCED_SOLAR_PANEL.getItemStack(),Item.ingotIron,ComponentTypes.ADVANCED_SOLAR_PANEL.getItemStack()},
-				{ComponentTypes.ADVANCED_PCB.getItemStack(),Item.redstone, ComponentTypes.ADVANCED_PCB.getItemStack()},
-				{Block.pistonBase,Item.ingotIron,Block.pistonBase}
+				{ComponentTypes.ADVANCED_SOLAR_PANEL.getItemStack(),Items.iron_ingot,ComponentTypes.ADVANCED_SOLAR_PANEL.getItemStack()},
+				{ComponentTypes.ADVANCED_PCB.getItemStack(),Items.redstone, ComponentTypes.ADVANCED_PCB.getItemStack()},
+				{Blocks.piston,Items.iron_ingot,Blocks.piston}
 			});		
 
 		
@@ -201,33 +203,33 @@ public class ModuleData {
 		new ModuleData(7, "Torch Placer", ModuleTorch.class,14).addSides(new SIDE[] {SIDE.RIGHT, SIDE.LEFT})
 			.addRecipe(new Object[][] {
 				{ComponentTypes.TRI_TORCH.getItemStack(),null, ComponentTypes.TRI_TORCH.getItemStack()},
-				{Item.ingotIron,null,Item.ingotIron},
-				{Item.ingotIron,Item.ingotIron,Item.ingotIron}
+				{Items.iron_ingot,null,Items.iron_ingot},
+				{Items.iron_ingot,Items.iron_ingot,Items.iron_ingot}
 			});				
 		
 		
 		
 		ModuleData drill = new ModuleDataTool(8, "Basic Drill", ModuleDrillDiamond.class,10, false).addSide(SIDE.FRONT)	
-			.addRecipe(new Object[][] {{Item.ingotIron, Item.diamond,  null},
-							   {null, Item.ingotIron,  Item.diamond},
-							   {Item.ingotIron,  Item.diamond, null}
+			.addRecipe(new Object[][] {{Items.iron_ingot, Items.diamond,  null},
+							   {null, Items.iron_ingot,  Items.diamond},
+							   {Items.iron_ingot,  Items.diamond, null}
 							  });
 
 		ModuleData ironDrill = new ModuleDataTool(42, "Iron Drill", ModuleDrillIron.class,3, false).addSide(SIDE.FRONT)			
-			.addRecipe(new Object[][] {{Item.ingotIron, Item.ingotIron,  null},
-									   {null, Item.ingotIron,  Item.ingotIron},
-									   {Item.ingotIron,  Item.ingotIron, null}
+			.addRecipe(new Object[][] {{Items.iron_ingot, Items.iron_ingot,  null},
+									   {null, Items.iron_ingot,  Items.iron_ingot},
+									   {Items.iron_ingot,  Items.iron_ingot, null}
 									  });
 						  
 		ModuleData hardeneddrill = new ModuleDataTool(43, "Hardened Drill", ModuleDrillHardened.class,45, false).addSide(SIDE.FRONT)
 			.addRecipe(new Object[][] {{ComponentTypes.HARDENED_MESH.getItemStack(), ComponentTypes.REINFORCED_METAL.getItemStack(),  null},
-							   {Block.blockDiamond, drill.getItemStack(), ComponentTypes.REINFORCED_METAL.getItemStack()},
+							   {Blocks.diamond_block, drill.getItemStack(), ComponentTypes.REINFORCED_METAL.getItemStack()},
 							   {ComponentTypes.HARDENED_MESH.getItemStack(),  ComponentTypes.REINFORCED_METAL.getItemStack(), null}
 							  });	
 							  
 		ModuleData galgdrill = new ModuleDataTool(9, "Galgadorian Drill", ModuleDrillGalgadorian.class,150, true).addSide(SIDE.FRONT)		
 			.addRecipe(new Object[][] {{ComponentTypes.GALGADORIAN_METAL.getItemStack(), ComponentTypes.ENHANCED_GALGADORIAN_METAL.getItemStack(),  null},
-							   {Block.blockDiamond, hardeneddrill.getItemStack(), ComponentTypes.ENHANCED_GALGADORIAN_METAL.getItemStack()},
+							   {Blocks.diamond_block, hardeneddrill.getItemStack(), ComponentTypes.ENHANCED_GALGADORIAN_METAL.getItemStack()},
 							   {ComponentTypes.GALGADORIAN_METAL.getItemStack(),  ComponentTypes.ENHANCED_GALGADORIAN_METAL.getItemStack(), null}
 							  });	
 
@@ -238,14 +240,14 @@ public class ModuleData {
 		drillGroup.add(galgdrill);
 		
 		ModuleData railer = new ModuleData(10, "Railer", ModuleRailer.class,3)/*.addSide(SIDE.TOP)*/	
-			.addRecipe(new Object[][] {{Block.stone,Block.stone,Block.stone},
-										{Item.ingotIron,Block.rail,Item.ingotIron},
-										{Block.stone,Block.stone,Block.stone}
+			.addRecipe(new Object[][] {{Blocks.stone,Blocks.stone,Blocks.stone},
+										{Items.iron_ingot,Blocks.rail,Items.iron_ingot},
+										{Blocks.stone,Blocks.stone,Blocks.stone}
 									  });											  	
 		ModuleData largerailer = new ModuleData(11, "Large Railer", ModuleRailerLarge.class,17)/*.addSide(SIDE.TOP)*/			
-			.addRecipe(new Object[][] {{Item.ingotIron,Item.ingotIron,Item.ingotIron},
-										{railer.getItemStack(),Block.rail,railer.getItemStack()},
-										{Item.ingotIron,Item.ingotIron,Item.ingotIron}
+			.addRecipe(new Object[][] {{Items.iron_ingot,Items.iron_ingot,Items.iron_ingot},
+										{railer.getItemStack(),Blocks.rail,railer.getItemStack()},
+										{Items.iron_ingot,Items.iron_ingot,Items.iron_ingot}
 									  });				
 		addNemesis(railer, largerailer);
 
@@ -253,28 +255,28 @@ public class ModuleData {
 		
 		new ModuleData(12, "Bridge Builder", ModuleBridge.class,14)	
 			.addRecipe(new Object[][] {
-				{null,Item.redstone,null},
-				{Block.brick,ComponentTypes.SIMPLE_PCB.getItemStack(),Block.brick},
-				{null,Block.pistonBase,null}
+				{null,Items.redstone,null},
+				{Blocks.brick_block,ComponentTypes.SIMPLE_PCB.getItemStack(),Blocks.brick_block},
+				{null,Blocks.piston,null}
 			});			
 		new ModuleData(13, "Track Remover", ModuleRemover.class,8).addSides(new SIDE[] {SIDE.TOP, SIDE.BACK})	
-			.addRecipe(new Object[][] {	{Item.ingotIron,Item.ingotIron,Item.ingotIron},
-										{Item.ingotIron,null,Item.ingotIron},
-										{Item.ingotIron,null,null}	
+			.addRecipe(new Object[][] {	{Items.iron_ingot,Items.iron_ingot,Items.iron_ingot},
+										{Items.iron_ingot,null,Items.iron_ingot},
+										{Items.iron_ingot,null,null}	
 									});
 			
 		ModuleDataGroup farmerGroup = new ModuleDataGroup(Localization.MODULE_INFO.FARMER_GROUP);
 		
 		ModuleData farmerbasic = new ModuleDataTool(14, "Basic Farmer", ModuleFarmerDiamond.class,36, false).addSide(SIDE.FRONT)
-			.addRecipe(new Object[][] {	{Item.diamond,Item.diamond,Item.diamond},
-										{null,Item.ingotIron,null},
-										{ComponentTypes.SIMPLE_PCB.getItemStack(),Item.ingotGold,ComponentTypes.SIMPLE_PCB.getItemStack()}	
+			.addRecipe(new Object[][] {	{Items.diamond,Items.diamond,Items.diamond},
+										{null,Items.iron_ingot,null},
+										{ComponentTypes.SIMPLE_PCB.getItemStack(),Items.gold_ingot,ComponentTypes.SIMPLE_PCB.getItemStack()}	
 									});			
 		
 		ModuleData farmergalg = new ModuleDataTool(84, "Galgadorian Farmer", ModuleFarmerGalgadorian.class,55, true).addSide(SIDE.FRONT)
 				.addRecipe(new Object[][]{{ComponentTypes.GALGADORIAN_METAL.getItemStack(), ComponentTypes.GALGADORIAN_METAL.getItemStack(), ComponentTypes.GALGADORIAN_METAL.getItemStack()},
                         {null, ComponentTypes.REINFORCED_METAL.getItemStack(), null},
-                        {ComponentTypes.ADVANCED_PCB.getItemStack(), Item.ingotGold, ComponentTypes.ADVANCED_PCB.getItemStack()}
+                        {ComponentTypes.ADVANCED_PCB.getItemStack(), Items.gold_ingot, ComponentTypes.ADVANCED_PCB.getItemStack()}
                 })
 				.addRecipe(new Object[][] {	{ComponentTypes.GALGADORIAN_METAL.getItemStack(),ComponentTypes.GALGADORIAN_METAL.getItemStack(),ComponentTypes.GALGADORIAN_METAL.getItemStack()},
 						{null,farmerbasic.getItemStack(),null},
@@ -288,17 +290,17 @@ public class ModuleData {
 		
 		ModuleData woodcutter = new ModuleDataTool(15, "Basic Wood Cutter", ModuleWoodcutterDiamond.class,34, false).addSide(SIDE.FRONT)		
 			.addRecipe(new Object[][] {	{ComponentTypes.SAW_BLADE.getItemStack(),ComponentTypes.SAW_BLADE.getItemStack(),ComponentTypes.SAW_BLADE.getItemStack()},
-										{ComponentTypes.SAW_BLADE.getItemStack(),Item.ingotIron,ComponentTypes.SAW_BLADE.getItemStack()},
+										{ComponentTypes.SAW_BLADE.getItemStack(),Items.iron_ingot,ComponentTypes.SAW_BLADE.getItemStack()},
 										{null,ComponentTypes.WOOD_CUTTING_CORE.getItemStack(),null}
 									});	
 		
 		ModuleData woodcutterHardened = new ModuleDataTool(79, "Hardened Wood Cutter", ModuleWoodcutterHardened.class, 65, false).addSide(SIDE.FRONT)	
 		.addRecipe(new Object[][]{{ComponentTypes.HARDENED_SAW_BLADE.getItemStack(), ComponentTypes.HARDENED_SAW_BLADE.getItemStack(), ComponentTypes.HARDENED_SAW_BLADE.getItemStack()},
-                {ComponentTypes.HARDENED_SAW_BLADE.getItemStack(), Item.diamond, ComponentTypes.HARDENED_SAW_BLADE.getItemStack()},
+                {ComponentTypes.HARDENED_SAW_BLADE.getItemStack(), Items.diamond, ComponentTypes.HARDENED_SAW_BLADE.getItemStack()},
                 {null, ComponentTypes.WOOD_CUTTING_CORE.getItemStack(), null}
         })
 		.addRecipe(new Object[][]{{ComponentTypes.REINFORCED_METAL.getItemStack(), ComponentTypes.REINFORCED_METAL.getItemStack(), ComponentTypes.REINFORCED_METAL.getItemStack()},
-                {ComponentTypes.REINFORCED_METAL.getItemStack(), Item.ingotIron, ComponentTypes.REINFORCED_METAL.getItemStack()},
+                {ComponentTypes.REINFORCED_METAL.getItemStack(), Items.iron_ingot, ComponentTypes.REINFORCED_METAL.getItemStack()},
                 {null, woodcutter.getItemStack(), null}
         });
 		
@@ -308,7 +310,7 @@ public class ModuleData {
                 {null, ComponentTypes.WOOD_CUTTING_CORE.getItemStack(), null}
         })
 		.addRecipe(new Object[][]{{ComponentTypes.GALGADORIAN_METAL.getItemStack(), ComponentTypes.GALGADORIAN_METAL.getItemStack(), ComponentTypes.GALGADORIAN_METAL.getItemStack()},
-                {ComponentTypes.GALGADORIAN_METAL.getItemStack(), Item.ingotIron, ComponentTypes.GALGADORIAN_METAL.getItemStack()},
+                {ComponentTypes.GALGADORIAN_METAL.getItemStack(), Items.iron_ingot, ComponentTypes.GALGADORIAN_METAL.getItemStack()},
                 {null, woodcutterHardened.getItemStack(), null}
         });
 		
@@ -319,29 +321,29 @@ public class ModuleData {
 		
 		ModuleDataGroup tankGroup = new ModuleDataGroup(Localization.MODULE_INFO.TANK_GROUP);
 		new ModuleData(16, "Hydrator", ModuleHydrater.class,6).addRequirement(tankGroup)		
-			.addRecipe(new Object[][] {	{Item.ingotIron,Item.glassBottle,Item.ingotIron},
-										{null,Block.fenceIron,null},
+			.addRecipe(new Object[][] {	{Items.iron_ingot,Items.glass_bottle,Items.iron_ingot},
+										{null,Blocks.fence,null},
 									});				
 
 		
 		new ModuleData(18, "Fertilizer", ModuleFertilizer.class,10)	
 			.addRecipe(new Object[][] {	{bonemeal,null,bonemeal},
-										{Item.glassBottle,Item.leather,Item.glassBottle},
-										{Item.leather,ComponentTypes.SIMPLE_PCB.getItemStack(),Item.leather}
+										{Items.glass_bottle,Items.leather,Items.glass_bottle},
+										{Items.leather,ComponentTypes.SIMPLE_PCB.getItemStack(),Items.leather}
 									});		
 
 
 		new ModuleData(19, "Height Controller", ModuleHeightControl.class, 20)
 			.addRecipe(new Object[][] {
-				{null,Item.compass,null},
-				{Item.paper,ComponentTypes.SIMPLE_PCB.getItemStack(),Item.paper},
-				{Item.paper,Item.paper,Item.paper}
+				{null,Items.compass,null},
+				{Items.paper,ComponentTypes.SIMPLE_PCB.getItemStack(),Items.paper},
+				{Items.paper,Items.paper,Items.paper}
 			});		
 		ModuleData liquidsensors = new ModuleData(20, "Liquid Sensors", ModuleLiquidSensors.class,27).addRequirement(drillGroup)
 			.addRecipe(new Object[][] {
-				{Item.redstone,null,Item.redstone},
-				{Item.bucketLava,Item.diamond,Item.bucketWater},
-				{Item.ingotIron,ComponentTypes.ADVANCED_PCB.getItemStack(),Item.ingotIron}
+				{Items.redstone,null,Items.redstone},
+				{Items.lava_bucket,Items.diamond,Items.water_bucket},
+				{Items.iron_ingot,ComponentTypes.ADVANCED_PCB.getItemStack(),Items.iron_ingot}
 			});			
 		
 									
@@ -352,15 +354,15 @@ public class ModuleData {
 									  });
 									  
 		new ModuleData(26, "Brake Handle", ModuleBrake.class,12).addSide(SIDE.RIGHT).addParent(seat)
-			.addRecipe(new Object[][] {{null, null, new ItemStack(Item.dyePowder, 1, 1)},
-									   {Item.ingotIron, ComponentTypes.REFINED_HANDLE.getItemStack(), null},
-									   {Item.redstone, Item.ingotIron, null}
+			.addRecipe(new Object[][] {{null, null, new ItemStack(Items.dye, 1, 1)},
+									   {Items.iron_ingot, ComponentTypes.REFINED_HANDLE.getItemStack(), null},
+									   {Items.redstone, Items.iron_ingot, null}
 									  });
 									  
 		new ModuleData(27, "Advanced Control System", ModuleAdvControl.class,38).addSide(SIDE.RIGHT).addParent(seat)		
 			.addRecipe(new Object[][] {{null, ComponentTypes.GRAPHICAL_INTERFACE.getItemStack(), null},
-									   {Item.redstone, ComponentTypes.WHEEL.getItemStack(), Item.redstone},
-									   {Item.ingotIron, Item.ingotIron, ComponentTypes.SPEED_HANDLE.getItemStack()}
+									   {Items.redstone, ComponentTypes.WHEEL.getItemStack(), Items.redstone},
+									   {Items.iron_ingot, Items.iron_ingot, ComponentTypes.SPEED_HANDLE.getItemStack()}
 									  });			
 		
 		
@@ -377,7 +379,7 @@ public class ModuleData {
 		ModuleData advshooter = new ModuleData(29, "Advanced Shooter", ModuleShooterAdv.class,50).addSide(SIDE.TOP).addRequirement(detectorGroup)		
 			.addRecipe(new Object[][] {{null, ComponentTypes.ENTITY_SCANNER.getItemStack(), null},
 									   {null, ComponentTypes.SHOOTING_STATION.getItemStack(), ComponentTypes.PIPE.getItemStack()},
-									   {Item.ingotIron, ComponentTypes.ENTITY_ANALYZER.getItemStack() ,Item.ingotIron}
+									   {Items.iron_ingot, ComponentTypes.ENTITY_ANALYZER.getItemStack() ,Items.iron_ingot}
 									  });		
 
 		ModuleDataGroup shooterGroup = new ModuleDataGroup(Localization.MODULE_INFO.SHOOTER_GROUP);
@@ -385,23 +387,23 @@ public class ModuleData {
 		shooterGroup.add(advshooter);
 		
 		ModuleData animal = new ModuleData(21, "Entity Detector: Animal", ModuleAnimal.class,1).addParent(advshooter)
-			.addRecipe(new Object[][] {{Item.porkRaw},
+			.addRecipe(new Object[][] {{Items.porkchop},
 										{ComponentTypes.EMPTY_DISK.getItemStack()}
 									});		
 		ModuleData player = new ModuleData(22, "Entity Detector: Player", ModulePlayer.class,7).addParent(advshooter)
-			.addRecipe(new Object[][] {	{Item.diamond},
+			.addRecipe(new Object[][] {	{Items.diamond},
 										{ComponentTypes.EMPTY_DISK.getItemStack()}
 									});			
 		ModuleData villager = new ModuleData(23, "Entity Detector: Villager", ModuleVillager.class,1).addParent(advshooter)
-			.addRecipe(new Object[][] {	{Item.emerald},
+			.addRecipe(new Object[][] {	{Items.emerald},
 										{ComponentTypes.EMPTY_DISK.getItemStack()}
 									});			
 		ModuleData monster = new ModuleData(24, "Entity Detector: Monster", ModuleMonster.class,1).addParent(advshooter)
-			.addRecipe(new Object[][] {	{Item.slimeBall},
+			.addRecipe(new Object[][] {	{Items.slime_ball},
 										{ComponentTypes.EMPTY_DISK.getItemStack()}
 									});			
 		ModuleData bats = new ModuleData(48, "Entity Detector: Bat", ModuleBat.class,1).addParent(advshooter)
-			.addRecipe(new Object[][] {	{Block.pumpkin},
+			.addRecipe(new Object[][] {	{Blocks.pumpkin},
 										{ComponentTypes.EMPTY_DISK.getItemStack()}
 									});	
 		if (!StevesCarts.isHalloween) {
@@ -425,34 +427,34 @@ public class ModuleData {
 		
 		new ModuleData(31, "Dynamite Carrier", ModuleDynamite.class,3).addSide(SIDE.TOP)
 			.addRecipe(new Object[][]{{null, ComponentTypes.DYNAMITE.getItemStack(), null},
-                    {ComponentTypes.DYNAMITE.getItemStack(), Item.flintAndSteel, ComponentTypes.DYNAMITE.getItemStack()},
+                    {ComponentTypes.DYNAMITE.getItemStack(), Items.flint_and_steel, ComponentTypes.DYNAMITE.getItemStack()},
                     {null, ComponentTypes.DYNAMITE.getItemStack(), null}
             });
 		
 		new ModuleData(32, "Divine Shield", ModuleShield.class, 60)			
-			.addRecipe(new Object[][] {{Block.obsidian,  ComponentTypes.REFINED_HARDENER.getItemStack(),  Block.obsidian},
-									   {ComponentTypes.REFINED_HARDENER.getItemStack(), Block.blockDiamond, ComponentTypes.REFINED_HARDENER.getItemStack()},
-									   {Block.obsidian,  ComponentTypes.REFINED_HARDENER.getItemStack(), Block.obsidian}
+			.addRecipe(new Object[][] {{Blocks.obsidian,  ComponentTypes.REFINED_HARDENER.getItemStack(),  Blocks.obsidian},
+									   {ComponentTypes.REFINED_HARDENER.getItemStack(), Blocks.diamond_block, ComponentTypes.REFINED_HARDENER.getItemStack()},
+									   {Blocks.obsidian,  ComponentTypes.REFINED_HARDENER.getItemStack(), Blocks.obsidian}
 									  });
 
 		
 		ModuleData melter = new ModuleData(33, "Melter", ModuleMelter.class,10)
-			.addRecipe(new Object[][] {{Block.netherBrick,  Block.glowStone,  Block.netherBrick},
-									   {Item.glowstone, Block.furnaceIdle, Item.glowstone},
-									   {Block.netherBrick,  Block.glowStone, Block.netherBrick}
+			.addRecipe(new Object[][] {{Blocks.nether_brick,  Blocks.glowstone,  Blocks.nether_brick},
+									   {Items.glowstone_dust, Blocks.furnace, Items.glowstone_dust},
+									   {Blocks.nether_brick,  Blocks.glowstone, Blocks.nether_brick}
 									  });
 		ModuleData extrememelter = new ModuleData(34, "Extreme Melter", ModuleMelterExtreme.class,19)
-			.addRecipe(new Object[][] {{Block.netherBrick,  Block.obsidian,  Block.netherBrick},
-									   {melter.getItemStack(), Item.bucketLava, melter.getItemStack()},
-									   {Block.netherBrick,  Block.obsidian, Block.netherBrick}
+			.addRecipe(new Object[][] {{Blocks.nether_brick,  Blocks.obsidian,  Blocks.nether_brick},
+									   {melter.getItemStack(), Items.lava_bucket, melter.getItemStack()},
+									   {Blocks.nether_brick,  Blocks.obsidian, Blocks.nether_brick}
 									  });	
 		addNemesis(melter, extrememelter);
 								  
 		
 		new ModuleData(36, "Invisibility Core", ModuleInvisible.class, 21)
 			.addRecipe(new Object[][] {{null, ComponentTypes.GLASS_O_MAGIC.getItemStack(), null},
-									   {ComponentTypes.GLASS_O_MAGIC.getItemStack(), Item.eyeOfEnder, ComponentTypes.GLASS_O_MAGIC.getItemStack()},
-									   {null, Item.goldenCarrot, null}
+									   {ComponentTypes.GLASS_O_MAGIC.getItemStack(), Items.ender_eye, ComponentTypes.GLASS_O_MAGIC.getItemStack()},
+									   {null, Items.golden_carrot, null}
 									  });
 				
 		new ModuleDataHull(37, "Wooden Hull", ModuleWood.class).setCapacity(50).setEngineMax(1).setAddonMax(0).setComplexityMax(15)		
@@ -462,8 +464,8 @@ public class ModuleData {
 									  });
 		
 		new ModuleDataHull(38, "Standard Hull", ModuleStandard.class).setCapacity(200).setEngineMax(3).setAddonMax(6).setComplexityMax(50)
-			.addRecipe(new Object[][] {{Item.ingotIron, null, Item.ingotIron},
-									   {Item.ingotIron, Item.ingotIron, Item.ingotIron},
+			.addRecipe(new Object[][] {{Items.iron_ingot, null, Items.iron_ingot},
+									   {Items.iron_ingot, Items.iron_ingot, Items.iron_ingot},
 									   {ComponentTypes.IRON_WHEELS.getItemStack(), null, ComponentTypes.IRON_WHEELS.getItemStack()}
 									  });		
 		
@@ -475,7 +477,7 @@ public class ModuleData {
 
 		ModuleData pumpkinhull = new ModuleDataHull(47, "Pumpkin chariot", ModulePumpkin.class).setCapacity(40).setEngineMax(1).setAddonMax(0).setComplexityMax(15)	
 			.addRecipe(new Object[][] {{planks, null, planks},
-									   {planks, Block.pumpkin, planks},
+									   {planks, Blocks.pumpkin, planks},
 									   {ComponentTypes.WOODEN_WHEELS.getItemStack(), null, ComponentTypes.WOODEN_WHEELS.getItemStack()}
 									  });
 									  
@@ -484,8 +486,8 @@ public class ModuleData {
 		}
 		
 		new ModuleDataHull(62, "Mechanical Pig", ModulePig.class).setCapacity(150).setEngineMax(2).setAddonMax(4).setComplexityMax(50).addSide(SIDE.FRONT) 			
-			.addRecipe(new Object[][] {{Item.porkRaw, null, Item.porkRaw},
-									   {Item.porkRaw, Item.porkRaw, Item.porkRaw},
+			.addRecipe(new Object[][] {{Items.porkchop, null, Items.porkchop},
+									   {Items.porkchop, Items.porkchop, Items.porkchop},
 									   {ComponentTypes.IRON_WHEELS.getItemStack(), null, ComponentTypes.IRON_WHEELS.getItemStack()}
 									  })
 		.addMessage(Localization.MODULE_INFO.PIG_MESSAGE);
@@ -507,9 +509,9 @@ public class ModuleData {
 		
 		new ModuleData(40, "Note Sequencer", ModuleNote.class, 30).addSides(new SIDE[] {SIDE.RIGHT, SIDE.LEFT})
 			.addRecipe(new Object[][] {
-									   {Block.music, null, Block.music},
-									   {Block.music, Block.jukebox, Block.music},
-									   {planks, Item.redstone, planks}
+									   {Blocks.noteblock, null, Blocks.noteblock},
+									   {Blocks.noteblock, Blocks.jukebox, Blocks.noteblock},
+									   {planks, Items.redstone, planks}
 									  });
 									  
 
@@ -517,8 +519,8 @@ public class ModuleData {
 		ModuleData colorizer = new ModuleData(41, "Colorizer", ModuleColorizer.class, 15)
 			.addRecipe(new Object[][] {
 									   {ComponentTypes.RED_PIGMENT.getItemStack(), ComponentTypes.GREEN_PIGMENT.getItemStack(), ComponentTypes.BLUE_PIGMENT.getItemStack()},
-									   {Item.ingotIron, Item.redstone, Item.ingotIron},
-									   {null, Item.ingotIron, null}
+									   {Items.iron_ingot, Items.redstone, Items.iron_ingot},
+									   {null, Items.iron_ingot, null}
 									  });
 
 		ModuleData colorRandomizer = new ModuleData(101, "Color Randomizer", ModuleColorRandomizer.class, 20)
@@ -534,8 +536,8 @@ public class ModuleData {
 		
 		new ModuleData(49, "Chunk Loader", ModuleChunkLoader.class, 84)
 			.addRecipe(new Object[][] {
-									   {null, Item.enderPearl, null},
-									   {ComponentTypes.SIMPLE_PCB.getItemStack(), Item.ingotIron, ComponentTypes.SIMPLE_PCB.getItemStack()},
+									   {null, Items.ender_pearl, null},
+									   {ComponentTypes.SIMPLE_PCB.getItemStack(), Items.iron_ingot, ComponentTypes.SIMPLE_PCB.getItemStack()},
 									   {ComponentTypes.REINFORCED_METAL.getItemStack(), ComponentTypes.ADVANCED_PCB.getItemStack(), ComponentTypes.REINFORCED_METAL.getItemStack()}
 									  });	
 		
@@ -570,20 +572,20 @@ public class ModuleData {
 		
 		
 		new ModuleData(51, "Projectile: Potion", ModulePotion.class, 10).addRequirement(shooterGroup)
-			.addRecipe(new Object[][] {	{Item.glassBottle},
+			.addRecipe(new Object[][] {	{Items.glass_bottle},
 										{ComponentTypes.EMPTY_DISK.getItemStack()}
 									});		
 		new ModuleData(52, "Projectile: Fire Charge", ModuleFireball.class, 10).lockByDefault().addRequirement(shooterGroup)
-			.addRecipe(new Object[][] {	{Item.fireballCharge},
+			.addRecipe(new Object[][] {	{Items.fire_charge},
 										{ComponentTypes.EMPTY_DISK.getItemStack()}
 									});			
 		new ModuleData(53, "Projectile: Egg", ModuleEgg.class, 10).addRequirement(shooterGroup)
-			.addRecipe(new Object[][] {	{Item.egg},
+			.addRecipe(new Object[][] {	{Items.egg},
 										{ComponentTypes.EMPTY_DISK.getItemStack()}
 			
 										});				
 		ModuleData snowballshooter = new ModuleData(54, "Projectile: Snowball", ModuleSnowball.class, 10).addRequirement(shooterGroup)
-			.addRecipe(new Object[][] {	{Item.snowball},
+			.addRecipe(new Object[][] {	{Items.snowball},
 										{ComponentTypes.EMPTY_DISK.getItemStack()}
 									});	
 			
@@ -593,16 +595,16 @@ public class ModuleData {
 		
 			
 	ModuleData cake = new ModuleData(90, "Projectile: Cake", ModuleCake.class, 10).addRequirement(shooterGroup).lock()
-	.addRecipe(new Object[][] {	{Item.cake},
+	.addRecipe(new Object[][] {	{Items.cake},
 			{ComponentTypes.EMPTY_DISK.getItemStack()}	
 	});
 		
 
 	
 		ModuleData snowgenerator = new ModuleData(55, "Freezer", ModuleSnowCannon.class, 24)
-			.addRecipe(new Object[][] {	{Block.blockSnow, Item.bucketWater, Block.blockSnow},
-										{Item.bucketWater, ComponentTypes.SIMPLE_PCB.getItemStack(), Item.bucketWater},
-										{Block.blockSnow, Item.bucketWater, Block.blockSnow}
+			.addRecipe(new Object[][] {	{Blocks.snow, Items.water_bucket, Blocks.snow},
+										{Items.water_bucket, ComponentTypes.SIMPLE_PCB.getItemStack(), Items.water_bucket},
+										{Blocks.snow, Items.water_bucket, Blocks.snow}
 									});	
 		if (!StevesCarts.isChristmas) {
 			snowgenerator.lock();
@@ -612,21 +614,21 @@ public class ModuleData {
 				
 
 		ModuleData cage = new ModuleData(57, "Cage", ModuleCage.class, 7).addSides(new SIDE[] {SIDE.TOP, SIDE.CENTER})						
-			.addRecipe(new Object[][] {	{Block.fenceIron, Block.fenceIron, Block.fenceIron},
-										{Block.fenceIron, ComponentTypes.SIMPLE_PCB.getItemStack(), Block.fenceIron},
-										{Block.fenceIron, Block.fenceIron, Block.fenceIron}
+			.addRecipe(new Object[][] {	{Blocks.fence, Blocks.fence, Blocks.fence},
+										{Blocks.fence, ComponentTypes.SIMPLE_PCB.getItemStack(), Blocks.fence},
+										{Blocks.fence, Blocks.fence, Blocks.fence}
 									  });				
 			
 
 		new ModuleData(58, "Crop: Nether Wart", ModuleNetherwart.class, 20).addRequirement(farmerGroup)
-			.addRecipe(new Object[][] {{Item.netherStalkSeeds},
+			.addRecipe(new Object[][] {{Items.nether_wart},
 										{ComponentTypes.EMPTY_DISK.getItemStack()}
 									  });	
 									  
 		new ModuleData(59, "Firework display", ModuleFirework.class, 45)
-			.addRecipe(new Object[][] {	{Block.fenceIron, Block.dispenser, Block.fenceIron},
-										{Block.workbench, ComponentTypes.FUSE.getItemStack(), Block.workbench},
-										{ComponentTypes.SIMPLE_PCB.getItemStack(), Item.flintAndSteel, ComponentTypes.SIMPLE_PCB.getItemStack()}
+			.addRecipe(new Object[][] {	{Blocks.fence, Blocks.dispenser, Blocks.fence},
+										{Blocks.crafting_table, ComponentTypes.FUSE.getItemStack(), Blocks.crafting_table},
+										{ComponentTypes.SIMPLE_PCB.getItemStack(), Items.flint_and_steel, ComponentTypes.SIMPLE_PCB.getItemStack()}
 									  });			
 		
 		
@@ -678,21 +680,21 @@ public class ModuleData {
 		tankGroup.add(internalTank).add(sideTank).add(topTank).add(advancedTank).add(frontTank).add(creativeTank).add(topTankOpen);
 		
 		new ModuleData(68, "Incinerator", ModuleIncinerator.class, 23).addRequirement(tankGroup).addRequirement(drillGroup)
-			.addRecipe(new Object[][] {{Block.netherBrick,  Block.netherBrick,  Block.netherBrick},
-									   {Block.obsidian, Block.furnaceIdle, Block.obsidian},
-									   {Block.netherBrick,  Block.netherBrick, Block.netherBrick}
+			.addRecipe(new Object[][] {{Blocks.nether_brick,  Blocks.nether_brick,  Blocks.nether_brick},
+									   {Blocks.obsidian, Blocks.furnace, Blocks.obsidian},
+									   {Blocks.nether_brick,  Blocks.nether_brick, Blocks.nether_brick}
 									  });	
 				
 		ModuleData thermal0 = new ModuleData(69, "Thermal Engine", ModuleThermalStandard.class, 28).addRequirement(tankGroup)
-			.addRecipe(new Object[][] {{Block.netherBrick,  Block.netherBrick,  Block.netherBrick},
-									   {Block.obsidian, Block.furnaceIdle, Block.obsidian},
-									   {Block.pistonBase, null, Block.pistonBase}
+			.addRecipe(new Object[][] {{Blocks.nether_brick,  Blocks.nether_brick,  Blocks.nether_brick},
+									   {Blocks.obsidian, Blocks.furnace, Blocks.obsidian},
+									   {Blocks.piston, null, Blocks.piston}
 									  });	
 									  
 		ModuleData thermal1 = new ModuleData(70, "Advanced Thermal Engine", ModuleThermalAdvanced.class, 58).addRequirement(tankGroup.copy(2))
-			.addRecipe(new Object[][] {{Block.netherBrick,  Block.netherBrick,  Block.netherBrick},
+			.addRecipe(new Object[][] {{Blocks.nether_brick,  Blocks.nether_brick,  Blocks.nether_brick},
 									   {ComponentTypes.REINFORCED_METAL.getItemStack(), thermal0.getItemStack(), ComponentTypes.REINFORCED_METAL.getItemStack()},
-									   {Block.pistonBase, null, Block.pistonBase}
+									   {Blocks.piston, null, Blocks.piston}
 									  });		
 		addNemesis(thermal0, thermal1);
 
@@ -706,7 +708,7 @@ public class ModuleData {
 		addNemesis(frontChest, cleanerliquid);		
 		
 
-		ItemStack yellowWool = new ItemStack(Block.cloth, 1, 4);
+		ItemStack yellowWool = new ItemStack(Blocks.wool, 1, 4);
 		ModuleData eggBasket = new ModuleData(74, "Egg Basket", ModuleEggBasket.class, 14) {
 			@Override
 			public String getModuleInfoText(byte b) {
@@ -736,15 +738,15 @@ public class ModuleData {
 		}			
 		
 		ModuleData intelligence = new ModuleData(75, "Drill Intelligence", ModuleDrillIntelligence.class, 21).addRequirement(drillGroup)
-			.addRecipe(new Object[][] {{Item.ingotGold, Item.ingotGold, Item.ingotGold},
-									   {Item.ingotIron, ComponentTypes.ADVANCED_PCB.getItemStack(), Item.ingotIron},
-									   {ComponentTypes.ADVANCED_PCB.getItemStack(), Item.redstone , ComponentTypes.ADVANCED_PCB.getItemStack()}
+			.addRecipe(new Object[][] {{Items.gold_ingot, Items.gold_ingot, Items.gold_ingot},
+									   {Items.iron_ingot, ComponentTypes.ADVANCED_PCB.getItemStack(), Items.iron_ingot},
+									   {ComponentTypes.ADVANCED_PCB.getItemStack(), Items.redstone , ComponentTypes.ADVANCED_PCB.getItemStack()}
 									  });	
 
 		new ModuleData(77, "Power Observer", ModulePowerObserver.class, 12).addRequirement(engineGroup)
-			.addRecipe(new Object[][] {{null, Block.pistonBase, null},
-									   {Item.ingotIron, Item.redstone, Item.ingotIron},
-									   {Item.redstone, ComponentTypes.ADVANCED_PCB.getItemStack() , Item.redstone}
+			.addRecipe(new Object[][] {{null, Blocks.piston, null},
+									   {Items.iron_ingot, Items.redstone, Items.iron_ingot},
+									   {Items.redstone, ComponentTypes.ADVANCED_PCB.getItemStack() , Items.redstone}
 									  });			
 				
 
@@ -767,14 +769,14 @@ public class ModuleData {
 		
 		new ModuleData(82, "Enchanter", ModuleEnchants.class, 72).addRequirement(enchantableGroup)
 			.addRecipe(new Object[][] {{null, ComponentTypes.GALGADORIAN_METAL.getItemStack(), null},
-					   {Item.book, Block.enchantmentTable, Item.book},
-					   {Item.redstone,  ComponentTypes.ADVANCED_PCB.getItemStack(), Item.redstone}
+					   {Items.book, Blocks.enchanting_table, Items.book},
+					   {Items.redstone,  ComponentTypes.ADVANCED_PCB.getItemStack(), Items.redstone}
 					  });	
 		
 		new ModuleData(83, "Ore Extractor", ModuleOreTracker.class, 80).addRequirement(drillGroup)
-		.addRecipe(new Object[][] {{Block.torchRedstoneActive, null, Block.torchRedstoneActive},
+		.addRecipe(new Object[][] {{Blocks.redstone_torch, null, Blocks.redstone_torch},
 				   {ComponentTypes.EYE_OF_GALGADOR.getItemStack(), ComponentTypes.GALGADORIAN_METAL.getItemStack(), ComponentTypes.EYE_OF_GALGADOR.getItemStack()},
-				   {Item.netherQuartz,  ComponentTypes.ADVANCED_PCB.getItemStack(), Item.netherQuartz}
+				   {Items.quartz,  ComponentTypes.ADVANCED_PCB.getItemStack(), Items.quartz}
 				  });			
 		
 		
@@ -785,64 +787,64 @@ public class ModuleData {
 						  });	
 		
 		new ModuleData(86, "Milker", ModuleMilker.class, 26).addParent(cage)
-			.addRecipe(new Object[][] {{Item.wheat, Item.wheat, Item.wheat},
-					{ComponentTypes.SIMPLE_PCB.getItemStack(), Item.bucketEmpty, ComponentTypes.SIMPLE_PCB.getItemStack()},
+			.addRecipe(new Object[][] {{Items.wheat, Items.wheat, Items.wheat},
+					{ComponentTypes.SIMPLE_PCB.getItemStack(), Items.bucket, ComponentTypes.SIMPLE_PCB.getItemStack()},
 					{null, ComponentTypes.SIMPLE_PCB.getItemStack(), null},
 					  });		
 		
 		ModuleData crafter = new ModuleData(87, "Crafter", ModuleCrafter.class, 22).setAllowDuplicate()
 			.addRecipe(new Object[][] {{ComponentTypes.SIMPLE_PCB.getItemStack()},
-					   {Block.workbench}
+					   {Blocks.crafting_table}
 					  });	
 		
 		new ModuleData(88, "Tree: Exotic", ModuleModTrees.class, 30).addRequirement(woodcutterGroup)
-			.addRecipe(new Object[][] {{Item.glowstone, null, Item.glowstone},
-					{Item.redstone, Block.sapling, Item.redstone},
+			.addRecipe(new Object[][] {{Items.glowstone_dust, null, Items.glowstone_dust},
+					{Items.redstone, Blocks.sapling, Items.redstone},
 					{ComponentTypes.SIMPLE_PCB.getItemStack(), ComponentTypes.EMPTY_DISK.getItemStack(), ComponentTypes.SIMPLE_PCB.getItemStack()}
 				});					
 			
 		
 		new ModuleData(89, "Planter Range Extender", ModulePlantSize.class, 20).addRequirement(woodcutterGroup)
-			.addRecipe(new Object[][] {{Item.redstone, ComponentTypes.ADVANCED_PCB.getItemStack(), Item.redstone},
-					{null, Block.sapling, null},
-					{ComponentTypes.SIMPLE_PCB.getItemStack(), Block.sapling, ComponentTypes.SIMPLE_PCB.getItemStack()}
+			.addRecipe(new Object[][] {{Items.redstone, ComponentTypes.ADVANCED_PCB.getItemStack(), Items.redstone},
+					{null, Blocks.sapling, null},
+					{ComponentTypes.SIMPLE_PCB.getItemStack(), Blocks.sapling, ComponentTypes.SIMPLE_PCB.getItemStack()}
 				});		
 		
 		
 		new ModuleData(78, "Steve's Arcade", ModuleArcade.class, 10).addParent(seat)
-			.addRecipe(new Object[][] {{null, Block.thinGlass, null},
+			.addRecipe(new Object[][] {{null, Blocks.glass_pane, null},
 					{planks, ComponentTypes.SIMPLE_PCB.getItemStack(), planks},
-					{Item.redstone, planks, Item.redstone}
+					{Items.redstone, planks, Items.redstone}
 				});	
 		
 		ModuleData smelter = new ModuleData(91, "Smelter", ModuleSmelter.class, 22).setAllowDuplicate()
 		.addRecipe(new Object[][] {{ComponentTypes.SIMPLE_PCB.getItemStack()},
-				   {Block.furnaceIdle}
+				   {Blocks.furnace}
 				  });	
 		
 		new ModuleData(92, "Advanced Crafter", ModuleCrafterAdv.class, 42).setAllowDuplicate()
-		.addRecipe(new Object[][] {{null, Item.diamond, null},
+		.addRecipe(new Object[][] {{null, Items.diamond, null},
 					{null, ComponentTypes.ADVANCED_PCB.getItemStack(), null},
 				   {ComponentTypes.SIMPLE_PCB.getItemStack(), crafter.getItemStack(), ComponentTypes.SIMPLE_PCB.getItemStack()}
 				  });			
 
 		new ModuleData(93, "Advanced Smelter", ModuleSmelterAdv.class, 42).setAllowDuplicate()
-		.addRecipe(new Object[][] {{null, Item.diamond, null},
+		.addRecipe(new Object[][] {{null, Items.diamond, null},
 					{null, ComponentTypes.ADVANCED_PCB.getItemStack(), null},
 				   {ComponentTypes.SIMPLE_PCB.getItemStack(), smelter.getItemStack(), ComponentTypes.SIMPLE_PCB.getItemStack()}
 				  });		
 		
 		new ModuleData(94, "Information Provider", ModuleLabel.class, 12)
-		.addRecipe(new Object[][] {{ Block.thinGlass, Block.thinGlass,  Block.thinGlass},
-				{Item.ingotIron, Item.glowstone, Item.ingotIron},
-			   {ComponentTypes.SIMPLE_PCB.getItemStack(), Item.sign, ComponentTypes.SIMPLE_PCB.getItemStack()}
+		.addRecipe(new Object[][] {{ Blocks.glass_pane, Blocks.glass_pane,  Blocks.glass_pane},
+				{Items.iron_ingot, Items.glowstone_dust, Items.iron_ingot},
+			   {ComponentTypes.SIMPLE_PCB.getItemStack(), Items.sign, ComponentTypes.SIMPLE_PCB.getItemStack()}
 			  });	
 			
 		
 		new ModuleData(95, "Experience Bank", ModuleExperience.class, 36)
-		.addRecipe(new Object[][] {{null, Item.redstone,  null},
-				{Item.glowstone, Item.emerald, Item.glowstone},
-			   {ComponentTypes.SIMPLE_PCB.getItemStack(), Block.cauldron, ComponentTypes.SIMPLE_PCB.getItemStack()}
+		.addRecipe(new Object[][] {{null, Items.redstone,  null},
+				{Items.glowstone_dust, Items.emerald, Items.glowstone_dust},
+			   {ComponentTypes.SIMPLE_PCB.getItemStack(), Blocks.cauldron, ComponentTypes.SIMPLE_PCB.getItemStack()}
 			  });		
 		
 		
@@ -852,13 +854,13 @@ public class ModuleData {
 		
 		new ModuleData(99, "Cake Server", ModuleCakeServer.class, 10).addSide(SIDE.TOP)
 		.addMessage(Localization.MODULE_INFO.ALPHA_MESSAGE)
-		.addRecipe(new Object[][]{{null, Item.cake, null},
+		.addRecipe(new Object[][]{{null, Items.cake, null},
                 {"slabWood", "slabWood", "slabWood"},
                 {null, ComponentTypes.SIMPLE_PCB.getItemStack(), null}
         });
 		
 		ModuleData trickOrTreat = new ModuleData(100, "Trick-or-Treat Cake Server", ModuleCakeServerDynamite.class, 15).addSide(SIDE.TOP)
-			.addRecipe(new Object[][] {{null, Item.cake,  null},
+			.addRecipe(new Object[][] {{null, Items.cake,  null},
 					{"slabWood", "slabWood", "slabWood"},
 				   {ComponentTypes.DYNAMITE.getItemStack(), ComponentTypes.SIMPLE_PCB.getItemStack(), ComponentTypes.DYNAMITE.getItemStack()}
 				  });		
@@ -1367,7 +1369,7 @@ public class ModuleData {
 	public static ArrayList<ItemStack> getModularItems(ItemStack cart) {
 		ArrayList<ItemStack> modules = new ArrayList<ItemStack>();
 		
-		if (cart != null && cart.getItem() == Items.carts && cart.getTagCompound() != null) {
+		if (cart != null && cart.getItem() == ModItems.carts && cart.getTagCompound() != null) {
 			NBTTagCompound info = cart.getTagCompound();
 			if (info.hasKey("Modules")) {
 				
@@ -1376,9 +1378,9 @@ public class ModuleData {
 				byte[] IDs = info.getByteArray("Modules");
 				for (int i = 0; i < IDs.length; i++) {
 					byte id = IDs[i];
-					ItemStack module =  new ItemStack(Items.modules, 1, id);
+					ItemStack module =  new ItemStack(ModItems.modules, 1, id);
 
-					Items.modules.addExtraDataToModule(module, info , i);
+					ModItems.modules.addExtraDataToModule(module, info , i);
 					
 					
 					modules.add(module);
@@ -1390,7 +1392,7 @@ public class ModuleData {
 	}	
 	
 	public static ItemStack createModularCart(MinecartModular parentcart) {
-		ItemStack cart = new ItemStack(Items.carts, 1);
+		ItemStack cart = new ItemStack(ModItems.carts, 1);
 			
 		NBTTagCompound save = new NBTTagCompound();
 		byte [] moduleIDs = new byte[parentcart.getModules().size()];
@@ -1403,7 +1405,7 @@ public class ModuleData {
 				}
 			}
 			
-			Items.modules.addExtraDataToModule(save, module , i);
+			ModItems.modules.addExtraDataToModule(save, module , i);
 			
 
 		}
@@ -1442,7 +1444,7 @@ public class ModuleData {
 	}*/
 	
 	public static ItemStack createModularCartFromItems(ArrayList<ItemStack> modules) {
-		ItemStack cart = new ItemStack(Items.carts, 1);
+		ItemStack cart = new ItemStack(ModItems.carts, 1);
 		
 		NBTTagCompound save = new NBTTagCompound();
 		byte [] moduleIDs = new byte[modules.size()];
@@ -1450,7 +1452,7 @@ public class ModuleData {
 			moduleIDs[i] =(byte) modules.get(i).getItemDamage();
 			
 	
-			Items.modules.addExtraDataToCart(save, modules.get(i) , i);
+			ModItems.modules.addExtraDataToCart(save, modules.get(i) , i);
 		}
 		save.setByteArray("Modules", moduleIDs);				
 		cart.setTagCompound(save);
@@ -1460,8 +1462,8 @@ public class ModuleData {
 	}
 	
 	public static boolean isItemOfModularType(ItemStack itemstack, Class<? extends ModuleBase> validClass) {
-		if (itemstack.getItem() == Items.modules) {
-			ModuleData module = Items.modules.getModuleData(itemstack);
+		if (itemstack.getItem() == ModItems.modules) {
+			ModuleData module = ModItems.modules.getModuleData(itemstack);
 			if (module != null) {
 				if (validClass.isAssignableFrom(module.moduleClass)) {
 					return true;
@@ -1497,10 +1499,10 @@ public class ModuleData {
 	}
 	
 	public ItemStack getItemStack() {
-		ItemStack module = new ItemStack(Items.modules, 1, id);
+		ItemStack module = new ItemStack(ModItems.modules, 1, id);
 		
 		if (isUsingExtraData()) {
-			NBTTagCompound save = new NBTTagCompound("tag");
+			NBTTagCompound save = new NBTTagCompound();
 
 			save.setByte("Data", getDefaultExtraData());
 			
@@ -1513,9 +1515,9 @@ public class ModuleData {
 
 	
 	public static boolean isValidModuleItem(int validGroup, ItemStack itemstack) {
-		if (itemstack.getItem() == Items.modules) {
+		if (itemstack.getItem() == ModItems.modules) {
 
-			ModuleData module = Items.modules.getModuleData(itemstack);
+			ModuleData module = ModItems.modules.getModuleData(itemstack);
 			return isValidModuleItem(validGroup, module);
 		}
 		
@@ -1815,15 +1817,15 @@ public class ModuleData {
 		return name.replace(":","").replace("'","").replace(" ","_").replace("-", "_").toLowerCase();
 	}
 	
-	private Icon icon;
+	private IIcon icon;
 		
 	@SideOnly(Side.CLIENT)
-	public void createIcon(IconRegister register) {
+	public void createIcon(IIconRegister register) {
 		icon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + getRawName() + "_icon");	
 	}
 	
 	@SideOnly(Side.CLIENT)
-	public Icon getIcon() {
+	public IIcon getIcon() {
 		return icon;
 	}
 	

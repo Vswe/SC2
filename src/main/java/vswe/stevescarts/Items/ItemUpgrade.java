@@ -1,5 +1,9 @@
 package vswe.stevescarts.Items;
 import java.util.List;
+
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.util.IIcon;
 import vswe.stevescarts.TileEntities.TileEntityBase;
 
 import vswe.stevescarts.Upgrades.AssemblerUpgrade;
@@ -15,15 +19,13 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.world.World;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-import net.minecraft.client.renderer.texture.IconRegister;
 public class ItemUpgrade extends ItemBlock
 {
 
 
-    public ItemUpgrade(int i)
+    public ItemUpgrade(Block block)
     {
-        super(i);
+        super(block);
         setHasSubtypes(true);
         setMaxDamage(0);
         setCreativeTab(StevesCarts.tabsSC2Blocks);		
@@ -31,7 +33,7 @@ public class ItemUpgrade extends ItemBlock
 
 	@Override
     @SideOnly(Side.CLIENT)
-    public Icon getIconFromDamage(int dmg)
+    public IIcon getIconFromDamage(int dmg)
     {
 		AssemblerUpgrade upgrade = AssemblerUpgrade.getUpgrade(dmg);
 		if (upgrade != null) {
@@ -42,7 +44,7 @@ public class ItemUpgrade extends ItemBlock
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister register)
+    public void registerIcons(IIconRegister register)
     {
 		for (AssemblerUpgrade upgrade : AssemblerUpgrade.getUpgradesList()) {
 			upgrade.createIcon(register);
@@ -66,7 +68,7 @@ public class ItemUpgrade extends ItemBlock
     {
 		AssemblerUpgrade upgrade = AssemblerUpgrade.getUpgrade(item.getItemDamage());
 		if (upgrade != null) {
-			return "item." + StevesCarts.instance.localStart + upgrade.getRawName();
+			return "item." + StevesCarts.localStart + upgrade.getRawName();
 		}	
 	
         return "item.unknown";
@@ -76,7 +78,7 @@ public class ItemUpgrade extends ItemBlock
     /**
      * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
      */
-    public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List)
+    public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List)
     {
 		for (AssemblerUpgrade upgrade : AssemblerUpgrade.getUpgradesList()) {
 			ItemStack iStack = new ItemStack(par1, 1, upgrade.getId());
@@ -90,7 +92,7 @@ public class ItemUpgrade extends ItemBlock
 		
 	
 		if (super.placeBlockAt(stack, player, world, x, y, z, side, hitX, hitY, hitZ, metadata)) {
-			TileEntity tile = world.getBlockTileEntity(x,y,z);
+			TileEntity tile = world.getTileEntity(x,y,z);
 			if (tile != null && tile instanceof TileEntityUpgrade) {
 				TileEntityUpgrade upgrade = (TileEntityUpgrade)tile;
 				upgrade.setType(stack.getItemDamage());

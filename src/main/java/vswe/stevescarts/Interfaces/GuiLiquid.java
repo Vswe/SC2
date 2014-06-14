@@ -2,9 +2,8 @@ package vswe.stevescarts.Interfaces;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
-import vswe.stevescarts.Blocks.Blocks;
+import vswe.stevescarts.Blocks.ModBlocks;
 import vswe.stevescarts.Helpers.Localization;
-import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Containers.ContainerLiquid;
 import vswe.stevescarts.Helpers.ResourceHelper;
 import vswe.stevescarts.TileEntities.TileEntityLiquid;
@@ -126,7 +125,7 @@ public class GuiLiquid extends GuiManager
 	
 	@Override
 	protected Block getBlock() {
-		return Blocks.LIQUID_MANAGER.getBlock();
+		return ModBlocks.LIQUID_MANAGER.getBlock();
 	}
 
 	@Override

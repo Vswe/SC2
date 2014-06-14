@@ -3,8 +3,7 @@ package vswe.stevescarts.Helpers;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
-import vswe.stevescarts.Items.Items;
-import vswe.stevescarts.StevesCarts;
+import vswe.stevescarts.Items.ModItems;
 
 public enum ComponentTypes {
     WOODEN_WHEELS(0, "Wooden Wheels"),
@@ -105,7 +104,7 @@ public enum ComponentTypes {
     }
 
     public ItemStack getItemStack(int count) {
-        return new ItemStack(Items.component, count, id);
+        return new ItemStack(ModItems.component, count, id);
     }
 
     public ItemStack getItemStack() {
@@ -117,10 +116,10 @@ public enum ComponentTypes {
     }
 
     public boolean isStackOfType(ItemStack itemstack) {
-        return itemstack != null && itemstack.itemID == Items.component.itemID && itemstack.getItemDamage() == id;
+        return itemstack != null && itemstack.itemID == ModItems.component.itemID && itemstack.getItemDamage() == id;
     }
 
     public String getLocalizedName() {
-        return StatCollector.translateToLocal(Items.component.getUnlocalizedName(getItemStack()) + ".name");
+        return StatCollector.translateToLocal(ModItems.component.getUnlocalizedName(getItemStack()) + ".name");
     }
 }

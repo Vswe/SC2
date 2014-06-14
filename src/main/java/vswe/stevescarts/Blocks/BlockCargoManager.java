@@ -1,11 +1,14 @@
 package vswe.stevescarts.Blocks;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.TileEntities.TileEntityCargo;
@@ -13,29 +16,27 @@ import cpw.mods.fml.common.network.FMLNetworkHandler;
 import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.util.Icon;
-import net.minecraft.client.renderer.texture.IconRegister;
 public class BlockCargoManager extends BlockContainer
 {
 
 
     public BlockCargoManager(int i)
     {
-        super(i, Material.rock);
+        super(Material.rock);
 		setCreativeTab(StevesCarts.tabsSC2Blocks);	
     }
 
 	
-	private Icon topIcon;
-	private Icon botIcon;
-	private Icon redIcon;
-	private Icon blueIcon;
-	private Icon greenIcon;
-	private Icon yellowIcon;
+	private IIcon topIcon;
+	private IIcon botIcon;
+	private IIcon redIcon;
+	private IIcon blueIcon;
+	private IIcon greenIcon;
+	private IIcon yellowIcon;
 	
     @SideOnly(Side.CLIENT)
 	@Override
-    public Icon getIcon(int side, int meta)
+    public IIcon getIcon(int side, int meta)
     {
         if (side == 0) {
 			return botIcon;
@@ -54,7 +55,7 @@ public class BlockCargoManager extends BlockContainer
 	
     @SideOnly(Side.CLIENT)
 	@Override
-    public void registerIcons(IconRegister register)
+    public void registerBlockIcons(IIconRegister register)
     {
         topIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "cargo_manager" + "_top");
 		botIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "cargo_manager" + "_bot");
@@ -65,9 +66,9 @@ public class BlockCargoManager extends BlockContainer
     }	
 
 	@Override
-   public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
+   public void breakBlock(World par1World, int par2, int par3, int par4, Block par5, int par6)
     {
-        TileEntityCargo var7 = (TileEntityCargo)par1World.getBlockTileEntity(par2, par3, par4);
+        TileEntityCargo var7 = (TileEntityCargo)par1World.getTileEntity(par2, par3, par4);
 
         if (var7 != null)
         {
@@ -91,7 +92,7 @@ public class BlockCargoManager extends BlockContainer
                         }
 
                         var9.stackSize -= var13;
-                        var14 = new EntityItem(par1World, (double)((float)par2 + var10), (double)((float)par3 + var11), (double)((float)par4 + var12), new ItemStack(var9.itemID, var13, var9.getItemDamage()));
+                        var14 = new EntityItem(par1World, (double)((float)par2 + var10), (double)((float)par3 + var11), (double)((float)par4 + var12), new ItemStack(var9.getItem(), var13, var9.getItemDamage()));
                         float var15 = 0.05F;
                         var14.motionX = (double)((float)par1World.rand.nextGaussian() * var15);
                         var14.motionY = (double)((float)par1World.rand.nextGaussian() * var15 + 0.2F);
@@ -138,7 +139,7 @@ public class BlockCargoManager extends BlockContainer
     }
 
 	@Override
-    public TileEntity createNewTileEntity(World world)
+    public TileEntity createNewTileEntity(World world, int var2)
     {
         return new TileEntityCargo();
     }

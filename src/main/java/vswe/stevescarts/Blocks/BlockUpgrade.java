@@ -1,15 +1,16 @@
 package vswe.stevescarts.Blocks;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import vswe.stevescarts.Helpers.DetectorType;
-import vswe.stevescarts.Items.Items;
+import vswe.stevescarts.Items.ModItems;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.TileEntities.TileEntityCartAssembler;
 import vswe.stevescarts.TileEntities.TileEntityUpgrade;
@@ -18,32 +19,29 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
-import java.util.ArrayList;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.util.Icon;
-import net.minecraft.client.renderer.texture.IconRegister;
 import vswe.stevescarts.Upgrades.AssemblerUpgrade;
 
 public class BlockUpgrade extends BlockContainer
 {
 
-    public BlockUpgrade(int i)
+    public BlockUpgrade()
     {
-        super(i, Material.rock);
+        super(Material.rock);
         setCreativeTab(StevesCarts.tabsSC2Blocks);					
     }
 
 
     @SideOnly(Side.CLIENT)
 	@Override
-    public Icon getIcon(int side, int meta)
+    public IIcon getIcon(int side, int meta)
     {
 		return AssemblerUpgrade.getStandardIcon();
     }	
 	
 	@Override
-    public void registerIcons(IconRegister register)
+    public void registerBlockIcons(IIconRegister register)
     {
 		//Load nothing here
     }
@@ -60,7 +58,7 @@ public class BlockUpgrade extends BlockContainer
     }	
 	
 	private int getUpgradeId(IBlockAccess world, int x, int y, int z) {
-		TileEntity tile = world.getBlockTileEntity(x,y,z);
+		TileEntity tile = world.getTileEntity(x, y, z);
 		if (tile != null && tile instanceof TileEntityUpgrade) {
 			TileEntityUpgrade upgrade = (TileEntityUpgrade)tile;
 			return upgrade.getType();
@@ -86,7 +84,7 @@ public class BlockUpgrade extends BlockContainer
 	@Override
 	public void onBlockAdded(World world, int x, int y, int z) {
 		super.onBlockAdded(world, x, y, z);
-        ((BlockCartAssembler)Blocks.CART_ASSEMBLER.getBlock()).addUpgrade(world, x, y, z);
+        ((BlockCartAssembler) ModBlocks.CART_ASSEMBLER.getBlock()).addUpgrade(world, x, y, z);
 	}
 	@Override
     public void onBlockHarvested(World world, int x, int y, int z, int meta, EntityPlayer player)
@@ -100,9 +98,9 @@ public class BlockUpgrade extends BlockContainer
     }
 	
 	@Override
-   public void breakBlock(World world, int x, int y, int z, int id, int meta)
+   public void breakBlock(World world, int x, int y, int z, Block id, int meta)
     {
-		TileEntity tile = world.getBlockTileEntity(x,y,z);
+		TileEntity tile = world.getTileEntity(x, y, z);
 		if (tile != null && tile instanceof TileEntityUpgrade) {
 			TileEntityUpgrade upgrade = (TileEntityUpgrade)tile;
 			if (upgrade.getUpgrade() != null) {
@@ -111,7 +109,7 @@ public class BlockUpgrade extends BlockContainer
 		
 		
 			if (meta != 1) {
-				dropBlockAsItem_do(world, x, y, z, new ItemStack(Items.upgrades, 1, getUpgradeId(world, x, y, z)));
+                dropBlockAsItem(world, x, y, z, new ItemStack(ModItems.upgrades, 1, getUpgradeId(world, x, y, z)));
 			}
 			
 			if (upgrade.hasInventory()) {
@@ -135,7 +133,7 @@ public class BlockUpgrade extends BlockContainer
 							}
 
 							var9.stackSize -= var13;
-							var14 = new EntityItem(world, (double)((float)x + var10), (double)((float)y + var11), (double)((float)z + var12), new ItemStack(var9.itemID, var13, var9.getItemDamage()));
+							var14 = new EntityItem(world, (double)((float)x + var10), (double)((float)y + var11), (double)((float)z + var12), new ItemStack(var9.getItem(), var13, var9.getItemDamage()));
 							float var15 = 0.05F;
 							var14.motionX = (double)((float)world.rand.nextGaussian() * var15);
 							var14.motionY = (double)((float)world.rand.nextGaussian() * var15 + 0.2F);
@@ -152,7 +150,7 @@ public class BlockUpgrade extends BlockContainer
 						
 		}
 		super.breakBlock(world, x, y, z, id, meta);
-        ((BlockCartAssembler)Blocks.CART_ASSEMBLER.getBlock()).removeUpgrade(world, x, y, z);
+        ((BlockCartAssembler) ModBlocks.CART_ASSEMBLER.getBlock()).removeUpgrade(world, x, y, z);
     }
 
     /**
@@ -209,7 +207,7 @@ public class BlockUpgrade extends BlockContainer
     }	
 	
 	public final int setUpgradeBounds(IBlockAccess world, int x, int y, int z) {
-		TileEntity tile = world.getBlockTileEntity(x,y,z);
+		TileEntity tile = world.getTileEntity(x,y,z);
 		if(tile instanceof TileEntityUpgrade){
 			TileEntityUpgrade upgrade = (TileEntityUpgrade)tile;
 			TileEntityCartAssembler master = upgrade.getMaster();
@@ -262,7 +260,7 @@ public class BlockUpgrade extends BlockContainer
 
  
 		
-		TileEntity tile = world.getBlockTileEntity(i,j,k);
+		TileEntity tile = world.getTileEntity(i,j,k);
 		if (tile != null && tile instanceof TileEntityUpgrade) {
 			TileEntityUpgrade upgrade = (TileEntityUpgrade)tile;
 
@@ -291,7 +289,7 @@ public class BlockUpgrade extends BlockContainer
     }
 
 	@Override
-    public TileEntity createNewTileEntity(World world)
+    public TileEntity createNewTileEntity(World world, int var2)
     {
         return new TileEntityUpgrade();
     }

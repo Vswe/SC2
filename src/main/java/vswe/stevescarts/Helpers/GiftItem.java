@@ -4,8 +4,7 @@ import net.minecraft.item.ItemStack;
 import java.util.ArrayList;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import vswe.stevescarts.Items.Items;
-import vswe.stevescarts.StevesCarts;
+import vswe.stevescarts.Items.ModItems;
 import vswe.stevescarts.ModuleData.ModuleData;
 public class GiftItem {
 	private int chanceWeight;
@@ -50,7 +49,7 @@ public class GiftItem {
 		for (ModuleData module : ModuleData.getList().values()) {
 			if (module.getIsValid() && !module.getIsLocked() && module.getHasRecipe()) {
 				if (module.getCost() > 0) {		
-					GiftItem item = new GiftItem(new ItemStack(Items.modules, 1, module.getID()), module.getCost() * 20, (int)Math.pow(151 - module.getCost(), 2));
+					GiftItem item = new GiftItem(new ItemStack(ModItems.modules, 1, module.getID()), module.getCost() * 20, (int)Math.pow(151 - module.getCost(), 2));
 					item.fixedSize = true;
 					gifts.add(item);
 				}

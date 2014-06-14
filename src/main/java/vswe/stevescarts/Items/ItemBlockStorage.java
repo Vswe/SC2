@@ -1,25 +1,18 @@
 package vswe.stevescarts.Items;
 import java.util.List;
 
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.util.IIcon;
 import vswe.stevescarts.Helpers.ComponentTypes;
 import vswe.stevescarts.Helpers.StorageBlock;
-import vswe.stevescarts.TileEntities.TileEntityBase;
-
-import vswe.stevescarts.Upgrades.AssemblerUpgrade;
-import vswe.stevescarts.Upgrades.BaseEffect;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import vswe.stevescarts.StevesCarts;
-import vswe.stevescarts.TileEntities.TileEntityUpgrade;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.world.World;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-import net.minecraft.client.renderer.texture.IconRegister;
 public class ItemBlockStorage extends ItemBlock
 {
 
@@ -39,11 +32,11 @@ public class ItemBlockStorage extends ItemBlock
 		}
 	}
 	
-    public Icon[] icons;
+    public IIcon[] icons;
     
-    public ItemBlockStorage(int i)
+    public ItemBlockStorage(Block block)
     {
-        super(i);
+        super(block);
         setHasSubtypes(true);
         setMaxDamage(0);
         setCreativeTab(StevesCarts.tabsSC2Blocks);		
@@ -51,7 +44,7 @@ public class ItemBlockStorage extends ItemBlock
 
 	@Override
     @SideOnly(Side.CLIENT)
-    public Icon getIconFromDamage(int dmg)
+    public IIcon getIconFromDamage(int dmg)
     {
     	dmg %= icons.length;
     	
@@ -60,9 +53,9 @@ public class ItemBlockStorage extends ItemBlock
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister register)
+    public void registerIcons(IIconRegister register)
     {
-    	icons = new Icon[blocks.length];
+    	icons = new IIcon[blocks.length];
     	for (int i = 0; i < icons.length; i++) {
     		icons[i] = register.registerIcon(StevesCarts.instance.textureHeader + ":" + blocks[i].getName().replace(":","").replace(" ","_").toLowerCase());	
     	}
@@ -95,11 +88,11 @@ public class ItemBlockStorage extends ItemBlock
     /**
      * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
      */
-    public void getSubItems(int id, CreativeTabs tab, List items)
+    public void getSubItems(Item item, CreativeTabs tab, List items)
     {
         for (int i = 0; i < blocks.length; i++)
         {
-            items.add(new ItemStack(id, 1, i));
+            items.add(new ItemStack(item, 1, i));
         }
     }
     

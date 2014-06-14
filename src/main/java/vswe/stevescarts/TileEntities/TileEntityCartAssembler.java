@@ -14,9 +14,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import vswe.stevescarts.Blocks.BlockCartAssembler;
-import vswe.stevescarts.Blocks.Blocks;
+import vswe.stevescarts.Blocks.ModBlocks;
 import vswe.stevescarts.Helpers.*;
-import vswe.stevescarts.Items.Items;
+import vswe.stevescarts.Items.ModItems;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Carts.MinecartModular;
 import vswe.stevescarts.Containers.ContainerBase;
@@ -711,7 +711,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 				}			
 				
 				if (validSize) {
-					ModuleData module = Items.modules.getModuleData(item, true);
+					ModuleData module = ModItems.modules.getModuleData(item, true);
 					if (module != null) {
 						modules.add(module);
 					}
@@ -723,7 +723,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 	
 	public ModuleDataHull getHullModule() {
 		if (getStackInSlot(0) != null) {
-			ModuleData hulldata = Items.modules.getModuleData(getStackInSlot(0));
+			ModuleData hulldata = ModItems.modules.getModuleData(getStackInSlot(0));
 			if(hulldata instanceof ModuleDataHull) {
 				return (ModuleDataHull)hulldata;
 			}
@@ -742,7 +742,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 		if (hullSlot.getStack() == null) {
 			errors.add(Localization.GUI.ASSEMBLER.HULL_ERROR.translate());
 		}else{
-			ModuleData hulldata = Items.modules.getModuleData(getStackInSlot(0));
+			ModuleData hulldata = ModItems.modules.getModuleData(getStackInSlot(0));
 			if (hulldata == null || !(hulldata instanceof ModuleDataHull)) {
 				errors.add(Localization.GUI.ASSEMBLER.INVALID_HULL_SHORT.translate());
 			}else{
@@ -758,7 +758,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 				ArrayList<ModuleData> modules = new ArrayList<ModuleData>();
 				for (int i = 0; i < getSizeInventory() - nonModularSlots(); i++) {
 					if (getStackInSlot(i) != null) {
-						ModuleData data = Items.modules.getModuleData(getStackInSlot(i));
+						ModuleData data = ModItems.modules.getModuleData(getStackInSlot(i));
 						if (data != null) {
 							modules.add(data);
 						}
@@ -780,7 +780,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 		ArrayList<ModuleData> modules = new ArrayList<ModuleData>();
 		for (int i = 0; i < getSizeInventory() - nonModularSlots(); i++) {
 			if (getStackInSlot(i) != null) {
-				ModuleData data = Items.modules.getModuleData(getStackInSlot(i));
+				ModuleData data = ModItems.modules.getModuleData(getStackInSlot(i));
 				if (data != null) {
 					modules.add(data);
 				}
@@ -874,7 +874,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 	public ArrayList<SlotAssembler> getValidSlotFromHullItem(ItemStack hullitem) {
 		
 		if (hullitem != null) {
-			ModuleData data = Items.modules.getModuleData(hullitem);
+			ModuleData data = ModItems.modules.getModuleData(hullitem);
 			if (data != null && data instanceof ModuleDataHull) {
 				ModuleDataHull hull = (ModuleDataHull)data;
 				return getValidSlotFromHull(hull);
@@ -1107,17 +1107,17 @@ public class TileEntityCartAssembler extends TileEntityBase
 	private boolean loaded;
 	public void updateEntity() {
 		if (!loaded) {
-            ((BlockCartAssembler)Blocks.CART_ASSEMBLER.getBlock()).updateMultiBlock(worldObj, xCoord, yCoord, zCoord);
+            ((BlockCartAssembler) ModBlocks.CART_ASSEMBLER.getBlock()).updateMultiBlock(worldObj, xCoord, yCoord, zCoord);
 			loaded = true;
 		}
 	
 		if (!isAssembling && outputSlot != null && outputSlot.getStack() != null) {
 			ItemStack itemInSlot = outputSlot.getStack();
-			if (itemInSlot.getItem() == Items.carts) {
+			if (itemInSlot.getItem() == ModItems.carts) {
 			
 				NBTTagCompound info = itemInSlot.getTagCompound();
 				if (info != null && info.hasKey("maxTime")) {
-					ItemStack newItem = new ItemStack(Items.carts);
+					ItemStack newItem = new ItemStack(ModItems.carts);
 					
 					NBTTagCompound save = new NBTTagCompound();
 					save.setByteArray("Modules", info.getByteArray("Modules"));				
@@ -1132,8 +1132,8 @@ public class TileEntityCartAssembler extends TileEntityBase
 						byte[] moduleIDs = info.getByteArray("Spares");
 						for (int i = 0; i < moduleIDs.length; i++) {
 							byte id = moduleIDs[i];
-							ItemStack module = new ItemStack(Items.modules, 1, id);
-							Items.modules.addExtraDataToModule(module, info, i + modulecount);
+							ItemStack module = new ItemStack(ModItems.modules, 1, id);
+							ModItems.modules.addExtraDataToModule(module, info, i + modulecount);
 							spareModules.add(module);
 						}
 					}
@@ -1334,7 +1334,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 		ArrayList<Byte> datalist = new ArrayList<Byte>();
 		for (int i = 0; i < getSizeInventory() - nonModularSlots(); i++) {
 			if (getStackInSlot(i) != null) {
-				ModuleData data = Items.modules.getModuleData(getStackInSlot(i));
+				ModuleData data = ModItems.modules.getModuleData(getStackInSlot(i));
 				if (data != null) {
 					datalist.add((byte)getStackInSlot(i).getItemDamage());
 				}
@@ -1599,10 +1599,10 @@ public class TileEntityCartAssembler extends TileEntityBase
 				byte [] moduleIDs = new byte[spareModules.size()];
 				for (int i = 0; i < spareModules.size(); i++) {
 					ItemStack item = spareModules.get(i);
-					ModuleData data = Items.modules.getModuleData(item);
+					ModuleData data = ModItems.modules.getModuleData(item);
 					if (data != null) {		
 						moduleIDs[i] = data.getID();
-						Items.modules.addExtraDataToCart(info, item, i + modulecount);
+						ModItems.modules.addExtraDataToCart(info, item, i + modulecount);
 					}					
 				}
 

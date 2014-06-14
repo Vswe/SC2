@@ -1,13 +1,16 @@
 package vswe.stevescarts.Blocks;
 import java.util.ArrayList;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Helpers.BlockCoord;
@@ -17,8 +20,7 @@ import cpw.mods.fml.common.network.FMLNetworkHandler;
 import vswe.stevescarts.PacketHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.util.Icon;
-import net.minecraft.client.renderer.texture.IconRegister;
+
 
 
 public class BlockCartAssembler extends BlockContainer
@@ -27,19 +29,19 @@ public class BlockCartAssembler extends BlockContainer
 
     public BlockCartAssembler(int i)
     {
-        super(i, Material.rock);
+        super(Material.rock);
         setCreativeTab(StevesCarts.tabsSC2Blocks);		
     }
 
 
 
-	private Icon topIcon;
-	private Icon botIcon;
-	private Icon sideIcons [];
+	private IIcon topIcon;
+	private IIcon botIcon;
+	private IIcon sideIcons [];
 	
     @SideOnly(Side.CLIENT)
 	@Override
-    public Icon getIcon(int side, int meta)
+    public IIcon getIcon(int side, int meta)
     {
         if (side == 0) {
 			return botIcon;
@@ -52,11 +54,11 @@ public class BlockCartAssembler extends BlockContainer
 	
     @SideOnly(Side.CLIENT)
 	@Override
-    public void registerIcons(IconRegister register)
+    public void registerBlockIcons(IIconRegister register)
     {
         topIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "cart_assembler" + "_top");
 		botIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "cart_assembler" + "_bot");
-		sideIcons = new Icon[4];
+		sideIcons = new IIcon[4];
 		for (int i = 1; i <= 4; i++) {
 			sideIcons[i-1] = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "cart_assembler" + "_side_" + i);
 		}
@@ -69,7 +71,7 @@ public class BlockCartAssembler extends BlockContainer
 			return false;
 		}
 	
-		TileEntityCartAssembler assembler = (TileEntityCartAssembler)world.getBlockTileEntity(x, y, z);
+		TileEntityCartAssembler assembler = (TileEntityCartAssembler)world.getTileEntity(x, y, z);
 		if (assembler != null) {
 		    if (!world.isRemote)
 			{
@@ -86,7 +88,7 @@ public class BlockCartAssembler extends BlockContainer
 
 	public void updateMultiBlock(World world, int x, int y, int z) {
 
-		TileEntityCartAssembler master = (TileEntityCartAssembler)world.getBlockTileEntity(x,y,z);
+		TileEntityCartAssembler master = (TileEntityCartAssembler)world.getTileEntity(x, y, z);
 		if (master != null) {
 			master.clearUpgrades();
 		}
@@ -113,7 +115,7 @@ public class BlockCartAssembler extends BlockContainer
 	}
 	
 	private TileEntityCartAssembler checkForUpgrade(World world, int x, int y, int z) {
-		TileEntity tile = world.getBlockTileEntity(x,y,z);
+		TileEntity tile = world.getTileEntity(x, y, z);
 		if (tile != null && tile instanceof TileEntityUpgrade) {
 			TileEntityUpgrade upgrade = (TileEntityUpgrade)tile;
 			ArrayList<TileEntityCartAssembler> masters = getMasters(world, x, y, z);
@@ -171,7 +173,7 @@ public class BlockCartAssembler extends BlockContainer
 	}	
 	
 	private TileEntityCartAssembler getMaster(World world, int x, int y, int z) {
-		TileEntity tile = world.getBlockTileEntity(x,y,z);
+		TileEntity tile = world.getTileEntity(x, y, z);
 		if (tile != null && tile instanceof TileEntityCartAssembler) {
 			TileEntityCartAssembler master = (TileEntityCartAssembler)tile;
 			
@@ -200,7 +202,7 @@ public class BlockCartAssembler extends BlockContainer
 	
 
 	@Override
-    public TileEntity createNewTileEntity(World world)
+    public TileEntity createNewTileEntity(World world, int var2)
     {
         return new TileEntityCartAssembler();
     }
@@ -212,11 +214,11 @@ public class BlockCartAssembler extends BlockContainer
 	}
 	
 	@Override
-	public void breakBlock(World world, int x, int y, int z, int unknown1, int unknown2) 
+	public void breakBlock(World world, int x, int y, int z, Block unknown1, int unknown2)
     {
 		
 	
-        TileEntityCartAssembler var7 = (TileEntityCartAssembler)world.getBlockTileEntity(x, y, z);
+        TileEntityCartAssembler var7 = (TileEntityCartAssembler)world.getTileEntity(x, y, z);
 		var7.isDead = true;
 		updateMultiBlock(world, x, y, z);
         if (var7 != null)
@@ -241,7 +243,7 @@ public class BlockCartAssembler extends BlockContainer
                         }
 
                         var9.stackSize -= var13;
-                        var14 = new EntityItem(world, (double)((float)x + var10), (double)((float)y + var11), (double)((float)z + var12), new ItemStack(var9.itemID, var13, var9.getItemDamage()));
+                        var14 = new EntityItem(world, (double)((float)x + var10), (double)((float)y + var11), (double)((float)z + var12), new ItemStack(var9.getItem(), var13, var9.getItemDamage()));
                         float var15 = 0.05F;
                         var14.motionX = (double)((float)world.rand.nextGaussian() * var15);
                         var14.motionY = (double)((float)world.rand.nextGaussian() * var15 + 0.2F);

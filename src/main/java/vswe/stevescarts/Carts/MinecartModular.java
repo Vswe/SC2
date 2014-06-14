@@ -16,6 +16,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagByteArray;
 import net.minecraft.nbt.NBTTagCompound;
@@ -27,13 +28,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
-import vswe.stevescarts.Blocks.Blocks;
-import vswe.stevescarts.Items.Items;
+import vswe.stevescarts.Blocks.ModBlocks;
+import vswe.stevescarts.Items.ModItems;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Containers.ContainerMinecart;
 import vswe.stevescarts.Helpers.ActivatorOption;
@@ -338,9 +340,9 @@ public class MinecartModular extends EntityMinecart
 		
 		//on the server, make sure the version is correct
 		if (worldObj.isRemote) {
-			moduleLoadingData = moduleIDTag.byteArray;
+			moduleLoadingData = moduleIDTag.func_150292_c();
 		}else{
-			moduleLoadingData = CartVersion.updateCart(this, moduleIDTag.byteArray);
+			moduleLoadingData = CartVersion.updateCart(this, moduleIDTag.func_150292_c());
 		}
 		
 		loadModules(moduleLoadingData);	
@@ -784,13 +786,13 @@ public class MinecartModular extends EntityMinecart
     {
 		if (modules != null) {
 			ItemStack cart = ModuleData.createModularCart(this);	
-			if (name != null && !name.equals("") && !name.equals(Items.carts.getName())) {
-				cart.setItemName(name);
+			if (name != null && !name.equals("") && !name.equals(ModItems.carts.getName())) {
+				cart.setStackDisplayName(name);
 			}
 
 			return cart;
 		}else{
-			return new ItemStack(Items.carts);
+			return new ItemStack(ModItems.carts);
 		}
     }
 
@@ -823,7 +825,7 @@ public class MinecartModular extends EntityMinecart
 						}
 
 						itemstack.stackSize -= j;
-						EntityItem entityitem = new EntityItem(this.worldObj, this.posX + (double)f, this.posY + (double)f1, this.posZ + (double)f2, new ItemStack(itemstack.itemID, j, itemstack.getItemDamage()));
+						EntityItem entityitem = new EntityItem(this.worldObj, this.posX + (double)f, this.posY + (double)f1, this.posZ + (double)f2, new ItemStack(itemstack.getItem(), j, itemstack.getItemDamage()));
 						float f3 = 0.05F;
 						entityitem.motionX = (double)((float)this.rand.nextGaussian() * f3);
 						entityitem.motionY = (double)((float)this.rand.nextGaussian() * f3 + 0.2F);
@@ -890,12 +892,13 @@ public class MinecartModular extends EntityMinecart
 	public int getDefaultDisplayTileData() {
 		return -1;
 	}
-	
-	@Override
+
+	//TODO this method doesn't exist anymore, remove or find another name for it
+	/*@Override
     public Block getDefaultDisplayTile()
     {
         return null;
-    }	
+    }*/
 
 	@Override
 	public int getMinecartType() {
@@ -1011,10 +1014,10 @@ public class MinecartModular extends EntityMinecart
 			}
 		}
 		
-        int id = worldObj.getBlockId(x, y, z);
-		int idBelow = worldObj.getBlockId(x, y-1, z);
+        Block block = worldObj.getBlock(x, y, z);
+		Block blockBelow = worldObj.getBlock(x, y - 1, z);
 		int metaBelow = worldObj.getBlockMetadata(x, y-1, z);
-		int m = ((BlockRailBase)Block.blocksList[id]).getBasicRailMetadata(worldObj, this, x, y, z);	
+		int m = ((BlockRailBase)block).getBasicRailMetadata(worldObj, this, x, y, z);
 		
 	
 		if (((m == 6 || m == 7) && motionX < 0) || ((m == 8 || m == 9) && motionX > 0)) {
@@ -1023,12 +1026,12 @@ public class MinecartModular extends EntityMinecart
 			cornerFlip = false;
 		}
 		
-       if (id != Blocks.ADVANCED_DETECTOR.getId() && isDisabled())
+       if (block != ModBlocks.ADVANCED_DETECTOR.getBlock() && isDisabled())
         {
             releaseCart();
         }
 
-        boolean canBeDisabled = id == Blocks.ADVANCED_DETECTOR.getId() && (idBelow != Blocks.DETECTOR_UNIT.getId() || !DetectorType.getTypeFromMeta(metaBelow).canInteractWithCart() || DetectorType.getTypeFromMeta(metaBelow).shouldStopCart());
+        boolean canBeDisabled = block == ModBlocks.ADVANCED_DETECTOR.getBlock() && (blockBelow != ModBlocks.DETECTOR_UNIT.getBlock() || !DetectorType.getTypeFromMeta(metaBelow).canInteractWithCart() || DetectorType.getTypeFromMeta(metaBelow).shouldStopCart());
         boolean forceUnDisable = (wasDisabled && disabledX == x && disabledY == y && disabledZ == z);
 
         if (!forceUnDisable && wasDisabled)
@@ -1227,13 +1230,15 @@ public class MinecartModular extends EntityMinecart
      * Lets the modules know when the inventory of the cart has been changed
      */
 	@Override
-	public void onInventoryChanged() {
+	public void markDirty() { //TODO make sure this method name is correct
 		if (modules != null) {
 			for (ModuleBase module : modules) {
 				module.onInventoryChanged();
 			}
 		}
 	}
+
+
 
 
     /**
@@ -2286,7 +2291,7 @@ public class MinecartModular extends EntityMinecart
 	}
 	
 	@Override
-	public String getInvName() {
+	public String getInventoryName() {
 		return "container.modularcart";
 	}
 

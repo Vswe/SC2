@@ -9,29 +9,29 @@ import vswe.stevescarts.TileEntities.TileEntityDistributor;
 import cpw.mods.fml.common.network.FMLNetworkHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.util.Icon;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.util.IIcon;
+import net.minecraft.client.renderer.texture.IIconRegister;
 public class BlockDistributor extends BlockContainer
 {
 
 
-    public BlockDistributor(int i)
+    public BlockDistributor()
     {
-        super(i, Material.rock);
+        super(Material.rock);
         setCreativeTab(StevesCarts.tabsSC2Blocks);			
     }
 
 
-	private Icon purpleIcon;
-	private Icon orangeIcon;
-	private Icon redIcon;
-	private Icon blueIcon;
-	private Icon greenIcon;
-	private Icon yellowIcon;
+	private IIcon purpleIcon;
+	private IIcon orangeIcon;
+	private IIcon redIcon;
+	private IIcon blueIcon;
+	private IIcon greenIcon;
+	private IIcon yellowIcon;
 	
     @SideOnly(Side.CLIENT)
 	@Override
-    public Icon getIcon(int side, int meta)
+    public IIcon getIcon(int side, int meta)
     {
         if (side == 0) {
 			return purpleIcon;
@@ -50,7 +50,7 @@ public class BlockDistributor extends BlockContainer
 	
     @SideOnly(Side.CLIENT)
 	@Override
-    public void registerIcons(IconRegister register)
+    public void registerBlockIcons(IIconRegister register)
     {
 		purpleIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "cargo_distributor" + "_purple");	
         orangeIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "cargo_distributor" + "_orange");
@@ -80,7 +80,7 @@ public class BlockDistributor extends BlockContainer
     }
 
 	@Override
-    public TileEntity createNewTileEntity(World world)
+    public TileEntity createNewTileEntity(World world, int var2)
     {
         return new TileEntityDistributor();
     }

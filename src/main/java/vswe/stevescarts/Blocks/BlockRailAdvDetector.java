@@ -1,11 +1,12 @@
 package vswe.stevescarts.Blocks;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockRailBase;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import vswe.stevescarts.StevesCarts;
@@ -24,17 +25,17 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockRailAdvDetector extends BlockRailBase
 {
 	
-	private Icon normalIcon;
-	private Icon cornerIcon;
+	private IIcon normalIcon;
+	private IIcon cornerIcon;
 
-    public BlockRailAdvDetector(int i)
+    public BlockRailAdvDetector()
     {
-        super(i, false);
+        super(false);
         setCreativeTab(StevesCarts.tabsSC2Blocks);		
     }
 	
 	@Override
-    public Icon getIcon(int side, int meta)
+    public IIcon getIcon(int side, int meta)
     {
         return meta >= 6 ? cornerIcon : normalIcon;
     }
@@ -42,7 +43,7 @@ public class BlockRailAdvDetector extends BlockRailBase
 
 	@Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister register)
+    public void registerBlockIcons(IIconRegister register)
     {
         normalIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "advanced_detector_rail");
 		cornerIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "advanced_detector_rail" + "_corner");
@@ -51,11 +52,10 @@ public class BlockRailAdvDetector extends BlockRailBase
     /*  Return true if the rail can go up and down slopes
      */
     @Override
-    public boolean canMakeSlopes(World world, int i, int j, int k)
+    public boolean canMakeSlopes(IBlockAccess world, int i, int j, int k)
     {
         return false;
     }
-
 
 
 	@Override
@@ -70,9 +70,9 @@ public class BlockRailAdvDetector extends BlockRailBase
 		
 
 	
-		if (world.getBlockId(x, y-1, z) == Blocks.DETECTOR_UNIT.getId() && DetectorType.getTypeFromMeta(world.getBlockMetadata(x, y-1, z)).canInteractWithCart()) {
+		if (world.getBlock(x, y - 1, z) == ModBlocks.DETECTOR_UNIT.getBlock() && DetectorType.getTypeFromMeta(world.getBlockMetadata(x, y-1, z)).canInteractWithCart()) {
 			
-			TileEntity tileentity = world.getBlockTileEntity(x, y-1, z);
+			TileEntity tileentity = world.getTileEntity(x, y - 1, z);
 			
 			if (tileentity != null && tileentity instanceof TileEntityDetector) {
 				TileEntityDetector detector = (TileEntityDetector)tileentity;
@@ -92,10 +92,10 @@ public class BlockRailAdvDetector extends BlockRailBase
 			for (int j = -1; j <= 1; j++) {
 				if (Math.abs(i) != Math.abs(j)) {
 					
-					int blockId = world.getBlockId(x+i, y, z+j);
-					if (blockId == Blocks.CARGO_MANAGER.getId() || blockId == Blocks.LIQUID_MANAGER.getId())
+					Block block = world.getBlock(x + i, y, z + j);
+					if (block == ModBlocks.CARGO_MANAGER.getBlock() || block == ModBlocks.LIQUID_MANAGER.getBlock())
 					{
-						TileEntity tileentity = world.getBlockTileEntity(x+i, y, z+j);
+						TileEntity tileentity = world.getTileEntity(x+i, y, z+j);
 						
 						if (tileentity != null && tileentity instanceof TileEntityManager) {
 							TileEntityManager manager = (TileEntityManager)tileentity;
@@ -106,8 +106,8 @@ public class BlockRailAdvDetector extends BlockRailBase
 						}
 						
 						return;						
-					}else if(blockId == Blocks.MODULE_TOGGLER.getId()) {
-						TileEntity tileentity = world.getBlockTileEntity(x+i, y, z+j);
+					}else if(block == ModBlocks.MODULE_TOGGLER.getBlock()) {
+						TileEntity tileentity = world.getTileEntity(x+i, y, z+j);
 						
 						if (tileentity != null && tileentity instanceof TileEntityActivator) {
 							TileEntityActivator activator = (TileEntityActivator)tileentity;
@@ -142,8 +142,8 @@ public class BlockRailAdvDetector extends BlockRailBase
 						
 						return;
 						
-					}else if(blockId == Blocks.UPGRADE.getId()) {
-						TileEntity tileentity = world.getBlockTileEntity(x+i, y, z+j);
+					}else if(block == ModBlocks.UPGRADE.getBlock()) {
+						TileEntity tileentity = world.getTileEntity(x+i, y, z+j);
 						
 						TileEntityUpgrade upgrade = (TileEntityUpgrade)tileentity;
 						if(upgrade != null && upgrade.getUpgrade() != null) {
@@ -196,7 +196,7 @@ public class BlockRailAdvDetector extends BlockRailBase
     public boolean canConnectRedstone(IBlockAccess world, int x, int y, int z, int side) {
         //check if any block is using this detector for something else
 
-        if (world.getBlockId(x, y-1, z) == Blocks.DETECTOR_UNIT.getId() && DetectorType.getTypeFromMeta(world.getBlockMetadata(x, y-1, z)).canInteractWithCart()) {
+        if (world.getBlock(x, y-1, z) == ModBlocks.DETECTOR_UNIT.getBlock() && DetectorType.getTypeFromMeta(world.getBlockMetadata(x, y-1, z)).canInteractWithCart()) {
             return false;
         }
 
@@ -204,11 +204,11 @@ public class BlockRailAdvDetector extends BlockRailBase
             for (int j = -1; j <= 1; j++) {
                 if (Math.abs(i) != Math.abs(j)) {
 
-                    int blockId = world.getBlockId(x+i, y, z+j);
-                    if (blockId == Blocks.CARGO_MANAGER.getId() || blockId == Blocks.LIQUID_MANAGER.getId() || blockId == Blocks.MODULE_TOGGLER.getId()) {
+                    Block block = world.getBlock(x+i, y, z+j);
+                    if (block == ModBlocks.CARGO_MANAGER.getBlock() || block == ModBlocks.LIQUID_MANAGER.getBlock() || block == ModBlocks.MODULE_TOGGLER.getBlock()) {
                         return false;
-                    }else if(blockId == Blocks.UPGRADE.getId()) {
-                        TileEntity tileentity = world.getBlockTileEntity(x+i, y, z+j);
+                    }else if(block == ModBlocks.UPGRADE.getBlock()) {
+                        TileEntity tileentity = world.getTileEntity(x+i, y, z+j);
 
                         TileEntityUpgrade upgrade = (TileEntityUpgrade)tileentity;
                         if(upgrade != null && upgrade.getUpgrade() != null) {
@@ -250,8 +250,8 @@ public class BlockRailAdvDetector extends BlockRailBase
 	@Override
     public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
     {
-		if (world.getBlockId(i,j-1,k) == Blocks.DETECTOR_UNIT.getId()) {
-			return Blocks.DETECTOR_UNIT.getBlock().onBlockActivated(world, i, j-1, k, entityplayer, par6, par7, par8, par9);
+		if (world.getBlock(i,j-1,k) == ModBlocks.DETECTOR_UNIT.getBlock()) {
+			return ModBlocks.DETECTOR_UNIT.getBlock().onBlockActivated(world, i, j-1, k, entityplayer, par6, par7, par8, par9);
 		}
 		
         return false;

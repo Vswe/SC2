@@ -2,13 +2,9 @@ package vswe.stevescarts.Renders;
 
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
-import vswe.stevescarts.Items.Items;
-import vswe.stevescarts.StevesCarts;
+import vswe.stevescarts.Items.ModItems;
 
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.ItemStack;
-import net.minecraft.client.renderer.RenderBlocks;
 import org.lwjgl.opengl.GL11;
 
 import vswe.stevescarts.ModuleData.ModuleData;
@@ -19,7 +15,7 @@ import java.util.HashMap;
 import vswe.stevescarts.Models.Cart.ModelCartbase;
 public class RendererMinecartItem implements IItemRenderer {
 	public RendererMinecartItem() {
-		MinecraftForgeClient.registerItemRenderer(Items.carts.itemID, this);
+		MinecraftForgeClient.registerItemRenderer(ModItems.carts.itemID, this);
 	}
 
   /** 

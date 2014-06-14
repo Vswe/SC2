@@ -3,8 +3,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevescarts.Helpers.ComponentTypes;
 import vswe.stevescarts.Helpers.Localization;
-import vswe.stevescarts.Items.Items;
-import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Carts.MinecartModular;
 import vswe.stevescarts.Helpers.ResourceHelper;
 import vswe.stevescarts.Interfaces.GuiMinecart;

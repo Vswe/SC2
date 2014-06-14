@@ -2,7 +2,6 @@ package vswe.stevescarts.Arcade;
 
 import java.util.EnumSet;
 
-import net.minecraftforge.common.EnumHelper;
 
 import org.lwjgl.opengl.GL11;
 

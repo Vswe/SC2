@@ -2,16 +2,14 @@ package vswe.stevescarts.Items;
 
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.common.config.Configuration;
-import vswe.stevescarts.Blocks.Blocks;
+import vswe.stevescarts.Blocks.ModBlocks;
 import vswe.stevescarts.Helpers.ComponentTypes;
 import vswe.stevescarts.Helpers.DetectorType;
-import vswe.stevescarts.Helpers.GiftItem;
 import vswe.stevescarts.Helpers.RecipeHelper;
 import vswe.stevescarts.ModuleData.ModuleData;
 import vswe.stevescarts.StevesCarts;
@@ -19,7 +17,7 @@ import vswe.stevescarts.Upgrades.AssemblerUpgrade;
 
 import java.util.HashMap;
 
-public final class Items {
+public final class ModItems {
 
     public static ItemCarts carts;
     public static ItemCartComponent component;
@@ -68,9 +66,9 @@ public final class Items {
     }
 
     public static void postBlockInit(Configuration config) {
-        detectors = (ItemBlockDetector) Item.itemsList[Blocks.DETECTOR_UNIT.getId()];
-        upgrades = (ItemUpgrade)Item.itemsList[Blocks.UPGRADE.getId()];
-        storages = (ItemBlockStorage)Item.itemsList[Blocks.STORAGE.getId()];
+        detectors = (ItemBlockDetector) Item.itemsList[ModBlocks.DETECTOR_UNIT.getId()];
+        upgrades = (ItemUpgrade)Item.itemsList[ModBlocks.UPGRADE.getId()];
+        storages = (ItemBlockStorage)Item.itemsList[ModBlocks.STORAGE.getId()];
 
 
 
@@ -648,5 +646,5 @@ public final class Items {
     }
 
 
-    private Items() {}
+    private ModItems() {}
 }

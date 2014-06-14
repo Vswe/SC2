@@ -4,13 +4,14 @@ import java.util.HashMap;
 
 import net.minecraft.block.BlockBaseRailLogic;
 import net.minecraft.block.BlockRailBase;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.Icon;
 import net.minecraft.util.StatCollector;
-import vswe.stevescarts.Blocks.Blocks;
+import vswe.stevescarts.Blocks.ModBlocks;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Carts.MinecartModular;
-import vswe.stevescarts.Helpers.OperatorObject.OperatorObjectRedirector;
 import vswe.stevescarts.TileEntities.TileEntityDetector;
 
 
@@ -67,12 +68,12 @@ public enum DetectorType {
 		}			
 		
 		private void update(TileEntityDetector detector, boolean flag) {
-			if (detector.worldObj.getBlockId(detector.xCoord, detector.yCoord + 1, detector.zCoord) == Blocks.ADVANCED_DETECTOR.getId()) {
-				(new BlockBaseRailLogic((BlockRailBase)Blocks.ADVANCED_DETECTOR.getBlock(), detector.worldObj, detector.xCoord, detector.yCoord + 1, detector.zCoord)).func_94511_a(flag, false);
+			if (detector.getWorldObj().getBlock(detector.xCoord, detector.yCoord + 1, detector.zCoord) == ModBlocks.ADVANCED_DETECTOR.getBlock()) {
+				(new BlockBaseRailLogic((BlockRailBase) ModBlocks.ADVANCED_DETECTOR.getBlock(), detector.getWorldObj(), detector.xCoord, detector.yCoord + 1, detector.zCoord)).func_94511_a(flag, false);
 			}
 		}
 	},
-	
+
 	REDSTONE(4, false, false, false,
 			"detector_redstone_bot",
 			"detector_redstone_bot",
@@ -99,7 +100,7 @@ public enum DetectorType {
 
 	private int meta;
 	private String[] textures;
-	private Icon[] icons;
+	private IIcon[] icons;
 	private boolean acceptCart;
 	private boolean stopCart;
 	private boolean emitRedstone;
@@ -125,15 +126,15 @@ public enum DetectorType {
 
 
 
-	public void registerIcons(IconRegister register) {
-		icons = new Icon[textures.length];
+	public void registerIcons(IIconRegister register) {
+		icons = new IIcon[textures.length];
 		for (int i = 0; i < textures.length; i++) {
 			icons[i] = register.registerIcon(StevesCarts.instance.textureHeader + ":" + textures[i]);
 		}
 	}
 	
 
-	public Icon getIcon(int side) {
+	public IIcon getIcon(int side) {
 		return icons[side];
 	}
 	

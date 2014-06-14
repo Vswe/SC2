@@ -12,9 +12,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
-import vswe.stevescarts.Blocks.Blocks;
+import vswe.stevescarts.Blocks.ModBlocks;
 import vswe.stevescarts.Helpers.Localization;
-import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Carts.MinecartModular;
 import vswe.stevescarts.Helpers.BlockCoord;
 import vswe.stevescarts.Helpers.ResourceHelper;
@@ -437,7 +436,7 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
                     id == Block.torchRedstoneIdle.blockID ||
                     id == Block.redstoneRepeaterIdle.blockID ||
                     id == Block.redstoneRepeaterActive.blockID ||
-					id == Blocks.MODULE_TOGGLER.getId()
+					id == ModBlocks.MODULE_TOGGLER.getId()
                     ))
             {
                 return null;

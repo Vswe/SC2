@@ -1,16 +1,17 @@
 package vswe.stevescarts.Blocks;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.TileEntities.TileEntityActivator;
 import cpw.mods.fml.common.network.FMLNetworkHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.util.Icon;
-import net.minecraft.client.renderer.texture.IconRegister;
+
 
 
 public class BlockActivator extends BlockContainer
@@ -19,18 +20,18 @@ public class BlockActivator extends BlockContainer
 
     public BlockActivator(int i)
     {
-        super(i, Material.rock);
+        super(Material.rock);
         setCreativeTab(StevesCarts.tabsSC2Blocks);		
     }
 
 
-	private Icon topIcon;
-	private Icon botIcon;
-	private Icon sideIcon;
+	private IIcon topIcon;
+	private IIcon botIcon;
+	private IIcon sideIcon;
 	
     @SideOnly(Side.CLIENT)
 	@Override
-    public Icon getIcon(int side, int meta)
+    public IIcon getIcon(int side, int meta)
     {
         if (side == 0) {
 			return botIcon;
@@ -43,7 +44,7 @@ public class BlockActivator extends BlockContainer
 	
     @SideOnly(Side.CLIENT)
 	@Override
-    public void registerIcons(IconRegister register)
+    public void registerBlockIcons(IIconRegister register)
     {
         topIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "module_toggler" + "_top");
 		botIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "module_toggler" + "_bot");
@@ -70,7 +71,7 @@ public class BlockActivator extends BlockContainer
     }
 
 	@Override
-    public TileEntity createNewTileEntity(World world)
+    public TileEntity createNewTileEntity(World world, int var2)
     {
         return new TileEntityActivator();
     }

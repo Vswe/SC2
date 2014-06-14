@@ -13,7 +13,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import vswe.stevescarts.Helpers.Localization;
-import vswe.stevescarts.Items.Items;
+import vswe.stevescarts.Items.ModItems;
 import vswe.stevescarts.PacketHandler;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Containers.ContainerCartAssembler;
@@ -78,7 +78,7 @@ public class GuiCartAssembler extends GuiBase
 			addText(lines, Localization.GUI.ASSEMBLER.ASSEMBLE_INSTRUCTION.translate());
 			hasErrors = true;
 		}else{
-			ModuleData hulldata = Items.modules.getModuleData(assembler.getStackInSlot(0));
+			ModuleData hulldata = ModItems.modules.getModuleData(assembler.getStackInSlot(0));
 			if (hulldata == null || !(hulldata instanceof ModuleDataHull)) {
 				addText(lines, Localization.GUI.ASSEMBLER.INVALID_HULL.translate() ,0x9E0B0E);
 				hasErrors = true;

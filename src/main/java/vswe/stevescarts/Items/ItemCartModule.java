@@ -1,26 +1,25 @@
 package vswe.stevescarts.Items;
 import java.util.List;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.IIcon;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.ModuleData.ModuleData;
 import vswe.stevescarts.Modules.ModuleBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import vswe.stevescarts.TileEntities.TileEntityCartAssembler;
-import net.minecraft.util.Icon;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.util.Icon;
 public class ItemCartModule extends Item
 {
 
-    public ItemCartModule(int i)
+    public ItemCartModule()
     {
-        super(i);
+        super();
         setHasSubtypes(true);
         setMaxDamage(0);
         setCreativeTab(StevesCarts.tabsSC2);	
@@ -41,7 +40,7 @@ public class ItemCartModule extends Item
 
 	@Override
     @SideOnly(Side.CLIENT)
-    public Icon getIconFromDamage(int dmg)
+    public IIcon getIconFromDamage(int dmg)
     {
 		ModuleData data = ModuleData.getList().get((byte)dmg);
 		if (data != null) {
@@ -50,11 +49,11 @@ public class ItemCartModule extends Item
 		return unknownIcon;
     }	
 		
-	Icon unknownIcon;	
+	IIcon unknownIcon;
 		
 	@Override
 	@SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister register)
+    public void registerIcons(IIconRegister register)
     {
 		for (ModuleData module : ModuleData.getList().values()) {
 			module.createIcon(register);
@@ -65,7 +64,7 @@ public class ItemCartModule extends Item
 	@Override
     public String getUnlocalizedName() {
 	
-		return "item." + StevesCarts.instance.localStart + "unknownmodule";	
+		return "item." + StevesCarts.localStart + "unknownmodule";
 	}
 	
 	@Override
@@ -73,7 +72,7 @@ public class ItemCartModule extends Item
     {
 		ModuleData data = getModuleData(item, true);
 		if (data != null) {
-			 return "item." + StevesCarts.instance.localStart  + data.getRawName();
+			 return "item." + StevesCarts.localStart  + data.getRawName();
 		}
 		return getUnlocalizedName();
     }

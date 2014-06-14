@@ -2,7 +2,7 @@ package vswe.stevescarts.Modules.Realtimers;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import vswe.stevescarts.Items.Items;
+import vswe.stevescarts.Items.ModItems;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Carts.MinecartModular;
 import vswe.stevescarts.Slots.SlotBase;
@@ -48,7 +48,7 @@ public class ModuleCakeServerDynamite extends ModuleCakeServer {
 		
 		if (!getCart().worldObj.isRemote) {
 			ItemStack item = getStack(0);
-			if (item != null && item.getItem().equals(Items.component) && item.getItemDamage() == 6 && dynamiteCount < getMaxDynamiteCount()) {
+			if (item != null && item.getItem().equals(ModItems.component) && item.getItemDamage() == 6 && dynamiteCount < getMaxDynamiteCount()) {
 				int count = Math.min(getMaxDynamiteCount() - dynamiteCount, item.stackSize);
 				dynamiteCount += count;
 				item.stackSize -= count;

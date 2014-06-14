@@ -4,7 +4,7 @@ import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import vswe.stevescarts.Carts.MinecartModular;
 import vswe.stevescarts.Helpers.*;
-import vswe.stevescarts.Items.Items;
+import vswe.stevescarts.Items.ModItems;
 import vswe.stevescarts.Renders.RendererMinecart;
 import vswe.stevescarts.Renders.RendererMinecartItem;
 import vswe.stevescarts.Renders.RendererUpgrade;
@@ -20,7 +20,7 @@ public class ClientProxy extends CommonProxy{
 	@Override
 	public void renderInit() {
 		RenderingRegistry.registerEntityRenderingHandler(MinecartModular.class, new RendererMinecart());
-		RenderingRegistry.registerEntityRenderingHandler(EntityEasterEgg.class, new RenderSnowball(Items.component, ComponentTypes.PAINTED_EASTER_EGG.getId()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityEasterEgg.class, new RenderSnowball(ModItems.component, ComponentTypes.PAINTED_EASTER_EGG.getId()));
 		StevesCarts.instance.blockRenderer = new RendererUpgrade();
 		new RendererMinecartItem();
 		RenderingRegistry.registerEntityRenderingHandler(EntityCake.class, new RenderSnowball(Item.cake));

@@ -10,7 +10,7 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
@@ -193,7 +193,7 @@ public class TileEntityDistributor extends TileEntityBase
 	}
 	
 	private TileEntityManager generateManager(int y) {
-		TileEntity TE = worldObj.getBlockTileEntity(xCoord, yCoord + y, zCoord);
+		TileEntity TE = worldObj.getTileEntity(xCoord, yCoord + y, zCoord);
 		if (TE != null && TE instanceof TileEntityManager) {
 			return (TileEntityManager)TE;
 		}
@@ -205,7 +205,7 @@ public class TileEntityDistributor extends TileEntityBase
 	@Override
     public boolean isUseableByPlayer(EntityPlayer entityplayer)
     {
-        if (worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this)
+        if (worldObj.getTileEntity(xCoord, yCoord, zCoord) != this)
         {
             return false;
         }
@@ -271,13 +271,13 @@ public class TileEntityDistributor extends TileEntityBase
     }
 
 	@Override
-    public String getInvName()
+    public String getInventoryName()
     {
         return "container.cargodistributor";
     }
 	
 	@Override
-    public boolean isInvNameLocalized()
+    public boolean hasCustomInventoryName()
     {
         return false;
     }	
@@ -289,11 +289,11 @@ public class TileEntityDistributor extends TileEntityBase
     }	
 	
 	@Override
-    public void closeChest()
+    public void closeInventory()
     {
     }
 	@Override
-    public void openChest()
+    public void openInventory()
     {
     }
 	

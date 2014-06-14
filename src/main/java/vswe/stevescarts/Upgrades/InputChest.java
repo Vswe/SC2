@@ -6,8 +6,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevescarts.Helpers.Localization;
-import vswe.stevescarts.Items.Items;
-import vswe.stevescarts.StevesCarts;
+import vswe.stevescarts.Items.ModItems;
 import vswe.stevescarts.Containers.ContainerCartAssembler;
 import vswe.stevescarts.Helpers.TransferHandler;
 import vswe.stevescarts.ModuleData.ModuleData;
@@ -57,7 +56,7 @@ public class InputChest extends SimpleInventoryEffect {
 					ItemStack itemstack = upgrade.getStackInSlot(slotId);
 					if (itemstack != null) {
 					
-						ModuleData module = Items.modules.getModuleData(itemstack);
+						ModuleData module = ModItems.modules.getModuleData(itemstack);
 						if (module == null) {
 							continue;
 						}		

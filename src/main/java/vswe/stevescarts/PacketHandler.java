@@ -12,7 +12,7 @@ import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.world.World;
 import vswe.stevescarts.Blocks.BlockCartAssembler;
-import vswe.stevescarts.Blocks.Blocks;
+import vswe.stevescarts.Blocks.ModBlocks;
 import vswe.stevescarts.Carts.MinecartModular;
 import vswe.stevescarts.Containers.ContainerBase;
 import vswe.stevescarts.Containers.ContainerMinecart;
@@ -53,7 +53,7 @@ public class PacketHandler implements IPacketHandler {
 					EntityPlayer ep = (EntityPlayer)player;
 					World world = ep.worldObj;
 					
-                    ((BlockCartAssembler)Blocks.CART_ASSEMBLER.getBlock()).updateMultiBlock(world, x, y, z);
+                    ((BlockCartAssembler) ModBlocks.CART_ASSEMBLER.getBlock()).updateMultiBlock(world, x, y, z);
 				}else{
 					int entityid = reader.readInt();
 					int len = packet.length - 5;

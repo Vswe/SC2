@@ -4,11 +4,9 @@ import java.util.Random;
 
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
-import vswe.stevescarts.Items.Items;
-import vswe.stevescarts.StevesCarts;
+import vswe.stevescarts.Items.ModItems;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 
 public class TradeHandler implements VillagerRegistry.IVillageTradeHandler
@@ -36,7 +34,7 @@ public class TradeHandler implements VillagerRegistry.IVillageTradeHandler
 	 */
 	@Override
 	public void manipulateTradesForVillager(EntityVillager villager, MerchantRecipeList recipeList, Random random) {
-		recipeList.add(new MerchantRecipe(new ItemStack(Items.component, 3, 50), new ItemStack(Items.component,1,51)));
+		recipeList.add(new MerchantRecipe(new ItemStack(ModItems.component, 3, 50), new ItemStack(ModItems.component,1,51)));
 	}
 	
 

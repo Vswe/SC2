@@ -1,29 +1,27 @@
 package vswe.stevescarts.Blocks;
 import net.minecraft.block.BlockRailBase;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityMinecart;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Carts.MinecartModular;
-import net.minecraft.util.Icon;
-import net.minecraft.client.renderer.texture.IconRegister;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 public class BlockRailJunction extends BlockRailBase
 {
 
-	private Icon normalIcon;
-	private Icon cornerIcon;
+	private IIcon normalIcon;
+	private IIcon cornerIcon;
 
-    public BlockRailJunction(int i)
+    public BlockRailJunction()
     {
-        super(i, false);
+        super(false);
         setCreativeTab(StevesCarts.tabsSC2Blocks);		
     }
 
 	@Override
-    public Icon getIcon(int side, int meta)
+    public IIcon getIcon(int side, int meta)
     {
         return meta >= 6 ? cornerIcon : normalIcon;
     }
@@ -31,7 +29,7 @@ public class BlockRailJunction extends BlockRailBase
 
 	@Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister register)
+    public void registerBlockIcons(IIconRegister register)
     {
         normalIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "junction_rail");
 		cornerIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "junction_rail" + "_corner");
@@ -40,7 +38,7 @@ public class BlockRailJunction extends BlockRailBase
     /*  Return true if the rail can go up and down slopes
      */
     @Override
-    public boolean canMakeSlopes(World world, int i, int j, int k)
+    public boolean canMakeSlopes(IBlockAccess world, int i, int j, int k)
     {
         return false;
     }
