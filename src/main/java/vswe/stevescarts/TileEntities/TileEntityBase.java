@@ -81,7 +81,7 @@ public abstract class TileEntityBase extends TileEntity {
 	 * @return If the player can use this tile entity
 	 */
    public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-        if (worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this)
+        if (worldObj.getTileEntity(xCoord, yCoord, zCoord) != this)
         {
             return false;
         }

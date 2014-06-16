@@ -285,13 +285,13 @@ public abstract class ModuleTool extends ModuleWorker {
 	
 	public ItemStack getSilkTouchedItem(Block b, int m) {		
 	    int droppedMeta = 0;
-	
-	    if (b.blockID >= 0 && b.blockID < Item.itemsList.length && Item.itemsList[b.blockID].getHasSubtypes())
-	    {
-	    	droppedMeta = m;
-	    }
-	
-	   return new ItemStack(b.blockID, 1, droppedMeta);    
+
+        ItemStack stack = new ItemStack(b, 1, droppedMeta);
+	    if (stack.getItem() != null && stack.getItem().getHasSubtypes()){
+            return new ItemStack(b, 1, m);
+	    }else{
+            return stack;
+        }
 	}
 
     public int getCurrentDurability() {

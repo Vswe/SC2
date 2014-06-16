@@ -74,7 +74,7 @@ public class TransferHandler {
                     //a super heavy if-statement. This will just compare the item in the slot and the item we want to store, if they are the same in various different properties they can be stored together.
                     if (
                             inv.getStackInSlot(i) != null &&
-                            inv.getStackInSlot(i).itemID == iStack.itemID &&
+                            inv.getStackInSlot(i).getItem() == iStack.getItem() &&
                             inv.getStackInSlot(i).isStackable() &&
                             inv.getStackInSlot(i).stackSize < inv.getStackInSlot(i).getMaxStackSize() &&
                             inv.getStackInSlot(i).stackSize < cont.getSlot(i).getSlotStackLimit() &&
@@ -192,7 +192,7 @@ public class TransferHandler {
         while (pos != -1);  //loop as long as there's more work to be done.
 		
         if (!fake) {
-        	inv.onInventoryChanged();
+        	inv.markDirty();
         }
     }
 }

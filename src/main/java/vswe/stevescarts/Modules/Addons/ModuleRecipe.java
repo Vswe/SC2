@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -94,7 +95,7 @@ public abstract class ModuleRecipe extends ModuleAddon {
 		if (canUseAdvancedFeatures()) {
 			ItemStack icon;
 			if (isTargetInvalid()) {
-				icon = new ItemStack(Item.minecartEmpty, 1);
+				icon = new ItemStack(Items.minecart, 1);
 			}else{
 				icon = TileEntityCargo.itemSelections.get(target).getIcon();
 			}

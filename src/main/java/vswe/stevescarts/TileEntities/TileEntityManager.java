@@ -6,6 +6,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import vswe.stevescarts.Helpers.NBTHelper;
 import vswe.stevescarts.PacketHandler;
 import vswe.stevescarts.Carts.MinecartModular;
 import vswe.stevescarts.Containers.ContainerManager;
@@ -38,7 +39,7 @@ public abstract class TileEntityManager extends TileEntityBase
             {
                 ItemStack itemstack = cargoItemStacks[i];
                 cargoItemStacks[i] = null;
-                onInventoryChanged();
+                markDirty();
                 return itemstack;
             }
 
@@ -49,7 +50,7 @@ public abstract class TileEntityManager extends TileEntityBase
                 cargoItemStacks[i] = null;
             }
 
-            onInventoryChanged();
+            markDirty();
             return itemstack1;
         }
         else
@@ -68,17 +69,17 @@ public abstract class TileEntityManager extends TileEntityBase
             itemstack.stackSize = getInventoryStackLimit();
         }
 
-        onInventoryChanged();
+        markDirty();
     }
 
 	@Override
-    public String getInvName()
+    public String getInventoryName()
     {
         return "container.cargomanager";
     }
 
 	@Override
-    public boolean isInvNameLocalized()
+    public boolean hasCustomInventoryName()
     {
         return false;
     }		
@@ -87,12 +88,12 @@ public abstract class TileEntityManager extends TileEntityBase
     public void readFromNBT(NBTTagCompound nbttagcompound)
     {
         super.readFromNBT(nbttagcompound);
-        NBTTagList nbttaglist = nbttagcompound.getTagList("Items");
+        NBTTagList nbttaglist = nbttagcompound.getTagList("Items", NBTHelper.COMPOUND.getId());
         cargoItemStacks = new ItemStack[getSizeInventory()];
 
         for (int i = 0; i < nbttaglist.tagCount(); i++)
         {
-            NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
+            NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.getCompoundTagAt(i);
             byte byte0 = nbttagcompound1.getByte("Slot");
 
             if (byte0 >= 0 && byte0 < cargoItemStacks.length)
@@ -471,17 +472,17 @@ public abstract class TileEntityManager extends TileEntityBase
     }
 
 	@Override
-    public void closeChest()
+    public void closeInventory()
     {
     }
 	@Override
-    public void openChest()
+    public void openInventory()
     {
     }
 	@Override
     public boolean isUseableByPlayer(EntityPlayer entityplayer)
     {
-        if (worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this)
+        if (worldObj.getTileEntity(xCoord, yCoord, zCoord) != this)
         {
             return false;
         }

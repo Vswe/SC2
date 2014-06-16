@@ -73,7 +73,7 @@ public class StevesCarts {
 
         ModItems.preBlockInit(config);
         ItemBlockStorage.init();
-        ModBlocks.init(config);
+        ModBlocks.init();
         ModItems.postBlockInit(config);
         AssemblerUpgrade.init();
 

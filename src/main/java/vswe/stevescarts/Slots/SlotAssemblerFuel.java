@@ -1,4 +1,5 @@
 package vswe.stevescarts.Slots;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityFurnace;
@@ -29,7 +30,7 @@ public class SlotAssemblerFuel extends SlotAssembler
     public boolean isItemValid(ItemStack itemstack)
     {
 		
-        if (itemstack.getItem().itemID == Item.coal.itemID) {
+        if (itemstack.getItem() == Items.coal) {
 			return true;
 		}else if(getAssembler().isCombustionFuelValid()) {
 			return !FluidContainerRegistry.isFilledContainer(itemstack) && TileEntityFurnace.getItemBurnTime(itemstack) > 0;

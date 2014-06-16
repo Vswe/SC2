@@ -29,14 +29,14 @@ public class GuiActivator extends GuiBase
     {
 		GL11.glDisable(GL11.GL_LIGHTING);
 	
-        fontRenderer.drawString(Localization.GUI.TOGGLER.TITLE.translate(), 8, 6, 0x404040);
+        getFontRenderer().drawString(Localization.GUI.TOGGLER.TITLE.translate(), 8, 6, 0x404040);
 		
 		for (int i = 0; i < activator.getOptions().size(); i++) {
 			ActivatorOption option = activator.getOptions().get(i);
 
 			int[] box = getBoxRect(i);
 			
-			fontRenderer.drawString(option.getName(), box[0] + box[2] + 6, box[1] + 4, 0x404040);
+			getFontRenderer().drawString(option.getName(), box[0] + box[2] + 6, box[1] + 4, 0x404040);
 		}			
 		
 		for (int i = 0; i < activator.getOptions().size(); i++) {

@@ -5,7 +5,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Vec3;
@@ -186,7 +186,7 @@ public class RendererMinecart extends Render
 		}
 	}
 	
-	private void renderCuboid(Icon icon, double sizeX, double sizeY, double sizeZ) {
+	private void renderCuboid(IIcon icon, double sizeX, double sizeY, double sizeZ) {
 		renderFace(icon, sizeX, sizeZ, 0, 		90F, 	0F, 					-(float)(sizeY / 2),	0F					);
 		renderFace(icon, sizeX, sizeZ, 0, 		-90F, 	0F, 					(float)(sizeY / 2), 	0F					);
 		renderFace(icon, sizeX, sizeY, 0, 		0, 		0F, 					0F, 					(float)(sizeZ / 2)	);
@@ -196,7 +196,7 @@ public class RendererMinecart extends Render
 	}
 	
 	
-	private void renderFace(Icon icon,  double totalTargetW, double totalTargetH, float yaw, float roll, float offX, float offY, float offZ) {
+	private void renderFace(IIcon icon,  double totalTargetW, double totalTargetH, float yaw, float roll, float offX, float offY, float offZ) {
         GL11.glPushMatrix();
 
 		GL11.glTranslatef(offX, offY, offZ);

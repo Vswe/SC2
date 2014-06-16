@@ -4,10 +4,11 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityEgg;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 public class EntityCake extends EntityEgg
 {
     public EntityCake(World world)
@@ -39,8 +40,8 @@ public class EntityCake extends EntityEgg
             	player.getFoodStats().addStats(14, 0.7F);
             }
         }else{
-        	if (worldObj.isAirBlock((int)posX, (int)posY, (int)posZ) && worldObj.isBlockSolidOnSide((int)posX, (int)posY - 1, (int) posZ, ForgeDirection.UP)) {
-        		worldObj.setBlock((int)posX, (int)posY, (int)posZ, Block.cake.blockID);
+        	if (worldObj.isAirBlock((int)posX, (int)posY, (int)posZ) && worldObj.isSideSolid((int)posX, (int)posY - 1, (int) posZ, ForgeDirection.UP)) {
+        		worldObj.setBlock((int)posX, (int)posY, (int)posZ, Blocks.cake);
         	}
         }
 

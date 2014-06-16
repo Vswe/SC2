@@ -2,7 +2,7 @@ package vswe.stevescarts.Helpers;
 
 import java.util.ArrayList;
 
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import vswe.stevescarts.Interfaces.GuiDetector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -98,7 +98,7 @@ public class DropDownMenu {
 		}
 	}
 	
-	public void drawContent(GuiDetector gui, int index, Icon icon) {
+	public void drawContent(GuiDetector gui, int index, IIcon icon) {
 		int[] rect = getContentRect(index);
 		if (rect == null) {
 			return;

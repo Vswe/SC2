@@ -3,10 +3,11 @@ import java.util.ArrayList;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
-import net.minecraft.block.BlockFluid;
+import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.BlockRailBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -135,7 +136,7 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
 
 		int yTarget = getCart().getYTarget();
 
-        if (BlockRailBase.isRailBlockAt(getCart().worldObj, x, y, z) || BlockRailBase.isRailBlockAt(getCart().worldObj, x, y - 1, z))
+        if (BlockRailBase.func_150049_b_(getCart().worldObj, x, y, z) || BlockRailBase.func_150049_b_(getCart().worldObj, x, y - 1, z))
         {
             return new int[] {0, blocksOnTop() - 1, 1};
         }
@@ -210,8 +211,7 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
         }
 
         //retrieve some information about the block
-        int id = getCart().worldObj.getBlockId(coordX, coordY, coordZ);
-        Block b = Block.blocksList[id];
+        Block b = getCart().worldObj.getBlock(coordX, coordY, coordZ);
         int m = getCart().worldObj.getBlockMetadata(coordX, coordY, coordZ);
 
         //if the cart hasn't been working, tell it to work and it's therefore done for this tick
@@ -276,9 +276,9 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
         	}                  
 
         //if the block drops anything, drop it
-        }else if (b.getBlockDropped(getCart().worldObj,coordX,coordY,coordZ,m,fortune).size() != 0) {       
+        }else if (b.getDrops(getCart().worldObj, coordX, coordY, coordZ, m, fortune).size() != 0) {
             //iStack = new ItemStack(b.idDropped(0, rand, 0), b.quantityDropped(rand), b.damageDropped(m));
-			ArrayList<ItemStack> stacks = b.getBlockDropped(getCart().worldObj,coordX,coordY,coordZ,m,fortune);
+			ArrayList<ItemStack> stacks = b.getDrops(getCart().worldObj, coordX, coordY, coordZ, m, fortune);
             boolean shouldRemove = false;
 			for (int i = 0; i < stacks.size(); i++) {
 				if (minedItem(stacks.get(i), next))
@@ -397,15 +397,14 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
     public Object isValidBlock(int x, int y, int z, int i, int j, boolean flag)
     {
         //do not remove rail blocks or block which will cause rail blocks to be removed
-        if ((!flag && BlockRailBase.isRailBlockAt(getCart().worldObj, x, y, z)) || BlockRailBase.isRailBlockAt(getCart().worldObj, x, y + 1, z))
+        if ((!flag && BlockRailBase.func_150049_b_(getCart().worldObj, x, y, z)) || BlockRailBase.func_150049_b_(getCart().worldObj, x, y + 1, z))
         {
             return null;
         }
         else
         {
             //retrieve the needed values, block id and the like
-            int id = getCart().worldObj.getBlockId(x, y, z);
-            Block b = Block.blocksList[id];
+            Block b = getCart().worldObj.getBlock(x, y, z);
             int m = getCart().worldObj.getBlockMetadata(x, y, z);
 
             //there need to be a block to remove
@@ -414,12 +413,12 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
                 return null;
                 //don't remove bedrock
             }
-            else if (id == Block.bedrock.blockID)
+            else if (b == Blocks.bedrock)
             {
                 return null;
                 //don't remove fluids either
             }
-            else if (b instanceof BlockFluid)
+            else if (b instanceof BlockLiquid)
             {
                 return null;
                 //nor things which can't be removed
@@ -430,13 +429,15 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
                 //some special things are just allowed to be removed when in font of the cart, like torches
             }
             else if ((i != 0 || j > 0) && (
-                    id == Block.torchWood.blockID ||
-                    id == Block.redstoneWire.blockID ||
-                    id == Block.torchRedstoneActive.blockID ||
-                    id == Block.torchRedstoneIdle.blockID ||
-                    id == Block.redstoneRepeaterIdle.blockID ||
-                    id == Block.redstoneRepeaterActive.blockID ||
-					id == ModBlocks.MODULE_TOGGLER.getId()
+                    b == Blocks.torch ||
+                    b == Blocks.redstone_wire ||
+                    b == Blocks.redstone_torch ||
+                    b == Blocks.unlit_redstone_torch ||
+                    b == Blocks.powered_repeater ||
+                    b == Blocks.unpowered_repeater ||
+                    b == Blocks.powered_comparator ||
+                    b == Blocks.unpowered_comparator ||
+					b == ModBlocks.MODULE_TOGGLER.getBlock()
                     ))
             {
                 return null;
@@ -445,7 +446,7 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
             else if (b instanceof BlockContainer)
             {
                 //if so load its tileentity to check if it has an inventory or not
-                TileEntity tileentity = getCart().worldObj.getBlockTileEntity(x, y, z);
+                TileEntity tileentity = getCart().worldObj.getTileEntity(x, y, z);
 
                 if (tileentity != null && IInventory.class.isInstance(tileentity))
                 {

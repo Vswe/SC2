@@ -29,7 +29,7 @@ public class GuiUpgrade extends GuiBase
 		GL11.glDisable(GL11.GL_LIGHTING);
 		
 		if (upgrade.getUpgrade() != null) {
-			fontRenderer.drawString(upgrade.getUpgrade().getName(), 8, 6, 0x404040);
+			getFontRenderer().drawString(upgrade.getUpgrade().getName(), 8, 6, 0x404040);
 			
 			InterfaceEffect gui = upgrade.getUpgrade().getInterfaceEffect();
 			if (gui != null) {

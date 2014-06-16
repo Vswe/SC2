@@ -542,7 +542,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 							ItemStack oldcart = tile.getStackInSlot(0);
 							if (oldcart != null && oldcart.getItem() instanceof ItemCarts) {
 								if (oldcart.hasDisplayName()) {
-									outputItem.setItemName(oldcart.getDisplayName());
+									outputItem.setStackDisplayName(oldcart.getDisplayName());
 								}
 							}
 							tile.setInventorySlotContents(0, null);
@@ -997,7 +997,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 						y += 1;
 					}
 					
-					if (BlockRailBase.isRailBlockAt(worldObj, x, y, z)) {
+					if (BlockRailBase.func_150049_b_(worldObj, x, y, z)) {
 					    try {
 							NBTTagCompound info = outputItem.getTagCompound();
 							if (info != null) {			
@@ -1035,7 +1035,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 						y2 += 1;
 					}
 					
-					TileEntity managerentity = worldObj.getBlockTileEntity(x2, y2, z2);
+					TileEntity managerentity = worldObj.getTileEntity(x2, y2, z2);
 					if (managerentity != null && managerentity instanceof TileEntityManager) {
 						ManagerTransfer transfer = new ManagerTransfer();
 						
@@ -1139,7 +1139,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 					}
 					
 					if (itemInSlot.hasDisplayName()) {
-						newItem.setItemName(itemInSlot.getDisplayName());
+						newItem.setStackDisplayName(itemInSlot.getDisplayName());
 					}
 					
 					isAssembling = true;					
@@ -1360,7 +1360,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 	
     public boolean isUseableByPlayer(EntityPlayer entityplayer)
     {
-        if (worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this)
+        if (worldObj.getTileEntity(xCoord, yCoord, zCoord) != this)
         {
             return false;
         }
@@ -1393,7 +1393,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 			{
 				ItemStack itemstack = inventoryStacks[i];
 				inventoryStacks[i] = null;
-				onInventoryChanged();
+				markDirty();
 				return itemstack;
 			}
 
@@ -1404,7 +1404,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 				inventoryStacks[i] = null;
 			}
 
-			onInventoryChanged();
+			markDirty();
 			return itemstack1;
 		}
 		else
@@ -1425,18 +1425,18 @@ public class TileEntityCartAssembler extends TileEntityBase
 			itemstack.stackSize = getInventoryStackLimit();
 		}
 
-		onInventoryChanged();
+		markDirty();
 		
     }
 
 	@Override
-    public String getInvName()
+    public String getInventoryName()
     {
         return "container.cartassembler";
     }	
 
 	@Override
-    public boolean isInvNameLocalized()
+    public boolean hasCustomInventoryName()
     {
         return false;
     }	
@@ -1448,11 +1448,11 @@ public class TileEntityCartAssembler extends TileEntityBase
     }	
 	
 		@Override
-    public void closeChest()
+    public void closeInventory()
     {
     }
 	@Override
-    public void openChest()
+    public void openInventory()
     {
     }
 	
@@ -1482,11 +1482,11 @@ public class TileEntityCartAssembler extends TileEntityBase
     {
 		super.readFromNBT(tagCompound);
 		
-		NBTTagList items = tagCompound.getTagList("Items");
+		NBTTagList items = tagCompound.getTagList("Items", NBTHelper.COMPOUND.getId());
 
 		for (int i = 0; i < items.tagCount(); ++i)
 		{
-			NBTTagCompound item = (NBTTagCompound)items.tagAt(i);
+			NBTTagCompound item = (NBTTagCompound)items.getCompoundTagAt(i);
 			int slot = item.getByte("Slot") & 255;
 
 			ItemStack iStack = ItemStack.loadItemStackFromNBT(item);
@@ -1497,11 +1497,11 @@ public class TileEntityCartAssembler extends TileEntityBase
 			}
 		}
 		
-		NBTTagList spares = tagCompound.getTagList("Spares");
+		NBTTagList spares = tagCompound.getTagList("Spares", NBTHelper.COMPOUND.getId());
 		spareModules.clear();
 		for (int i = 0; i < spares.tagCount(); ++i)
 		{
-			NBTTagCompound item = (NBTTagCompound)spares.tagAt(i);
+			NBTTagCompound item = (NBTTagCompound)spares.getCompoundTagAt(i);
 			ItemStack iStack = ItemStack.loadItemStackFromNBT(item);
 			spareModules.add(iStack);
 		}		

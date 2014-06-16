@@ -28,7 +28,7 @@ public class RendererUpgrade implements ISimpleBlockRenderingHandler
 
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
 	
-		TileEntity te = world.getBlockTileEntity(x, y, z);
+		TileEntity te = world.getTileEntity(x, y, z);
 		if (te instanceof TileEntityCartAssembler) {
 			TileEntityCartAssembler assembler = (TileEntityCartAssembler)te;
 			BlockCartAssembler b = (BlockCartAssembler)block;

@@ -1,7 +1,9 @@
 package vswe.stevescarts.Modules.Workers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRailBase;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.Vec3;
+import net.minecraft.world.World;
 import net.minecraftforge.fluids.IFluidBlock;
 import vswe.stevescarts.Carts.MinecartModular;
 import vswe.stevescarts.Modules.ModuleBase;
@@ -69,17 +71,17 @@ public abstract class ModuleWorker extends ModuleBase {
         int k = getCart().z();
 
         //if there's a rail block below the cart, decrease the j value since the cart should therefore be counted as being on that rail
-        if (BlockRailBase.isRailBlockAt(getCart().worldObj, i, j - 1, k))
+        if (BlockRailBase.func_150049_b_(getCart().worldObj, i, j - 1, k))
         {
             j--;
         }
 
         //check if the cart actually is on a piece of rail
-        int id = getCart().worldObj.getBlockId(i, j, k);
-        if (BlockRailBase.isRailBlock(id))
+        Block b = getCart().worldObj.getBlock(i, j, k);
+        if (BlockRailBase.func_150051_a(b))
         {
             //int meta = worldObj.getBlockMetadata(i, j, k);
-            int meta = ((BlockRailBase)Block.blocksList[id]).getBasicRailMetadata(getCart().worldObj, getCart(), i, j, k);
+            int meta = ((BlockRailBase)b).getBasicRailMetadata(getCart().worldObj, getCart(), i, j, k);
 
             //if the rail block is a slope we need to go up one level.
             if (meta >= 2 && meta <= 5)
@@ -88,7 +90,7 @@ public abstract class ModuleWorker extends ModuleBase {
             }
 
             //load the rail logic for the rail
-            int logic[][] = getCart().railDirectionCoordinates[meta];
+            int logic[][] = MinecartModular.railDirectionCoordinates[meta];
 
             double pX = getCart().pushX;
             double pZ = getCart().pushZ;
@@ -127,16 +129,15 @@ public abstract class ModuleWorker extends ModuleBase {
 	//flag is false if it don't need a valid block to be built on(i.e assumes a bridge block will be there later)
     protected boolean isValidForTrack(int i, int j, int k, boolean flag)
     {
-        boolean result = countsAsAir(i, j, k) && (!flag || getCart().worldObj.doesBlockHaveSolidTopSurface(i, j - 1, k));
+        boolean result = countsAsAir(i, j, k) && (!flag || World.doesBlockHaveSolidTopSurface(getCart().worldObj, i, j - 1, k));
 
 		if (result) {
 			int coordX = i - (getCart().x() - i);
 			int coordY = j;
 			int coordZ = k - (getCart().z() - k);
-			int id = getCart().worldObj.getBlockId(coordX, coordY, coordZ);
-			boolean isWater = id == 9 || id == 8 || id == 79;
-			boolean isLava = id == 11 || id == 10;
-			Block block = Block.blocksList[id];
+            Block block = getCart().worldObj.getBlock(coordX, coordY, coordZ);
+			boolean isWater = block == Blocks.water || block == Blocks.flowing_water || block == Blocks.ice;
+			boolean isLava = block == Blocks.lava || block == Blocks.flowing_lava;
 			boolean isOther = block != null && block instanceof IFluidBlock;			
 			boolean isLiquid = isWater || isLava || isOther;
 			result = !isLiquid;

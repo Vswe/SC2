@@ -42,7 +42,7 @@ public class GuiCartAssembler extends GuiBase
 	@Override
     public void drawGuiForeground(int x, int y)
     {
-        fontRenderer.drawString(Localization.GUI.ASSEMBLER.TITLE.translate() , 8, 6, 0x404040);
+        getFontRenderer().drawString(Localization.GUI.ASSEMBLER.TITLE.translate() , 8, 6, 0x404040);
 
 		if (assembler.isErrorListOutdated) {
 			updateErrorList();
@@ -60,11 +60,11 @@ public class GuiCartAssembler extends GuiBase
 			for (int i = 0; i < lineCount; i++) {
 				TextWithColor info = lines.get(i);
 				if (info != null) {
-					fontRenderer.drawString(info.getText(), 375, 40 + i * 10, info.getColor());
+					getFontRenderer().drawString(info.getText(), 375, 40 + i * 10, info.getColor());
 				}
 			}
 			if (dotdotdot) {
-				fontRenderer.drawString("...", 375, 40 + lineCount * 10, 0x404040);
+				getFontRenderer().drawString("...", 375, 40 + lineCount * 10, 0x404040);
 			}
 		}
 
@@ -117,7 +117,7 @@ public class GuiCartAssembler extends GuiBase
 	}
 	
 	private void addText(ArrayList<TextWithColor> lines, String text, int color) {
-		List newlines = fontRenderer.listFormattedStringToWidth(text,130);
+		List newlines = getFontRenderer().listFormattedStringToWidth(text,130);
 		for (Object line : newlines) {
 			
 			lines.add(new TextWithColor(line.toString(), color));

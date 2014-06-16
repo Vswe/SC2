@@ -7,8 +7,8 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.Icon;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraft.util.IIcon;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -198,13 +198,13 @@ public class TileEntityLiquid extends TileEntityManager  implements IFluidHandle
 	
 	@Override
 	public void onFluidUpdated(int tankid) {
-		onInventoryChanged();
+		markDirty();
 	}
 	
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawImage(int tankid, GuiBase gui, Icon icon, int targetX, int targetY, int srcX, int srcY, int sizeX, int sizeY) {
+	public void drawImage(int tankid, GuiBase gui, IIcon icon, int targetX, int targetY, int srcX, int srcY, int sizeX, int sizeY) {
 		gui.drawIcon(icon, gui.getGuiLeft() + targetX, gui.getGuiTop() + targetY, sizeX / 16F, sizeY / 16F, srcX / 16F, srcY / 16F);
 	}	
 	
@@ -377,7 +377,7 @@ public class TileEntityLiquid extends TileEntityManager  implements IFluidHandle
 			if (tanks[i].getFluid() != null) {
 				NBTTagCompound compound = new NBTTagCompound();
 				tanks[i].getFluid().writeToNBT(compound);
-				nbttagcompound.setCompoundTag("Fluid" + i, compound);	
+				nbttagcompound.setTag("Fluid" + i, compound);
 			}
 		}	
 		nbttagcompound.setShort("workload", (short)getWorkload());

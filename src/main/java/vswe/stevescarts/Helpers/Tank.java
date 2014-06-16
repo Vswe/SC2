@@ -1,12 +1,13 @@
 package vswe.stevescarts.Helpers;
 
 
+import net.minecraft.init.Blocks;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -209,7 +210,7 @@ public class Tank implements IFluidTank {
 	}	
 	
 	public static IconData getIconAndTexture(FluidStack stack) {
-		Icon icon = null;
+		IIcon icon = null;
 		String texture = null;
 		
 		if (stack != null) {
@@ -222,9 +223,9 @@ public class Tank implements IFluidTank {
 				
 				if (icon == null) {
 					if (FluidRegistry.WATER.equals(fluid)) {
-						icon = Block.waterStill.getIcon(0, 0);
+						icon = Blocks.water.getIcon(0, 0);
 					}else if(FluidRegistry.LAVA.equals(fluid)) {
-						icon = Block.lavaStill.getIcon(0, 0);
+						icon = Blocks.lava.getIcon(0, 0);
 					}
 				}
 				

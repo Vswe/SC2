@@ -1,4 +1,5 @@
 package vswe.stevescarts.Slots;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -12,20 +13,19 @@ public class SlotFirework extends SlotBase
 
     public boolean isItemValid(ItemStack itemstack)
     {
-		int id = itemstack.getItem().itemID;
+		Item item = itemstack.getItem();
 	
         return 
-			id == Item.firework.itemID ||		
-		
-			id == Item.gunpowder.itemID ||
-			id == Item.fireworkCharge.itemID ||
-			id == Item.dyePowder.itemID ||
-			id == Item.paper.itemID ||
-			id == Item.glowstone.itemID ||
-			id == Item.diamond.itemID ||
-			id == Item.fireballCharge.itemID ||
-			id == Item.feather.itemID ||
-			id == Item.goldNugget.itemID ||
-			id == Item.skull.itemID;			
+			item == Items.fireworks ||
+            item == Items.gunpowder ||
+            item == Items.firework_charge ||
+            item == Items.dye ||
+            item == Items.paper ||
+            item == Items.glowstone_dust ||
+            item == Items.diamond ||
+            item == Items.fire_charge ||
+            item == Items.feather ||
+            item == Items.gold_nugget ||
+            item == Items.skull;
     }
 }

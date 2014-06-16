@@ -3,6 +3,7 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChunkCoordinates;
 import vswe.stevescarts.Carts.MinecartModular;
@@ -100,9 +101,7 @@ public abstract /*remove the abstract*/ class ModuleCommand extends ModuleBase i
 	
 	@Override
 	public void moveMinecartOnRail(int x, int y, int z) {
-		int id = getCart().worldObj.getBlockId(x, y, z);
-	
-        if (id == Block.railDetector.blockID)
+        if (getCart().worldObj.getBlock(x, y, z) == Blocks.detector_rail)
         {
            executeCommand();
         }

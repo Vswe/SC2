@@ -1,5 +1,7 @@
 package vswe.stevescarts.Modules.Addons;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockFalling;
+import net.minecraft.init.Blocks;
 import net.minecraftforge.fluids.IFluidBlock;
 import vswe.stevescarts.Carts.MinecartModular;
 import vswe.stevescarts.Modules.ModuleBase;
@@ -123,15 +125,15 @@ public class ModuleLiquidSensors extends ModuleAddon {
         int x1 = x + p;
         int y1 = y + q;
         int z1 = z + r;
-        int id = getCart().worldObj.getBlockId(x1, y1, z1);
-				Block block = Block.blocksList[id];
+
+		Block block = getCart().worldObj.getBlock(x1, y1, z1);
 		
-        if (id == 10)   //stat lava
+        if (block == Blocks.lava)   //stat lava
         {
 			handleLiquid(drill, x1, y1, z1);
 			return true;
         }
-        else if (id == 8)   //stat water
+        else if (block == Blocks.water)   //stat water
         {
 			handleLiquid(drill, x1, y1, z1);
 			return true;
@@ -154,8 +156,8 @@ public class ModuleLiquidSensors extends ModuleAddon {
         //2.3.2. the liquid is not at the bottom -> it will spread one block and then fall -> it will flow to the bottom and start to spread -> the cart will be in the way -> not good
         //2.4.  none of the above -> the liquid will flow and destroy the cart -> not good
         //3. when the block is removed sand or gravel will fall down -> liquid on top of this will fall down -> the liquid will hit the cart -> not good (this is very difficult to detect(maybe not :P))
-        boolean isWater = id == 9 || id == 8 || id == 79 /* ice */;
-        boolean isLava = id == 11 || id == 10;
+        boolean isWater = block == Blocks.water || block == Blocks.flowing_water || block == Blocks.ice /* ice */;
+        boolean isLava = block == Blocks.lava || block == Blocks.flowing_lava;
 		
 
 		boolean isOther = block != null && block instanceof IFluidBlock;
@@ -220,7 +222,7 @@ public class ModuleLiquidSensors extends ModuleAddon {
             if (q == 1)
             {
 				//sand or gravel
-                boolean isFalling = id == 12 || id == 13;
+                boolean isFalling = block instanceof BlockFalling;
 
                 if (isFalling)
                 {

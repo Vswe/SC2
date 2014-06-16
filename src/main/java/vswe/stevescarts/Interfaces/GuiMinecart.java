@@ -155,7 +155,7 @@ public class GuiMinecart extends GuiBase
     	ArrayList<ModuleCountPair> moduleCounts = cart.getModuleCounts();
     	GL11.glColor4f(1F, 1F, 1F, 1F);
     	
-    	fontRenderer.drawString(cart.getCartName(), 5, 172, 0x404040);
+    	getFontRenderer().drawString(cart.getCartName(), 5, 172, 0x404040);
     	
     	GL11.glEnable(GL11.GL_BLEND);
     	for (int i = 0; i < moduleCounts.size(); i++) {
@@ -165,7 +165,7 @@ public class GuiMinecart extends GuiBase
         		int alpha = (int)((inRect(x, y, getModuleDisplayX(i), getModuleDisplayY(i), 16, 16) ? 1 : 0.75F) * 256);
     			
     			String str = String.valueOf(count.getCount());
-    			fontRenderer.drawStringWithShadow(str, getModuleDisplayX(i) + 16 - fontRenderer.getStringWidth(str), getModuleDisplayY(i) + 8, 0xFFFFFF | (alpha << 24));
+    			getFontRenderer().drawStringWithShadow(str, getModuleDisplayX(i) + 16 - getFontRenderer().getStringWidth(str), getModuleDisplayY(i) + 8, 0xFFFFFF | (alpha << 24));
     		}
     	}
     	GL11.glDisable(GL11.GL_BLEND);

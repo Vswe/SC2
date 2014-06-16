@@ -2,12 +2,9 @@ package vswe.stevescarts.Helpers;
 
 import java.util.HashMap;
 
-import net.minecraft.block.BlockBaseRailLogic;
 import net.minecraft.block.BlockRailBase;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.Icon;
 import net.minecraft.util.StatCollector;
 import vswe.stevescarts.Blocks.ModBlocks;
 import vswe.stevescarts.StevesCarts;

@@ -12,8 +12,8 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
-import net.minecraft.util.Icon;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraft.util.IIcon;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
@@ -23,6 +23,7 @@ import net.minecraftforge.fluids.IFluidTank;
 import vswe.stevescarts.Containers.ContainerBase;
 import vswe.stevescarts.Containers.ContainerUpgrade;
 import vswe.stevescarts.Helpers.ITankHolder;
+import vswe.stevescarts.Helpers.NBTHelper;
 import vswe.stevescarts.Helpers.Tank;
 import vswe.stevescarts.Helpers.TransferHandler;
 import vswe.stevescarts.Interfaces.GuiBase;
@@ -119,7 +120,7 @@ public class TileEntityUpgrade extends TileEntityBase
 	}
 	
 	@SideOnly(Side.CLIENT)
-	public Icon getTexture(boolean outside) {
+	public IIcon getTexture(boolean outside) {
 		if (getUpgrade() == null) {
 			return null;
 		}
@@ -142,11 +143,11 @@ public class TileEntityUpgrade extends TileEntityBase
 		
 		setType(tagCompound.getByte("Type"));
 		
-		NBTTagList items = tagCompound.getTagList("Items");
+		NBTTagList items = tagCompound.getTagList("Items", NBTHelper.COMPOUND.getId());
 
 		for (int i = 0; i < items.tagCount(); ++i)
 		{
-			NBTTagCompound item = (NBTTagCompound)items.tagAt(i);
+			NBTTagCompound item = (NBTTagCompound)items.getCompoundTagAt(i);
 			int slot = item.getByte("Slot") & 255;
 
 			ItemStack iStack = ItemStack.loadItemStackFromNBT(item);
@@ -200,7 +201,7 @@ public class TileEntityUpgrade extends TileEntityBase
 	
     public boolean isUseableByPlayer(EntityPlayer entityplayer)
     {
-        if (worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this)
+        if (worldObj.getTileEntity(xCoord, yCoord, zCoord) != this)
         {
             return false;
         }
@@ -298,7 +299,7 @@ public class TileEntityUpgrade extends TileEntityBase
 				{
 					ItemStack itemstack = inventoryStacks[i];
 					inventoryStacks[i] = null;
-					onInventoryChanged();
+					markDirty();
 					return itemstack;
 				}
 
@@ -309,7 +310,7 @@ public class TileEntityUpgrade extends TileEntityBase
 					inventoryStacks[i] = null;
 				}
 
-				onInventoryChanged();
+				markDirty();
 				return itemstack1;
 			}
 			else
@@ -336,19 +337,19 @@ public class TileEntityUpgrade extends TileEntityBase
 				itemstack.stackSize = getInventoryStackLimit();
 			}
 
-			onInventoryChanged();
+			markDirty();
 		}
     }
 
 
 	@Override
-    public String getInvName()
+    public String getInventoryName()
     {
         return "container.assemblerupgrade";
     }
 	
 	@Override
-    public boolean isInvNameLocalized()
+    public boolean hasCustomInventoryName()
     {
         return false;
     }	
@@ -360,11 +361,11 @@ public class TileEntityUpgrade extends TileEntityBase
     }	
 	
 	@Override
-    public void closeChest()
+    public void closeInventory()
     {
     }
 	@Override
-    public void openChest()
+    public void openInventory()
     {
     }
 		
@@ -394,7 +395,7 @@ public class TileEntityUpgrade extends TileEntityBase
 	
 
 	@Override
-	public void onInventoryChanged() {
+	public void markDirty() {
 		if (getUpgrade() != null) {
 			InventoryEffect inv = getUpgrade().getInventoryEffect();
 			if (inv != null) {
@@ -578,7 +579,7 @@ public class TileEntityUpgrade extends TileEntityBase
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawImage(int tankid, GuiBase gui, Icon icon, int targetX, int targetY, int srcX, int srcY, int sizeX, int sizeY) {
+	public void drawImage(int tankid, GuiBase gui, IIcon icon, int targetX, int targetY, int srcX, int srcY, int sizeX, int sizeY) {
 		gui.drawIcon(icon, gui.getGuiLeft() + targetX, gui.getGuiTop() + targetY, sizeX / 16F, sizeY / 16F, srcX / 16F, srcY / 16F);
 	}
 

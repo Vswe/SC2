@@ -55,15 +55,14 @@ public class ModuleOreTracker extends ModuleAddon {
 	}
 	
 	private boolean isOre(BlockCoord coord) {
-        int id = getCart().worldObj.getBlockId(coord.getX(), coord.getY(), coord.getZ());
-        Block b = Block.blocksList[id];		
+        Block b = getCart().worldObj.getBlock(coord.getX(), coord.getY(), coord.getZ());
         
         if (b != null) {
         	if (b instanceof BlockOre) {
         		return true;
 	        }else{       	
 	        	int oreId = OreDictionary.getOreID(new ItemStack(b));
-	        	if (id == - 1) {
+	        	if (oreId == - 1) {
 	        		return false;
 	        	}else{
 	        		String oreName = OreDictionary.getOreName(oreId);

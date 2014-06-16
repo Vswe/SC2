@@ -3,7 +3,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidTank;
@@ -124,7 +124,7 @@ public abstract class ModuleTank extends ModuleStorage implements IFluidTank, IT
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawImage(int tankid, GuiBase gui, Icon icon, int targetX, int targetY, int srcX, int srcY, int sizeX, int sizeY) {
+	public void drawImage(int tankid, GuiBase gui, IIcon icon, int targetX, int targetY, int srcX, int srcY, int sizeX, int sizeY) {
 		drawImage((GuiMinecart)gui, icon, targetX, targetY, srcX, srcY, sizeX, sizeY);
 	}
 	
@@ -206,7 +206,7 @@ public abstract class ModuleTank extends ModuleStorage implements IFluidTank, IT
 		if (tank.getFluid() != null) {
 			NBTTagCompound compound = new NBTTagCompound();
 			tank.getFluid().writeToNBT(compound);
-			tagCompound.setCompoundTag(generateNBTName("Fluid",id), compound);	
+			tagCompound.setTag(generateNBTName("Fluid", id), compound);
 		}
 		tagCompound.setBoolean(generateNBTName("Locked",id), tank.isLocked());
 	}

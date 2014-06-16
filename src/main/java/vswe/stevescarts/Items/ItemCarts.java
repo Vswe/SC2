@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.BlockRailBase;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemMinecart;
 import net.minecraft.item.ItemStack;
@@ -25,9 +25,9 @@ public class ItemCarts extends ItemMinecart
 	
 	
 	
-    public ItemCarts(int par1)
+    public ItemCarts()
     {
-        super(par1,0);
+        super(0);
         this.setHasSubtypes(true);
         this.setMaxDamage(0);
         setCreativeTab(null);	
@@ -41,7 +41,7 @@ public class ItemCarts extends ItemMinecart
 	
 	@Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister register)
+    public void registerIcons(IIconRegister register)
     {
         this.itemIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "modular_cart" + "_icon");
     }	
@@ -53,7 +53,7 @@ public class ItemCarts extends ItemMinecart
 
 		CartVersion.updateItemStack(par1ItemStack);
 		
-	    if (BlockRailBase.isRailBlockAt(par3World,par4, par5, par6))
+	    if (BlockRailBase.func_150049_b_(par3World,par4, par5, par6))
         {
 		   try {
 				NBTTagCompound info = par1ItemStack.getTagCompound();
@@ -87,7 +87,7 @@ public class ItemCarts extends ItemMinecart
 		NBTTagCompound info = item.getTagCompound();
 		if (info != null) {
 			NBTTagByteArray moduleIDTag = (NBTTagByteArray)info.getTag("Modules");
-			byte [] bytes = moduleIDTag.byteArray;
+			byte [] bytes = moduleIDTag.func_150292_c();
 			
 			ArrayList<ModuleCountPair> counts = new ArrayList<ModuleCountPair>();
 			

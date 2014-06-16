@@ -3,6 +3,7 @@ package vswe.stevescarts.Helpers;
 import java.util.ArrayList;
 import java.util.Map;
 
+import net.minecraft.init.Items;
 import vswe.stevescarts.Helpers.EnchantmentInfo.ENCHANTMENT_TYPE;
 
 import net.minecraft.enchantment.Enchantment;
@@ -61,7 +62,7 @@ public class EnchantmentInfo {
 	public static boolean isItemValid(ArrayList<ENCHANTMENT_TYPE> enabledTypes, ItemStack itemstack) {
 	
 		
-		if (itemstack != null && itemstack.getItem() == Item.enchantedBook) {
+		if (itemstack != null && itemstack.getItem() == Items.enchanted_book) {
 
 			for (EnchantmentInfo info : enchants) {
 				
@@ -84,7 +85,7 @@ public class EnchantmentInfo {
 	}
 	
 	public static EnchantmentData addBook(ArrayList<ENCHANTMENT_TYPE> enabledTypes, EnchantmentData data, ItemStack itemstack) {
-		if (itemstack != null && itemstack.getItem() == Item.enchantedBook) {
+		if (itemstack != null && itemstack.getItem() == Items.enchanted_book) {
 			if (data == null) {
 				for (EnchantmentInfo info : enchants) {
 					data = addEnchantment(enabledTypes, data, itemstack, info);
@@ -132,7 +133,7 @@ public class EnchantmentInfo {
         }
         else
         {
-            NBTTagList nbttaglist =  Item.enchantedBook.func_92110_g(par1ItemStack);
+            NBTTagList nbttaglist =  Items.enchanted_book.func_92110_g(par1ItemStack);
            
             if (nbttaglist == null)
             {
@@ -142,8 +143,8 @@ public class EnchantmentInfo {
             {
                 for (int j = 0; j < nbttaglist.tagCount(); ++j)
                 {
-                    short short1 = ((NBTTagCompound)nbttaglist.tagAt(j)).getShort("id");
-                    short short2 = ((NBTTagCompound)nbttaglist.tagAt(j)).getShort("lvl");
+                    short short1 = nbttaglist.getCompoundTagAt(j).getShort("id");
+                    short short2 = nbttaglist.getCompoundTagAt(j).getShort("lvl");
 
                     if (short1 == par0)
                     {

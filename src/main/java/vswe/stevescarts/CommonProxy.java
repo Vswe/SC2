@@ -27,7 +27,7 @@ public class CommonProxy implements IGuiHandler {
 				return cart.getGui(player);
 			}
 		}else{	
-			TileEntity tileentity = world.getBlockTileEntity(x, y, z);
+			TileEntity tileentity = world.getTileEntity(x, y, z);
 			
 			if (tileentity != null && tileentity instanceof TileEntityBase) {
 				
@@ -47,7 +47,7 @@ public class CommonProxy implements IGuiHandler {
 				return cart.getCon(player.inventory);
 			}
 		}else{
-			TileEntity tileentity = world.getBlockTileEntity(x, y, z);
+			TileEntity tileentity = world.getTileEntity(x, y, z);
 			if (tileentity != null && tileentity instanceof TileEntityBase) {
 				
 				return ((TileEntityBase)tileentity).getContainer(player.inventory);

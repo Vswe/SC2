@@ -5,9 +5,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.BlockFlower;
-import net.minecraft.block.BlockNetherStalk;
+import net.minecraft.block.BlockNetherWart;
 import net.minecraft.block.BlockSapling;
 import net.minecraft.block.BlockStem;
 import net.minecraft.entity.EntityLiving;
@@ -75,12 +76,11 @@ public class ModuleFlowerRemover extends ModuleBase {
 					int z1 = z + getCart().z();
 					
 					if (isFlower(x1, y1, z1)) {
-						int id = getCart().worldObj.getBlockId(x1, y1, z1);
-						Block block = Block.blocksList[id];				
+						Block block = getCart().worldObj.getBlock(x1, y1, z1);
 						int m = getCart().worldObj.getBlockMetadata(x1, y1, z1);
 						
 						if (block != null) {
-							addStuff(block.getBlockDropped(getCart().worldObj, x1, y1, z1, m, 0));
+							addStuff(block.getDrops(getCart().worldObj, x1, y1, z1, m, 0));
 
 			                getCart().worldObj.setBlockToAir(x1, y1, z1);	
 						}
@@ -113,15 +113,9 @@ public class ModuleFlowerRemover extends ModuleBase {
 	}
 		
 	private boolean isFlower(int x, int y, int z) {
-		
-        int id = getCart().worldObj.getBlockId(x, y, z);
-		Block block = Block.blocksList[id];		
-		
-		if (block != null && block instanceof BlockFlower) {
-			return !(block instanceof BlockCrops || block instanceof BlockSapling || block instanceof BlockNetherStalk || block instanceof BlockStem);
-		}else{
-			return false;
-		}
+		Block block = getCart().worldObj.getBlock(x, y, z);
+
+        return block != null && block instanceof BlockFlower;
 	}
 	
 	

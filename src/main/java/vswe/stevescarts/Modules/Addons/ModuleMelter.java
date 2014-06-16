@@ -1,5 +1,6 @@
 package vswe.stevescarts.Modules.Addons;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import vswe.stevescarts.Carts.MinecartModular;
 
 public class ModuleMelter extends ModuleAddon {
@@ -43,15 +44,15 @@ public class ModuleMelter extends ModuleAddon {
 		for (int x = -getBlocksOnSide(); x <= getBlocksOnSide(); x++) {
 			for (int z = -getBlocksOnSide(); z <= getBlocksOnSide(); z++) {
 				for (int y = -getBlocksFromLevel(); y <= getBlocksFromLevel(); y++) {
-					int id = getCart().worldObj.getBlockId(x + getCart().x(), y + getCart().y(), z + getCart().z());
-					melt(id,x + getCart().x(), y + getCart().y(), z + getCart().z());
+                    Block b = getCart().worldObj.getBlock(x + getCart().x(), y + getCart().y(), z + getCart().z());
+					melt(b,x + getCart().x(), y + getCart().y(), z + getCart().z());
 				}
 			}
 		}
 	}
 
-	protected boolean melt(int id, int x, int y, int z) {
-		if (id == Block.snow.blockID) {
+	protected boolean melt(Block b, int x, int y, int z) {
+		if (b == Blocks.snow) {
 			getCart().worldObj.setBlockToAir(x,y,z);
 			return true;
 		}

@@ -1,17 +1,13 @@
 package vswe.stevescarts.Modules.Workers;
-import java.util.HashMap;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFluid;
+import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.BlockRailBase;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Vec3;
 import vswe.stevescarts.Carts.MinecartModular;
 import vswe.stevescarts.Interfaces.GuiMinecart;
-import vswe.stevescarts.Models.Cart.ModelCartbase;
-import vswe.stevescarts.Models.Cart.ModelBridge;
-import vswe.stevescarts.Models.Cart.ModelToolPlate;
 import vswe.stevescarts.Modules.ISuppliesModule;
 import vswe.stevescarts.Slots.SlotBase;
 import vswe.stevescarts.Slots.SlotBridge;
@@ -65,7 +61,7 @@ public class ModuleBridge extends ModuleWorker implements ISuppliesModule {
             yLocation = y - 1;
         }
 
-        if (!BlockRailBase.isRailBlockAt(getCart().worldObj, x, y, z) && !BlockRailBase.isRailBlockAt(getCart().worldObj, x, y - 1, z))
+        if (!BlockRailBase.func_150049_b_(getCart().worldObj, x, y, z) && !BlockRailBase.func_150049_b_(getCart().worldObj, x, y - 1, z))
         {
             if (doPreWork())
             {
@@ -91,10 +87,9 @@ public class ModuleBridge extends ModuleWorker implements ISuppliesModule {
 
     private boolean tryBuildBridge(int i, int j, int k, boolean flag)
     {
-        int id = getCart().worldObj.getBlockId(i, j, k);
-        Block b = Block.blocksList[id];
+        Block b = getCart().worldObj.getBlock(i, j, k);
 
-        if ((countsAsAir(i, j, k) || b instanceof BlockFluid) && isValidForTrack(i, j + 1, k, false))
+        if ((countsAsAir(i, j, k) || b instanceof BlockLiquid) && isValidForTrack(i, j + 1, k, false))
         {
 			//OPTIONAL: add code that makes the cart turn around if it can't place any tracks afterwards
 
@@ -108,7 +103,7 @@ public class ModuleBridge extends ModuleWorker implements ISuppliesModule {
                         {
 							//EntityPlayer play = ModLoader.getMinecraftInstance().thePlayer;
 							//getStack(m).getItem().tryPlaceIntoWorld(getStack(m), play, getCart().worldObj, i, j, k, -1,0F,0F,0F);
-							getCart().worldObj.setBlock(i,j,k, getStack(m).itemID, ((ItemBlock)(getStack(m).getItem())).getMetadata(getStack(m).getItemDamage()), 3);
+							getCart().worldObj.setBlock(i,j,k, Block.getBlockFromItem(getStack(m).getItem()), ((ItemBlock)(getStack(m).getItem())).getMetadata(getStack(m).getItemDamage()), 3);
 							
 							if (!getCart().hasCreativeSupplies()) {
 								getStack(m).stackSize--;
@@ -117,7 +112,7 @@ public class ModuleBridge extends ModuleWorker implements ISuppliesModule {
 	                                setStack(m,null);
 	                            }
 	
-								getCart().onInventoryChanged();
+								getCart().markDirty();
 							}
                         }
 
