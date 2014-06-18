@@ -1,6 +1,5 @@
 package vswe.stevescarts.Blocks;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockRailBase;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayer;
@@ -256,5 +255,9 @@ public class BlockRailAdvDetector extends BlockSpecialRailBase
 		
         return false;
     }	
-	
+
+
+    public void refreshState(World world, int x, int y, int z, boolean flag) {
+        new Rail(world, x, y, z).func_150655_a(flag, false);
+    }
 }

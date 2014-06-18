@@ -43,7 +43,7 @@ public class InputChest extends SimpleInventoryEffect {
 	
 	@Override
 	public void update(TileEntityUpgrade upgrade) {
-		if (!upgrade.worldObj.isRemote && upgrade.getMaster() != null) {
+		if (!upgrade.getWorldObj().isRemote && upgrade.getMaster() != null) {
 			NBTTagCompound comp = upgrade.getCompound();
 			
 			if (comp.getByte("TransferCooldown") != 0) {

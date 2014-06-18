@@ -1,7 +1,5 @@
 package vswe.stevescarts.Arcade;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.item.SoundUpdaterMinecart;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevescarts.Helpers.Localization;
@@ -37,10 +35,11 @@ public abstract class ArcadeGame {
 	
 	@SideOnly(Side.CLIENT)
 	public void update() {
-		if (StevesCarts.instance.useArcadeSounds && getModule().getCart().getSoundUpdater() != null) {
-			ReflectionHelper.setPrivateValue(SoundUpdaterMinecart.class, getModule().getCart().getSoundUpdater(), 0F, 8/*"i"*/ /*"minecartMoveSoundVolume"*/);
-			ReflectionHelper.setPrivateValue(SoundUpdaterMinecart.class, getModule().getCart().getSoundUpdater(), 0F, 9/*"j"*/  /*"minecartRideSoundVolume"*/);
-		}
+        //TODO figure out/test how these sounds behave
+		//if (StevesCarts.instance.useArcadeSounds && getModule().getCart().getSoundUpdater() != null) {
+		//	ReflectionHelper.setPrivateValue(SoundUpdaterMinecart.class, getModule().getCart().getSoundUpdater(), 0F, 8/*"i"*/ /*"minecartMoveSoundVolume"*/);
+		//	ReflectionHelper.setPrivateValue(SoundUpdaterMinecart.class, getModule().getCart().getSoundUpdater(), 0F, 9/*"j"*/  /*"minecartRideSoundVolume"*/);
+		//}
 	}
 	
 	

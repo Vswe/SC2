@@ -1,5 +1,6 @@
 package vswe.stevescarts;
 
+import cpw.mods.fml.common.network.FMLEventChannel;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import vswe.stevescarts.Blocks.*;
@@ -41,6 +42,8 @@ public class StevesCarts {
 	public static boolean freezeCartSimulation = false;
 	public static boolean renderSteve = false;
 	public static boolean arcadeDevOperator = false;
+
+    public static final String CHANNEL = "SC2";
 	
 	public final String texturePath = "/assets/stevescarts/textures";
 	//public final String soundPath = "/assets/stevescarts/sounds";
@@ -61,9 +64,12 @@ public class StevesCarts {
 	public int maxDynamites = 50;
 	public boolean useArcadeSounds;
 	public boolean useArcadeMobSounds;
+
+    public static FMLEventChannel packetHandler;
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+        packetHandler = NetworkRegistry.INSTANCE.newEventDrivenChannel(CHANNEL);
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 		config.load();
 
@@ -91,7 +97,7 @@ public class StevesCarts {
 
     @EventHandler
 	public void load(FMLInitializationEvent evt) {
-
+        packetHandler.register(new PacketHandler());
 		LanguageRegistry.instance().addStringLocalization("itemGroup.SC2Modules", "en_US", "Steve's Carts 2 Modules");
 		LanguageRegistry.instance().addStringLocalization("itemGroup.SC2Items", "en_US", "Steve's Carts 2 Components");
 		LanguageRegistry.instance().addStringLocalization("itemGroup.SC2Blocks", "en_US", "Steve's Carts 2 Blocks");

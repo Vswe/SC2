@@ -101,7 +101,7 @@ public class ContainerMinecart extends ContainerBase
     public void onContainerClosed(EntityPlayer par1EntityPlayer)
     {
         super.onContainerClosed(par1EntityPlayer);
-        cart.closeChest();
+        cart.closeInventory();
     }
 
 	@Override

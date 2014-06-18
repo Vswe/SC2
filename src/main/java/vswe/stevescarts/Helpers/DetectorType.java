@@ -6,6 +6,7 @@ import net.minecraft.block.BlockRailBase;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
+import vswe.stevescarts.Blocks.BlockRailAdvDetector;
 import vswe.stevescarts.Blocks.ModBlocks;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Carts.MinecartModular;
@@ -66,7 +67,7 @@ public enum DetectorType {
 		
 		private void update(TileEntityDetector detector, boolean flag) {
 			if (detector.getWorldObj().getBlock(detector.xCoord, detector.yCoord + 1, detector.zCoord) == ModBlocks.ADVANCED_DETECTOR.getBlock()) {
-				(new BlockBaseRailLogic((BlockRailBase) ModBlocks.ADVANCED_DETECTOR.getBlock(), detector.getWorldObj(), detector.xCoord, detector.yCoord + 1, detector.zCoord)).func_94511_a(flag, false);
+                ((BlockRailAdvDetector)ModBlocks.ADVANCED_DETECTOR.getBlock()).refreshState(detector.getWorldObj(), detector.xCoord, detector.yCoord + 1, detector.zCoord, flag);
 			}
 		}
 	},

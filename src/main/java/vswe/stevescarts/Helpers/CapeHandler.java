@@ -10,25 +10,27 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.renderer.ThreadDownloadImageData;
 import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.client.renderer.texture.TextureObject;
+import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.scoreboard.Team;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringUtils;
-import cpw.mods.fml.common.ITickHandler;
-import cpw.mods.fml.common.TickType;
-import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.common.MinecraftForge;
+
+//TODO make this class non-cape based but rather skin/flag based :)
 
 @SideOnly(Side.CLIENT)
-public class CapeHandler implements Runnable, ITickHandler {
+public class CapeHandler implements Runnable {
 
     private HashMap<String,UserCape> capes;
     private HashMap<String,ServerCape> serverCapes;
@@ -37,7 +39,7 @@ public class CapeHandler implements Runnable, ITickHandler {
     private int serverReHash;
 
 	public CapeHandler() {
-		TickRegistry.registerTickHandler(this, Side.CLIENT);
+        MinecraftForge.EVENT_BUS.register(this);
 		capes = new HashMap<String,UserCape>();
         serverCapes = new HashMap<String, ServerCape>();
         new Thread(this).start();
@@ -178,10 +180,10 @@ public class CapeHandler implements Runnable, ITickHandler {
 
         return null;
     }
-	
-	@Override	
-	public void tickStart(EnumSet type, Object... tickData) {
-        if (!ready) {
+
+    @SubscribeEvent
+    public void tick(TickEvent.PlayerTickEvent event) {
+        if (!ready || event.phase != TickEvent.Phase.START) {
             return;
         }
 
@@ -189,21 +191,22 @@ public class CapeHandler implements Runnable, ITickHandler {
             serverReHash--;
         }
 
-		if (type.contains(TickType.PLAYER)) {
 
-			EntityPlayer player = (EntityPlayer)tickData[0];
-			
+        EntityPlayer player = event.player;
 
-			if (player instanceof AbstractClientPlayer) {
-				loadNewCape((AbstractClientPlayer)player);
-			}
-		}
-	}
+
+        if (player instanceof AbstractClientPlayer) {
+            loadNewCape((AbstractClientPlayer)player);
+        }
+
+    }
+
+
 	
 	private void loadNewCape(AbstractClientPlayer player) {
         if (player != null) {
 
-            String username = StringUtils.stripControlCodes(player.username);
+            String username = StringUtils.stripControlCodes(player.getDisplayName());
             UserCape capeObj = capes.get(username);
             if (capeObj == null && serverCapes.size() > 0 && serverCapes.containsKey(getServerHash())) {
                 capeObj = new UserCape();
@@ -225,7 +228,7 @@ public class CapeHandler implements Runnable, ITickHandler {
 	
     private ThreadDownloadImageData tryToDownloadCape(ResourceLocation cape, String capeUrl) {
         TextureManager texturemanager = Minecraft.getMinecraft().getTextureManager();
-        TextureObject object = texturemanager.getTexture(cape);
+        ITextureObject object = texturemanager.getTexture(cape);
 
         //no need to download the cape if we have it already
         if (object == null) {
@@ -237,22 +240,6 @@ public class CapeHandler implements Runnable, ITickHandler {
     }
 	
 
-	
-	@Override
-	public void tickEnd(EnumSet type, Object... tickData) {
-	
-	}
-	
-	@Override
-	public EnumSet ticks()
-	{
-		return EnumSet.of(TickType.PLAYER);
-	}
-	
-	@Override
-	public String getLabel() {
-		return "SC2Capes";
-	}
 
     private class ServerCape {
         private List<Cape> capes = new ArrayList<Cape>();
@@ -331,7 +318,7 @@ public class CapeHandler implements Runnable, ITickHandler {
         }
 
         private boolean isUsingMojangCape(AbstractClientPlayer player) {
-            return hasMojangCape && AbstractClientPlayer.getLocationCape(player.username).equals(player.getLocationCape());
+            return hasMojangCape && AbstractClientPlayer.getLocationCape(player.getDisplayName()).equals(player.getLocationCape());
         }
 
         private void add(Cape cape) {
@@ -343,7 +330,7 @@ public class CapeHandler implements Runnable, ITickHandler {
                 return activeCape.getImage();
             }else {
                 //always go back to the default cape (even if it doesn't exist)
-                return AbstractClientPlayer.getCapeUrl(player.username);
+                return AbstractClientPlayer.getCapeUrl(player.getDisplayName());
             }
         }
     }
@@ -621,7 +608,7 @@ public class CapeHandler implements Runnable, ITickHandler {
             }
 
             Team team = player.getTeam();
-            String requiredTeam = team == null ? "~" : team.func_96661_b();
+            String requiredTeam = team == null ? "~" : team.getRegisteredName();
 
             for (String teamName : teams) {
                 if (teamName.equals(requiredTeam)) {

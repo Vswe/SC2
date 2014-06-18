@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRailBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityMinecart;
-import net.minecraft.entity.item.SoundUpdaterMinecart;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -27,13 +27,13 @@ import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
-import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
+import scala.collection.mutable.ArrayBuilder;
 import vswe.stevescarts.Blocks.ModBlocks;
 import vswe.stevescarts.Items.ModItems;
 import vswe.stevescarts.StevesCarts;
@@ -62,7 +62,7 @@ import vswe.stevescarts.TileEntities.TileEntityCartAssembler;
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteArrayDataOutput;
 
-import cpw.mods.fml.common.network.FMLNetworkHandler;
+import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -254,7 +254,7 @@ public class MinecartModular extends EntityMinecart
      */
 	private void overrideDatawatcher() {
 		if (worldObj.isRemote) {
-			this.dataWatcher = new DataWatcherLockable();
+			this.dataWatcher = new DataWatcherLockable(this);
 
 			this.dataWatcher.addObject(0, Byte.valueOf((byte)0));
 			this.dataWatcher.addObject(1, Short.valueOf((short)300));
@@ -1264,9 +1264,9 @@ public class MinecartModular extends EntityMinecart
 
 
 	@Override
-    protected void updateOnTrack(int par1, int par2, int par3, double par4, double par6, int par8, int par9)
+    protected void func_145821_a(int par1, int par2, int par3, double par4, double par6, Block par8, int par9)
     {
-        super.updateOnTrack(par1, par2, par3, par4, par6, par8, par9);
+        super.func_145821_a(par1, par2, par3, par4, par6, par8, par9);
         double d2 = this.pushX * this.pushX + this.pushZ * this.pushZ;
 
         if (d2 > 1.0E-4D && this.motionX * this.motionX + this.motionZ * this.motionZ > 0.001D)
@@ -1571,8 +1571,8 @@ public class MinecartModular extends EntityMinecart
 	        }
 	
 	        
-	        FMLNetworkHandler.openGui(entityplayer, StevesCarts.instance, 0, worldObj, entityId, 0, 0);
-			openChest();
+	        FMLNetworkHandler.openGui(entityplayer, StevesCarts.instance, 0, worldObj, getEntityId(), 0, 0);
+			openInventory();
 		}
 		
         return true;
@@ -1957,7 +1957,8 @@ public class MinecartModular extends EntityMinecart
 	/**
 	 * Called when a player interacts with the cart to open any chests
 	 */
-    public void openChest()
+    @Override
+    public void openInventory()
     {
 		if (modules != null) {
 			for (ModuleBase module : modules) {
@@ -1971,7 +1972,8 @@ public class MinecartModular extends EntityMinecart
     /**
      * Called when a player stops interacting with the cart to close any chests
      */
-    public void closeChest()
+    @Override
+    public void closeInventory()
     {
 		if (modules != null) {
 			for (ModuleBase module : modules) {
@@ -2101,14 +2103,16 @@ public class MinecartModular extends EntityMinecart
      * @param data The packet data stream
      */
 	 @Override
-    public void writeSpawnData(ByteArrayDataOutput data) {
+    public void writeSpawnData(ByteBuf data) {
 		data.writeByte(moduleLoadingData.length);
 		for (byte b : moduleLoadingData) {
 			data.writeByte(b);
 		}
 		
-		data.writeByte(name.length());
-		data.writeChars(name);
+		data.writeByte(name.getBytes().length);
+        for (byte b : name.getBytes()) {
+            data.writeByte(b);
+        }
 	}
 
     /**
@@ -2118,24 +2122,26 @@ public class MinecartModular extends EntityMinecart
      * @param data The packet data stream
      */
 	 @Override
-    public void readSpawnData(ByteArrayDataInput data) {
+    public void readSpawnData(ByteBuf data) {
 		byte length = data.readByte();
 		byte[] bytes  = new byte[length];
-		data.readFully(bytes);
+		data.readBytes(bytes);
 		loadModules(bytes);
 		
 		int nameLength = data.readByte();
-		name = "";
+		byte[] nameBytes = new byte[nameLength];
 		for (int i = 0; i < nameLength; i++) {
-			name += data.readChar();
+            nameBytes[i] = data.readByte();
 		}
+        name = new String(nameBytes);
 		
 		if (getDataWatcher() instanceof DataWatcherLockable) {
 			((DataWatcherLockable)getDataWatcher()).release();
 		}
 		
 	}
-	
+
+
 	
 	private int scrollY;
 	public void setScrollY(int val) {
@@ -2294,11 +2300,6 @@ public class MinecartModular extends EntityMinecart
 	public String getInventoryName() {
 		return "container.modularcart";
 	}
-
-	public SoundUpdaterMinecart getSoundUpdater() {
-		return (SoundUpdaterMinecart)this.field_82344_g;
-	}
-	
 
 	public String getCartName() {
 		if (name == null || name.length() == 0) {
