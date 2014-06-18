@@ -16,7 +16,6 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagByteArray;
 import net.minecraft.nbt.NBTTagCompound;
@@ -33,7 +32,6 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
-import scala.collection.mutable.ArrayBuilder;
 import vswe.stevescarts.Blocks.ModBlocks;
 import vswe.stevescarts.Items.ModItems;
 import vswe.stevescarts.StevesCarts;
@@ -59,8 +57,6 @@ import vswe.stevescarts.Modules.Workers.ModuleWorker;
 import vswe.stevescarts.Modules.Workers.Tools.ModuleTool;
 import vswe.stevescarts.TileEntities.TileEntityCartAssembler;
 
-import com.google.common.io.ByteArrayDataInput;
-import com.google.common.io.ByteArrayDataOutput;
 
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
@@ -263,7 +259,12 @@ public class MinecartModular extends EntityMinecart
 		}
 	}
 
-	/**
+
+    public String getEntityIdDifference() {
+        return "This: " + getEntityId() + " Super: " + super.getEntityId();
+    }
+
+    /**
 	 * Load a placeholder's modules, this is a bit special since it can be done on existing carts.
 	 * Therefore new modules should be loaded, old modules that still are there be ignored and
 	 * old modules that are no longer present be removed.
