@@ -15,7 +15,7 @@ import java.util.HashMap;
 import vswe.stevescarts.Models.Cart.ModelCartbase;
 public class RendererMinecartItem implements IItemRenderer {
 	public RendererMinecartItem() {
-		MinecraftForgeClient.registerItemRenderer(ModItems.carts.itemID, this);
+		MinecraftForgeClient.registerItemRenderer(ModItems.carts, this);
 	}
 
   /** 
@@ -64,7 +64,7 @@ public class RendererMinecartItem implements IItemRenderer {
 		NBTTagCompound info = item.getTagCompound();
 		if (info != null) {
 			NBTTagByteArray moduleIDTag = (NBTTagByteArray)info.getTag("Modules");
-			byte [] bytes = moduleIDTag.byteArray;
+			byte [] bytes = moduleIDTag.func_150292_c();
 			
 			HashMap<String, ModelCartbase> models = new HashMap<String, ModelCartbase>();
 			

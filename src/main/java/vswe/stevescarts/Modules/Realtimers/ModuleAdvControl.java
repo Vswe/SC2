@@ -1,7 +1,9 @@
 package vswe.stevescarts.Modules.Realtimers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -77,11 +79,11 @@ public class ModuleAdvControl extends ModuleBase implements ILeverModule {
 		int enginesEndAt = getCart().getEngines().size() * 15;
 		
         drawImage(5,enginesEndAt,0,15,32,32);
-		if (minecraft.gameSettings.keyBindForward.pressed) {
+		if (minecraft.gameSettings.keyBindForward.getIsKeyPressed()) {
 			drawImage(5+10,enginesEndAt + 5,32 + 10,15 + 5,12,6);
-		}else if (minecraft.gameSettings.keyBindLeft.pressed) {
+		}else if (minecraft.gameSettings.keyBindLeft.getIsKeyPressed()) {
 			drawImage(5+2,enginesEndAt + 13,32 + 2,15 + 13,6,12);
-		}else if (minecraft.gameSettings.keyBindRight.pressed) {
+		}else if (minecraft.gameSettings.keyBindRight.getIsKeyPressed()) {
 			drawImage(5+24,enginesEndAt + 13,32 + 24,15 + 13,6,12);
 		}    
 
@@ -104,8 +106,8 @@ public class ModuleAdvControl extends ModuleBase implements ILeverModule {
         minecraft.fontRenderer.drawString(distToString(trip), 5 + 2, enginesEndAt +52 + 31, 0x404040);
 		
 		RenderItem itemRenderer = new RenderItem();
-        itemRenderer.renderItemIntoGUI(minecraft.fontRenderer, minecraft.renderEngine, new ItemStack(Item.pocketSundial, 1), 5, enginesEndAt +32 + 3);
-        itemRenderer.renderItemIntoGUI(minecraft.fontRenderer, minecraft.renderEngine, new ItemStack(Item.compass, 1), 5 + 16, enginesEndAt+32 + 3);		
+        itemRenderer.renderItemIntoGUI(minecraft.fontRenderer, minecraft.renderEngine, new ItemStack(Items.clock, 1), 5, enginesEndAt +32 + 3);
+        itemRenderer.renderItemIntoGUI(minecraft.fontRenderer, minecraft.renderEngine, new ItemStack(Items.compass, 1), 5 + 16, enginesEndAt+32 + 3);
 	
 	}
 	
@@ -343,12 +345,12 @@ public class ModuleAdvControl extends ModuleBase implements ILeverModule {
 			keyinformation = 0;
 			
 
-			keyinformation |= (byte)((minecraft.gameSettings.keyBindForward.pressed ? 1 : 0) << 0);
-			keyinformation |= (byte)((minecraft.gameSettings.keyBindLeft.pressed ? 1 : 0) << 1);
-			keyinformation |= (byte)((minecraft.gameSettings.keyBindRight.pressed ? 1 : 0) << 2);
-			keyinformation |= (byte)((minecraft.gameSettings.keyBindBack.pressed ? 1 : 0) << 3);
-			keyinformation |= (byte)((minecraft.gameSettings.keyBindJump.pressed ? 1 : 0) << 4);
-			keyinformation |= (byte)((minecraft.gameSettings.keyBindSneak.pressed ? 1 : 0) << 5);
+			keyinformation |= (byte)((minecraft.gameSettings.keyBindForward.getIsKeyPressed() ? 1 : 0) << 0);
+			keyinformation |= (byte)((minecraft.gameSettings.keyBindLeft.getIsKeyPressed() ? 1 : 0) << 1);
+			keyinformation |= (byte)((minecraft.gameSettings.keyBindRight.getIsKeyPressed() ? 1 : 0) << 2);
+			keyinformation |= (byte)((minecraft.gameSettings.keyBindBack.getIsKeyPressed() ? 1 : 0) << 3);
+			keyinformation |= (byte)((minecraft.gameSettings.keyBindJump.getIsKeyPressed() ? 1 : 0) << 4);
+			keyinformation |= (byte)((minecraft.gameSettings.keyBindSneak.getIsKeyPressed() ? 1 : 0) << 5);
 
 			
 			if (oldVal != keyinformation) {
@@ -567,7 +569,7 @@ public class ModuleAdvControl extends ModuleBase implements ILeverModule {
 	@Override
 	public void postUpdate() {
 		if (getCart().worldObj.isRemote && getCart().riddenByEntity != null && getCart().riddenByEntity instanceof EntityPlayer && getCart().riddenByEntity == getClientPlayer()) {
-			Minecraft.getMinecraft().gameSettings.keyBindSneak.pressed = false;
+            KeyBinding.setKeyBindState(Minecraft.getMinecraft().gameSettings.keyBindSneak.getKeyCode(), false);
 		}
 	}
 }

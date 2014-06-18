@@ -22,10 +22,12 @@ public class RendererUpgrade implements ISimpleBlockRenderingHandler
 		RenderingRegistry.registerBlockHandler(this);
     }
 
+    @Override
     public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
 		//renderer.renderStandardBlock(block, x, y, z);
 	}
 
+    @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
 	
 		TileEntity te = world.getTileEntity(x, y, z);
@@ -61,11 +63,13 @@ public class RendererUpgrade implements ISimpleBlockRenderingHandler
 		}
 	}
 
+    @Override
+    public boolean shouldRender3DInInventory(int modelId) {
+        return false;
+    }
 
-    public boolean shouldRender3DInInventory() {
-		return false;
-	}
 
+    @Override
     public int getRenderId() {
 		return id;
 	}

@@ -1,5 +1,7 @@
 package vswe.stevescarts.Modules.Addons.Plants;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import vswe.stevescarts.Carts.MinecartModular;
@@ -14,20 +16,20 @@ public class ModuleNetherwart extends ModuleAddon implements ICropModule {
 
 	@Override
 	public boolean isSeedValid(ItemStack seed) {
-        return seed.getItem().itemID == Item.netherStalkSeeds.itemID;
-	}	
+        return seed.getItem() == Items.nether_wart;
+    }
 	
 	@Override
-	public int getCropFromSeed(ItemStack seed) {
-		return Block.netherStalk.blockID;
+	public Block getCropFromSeed(ItemStack seed) {
+		return Blocks.nether_wart;
 	}
 	
 	@Override
 	public boolean isReadyToHarvest(int x, int y, int z) {
-        int id = getCart().worldObj.getBlockId(x, y , z);
+        Block b = getCart().worldObj.getBlock(x, y, z);
         int m = getCart().worldObj.getBlockMetadata(x, y, z);
 
-		return id == Block.netherStalk.blockID && m == 3;
+		return b == Blocks.nether_wart && m == 3;
 	}
 
 }

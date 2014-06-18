@@ -8,7 +8,7 @@ public abstract class RechargerBase extends BaseEffect {
 	
 	@Override
 	public void update(TileEntityUpgrade upgrade) {
-		if (!upgrade.worldObj.isRemote && canGenerate(upgrade)) {
+		if (!upgrade.getWorldObj().isRemote && canGenerate(upgrade)) {
 			NBTTagCompound comp = upgrade.getCompound();
 			
 			if (comp.getShort("GenerateCooldown") >= 1200 / getAmount(upgrade)) {

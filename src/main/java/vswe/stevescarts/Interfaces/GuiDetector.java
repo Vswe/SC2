@@ -52,7 +52,7 @@ public class GuiDetector extends GuiBase
     {
 		GL11.glDisable(GL11.GL_LIGHTING);
 	
-        fontRenderer.drawString(DetectorType.getTypeFromMeta(detector.getBlockMetadata()).getName(), 8, 6, 0x404040);
+        getFontRenderer().drawString(DetectorType.getTypeFromMeta(detector.getBlockMetadata()).getName(), 8, 6, 0x404040);
 		
 		if (modulesMenu.getScroll() != 0) {
 			int modulePosId = 0;

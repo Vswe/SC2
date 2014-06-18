@@ -171,7 +171,7 @@ public abstract class TankEffect extends InventoryEffect {
 			return;
 		}
 		
-		if (!upgrade.worldObj.isRemote && slots != null && slots.size() >= 2) {
+		if (!upgrade.getWorldObj().isRemote && slots != null && slots.size() >= 2) {
 			upgrade.tank.containerTransfer();
 		}
 		

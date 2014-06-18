@@ -63,7 +63,7 @@ public class CommonProxy implements IGuiHandler {
 	
 	private MinecartModular getCart(int ID, World world) {
 		for (Object e : world.loadedEntityList) {
-			if (e instanceof Entity && ((Entity)e).entityId == ID && e instanceof MinecartModular) {
+			if (e instanceof Entity && ((Entity)e).getEntityId() == ID && e instanceof MinecartModular) {
 				return (MinecartModular)e;
 			}
 		}

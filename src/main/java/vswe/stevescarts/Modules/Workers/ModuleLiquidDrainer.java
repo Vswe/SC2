@@ -2,6 +2,7 @@ package vswe.stevescarts.Modules.Workers;
 import java.util.ArrayList;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -45,13 +46,13 @@ public class ModuleLiquidDrainer extends ModuleWorker {
 	
 	private int drainAt(ModuleDrill drill, ArrayList<BlockCoord> checked, BlockCoord here, int buckets) {		
 		int drained = 0;
-		int id = getCart().worldObj.getBlockId(here.getX(), here.getY(), here.getZ());
-		if (!isLiquid(id)) {
+		Block b = getCart().worldObj.getBlock(here.getX(), here.getY(), here.getZ());
+		if (!isLiquid(b)) {
 			return 0;
 		}
 		int meta = getCart().worldObj.getBlockMetadata(here.getX(), here.getY(), here.getZ());
 		
-		FluidStack liquid = getFluidStack(id, here.getX(), here.getY(), here.getZ(), !doPreWork());
+		FluidStack liquid = getFluidStack(b, here.getX(), here.getY(), here.getZ(), !doPreWork());
 		if (liquid != null) {
 			if (doPreWork()) {
 				liquid.amount += buckets * FluidContainerRegistry.BUCKET_VOLUME;
@@ -93,24 +94,23 @@ public class ModuleLiquidDrainer extends ModuleWorker {
 		return drained;
 	}		
 	
-	private boolean isLiquid(int id) {
+	private boolean isLiquid(Block b) {
 
-		boolean isWater = id == 9 || id == 8 || id == 79;
-		boolean isLava = id == 11 || id == 10;
-		Block block = Block.blocksList[id];
-		boolean isOther = block != null && block instanceof IFluidBlock;	
+		boolean isWater = b == Blocks.water || b == Blocks.flowing_water || b == Blocks.ice;
+		boolean isLava = b == Blocks.lava || b == Blocks.flowing_lava;
+		boolean isOther = b != null && b instanceof IFluidBlock;
 		return isWater || isLava || isOther;
 	}
 	
-	private FluidStack getFluidStack(int id, int x, int y, int z, boolean doDrain) {
-		if (id == Block.waterStill.blockID || id == Block.waterMoving.blockID) {
+	private FluidStack getFluidStack(Block b, int x, int y, int z, boolean doDrain) {
+		if (b == Blocks.water || b == Blocks.flowing_water) {
 			return new FluidStack(FluidRegistry.WATER, FluidContainerRegistry.BUCKET_VOLUME);
 			
-		}else if (id == Block.lavaStill.blockID || id == Block.lavaMoving.blockID) {
+		}else if (b == Blocks.lava || b == Blocks.flowing_lava) {
 			return new FluidStack(FluidRegistry.LAVA, FluidContainerRegistry.BUCKET_VOLUME);
 			
-		}else if (Block.blocksList[id] instanceof IFluidBlock) {
-			IFluidBlock liquid = (IFluidBlock) Block.blocksList[id];
+		}else if (b instanceof IFluidBlock) {
+			IFluidBlock liquid = (IFluidBlock)b;
 
 			return liquid.drain(getCart().worldObj, x, y, z, doDrain);
 		}else {

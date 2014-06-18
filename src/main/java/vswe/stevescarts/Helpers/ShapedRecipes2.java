@@ -1,4 +1,5 @@
 package vswe.stevescarts.Helpers;
+import net.minecraft.init.Items;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
@@ -69,7 +70,7 @@ public class ShapedRecipes2 extends ShapedRecipes
                         return false;
                     }
 
-                    if (var9.itemID != var10.itemID)
+                    if (var9.getItem() != var10.getItem())
                     {
                         return false;
                     }
@@ -81,7 +82,7 @@ public class ShapedRecipes2 extends ShapedRecipes
 					
 					if (var9.getItem() instanceof ItemEnchantedBook && var10.getItem() instanceof ItemEnchantedBook) {
 
-						if (!Item.enchantedBook.func_92110_g(var9).equals(Item.enchantedBook.func_92110_g(var10))) {
+						if (!Items.enchanted_book.func_92110_g(var9).equals(Items.enchanted_book.func_92110_g(var10))) {
 							return false;
 						}
 					}

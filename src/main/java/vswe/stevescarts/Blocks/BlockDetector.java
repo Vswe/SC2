@@ -20,7 +20,7 @@ import cpw.mods.fml.common.network.FMLNetworkHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockDetector extends BlockContainer
+public class BlockDetector extends BlockContainerBase
 {
 
     public BlockDetector()

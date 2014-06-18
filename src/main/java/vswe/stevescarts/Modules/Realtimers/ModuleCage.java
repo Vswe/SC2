@@ -1,12 +1,12 @@
 package vswe.stevescarts.Modules.Realtimers;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.EntityAINearestAttackableTargetSorter;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.monster.EntityCaveSpider;
@@ -148,7 +148,7 @@ public class ModuleCage extends ModuleBase implements IActivatorModule {
 		pickUpCreature(5);
 	}
 
-	private EntityAINearestAttackableTargetSorter sorter = new EntityAINearestAttackableTargetSorter(getCart());
+	private EntityNearestTarget sorter = new EntityNearestTarget(getCart());
 	private void pickUpCreature(int searchDistance) {
 		if (getCart().worldObj.isRemote || !isCageEmpty()) {
 			return;
@@ -256,4 +256,22 @@ public class ModuleCage extends ModuleBase implements IActivatorModule {
 			manualDrop();
 		}
 	}
+
+    private static class EntityNearestTarget implements Comparator {
+        private Entity entity;
+
+        public EntityNearestTarget(Entity entity) {
+            this.entity = entity;
+        }
+
+        public int compareDistanceSq(Entity entity1, Entity entity2) {
+            double distance1 = this.entity.getDistanceSqToEntity(entity1);
+            double distance2 = this.entity.getDistanceSqToEntity(entity2);
+            return distance1 < distance2 ? -1 : distance1 > distance2 ? 1 : 0;
+        }
+
+        public int compare(Object obj1, Object obj2) {
+            return this.compareDistanceSq((Entity)obj1, (Entity)obj2);
+        }
+    }
 }

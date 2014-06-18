@@ -12,7 +12,7 @@ public class SlotCakeDynamite extends SlotCake implements ISlotExplosions
 
     public boolean isItemValid(ItemStack itemstack)
     {
-        return super.isItemValid(itemstack) || (itemstack != null && itemstack.getItem().itemID == ModItems.component.itemID && itemstack.getItemDamage() == 6);
+        return super.isItemValid(itemstack) || (itemstack != null && itemstack.getItem() == ModItems.component && itemstack.getItemDamage() == 6);
     }
 
 

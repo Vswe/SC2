@@ -2,6 +2,7 @@ package vswe.stevescarts.Modules.Realtimers;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -42,7 +43,7 @@ public class ModuleMilker extends ModuleBase {
 
 	private void depositeMilk() {
 		if (milkbuffer > 0) {
-			FluidStack ret = FluidContainerRegistry.getFluidForFilledItem(new ItemStack(Item.bucketMilk));
+			FluidStack ret = FluidContainerRegistry.getFluidForFilledItem(new ItemStack(Items.milk_bucket));
 			if (ret != null) {
 				ret.amount = milkbuffer;
 				milkbuffer -= getCart().fill(ret, true);
@@ -51,8 +52,8 @@ public class ModuleMilker extends ModuleBase {
 			if (milkbuffer == FluidContainerRegistry.BUCKET_VOLUME) {
 				for (int i = 0; i < getInventorySize(); i++) {
 					ItemStack bucket = getStack(i);
-					if (bucket != null && bucket.getItem() == Item.bucketEmpty) {
-						ItemStack milk = new ItemStack(Item.bucketMilk);
+					if (bucket != null && bucket.getItem() == Items.bucket) {
+						ItemStack milk = new ItemStack(Items.milk_bucket);
 						
 						
 

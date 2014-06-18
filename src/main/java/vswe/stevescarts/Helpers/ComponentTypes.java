@@ -116,7 +116,7 @@ public enum ComponentTypes {
     }
 
     public boolean isStackOfType(ItemStack itemstack) {
-        return itemstack != null && itemstack.itemID == ModItems.component.itemID && itemstack.getItemDamage() == id;
+        return itemstack != null && itemstack.getItem() == ModItems.component && itemstack.getItemDamage() == id;
     }
 
     public String getLocalizedName() {

@@ -2,6 +2,8 @@ package vswe.stevescarts.Modules.Workers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.BlockSapling;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Vec3;
@@ -116,8 +118,7 @@ public class ModuleFertilizer extends ModuleWorker implements ISuppliesModule {
 
     private void fertilize(int x, int y, int z)
     {
-        int idOfBlockAbove = getCart().worldObj.getBlockId(x, y + 1, z);
-		Block block = Block.blocksList[idOfBlockAbove];
+		Block block = getCart().worldObj.getBlock(x, y + 1, z);
         int metadataOfBlockAbove = getCart().worldObj.getBlockMetadata(x, y + 1, z);
         int metadata = getCart().worldObj.getBlockMetadata(x, y, z);
 
@@ -134,7 +135,7 @@ public class ModuleFertilizer extends ModuleWorker implements ISuppliesModule {
 				if (getCart().rand.nextInt(100) == 0) {
 					if (getCart().rand.nextInt(6) == 0) {
 						getCart().worldObj.setBlockMetadataWithNotify(x, y+1, z, metadataOfBlockAbove | 8, 3);
-						((BlockSapling)Block.sapling).growTree(getCart().worldObj,x,y+1,z,getCart().rand);
+						((BlockSapling) Blocks.sapling).func_149878_d(getCart().worldObj,x,y+1,z,getCart().rand);
 					}
 					fert--;
 				}
@@ -171,8 +172,8 @@ public class ModuleFertilizer extends ModuleWorker implements ISuppliesModule {
 
         if (getStack(0) != null)
         {
-            boolean isBone = getStack(0).itemID == Item.bone.itemID;
-            boolean isBoneMeal = getStack(0).itemID == Item.dyePowder.itemID && getStack(0).getItemDamage() == 15;
+            boolean isBone = getStack(0).getItem() == Items.bone;
+            boolean isBoneMeal = getStack(0).getItem() == Items.dye && getStack(0).getItemDamage() == 15;
 
             if (isBone || isBoneMeal)
             {

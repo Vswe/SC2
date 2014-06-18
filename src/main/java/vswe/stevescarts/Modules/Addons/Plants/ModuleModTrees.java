@@ -27,8 +27,7 @@ public class ModuleModTrees extends ModuleAddon implements ITreeModule {
 			if (isStackSapling(sapling)) {
 				return true;
 			}else if (sapling.getItem() instanceof ItemBlock){
-				int id = ((ItemBlock)sapling.getItem()).getBlockID();
-				Block b = Block.blocksList[id];
+				Block b = Block.getBlockFromItem(sapling.getItem());
 				
 				if (b instanceof BlockSapling) {
 					return true;

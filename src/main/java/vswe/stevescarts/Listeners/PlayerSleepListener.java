@@ -1,51 +1,26 @@
 package vswe.stevescarts.Listeners;
 import java.util.EnumSet;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
 import vswe.stevescarts.Items.ModItems;
 import vswe.stevescarts.StevesCarts;
-import cpw.mods.fml.common.ITickHandler;
-import cpw.mods.fml.common.TickType;
-import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-public class PlayerSleepListener implements ITickHandler
+public class PlayerSleepListener
 {
-    public PlayerSleepListener()
-    {
-		TickRegistry.registerTickHandler(this,Side.SERVER);
+
+    public PlayerSleepListener() {
+        MinecraftForge.EVENT_BUS.register(this);
     }
 
-	
-	
-	
-	
-    /**
-     * Called at the "start" phase of a tick
-     *
-     * Multiple ticks may fire simultaneously- you will only be called once with all the firing ticks
-     *
-     * @param type
-     * @param tickData
-     */
-    public void tickStart(EnumSet<TickType> type, Object... tickData) {
-
-	}
-
-
-	
-    /**
-     * Called at the "end" phase of a tick
-     *
-     * Multiple ticks may fire simultaneously- you will only be called once with all the firing ticks
-     *
-     * @param type
-     * @param tickData
-     */
-    public void tickEnd(EnumSet<TickType> type, Object... tickData) {
-		if (type.contains(TickType.PLAYER)) {
-			EntityPlayer player =  (EntityPlayer)tickData[0];
+    @SubscribeEvent
+    public void tickEnd(TickEvent.PlayerTickEvent event) {
+		if (event.side == Side.SERVER) {
+			EntityPlayer player = event.player;
 			
 			if (StevesCarts.isChristmas && player.isPlayerFullyAsleep()) {
 				for (int i = 0; i < player.inventory.getSizeInventory();i++) {
@@ -60,23 +35,5 @@ public class PlayerSleepListener implements ITickHandler
 		}
 	}
 
-    /**
-     * Returns the list of ticks this tick handler is interested in receiving at the minute
-     *
-     * @return
-     */
-    public EnumSet<TickType> ticks() {
-		return EnumSet.of(TickType.PLAYER);
-	}
-
-    /**
-     * A profiling label for this tick handler
-     * @return
-     */
-    public String getLabel() {
-		return "StevesCarts.sleeping";
-	}		
-	
-	
 	
 }

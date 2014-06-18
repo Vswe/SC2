@@ -57,18 +57,15 @@ public class ModuleRocket extends ModuleBase {
 			if (isLanding) {
 				getCart().posY = landY;
 				
-				int id = getCart().worldObj.getBlockId(getCart().x(), getCart().y(), getCart().z());
-				
-	            if (BlockRailBase.isRailBlock(id)) {
+
+	            if (BlockRailBase.func_150049_b_( getCart().worldObj, getCart().x(), getCart().y(), getCart().z())) {
 	            	done();
 	            	updateDw(0, (byte)0);
 	            }				
 			}
 			
 			if (!isLanding && getCart().posY - groundY > 2) {
-	            int id = getCart().worldObj.getBlockId(getCart().x() + landDirX, getCart().y(), getCart().z() + landDirZ);
-	
-	            if (BlockRailBase.isRailBlock(id)) {
+                if (BlockRailBase.func_150049_b_( getCart().worldObj, getCart().x() + landDirX, getCart().y(), getCart().z() + landDirZ)) {
 	            	land();
 	            	updateDw(0, (byte)2);
 	            }

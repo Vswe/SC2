@@ -38,7 +38,7 @@ public class Blueprint extends SimpleInventoryEffect {
 			if (moduleIDTag == null) {
 				return false;
 			}
-			byte[] IDs = moduleIDTag.byteArray;
+			byte[] IDs = moduleIDTag.func_150292_c();
 			ArrayList<ModuleData> missing = new ArrayList<ModuleData>();
 			for (byte id : IDs) {
 				ModuleData blueprintModule = ModuleData.getList().get(id);

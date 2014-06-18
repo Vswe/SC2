@@ -33,15 +33,15 @@ public abstract class GuiManager extends GuiBase
 		GL11.glDisable(GL11.GL_LIGHTING);
 	
 		int[] coords = getMiddleCoords();
-        fontRenderer.drawString(getManagerName(), coords[0] - 34, 65, 0x404040);
-        fontRenderer.drawString(Localization.GUI.MANAGER.TITLE.translate(), coords[0] + coords[2], 65, 0x404040);
+        getFontRenderer().drawString(getManagerName(), coords[0] - 34, 65, 0x404040);
+        getFontRenderer().drawString(Localization.GUI.MANAGER.TITLE.translate(), coords[0] + coords[2], 65, 0x404040);
 
         for (int i = 0; i < 4; i++)
         {
             coords = getTextCoords(i);
             String str = getMaxSizeText(i);
 
-            fontRenderer.drawString(str, coords[0], coords[1], 0x404040);
+            getFontRenderer().drawString(str, coords[0], coords[1], 0x404040);
         }
 		
 		

@@ -1,5 +1,6 @@
 package vswe.stevescarts.Modules.Addons;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import vswe.stevescarts.Carts.MinecartModular;
 
 public class ModuleSnowCannon extends ModuleAddon {
@@ -46,9 +47,9 @@ public class ModuleSnowCannon extends ModuleAddon {
 					int x1 = getCart().x() + x;
 					int y1 = getCart().y() + y;
 					int z1 = getCart().z() + z;
-					if (countsAsAir(x1, y1, z1) && getCart().worldObj.getBiomeGenForCoords(x1, z1).getFloatTemperature() <= 1.0F /* snow golems won't be hurt */ && Block.snow.canPlaceBlockAt(getCart().worldObj, x1, y1, z1))
+					if (countsAsAir(x1, y1, z1) && getCart().worldObj.getBiomeGenForCoords(x1, z1).getFloatTemperature(x1, y1, z1) <= 1.0F /* snow golems won't be hurt */ && Blocks.snow.canPlaceBlockAt(getCart().worldObj, x1, y1, z1))
 					{
-						getCart().worldObj.setBlock(x1, y1, z1, Block.snow.blockID);
+						getCart().worldObj.setBlock(x1, y1, z1, Blocks.snow);
 					}
 				}
 			}

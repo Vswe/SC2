@@ -2,8 +2,10 @@ package vswe.stevescarts.Interfaces;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
@@ -112,9 +114,9 @@ public class GuiCargo extends GuiManager
 		ItemStack cartIcon;
 	
 		if (getCargo().target[id] < 0 || getCargo().target[id] >= getCargo().itemSelections.size() ||  getCargo().itemSelections.get(getCargo().target[id]).getIcon() == null) {
-			cartIcon = new ItemStack(Item.minecartEmpty, 1);
+			cartIcon = new ItemStack(Items.minecart, 1);
 		}else{
-			cartIcon = getCargo().itemSelections.get(getCargo().target[id]).getIcon();
+			cartIcon = TileEntityCargo.itemSelections.get(getCargo().target[id]).getIcon();
 		}
 	
 

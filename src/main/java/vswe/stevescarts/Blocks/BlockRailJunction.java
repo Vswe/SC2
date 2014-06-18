@@ -8,7 +8,7 @@ import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Carts.MinecartModular;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-public class BlockRailJunction extends BlockRailBase
+public class BlockRailJunction extends BlockSpecialRailBase
 {
 
 	private IIcon normalIcon;

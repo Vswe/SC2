@@ -23,7 +23,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import vswe.stevescarts.Upgrades.AssemblerUpgrade;
 
-public class BlockUpgrade extends BlockContainer
+public class BlockUpgrade extends BlockContainerBase
 {
 
     public BlockUpgrade()

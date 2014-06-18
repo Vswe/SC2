@@ -18,7 +18,7 @@ public class Redstone extends BaseEffect {
 	
 	@Override
 	public void update(TileEntityUpgrade upgrade) {
-		if (upgrade.worldObj.isBlockIndirectlyGettingPowered(upgrade.xCoord, upgrade.yCoord, upgrade.zCoord)) {
+		if (upgrade.getWorldObj().isBlockIndirectlyGettingPowered(upgrade.xCoord, upgrade.yCoord, upgrade.zCoord)) {
 			if (upgrade.getMaster() != null) {
 				upgrade.getMaster().doAssemble();
 			}

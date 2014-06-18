@@ -1180,7 +1180,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 
 			if (fuel > 0 && getFuelLevel() + fuel <= getMaxFuelLevel()) {
 				setFuelLevel(getFuelLevel() + fuel);			
-				if (fuelSlot.getStack().getItem().hasContainerItem()) {
+				if (fuelSlot.getStack().getItem().hasContainerItem(fuelSlot.getStack())) {
 					fuelSlot.putStack(new ItemStack(fuelSlot.getStack().getItem().getContainerItem()));
 				} else{
 					fuelSlot.getStack().stackSize--;

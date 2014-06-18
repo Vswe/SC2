@@ -36,26 +36,26 @@ public enum ModBlocks {
 
 
     private final String name;
-    private final Class<? extends Block> clazz;
+    private final Class<? extends IBlockBase> clazz;
     private final Class<? extends TileEntity> tileEntityClazz;
     private final String tileEntityName;
     private final Class<? extends ItemBlock> itemClazz;
 
     private Block block;
 
-    ModBlocks(String name, Class<? extends Block> clazz) {
+    ModBlocks(String name, Class<? extends IBlockBase> clazz) {
         this(name, clazz, null, null);
     }
 
-    ModBlocks(String name, Class<? extends Block> clazz, Class<? extends TileEntity> tileEntityClazz, String tileEntityName) {
+    ModBlocks(String name, Class<? extends IBlockBase> clazz, Class<? extends TileEntity> tileEntityClazz, String tileEntityName) {
         this(name, clazz, tileEntityClazz, tileEntityName, ItemBlock.class);
     }
 
-    ModBlocks(String name, Class<? extends Block> clazz, Class<? extends ItemBlock> itemClazz) {
+    ModBlocks(String name, Class<? extends IBlockBase> clazz, Class<? extends ItemBlock> itemClazz) {
         this(name, clazz, null, null, itemClazz);
     }
 
-    ModBlocks(String name, Class<? extends Block> clazz, Class<? extends TileEntity> tileEntityClazz, String tileEntityName, Class<? extends ItemBlock> itemClazz) {
+    ModBlocks(String name, Class<? extends IBlockBase> clazz, Class<? extends TileEntity> tileEntityClazz, String tileEntityName, Class<? extends ItemBlock> itemClazz) {
         this.name = name;
         this.clazz = clazz;
         this.tileEntityClazz = tileEntityClazz;
@@ -67,18 +67,23 @@ public enum ModBlocks {
     public static void init() {
         for (ModBlocks blockInfo : values()) {
             try {
-                Constructor<? extends Block> blockConstructor = blockInfo.clazz.getConstructor(new Class[0]);
-                Object blockInstance = blockConstructor.newInstance(new Object[0]);
+                if (Block.class.isAssignableFrom(blockInfo.clazz)) {
+                    Constructor<? extends IBlockBase> blockConstructor = blockInfo.clazz.getConstructor();
+                    Object blockInstance = blockConstructor.newInstance();
 
-                Block block = (Block)blockInstance;
-                block.setHardness(2F).setStepSound(Block.soundTypeMetal);
-                GameRegistry.registerBlock(block, blockInfo.itemClazz, blockInfo.name);
-                block.setUnlocalizedName(StevesCarts.localStart + blockInfo.name);
+                    IBlockBase blockBase = (IBlockBase)blockInstance;
+                    Block block = (Block)blockInstance;
+                    block.setHardness(2F).setStepSound(Block.soundTypeMetal);
+                    GameRegistry.registerBlock(block, blockInfo.itemClazz, blockInfo.name);
+                    blockBase.setUnlocalizedName(StevesCarts.localStart + blockInfo.name);
 
-                blockInfo.block = block;
+                    blockInfo.block = block;
 
-                if (blockInfo.tileEntityClazz != null) {
-                    GameRegistry.registerTileEntity(blockInfo.tileEntityClazz, blockInfo.tileEntityName);
+                    if (blockInfo.tileEntityClazz != null) {
+                        GameRegistry.registerTileEntity(blockInfo.tileEntityClazz, blockInfo.tileEntityName);
+                    }
+                }else{
+                    System.out.println("This is not a block (" + blockInfo.name + ")");
                 }
             }catch(Exception e) {
                 System.out.println("Failed to create block (" + blockInfo.name + ")");

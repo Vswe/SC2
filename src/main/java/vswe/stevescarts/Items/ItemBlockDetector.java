@@ -1,5 +1,6 @@
 package vswe.stevescarts.Items;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
@@ -8,9 +9,9 @@ import vswe.stevescarts.StevesCarts;
 public class ItemBlockDetector extends ItemBlock {
 
    
-    public ItemBlockDetector(int i)
+    public ItemBlockDetector(Block b)
     {
-        super(i);
+        super(b);
         setHasSubtypes(true);
         setMaxDamage(0);
         setCreativeTab(StevesCarts.tabsSC2Blocks);		
@@ -22,7 +23,7 @@ public class ItemBlockDetector extends ItemBlock {
     {
 
 		if (item != null) {
-			return "item." + StevesCarts.instance.localStart + "BlockDetector" + item.getItemDamage();
+			return "item." + StevesCarts.localStart + "BlockDetector" + item.getItemDamage();
 		}	
 	
         return "item.unknown";

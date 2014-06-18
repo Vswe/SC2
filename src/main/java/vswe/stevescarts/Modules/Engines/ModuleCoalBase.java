@@ -41,7 +41,7 @@ public abstract class ModuleCoalBase extends ModuleEngine {
                     if (getStack(i) != null)
                     {
                         //code for emptying buckets and the like
-                        if (getStack(i).getItem().hasContainerItem())
+                        if (getStack(i).getItem().hasContainerItem(getStack(i)))
                         {
                             setStack(i,new ItemStack(getStack(i).getItem().getContainerItem()));
                         }

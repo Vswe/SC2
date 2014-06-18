@@ -16,8 +16,8 @@ import vswe.stevescarts.Items.*;
 import vswe.stevescarts.Listeners.ChunkListener;
 import vswe.stevescarts.Listeners.MobDeathListener;
 import vswe.stevescarts.Listeners.MobInteractListener;
+import vswe.stevescarts.Listeners.OverlayRenderer;
 import vswe.stevescarts.Listeners.PlayerSleepListener;
-import vswe.stevescarts.Listeners.TickListener;
 import vswe.stevescarts.Listeners.TicketListener;
 import vswe.stevescarts.TileEntities.TileEntityCargo;
 import vswe.stevescarts.Upgrades.AssemblerUpgrade;
@@ -96,7 +96,7 @@ public class StevesCarts {
 		LanguageRegistry.instance().addStringLocalization("itemGroup.SC2Items", "en_US", "Steve's Carts 2 Components");
 		LanguageRegistry.instance().addStringLocalization("itemGroup.SC2Blocks", "en_US", "Steve's Carts 2 Blocks");
 	
-		new TickListener();
+		new OverlayRenderer();
 		new TicketListener();
 		new ChunkListener();
 		new CraftingHandler();

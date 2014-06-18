@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import vswe.stevescarts.Carts.MinecartModular;
@@ -100,7 +101,7 @@ public class ModuleCleaner extends ModuleBase {
                 if (Math.pow(eItem.motionX,2) + Math.pow(eItem.motionY,2) + Math.pow(eItem.motionZ,2) < 0.2D && eItem.arrowShake <= 0 && !eItem.isDead)
                 {
                     eItem.arrowShake = 3;
-                    ItemStack iItem = new ItemStack(Item.arrow, 1);
+                    ItemStack iItem = new ItemStack(Items.arrow, 1);
                     getCart().addItemToChest(iItem);
 
                     if (iItem.stackSize <= 0)

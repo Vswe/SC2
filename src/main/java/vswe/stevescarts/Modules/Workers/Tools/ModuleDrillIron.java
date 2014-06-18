@@ -1,5 +1,6 @@
 package vswe.stevescarts.Modules.Workers.Tools;
 
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import vswe.stevescarts.Carts.MinecartModular;
@@ -35,7 +36,7 @@ public class ModuleDrillIron extends ModuleDrill {
 	}
 	@Override
 	public int getRepairItemUnits(ItemStack item) {
-		if (item != null && item.getItem() == Item.ingotIron) {
+		if (item != null && item.getItem() == Items.iron_ingot) {
 			return 20000;
 		}
 		return 0;

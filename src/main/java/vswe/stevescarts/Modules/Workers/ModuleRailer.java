@@ -3,6 +3,8 @@ import java.util.ArrayList;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRailBase;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Vec3;
@@ -70,7 +72,7 @@ public class ModuleRailer extends ModuleWorker implements ISuppliesModule {
 				boolean front = false;
 				for (int i = 0; i < pos.size(); i++) {
 					
-					if (BlockRailBase.isRailBlockAt(getCart().worldObj, pos.get(i)[0], pos.get(i)[1], pos.get(i)[2])) {
+					if (BlockRailBase.func_150049_b_(getCart().worldObj, pos.get(i)[0], pos.get(i)[1], pos.get(i)[2])) {
 						front = true;
 						break;
 					}
@@ -112,8 +114,8 @@ public class ModuleRailer extends ModuleWorker implements ISuppliesModule {
 		return lst;
 	}
 
-	protected boolean validRail(int id) {
-		return id == Block.rail.blockID;
+	protected boolean validRail(Item item) {
+		return Block.getBlockFromItem(item) == Blocks.rail;
 	}
 
     /**
@@ -132,13 +134,13 @@ public class ModuleRailer extends ModuleWorker implements ISuppliesModule {
                 //check if it has found a standard rail block
                 if (getStack(l) != null)
                 {
-                    if (validRail(getStack(l).getItem().itemID))
+                    if (validRail(getStack(l).getItem()))
                     {
                         //if so this is a valid action to do, if the flag parameter is true this action should also be done
                         if (flag)
                         {
                             //place the rail
-                            getCart().worldObj.setBlock(i, j, k, getStack(l).getItem().itemID);
+                            getCart().worldObj.setBlock(i, j, k, Block.getBlockFromItem(getStack(l).getItem()));
                             
 							if (!getCart().hasCreativeSupplies()) {
 	                            //remove the placed rail from the cart's inventory
@@ -150,7 +152,7 @@ public class ModuleRailer extends ModuleWorker implements ISuppliesModule {
 	                                setStack(l,null);
 	                            }
 	
-								getCart().onInventoryChanged();
+								getCart().markDirty();
 							}
                         }
 
@@ -196,7 +198,7 @@ public class ModuleRailer extends ModuleWorker implements ISuppliesModule {
 			//check if it has found a standard rail block
 			if (getStack(i) != null)
 			{
-				if (validRail(getStack(i).getItem().itemID))
+				if (validRail(getStack(i).getItem()))
 				{
 					valid++;
 				}
@@ -252,7 +254,7 @@ public class ModuleRailer extends ModuleWorker implements ISuppliesModule {
 	public boolean haveSupplies() {
 		for (int i = 0; i < getInventorySize(); i++) {
 			ItemStack item = getStack(i);
-			if (item != null && validRail(item.getItem().itemID)) {
+			if (item != null && validRail(item.getItem())) {
 				return true;
 			}
 		}

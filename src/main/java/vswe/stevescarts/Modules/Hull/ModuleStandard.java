@@ -10,7 +10,7 @@ public class ModuleStandard extends ModuleHull {
 	@Override
 	public int getConsumption(boolean isMoving) {
 		if (!isMoving) {
-			return super.getConsumption(isMoving);
+			return super.getConsumption(false);
 		}else{
 			return 1;		
 		}

@@ -2,13 +2,13 @@ package vswe.stevescarts.Listeners;
 
 import java.util.Random;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.village.MerchantRecipeList;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.EntityInteractEvent;
 import vswe.stevescarts.Items.ModItems;
 import vswe.stevescarts.Helpers.TradeHandler;
@@ -21,7 +21,7 @@ public class MobInteractListener {
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void onEntityInteract(EntityInteractEvent event) {
 		EntityPlayer player = event.entityPlayer;
 		Entity target = event.target;

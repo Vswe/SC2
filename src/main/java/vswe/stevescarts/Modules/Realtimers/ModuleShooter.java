@@ -6,6 +6,7 @@ import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityFireball;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -471,7 +472,7 @@ public class ModuleShooter extends ModuleBase implements ISuppliesModule {
 				return true;
 			}
 		}	
-		return item.getItem().itemID == Item.arrow.itemID;
+		return item.getItem() == Items.arrow;
 	}
 	
 	private final int[] AInterval = {1, 3, 5, 7, 10, 13, 17, 21, 27, 35, 44, 55, 70, 95, 130, 175, 220, 275, 340, 420, 520, 650};

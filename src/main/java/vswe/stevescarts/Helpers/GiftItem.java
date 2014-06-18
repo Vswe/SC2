@@ -1,5 +1,7 @@
 package vswe.stevescarts.Helpers;
 
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import java.util.ArrayList;
 import net.minecraft.block.Block;
@@ -32,13 +34,13 @@ public class GiftItem {
 	
 	public static void init() {
 		ChristmasList = new ArrayList<GiftItem>();
-		ChristmasList.add(new GiftItem(new ItemStack(Block.dirt, 32), 25, 200000));
-		ChristmasList.add(new GiftItem(new ItemStack(Block.stone, 16), 50, 100000));
-		ChristmasList.add(new GiftItem(new ItemStack(Item.coal, 8), 50, 50000));
-		ChristmasList.add(new GiftItem(new ItemStack(Item.redstone, 2), 75, 22000));
-		ChristmasList.add(new GiftItem(new ItemStack(Item.ingotIron, 4), 75, 25000));
-		ChristmasList.add(new GiftItem(Item.ingotGold, 80, 17000));
-		ChristmasList.add(new GiftItem(Item.diamond, 250, 5000));
+		ChristmasList.add(new GiftItem(new ItemStack(Blocks.dirt, 32), 25, 200000));
+		ChristmasList.add(new GiftItem(new ItemStack(Blocks.stone, 16), 50, 100000));
+		ChristmasList.add(new GiftItem(new ItemStack(Items.coal, 8), 50, 50000));
+		ChristmasList.add(new GiftItem(new ItemStack(Items.redstone, 2), 75, 22000));
+		ChristmasList.add(new GiftItem(new ItemStack(Items.iron_ingot, 4), 75, 25000));
+		ChristmasList.add(new GiftItem(Items.gold_ingot, 80, 17000));
+		ChristmasList.add(new GiftItem(Items.diamond, 250, 5000));
 		GiftItem.addModuleGifts(ChristmasList);
 		
 		EasterList = new ArrayList<GiftItem>();
@@ -75,8 +77,8 @@ public class GiftItem {
 			for (GiftItem gift : gifts) {
 				if (chance < gift.chanceWeight) {
 					int maxSetSize = (value / gift.costPerItem);
-					if (maxSetSize * gift.item.stackSize > gift.item.getItem().getItemStackLimit()) {
-						maxSetSize = gift.item.getItem().getItemStackLimit() / gift.item.stackSize;
+					if (maxSetSize * gift.item.stackSize > gift.item.getItem().getItemStackLimit(gift.item)) {
+						maxSetSize = gift.item.getItem().getItemStackLimit(gift.item) / gift.item.stackSize;
 					}
 					if (maxSetSize > 0) {
 						int setSize = 1;

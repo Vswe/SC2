@@ -1,6 +1,7 @@
 package vswe.stevescarts.Modules.Workers;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Vec3;
@@ -17,8 +18,8 @@ public class ModuleTorch extends ModuleWorker implements ISuppliesModule  {
 	}
 	@Override
 	public boolean hasGui(){
-		return true;
-	}
+        return true;
+    }
 	@Override
 	protected SlotBase getSlot(int slotId, int x, int y) {
 		return new SlotTorch(getCart(),slotId,8+x*18,23+y*18);
@@ -58,7 +59,7 @@ public class ModuleTorch extends ModuleWorker implements ISuppliesModule  {
                 for (int level = 2; level >= -2; level--)
                 {
                     //check if this coordinate is a valid place to place a torch
-                    if (getCart().worldObj.isAirBlock(xTorch, y + level, zTorch)  && Block.torchWood.canPlaceBlockAt(getCart().worldObj, xTorch, y + level, zTorch))
+                    if (getCart().worldObj.isAirBlock(xTorch, y + level, zTorch)  && Blocks.torch.canPlaceBlockAt(getCart().worldObj, xTorch, y + level, zTorch))
                     {
                         //check if there's any torches to place
                         for (int i = 0; i < getInventorySize(); i++)
@@ -66,7 +67,7 @@ public class ModuleTorch extends ModuleWorker implements ISuppliesModule  {
                             //check if the slot contains torches
                             if (getStack(i) != null)
                             {
-                                if (getStack(i).getItem().itemID == Block.torchWood.blockID)
+                                if (Block.getBlockFromItem(getStack(i).getItem()) == Blocks.torch)
                                 {
                                     if (doPreWork()) {
 										startWorking(3);
@@ -75,7 +76,7 @@ public class ModuleTorch extends ModuleWorker implements ISuppliesModule  {
 									}
 
 									//if so place it and remove one torch from the cart's inventory
-                                    getCart().worldObj.setBlock(xTorch, y + level, zTorch, Block.torchWood.blockID);
+                                    getCart().worldObj.setBlock(xTorch, y + level, zTorch, Blocks.torch);
         							if (!getCart().hasCreativeSupplies()) {
 	                                    getStack(i).stackSize--;
 	
@@ -95,7 +96,7 @@ public class ModuleTorch extends ModuleWorker implements ISuppliesModule  {
 
                     //if it isn't valid but there's already a torch there this side is already done. This shouldn't really happen since then it wouldn't be dark enough in the first place.
                     }
-                    else if (getCart().worldObj.getBlockId(xTorch, y + level, zTorch) == Block.torchWood.blockID)
+                    else if (getCart().worldObj.getBlock(xTorch, y + level, zTorch) == Blocks.torch)
                     {
                         break;
                     }
@@ -287,7 +288,7 @@ public class ModuleTorch extends ModuleWorker implements ISuppliesModule  {
 	public boolean haveSupplies() {
 		for (int i = 0; i < getInventorySize(); i++) {
 			ItemStack item = getStack(i);
-			if (item != null && item.getItem().itemID == Block.torchWood.blockID) {
+			if (item != null && Block.getBlockFromItem(item.getItem()) == Blocks.torch) {
 				return true;
 			}
 		}

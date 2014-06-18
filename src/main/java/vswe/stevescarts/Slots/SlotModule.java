@@ -13,6 +13,6 @@ public class SlotModule extends Slot
 	@Override
     public boolean isItemValid(ItemStack itemstack)
     {
-        return itemstack.getItem().itemID == ModItems.modules.itemID;
+        return itemstack.getItem() == ModItems.modules;
     }
 }

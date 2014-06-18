@@ -11,7 +11,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.util.IIcon;
 import net.minecraft.client.renderer.texture.IIconRegister;
-public class BlockDistributor extends BlockContainer
+public class BlockDistributor extends BlockContainerBase
 {
 
 
@@ -28,7 +28,7 @@ public class BlockDistributor extends BlockContainer
 	private IIcon blueIcon;
 	private IIcon greenIcon;
 	private IIcon yellowIcon;
-	
+
     @SideOnly(Side.CLIENT)
 	@Override
     public IIcon getIcon(int side, int meta)

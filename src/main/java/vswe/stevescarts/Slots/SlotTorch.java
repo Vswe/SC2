@@ -1,5 +1,6 @@
 package vswe.stevescarts.Slots;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
@@ -12,6 +13,6 @@ public class SlotTorch extends SlotBase
 
     public boolean isItemValid(ItemStack itemstack)
     {
-        return itemstack.getItem().itemID == Block.torchWood.blockID;
+        return Block.getBlockFromItem(itemstack.getItem()) == Blocks.torch;
     }
 }

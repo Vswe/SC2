@@ -1,4 +1,5 @@
 package vswe.stevescarts.Slots;
+import net.minecraft.init.Blocks;
 import vswe.stevescarts.Helpers.TransferHandler.TRANSFER_TYPE;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.IInventory;
@@ -18,11 +19,11 @@ public class SlotBridge extends SlotBase  implements ISpecialItemTransferValidat
 
     public static boolean isBridgeMaterial(ItemStack itemstack)
     {
-        int index = itemstack.getItem().itemID;
-        return  index == Block.planks.blockID ||
-                index == Block.brick.blockID ||
-                index == Block.stone.blockID ||
-                (index == Block.stoneBrick.blockID && itemstack.getItemDamage() == 0);
+        Block b = Block.getBlockFromItem(itemstack.getItem());
+        return  b == Blocks.planks ||
+                b == Blocks.brick_block ||
+                b == Blocks.stone ||
+                (b == Blocks.stonebrick && itemstack.getItemDamage() == 0);
     }
     
     

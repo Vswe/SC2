@@ -1,5 +1,6 @@
 package vswe.stevescarts;
 import net.minecraft.client.renderer.entity.RenderSnowball;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import vswe.stevescarts.Carts.MinecartModular;
@@ -23,7 +24,7 @@ public class ClientProxy extends CommonProxy{
 		RenderingRegistry.registerEntityRenderingHandler(EntityEasterEgg.class, new RenderSnowball(ModItems.component, ComponentTypes.PAINTED_EASTER_EGG.getId()));
 		StevesCarts.instance.blockRenderer = new RendererUpgrade();
 		new RendererMinecartItem();
-		RenderingRegistry.registerEntityRenderingHandler(EntityCake.class, new RenderSnowball(Item.cake));
+		RenderingRegistry.registerEntityRenderingHandler(EntityCake.class, new RenderSnowball(Items.cake));
 		ModuleData.initModels();
         if (StevesCarts.instance.tradeHandler != null) {
             StevesCarts.instance.tradeHandler.registerSkin();

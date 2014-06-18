@@ -173,7 +173,7 @@ public class TileEntityLiquid extends TileEntityManager  implements IFluidHandle
 
 
 	@Override
-    public String getInvName()
+    public String getInventoryName()
     {
         return "container.fluidmanager";
     }

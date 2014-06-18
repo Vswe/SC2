@@ -1,6 +1,7 @@
 package vswe.stevescarts.Modules.Realtimers;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -46,7 +47,7 @@ public class ModuleCakeServer extends ModuleBase implements ISuppliesModule {
 			}
 			
 			ItemStack item = getStack(0);
-			if (item != null && item.getItem().equals(Item.cake) && getCakeBuffer() + SLICES_PER_CAKE <= MAX_TOTAL_SLICES) {
+			if (item != null && item.getItem().equals(Items.cake) && getCakeBuffer() + SLICES_PER_CAKE <= MAX_TOTAL_SLICES) {
 				setCakeBuffer(getCakeBuffer() + SLICES_PER_CAKE);
 				setStack(0, null);
 			}

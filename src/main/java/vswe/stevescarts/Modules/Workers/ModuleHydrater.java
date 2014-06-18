@@ -1,5 +1,6 @@
 package vswe.stevescarts.Modules.Workers;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.Vec3;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -63,10 +64,10 @@ public class ModuleHydrater extends ModuleWorker {
 
    private boolean hydrate(int x, int y, int z)
    {
-       int id = getCart().worldObj.getBlockId(x, y, z);
+       Block b = getCart().worldObj.getBlock(x, y, z);
        int m = getCart().worldObj.getBlockMetadata(x, y, z);
 
-        if (id == Block.tilledField.blockID && m != 7)
+        if (b == Blocks.farmland && m != 7)
         {
             int waterCost = 7 - m;
 			waterCost = getCart().drain(FluidRegistry.WATER, waterCost, false);

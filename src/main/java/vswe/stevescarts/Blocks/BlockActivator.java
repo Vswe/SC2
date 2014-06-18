@@ -14,7 +14,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 
 
-public class BlockActivator extends BlockContainer
+public class BlockActivator extends BlockContainerBase
 {
 
 

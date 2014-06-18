@@ -23,7 +23,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 
 
-public class BlockCartAssembler extends BlockContainer
+public class BlockCartAssembler extends BlockContainerBase
 {
 
 

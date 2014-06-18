@@ -72,8 +72,8 @@ public class ModuleCrafter extends ModuleRecipe {
 									if (item != null && item.isItemEqual(recipe) && ItemStack.areItemStackTagsEqual(item, recipe)) {
 										edited = true;
 										
-										if (item.getItem().hasContainerItem()) {
-											containers.add(item.getItem().getContainerItemStack(item));
+										if (item.getItem().hasContainerItem(item)) {
+											containers.add(item.getItem().getContainerItem(item));
 										}
 										
 										item.stackSize--;

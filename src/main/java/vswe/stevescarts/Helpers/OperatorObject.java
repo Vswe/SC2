@@ -94,7 +94,7 @@ public class OperatorObject {
 			int y = this.y + detector.yCoord;
 			int z = this.z + detector.zCoord;
 			
-			TileEntity tileentity = detector.worldObj.getBlockTileEntity(x, y, z);
+			TileEntity tileentity = detector.getWorldObj().getTileEntity(x, y, z);
 			if (tileentity != null && tileentity instanceof TileEntityDetector) {
 				return ((TileEntityDetector)tileentity).evaluate(cart, depth);
 			}else{
@@ -123,7 +123,7 @@ public class OperatorObject {
 			
 			
 			if (this.x == 0 && this.y == 0 && this.z == 0) {
-				return detector.worldObj.isBlockIndirectlyGettingPowered(x, y, z);
+				return detector.getWorldObj().isBlockIndirectlyGettingPowered(x, y, z);
 			}else{
 				int direction;
 				if (this.y > 0) {
@@ -140,7 +140,7 @@ public class OperatorObject {
 					direction = 3;
 				}
 				
-		        return detector.worldObj.getIndirectPowerLevelTo(x, y, z, direction) > 0;				
+		        return detector.getWorldObj().getIndirectPowerLevelTo(x, y, z, direction) > 0;
 			}
 		}
 	}	

@@ -307,7 +307,7 @@ public class TileEntityDetector extends TileEntityBase
 
     public boolean isUseableByPlayer(EntityPlayer entityplayer)
     {
-        if (worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this)
+        if (worldObj.getTileEntity(xCoord, yCoord, zCoord) != this)
         {
             return false;
         }

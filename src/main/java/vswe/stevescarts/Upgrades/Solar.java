@@ -20,8 +20,8 @@ public class Solar extends RechargerBase {
 	
 	@Override
 	protected boolean canGenerate(TileEntityUpgrade upgrade) {
-		return upgrade.worldObj.getBlockLightValue(upgrade.xCoord, upgrade.yCoord, upgrade.zCoord) == 15 && 
-				upgrade.worldObj.canBlockSeeTheSky(upgrade.xCoord, upgrade.yCoord+1, upgrade.zCoord);		
+		return upgrade.getWorldObj().getBlockLightValue(upgrade.xCoord, upgrade.yCoord, upgrade.zCoord) == 15 &&
+				upgrade.getWorldObj().canBlockSeeTheSky(upgrade.xCoord, upgrade.yCoord+1, upgrade.zCoord);
 	}
 
 	@Override

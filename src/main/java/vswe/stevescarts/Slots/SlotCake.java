@@ -1,4 +1,5 @@
 package vswe.stevescarts.Slots;
+import net.minecraft.init.Items;
 import vswe.stevescarts.Helpers.TransferHandler.TRANSFER_TYPE;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.IInventory;
@@ -14,7 +15,7 @@ public class SlotCake extends SlotBase
 
     public boolean isItemValid(ItemStack itemstack)
     {
-        return itemstack != null && itemstack.getItem() == Item.cake;
+        return itemstack != null && itemstack.getItem() == Items.cake;
     }
 
 

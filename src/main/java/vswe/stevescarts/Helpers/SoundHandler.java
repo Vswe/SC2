@@ -1,9 +1,9 @@
 package vswe.stevescarts.Helpers;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.sound.SoundLoadEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.ForgeSubscribe;
 import vswe.stevescarts.StevesCarts;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -17,7 +17,7 @@ public class SoundHandler {
 			}
 		}
 	
-	    @ForgeSubscribe
+	    @SubscribeEvent
 		public void onSoundsLoad(SoundLoadEvent event) {	    
             addSound(event,  "gearswitch");  
             addSound(event,  "win");  	          

@@ -22,7 +22,7 @@ import vswe.stevescarts.Upgrades.Disassemble;
 import vswe.stevescarts.Upgrades.Transposer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-public class BlockRailAdvDetector extends BlockRailBase
+public class BlockRailAdvDetector extends BlockSpecialRailBase
 {
 	
 	private IIcon normalIcon;

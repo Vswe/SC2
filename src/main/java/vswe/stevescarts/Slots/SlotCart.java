@@ -13,6 +13,6 @@ public class SlotCart extends Slot
 	@Override
     public boolean isItemValid(ItemStack itemstack)
     {
-        return itemstack != null && itemstack.getItem().itemID == ModItems.carts.itemID && itemstack.getTagCompound() != null && !itemstack.getTagCompound().hasKey("maxTime");
+        return itemstack != null && itemstack.getItem() == ModItems.carts && itemstack.getTagCompound() != null && !itemstack.getTagCompound().hasKey("maxTime");
     }
 }

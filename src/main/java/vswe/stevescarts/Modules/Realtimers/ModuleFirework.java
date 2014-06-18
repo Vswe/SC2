@@ -2,6 +2,7 @@ package vswe.stevescarts.Modules.Realtimers;
 import java.util.ArrayList;
 
 import net.minecraft.entity.item.EntityFireworkRocket;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
@@ -92,15 +93,15 @@ public class ModuleFirework extends ModuleBase {
 			
 			if (item != null) {
 			
-				if (item.getItem().itemID == Item.firework.itemID) {
+				if (item.getItem() == Items.fireworks) {
 					ItemStack firework = item.copy();
 					firework.stackSize = 1;
                     removeItemStack(item, 1, i);
 					
 					return firework;
-				}else if(item.getItem().itemID == Item.paper.itemID) {
+				}else if(item.getItem() == Items.paper) {
 					hasPaper = true;
-				}else if(item.getItem().itemID == Item.gunpowder.itemID) {
+				}else if(item.getItem() == Items.gunpowder) {
 					hasGunpowder = true;
 				}
 			}			
@@ -111,7 +112,7 @@ public class ModuleFirework extends ModuleBase {
 		if (hasPaper && hasGunpowder) {
 
 		
-			ItemStack firework = new ItemStack(Item.firework);
+			ItemStack firework = new ItemStack(Items.fireworks);
 			
 			int maxGunpowder = getCart().rand.nextInt(3) + 1;
 			int countGunpowder = 0;
@@ -120,10 +121,10 @@ public class ModuleFirework extends ModuleBase {
 				ItemStack item = getStack(i);
 				
 				if (item != null) {
-					if(item.getItem().itemID == Item.paper.itemID && !removedPaper) {
+					if(item.getItem() == Items.paper && !removedPaper) {
                         removeItemStack(item, 1, i);
 						removedPaper = true;
-					}else if(item.getItem().itemID == Item.gunpowder.itemID && countGunpowder < maxGunpowder) {
+					}else if(item.getItem() == Items.gunpowder && countGunpowder < maxGunpowder) {
 						while (item.stackSize > 0 && countGunpowder < maxGunpowder) {
 							countGunpowder++;
                             removeItemStack(item, 1, i);
@@ -139,8 +140,8 @@ public class ModuleFirework extends ModuleBase {
 			}
 			
 			NBTTagCompound itemstackNBT = new NBTTagCompound();
-			NBTTagCompound fireworksNBT = new NBTTagCompound("Fireworks");
-			NBTTagList explosionsNBT = new NBTTagList("Explosions");			
+			NBTTagCompound fireworksNBT = new NBTTagCompound();
+			NBTTagList explosionsNBT = new NBTTagList();
 			
 			for (int i = 0; i < chargeCount; i++) {
 				ItemStack charge = getCharge();
@@ -170,7 +171,7 @@ public class ModuleFirework extends ModuleBase {
 			
 			if (item != null) {
 			
-				if (item.getItem().itemID == Item.fireworkCharge.itemID) {
+				if (item.getItem() == Items.firework_charge) {
 					ItemStack charge = item.copy();
 					charge.stackSize = 1;
                     removeItemStack(item, 1, i);
@@ -180,9 +181,9 @@ public class ModuleFirework extends ModuleBase {
 			}			
 		}	
 	
-		ItemStack charge = new ItemStack(Item.fireworkCharge);
+		ItemStack charge = new ItemStack(Items.firework_charge);
 		NBTTagCompound itemNBT = new NBTTagCompound();
-		NBTTagCompound explosionNBT = new NBTTagCompound("Explosion");
+		NBTTagCompound explosionNBT = new NBTTagCompound();
 		byte type = 0;
 
 		
@@ -199,22 +200,22 @@ public class ModuleFirework extends ModuleBase {
 			ItemStack item = getStack(i);
 			
 			if (item != null) {
-				if(item.getItem().itemID == Item.gunpowder.itemID && !removedGunpowder) {
+				if(item.getItem() == Items.gunpowder && !removedGunpowder) {
                     removeItemStack(item, 1, i);
 					removedGunpowder = true;
-				}else if(item.getItem().itemID == Item.glowstone.itemID && canHasFlicker && !removedGlow) {
+				}else if(item.getItem() == Items.glowstone_dust && canHasFlicker && !removedGlow) {
                     removeItemStack(item, 1, i);
 					removedGlow = true;
 					explosionNBT.setBoolean("Flicker", true);
-				}else if(item.getItem().itemID == Item.diamond.itemID && canHasTrail && !removedDiamond) {
+				}else if(item.getItem() == Items.diamond && canHasTrail && !removedDiamond) {
                     removeItemStack(item, 1, i);
 					removedDiamond = true;
 					explosionNBT.setBoolean("Trail", true);
 				}else if(canHasModifier && !removedModifier && (
-					(item.getItem().itemID == Item.fireballCharge.itemID && modifierType == 1) ||
-					(item.getItem().itemID == Item.goldNugget.itemID && modifierType == 2) ||
-					(item.getItem().itemID == Item.skull.itemID && modifierType == 3) ||
-					(item.getItem().itemID == Item.feather.itemID && modifierType == 4)
+					(item.getItem() == Items.fire_charge && modifierType == 1) ||
+					(item.getItem() == Items.gold_nugget && modifierType == 2) ||
+					(item.getItem() == Items.skull && modifierType == 3) ||
+					(item.getItem() == Items.feather && modifierType == 4)
 					)
 				
 				
@@ -259,7 +260,7 @@ public class ModuleFirework extends ModuleBase {
 			ItemStack item = getStack(i);
 			
 			if (item != null) {		
-				if(item.getItem().itemID == Item.dyePowder.itemID) {
+				if(item.getItem() == Items.dye) {
 					maxColors[item.getItemDamage()] += item.stackSize;	
 				}
 			}
@@ -297,14 +298,14 @@ public class ModuleFirework extends ModuleBase {
 
 		for (int i = 0; i < colors.length; ++i)
 		{
-			colors[i] = Integer.valueOf(ItemDye.dyeColors[usedColors.get(i)]);
+			colors[i] = ItemDye.field_150922_c[usedColors.get(i)];
 		}
 
 		for (int i = 0; i < getInventorySize(); i++) {
 			ItemStack item = getStack(i);
 			
 			if (item != null) {
-				if(item.getItem().itemID == Item.dyePowder.itemID) {
+				if(item.getItem() == Items.dye) {
 					if (currentColors[item.getItemDamage()] > 0) {
 						int count = Math.min(currentColors[item.getItemDamage()], item.stackSize);
 						currentColors[item.getItemDamage()] -= count;

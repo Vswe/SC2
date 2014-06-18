@@ -3,6 +3,8 @@ import java.util.HashMap;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRail;
+import net.minecraft.block.BlockRailBase;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Vec3;
 import vswe.stevescarts.Carts.MinecartModular;
@@ -72,14 +74,14 @@ public class ModuleRemover extends ModuleWorker {
 		int x = (int)coords.xCoord;
 		int y = (int)coords.yCoord;
 		int z = (int)coords.zCoord;
-		return BlockRail.isRailBlockAt(getCart().worldObj, x, y + 1, z) || BlockRail.isRailBlockAt(getCart().worldObj, x, y, z) || BlockRail.isRailBlockAt(getCart().worldObj, x, y - 1, z);
+		return BlockRailBase.func_150049_b_(getCart().worldObj, x, y + 1, z) || BlockRailBase.func_150049_b_(getCart().worldObj, x, y, z) || BlockRailBase.func_150049_b_(getCart().worldObj, x, y - 1, z);
 	}
 
     private boolean removeRail(int x, int y, int z, boolean flag)
     {
         if (flag)
         {
-            if (BlockRail.isRailBlockAt(getCart().worldObj, x, y, z) && getCart().worldObj.getBlockId(x, y, z) == 66)
+            if (BlockRailBase.func_150049_b_(getCart().worldObj, x, y, z) && getCart().worldObj.getBlock(x, y, z) == Blocks.rail)
             {
                 if (!doPreWork())
                 {
@@ -100,7 +102,7 @@ public class ModuleRemover extends ModuleWorker {
                     }
                     else
                     {*/
-                        iStack = new ItemStack(Block.rail, 1, 0);
+                        iStack = new ItemStack(Blocks.rail, 1, 0);
                     //}
 								
                     getCart().addItemToChest(iStack);
@@ -125,19 +127,19 @@ public class ModuleRemover extends ModuleWorker {
         }
         else
         {
-            if (BlockRail.isRailBlockAt(getCart().worldObj, x, y - 1, z))
+            if (BlockRailBase.func_150049_b_(getCart().worldObj, x, y - 1, z))
             {
                 removeX = x;
                 removeY = y - 1;
                 removeZ = z;
             }
-            else if (BlockRail.isRailBlockAt(getCart().worldObj, x, y, z))
+            else if (BlockRailBase.func_150049_b_(getCart().worldObj, x, y, z))
             {
                 removeX = x;
                 removeY = y;
                 removeZ = z;
             }
-            else if (BlockRail.isRailBlockAt(getCart().worldObj, x, y + 1, z))
+            else if (BlockRailBase.func_150049_b_(getCart().worldObj, x, y + 1, z))
             {
                 removeX = x;
                 removeY = y + 1;

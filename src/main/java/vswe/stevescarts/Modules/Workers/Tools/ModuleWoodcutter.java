@@ -3,6 +3,8 @@ import java.util.ArrayList;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -204,10 +206,6 @@ private boolean plant(int size, int x, int y, int z, int cx, int cz)
 	   }
 	   
 
-        int id = getCart().worldObj.getBlockId(x, y, z);
-        int idOfBlockAbove = getCart().worldObj.getBlockId(x, y + 1, z);
-        Block b = Block.blocksList[idOfBlockAbove];
-        
         /*if ((id == Block.grass.blockID || id == Block.dirt.blockID || id == Block.tilledField.blockID) && idOfBlockAbove == 0)
         {
             int hasSapling = -1;
@@ -299,8 +297,7 @@ private boolean plant(int size, int x, int y, int z, int cx, int cz)
    private boolean farm(int x, int y, int z)
     {
 	   	if (!isBroken()) {
-	        int id = getCart().worldObj.getBlockId(x, y + 1, z);
-	        Block b = Block.blocksList[id];
+	        Block b = getCart().worldObj.getBlock(x, y + 1, z);
 	        int m = getCart().worldObj.getBlockMetadata(x, y + 1, z);
 	
 	        if (b != null && isWoodHandler(b, x, y + 1, z))
@@ -324,8 +321,7 @@ private boolean plant(int size, int x, int y, int z, int cx, int cz)
 		BlockCoord here = new BlockCoord(i,j,k);
 		checked.add(here);
 
-		int id = getCart().worldObj.getBlockId(i, j, k);
-		Block b = Block.blocksList[id];
+		Block b = getCart().worldObj.getBlock(i, j, k);
 		int m = getCart().worldObj.getBlockMetadata(i, j, k);
 
 		if (b == null) {
@@ -335,7 +331,7 @@ private boolean plant(int size, int x, int y, int z, int cx, int cz)
 
 		if (checked.size() < 125 && here.getHorizontalDistToCartSquared(getCart()) < 175) {
 			for (int type = 0; type < 2; type++) {
-				boolean hitWood = false;;
+				boolean hitWood = false;
 				if (isLeavesHandler(b, i, j, k)) {
 					type = 1;
 				}else if(type == 1) {
@@ -345,7 +341,7 @@ private boolean plant(int size, int x, int y, int z, int cx, int cz)
 				for (int x = -1; x <= 1; x++) {
 					for (int y = 1; y >= 0; y--) {
 						for (int z = -1; z <= 1; z++) {
-							Block currentBlock = Block.blocksList[getCart().worldObj.getBlockId(i+x, j+y, k+z)];
+							Block currentBlock = getCart().worldObj.getBlock(i + x, j + y, k + z);
 							if (currentBlock != null && (hitWood ? isWoodHandler(currentBlock, i+x, j+y, k+z) : isLeavesHandler(currentBlock, i+x, j+y, k+z))) {
 								if (!checked.contains(new BlockCoord(i+x,j+y,k+z))) {
 									return removeAt(i+x,j+y,k+z,checked);
@@ -368,7 +364,7 @@ private boolean plant(int size, int x, int y, int z, int cx, int cz)
 			}
 		}else{
 			int fortune = enchanter != null ? enchanter.getFortuneLevel() : 0;
-			stuff = Block.blocksList[id].getBlockDropped(getCart().worldObj, i, j, k, m, fortune);
+			stuff = b.getDrops(getCart().worldObj, i, j, k, m, fortune);
 
 	        int applerand = 200;
 	
@@ -380,8 +376,8 @@ private boolean plant(int size, int x, int y, int z, int cx, int cz)
 	            }
 	        }		
 			
-			if ((m & 3) == 0 && id == Block.leaves.blockID && getCart().rand.nextInt(applerand) == 0) {
-				stuff.add(new ItemStack(Item.appleRed, 1, 0));
+			if ((m & 3) == 0 && b == Blocks.leaves && getCart().rand.nextInt(applerand) == 0) {
+				stuff.add(new ItemStack(Items.apple, 1, 0));
 			}
 		}
 
@@ -521,16 +517,18 @@ private boolean plant(int size, int x, int y, int z, int cx, int cz)
 		
 		return false;
 	}
-	
+
+    @Override
 	public boolean isLeaves(Block b, int x, int y, int z) {
-		return b.blockID == Block.leaves.blockID;
+		return b == Blocks.leaves;
 	}
-	
+    @Override
 	public boolean isWood(Block b, int x, int y, int z) {
-		return b.blockID == Block.wood.blockID;
+		return b == Blocks.log || b == Blocks.log2;
 	}
+    @Override
 	public boolean isSapling(ItemStack sapling) {
-		return sapling != null && sapling.getItem().itemID == Block.sapling.blockID;	
+		return sapling != null && Block.getBlockFromItem(sapling.getItem()) == Blocks.sapling;
 	}
 	
 
@@ -544,9 +542,8 @@ private boolean plant(int size, int x, int y, int z, int cx, int cz)
 	
 	
 	private void destroyLeaveBlockOnTrack(int x, int y, int z) {
-        int id = getCart().worldObj.getBlockId(x, y, z);                
-        Block b = Block.blocksList[id];
-        
+        Block b = getCart().worldObj.getBlock(x, y, z);
+
         if (b != null && isLeavesHandler(b, x, y, z)) {
         	getCart().worldObj.setBlockToAir(x, y, z);
         }		

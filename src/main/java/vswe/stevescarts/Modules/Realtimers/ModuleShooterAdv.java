@@ -1,11 +1,11 @@
 package vswe.stevescarts.Modules.Realtimers;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.ai.EntityAINearestAttackableTargetSorter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
@@ -175,7 +175,7 @@ public class ModuleShooterAdv extends ModuleShooter {
 		return 16;
 	}
 
-	private EntityAINearestAttackableTargetSorter sorter = new EntityAINearestAttackableTargetSorter(getCart());
+	private EntityNearestTarget sorter = new EntityNearestTarget(getCart());
 	private Entity getTarget() {
 		List entities = getCart().worldObj.getEntitiesWithinAABB(Entity.class, getCart().boundingBox.expand((double)getTargetDistance(), 4.0D, (double)getTargetDistance()));
 		Collections.sort(entities, sorter);
@@ -201,14 +201,13 @@ public class ModuleShooterAdv extends ModuleShooter {
 		return null;
 	}
 
-	private boolean canSee(Entity target)
-    {
+	private boolean canSee(Entity target) {
 		if (target == null) {
 			return false;
 		}
 
 
-        return getCart().worldObj.clip(Vec3.createVectorHelper(getCart().posX, getCart().posY + (double)getCart().getEyeHeight(), getCart().posZ), Vec3.createVectorHelper(target.posX, target.posY + (double)target.getEyeHeight(), target.posZ)) == null;
+        return getCart().worldObj.rayTraceBlocks(Vec3.createVectorHelper(getCart().posX, getCart().posY + (double)getCart().getEyeHeight(), getCart().posZ), Vec3.createVectorHelper(target.posX, target.posY + (double)target.getEyeHeight(), target.posZ)) == null;
     }
 
 	@Override
@@ -305,6 +304,23 @@ public class ModuleShooterAdv extends ModuleShooter {
 	protected void Load(NBTTagCompound tagCompound, int id) {
         setOptions(tagCompound.getByte(generateNBTName("Options",id)));	
         loadTick(tagCompound, id);		
-	}		
-	
+	}
+
+    private static class EntityNearestTarget implements Comparator {
+        private Entity entity;
+
+        public EntityNearestTarget(Entity entity) {
+            this.entity = entity;
+        }
+
+        public int compareDistanceSq(Entity entity1, Entity entity2) {
+            double distance1 = this.entity.getDistanceSqToEntity(entity1);
+            double distance2 = this.entity.getDistanceSqToEntity(entity2);
+            return distance1 < distance2 ? -1 : distance1 > distance2 ? 1 : 0;
+        }
+
+        public int compare(Object obj1, Object obj2) {
+            return this.compareDistanceSq((Entity)obj1, (Entity)obj2);
+        }
+    }
 }

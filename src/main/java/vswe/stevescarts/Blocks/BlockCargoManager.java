@@ -16,7 +16,7 @@ import cpw.mods.fml.common.network.FMLNetworkHandler;
 import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-public class BlockCargoManager extends BlockContainer
+public class BlockCargoManager extends BlockContainerBase
 {
 
 

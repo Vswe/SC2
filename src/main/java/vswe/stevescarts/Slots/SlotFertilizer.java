@@ -1,4 +1,5 @@
 package vswe.stevescarts.Slots;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -12,6 +13,6 @@ public class SlotFertilizer extends SlotBase
 
     public boolean isItemValid(ItemStack itemstack)
     {
-        return itemstack.getItem().itemID == Item.bone.itemID || (itemstack.getItem().itemID == Item.dyePowder.itemID && itemstack.getItemDamage() == 15);
+        return itemstack.getItem() == Items.bone || (itemstack.getItem() == Items.dye && itemstack.getItemDamage() == 15);
     }
 }

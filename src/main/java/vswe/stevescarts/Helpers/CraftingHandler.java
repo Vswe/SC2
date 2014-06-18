@@ -1,26 +1,23 @@
 package vswe.stevescarts.Helpers;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import vswe.stevescarts.Items.ModItems;
-import cpw.mods.fml.common.ICraftingHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class CraftingHandler implements ICraftingHandler
+public class CraftingHandler
 {
-	public CraftingHandler() {
-		GameRegistry.registerCraftingHandler(this);
-	}
 
-    /**
-     * The object array contains these three arguments
-     *
-     * @param player
-     * @param item
-     * @param craftMatrix
-     */
-    public void onCrafting(EntityPlayer player, ItemStack item, IInventory craftMatrix) {
+    @SubscribeEvent
+    public void onCrafting(PlayerEvent.ItemCraftedEvent event) {
+        onCrafting(event.player, event.crafting, event.craftMatrix);
+    }
+
+
+    private void onCrafting(EntityPlayer player, ItemStack item, IInventory craftMatrix) {
 		if (item.getItem() == ModItems.component || item.getItem() == ModItems.modules) {
 			for (int i = 0; i < craftMatrix.getSizeInventory();i++) {
 				ItemStack sItem = craftMatrix.getStackInSlot(i);
@@ -31,15 +28,6 @@ public class CraftingHandler implements ICraftingHandler
 		}
 	}
 
-    /**
-     * The object array contains these two arguments
-     * @param player
-     * @param item
-     */
-    public void onSmelting(EntityPlayer player, ItemStack item) {
-	
-	}
-	
 
 	
 }

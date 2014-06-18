@@ -40,7 +40,7 @@ public class ModulePig extends ModuleHull {
 	private ItemStack getHelmet() {
 		Entity rider = getCart().riddenByEntity;
 		if (rider != null && rider instanceof EntityLivingBase) {
-			return ((EntityLivingBase)rider).getCurrentItemOrArmor(4);
+			return ((EntityLivingBase)rider).getEquipmentInSlot(4);
 		}
 		
 		return null;

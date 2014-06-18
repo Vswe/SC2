@@ -3,6 +3,7 @@ package vswe.stevescarts.Modules.Workers.Tools;
 import java.util.ArrayList;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import vswe.stevescarts.Helpers.Localization;
@@ -56,7 +57,7 @@ public class ModuleWoodcutterDiamond extends ModuleWoodcutter {
 	}
 	@Override
 	public int getRepairItemUnits(ItemStack item) {
-		if (item != null && item.getItem() == Item.diamond) {
+		if (item != null && item.getItem() == Items.diamond) {
 			return 160000;
 		}
 		return 0;

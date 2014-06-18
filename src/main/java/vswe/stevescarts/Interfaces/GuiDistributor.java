@@ -34,12 +34,12 @@ public class GuiDistributor extends GuiBase
     {
 		GL11.glDisable(GL11.GL_LIGHTING);
 	
-        fontRenderer.drawString(Localization.GUI.DISTRIBUTOR.TITLE.translate(), 8, 6, 0x404040);
+        getFontRenderer().drawString(Localization.GUI.DISTRIBUTOR.TITLE.translate(), 8, 6, 0x404040);
 		
 		TileEntityManager[] invs = distributor.getInventories();
 		 
 		if (invs.length == 0) {
-			fontRenderer.drawString(Localization.GUI.DISTRIBUTOR.NOT_CONNECTED.translate(), 30, 40, 0xFF4040);
+			getFontRenderer().drawString(Localization.GUI.DISTRIBUTOR.NOT_CONNECTED.translate(), 30, 40, 0xFF4040);
 		}
 			
 

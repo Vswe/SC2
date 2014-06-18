@@ -1,4 +1,5 @@
 package vswe.stevescarts.Slots;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -17,6 +18,6 @@ public class SlotWater extends SlotBase
 
     public boolean isItemValid(ItemStack itemstack)
     {
-        return itemstack.getItem().itemID == Item.bucketWater.itemID;
+        return itemstack.getItem() == Items.water_bucket;
     }
 }

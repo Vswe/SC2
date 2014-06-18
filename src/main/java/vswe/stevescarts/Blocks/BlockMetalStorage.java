@@ -9,7 +9,7 @@ import net.minecraft.util.IIcon;
 import vswe.stevescarts.Items.ModItems;
 import vswe.stevescarts.StevesCarts;
 
-public class BlockMetalStorage extends Block {
+public class BlockMetalStorage extends Block implements IBlockBase {
 
     public BlockMetalStorage()
     {
@@ -36,8 +36,18 @@ public class BlockMetalStorage extends Block {
     {
     	//do nothing here
     }
-    
-	
 
+
+    private String unlocalizedName;
+
+    @Override
+    public String getUnlocalizedName() {
+        return unlocalizedName;
+    }
+
+    @Override
+    public void setUnlocalizedName(String name) {
+        this.unlocalizedName = name;
+    }
 }
 
