@@ -32,10 +32,6 @@ public final class ModItems {
     private static final String COMPONENTS_NAME = "ModuleComponents";
     private static final String MODULES_NAME = "CartModule";
 
-    private static final int CART_DEFAULT_ID = 29743;
-    private static final int COMPONENTS_DEFAULT_ID = 29742;
-    private static final int MODULES_DEFAULT_ID = 29741;
-
     private static HashMap<Byte,Boolean> validModules = new HashMap<Byte,Boolean>();
 
     public static void preBlockInit(Configuration config) {

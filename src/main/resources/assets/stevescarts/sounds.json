@@ -1,0 +1,16 @@
+{ 
+    "gearswitch": {"category": "master","sounds": [{"name": "gearswitch","stream": false}]}, 
+    "win": {"category": "master","sounds": [{"name": "win","stream": false}]}, 
+    "boop": {"category": "master","sounds": [{"name": "boop1","stream": false}, {"name": "boop2","stream": false}, {"name": "boop3","stream": false}]}, 
+    "gameover": {"category": "master","sounds": [{"name": "gameover","stream": false}]}, 
+    "1lines": {"category": "master","sounds": [{"name": "1lines","stream": false}]}, 
+    "2lines": {"category": "master","sounds": [{"name": "2lines","stream": false}]}, 
+    "3lines": {"category": "master","sounds": [{"name": "3lines","stream": false}]}, 
+    "4lines": {"category": "master","sounds": [{"name": "4lines","stream": false}]}, 
+    "highscore": {"category": "master","sounds": [{"name": "highscore","stream": false}]}, 
+    "hit": {"category": "master","sounds": [{"name": "hit","stream": false}]}, 
+    "click": {"category": "master","sounds": [{"name": "click","stream": false}]}, 
+    "blobclick": {"category": "master","sounds": [{"name": "blobclick","stream": false}]}, 
+    "flagclick": {"category": "master","sounds": [{"name": "flagclick","stream": false}]}, 
+    "goodjob": {"category": "master","sounds": [{"name": "goodjob","stream": false}]} 	
+}

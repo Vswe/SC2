@@ -25,7 +25,7 @@ public class BlockCartAssembler extends BlockContainerBase
 {
 
 
-    public BlockCartAssembler(int i)
+    public BlockCartAssembler()
     {
         super(Material.rock);
         setCreativeTab(StevesCarts.tabsSC2Blocks);		

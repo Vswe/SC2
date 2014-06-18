@@ -81,7 +81,8 @@ public class ItemCartModule extends Item
     /**
      * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
      */
-    public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List)
+    @Override
+    public void getSubItems(Item item, CreativeTabs par2CreativeTabs, List par3List)
     {
 		for (ModuleData module : ModuleData.getList().values()) {
 			if (module.getIsValid()) {
@@ -91,6 +92,7 @@ public class ItemCartModule extends Item
     }
 	
     @SideOnly(Side.CLIENT)
+    @Override
 
     /**
      * allows items to add custom lines of information to the mouseover description

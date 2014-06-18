@@ -20,12 +20,10 @@ public class TrackEnderHandler extends Track {
 			game.getEnderman().setDirection(DIRECTION.RIGHT);
 			game.getEnderman().setX(cart.getX() + 5);
 			game.getEnderman().setY(cart.getY());
-			Minecraft.getMinecraft().sndManager.playSoundFX("mob.endermen.portal", 1, 1);		 
 		}else if (game.getEnderman().isAlive()){
 			game.getEnderman().setAlive(false);
-			Minecraft.getMinecraft().sndManager.playSoundFX("mob.endermen.portal", 1, 1);		 
 		}
-		
+        ArcadeGame.playDefaultSound("mob.endermen.portal", 1, 1);
 	}		
 	
 	@Override

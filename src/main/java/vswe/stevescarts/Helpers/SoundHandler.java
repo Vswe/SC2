@@ -2,6 +2,11 @@ package vswe.stevescarts.Helpers;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.ISound;
+import net.minecraft.client.audio.PositionedSound;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.server.gui.IUpdatePlayerListBox;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.sound.SoundLoadEvent;
 import net.minecraftforge.common.MinecraftForge;
 import vswe.stevescarts.StevesCarts;
@@ -10,47 +15,36 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class SoundHandler {
-		
-		public SoundHandler() {
-			if (StevesCarts.instance.useArcadeSounds) {
-				MinecraftForge.EVENT_BUS.register(this);
-			}
-		}
-	
-	    @SubscribeEvent
-		public void onSoundsLoad(SoundLoadEvent event) {	    
-            addSound(event,  "gearswitch");  
-            addSound(event,  "win");  	          
-            if (!StevesCarts.instance.useArcadeMobSounds) {
-            	addSound(event,  "boop1");  
-            	addSound(event,  "boop2");  
-            	addSound(event,  "boop3");  
-            }
-            addSound(event,  "gameover");  	 
-            addSound(event,  "1lines");  	 
-            addSound(event,  "2lines");  	 
-            addSound(event,  "3lines");  	 
-            addSound(event,  "4lines");  	 
-            addSound(event,  "highscore");  	 
-            addSound(event,  "hit");  	 
-            addSound(event,  "click");  	 
-            addSound(event,  "blobclick");  	 
-            addSound(event,  "flagclick");  	 
-            addSound(event,  "goodjob"); 
-	        
 
-	    }
-	    
-	    private void addSound(SoundLoadEvent event, String name) {
-	    	 event.manager.soundPoolSounds.addSound("stevescarts:" + name + ".ogg");		    
-	    }
-	    
-	    public static void playSound(String sound, float volume, float pitch) {
-	    	 Minecraft.getMinecraft().sndManager.playSoundFX("stevescarts:" + sound, volume, pitch);		    
-	    }	    
-	    
-	    public static void playDefaultSound(String sound, float volume, float pitch) {
-	    	 Minecraft.getMinecraft().sndManager.playSoundFX(sound, volume, pitch);		    
-	    }		    
-	}
+    public static void playDefaultSound(String name, float volume, float pitch) {
+        ISound soundObj = new PlayerSound(Minecraft.getMinecraft().thePlayer, name, volume, pitch);
+        Minecraft.getMinecraft().getSoundHandler().playSound(soundObj);
+    }
+
+
+    public static void playSound(String name, float volume, float pitch) {
+        playDefaultSound("stevescarts:" + name, volume, pitch);
+    }
+
+    private static class PlayerSound extends PositionedSound implements IUpdatePlayerListBox {
+
+        private EntityPlayer player;
+        protected PlayerSound(EntityPlayer player, String name, float volume, float pitch) {
+            super(new ResourceLocation(name));
+
+            this.player = player;
+            this.volume = volume;
+            this.field_147663_c = pitch;
+        }
+
+        @Override
+        public void update() {
+            xPosF = (float)player.posX;
+            yPosF = (float)player.posY;
+            zPosF = (float)player.posZ;
+        }
+
+    }
+}
+
 	

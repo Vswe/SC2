@@ -18,7 +18,7 @@ public class BlockCargoManager extends BlockContainerBase
 {
 
 
-    public BlockCargoManager(int i)
+    public BlockCargoManager()
     {
         super(Material.rock);
 		setCreativeTab(StevesCarts.tabsSC2Blocks);	

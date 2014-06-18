@@ -88,8 +88,10 @@ public class ItemCartComponent extends Item
     public String getUnlocalizedName() {
 	
 		return "item." + StevesCarts.localStart + "unknowncomponent";
-	}	
-	
+	}
+
+    @SideOnly(Side.CLIENT)
+    @Override
     public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
 	
 		if (par1ItemStack == null || par1ItemStack.getItemDamage() < 0 || par1ItemStack.getItemDamage() >= size() || getName(par1ItemStack.getItemDamage()) == null) {
@@ -102,6 +104,7 @@ public class ItemCartComponent extends Item
 	}		
 	
     @SideOnly(Side.CLIENT)
+    @Override
     /**
      * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
      */
