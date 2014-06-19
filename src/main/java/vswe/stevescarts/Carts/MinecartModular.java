@@ -4,10 +4,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.ReflectionHelper;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRailBase;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.ISound;
+import net.minecraft.client.audio.MovingSound;
+import net.minecraft.client.audio.MovingSoundMinecart;
+import net.minecraft.client.audio.MovingSoundMinecartRiding;
+import net.minecraft.client.audio.PositionedSound;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityMinecart;
@@ -22,6 +28,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager;
@@ -138,8 +145,9 @@ public class MinecartModular extends EntityMinecart
 	private ArrayList<ModuleTank> tankModules;
 
 	private ModuleCreativeSupplies creativeSupplies;
-	
-	/**
+
+
+    /**
 	 * All Modules that belong to this cart
 	 * @return All Modules that belong to this cart
 	 */
@@ -259,10 +267,6 @@ public class MinecartModular extends EntityMinecart
 		}
 	}
 
-
-    public String getEntityIdDifference() {
-        return "This: " + getEntityId() + " Super: " + super.getEntityId();
-    }
 
     /**
 	 * Load a placeholder's modules, this is a bit special since it can be done on existing carts.
@@ -400,10 +404,9 @@ public class MinecartModular extends EntityMinecart
 			
 		}		
 	}
-	
 
 
-	/**
+    /**
 	 * Initiate the modules on the cart. 
 	 * This will allocate all required IDs, place them on the interface
 	 * and initiate every module.
@@ -1451,7 +1454,9 @@ public class MinecartModular extends EntityMinecart
 
 		
 		onCartUpdate();
-		
+        if (worldObj.isRemote) {
+            updateSounds();
+        }
 	}	
 
 	/**
@@ -2320,4 +2325,44 @@ public class MinecartModular extends EntityMinecart
 		return true;
 	}
 
+    @SideOnly(Side.CLIENT)
+    private MovingSound sound;
+    @SideOnly(Side.CLIENT)
+    private MovingSound soundRiding;
+    @SideOnly(Side.CLIENT)
+    private int keepSilent = -1;
+    @SideOnly(Side.CLIENT)
+    public void setSound(MovingSound sound, boolean riding) {
+        if (riding) {
+            this.soundRiding = sound;
+        }else{
+            this.sound = sound;
+        }
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void silent() {
+        keepSilent = 5;
+    }
+    @SideOnly(Side.CLIENT)
+    private void updateSounds() {
+        if (keepSilent > 0) {
+            keepSilent--;
+            stopSound(sound);
+            stopSound(soundRiding);
+            sound = null;
+            soundRiding = null;
+        }else if(keepSilent == 0) {
+            keepSilent = -1;
+            Minecraft.getMinecraft().getSoundHandler().playSound(new MovingSoundMinecart(this));
+            Minecraft.getMinecraft().getSoundHandler().playSound(new MovingSoundMinecartRiding(Minecraft.getMinecraft().thePlayer, this));
+        }
+
+    }
+    @SideOnly(Side.CLIENT)
+    private void stopSound(MovingSound sound) {
+        if (sound != null) {
+            ReflectionHelper.setPrivateValue(MovingSound.class, sound, true, 0);
+        }
+    }
 }

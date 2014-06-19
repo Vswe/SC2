@@ -1,15 +1,10 @@
 package vswe.stevescarts.Helpers;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.PositionedSound;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.event.sound.SoundLoadEvent;
-import net.minecraftforge.common.MinecraftForge;
-import vswe.stevescarts.StevesCarts;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -26,7 +21,7 @@ public class SoundHandler {
         playDefaultSound("stevescarts:" + name, volume, pitch);
     }
 
-    private static class PlayerSound extends PositionedSound implements IUpdatePlayerListBox {
+    private static class PlayerSound extends PositionedSound {
 
         private EntityPlayer player;
         protected PlayerSound(EntityPlayer player, String name, float volume, float pitch) {
@@ -35,10 +30,11 @@ public class SoundHandler {
             this.player = player;
             this.volume = volume;
             this.field_147663_c = pitch;
+            update();
         }
 
-        @Override
-        public void update() {
+
+        private void update() {
             xPosF = (float)player.posX;
             yPosF = (float)player.posY;
             zPosF = (float)player.posZ;

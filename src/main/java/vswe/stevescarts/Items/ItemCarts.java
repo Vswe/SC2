@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagByteArray;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import vswe.stevescarts.Helpers.EntityCake;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Carts.MinecartModular;
 import vswe.stevescarts.Helpers.CartVersion;
@@ -48,7 +49,7 @@ public class ItemCarts extends ItemMinecart
         this.itemIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "modular_cart" + "_icon");
     }	
 	
-	/*@Override
+	@Override
     public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
     {
 		CartVersion.updateItemStack(par1ItemStack);
@@ -61,12 +62,7 @@ public class ItemCarts extends ItemMinecart
                     if (info != null) {
                         if (!info.hasKey("maxTime")) {
                             MinecartModular cart = new MinecartModular(par3World, (double)((float)par4 + 0.5F), (double)((float)par5 + 0.5F), (double)((float)par6 + 0.5F), info, par1ItemStack.getDisplayName());
-                            System.out.println("-------------");
-                            System.out.println("Cart ID: " + cart.getEntityId());
                             par3World.spawnEntityInWorld(cart);
-                            System.out.println("Cart ID: " + cart.getEntityId());
-                            System.out.println("-------------");
-                            System.out.println();
                         }
                     }
                 } catch(Exception e) {
@@ -80,35 +76,6 @@ public class ItemCarts extends ItemMinecart
 			return true;
 		}	
         return false;
-    }*/
-
-    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
-    {
-        if (BlockRailBase.func_150051_a(par3World.getBlock(par4, par5, par6)))
-        {
-            if (!par3World.isRemote)
-            {
-
-
-                MinecartModular entityminecart = new MinecartModular(par3World, (double)((float)par4 + 0.5F), (double)((float)par5 + 0.5F), (double)((float)par6 + 0.5F), par1ItemStack.getTagCompound(), par1ItemStack.getDisplayName());
-                System.out.println("-------------");
-                System.out.println("nextEntityId (this is a static field): " + ReflectionHelper.getPrivateValue(Entity.class, entityminecart, 0));
-                System.out.println("entityId: " + ReflectionHelper.getPrivateValue(Entity.class, entityminecart, 1));
-                System.out.println(entityminecart.getEntityIdDifference());
-                System.out.println("getEntityId() before spawn: " + entityminecart.getEntityId());
-                par3World.spawnEntityInWorld(entityminecart);
-                System.out.println("getEntityId() after spawn: " + entityminecart.getEntityId());
-                System.out.println("-------------");
-                System.out.println();
-            }
-
-            --par1ItemStack.stackSize;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
     }
 
 
