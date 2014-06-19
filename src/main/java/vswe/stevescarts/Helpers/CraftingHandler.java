@@ -1,5 +1,6 @@
 package vswe.stevescarts.Helpers;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,6 +11,10 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class CraftingHandler
 {
+
+    public CraftingHandler() {
+        FMLCommonHandler.instance().bus().register(this);
+    }
 
     @SubscribeEvent
     public void onCrafting(PlayerEvent.ItemCraftedEvent event) {

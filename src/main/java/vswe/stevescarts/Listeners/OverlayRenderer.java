@@ -1,10 +1,9 @@
 package vswe.stevescarts.Listeners;
-import java.util.EnumSet;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.common.MinecraftForge;
 import vswe.stevescarts.Carts.MinecartModular;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -13,7 +12,7 @@ public class OverlayRenderer
 {
 
     public OverlayRenderer() {
-        MinecraftForge.EVENT_BUS.register(this);
+        FMLCommonHandler.instance().bus().register(this);
     }
 
     @SubscribeEvent

@@ -1,9 +1,9 @@
 package vswe.stevescarts;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import vswe.stevescarts.Carts.MinecartModular;
+import vswe.stevescarts.Fancy.FancyPancyLoader;
 import vswe.stevescarts.Helpers.*;
 import vswe.stevescarts.Items.ModItems;
 import vswe.stevescarts.Renders.RendererMinecart;
@@ -15,7 +15,7 @@ import vswe.stevescarts.ModuleData.ModuleData;
 public class ClientProxy extends CommonProxy{
 
 	public ClientProxy() {
-		new CapeHandler();
+		new FancyPancyLoader();
 	}
 
 	@Override

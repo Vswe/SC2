@@ -897,12 +897,7 @@ public class MinecartModular extends EntityMinecart
 		return -1;
 	}
 
-	//TODO this method doesn't exist anymore, remove or find another name for it
-	/*@Override
-    public Block getDefaultDisplayTile()
-    {
-        return null;
-    }*/
+
 
 	@Override
 	public int getMinecartType() {
@@ -1234,7 +1229,7 @@ public class MinecartModular extends EntityMinecart
      * Lets the modules know when the inventory of the cart has been changed
      */
 	@Override
-	public void markDirty() { //TODO make sure this method name is correct
+	public void markDirty() {
 		if (modules != null) {
 			for (ModuleBase module : modules) {
 				module.onInventoryChanged();
