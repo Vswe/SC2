@@ -1,12 +1,14 @@
 package vswe.stevescarts.Fancy;
 
 import cpw.mods.fml.relauncher.ReflectionHelper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.ThreadDownloadImageData;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringUtils;
 
-
+@SideOnly(Side.CLIENT)
 public class CapeHandler extends FancyPancyHandler {
     public CapeHandler() {
         super("Cape");

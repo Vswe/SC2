@@ -204,7 +204,11 @@ public class FancyPancy {
                 if (image.startsWith("^")) {
                     image = image.substring(1);
                 }else if (image.startsWith("*")) {
-                    image = fancyPancyHandler.getDefaultUrl() + image.substring(1) + ".png";
+                    String defaultPath = fancyPancyHandler.getDefaultUrl();
+                    if (defaultPath == null) {
+                        defaultPath = "https://dl.dropbox.com/u/46486053/";
+                    }
+                    image = defaultPath + image.substring(1) + ".png";
                 }else{
                     image = "https://dl.dropbox.com/u/46486053/" + image + ".png";
                 }
@@ -355,7 +359,11 @@ public class FancyPancy {
     }
 
     private boolean doSpecialCheck(AbstractClientPlayer player) {
-        BufferedImage image = ReflectionHelper.getPrivateValue(ThreadDownloadImageData.class, fancyPancyHandler.getCurrentTexture(player), 2);
+        ThreadDownloadImageData data = fancyPancyHandler.getCurrentTexture(player);
+        if (data == null) {
+            return false;
+        }
+        BufferedImage image = ReflectionHelper.getPrivateValue(ThreadDownloadImageData.class, data, 2);
         if (image != null) {
             for (SpecialLoadSetting loadPixelSetting : loadPixelSettings) {
                 int color = image.getRGB(loadPixelSetting.x, loadPixelSetting.y);

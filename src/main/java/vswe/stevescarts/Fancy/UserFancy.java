@@ -41,13 +41,18 @@ public class UserFancy {
     private void updateMojangFancyState(AbstractClientPlayer player) {
         if (!doneMojangFancyCheck) {
             ThreadDownloadImageData fancyData = fancyPancyHandler.getCurrentTexture(player);
-            Thread thread = ReflectionHelper.getPrivateValue(ThreadDownloadImageData.class, fancyData, 5);
-            if (thread != null && !thread.isAlive()) {
-                //1 finished looking for fancy
-                //2 managed to download a fancy
-                //3 has Mojang fancy path
+            if (fancyData != null) {
+                Thread thread = ReflectionHelper.getPrivateValue(ThreadDownloadImageData.class, fancyData, 5);
+                if (thread != null && !thread.isAlive()) {
+                    //1 finished looking for fancy
+                    //2 managed to download a fancy
+                    //3 has Mojang fancy path
 
-                hasMojangFancy = fancyData.isTextureUploaded();
+                    hasMojangFancy = fancyData.isTextureUploaded();
+                    doneMojangFancyCheck = true;
+                    updateActive(player);
+                }
+            }else{
                 doneMojangFancyCheck = true;
                 updateActive(player);
             }

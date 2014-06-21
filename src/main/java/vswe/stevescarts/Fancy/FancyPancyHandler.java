@@ -11,6 +11,8 @@ import cpw.mods.fml.common.gameevent.TickEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.multiplayer.ServerData;
+import net.minecraft.client.renderer.IImageBuffer;
+import net.minecraft.client.renderer.ImageBufferDownload;
 import net.minecraft.client.renderer.ThreadDownloadImageData;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.texture.ITextureObject;
@@ -151,14 +153,18 @@ public abstract class FancyPancyHandler {
             }
 		}		
 	}
-	
+
     public ThreadDownloadImageData tryToDownloadFancy(ResourceLocation fancy, String fancyUrl) {
+        return tryToDownloadFancy(fancy, fancyUrl, null, null);
+    }
+
+    public ThreadDownloadImageData tryToDownloadFancy(ResourceLocation fancy, String fancyUrl, ResourceLocation fallbackResource, IImageBuffer optionalBuffer) {
         TextureManager texturemanager = Minecraft.getMinecraft().getTextureManager();
         ITextureObject object = texturemanager.getTexture(fancy);
 
         //no need to download the fancy if we have it already
         if (object == null) {
-            object = new ThreadDownloadImageData(fancyUrl, null, null);
+            object = new ThreadDownloadImageData(fancyUrl, fallbackResource, optionalBuffer);
             texturemanager.loadTexture(fancy, object);
         }
 

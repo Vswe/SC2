@@ -1,12 +1,15 @@
 package vswe.stevescarts.Fancy;
 
 import cpw.mods.fml.relauncher.ReflectionHelper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.AbstractClientPlayer;
+import net.minecraft.client.renderer.ImageBufferDownload;
 import net.minecraft.client.renderer.ThreadDownloadImageData;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringUtils;
 
-
+@SideOnly(Side.CLIENT)
 public class SkinHandler extends FancyPancyHandler {
     public SkinHandler() {
         super("Skin");
@@ -35,7 +38,7 @@ public class SkinHandler extends FancyPancyHandler {
     @Override
     public void setCurrentResource(AbstractClientPlayer player, ResourceLocation resource, String url) {
         ReflectionHelper.setPrivateValue(AbstractClientPlayer.class, player, resource, 3);
-        ReflectionHelper.setPrivateValue(AbstractClientPlayer.class, player, tryToDownloadFancy(resource, url), 1);
+        ReflectionHelper.setPrivateValue(AbstractClientPlayer.class, player, tryToDownloadFancy(resource, url, AbstractClientPlayer.locationStevePng, new ImageBufferDownload()), 1);
     }
 
     @Override
