@@ -131,13 +131,14 @@ public class OverheadHandler extends FancyPancyHandler {
         OverheadData data = getData(player);
         if (data.image != null && data.image.isTextureUploaded()) {
             RenderManager renderManager = ReflectionHelper.getPrivateValue(Render.class, renderer, 1);
+            //check if it's in an inventory
+            if (isObserver && player.openContainer != null && renderManager.playerViewY == 180 /* set to 180 when rendering, it might be 180 at other points but won't be the end of the world*/) {
+                return;
+            }
             renderManager.renderEngine.bindTexture(data.resourceLocation);
 
-            FontRenderer fontrenderer = renderer.getFontRendererFromRenderManager();
-
-
             GL11.glPushMatrix();
-            GL11.glTranslatef((float)x, (float)y + player.height + (isObserver ? 0.8F : 1.3F), (float)z);
+            GL11.glTranslatef((float)x, (float)y + player.height + (isObserver ? 0.8F : 1.1F), (float)z);
             GL11.glNormal3f(0, 1, 0);
             GL11.glRotatef(-renderManager.playerViewY, 0, 1, 0);
             GL11.glRotatef(renderManager.playerViewX, 1, 0, 0);
