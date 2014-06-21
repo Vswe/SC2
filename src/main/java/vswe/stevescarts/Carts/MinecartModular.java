@@ -15,6 +15,7 @@ import net.minecraft.client.audio.MovingSoundMinecart;
 import net.minecraft.client.audio.MovingSoundMinecartRiding;
 import net.minecraft.client.audio.PositionedSound;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayer;
@@ -1265,7 +1266,15 @@ public class MinecartModular extends EntityMinecart
 	@Override
     protected void func_145821_a(int par1, int par2, int par3, double par4, double par6, Block par8, int par9)
     {
-        super.func_145821_a(par1, par2, par3, par4, par6, par8, par9);
+        if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityLivingBase) {
+            float move = ((EntityLivingBase)this.riddenByEntity).moveForward;
+            ((EntityLivingBase)this.riddenByEntity).moveForward = 0;
+            super.func_145821_a(par1, par2, par3, par4, par6, par8, par9);
+            ((EntityLivingBase)this.riddenByEntity).moveForward = move;
+        }else{
+            super.func_145821_a(par1, par2, par3, par4, par6, par8, par9);
+        }
+        
         double d2 = this.pushX * this.pushX + this.pushZ * this.pushZ;
 
         if (d2 > 1.0E-4D && this.motionX * this.motionX + this.motionZ * this.motionZ > 0.001D)
