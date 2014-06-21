@@ -1274,7 +1274,7 @@ public class MinecartModular extends EntityMinecart
         }else{
             super.func_145821_a(par1, par2, par3, par4, par6, par8, par9);
         }
-        
+
         double d2 = this.pushX * this.pushX + this.pushZ * this.pushZ;
 
         if (d2 > 1.0E-4D && this.motionX * this.motionX + this.motionZ * this.motionZ > 0.001D)
@@ -2334,7 +2334,7 @@ public class MinecartModular extends EntityMinecart
     @SideOnly(Side.CLIENT)
     private MovingSound soundRiding;
     @SideOnly(Side.CLIENT)
-    private int keepSilent = -1;
+    private int keepSilent;
     @SideOnly(Side.CLIENT)
     public void setSound(MovingSound sound, boolean riding) {
         if (riding) {
@@ -2346,18 +2346,18 @@ public class MinecartModular extends EntityMinecart
 
     @SideOnly(Side.CLIENT)
     public void silent() {
-        keepSilent = 5;
+        keepSilent = 6;
     }
     @SideOnly(Side.CLIENT)
     private void updateSounds() {
-        if (keepSilent > 0) {
+        if (keepSilent > 1) {
             keepSilent--;
             stopSound(sound);
             stopSound(soundRiding);
             sound = null;
             soundRiding = null;
-        }else if(keepSilent == 0) {
-            keepSilent = -1;
+        }else if(keepSilent == 1) {
+            keepSilent = 0;
             Minecraft.getMinecraft().getSoundHandler().playSound(new MovingSoundMinecart(this));
             Minecraft.getMinecraft().getSoundHandler().playSound(new MovingSoundMinecartRiding(Minecraft.getMinecraft().thePlayer, this));
         }
