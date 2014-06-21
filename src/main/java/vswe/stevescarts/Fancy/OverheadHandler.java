@@ -53,7 +53,7 @@ public class OverheadHandler extends FancyPancyHandler {
 
         ModelBase base = new ModelBase() {};
         model = new ModelRenderer(base, 0, 0);
-        model.addBox(-16, 0, 0, 32, 26, 0);
+        model.addBox(-16, 0, 0, 32, 23, 0);
     }
 
     private OverheadData getData(AbstractClientPlayer player) {
@@ -117,9 +117,9 @@ public class OverheadHandler extends FancyPancyHandler {
 
             if (distanceSq < distanceLimit * distanceLimit) {
                 if (player.isPlayerSleeping()) {
-                    renderOverHead(renderer, player, "Hello", event.x, event.y - 1.5D, event.z, isObserver);
+                    renderOverHead(renderer, player, event.x, event.y - 1.5D, event.z, isObserver);
                 }else{
-                    renderOverHead(renderer, player, "Hello", event.x, event.y, event.z, isObserver);
+                    renderOverHead(renderer, player, event.x, event.y, event.z, isObserver);
                 }
             }
 
@@ -127,7 +127,7 @@ public class OverheadHandler extends FancyPancyHandler {
         }
     }
 
-    private void renderOverHead(RenderPlayer renderer, AbstractClientPlayer player, String text, double x, double y, double z, boolean isObserver) {
+    private void renderOverHead(RenderPlayer renderer, AbstractClientPlayer player, double x, double y, double z, boolean isObserver) {
         OverheadData data = getData(player);
         if (data.image != null && data.image.isTextureUploaded()) {
             RenderManager renderManager = ReflectionHelper.getPrivateValue(Render.class, renderer, 1);
