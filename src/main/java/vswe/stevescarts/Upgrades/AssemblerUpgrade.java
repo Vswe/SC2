@@ -98,29 +98,29 @@ public class AssemblerUpgrade {
 			.addEffect(new WorkEfficiency(0.10F))
 			.addEffect(new FuelCost(0.3F))
 			.addRecipe(new Object[][] {
-					{ComponentTypes.SIMPLE_PCB, books[0], ComponentTypes.SIMPLE_PCB},
-					{ ComponentTypes.REINFORCED_METAL.getItemStack() , ComponentTypes.ADVANCED_PCB.getItemStack(),  ComponentTypes.REINFORCED_METAL.getItemStack()},
-					{ ComponentTypes.REINFORCED_METAL.getItemStack() , ComponentTypes.BLANK_UPGRADE.getItemStack(),  ComponentTypes.REINFORCED_METAL.getItemStack()}
+					{ComponentTypes.SIMPLE_PCB.getItemStack(), books[0], ComponentTypes.SIMPLE_PCB.getItemStack()},
+					{ComponentTypes.REINFORCED_METAL.getItemStack(), ComponentTypes.ADVANCED_PCB.getItemStack(), ComponentTypes.REINFORCED_METAL.getItemStack()},
+					{ComponentTypes.REINFORCED_METAL.getItemStack(), ComponentTypes.BLANK_UPGRADE.getItemStack(), ComponentTypes.REINFORCED_METAL.getItemStack()}
 				})
 			.addRecipe(new Object[][] {
-					{Items.redstone,books[1],Items.redstone},
-					{ ComponentTypes.REINFORCED_METAL.getItemStack() , ComponentTypes.ADVANCED_PCB.getItemStack(),  ComponentTypes.REINFORCED_METAL.getItemStack()},
-					{ ComponentTypes.REINFORCED_METAL.getItemStack() ,ComponentTypes.BLANK_UPGRADE.getItemStack(),  ComponentTypes.REINFORCED_METAL.getItemStack()}
+					{Items.redstone, books[1], Items.redstone},
+					{ComponentTypes.REINFORCED_METAL.getItemStack(), ComponentTypes.ADVANCED_PCB.getItemStack(), ComponentTypes.REINFORCED_METAL.getItemStack()},
+					{ComponentTypes.REINFORCED_METAL.getItemStack(), ComponentTypes.BLANK_UPGRADE.getItemStack(), ComponentTypes.REINFORCED_METAL.getItemStack()}
 				})
 			.addRecipe(new Object[][] {
-					{Items.redstone,books[2],Items.redstone},
-					{Items.iron_ingot, ComponentTypes.ADVANCED_PCB.getItemStack(),Items.iron_ingot},
-					{ ComponentTypes.REINFORCED_METAL.getItemStack() ,ComponentTypes.BLANK_UPGRADE.getItemStack(),  ComponentTypes.REINFORCED_METAL.getItemStack()}
+					{Items.redstone, books[2], Items.redstone},
+					{Items.iron_ingot, ComponentTypes.ADVANCED_PCB.getItemStack(), Items.iron_ingot},
+					{ComponentTypes.REINFORCED_METAL.getItemStack(), ComponentTypes.BLANK_UPGRADE.getItemStack(), ComponentTypes.REINFORCED_METAL.getItemStack()}
 				})
 			.addRecipe(new Object[][] {
-					{null,books[3], null},
-					{Items.iron_ingot, ComponentTypes.SIMPLE_PCB,Items.iron_ingot},
-					{ ComponentTypes.REINFORCED_METAL.getItemStack() ,ComponentTypes.BLANK_UPGRADE.getItemStack(), ComponentTypes.REINFORCED_METAL.getItemStack()}
+					{null, books[3], null},
+					{Items.iron_ingot, ComponentTypes.SIMPLE_PCB.getItemStack(), Items.iron_ingot},
+					{ComponentTypes.REINFORCED_METAL.getItemStack(), ComponentTypes.BLANK_UPGRADE.getItemStack(), ComponentTypes.REINFORCED_METAL.getItemStack()}
 				})
 			.addRecipe(new Object[][] {
-					{null,books[4], null},
-					{null,Items.redstone,null},
-					{Items.iron_ingot,ComponentTypes.BLANK_UPGRADE.getItemStack(),Items.iron_ingot}
+					{null, books[4], null},
+					{null, Items.redstone, null},
+					{Items.iron_ingot, ComponentTypes.BLANK_UPGRADE.getItemStack(), Items.iron_ingot}
 				});
 
 				
