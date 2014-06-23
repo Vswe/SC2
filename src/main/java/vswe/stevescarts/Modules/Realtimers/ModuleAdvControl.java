@@ -41,7 +41,7 @@ public class ModuleAdvControl extends ModuleBase implements ILeverModule {
 
 	@Override
 	public int guiWidth() {
-		return 80;
+		return 90;
 	}
 
 	@Override

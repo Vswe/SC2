@@ -26,7 +26,7 @@ public class ModuleChunkLoader extends ModuleAddon implements IActivatorModule{
 
 	@Override
 	public int guiWidth() {
-		return 75;
+		return 80;
 	}
 
 	@Override

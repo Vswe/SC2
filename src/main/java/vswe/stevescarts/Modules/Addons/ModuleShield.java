@@ -81,7 +81,7 @@ public class ModuleShield extends ModuleAddon implements IActivatorModule {
 
 	@Override
 	public int guiWidth() {
-		return 55;
+		return 75;
 	}
 
 	@Override

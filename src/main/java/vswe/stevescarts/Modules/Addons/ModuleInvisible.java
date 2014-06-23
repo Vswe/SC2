@@ -26,7 +26,7 @@ public class ModuleInvisible extends ModuleAddon implements IActivatorModule {
 
 	@Override
 	public int guiWidth() {
-		return 55;
+		return 90;
 	}
 
 	@Override

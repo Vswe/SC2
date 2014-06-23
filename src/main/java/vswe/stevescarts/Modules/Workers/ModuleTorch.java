@@ -16,10 +16,17 @@ public class ModuleTorch extends ModuleWorker implements ISuppliesModule  {
 	public ModuleTorch(MinecartModular cart) {
 		super(cart);
 	}
+
 	@Override
 	public boolean hasGui(){
         return true;
     }
+
+	@Override
+	public int guiWidth() {
+		return 80;
+	}
+
 	@Override
 	protected SlotBase getSlot(int slotId, int x, int y) {
 		return new SlotTorch(getCart(),slotId,8+x*18,23+y*18);

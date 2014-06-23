@@ -22,6 +22,6 @@ public class ModuleInternalStorage extends ModuleChest {
 	}
 	@Override
 	public int guiWidth() {
-		return super.guiWidth() + 10;
+		return super.guiWidth() + 30;
 	}	
 }

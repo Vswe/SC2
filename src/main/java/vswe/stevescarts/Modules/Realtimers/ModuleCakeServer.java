@@ -148,7 +148,7 @@ public class ModuleCakeServer extends ModuleBase implements ISuppliesModule {
 	
 	@Override
 	public int guiWidth() {
-		return 70;
+		return 75;
 	}
 	
 	@Override

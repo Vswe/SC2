@@ -3,6 +3,7 @@ package vswe.stevescarts;
 import cpw.mods.fml.common.network.FMLEventChannel;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
+import org.apache.logging.log4j.Logger;
 import vswe.stevescarts.Blocks.*;
 import vswe.stevescarts.Carts.MinecartModular;
 import vswe.stevescarts.Helpers.CraftingHandler;
@@ -66,9 +67,13 @@ public class StevesCarts {
 	public boolean useArcadeMobSounds;
 
     public static FMLEventChannel packetHandler;
+
+	public static Logger logger;
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		logger = event.getModLog();
+
         packetHandler = NetworkRegistry.INSTANCE.newEventDrivenChannel(CHANNEL);
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 		config.load();

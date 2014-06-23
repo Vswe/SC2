@@ -13,6 +13,7 @@ import vswe.stevescarts.Slots.SlotBase;
 import vswe.stevescarts.Slots.SlotCartCrafterResult;
 import vswe.stevescarts.Slots.SlotChest;
 import vswe.stevescarts.Slots.SlotFurnaceInput;
+import vswe.stevescarts.StevesCarts;
 
 public class ModuleSmelter extends ModuleRecipe {
 
@@ -147,7 +148,11 @@ public class ModuleSmelter extends ModuleRecipe {
 	@Override
 	public void onInventoryChanged() {
 		if (getCart().worldObj.isRemote) {
-			setStack(1, FurnaceRecipes.smelting().getSmeltingResult(getStack(0)));
+			if (getStack(0) != null) {
+				setStack(1, FurnaceRecipes.smelting().getSmeltingResult(getStack(0)));
+			} else {
+				setStack(1, null);
+			}
 		}
 	}
 	
@@ -159,7 +164,7 @@ public class ModuleSmelter extends ModuleRecipe {
 	
 	@Override
 	public int guiWidth() {
-		return canUseAdvancedFeatures() ? 80 : 45;
+		return canUseAdvancedFeatures() ? 100 : 45;
 	}
 
 	@Override

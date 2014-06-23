@@ -16,7 +16,7 @@ public class ModuleMonster extends ModuleMobdetector {
 	}
 
 	public String getName() {
-		return Localization.MODULES.ADDONS.DETECTOR_PLAYERS.translate();
+		return Localization.MODULES.ADDONS.DETECTOR_MONSTERS.translate();
 	}
 	public boolean isValidTarget(Entity target) {
 		return

@@ -291,7 +291,7 @@ public class ModuleNote extends ModuleBase {
 	
 	@Override
 	public int guiWidth() {
-		return 300;
+		return 310;
 	}
 	@Override
 	public int guiHeight() {

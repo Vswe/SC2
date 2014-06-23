@@ -23,7 +23,7 @@ public class ModuleHeightControl extends ModuleAddon {
 
 	@Override
 	public int guiWidth() {
-		return Math.max(80, oreMapX + 5 +  HeightControlOre.ores.size() * 4);
+		return Math.max(100, oreMapX + 5 +  HeightControlOre.ores.size() * 4);
 	}
 
 	@Override

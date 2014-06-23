@@ -23,6 +23,11 @@ public class ModuleBridge extends ModuleWorker implements ISuppliesModule {
 	}
 
 	@Override
+	public int guiWidth() {
+		return 80;
+	}
+
+	@Override
 	protected SlotBase getSlot(int slotId, int x, int y) {
 		return new SlotBridge(getCart(),slotId,8+x*18,23+y*18);
 	}
