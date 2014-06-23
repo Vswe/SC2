@@ -499,7 +499,7 @@ info.SC2:impossibleCombinationError=The combination of module types of the modul
 info.SC2:complexityOverloadError=[%1] is too complex for this hull.
 info.SC2:missingParentError=[%1] requires [%2] to work!
 info.SC2:presentNemesisError=[%1] won't work with [%2]
-info.SC2:presentDuplicateError[%1] is not allowed to be added twice.
+info.SC2:presentDuplicateError=[%1] is not allowed to be added twice.
 info.SC2:sideClashError=[%1] and [%2] will clash at the [%3]
 # need beta 3 for these ones to show up (remove this note)
 info.SC2:toolUnbreakable=Unbreakable
