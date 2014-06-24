@@ -41,8 +41,11 @@ public class ModuleSmelter extends ModuleRecipe {
 			
 			if (energyBuffer == 10) {
 				ItemStack recipe = getStack(0);
-	
-				ItemStack result = FurnaceRecipes.smelting().getSmeltingResult(recipe);
+
+				ItemStack result = null;
+				if (recipe != null) {
+					result = FurnaceRecipes.smelting().getSmeltingResult(recipe);
+				}
 				if (result != null) {
 					result = result.copy();
 				}
