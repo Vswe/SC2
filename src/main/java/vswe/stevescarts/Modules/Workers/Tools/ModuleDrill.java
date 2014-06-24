@@ -77,7 +77,7 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
 		if (isBroken()) {
 			return false;
 		}
-	
+
         //get the next block so the cart knows where to mine
         Vec3 next = getNextblock();
         //save the coordinates for easy access
@@ -412,6 +412,10 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
             {
                 return null;
                 //don't remove bedrock
+            }
+            else if (b == Blocks.air)
+            {
+	            return null;
             }
             else if (b == Blocks.bedrock)
             {
