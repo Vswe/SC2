@@ -16,7 +16,7 @@ import vswe.stevesvehicles.client.interfaces.GuiBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.network.PacketHandler;
-import vswe.stevesvehicles.old.StevesCarts;
+import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.old.Containers.ContainerCartAssembler;
 import vswe.stevesvehicles.old.Helpers.DropDownMenuItem;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
@@ -362,7 +362,7 @@ public class GuiCartAssembler extends GuiBase
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 		GL11.glEnable(GL11.GL_COLOR_MATERIAL);
 		GL11.glPushMatrix();
-		GL11.glTranslatef((float)(left + 512 / 2), (float)(top + (StevesCarts.instance.renderSteve ? 50 : 100)), 100.0F);
+		GL11.glTranslatef((float)(left + 512 / 2), (float)(top + (StevesVehicles.instance.renderSteve ? 50 : 100)), 100.0F);
 		float scale = 50.0F;
 		GL11.glScalef(-scale, scale, scale);
 		GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
@@ -378,7 +378,7 @@ public class GuiCartAssembler extends GuiBase
 					
 		RenderManager.instance.playerViewY = 180.0F;
 		
-		if (StevesCarts.renderSteve) {
+		if (StevesVehicles.renderSteve) {
 			EntityPlayer player = (EntityPlayer)net.minecraft.client.Minecraft.getMinecraft().thePlayer;
 			ItemStack stack = player.getCurrentEquippedItem();
 			player.setCurrentItemOrArmor(0, assembler.getCartFromModules(true));	

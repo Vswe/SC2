@@ -3,7 +3,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import vswe.stevesvehicles.old.StevesCarts;
+import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.old.TileEntities.TileEntityDistributor;
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import cpw.mods.fml.relauncher.Side;
@@ -17,7 +17,7 @@ public class BlockDistributor extends BlockContainerBase
     public BlockDistributor()
     {
         super(Material.rock);
-        setCreativeTab(StevesCarts.tabsSC2Blocks);			
+        setCreativeTab(StevesVehicles.tabsSC2Blocks);
     }
 
 
@@ -51,12 +51,12 @@ public class BlockDistributor extends BlockContainerBase
 	@Override
     public void registerBlockIcons(IIconRegister register)
     {
-		purpleIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "cargo_distributor" + "_purple");	
-        orangeIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "cargo_distributor" + "_orange");
-		redIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "cargo_distributor" + "_red");
-		blueIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "cargo_distributor" + "_blue");
-		greenIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "cargo_distributor" + "_green");
-		yellowIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "cargo_distributor" + "_yellow");
+		purpleIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "cargo_distributor" + "_purple");
+        orangeIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "cargo_distributor" + "_orange");
+		redIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "cargo_distributor" + "_red");
+		blueIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "cargo_distributor" + "_blue");
+		greenIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "cargo_distributor" + "_green");
+		yellowIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "cargo_distributor" + "_yellow");
     }	
 
 	@Override
@@ -73,7 +73,7 @@ public class BlockDistributor extends BlockContainerBase
         }
 
 
-		FMLNetworkHandler.openGui(entityplayer, StevesCarts.instance, 5, world, i, j, k);
+		FMLNetworkHandler.openGui(entityplayer, StevesVehicles.instance, 5, world, i, j, k);
 
         return true;
     }

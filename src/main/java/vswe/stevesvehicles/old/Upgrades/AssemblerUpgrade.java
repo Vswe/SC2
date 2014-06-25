@@ -17,7 +17,7 @@ import vswe.stevesvehicles.old.Blocks.ModBlocks;
 import vswe.stevesvehicles.old.Helpers.ComponentTypes;
 import vswe.stevesvehicles.old.Helpers.RecipeHelper;
 import vswe.stevesvehicles.old.Items.ModItems;
-import vswe.stevesvehicles.old.StevesCarts;
+import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.old.TileEntities.TileEntityUpgrade;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -264,7 +264,7 @@ public class AssemblerUpgrade {
 	
 		for (AssemblerUpgrade upgrade : getUpgradesList()) {
 			if (!used.contains(upgrade.sideTexture)) {
-				sides.put((byte)upgrade.sideTexture, register.registerIcon(StevesCarts.instance.textureHeader + ":upgrade_side_" + upgrade.sideTexture + "_icon"));
+				sides.put((byte)upgrade.sideTexture, register.registerIcon(StevesVehicles.instance.textureHeader + ":upgrade_side_" + upgrade.sideTexture + "_icon"));
 				used.add(upgrade.sideTexture);
 			}	
 		}
@@ -293,7 +293,7 @@ public class AssemblerUpgrade {
 	}
 	
 	public String getName() {
-		return StatCollector.translateToLocal("item." + StevesCarts.localStart + getRawName() + ".name");
+		return StatCollector.translateToLocal("item." + StevesVehicles.localStart + getRawName() + ".name");
 	}
 	
 	public AssemblerUpgrade addEffect(BaseEffect effect) {
@@ -403,7 +403,7 @@ public class AssemblerUpgrade {
 	
 	@SideOnly(Side.CLIENT)
 	public void createIcon(IIconRegister register) {
-		icon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + getRawName().replace("_upgrade", "") + "_icon");
+		icon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + getRawName().replace("_upgrade", "") + "_icon");
 	}
 	
 	@SideOnly(Side.CLIENT)

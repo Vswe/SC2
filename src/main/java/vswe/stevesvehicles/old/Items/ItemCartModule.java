@@ -8,7 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
-import vswe.stevesvehicles.old.StevesCarts;
+import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.old.ModuleData.ModuleData;
 import vswe.stevesvehicles.modules.ModuleBase;
 import cpw.mods.fml.relauncher.Side;
@@ -22,7 +22,7 @@ public class ItemCartModule extends Item
         super();
         setHasSubtypes(true);
         setMaxDamage(0);
-        setCreativeTab(StevesCarts.tabsSC2);	
+        setCreativeTab(StevesVehicles.tabsSC2);
     }
 
 
@@ -58,13 +58,13 @@ public class ItemCartModule extends Item
 		for (ModuleData module : ModuleData.getList().values()) {
 			module.createIcon(register);
 		}
-		unknownIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "unknown_icon");	
+		unknownIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "unknown_icon");
     }	
 
 	@Override
     public String getUnlocalizedName() {
 	
-		return "item." + StevesCarts.localStart + "unknownmodule";
+		return "item." + StevesVehicles.localStart + "unknownmodule";
 	}
 	
 	@Override
@@ -72,7 +72,7 @@ public class ItemCartModule extends Item
     {
 		ModuleData data = getModuleData(item, true);
 		if (data != null) {
-			 return "item." + StevesCarts.localStart  + data.getRawName();
+			 return "item." + StevesVehicles.localStart  + data.getRawName();
 		}
 		return getUnlocalizedName();
     }

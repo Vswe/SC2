@@ -18,7 +18,7 @@ import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.old.Models.Cart.*;
 import vswe.stevesvehicles.old.Modules.Addons.*;
 import vswe.stevesvehicles.old.Modules.Workers.*;
-import vswe.stevesvehicles.old.StevesCarts;
+import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 import vswe.stevesvehicles.modules.ModuleBase;
 import vswe.stevesvehicles.old.Modules.Addons.Mobdetectors.ModuleAnimal;
@@ -406,7 +406,7 @@ public class ModuleData {
 			.addRecipe(new Object[][] {	{Blocks.pumpkin},
 										{ComponentTypes.EMPTY_DISK.getItemStack()}
 									});	
-		if (!StevesCarts.isHalloween) {
+		if (!StevesVehicles.isHalloween) {
 			bats.lock();
 		}	
 
@@ -481,7 +481,7 @@ public class ModuleData {
 									   {ComponentTypes.WOODEN_WHEELS.getItemStack(), null, ComponentTypes.WOODEN_WHEELS.getItemStack()}
 									  });
 									  
-		if (!StevesCarts.isHalloween) {
+		if (!StevesVehicles.isHalloween) {
 			pumpkinhull.lock();
 		}
 		
@@ -502,8 +502,8 @@ public class ModuleData {
 										   {ComponentTypes.GALGADORIAN_WHEELS.getItemStack(), null, ComponentTypes.GALGADORIAN_WHEELS.getItemStack()}
 										  });		
 		
-		StevesCarts.tabsSC2.setIcon(reinfhull.getItemStack());
-		StevesCarts.tabsSC2Components.setIcon(ComponentTypes.REINFORCED_WHEELS.getItemStack());
+		StevesVehicles.tabsSC2.setIcon(reinfhull.getItemStack());
+		StevesVehicles.tabsSC2Components.setIcon(ComponentTypes.REINFORCED_WHEELS.getItemStack());
 
 		
 		
@@ -566,7 +566,7 @@ public class ModuleData {
 				{ComponentTypes.RED_WRAPPING_PAPER.getItemStack(),ComponentTypes.CHEST_LOCK.getItemStack(),ComponentTypes.GREEN_WRAPPING_PAPER.getItemStack()},
 				{ComponentTypes.RED_WRAPPING_PAPER.getItemStack(),ComponentTypes.STUFFED_SOCK.getItemStack(),ComponentTypes.GREEN_WRAPPING_PAPER.getItemStack()}
 			});			
-		if (!StevesCarts.isChristmas) {
+		if (!StevesVehicles.isChristmas) {
 			gift.lock();
 		}	
 		
@@ -589,7 +589,7 @@ public class ModuleData {
 										{ComponentTypes.EMPTY_DISK.getItemStack()}
 									});	
 			
-		if (!StevesCarts.isChristmas) {
+		if (!StevesVehicles.isChristmas) {
 			snowballshooter.lock();
 		}	
 
@@ -606,7 +606,7 @@ public class ModuleData {
 										{Items.water_bucket, ComponentTypes.SIMPLE_PCB.getItemStack(), Items.water_bucket},
 										{Blocks.snow, Items.water_bucket, Blocks.snow}
 									});	
-		if (!StevesCarts.isChristmas) {
+		if (!StevesVehicles.isChristmas) {
 			snowgenerator.lock();
 		}	
 		addNemesis(snowgenerator, melter);
@@ -733,7 +733,7 @@ public class ModuleData {
 									   {ComponentTypes.GLISTERING_EASTER_EGG.getItemStack(), ComponentTypes.BASKET.getItemStack() , ComponentTypes.CHOCOLATE_EASTER_EGG.getItemStack()}
 									  });
 		
-		if (!StevesCarts.isEaster) {
+		if (!StevesVehicles.isEaster) {
 			eggBasket.lock();
 		}			
 		
@@ -865,7 +865,7 @@ public class ModuleData {
 				   {ComponentTypes.DYNAMITE.getItemStack(), ComponentTypes.SIMPLE_PCB.getItemStack(), ComponentTypes.DYNAMITE.getItemStack()}
 				  });		
 		
-		if (!StevesCarts.isHalloween) {
+		if (!StevesVehicles.isHalloween) {
 			trickOrTreat.lock();
 		}	
 		
@@ -1331,7 +1331,7 @@ public class ModuleData {
 	}
 
     public String getUnlocalizedName() {
-        return "item." + StevesCarts.localStart + getRawName() + ".name";
+        return "item." + StevesVehicles.localStart + getRawName() + ".name";
     }
 
 	public byte getID() {
@@ -1821,7 +1821,7 @@ public class ModuleData {
 		
 	@SideOnly(Side.CLIENT)
 	public void createIcon(IIconRegister register) {
-		icon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + getRawName() + "_icon");	
+		icon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + getRawName() + "_icon");
 	}
 	
 	@SideOnly(Side.CLIENT)

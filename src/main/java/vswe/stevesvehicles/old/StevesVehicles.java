@@ -35,7 +35,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid = "StevesCarts", name = "Steve's Carts 2", version = GeneratedInfo.version)
-public class StevesCarts {
+public class StevesVehicles {
 	public static boolean hasGreenScreen = false;
 	public static boolean isChristmas = false;
 	public static boolean isHalloween = false;
@@ -54,7 +54,7 @@ public class StevesCarts {
 	@SidedProxy(clientSide = "vswe.stevescarts.old.ClientProxy", serverSide = "vswe.stevescarts.old.CommonProxy")
 	public static CommonProxy proxy;
 	@Instance("StevesCarts")
-	public static StevesCarts instance;
+	public static StevesVehicles instance;
 
 	public static CreativeTabSC2 tabsSC2 = new CreativeTabSC2("SC2Modules");
 	public static CreativeTabSC2 tabsSC2Components = new CreativeTabSC2("SC2Items");

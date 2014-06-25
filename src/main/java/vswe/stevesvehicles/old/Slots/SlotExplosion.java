@@ -2,7 +2,7 @@ package vswe.stevesvehicles.old.Slots;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import vswe.stevesvehicles.old.Helpers.ComponentTypes;
-import vswe.stevesvehicles.old.StevesCarts;
+import vswe.stevesvehicles.old.StevesVehicles;
 
 public class SlotExplosion extends SlotBase implements ISlotExplosions
 {
@@ -13,7 +13,7 @@ public class SlotExplosion extends SlotBase implements ISlotExplosions
 
     public int getSlotStackLimit()
     {
-        return StevesCarts.instance.maxDynamites;
+        return StevesVehicles.instance.maxDynamites;
     }
 
     public boolean isItemValid(ItemStack itemstack)

@@ -3,7 +3,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
-import vswe.stevesvehicles.old.StevesCarts;
+import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -16,7 +16,7 @@ public class BlockRailJunction extends BlockSpecialRailBase
     public BlockRailJunction()
     {
         super(false);
-        setCreativeTab(StevesCarts.tabsSC2Blocks);		
+        setCreativeTab(StevesVehicles.tabsSC2Blocks);
     }
 
 	@Override
@@ -30,8 +30,8 @@ public class BlockRailJunction extends BlockSpecialRailBase
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister register)
     {
-        normalIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "junction_rail");
-		cornerIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "junction_rail" + "_corner");
+        normalIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "junction_rail");
+		cornerIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "junction_rail" + "_corner");
     }
 
     /*  Return true if the rail can go up and down slopes

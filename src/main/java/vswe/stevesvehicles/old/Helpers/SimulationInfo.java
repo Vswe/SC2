@@ -1,7 +1,7 @@
 package vswe.stevesvehicles.old.Helpers;
 import java.util.ArrayList;
 
-import vswe.stevesvehicles.old.StevesCarts;
+import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.old.Modules.Addons.ModuleInvisible;
 import vswe.stevesvehicles.old.Modules.Addons.ModuleBrake;
 import vswe.stevesvehicles.old.Modules.Addons.ModuleLiquidSensors;
@@ -161,10 +161,10 @@ public class SimulationInfo {
 		itemBOOLPipe = new DropDownMenuItem("Pipe",17, DropDownMenuItem.VALUETYPE.BOOL, ModuleShooterAdv.class);	
 
 		itemINTBackground = new DropDownMenuItem("Background",18, DropDownMenuItem.VALUETYPE.INT, null);	
-		itemINTBackground.setINTLimit(StevesCarts.hasGreenScreen ? 0 : 1,3);
+		itemINTBackground.setINTLimit(StevesVehicles.hasGreenScreen ? 0 : 1,3);
 		itemINTBackground.setINT(1);
 		
-		if (StevesCarts.hasGreenScreen) {
+		if (StevesVehicles.hasGreenScreen) {
 			items.add(itemINTBackground);	
 		}
 		

@@ -17,7 +17,7 @@ import vswe.stevesvehicles.old.Blocks.BlockCartAssembler;
 import vswe.stevesvehicles.old.Blocks.ModBlocks;
 import vswe.stevesvehicles.old.Helpers.*;
 import vswe.stevesvehicles.old.Items.ModItems;
-import vswe.stevesvehicles.old.StevesCarts;
+import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 import vswe.stevesvehicles.containers.ContainerBase;
 import vswe.stevesvehicles.old.Containers.ContainerCartAssembler;
@@ -1256,7 +1256,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 				return;
 			}
 			
-			if (!StevesCarts.freezeCartSimulation) {
+			if (!StevesVehicles.freezeCartSimulation) {
 				int minRoll = -5;
 				int maxRoll = 25;			
 				if (shouldSpin) {

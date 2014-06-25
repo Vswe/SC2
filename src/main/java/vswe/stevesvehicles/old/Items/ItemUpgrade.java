@@ -5,13 +5,13 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 
+import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.old.Upgrades.AssemblerUpgrade;
 import vswe.stevesvehicles.old.Upgrades.BaseEffect;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import vswe.stevesvehicles.old.StevesCarts;
 import vswe.stevesvehicles.old.TileEntities.TileEntityUpgrade;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -27,7 +27,7 @@ public class ItemUpgrade extends ItemBlock
         super(block);
         setHasSubtypes(true);
         setMaxDamage(0);
-        setCreativeTab(StevesCarts.tabsSC2Blocks);		
+        setCreativeTab(StevesVehicles.tabsSC2Blocks);
     }
 
 	@Override
@@ -67,7 +67,7 @@ public class ItemUpgrade extends ItemBlock
     {
 		AssemblerUpgrade upgrade = AssemblerUpgrade.getUpgrade(item.getItemDamage());
 		if (upgrade != null) {
-			return "item." + StevesCarts.localStart + upgrade.getRawName();
+			return "item." + StevesVehicles.localStart + upgrade.getRawName();
 		}	
 	
         return "item.unknown";

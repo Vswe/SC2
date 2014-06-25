@@ -1,7 +1,7 @@
 package vswe.stevesvehicles.old.Arcade;
 
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
-import vswe.stevesvehicles.old.StevesCarts;
+import vswe.stevesvehicles.old.StevesVehicles;
 
 public class TetrisPiece {
 
@@ -182,7 +182,7 @@ public class TetrisPiece {
 							isGameOver = true;
 						}
 					}
-					if (StevesCarts.instance.useArcadeMobSounds) {
+					if (StevesVehicles.instance.useArcadeMobSounds) {
 						if (sound != null) {
 							ArcadeGame.playDefaultSound(sound, volume, (game.getModule().getCart().rand.nextFloat() - game.getModule().getCart().rand.nextFloat()) * 0.2F + 1.0F);
 						}

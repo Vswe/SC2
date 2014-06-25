@@ -10,7 +10,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import vswe.stevesvehicles.old.Items.ModItems;
-import vswe.stevesvehicles.old.StevesCarts;
+import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.old.TileEntities.TileEntityCartAssembler;
 import vswe.stevesvehicles.old.TileEntities.TileEntityUpgrade;
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
@@ -28,7 +28,7 @@ public class BlockUpgrade extends BlockContainerBase
     public BlockUpgrade()
     {
         super(Material.rock);
-        setCreativeTab(StevesCarts.tabsSC2Blocks);					
+        setCreativeTab(StevesVehicles.tabsSC2Blocks);
     }
 
 
@@ -172,7 +172,7 @@ public class BlockUpgrade extends BlockContainerBase
 	@Override
     public int getRenderType()
     {
-        return renderAsNormalBlock() || StevesCarts.instance.blockRenderer == null ? 0 : StevesCarts.instance.blockRenderer.getRenderId();
+        return renderAsNormalBlock() || StevesVehicles.instance.blockRenderer == null ? 0 : StevesVehicles.instance.blockRenderer.getRenderId();
     }	
 	
 
@@ -275,12 +275,12 @@ public class BlockUpgrade extends BlockContainerBase
 
 			if (upgrade.getUpgrade().useStandardInterface())
 			{
-				FMLNetworkHandler.openGui(entityplayer, StevesCarts.instance, 3, world, upgrade.getMaster().xCoord, upgrade.getMaster().yCoord, upgrade.getMaster().zCoord);
+				FMLNetworkHandler.openGui(entityplayer, StevesVehicles.instance, 3, world, upgrade.getMaster().xCoord, upgrade.getMaster().yCoord, upgrade.getMaster().zCoord);
 				return true;
 			}
 		
 
-			FMLNetworkHandler.openGui(entityplayer, StevesCarts.instance, 7, world, i, j, k);
+			FMLNetworkHandler.openGui(entityplayer, StevesVehicles.instance, 7, world, i, j, k);
 		}
 
 		

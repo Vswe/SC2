@@ -27,6 +27,7 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
 import vswe.stevesvehicles.containers.ContainerVehicle;
 import vswe.stevesvehicles.old.Helpers.ActivatorOption;
+import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicles.versions.VehicleVersion;
 import vswe.stevesvehicles.old.Helpers.CompWorkModule;
 import vswe.stevesvehicles.old.Helpers.DataWatcherLockable;
@@ -43,7 +44,6 @@ import vswe.stevesvehicles.old.Modules.Storages.Chests.ModuleChest;
 import vswe.stevesvehicles.old.Modules.Storages.Tanks.ModuleTank;
 import vswe.stevesvehicles.old.Modules.Workers.ModuleWorker;
 import vswe.stevesvehicles.old.Modules.Workers.Tools.ModuleTool;
-import vswe.stevesvehicles.old.StevesCarts;
 import vswe.stevesvehicles.old.TileEntities.TileEntityCartAssembler;
 import vswe.stevesvehicles.vehicles.entities.IVehicleEntity;
 
@@ -799,7 +799,7 @@ public class VehicleBase {
             return;
         }
 
-        cartTicket = ForgeChunkManager.requestTicket(StevesCarts.instance, getWorld(), ForgeChunkManager.Type.ENTITY);
+        cartTicket = ForgeChunkManager.requestTicket(StevesVehicles.instance, getWorld(), ForgeChunkManager.Type.ENTITY);
         if (cartTicket != null) {
 
             cartTicket.bindEntity(entity);
@@ -1246,7 +1246,7 @@ public class VehicleBase {
     }
 
     public void onInteractWith(EntityPlayer player) {
-        FMLNetworkHandler.openGui(player, StevesCarts.instance, 0, getWorld(), entity.getEntityId(), 0, 0);
+        FMLNetworkHandler.openGui(player, StevesVehicles.instance, 0, getWorld(), entity.getEntityId(), 0, 0);
         vehicleEntity.openInventory();
     }
 

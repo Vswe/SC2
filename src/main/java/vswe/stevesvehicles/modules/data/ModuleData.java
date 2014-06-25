@@ -8,16 +8,16 @@ import vswe.stevesvehicles.modules.ModuleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Models.Cart.ModelCartbase;
 import vswe.stevesvehicles.old.ModuleData.ModuleDataGroup;
-import vswe.stevesvehicles.old.StevesCarts;
+import vswe.stevesvehicles.old.StevesVehicles;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ModuleData {
-    private Class<? extends ModuleBase> moduleClass;
-    private String unlocalizedName;
-    private int modularCost;
-    private ModuleType moduleType;
+    private final Class<? extends ModuleBase> moduleClass;
+    private final String unlocalizedName;
+    private final int modularCost;
+    private final ModuleType moduleType;
     private ArrayList<ModuleSide> sides;
     private boolean allowDuplicate;
     private ArrayList<ModuleData> nemesis;
@@ -42,19 +42,36 @@ public class ModuleData {
 
     public ModuleData(String unlocalizedName, Class<? extends ModuleBase> moduleClass, int modularCost) {
         this.moduleClass = moduleClass;
-        this.unlocalizedName = unlocalizedName;
+        if (unlocalizedName.contains(":")) {
+            System.err.println("The raw unlocalized name can't contain colons. Any colons have been replaced with underscores.");
+        }
+        this.unlocalizedName = unlocalizedName.replace(":", "_");
         this.modularCost = modularCost;
 
-        for (ModuleType moduleType : ModuleType.values()) {
+        ModuleType moduleType = ModuleType.INVALID;
+        for (ModuleType type : ModuleType.values()) {
             if (moduleType.getClazz().isAssignableFrom(moduleClass)) {
-                this.moduleType = moduleType;
+                moduleType = type;
                 break;
             }
         }
+        this.moduleType = moduleType;
     }
 
-    public Class<? extends ModuleBase> getModuleClass() {
+    public final Class<? extends ModuleBase> getModuleClass() {
         return moduleClass;
+    }
+
+    public final String getRawUnlocalizedName() {
+        return unlocalizedName;
+    }
+
+    public final int getCost() {
+        return modularCost;
+    }
+
+    public final ModuleType getModuleType() {
+        return moduleType;
     }
 
     public boolean getIsValid() {
@@ -235,12 +252,9 @@ public class ModuleData {
     }
 
     public String getUnlocalizedName() {
-        return "item." + StevesCarts.localStart + unlocalizedName + ".name";
+        return "item." + StevesVehicles.localStart + unlocalizedName + ".name";
     }
 
-    public int getCost() {
-        return modularCost;
-    }
 
     protected ModuleData getParent() {
         return parent;

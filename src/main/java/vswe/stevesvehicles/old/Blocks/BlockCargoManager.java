@@ -9,7 +9,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import vswe.stevesvehicles.old.StevesCarts;
+import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.old.TileEntities.TileEntityCargo;
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import cpw.mods.fml.relauncher.Side;
@@ -21,7 +21,7 @@ public class BlockCargoManager extends BlockContainerBase
     public BlockCargoManager()
     {
         super(Material.rock);
-		setCreativeTab(StevesCarts.tabsSC2Blocks);	
+		setCreativeTab(StevesVehicles.tabsSC2Blocks);
     }
 
 	
@@ -55,12 +55,12 @@ public class BlockCargoManager extends BlockContainerBase
 	@Override
     public void registerBlockIcons(IIconRegister register)
     {
-        topIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "cargo_manager" + "_top");
-		botIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "cargo_manager" + "_bot");
-		redIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "cargo_manager" + "_red");
-		blueIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "cargo_manager" + "_blue");
-		greenIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "cargo_manager" + "_green");
-		yellowIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "cargo_manager" + "_yellow");
+        topIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "cargo_manager" + "_top");
+		botIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "cargo_manager" + "_bot");
+		redIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "cargo_manager" + "_red");
+		blueIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "cargo_manager" + "_blue");
+		greenIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "cargo_manager" + "_green");
+		yellowIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "cargo_manager" + "_yellow");
     }	
 
 	@Override
@@ -130,7 +130,7 @@ public class BlockCargoManager extends BlockContainerBase
         //if (tileentitycargo != null)
         //{
             //ModLoader.openGUI(entityplayer, new GuiCargo(entityplayer.inventory, tileentitycargo));
-			FMLNetworkHandler.openGui(entityplayer, StevesCarts.instance, 1, world, i, j, k);
+			FMLNetworkHandler.openGui(entityplayer, StevesVehicles.instance, 1, world, i, j, k);
         //}
 
         return true;

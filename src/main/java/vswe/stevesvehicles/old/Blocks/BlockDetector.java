@@ -11,7 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import vswe.stevesvehicles.old.StevesCarts;
+import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.old.Helpers.DetectorType;
 import vswe.stevesvehicles.old.TileEntities.TileEntityDetector;
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
@@ -24,7 +24,7 @@ public class BlockDetector extends BlockContainerBase
     public BlockDetector()
     {
         super(Material.circuits);
-        setCreativeTab(StevesCarts.tabsSC2Blocks);		
+        setCreativeTab(StevesVehicles.tabsSC2Blocks);
     }
 
 
@@ -78,7 +78,7 @@ public class BlockDetector extends BlockContainerBase
         }
 
 
-		FMLNetworkHandler.openGui(entityplayer, StevesCarts.instance, 6, world, i, j, k);
+		FMLNetworkHandler.openGui(entityplayer, StevesVehicles.instance, 6, world, i, j, k);
 
         return true;
     }

@@ -11,7 +11,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import vswe.stevesvehicles.old.StevesCarts;
+import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.old.TileEntities.TileEntityCartAssembler;
 import vswe.stevesvehicles.old.TileEntities.TileEntityUpgrade;
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
@@ -28,7 +28,7 @@ public class BlockCartAssembler extends BlockContainerBase
     public BlockCartAssembler()
     {
         super(Material.rock);
-        setCreativeTab(StevesCarts.tabsSC2Blocks);		
+        setCreativeTab(StevesVehicles.tabsSC2Blocks);
     }
 
 
@@ -54,11 +54,11 @@ public class BlockCartAssembler extends BlockContainerBase
 	@Override
     public void registerBlockIcons(IIconRegister register)
     {
-        topIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "cart_assembler" + "_top");
-		botIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "cart_assembler" + "_bot");
+        topIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "cart_assembler" + "_top");
+		botIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "cart_assembler" + "_bot");
 		sideIcons = new IIcon[4];
 		for (int i = 1; i <= 4; i++) {
-			sideIcons[i-1] = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "cart_assembler" + "_side_" + i);
+			sideIcons[i-1] = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "cart_assembler" + "_side_" + i);
 		}
     }
 	
@@ -73,7 +73,7 @@ public class BlockCartAssembler extends BlockContainerBase
 		if (assembler != null) {
 		    if (!world.isRemote)
 			{
-				FMLNetworkHandler.openGui(entityplayer, StevesCarts.instance, 3, world, x, y, z);								 
+				FMLNetworkHandler.openGui(entityplayer, StevesVehicles.instance, 3, world, x, y, z);
 			}
 			
 			

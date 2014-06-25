@@ -12,7 +12,7 @@ import vswe.stevesvehicles.old.Helpers.ComponentTypes;
 import vswe.stevesvehicles.old.Helpers.DetectorType;
 import vswe.stevesvehicles.old.Helpers.RecipeHelper;
 import vswe.stevesvehicles.old.ModuleData.ModuleData;
-import vswe.stevesvehicles.old.StevesCarts;
+import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.old.Upgrades.AssemblerUpgrade;
 
 import java.util.HashMap;
@@ -34,7 +34,7 @@ public final class ModItems {
     private static HashMap<Byte,Boolean> validModules = new HashMap<Byte,Boolean>();
 
     public static void preBlockInit(Configuration config) {
-        (carts = new ItemCarts()).setUnlocalizedName(StevesCarts.localStart + CART_NAME);
+        (carts = new ItemCarts()).setUnlocalizedName(StevesVehicles.localStart + CART_NAME);
         component = new ItemCartComponent();
         modules = new ItemCartModule();
 

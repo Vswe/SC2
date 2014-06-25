@@ -3,7 +3,7 @@ package vswe.stevesvehicles.old.Modules.Realtimers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import vswe.stevesvehicles.old.Items.ModItems;
-import vswe.stevesvehicles.old.StevesCarts;
+import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 import vswe.stevesvehicles.old.Slots.SlotBase;
 import vswe.stevesvehicles.old.Slots.SlotCakeDynamite;
@@ -13,7 +13,7 @@ public class ModuleCakeServerDynamite extends ModuleCakeServer {
 	private int dynamiteCount;
 	
 	private int getMaxDynamiteCount() {
-		return Math.min(StevesCarts.instance.maxDynamites, 25);
+		return Math.min(StevesVehicles.instance.maxDynamites, 25);
 	}
 	
 	public ModuleCakeServerDynamite(EntityModularCart cart) {

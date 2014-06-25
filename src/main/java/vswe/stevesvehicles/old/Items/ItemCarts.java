@@ -10,8 +10,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagByteArray;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicles.versions.VehicleVersion;
-import vswe.stevesvehicles.old.StevesCarts;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.ColorHelper;
 import vswe.stevesvehicles.old.Helpers.GeneratedInfo;
@@ -43,7 +43,7 @@ public class ItemCarts extends ItemMinecart
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister register)
     {
-        this.itemIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "modular_cart" + "_icon");
+        this.itemIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "modular_cart" + "_icon");
     }	
 	
 	@Override

@@ -6,7 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
 import vswe.stevesvehicles.old.Helpers.Localization;
-import vswe.stevesvehicles.old.StevesCarts;
+import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.old.Arcade.TrackOrientation.DIRECTION;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
@@ -108,7 +108,7 @@ public class ArcadeTracks extends ArcadeGame {
 		
 		userMaps = TrackLevel.loadMapsFromFolder();
 		
-		if (StevesCarts.arcadeDevOperator) {
+		if (StevesVehicles.arcadeDevOperator) {
 			for (int i = 0; i < TrackStory.stories.size(); i++) {
 				for (int j = 0; j < TrackStory.stories.get(i).getLevels().size(); j++) {
 					userMaps.add(TrackStory.stories.get(i).getLevels().get(j));
@@ -974,7 +974,7 @@ public class ArcadeTracks extends ArcadeGame {
 	
 	@SideOnly(Side.CLIENT)
 	private boolean save(String name) {
-		if (StevesCarts.arcadeDevOperator) {
+		if (StevesVehicles.arcadeDevOperator) {
 			if (name.startsWith(" ")) {
 				name = name.substring(1);
 			}else{

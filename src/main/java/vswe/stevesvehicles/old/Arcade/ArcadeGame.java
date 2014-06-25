@@ -4,7 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
 import vswe.stevesvehicles.old.Helpers.Localization;
-import vswe.stevesvehicles.old.StevesCarts;
+import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.SoundHandler;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleArcade;
@@ -34,7 +34,7 @@ public abstract class ArcadeGame {
 	
 	@SideOnly(Side.CLIENT)
 	public void update() {
-        if (StevesCarts.instance.useArcadeSounds) {
+        if (StevesVehicles.instance.useArcadeSounds) {
             getModule().getCart().silent();
         }
 	}
@@ -71,14 +71,14 @@ public abstract class ArcadeGame {
 
 	@SideOnly(Side.CLIENT)
 	public static void playSound(String sound, float volume, float pitch) {
-		if (StevesCarts.instance.useArcadeSounds && sound != null) {
+		if (StevesVehicles.instance.useArcadeSounds && sound != null) {
 			SoundHandler.playSound(sound, volume, pitch);
 		}
 	}
 	
 	@SideOnly(Side.CLIENT)
 	public static void playDefaultSound(String sound, float volume, float pitch) {
-		if (StevesCarts.instance.useArcadeSounds && sound != null) {
+		if (StevesVehicles.instance.useArcadeSounds && sound != null) {
 			SoundHandler.playDefaultSound(sound, volume, pitch);
 		}
 	}	

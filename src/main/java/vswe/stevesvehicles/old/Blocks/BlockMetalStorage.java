@@ -7,14 +7,14 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import vswe.stevesvehicles.old.Items.ModItems;
-import vswe.stevesvehicles.old.StevesCarts;
+import vswe.stevesvehicles.old.StevesVehicles;
 
 public class BlockMetalStorage extends Block implements IBlockBase {
 
     public BlockMetalStorage()
     {
         super(Material.iron);
-        this.setCreativeTab(StevesCarts.tabsSC2Blocks);
+        this.setCreativeTab(StevesVehicles.tabsSC2Blocks);
     }
 
     

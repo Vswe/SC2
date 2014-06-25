@@ -14,7 +14,7 @@ import vswe.stevesvehicles.old.Items.ItemBlockDetector;
 import vswe.stevesvehicles.old.Items.ItemBlockStorage;
 import vswe.stevesvehicles.old.Items.ItemUpgrade;
 import vswe.stevesvehicles.old.Items.ModItems;
-import vswe.stevesvehicles.old.StevesCarts;
+import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.old.TileEntities.*;
 
 import java.lang.reflect.Constructor;
@@ -73,7 +73,7 @@ public enum ModBlocks {
                     Block block = (Block)blockInstance;
                     block.setHardness(2F).setStepSound(Block.soundTypeMetal);
                     GameRegistry.registerBlock(block, blockInfo.itemClazz, blockInfo.name);
-                    blockBase.setUnlocalizedName("tile." + StevesCarts.localStart + blockInfo.name);
+                    blockBase.setUnlocalizedName("tile." + StevesVehicles.localStart + blockInfo.name);
 
                     blockInfo.block = block;
 

@@ -22,12 +22,12 @@ public class ClientProxy extends CommonProxy{
 	public void renderInit() {
 		RenderingRegistry.registerEntityRenderingHandler(EntityModularCart.class, new RendererMinecart());
 		RenderingRegistry.registerEntityRenderingHandler(EntityEasterEgg.class, new RenderSnowball(ModItems.component, ComponentTypes.PAINTED_EASTER_EGG.getId()));
-		StevesCarts.instance.blockRenderer = new RendererUpgrade();
+		StevesVehicles.instance.blockRenderer = new RendererUpgrade();
 		new RendererMinecartItem();
 		RenderingRegistry.registerEntityRenderingHandler(EntityCake.class, new RenderSnowball(Items.cake));
 		ModuleData.initModels();
-        if (StevesCarts.instance.tradeHandler != null) {
-            StevesCarts.instance.tradeHandler.registerSkin();
+        if (StevesVehicles.instance.tradeHandler != null) {
+            StevesVehicles.instance.tradeHandler.registerSkin();
         }
 	}
 	

@@ -33,8 +33,8 @@ import com.google.common.io.ByteStreams;
 import vswe.stevesvehicles.vehicles.entities.IVehicleEntity;
 
 
-import static vswe.stevesvehicles.old.StevesCarts.CHANNEL;
-import static vswe.stevesvehicles.old.StevesCarts.packetHandler;
+import static vswe.stevesvehicles.old.StevesVehicles.CHANNEL;
+import static vswe.stevesvehicles.old.StevesVehicles.packetHandler;
 
 public class PacketHandler {
 

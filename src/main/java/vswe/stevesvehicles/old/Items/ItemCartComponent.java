@@ -7,7 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import vswe.stevesvehicles.old.Helpers.ComponentTypes;
-import vswe.stevesvehicles.old.StevesCarts;
+import vswe.stevesvehicles.old.StevesVehicles;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,6 +16,7 @@ import net.minecraft.world.World;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import vswe.stevesvehicles.old.Helpers.EntityEasterEgg;
+
 public class ItemCartComponent extends Item
 {
 
@@ -30,7 +31,7 @@ public class ItemCartComponent extends Item
         super();
         setHasSubtypes(true);
         setMaxDamage(0);
-        setCreativeTab(StevesCarts.tabsSC2Components);	
+        setCreativeTab(StevesVehicles.tabsSC2Components);
     }
 
 	private String getName(int dmg) {
@@ -68,10 +69,10 @@ public class ItemCartComponent extends Item
 		icons = new IIcon[size()];
 		for (int i = 0; i < icons.length; i++) {
 			if (getName(i) != null) {
-				icons[i] = register.registerIcon(StevesCarts.instance.textureHeader + ":" + getRawName(i) + "_icon");
+				icons[i] = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + getRawName(i) + "_icon");
 			}
 		}
-		unknownIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "unknown_icon");	
+		unknownIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "unknown_icon");
     }
 	
 	@Override
@@ -80,14 +81,14 @@ public class ItemCartComponent extends Item
 		if (item == null || item.getItemDamage() < 0 || item.getItemDamage() >= size() || getName(item.getItemDamage()) == null) {
 			return getUnlocalizedName();
 		}else{
-			return "item." + StevesCarts.localStart + getRawName(item.getItemDamage());
+			return "item." + StevesVehicles.localStart + getRawName(item.getItemDamage());
 		}
     }
 	
 	@Override
     public String getUnlocalizedName() {
 	
-		return "item." + StevesCarts.localStart + "unknowncomponent";
+		return "item." + StevesVehicles.localStart + "unknowncomponent";
 	}
 
     @SideOnly(Side.CLIENT)
@@ -125,10 +126,10 @@ public class ItemCartComponent extends Item
 		}
 	
 		if (item.getItemDamage() >= 50 && item.getItemDamage() < 58) {
-			return StevesCarts.isChristmas;
+			return StevesVehicles.isChristmas;
 		}
 		if (item.getItemDamage() >= 66 && item.getItemDamage() < 72) {
-			return StevesCarts.isEaster;
+			return StevesVehicles.isEaster;
 		}		
 		
 		if (item.getItemDamage() >= 72 && item.getItemDamage() < 80) {

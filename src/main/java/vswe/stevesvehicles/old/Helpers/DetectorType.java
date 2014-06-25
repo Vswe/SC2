@@ -7,7 +7,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import vswe.stevesvehicles.old.Blocks.BlockRailAdvDetector;
 import vswe.stevesvehicles.old.Blocks.ModBlocks;
-import vswe.stevesvehicles.old.StevesCarts;
+import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 import vswe.stevesvehicles.old.TileEntities.TileEntityDetector;
 
@@ -118,7 +118,7 @@ public enum DetectorType {
 	}
 
 	public String getName() {
-		return StatCollector.translateToLocal("item." + StevesCarts.instance.localStart + "BlockDetector" + meta + ".name");
+		return StatCollector.translateToLocal("item." + StevesVehicles.instance.localStart + "BlockDetector" + meta + ".name");
 	}
 
 
@@ -126,7 +126,7 @@ public enum DetectorType {
 	public void registerIcons(IIconRegister register) {
 		icons = new IIcon[textures.length];
 		for (int i = 0; i < textures.length; i++) {
-			icons[i] = register.registerIcon(StevesCarts.instance.textureHeader + ":" + textures[i]);
+			icons[i] = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + textures[i]);
 		}
 	}
 	

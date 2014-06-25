@@ -5,7 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import vswe.stevesvehicles.old.StevesCarts;
+import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.old.TileEntities.TileEntityActivator;
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import cpw.mods.fml.relauncher.Side;
@@ -20,7 +20,7 @@ public class BlockActivator extends BlockContainerBase
     public BlockActivator()
     {
         super(Material.rock);
-        setCreativeTab(StevesCarts.tabsSC2Blocks);		
+        setCreativeTab(StevesVehicles.tabsSC2Blocks);
     }
 
 
@@ -45,9 +45,9 @@ public class BlockActivator extends BlockContainerBase
 	@Override
     public void registerBlockIcons(IIconRegister register)
     {
-        topIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "module_toggler" + "_top");
-		botIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "module_toggler" + "_bot");
-		sideIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "module_toggler" + "_side");
+        topIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "module_toggler" + "_top");
+		botIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "module_toggler" + "_bot");
+		sideIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "module_toggler" + "_side");
     }	
 	
 	@Override
@@ -64,7 +64,7 @@ public class BlockActivator extends BlockContainerBase
         }
 
 
-		FMLNetworkHandler.openGui(entityplayer, StevesCarts.instance, 4, world, i, j, k);
+		FMLNetworkHandler.openGui(entityplayer, StevesVehicles.instance, 4, world, i, j, k);
 
         return true;
     }

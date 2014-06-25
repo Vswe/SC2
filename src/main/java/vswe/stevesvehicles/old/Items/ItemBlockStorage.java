@@ -10,9 +10,10 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import vswe.stevesvehicles.old.StevesCarts;
+import vswe.stevesvehicles.old.StevesVehicles;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
 public class ItemBlockStorage extends ItemBlock
 {
 
@@ -39,7 +40,7 @@ public class ItemBlockStorage extends ItemBlock
         super(block);
         setHasSubtypes(true);
         setMaxDamage(0);
-        setCreativeTab(StevesCarts.tabsSC2Blocks);		
+        setCreativeTab(StevesVehicles.tabsSC2Blocks);
     }
 
 	@Override
@@ -57,7 +58,7 @@ public class ItemBlockStorage extends ItemBlock
     {
     	icons = new IIcon[blocks.length];
     	for (int i = 0; i < icons.length; i++) {
-    		icons[i] = register.registerIcon(StevesCarts.instance.textureHeader + ":" + blocks[i].getName().replace(":","").replace(" ","_").toLowerCase());	
+    		icons[i] = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + blocks[i].getName().replace(":","").replace(" ","_").toLowerCase());
     	}
     }	
 
@@ -77,7 +78,7 @@ public class ItemBlockStorage extends ItemBlock
     {
 
 		if (item != null) {
-			return "item." + StevesCarts.instance.localStart + "BlockStorage" + item.getItemDamage();
+			return "item." + StevesVehicles.instance.localStart + "BlockStorage" + item.getItemDamage();
 		}	
 	
         return "item.unknown";

@@ -4,7 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-import vswe.stevesvehicles.old.StevesCarts;
+import vswe.stevesvehicles.old.StevesVehicles;
 
 public class ItemBlockDetector extends ItemBlock {
 
@@ -14,7 +14,7 @@ public class ItemBlockDetector extends ItemBlock {
         super(b);
         setHasSubtypes(true);
         setMaxDamage(0);
-        setCreativeTab(StevesCarts.tabsSC2Blocks);		
+        setCreativeTab(StevesVehicles.tabsSC2Blocks);
     }
 
 
@@ -23,7 +23,7 @@ public class ItemBlockDetector extends ItemBlock {
     {
 
 		if (item != null) {
-			return "item." + StevesCarts.localStart + "BlockDetector" + item.getItemDamage();
+			return "item." + StevesVehicles.localStart + "BlockDetector" + item.getItemDamage();
 		}	
 	
         return "item.unknown";

@@ -8,7 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import vswe.stevesvehicles.old.StevesCarts;
+import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.DetectorType;
 import vswe.stevesvehicles.old.ModuleData.ModuleData;
@@ -30,7 +30,7 @@ public class BlockRailAdvDetector extends BlockSpecialRailBase
     public BlockRailAdvDetector()
     {
         super(false);
-        setCreativeTab(StevesCarts.tabsSC2Blocks);		
+        setCreativeTab(StevesVehicles.tabsSC2Blocks);
     }
 	
 	@Override
@@ -44,8 +44,8 @@ public class BlockRailAdvDetector extends BlockSpecialRailBase
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister register)
     {
-        normalIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "advanced_detector_rail");
-		cornerIcon = register.registerIcon(StevesCarts.instance.textureHeader + ":" + "advanced_detector_rail" + "_corner");
+        normalIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "advanced_detector_rail");
+		cornerIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "advanced_detector_rail" + "_corner");
     }	
 
     /*  Return true if the rail can go up and down slopes

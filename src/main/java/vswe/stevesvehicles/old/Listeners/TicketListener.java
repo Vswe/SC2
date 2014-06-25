@@ -6,12 +6,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.LoadingCallback;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
-import vswe.stevesvehicles.old.StevesCarts;
+import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 
 public class TicketListener implements LoadingCallback {
 	public TicketListener() {
-		ForgeChunkManager.setForcedChunkLoadingCallback(StevesCarts.instance, this);
+		ForgeChunkManager.setForcedChunkLoadingCallback(StevesVehicles.instance, this);
 	}
 
 
