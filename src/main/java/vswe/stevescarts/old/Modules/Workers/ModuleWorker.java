@@ -6,7 +6,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.IFluidBlock;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
-import vswe.stevescarts.old.Modules.ModuleBase;
+import vswe.stevescarts.vehicles.modules.ModuleBase;
 public abstract class ModuleWorker extends ModuleBase {
 	private boolean preWork;
 	private boolean shouldDie;

@@ -8,7 +8,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
-import vswe.stevescarts.old.Modules.ModuleBase;
+import vswe.stevescarts.vehicles.modules.ModuleBase;
 import vswe.stevescarts.old.Slots.SlotBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

@@ -6,7 +6,7 @@ import vswe.stevescarts.old.Helpers.Localization;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
 import vswe.stevescarts.old.Interfaces.GuiMinecart;
-import vswe.stevescarts.old.Modules.ModuleBase;
+import vswe.stevescarts.vehicles.modules.ModuleBase;
 import vswe.stevescarts.old.Slots.SlotBase;
 import vswe.stevescarts.old.Slots.SlotExplosion;
 

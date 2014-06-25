@@ -20,7 +20,7 @@ import vswe.stevescarts.old.Modules.Addons.*;
 import vswe.stevescarts.old.Modules.Workers.*;
 import vswe.stevescarts.old.StevesCarts;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
-import vswe.stevescarts.old.Modules.ModuleBase;
+import vswe.stevescarts.vehicles.modules.ModuleBase;
 import vswe.stevescarts.old.Modules.Addons.Mobdetectors.ModuleAnimal;
 import vswe.stevescarts.old.Modules.Addons.Mobdetectors.ModuleBat;
 import vswe.stevescarts.old.Modules.Addons.Mobdetectors.ModuleMonster;

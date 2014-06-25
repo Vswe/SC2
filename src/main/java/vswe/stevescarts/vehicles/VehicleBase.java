@@ -38,7 +38,7 @@ import vswe.stevescarts.old.ModuleData.ModuleData;
 import vswe.stevescarts.old.Modules.Addons.ModuleCreativeSupplies;
 import vswe.stevescarts.old.Modules.Engines.ModuleEngine;
 import vswe.stevescarts.old.Modules.IActivatorModule;
-import vswe.stevescarts.old.Modules.ModuleBase;
+import vswe.stevescarts.vehicles.modules.ModuleBase;
 import vswe.stevescarts.old.Modules.Storages.Chests.ModuleChest;
 import vswe.stevescarts.old.Modules.Storages.Tanks.ModuleTank;
 import vswe.stevescarts.old.Modules.Workers.ModuleWorker;
@@ -1524,5 +1524,9 @@ public class VehicleBase {
 
     public void setEngineFlag(boolean engineFlag) {
         this.engineFlag = engineFlag;
+    }
+
+    public Entity getEntity() {
+        return entity;
     }
 }

@@ -1,7 +1,7 @@
 package vswe.stevescarts.old.ModuleData;
 
 import vswe.stevescarts.old.Helpers.Localization;
-import vswe.stevescarts.old.Modules.ModuleBase;
+import vswe.stevescarts.vehicles.modules.ModuleBase;
 
 public class ModuleDataTool extends ModuleData {
 

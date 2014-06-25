@@ -2,7 +2,7 @@ package vswe.stevescarts.old.Models.Cart;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelRenderer;
-import vswe.stevescarts.old.Modules.ModuleBase;
+import vswe.stevescarts.vehicles.modules.ModuleBase;
 import vswe.stevescarts.old.Modules.Engines.ModuleSolarTop;
 @SideOnly(Side.CLIENT)
 public abstract class ModelSolarPanel extends ModelCartbase

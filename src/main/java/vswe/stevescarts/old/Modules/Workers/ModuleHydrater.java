@@ -4,7 +4,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.Vec3;
 import net.minecraftforge.fluids.FluidRegistry;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
-import vswe.stevescarts.old.Modules.ModuleBase;
+import vswe.stevescarts.vehicles.modules.ModuleBase;
 import vswe.stevescarts.old.Modules.Workers.Tools.ModuleFarmer;
 public class ModuleHydrater extends ModuleWorker {
 	public ModuleHydrater(EntityModularCart cart) {

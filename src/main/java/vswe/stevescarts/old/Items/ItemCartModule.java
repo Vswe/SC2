@@ -10,7 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import vswe.stevescarts.old.StevesCarts;
 import vswe.stevescarts.old.ModuleData.ModuleData;
-import vswe.stevescarts.old.Modules.ModuleBase;
+import vswe.stevescarts.vehicles.modules.ModuleBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import vswe.stevescarts.old.TileEntities.TileEntityCartAssembler;

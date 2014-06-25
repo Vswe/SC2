@@ -1,4 +1,4 @@
-package vswe.stevescarts.old.Modules;
+package vswe.stevescarts.vehicles.modules;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -28,6 +28,7 @@ import net.minecraft.util.IIcon;
 import vswe.stevescarts.old.Helpers.NBTHelper;
 import vswe.stevescarts.old.PacketHandler;
 import vswe.stevescarts.old.Buttons.ButtonBase;
+import vswe.stevescarts.vehicles.VehicleBase;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Containers.ContainerMinecart;
 import vswe.stevescarts.old.Helpers.CompButtons;
@@ -41,20 +42,20 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 /**
- * The base for all modules. This is what's used by the cart to add features, models and interfaces for the cart. should not be
- * confused with ModuleData which is the data used for adding a module to the cart in the Cart Assembler.
+ * The base for all modules. This is what's used by the vehicle to add features, models and interfaces for the vehicle. should not be
+ * confused with ModuleData which is the data used for adding a module to the vehicle in the vehicle Assembler.
  * @author Vswe
  *
  */
 public abstract class ModuleBase {
-	//the cart this module is part of
-	private EntityModularCart cart;
+	//the vehicle this module is part of
+	private VehicleBase vehicle;
 	
 	//the inventory this module is using, could be an empty array. getInventorySize is controlling the size of this  
 	private	ItemStack[] cargo;
 	
 	//where in the interface the module is located, used to draw things where they should be.
-	//the values are calculated in the cart on initializing
+	//the values are calculated in the vehicle on initializing
 	private int offSetX;
 	private int offSetY;
 	
@@ -77,19 +78,19 @@ public abstract class ModuleBase {
 	private ArrayList<ModelCartbase> models;
 	
 	/**
-	 * Creates a new instance of this module, the module will be created at the given cart.
-	 * @param cart The cart this module is created on
+	 * Creates a new instance of this module, the module will be created at the given vehicle.
+	 * @param vehicle The vehicle this module is created on
 	 */
-	public ModuleBase(EntityModularCart cart) {
-		//save the cart
-		this.cart = cart;
+	public ModuleBase(VehicleBase vehicle) {
+		//save the vehicle
+		this.vehicle = vehicle;
 		
 		//initialize the inventory of this module
 		cargo = new ItemStack[getInventorySize()];
 	}
 	
 	/**
-	 * Initializes the modules, this is done after all modules has been added to the cart, and given proper IDs and everything.
+	 * Initializes the modules, this is done after all modules has been added to the vehicle, and given proper IDs and everything.
 	 */
 	public void init() {
 		//prepare any server-client buttons, these are only used in the assembly module atm
@@ -102,33 +103,33 @@ public abstract class ModuleBase {
 	}
 	
 	/**
-	 * Initializes the modules, this is done after all modules has been added to the cart but before most of the initializing code
+	 * Initializes the modules, this is done after all modules has been added to the vehicle but before most of the initializing code
 	 */
 	public void preInit() {}
 	
 
 	/**
-	 * Get the cart this module is a part of
-	 * @return The cart this module was created at
+	 * Get the vehicle this module is a part of
+	 * @return The vehicle this module was created at
 	 */
-	public EntityModularCart getCart() {
-		return cart;
+	public VehicleBase getVehicle() {
+		return vehicle;
 	}
 
 	/**
-	 * If this module is part of a placeholder cart, a placeholder cart is a client side only cart used in the cart assembler.
+	 * If this module is part of a placeholder vehicle, a placeholder vehicle is a client side only vehicle used in the vehicle assembler.
 	 * @return If this module is a placeholder module
 	 */
 	public boolean isPlaceholder() {
-		return getCart().isPlaceholder;
+		return getVehicle().isPlaceholder;
 	}
 	
 	/**
-	 * If isPlaceholder returns true you can get the object controlling the simulation of the client only cart.
-	 * @return The Simulation Info object used to simulate the cart
+	 * If isPlaceholder returns true you can get the object controlling the simulation of the client only vehicle.
+	 * @return The Simulation Info object used to simulate the vehicle
 	 */
 	protected SimulationInfo getSimInfo() {
-		return getCart().placeholderAsssembler.getSimulationInfo();
+		return getVehicle().placeholderAsssembler.getSimulationInfo();
 	}
 	
 	/**
@@ -148,12 +149,12 @@ public abstract class ModuleBase {
 	}
 	
 	/**
-	 * Is called when the cart's inventory has been changed
+	 * Is called when the vehicle's inventory has been changed
 	 */
 	public void onInventoryChanged() {}
 
 	/**
-	 * Used to get where to start draw the interface, this is calculated by the cart.
+	 * Used to get where to start draw the interface, this is calculated by the vehicle.
 	 * @return The x offset of the interface
 	 */
 	public int getX() {
@@ -166,7 +167,7 @@ public abstract class ModuleBase {
 
 	
 	/**
-	 * Used to get where to start draw the interface, this is calculated by the cart.
+	 * Used to get where to start draw the interface, this is calculated by the vehicle.
 	 * @return The y offset of the interface
 	 */
 	public int getY() {
@@ -178,7 +179,7 @@ public abstract class ModuleBase {
 	}
 
 	/**
-	 * Used to set where the interface of this module starts, this is set by the cart
+	 * Used to set where the interface of this module starts, this is set by the vehicle
 	 * @param val The x offset to use
 	 */
 	public void setX(int val) {
@@ -186,7 +187,7 @@ public abstract class ModuleBase {
 	}
 
 	/**
-	 * Used to set where the interface of this module starts, this is set by the cart
+	 * Used to set where the interface of this module starts, this is set by the vehicle
 	 * @param val The y offset to use
 	 */
 	public void setY(int val) {
@@ -261,8 +262,8 @@ public abstract class ModuleBase {
 	/**
 	 * Generates the slots used for this module, this is used both for the Container and the Interface. For most modules
 	 * just leave this and use getSlot instead (as well as setting getInventoryWidth and getInventoryHeight)
-	 * @param slotCount The number of slots that has already been added to the cart. This is for generating the corred slot id
-	 * @return The number of slots that the cart have added after this module has generated its slots.
+	 * @param slotCount The number of slots that has already been added to the vehicle. This is for generating the corred slot id
+	 * @return The number of slots that the vehicle have added after this module has generated its slots.
 	 */
 	public int generateSlots(int slotCount) {
 		slotGlobalStart = slotCount;
@@ -302,13 +303,13 @@ public abstract class ModuleBase {
 	}
 
 	/**
-	 * Called every time the cart is being updated.
+	 * Called every time the vehicle is being updated.
 	 */
 	public void update() {}
 
 	/**
-	 * Returns if this module has enough fuel to keep the cart going one tick more. This should however be moved to engineModuleBase
-	 * @param consumption The amount of fuel units the cart wants to consume
+	 * Returns if this module has enough fuel to keep the vehicle going one tick more. This should however be moved to engineModuleBase
+	 * @param consumption The amount of fuel units the vehicle wants to consume
 	 * @return If it has fuel or not
 	 */
 	public boolean hasFuel(int consumption) {
@@ -317,17 +318,17 @@ public abstract class ModuleBase {
 
 
 	/**
-	 * The maximum speed this module allows the cart to move in. The maximum speed of the cart will therefore be set to the lowest
+	 * The maximum speed this module allows the vehicle to move in. The maximum speed of the vehicle will therefore be set to the lowest
 	 * value all of it's modules allow. 
-	 * @return The maximum speed of the cart
+	 * @return The maximum speed of the vehicle
 	 */
 	public float getMaxSpeed() {
 		return 1.1F;
 	}
 
 	/**
-	 * Returns the Y value this cart should try to be on. By returning -1 this module won't care about where the cart should be.
-	 * If no modules do care about this the cart will just continue where it already is.
+	 * Returns the Y value this vehicle should try to be on. By returning -1 this module won't care about where the vehicle should be.
+	 * If no modules do care about this the vehicle will just continue where it already is.
 	 * @return The Y value
 	 */
 	public int getYTarget() {
@@ -335,12 +336,12 @@ public abstract class ModuleBase {
 	}
 
 	/**
-	 * Called when the cart travels over a rail. Used to allow modules to react to specific rails.
+	 * Called when the vehicle travels over a rail. Used to allow modules to react to specific rails.
 	 * @param x X coordinate in the world
 	 * @param y Y coordinate in the world
 	 * @param z Z coordinate in the world
 	 */
-	public void moveMinecartOnRail(int x, int y, int z) {}
+	public void moveMinevehicleOnRail(int x, int y, int z) {}
 
 	/**
 	 * Used to get the ItemStack in a specific slot of this module
@@ -367,7 +368,7 @@ public abstract class ModuleBase {
 	 * @param item The ItemStack to be set.
 	 */
 	public void addStack(int slotStart, int slotEnd, ItemStack item) {
-		getCart().addItemToChest(item, slotGlobalStart + slotStart, slotGlobalStart + slotEnd);
+		getVehicle().addItemToChest(item, slotGlobalStart + slotStart, slotGlobalStart + slotEnd);
 	}	
 
 	/**
@@ -380,20 +381,20 @@ public abstract class ModuleBase {
 	}	
 	
 	/**
-	 * Used to prevent the cart to drop things when it breaks. If any module returns false the cart won't drop anything.
-	 * @return If this module allows the cart to drop on death
+	 * Used to prevent the vehicle to drop things when it breaks. If any module returns false the vehicle won't drop anything.
+	 * @return If this module allows the vehicle to drop on death
 	 */
 	public boolean dropOnDeath() {
 		return true;
 	}
 
 	/**
-	 * Called when the cart breaks
+	 * Called when the vehicle breaks
 	 */
     public void onDeath() {}
 
     /**
-     * Whether the cart should allocate room for this interface. By default this also allocates slots, see hasSlots
+     * Whether the vehicle should allocate room for this interface. By default this also allocates slots, see hasSlots
      * @return If the module is using an interface
      */
 	public boolean hasGui() {
@@ -437,7 +438,7 @@ public abstract class ModuleBase {
 	 }	 
 		 
 	 @SideOnly(Side.CLIENT)	 
-	public void drawString(GuiMinecart gui,String str, int x, int y, int w, boolean center, int c) {	 
+	public void drawString(GuiMinecart gui,String str, int x, int y, int w, boolean center, int c) {
 		 int j = gui.getGuiLeft();
 		 int k = gui.getGuiTop();
 		 int[] rect = new int[] {x, y , w, 8};
@@ -459,7 +460,7 @@ public abstract class ModuleBase {
 	}
 	 
 	 @SideOnly(Side.CLIENT)	 
-	public void drawStringWithShadow(GuiMinecart gui,String str, int x, int y, int c) {	 
+	public void drawStringWithShadow(GuiMinecart gui,String str, int x, int y, int c) {
 		 int j = gui.getGuiLeft();
 		 int k = gui.getGuiTop();
 		 int[] rect = new int[] {x, y , 0, 8};
@@ -503,7 +504,7 @@ public abstract class ModuleBase {
 	}
 
 	 
-	public void drawItemInInterface(GuiMinecart gui, ItemStack item, int x, int y) {			
+	public void drawItemInInterface(GuiMinecart gui, ItemStack item, int x, int y) {
 		int[] rect = new int[] {x, y, 16, 16};
 		handleScroll(rect);
 		if (rect[3] == 16) {
@@ -637,7 +638,7 @@ public abstract class ModuleBase {
 	 */
 	public int handleScroll(int rect[]) {
 		//scroll the rectangle
-		rect[1] -= getCart().getRealScrollY();
+		rect[1] -= getVehicle().getRealScrollY();
 		
 		//calculate the y val
 		int y = rect[1] + getY(); 
@@ -651,8 +652,8 @@ public abstract class ModuleBase {
 			return dif;
 			
 		//if it's too far down
-		}else if(y + rect[3] > EntityModularCart.MODULAR_SPACE_HEIGHT) {
-			rect[3] = Math.max(0, EntityModularCart.MODULAR_SPACE_HEIGHT-y);
+		}else if(y + rect[3] > VehicleBase.MODULAR_SPACE_HEIGHT) {
+			rect[3] = Math.max(0, VehicleBase.MODULAR_SPACE_HEIGHT-y);
 			return 0;
 			
 		//if the whole rectangle do fit
@@ -700,7 +701,7 @@ public abstract class ModuleBase {
 	
 	
 	/**
-	 * Allows the module to override the direction the cart is going. This mechanic is not finished and hence won't work perfectly.
+	 * Allows the module to override the direction the vehicle is going. This mechanic is not finished and hence won't work perfectly.
 	 * @param x The x coordinate in the world
 	 * @param y The y coordinate in the world
 	 * @param z The z coordinate in the world
@@ -711,7 +712,7 @@ public abstract class ModuleBase {
 	}
 
 	/**
-	 * Handles the different directions that the module can force a cart to go in. {@see getSpecialRailDirection}
+	 * Handles the different directions that the module can force a vehicle to go in. {@see getSpecialRailDirection}
 	 * @author Vswe
 	 *
 	 */
@@ -962,10 +963,10 @@ public abstract class ModuleBase {
 	}
 
 	/**
-	 * Let's the module handle when damage is caused to the cart
+	 * Let's the module handle when damage is caused to the vehicle
 	 * @param source The source of the damage
 	 * @param val The damage
-	 * @return True if the cart should take the damage, False to prevent the damage
+	 * @return True if the vehicle should take the damage, False to prevent the damage
 	 */
 	public boolean receiveDamage(DamageSource source, float val) {
 		return true;
@@ -973,23 +974,25 @@ public abstract class ModuleBase {
 
 
 	/**
-	 * Tells the cart to turn around, if this module is allowed to tell the cart to do so.
+	 * Tells the vehicle to turn around, if this module is allowed to tell the vehicle to do so.
 	 */
 	protected void turnback() {
-		//check if this module is allowed to tell the cart
-		for (ModuleBase module : getCart().getModules()) {
-			if (module != this && module.preventTurnback()) {
-				return;
-			}
-		}
-		
-		//if so, turn bakc
-		getCart().turnback();
+        if (getVehicle().getEntity() instanceof EntityModularCart) {
+            //check if this module is allowed to tell the vehicle
+            for (ModuleBase module : getVehicle().getModules()) {
+                if (module != this && module.preventTurnback()) {
+                    return;
+                }
+            }
+
+            //if so, turn bakc
+            ((EntityModularCart)getVehicle().getEntity()).turnback();
+        }
 	}
 
 	/**
-	 * Allows a module to take all control of a cart's turn back condition
-	 * @return True to prevent other modules from turning the cart around
+	 * Allows a module to take all control of a vehicle's turn back condition
+	 * @return True to prevent other modules from turning the vehicle around
 	 */
 	protected boolean preventTurnback() {
 		return false;
@@ -1012,7 +1015,7 @@ public abstract class ModuleBase {
 	}
 
 	/**
-	 * Gets the packet offset used as a header to determine which module owns a packet. This is done by the cart.
+	 * Gets the packet offset used as a header to determine which module owns a packet. This is done by the vehicle.
 	 * @return The packet offset
 	 */
 	public int getPacketStart() {
@@ -1020,7 +1023,7 @@ public abstract class ModuleBase {
 	}
 
 	/**
-	 * Sets the packet offset used as a header to determine which module own a packet. This is done by the cart.
+	 * Sets the packet offset used as a header to determine which module own a packet. This is done by the vehicle.
 	 * @param val The packet offset
 	 */
 	public void setPacketStart(int val) {
@@ -1076,7 +1079,7 @@ public abstract class ModuleBase {
 	 * @param player The player to send it to
 	 */
 	protected void sendPacket(int id, byte[] data, EntityPlayer player) {
-		PacketHandler.sendPacketToPlayer(getPacketStart() + id,data, player, getCart());
+		PacketHandler.sendPacketToPlayer(getPacketStart() + id,data, player, getVehicle());
 	}
 
 	/**
@@ -1142,7 +1145,7 @@ public abstract class ModuleBase {
 	}
 
 	/**
-	 * Sets the offset of the datawatchers, this is used as a header to know which module owns the datawatcher. This is set by the cart.
+	 * Sets the offset of the datawatchers, this is used as a header to know which module owns the datawatcher. This is set by the vehicle.
 	 * @return The datawatcher offset
 	 */
 	public int getDataWatcherStart() {
@@ -1169,7 +1172,7 @@ public abstract class ModuleBase {
 	 */
 	private int getDwId(int id) {
 		id = 2 + getDataWatcherStart() + id;
-		//these ids are already used by EntityMinecart
+		//these ids are already used by EntityMinevehicle
 		if (id >= 16) {
 			id += 7;
 		}
@@ -1182,7 +1185,7 @@ public abstract class ModuleBase {
 	 * @param val The value to add
 	 */
 	protected final void addIntDw(int id, int val) {
-		getCart().getDataWatcher().addObject(getDwId(id), (int)val);
+		getVehicle().getEntity().getDataWatcher().addObject(getDwId(id), (int)val);
 	}
 
 	/**
@@ -1191,7 +1194,7 @@ public abstract class ModuleBase {
 	 * @param val The value to update it to
 	 */
 	protected final void updateIntDw(int id, int val) {
-		getCart().getDataWatcher().updateObject(getDwId(id), (int)val);
+        getVehicle().getEntity().getDataWatcher().updateObject(getDwId(id), (int) val);
 	}
 
 	/**
@@ -1200,7 +1203,7 @@ public abstract class ModuleBase {
 	 * @return The value of the datawatcher
 	 */
 	protected final int getIntDw(int id) {
-		return getCart().getDataWatcher().getWatchableObjectInt(getDwId(id));
+		return getVehicle().getEntity().getDataWatcher().getWatchableObjectInt(getDwId(id));
 	}	
 	
 	/**
@@ -1209,7 +1212,7 @@ public abstract class ModuleBase {
 	 * @param val The value to add
 	 */
 	protected final void addShortDw(int id, int val) {
-		getCart().getDataWatcher().addObject(getDwId(id), (short)val);
+        getVehicle().getEntity().getDataWatcher().addObject(getDwId(id), (short)val);
 	}
 
 	/**
@@ -1218,7 +1221,7 @@ public abstract class ModuleBase {
 	 * @param val The value to update it to
 	 */
 	protected final void updateShortDw(int id, int val) {
-		getCart().getDataWatcher().updateObject(getDwId(id), (short)val);
+        getVehicle().getEntity().getDataWatcher().updateObject(getDwId(id), (short)val);
 	}
 
 	/**
@@ -1227,7 +1230,7 @@ public abstract class ModuleBase {
 	 * @return The value of the datawatcher
 	 */
 	protected final short getShortDw(int id) {
-		return getCart().getDataWatcher().getWatchableObjectShort(getDwId(id));
+		return getVehicle().getEntity().getDataWatcher().getWatchableObjectShort(getDwId(id));
 	}	
 	
 	/**
@@ -1236,7 +1239,7 @@ public abstract class ModuleBase {
 	 * @param val The value to add
 	 */
 	protected final void addDw(int id, int val) {
-		getCart().getDataWatcher().addObject(getDwId(id), (byte)val);
+        getVehicle().getEntity().getDataWatcher().addObject(getDwId(id), (byte)val);
 	}
 
 	/**
@@ -1245,7 +1248,7 @@ public abstract class ModuleBase {
 	 * @param val The value to update it to
 	 */	
 	protected final void updateDw(int id, int val) {
-		getCart().getDataWatcher().updateObject(getDwId(id), (byte)val);	
+        getVehicle().getEntity().getDataWatcher().updateObject(getDwId(id), (byte)val);
 	}
 	
 	/**
@@ -1254,7 +1257,7 @@ public abstract class ModuleBase {
 	 * @return The value of the datawatcher
 	 */
 	protected final byte getDw(int id) {
-		return getCart().getDataWatcher().getWatchableObjectByte(getDwId(id));
+		return getVehicle().getEntity().getDataWatcher().getWatchableObjectByte(getDwId(id));
 	}
 
 	/**
@@ -1275,7 +1278,7 @@ public abstract class ModuleBase {
 	}
 
 	/**
-	 * Set the gui data offset. This is used as a header to know which module owns a specific gui data. This is set by the cart.
+	 * Set the gui data offset. This is used as a header to know which module owns a specific gui data. This is set by the vehicle.
 	 * @param val
 	 */
 	public void setGuiDataStart(int val) {
@@ -1389,18 +1392,19 @@ public abstract class ModuleBase {
 	
 	/**
 	 * Get the consumption for this module
-	 * @param isMoving A flag telling you if the cart is moving or not
+	 * @param isMoving A flag telling you if the vehicle is moving or not
 	 * @return The consumption
 	 */
 	public int getConsumption(boolean isMoving) {
 		return 0;
-	}	
-	
+	}
 
+    @SideOnly(Side.CLIENT)
 	public void setModels(ArrayList<ModelCartbase> models){
 		this.models = models;
 	}
-	
+
+    @SideOnly(Side.CLIENT)
 	public ArrayList<ModelCartbase> getModels() {
 		return models;
 	}
@@ -1510,15 +1514,15 @@ public abstract class ModuleBase {
 	}
 		
 	/**
-	 * Allows a module to stop the cart from being rendered
-	 * @return False if the cart sohuldn't be rendered
+	 * Allows a module to stop the vehicle from being rendered
+	 * @return False if the vehicle sohuldn't be rendered
 	 */
-	public boolean shouldCartRender() {
+	public boolean shouldvehicleRender() {
 		return true;
 	}
 	
 	/**
-	 * Allows a module to tell the cart to use a specific push factor
+	 * Allows a module to tell the vehicle to use a specific push factor
 	 * @return the push factor, or -1 to use the default value
 	 */
 	public double getPushFactor() {
@@ -1526,8 +1530,8 @@ public abstract class ModuleBase {
 	}
 	
 	/**
-	 * Allows a module to change the color of the cart
-	 * @return The color of the cart {Red 0.0F to 1.0F, Green 0.0F to 1.0F, Blue 0.0F to 1.0F}
+	 * Allows a module to change the color of the vehicle
+	 * @return The color of the vehicle {Red 0.0F to 1.0F, Green 0.0F to 1.0F, Blue 0.0F to 1.0F}
 	 */
 	public float[] getColor() {
 		return new float[] {1F,1F,1F};
@@ -1545,18 +1549,18 @@ public abstract class ModuleBase {
 
 
 	/**
-	 * Determines if a block counts as air by the modules, for example a cart will count snow as air, or long grass or the like
+	 * Determines if a block counts as air by the modules, for example a vehicle will count snow as air, or long grass or the like
 	 * @param x The X coordinate of the block
 	 * @param y The Y coordinate of the block
 	 * @param z The Z coordinate of the block
 	 * @return If this block counts as air by the modules
 	 */
 	protected boolean countsAsAir(int x, int y, int z) {
-	    if (getCart().worldObj.isAirBlock(x, y, z)) {
+	    if (getVehicle().getWorld().isAirBlock(x, y, z)) {
 			return true;
 		}
 
-        Block b = getCart().worldObj.getBlock(x, y, z);
+        Block b = getVehicle().getWorld().getBlock(x, y, z);
 
 		if (b instanceof BlockSnow) {
 			return true;
@@ -1571,7 +1575,7 @@ public abstract class ModuleBase {
 	
 	
 	/**
-	 * Called when the cart is passing a vanilla activator rail
+	 * Called when the vehicle is passing a vanilla activator rail
 	 * @param x The X coordinate of the rail
 	 * @param y The Y coordinate of the rail
 	 * @param z The Z coordinate of the rail
@@ -1612,7 +1616,7 @@ public abstract class ModuleBase {
 	
 
 	protected FakePlayer getFakePlayer() {
-		return FakePlayerFactory.getMinecraft((WorldServer)getCart().worldObj);
+		return FakePlayerFactory.getMinecraft((WorldServer)getVehicle().getWorld());
 	}
 
 	public boolean disableStandardKeyFunctionality() {

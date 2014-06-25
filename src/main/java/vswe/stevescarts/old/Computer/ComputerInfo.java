@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
-import vswe.stevescarts.old.Modules.ModuleBase;
+import vswe.stevescarts.vehicles.modules.ModuleBase;
 import vswe.stevescarts.old.Modules.Workers.ModuleComputer;
 import vswe.stevescarts.old.Modules.Workers.ModuleTorch;
 import vswe.stevescarts.old.Modules.Workers.Tools.ModuleDrill;

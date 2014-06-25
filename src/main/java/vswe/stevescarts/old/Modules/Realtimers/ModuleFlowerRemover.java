@@ -10,7 +10,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
-import vswe.stevescarts.old.Modules.ModuleBase;
+import vswe.stevescarts.vehicles.modules.ModuleBase;
 import net.minecraftforge.common.IShearable;
 public class ModuleFlowerRemover extends ModuleBase {
 

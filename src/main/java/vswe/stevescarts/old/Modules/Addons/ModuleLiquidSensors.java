@@ -4,7 +4,7 @@ import net.minecraft.block.BlockFalling;
 import net.minecraft.init.Blocks;
 import net.minecraftforge.fluids.IFluidBlock;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
-import vswe.stevescarts.old.Modules.ModuleBase;
+import vswe.stevescarts.vehicles.modules.ModuleBase;
 import vswe.stevescarts.old.Modules.Workers.ModuleLiquidDrainer;
 import vswe.stevescarts.old.Modules.Workers.Tools.ModuleDrill;
 public class ModuleLiquidSensors extends ModuleAddon {

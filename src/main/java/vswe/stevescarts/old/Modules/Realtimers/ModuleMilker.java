@@ -9,7 +9,7 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Interfaces.GuiMinecart;
-import vswe.stevescarts.old.Modules.ModuleBase;
+import vswe.stevescarts.vehicles.modules.ModuleBase;
 import vswe.stevescarts.old.Slots.SlotBase;
 import vswe.stevescarts.old.Slots.SlotMilker;
 

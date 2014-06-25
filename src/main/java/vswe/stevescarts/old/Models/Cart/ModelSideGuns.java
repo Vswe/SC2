@@ -3,7 +3,7 @@ package vswe.stevescarts.old.Models.Cart;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.util.ResourceLocation;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
-import vswe.stevescarts.old.Modules.ModuleBase;
+import vswe.stevescarts.vehicles.modules.ModuleBase;
 import vswe.stevescarts.old.Modules.Realtimers.ModuleShooterAdvSide;
 
 public class ModelSideGuns extends ModelCartbase {

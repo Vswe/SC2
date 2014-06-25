@@ -21,10 +21,11 @@ import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.world.World;
 import vswe.stevescarts.old.Blocks.BlockCartAssembler;
 import vswe.stevescarts.old.Blocks.ModBlocks;
+import vswe.stevescarts.vehicles.VehicleBase;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Containers.ContainerBase;
 import vswe.stevescarts.old.Containers.ContainerMinecart;
-import vswe.stevescarts.old.Modules.ModuleBase;
+import vswe.stevescarts.vehicles.modules.ModuleBase;
 import vswe.stevescarts.old.TileEntities.TileEntityBase;
 
 import com.google.common.io.ByteArrayDataInput;
@@ -206,14 +207,14 @@ public class PacketHandler {
         packetHandler.sendToServer(createPacket(bs.toByteArray()));
 	}	
 	
-	public static void sendPacketToPlayer(int id, byte[] data, EntityPlayer player, EntityModularCart cart) {
+	public static void sendPacketToPlayer(int id, byte[] data, EntityPlayer player, VehicleBase vehicle) {
 		ByteArrayOutputStream bs = new ByteArrayOutputStream();
 		DataOutputStream ds = new DataOutputStream(bs);
 
 		try {
 			ds.writeByte((byte)id);
 
-			ds.writeInt(cart.getEntityId());
+			ds.writeInt(vehicle.getEntity().getEntityId());
 			
 			for (byte b : data) {
 				ds.writeByte(b);

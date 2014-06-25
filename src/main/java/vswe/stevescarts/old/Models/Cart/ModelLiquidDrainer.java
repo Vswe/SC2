@@ -1,7 +1,7 @@
 package vswe.stevescarts.old.Models.Cart;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import vswe.stevescarts.old.Modules.ModuleBase;
+import vswe.stevescarts.vehicles.modules.ModuleBase;
 @SideOnly(Side.CLIENT)
 public class ModelLiquidDrainer extends ModelCleaner
 {

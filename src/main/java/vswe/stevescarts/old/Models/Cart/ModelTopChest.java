@@ -2,7 +2,7 @@ package vswe.stevescarts.old.Models.Cart;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.util.ResourceLocation;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
-import vswe.stevescarts.old.Modules.ModuleBase;
+import vswe.stevescarts.vehicles.modules.ModuleBase;
 import vswe.stevescarts.old.Modules.Storages.Chests.ModuleChest;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
