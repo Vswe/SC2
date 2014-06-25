@@ -84,13 +84,13 @@ public abstract class ModuleChest extends ModuleStorage {
 		}
 	}
 
-	public void openChest() {
+	public void openInventory() {
 		if (hasVisualChest()) {
 			updateDw(0,getDw(0)+1);
 		}
 	}
 
-	public void closeChest() {
+	public void closeInventory() {
 		if (hasVisualChest()) {
 			updateDw(0,getDw(0)-1);
 		}
