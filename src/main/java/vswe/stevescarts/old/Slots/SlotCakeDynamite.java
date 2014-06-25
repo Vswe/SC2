@@ -1,0 +1,19 @@
+package vswe.stevescarts.old.Slots;
+import vswe.stevescarts.old.Items.ModItems;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
+
+public class SlotCakeDynamite extends SlotCake implements ISlotExplosions
+{
+    public SlotCakeDynamite(IInventory iinventory, int i, int j, int k)
+    {
+        super(iinventory, i, j, k);
+    }
+
+    public boolean isItemValid(ItemStack itemstack)
+    {
+        return super.isItemValid(itemstack) || (itemstack != null && itemstack.getItem() == ModItems.component && itemstack.getItemDamage() == 6);
+    }
+
+
+}
