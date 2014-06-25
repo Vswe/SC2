@@ -4,7 +4,9 @@ import cpw.mods.fml.common.network.FMLEventChannel;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.Logger;
+import vswe.stevesvehicles.modules.data.ModuleRegistry;
 import vswe.stevesvehicles.network.PacketHandler;
+import vswe.stevesvehicles.vehicles.VehicleRegistry;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.CraftingHandler;
 import vswe.stevesvehicles.old.Helpers.CreativeTabSC2;
@@ -72,6 +74,9 @@ public class StevesVehicles {
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+        VehicleRegistry.init();
+        ModuleRegistry.init();
+
 		logger = event.getModLog();
 
         packetHandler = NetworkRegistry.INSTANCE.newEventDrivenChannel(CHANNEL);
