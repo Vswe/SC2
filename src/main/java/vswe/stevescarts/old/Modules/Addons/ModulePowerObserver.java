@@ -3,10 +3,10 @@ package vswe.stevescarts.old.Modules.Addons;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.Localization;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.old.Modules.Engines.ModuleEngine;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -38,7 +38,7 @@ public class ModulePowerObserver extends ModuleAddon {
 	}		
 	
 	@Override
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 	    drawString(gui,getModuleName(), 8, 6, 0x404040);
 	    
 	    for (int i = 0; i < 4; i++) {
@@ -56,7 +56,7 @@ public class ModulePowerObserver extends ModuleAddon {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawBackground(GuiMinecart gui, int x, int y) {		
+	public void drawBackground(GuiVehicle gui, int x, int y) {
 		for (int i  = 0; i < getCart().getEngines().size(); i++) {
 			if (!removeOnPickup() || currentEngine != i) {
 				drawEngine(gui, i, getEngineRect(i));
@@ -104,7 +104,7 @@ public class ModulePowerObserver extends ModuleAddon {
 	}	
 	
 	
-	private void drawEngine(GuiMinecart gui, int id, int [] rect) {
+	private void drawEngine(GuiVehicle gui, int id, int [] rect) {
 		ModuleEngine engine = getCart().getEngines().get(id);
 		
 		ResourceHelper.bindResourcePath("/atlas/items.png");
@@ -137,7 +137,7 @@ public class ModulePowerObserver extends ModuleAddon {
 	}	
 	
 	@Override
-	public void drawMouseOver(GuiMinecart gui, int x, int y) {
+	public void drawMouseOver(GuiVehicle gui, int x, int y) {
 		for (int i  = 0; i < getCart().getEngines().size(); i++) {		
 			if (!removeOnPickup() || currentEngine != i) {
 				ModuleEngine engine = getCart().getEngines().get(i);
@@ -233,7 +233,7 @@ public class ModulePowerObserver extends ModuleAddon {
 	private int currentEngine = -1;
 	
 	@Override
-	public void mouseMovedOrUp(GuiMinecart gui,  int x, int y, int button) {
+	public void mouseMovedOrUp(GuiVehicle gui,  int x, int y, int button) {
 		if (button != -1) {
 			if (button == 0) {
 				for (int i = 0; i < 4; i++) {
@@ -250,7 +250,7 @@ public class ModulePowerObserver extends ModuleAddon {
 	}
 	
 	@Override
-	public void mouseClicked(GuiMinecart gui, int x, int y, int button) {
+	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 
 		for (int i  = 0; i < 4; i++) {
 			int[] rect = getPowerRect(i);

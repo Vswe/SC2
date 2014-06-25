@@ -10,9 +10,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Vec3;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.common.IPlantable;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.Localization;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.old.Modules.ICropModule;
 import vswe.stevescarts.old.Modules.ISuppliesModule;
 import vswe.stevescarts.modules.ModuleBase;
@@ -56,7 +56,7 @@ public abstract class ModuleFarmer extends ModuleTool implements ISuppliesModule
 	}
 
 	@Override
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 	    drawString(gui, Localization.MODULES.TOOLS.FARMER.translate(), 8, 6, 0x404040);
 	}
 

@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.old.Helpers.Localization;
 import vswe.stevescarts.old.StevesCarts;
 import vswe.stevescarts.old.Arcade.TrackOrientation.DIRECTION;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.old.Modules.Realtimers.ModuleArcade;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -250,7 +250,7 @@ public class ArcadeTracks extends ArcadeGame {
 	
 
 	@Override
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 		if (isSaveMenuOpen) {
 			int[] menu = getSaveMenuArea();
 			if (failedToSave) {
@@ -313,7 +313,7 @@ public class ArcadeTracks extends ArcadeGame {
 	private static String textureGame = "/gui/trackgame.png";
 	
 	@Override
-	public void drawBackground(GuiMinecart gui, int x, int y) {
+	public void drawBackground(GuiVehicle gui, int x, int y) {
 		if (!isSaveMenuOpen && isMenuOpen) {
 			ResourceHelper.bindResource(textureMenu);
 			
@@ -406,7 +406,7 @@ public class ArcadeTracks extends ArcadeGame {
 	}
 	
 	@Override
-	public void drawMouseOver(GuiMinecart gui, int x, int y) {
+	public void drawMouseOver(GuiVehicle gui, int x, int y) {
 		for (int i = 0; i < BUTTON_COUNT; i++) {
 			if (!isButtonDisabled(i) && isButtonVisible(i)) {
 				getModule().drawStringOnMouseOver(gui, getButtonText(i), x, y, getButtonArea(i));
@@ -415,7 +415,7 @@ public class ArcadeTracks extends ArcadeGame {
 	}	
 
 	@Override
-	public void mouseMovedOrUp(GuiMinecart gui,int x, int y, int button) {
+	public void mouseMovedOrUp(GuiVehicle gui,int x, int y, int button) {
 		if (isSaveMenuOpen) {
 			return;
 		}
@@ -447,7 +447,7 @@ public class ArcadeTracks extends ArcadeGame {
 	
 	
 	@Override
-	public void mouseClicked(GuiMinecart gui, int x, int y, int button) {
+	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (isSaveMenuOpen) {
 		
 		}else if (isMenuOpen) {
@@ -815,7 +815,7 @@ public class ArcadeTracks extends ArcadeGame {
 	private String validSaveNameCharacters = "abcdefghijklmnopqrstuvwxyz0123456789 ";
 	
 	@Override
-	public void keyPress(GuiMinecart gui, char character, int extraInformation) {
+	public void keyPress(GuiVehicle gui, char character, int extraInformation) {
 		if (isSaveMenuOpen) {
 			if (saveName.length() < 15 && validSaveNameCharacters.indexOf(Character.toLowerCase(character)) != -1) {
 				saveName += character;

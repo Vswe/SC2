@@ -8,8 +8,8 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.tileentity.TileEntity;
-import vswe.stevescarts.old.Containers.ContainerBase;
-import vswe.stevescarts.old.Interfaces.GuiBase;
+import vswe.stevescarts.containers.ContainerBase;
+import vswe.stevescarts.client.interfaces.GuiBase;
 
 public abstract class TileEntityBase extends TileEntity {
 

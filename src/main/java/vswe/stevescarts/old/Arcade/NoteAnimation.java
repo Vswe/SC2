@@ -1,6 +1,6 @@
 package vswe.stevescarts.old.Arcade;
 
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 
 public class NoteAnimation {
 
@@ -15,7 +15,7 @@ public class NoteAnimation {
 		this.isNew = isNew;
 	}
 
-	public boolean draw(ArcadeMonopoly game, GuiMinecart gui, int x, int y) {
+	public boolean draw(ArcadeMonopoly game, GuiVehicle gui, int x, int y) {
 		if (animation >= 0) {
 			if (isNew) {
 				note.draw(game, gui, x, y - 10 + animation / 2);

@@ -10,11 +10,11 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.EnchantmentInfo.ENCHANTMENT_TYPE;
 import vswe.stevescarts.old.Helpers.Localization;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.old.Modules.ISuppliesModule;
 import vswe.stevescarts.modules.ModuleBase;
 import vswe.stevescarts.old.Modules.Addons.ModuleEnchants;
@@ -68,7 +68,7 @@ public class ModuleShooter extends ModuleBase implements ISuppliesModule {
 	}
 
 	@Override
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 	    drawString(gui, Localization.MODULES.ATTACHMENTS.SHOOTER.translate(), 8, 6, 0x404040);
 
 		int delay = AInterval[arrowInterval];
@@ -124,7 +124,7 @@ public class ModuleShooter extends ModuleBase implements ISuppliesModule {
 		
 	
 	@Override
-	public void drawBackground(GuiMinecart gui, int x, int y) {
+	public void drawBackground(GuiVehicle gui, int x, int y) {
 		ResourceHelper.bindResource("/gui/shooter.png");
 
 		drawImage(gui, pipeSelectionX + (26-8) / 2, pipeSelectionY + (26-8) / 2 - 1, 0, 104, 8, 9);
@@ -185,7 +185,7 @@ public class ModuleShooter extends ModuleBase implements ISuppliesModule {
 	}
 
 	@Override
-	public void mouseClicked(GuiMinecart gui, int x, int y, int button) {
+	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0) {
 			if (inRect(x,y,intervalDragArea)) {
 				dragState = y - (intervalSelectionY + arrowInterval * 2);
@@ -202,7 +202,7 @@ public class ModuleShooter extends ModuleBase implements ISuppliesModule {
 
 	private int dragState = -1;
 	@Override
-	public void mouseMovedOrUp(GuiMinecart gui,int x, int y, int button) {
+	public void mouseMovedOrUp(GuiVehicle gui,int x, int y, int button) {
 	    if (button != -1)
         {
             dragState = -1;

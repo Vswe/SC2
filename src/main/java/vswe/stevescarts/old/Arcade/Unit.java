@@ -1,6 +1,6 @@
 package vswe.stevescarts.old.Arcade;
 
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 
 public abstract class Unit {
 
@@ -18,7 +18,7 @@ public abstract class Unit {
 		this.health = 1;
 	}
 	
-	public abstract void draw(GuiMinecart gui);
+	public abstract void draw(GuiVehicle gui);
 	
 	public UPDATE_RESULT update() {
 		if (!dead) {

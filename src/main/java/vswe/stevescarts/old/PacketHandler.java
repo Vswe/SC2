@@ -23,8 +23,8 @@ import vswe.stevescarts.old.Blocks.BlockCartAssembler;
 import vswe.stevescarts.old.Blocks.ModBlocks;
 import vswe.stevescarts.vehicles.VehicleBase;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
-import vswe.stevescarts.old.Containers.ContainerBase;
-import vswe.stevescarts.old.Containers.ContainerMinecart;
+import vswe.stevescarts.containers.ContainerBase;
+import vswe.stevescarts.containers.ContainerMinecart;
 import vswe.stevescarts.modules.ModuleBase;
 import vswe.stevescarts.old.TileEntities.TileEntityBase;
 

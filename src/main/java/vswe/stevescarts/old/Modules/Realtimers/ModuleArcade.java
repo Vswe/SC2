@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.old.Arcade.ArcadeGame;
 import vswe.stevescarts.old.Arcade.ArcadeInvaders;
 import vswe.stevescarts.old.Arcade.ArcadeSweeper;
@@ -12,7 +13,6 @@ import vswe.stevescarts.old.Arcade.ArcadeTracks;
 import vswe.stevescarts.old.Arcade.TrackStory;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.modules.ModuleBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -75,7 +75,7 @@ public class ModuleArcade extends ModuleBase {
 	}
 	
 	@Override
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 		if (isGameActive()) {
 		    //drawString(gui, currentGame.getName(), 8, 6, 0x404040);
 			
@@ -98,7 +98,7 @@ public class ModuleArcade extends ModuleBase {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawBackground(GuiMinecart gui, int x, int y) {
+	public void drawBackground(GuiVehicle gui, int x, int y) {
 		ResourceHelper.bindResource("/gui/arcade.png");
 		
 		afkTimer = 0;
@@ -136,7 +136,7 @@ public class ModuleArcade extends ModuleBase {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawMouseOver(GuiMinecart gui, int x, int y) {
+	public void drawMouseOver(GuiVehicle gui, int x, int y) {
 		if (isGameActive()) {
 			drawStringOnMouseOver(gui, "Exit", x, y, getExitArea());
 			currentGame.drawMouseOver(gui, x, y);
@@ -181,7 +181,7 @@ public class ModuleArcade extends ModuleBase {
 	}
 	
 	@Override
-	public void mouseClicked(GuiMinecart gui, int x, int y, int button) {
+	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (isGameActive()) {
 			if (button == 0 && inRect(x,y, getExitArea())) {
 				currentGame.unload(gui);
@@ -203,14 +203,14 @@ public class ModuleArcade extends ModuleBase {
 	}
 	
 	@Override
-	public void mouseMovedOrUp(GuiMinecart gui,int x, int y, int button) {
+	public void mouseMovedOrUp(GuiVehicle gui,int x, int y, int button) {
 		if (isGameActive()) {
 			currentGame.mouseMovedOrUp(gui, x, y, button);
 		}
 	}
 	
 	@Override
-	public void keyPress(GuiMinecart gui, char character, int extraInformation) {
+	public void keyPress(GuiVehicle gui, char character, int extraInformation) {
 		if (isGameActive()) {
 			currentGame.keyPress(gui, character, extraInformation);
 		}		

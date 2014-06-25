@@ -1,9 +1,9 @@
 package vswe.stevescarts.old.Modules.Engines;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.Localization;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -94,7 +94,7 @@ public abstract class ModuleSolarBase extends ModuleEngine {
 	
 
 	@Override
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 	    drawString(gui, Localization.MODULES.ENGINES.SOLAR.translate(), 8, 6, 0x404040);
         String strfuel = Localization.MODULES.ENGINES.NO_POWER.translate();
 
@@ -110,7 +110,7 @@ public abstract class ModuleSolarBase extends ModuleEngine {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawBackground(GuiMinecart gui, int x, int y) {
+	public void drawBackground(GuiVehicle gui, int x, int y) {
 		super.drawBackground(gui,x,y);
 
 		ResourceHelper.bindResource("/gui/solar.png");

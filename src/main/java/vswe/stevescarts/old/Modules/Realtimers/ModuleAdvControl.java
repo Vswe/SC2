@@ -9,11 +9,11 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import org.lwjgl.opengl.GL11;
 
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.old.Helpers.Localization;
 import vswe.stevescarts.old.PacketHandler;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.old.Modules.ILeverModule;
 import vswe.stevescarts.modules.ModuleBase;
 import vswe.stevescarts.old.Modules.Engines.ModuleEngine;
@@ -489,7 +489,7 @@ public class ModuleAdvControl extends ModuleBase implements ILeverModule {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawBackground(GuiMinecart gui, int x, int y) {
+	public void drawBackground(GuiVehicle gui, int x, int y) {
 		ResourceHelper.bindResource("/gui/advlever.png");
 
 		if (inRect(x,y, buttonRect)) {
@@ -502,12 +502,12 @@ public class ModuleAdvControl extends ModuleBase implements ILeverModule {
 	private int[] buttonRect = new int[] {15,20, 24, 12};
 
 	@Override
-	public void drawMouseOver(GuiMinecart gui, int x, int y) {
+	public void drawMouseOver(GuiVehicle gui, int x, int y) {
 		drawStringOnMouseOver(gui, Localization.MODULES.ATTACHMENTS.CONTROL_RESET.translate(), x,y,buttonRect);
 	}
 
 	@Override
-	public void mouseClicked(GuiMinecart gui, int x, int y, int button) {
+	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0) {
 			if (inRect(x,y, buttonRect)) {
 				sendPacket(3);
@@ -516,7 +516,7 @@ public class ModuleAdvControl extends ModuleBase implements ILeverModule {
 	}
 	
 	@Override
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 	    drawString(gui, Localization.MODULES.ATTACHMENTS.CONTROL_SYSTEM.translate(), 8, 6, 0x404040);
 	}
 	

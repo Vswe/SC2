@@ -8,10 +8,10 @@ import net.minecraft.init.Items;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Vec3;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.BlockCoord;
 import vswe.stevescarts.old.Helpers.Localization;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.old.Modules.ISuppliesModule;
 import vswe.stevescarts.old.Modules.ITreeModule;
 import vswe.stevescarts.modules.ModuleBase;
@@ -35,7 +35,7 @@ public abstract class ModuleWoodcutter extends ModuleTool implements ISuppliesMo
 	}
 
 	@Override
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 	    drawString(gui, Localization.MODULES.TOOLS.CUTTER.translate(), 8, 6, 0x404040);
 	}
 

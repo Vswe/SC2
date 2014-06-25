@@ -2,7 +2,7 @@ package vswe.stevescarts.old.Arcade;
 
 import java.util.ArrayList;
 
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 
 public class ScrollableList {
 	
@@ -51,7 +51,7 @@ public class ScrollableList {
 	}
 	
 	
-	public void drawBackground(GuiMinecart gui, int x, int y) {
+	public void drawBackground(GuiVehicle gui, int x, int y) {
 		if (!isVisible()) {
 			return;
 		}
@@ -83,7 +83,7 @@ public class ScrollableList {
 		game.getModule().drawImage(gui, area[0], area[1] + scrollPosition, 132, 256 - (items.size() >= 4 ? 32 : 16),  14, 16);	
 	}
 	
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 		if (!isVisible()) {
 			return;
 		}		
@@ -107,7 +107,7 @@ public class ScrollableList {
 	}
 	
 
-	public void mouseMovedOrUp(GuiMinecart gui,int x, int y, int button) {
+	public void mouseMovedOrUp(GuiVehicle gui,int x, int y, int button) {
 		if (!isVisible()) {
 			return;
 		}		
@@ -169,7 +169,7 @@ public class ScrollableList {
 	}
 
 		
-	public void mouseClicked(GuiMinecart gui, int x, int y, int button) {	
+	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (!isVisible()) {
 			return;
 		}		

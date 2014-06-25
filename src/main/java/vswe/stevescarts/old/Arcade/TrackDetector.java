@@ -2,7 +2,7 @@ package vswe.stevescarts.old.Arcade;
 
 import java.util.ArrayList;
 
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.old.Modules.Realtimers.ModuleArcade;
 
 
@@ -108,7 +108,7 @@ public class TrackDetector extends Track {
 	}	
 	
 	@Override
-	public void drawOverlay(ModuleArcade module, GuiMinecart gui, int x, int y, boolean isRunning) {
+	public void drawOverlay(ModuleArcade module, GuiVehicle gui, int x, int y, boolean isRunning) {
 		if (!isRunning && module.inRect(x, y, ArcadeTracks.getTrackArea(getX(), getY()))) {
 			for (TrackCoordinate target : targets) {
 				module.drawImage(gui, ArcadeTracks.getTrackArea(target.getX(), target.getY()), 0, 128);

@@ -1,4 +1,4 @@
-package vswe.stevescarts.old.Interfaces;
+package vswe.stevescarts.client.interfaces;
 import java.util.ArrayList;
 
 import net.minecraft.entity.player.InventoryPlayer;
@@ -6,7 +6,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import vswe.stevescarts.vehicles.entities.EntityModularCart;
+import vswe.stevescarts.vehicles.VehicleBase;
 import vswe.stevescarts.old.Helpers.GeneratedInfo;
 import vswe.stevescarts.old.Helpers.ModuleCountPair;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
@@ -16,42 +16,41 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class GuiMinecart extends GuiBase
-{
-    public GuiMinecart(InventoryPlayer invPlayer, EntityModularCart cart)
-    {
-        super(cart.getCon(invPlayer));
-        setup(cart);
+public class GuiVehicle extends GuiBase {
+
+    private VehicleBase vehicle;
+
+    public GuiVehicle(InventoryPlayer invPlayer, VehicleBase vehicle) {
+        super(vehicle.getCon(invPlayer));
+        setup(vehicle);
     }
 
-    protected void setup(EntityModularCart cart)
-    {
-        this.cart = cart;
+    protected void setup(VehicleBase vehicle){
+        this.vehicle = vehicle;
 
 		setXSize(478);
 		setYSize(256);
     }
 
-    public void drawGuiForeground(int x, int y)
-    {
-
+    @Override
+    public void drawGuiForeground(int x, int y) {
 		GL11.glDisable(GL11.GL_LIGHTING);
 
 	
-		if (cart.getModules() != null) {
-			ModuleBase thief = cart.getInterfaceThief();
+		if (vehicle.getModules() != null) {
+			ModuleBase thief = vehicle.getInterfaceThief();
 			
 			if (thief != null) {
 				drawModuleForeground(thief);
 				drawModuleMouseOver(thief, x, y);
 			}else{
-				for (ModuleBase module : cart.getModules()) {
+				for (ModuleBase module : vehicle.getModules()) {
 					drawModuleForeground(module);
 				}
 	
 				renderModuleListText(x, y);
 				
-				for (ModuleBase module : cart.getModules()) {
+				for (ModuleBase module : vehicle.getModules()) {
 					drawModuleMouseOver(module, x, y);
 				}
 				
@@ -66,8 +65,8 @@ public class GuiMinecart extends GuiBase
 
     private static ResourceLocation textureLeft = ResourceHelper.getResource("/gui/guiBase1.png");
     private static ResourceLocation textureRight = ResourceHelper.getResource("/gui/guiBase2.png");
-    public void drawGuiBackground(float f, int x, int y)
-    {
+    @Override
+    public void drawGuiBackground(float f, int x, int y) {
 		GL11.glDisable(GL11.GL_LIGHTING);
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -80,14 +79,14 @@ public class GuiMinecart extends GuiBase
         ResourceHelper.bindResource(textureRight);
         drawTexturedModalRect(j+256, k, 0, 0, xSize-256, ySize);
         
-		ModuleBase thief = cart.getInterfaceThief();
+		ModuleBase thief = vehicle.getInterfaceThief();
 
 		if (thief != null) {
 			drawModuleSlots(thief);
 			drawModuleBackground(thief, x, y);
 			drawModuleBackgroundItems(thief, x, y);
 			
-			for (ModuleBase module : cart.getModules()) {
+			for (ModuleBase module : vehicle.getModules()) {
 				if (module.hasGui()) {
 					if (module.hasSlots()) {
 						ArrayList<SlotBase> slotsList = module.getSlots();
@@ -98,23 +97,23 @@ public class GuiMinecart extends GuiBase
 				}
 			}
 		
-		}else if (cart.getModules() != null) {
+		}else if (vehicle.getModules() != null) {
 			drawTexturedModalRect(j + scrollBox[0], k + scrollBox[1], 222, 24, scrollBox[2], scrollBox[3]);
-			drawTexturedModalRect(j + scrollBox[0] + 2, k + scrollBox[1] + 2 + cart.getScrollY(), 222+18, 26 + (cart.canScrollModules ? 0 : 25), 14, 25);
+			drawTexturedModalRect(j + scrollBox[0] + 2, k + scrollBox[1] + 2 + vehicle.getScrollY(), 222+18, 26 + (vehicle.canScrollModules ? 0 : 25), 14, 25);
 			
 								
-			for (ModuleBase module : cart.getModules()) {
+			for (ModuleBase module : vehicle.getModules()) {
 				drawModuleSlots(module);
 			}
 
 			//loop again since these function calls will probably bind other textures
-			for (ModuleBase module : cart.getModules()) {
+			for (ModuleBase module : vehicle.getModules()) {
 				drawModuleBackground(module, x, y);
 			}
 			
 			renderModuleList(x, y);
 			
-			for (ModuleBase module : cart.getModules()) {
+			for (ModuleBase module : vehicle.getModules()) {
 				drawModuleBackgroundItems(module, x, y);
 			}
 			
@@ -131,7 +130,7 @@ public class GuiMinecart extends GuiBase
     	x -= getGuiLeft();
     	y -= getGuiTop();
     	
-    	ArrayList<ModuleCountPair> moduleCounts = cart.getModuleCounts();
+    	ArrayList<ModuleCountPair> moduleCounts = vehicle.getModuleCounts();
     	ResourceHelper.bindResource(moduleTexture);
     	
     	GL11.glEnable(GL11.GL_BLEND);
@@ -151,10 +150,10 @@ public class GuiMinecart extends GuiBase
     	x -= getGuiLeft();
     	y -= getGuiTop();    	
     	
-    	ArrayList<ModuleCountPair> moduleCounts = cart.getModuleCounts();
+    	ArrayList<ModuleCountPair> moduleCounts = vehicle.getModuleCounts();
     	GL11.glColor4f(1F, 1F, 1F, 1F);
     	
-    	getFontRenderer().drawString(cart.getCartName(), 5, 172, 0x404040);
+    	getFontRenderer().drawString(vehicle.getVehicleName(), 5, 172, 0x404040);
     	
     	GL11.glEnable(GL11.GL_BLEND);
     	for (int i = 0; i < moduleCounts.size(); i++) {
@@ -174,7 +173,7 @@ public class GuiMinecart extends GuiBase
     	x -= getGuiLeft();
     	y -= getGuiTop();    	
     	
-    	ArrayList<ModuleCountPair> moduleCounts = cart.getModuleCounts();
+    	ArrayList<ModuleCountPair> moduleCounts = vehicle.getModuleCounts();
     	GL11.glColor4f(1F, 1F, 1F, 1F);
     	
     	for (int i = 0; i < moduleCounts.size(); i++) {
@@ -196,21 +195,20 @@ public class GuiMinecart extends GuiBase
     
 	private boolean isScrolling;
 	private int[] scrollBox = new int[] {450,15,18,225};
-	public void mouseClick(int x, int y, int button)
-    {
+	public void mouseClick(int x, int y, int button) {
         super.mouseClick(x, y, button);
 
 
-		ModuleBase thief = cart.getInterfaceThief();
+		ModuleBase thief = vehicle.getInterfaceThief();
 		
 		if (thief != null) {
 			handleModuleMouseClicked(thief, x, y, button);				
-		}else if (cart.getModules() != null) {		
+		}else if (vehicle.getModules() != null) {
 			if (inRect(x-getGuiLeft(),y-getGuiTop(), scrollBox[0], scrollBox[1], scrollBox[2], scrollBox[3])) {
 				isScrolling = true;
 			}			
 			
-			for (ModuleBase module : cart.getModules()) {
+			for (ModuleBase module : vehicle.getModules()) {
 				handleModuleMouseClicked(module, x, y, button);
 			}
 		}
@@ -220,9 +218,9 @@ public class GuiMinecart extends GuiBase
 	protected boolean inRect(int x, int y, int x1, int y1, int sizeX, int sizeY) {
 		return x >= x1 && x <= x1 + sizeX && y >= y1 && y <= y1 + sizeY;
 	}	
-	
-	public void mouseMoved(int x, int y, int button)
-    {
+
+    @Override
+	public void mouseMoved(int x, int y, int button) {
         super.mouseMoved(x, y, button);
 		
 		if (isScrolling) {
@@ -232,7 +230,7 @@ public class GuiMinecart extends GuiBase
 			}else if(temp > 198) {
 				temp = 198;
 			}
-			cart.setScrollY(temp);
+			vehicle.setScrollY(temp);
 		}
 		
 		if (button != -1) {
@@ -240,30 +238,31 @@ public class GuiMinecart extends GuiBase
 		}	
 		
 		
-		if (cart.getModules() != null) {
-			ModuleBase thief = cart.getInterfaceThief();
+		if (vehicle.getModules() != null) {
+			ModuleBase thief = vehicle.getInterfaceThief();
 			
 			if (thief != null) {
 				handleModuleMouseMoved(thief, x, y, button);
 			}else{
-				for (ModuleBase module : cart.getModules()) {
+				for (ModuleBase module : vehicle.getModules()) {
 					handleModuleMouseMoved(module, x, y, button);
 				}
 			}
 		}
     }
 
+    @Override
 	public void keyPress(char character, int extraInformation) {
 		super.keyPress(character,extraInformation);
 		
-		if (cart.getModules() != null) {
+		if (vehicle.getModules() != null) {
 
-			ModuleBase thief = cart.getInterfaceThief();
+			ModuleBase thief = vehicle.getInterfaceThief();
 			
 			if (thief != null) {
 				handleModuleKeyPress(thief, character, extraInformation);
 			}else{
-				for (ModuleBase module : cart.getModules()) {
+				for (ModuleBase module : vehicle.getModules()) {
 					handleModuleKeyPress(module, character, extraInformation);
 				}
 			}
@@ -273,14 +272,14 @@ public class GuiMinecart extends GuiBase
 	
     @Override
     public boolean disableStandardKeyFunctionality() {
-		if (cart.getModules() != null) {
+		if (vehicle.getModules() != null) {
 
-			ModuleBase thief = cart.getInterfaceThief();
+			ModuleBase thief = vehicle.getInterfaceThief();
 			
 			if (thief != null) {
 				return thief.disableStandardKeyFunctionality();
 			}else{
-				for (ModuleBase module : cart.getModules()) {
+				for (ModuleBase module : vehicle.getModules()) {
 					if (module.disableStandardKeyFunctionality()) {
 						return true;
 					}
@@ -291,7 +290,6 @@ public class GuiMinecart extends GuiBase
 		return false;
     }	
 	
-    private EntityModularCart cart;
 
 
     private void drawModuleForeground(ModuleBase module) {
@@ -323,7 +321,7 @@ public class GuiMinecart extends GuiBase
 					boolean drawAll = rect[3] == 16;
 					if (drawAll) {
 						slot.xDisplayPosition = slot.getX() + module.getX() + 1;
-						slot.yDisplayPosition = slot.getY() + module.getY() + 1 - cart.getRealScrollY();
+						slot.yDisplayPosition = slot.getY() + module.getY() + 1 - vehicle.getRealScrollY();
 					}else{
 						resetSlot(slot);
 					}

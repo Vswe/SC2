@@ -1,8 +1,8 @@
 package vswe.stevescarts.old.Buttons;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.modules.ModuleBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -54,7 +54,7 @@ public abstract class ButtonBase
         return false;
     }
 
-    public final void computeOnClick(GuiMinecart gui, int mousebutton)
+    public final void computeOnClick(GuiVehicle gui, int mousebutton)
     {
 		if (this.isVisible() && this.isEnabled()) {
 			onClientClick(mousebutton, gui.isCtrlKeyDown(), gui.isShiftKeyDown());
@@ -109,7 +109,7 @@ public abstract class ButtonBase
     }
 
 
-	public void drawButtonText(GuiMinecart gui, ModuleBase module) {
+	public void drawButtonText(GuiVehicle gui, ModuleBase module) {
 		if (this.isVisible() && this.hasText())
 		{
 			module.drawString(gui, this.toString(), X() + 8, Y() + 7, 0xFFFFFF);
@@ -119,7 +119,7 @@ public abstract class ButtonBase
 	@SideOnly(Side.CLIENT)	
 	private static ResourceLocation texture = ResourceHelper.getResource("/gui/buttons.png");	
 	
-	public void drawButton(GuiMinecart gui, ModuleBase module, int x, int y) {
+	public void drawButton(GuiVehicle gui, ModuleBase module, int x, int y) {
 	    boolean visibility = this.isVisible();
 		if (visibility != lastVisibility) {
 			module.buttonVisibilityChanged();			

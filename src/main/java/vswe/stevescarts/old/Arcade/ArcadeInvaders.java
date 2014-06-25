@@ -7,11 +7,11 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import org.lwjgl.input.Keyboard;
 
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.old.Arcade.Unit.UPDATE_RESULT;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.Localization;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.old.Modules.Realtimers.ModuleArcade;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -207,7 +207,7 @@ public class ArcadeInvaders extends ArcadeGame {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawBackground(GuiMinecart gui, int x, int y) {
+	public void drawBackground(GuiVehicle gui, int x, int y) {
 		ResourceHelper.bindResource(texture);
 		
 		
@@ -244,7 +244,7 @@ public class ArcadeInvaders extends ArcadeGame {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 		getModule().drawString(gui, Localization.ARCADE.EXTRA_LIVES.translate() + ":", 10, 180, 0x404040);
 		getModule().drawString(gui, Localization.ARCADE.HIGH_SCORE.translate(String.valueOf(highscore)), 10, 210, 0x404040);
 		getModule().drawString(gui, Localization.ARCADE.SCORE.translate(String.valueOf(score)), 10, 220, 0x404040);
@@ -257,7 +257,7 @@ public class ArcadeInvaders extends ArcadeGame {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void keyPress(GuiMinecart gui, char character, int extraInformation) {
+	public void keyPress(GuiVehicle gui, char character, int extraInformation) {
 		if (Character.toLowerCase(character) == 'r') {
 			start();
 		}

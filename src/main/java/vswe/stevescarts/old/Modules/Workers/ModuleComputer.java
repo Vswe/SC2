@@ -2,6 +2,7 @@ package vswe.stevescarts.old.Modules.Workers;
 import java.util.ArrayList;
 
 import net.minecraft.entity.player.EntityPlayer;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.old.Buttons.ButtonBase;
 import vswe.stevescarts.old.Buttons.ButtonTask;
 import vswe.stevescarts.old.Buttons.ButtonProgramStart;
@@ -46,7 +47,6 @@ import vswe.stevescarts.old.Computer.ComputerProg;
 import vswe.stevescarts.old.Computer.ComputerTask;
 import vswe.stevescarts.old.Computer.ComputerVar;
 import vswe.stevescarts.old.Computer.IWriting;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 
 
 public class ModuleComputer extends ModuleWorker {
@@ -79,7 +79,7 @@ public class ModuleComputer extends ModuleWorker {
 	}	
 
 	@Override
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 	    //drawString(gui,"Assembly", 8, 6, 0x404040);
 		
 		if (isWriting()) {

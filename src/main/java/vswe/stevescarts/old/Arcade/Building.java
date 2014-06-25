@@ -1,6 +1,6 @@
 package vswe.stevescarts.old.Arcade;
 
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 
 public class Building extends Unit {
 
@@ -10,7 +10,7 @@ public class Building extends Unit {
 	}
 
 	@Override
-	public void draw(GuiMinecart gui) {
+	public void draw(GuiVehicle gui) {
 		game.getModule().drawImage(gui, x, y, 32 + (10 - this.health) * 16, 16, 16, 16);
 	}
 

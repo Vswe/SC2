@@ -2,8 +2,8 @@ package vswe.stevescarts.old.Arcade;
 
 import java.util.ArrayList;
 
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
-import vswe.stevescarts.old.Interfaces.GuiBase.RENDER_ROTATION;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
+import vswe.stevescarts.client.interfaces.GuiBase.RENDER_ROTATION;
 import vswe.stevescarts.old.Modules.Realtimers.ModuleArcade;
 
 public class Track  {
@@ -98,7 +98,7 @@ public class Track  {
 	
 	
 	public void travel(ArcadeTracks game, Cart cart) {}
-	public void drawOverlay(ModuleArcade module, GuiMinecart gui, int x, int y, boolean isRunning) {}
+	public void drawOverlay(ModuleArcade module, GuiVehicle gui, int x, int y, boolean isRunning) {}
 	
 	
 	public static void addTrack(ArrayList<Track> tracks, int x1, int y1, int x2, int y2) {

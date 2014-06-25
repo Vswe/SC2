@@ -1,6 +1,6 @@
 package vswe.stevescarts.old.Arcade;
 
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 
 public class TetrisPiecePart {
 
@@ -14,7 +14,7 @@ public class TetrisPiecePart {
 		this.offY = offY;
 	}
 
-	public void render(ArcadeTetris game, GuiMinecart gui, int x, int y) {
+	public void render(ArcadeTetris game, GuiVehicle gui, int x, int y) {
 		block.render(game, gui, x + offX, y + offY);
 	}
 

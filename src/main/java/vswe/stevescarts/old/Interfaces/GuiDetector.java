@@ -6,6 +6,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
+import vswe.stevescarts.client.interfaces.GuiBase;
 import vswe.stevescarts.old.Containers.ContainerDetector;
 import vswe.stevescarts.old.Helpers.DetectorType;
 import vswe.stevescarts.old.Helpers.DropDownMenu;

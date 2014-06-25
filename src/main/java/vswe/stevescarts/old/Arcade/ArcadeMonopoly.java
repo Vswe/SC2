@@ -5,12 +5,12 @@ import java.util.EnumSet;
 
 import org.lwjgl.opengl.GL11;
 
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.old.Arcade.Piece.CONTROLLED_BY;
 import vswe.stevescarts.old.Arcade.Place.PLACE_STATE;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.Localization;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.old.Modules.Realtimers.ModuleArcade;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -581,7 +581,7 @@ public class ArcadeMonopoly extends ArcadeGame {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawBackground(GuiMinecart gui, int x, int y) {
+	public void drawBackground(GuiVehicle gui, int x, int y) {
 		loadTexture(gui, 1);
 		die.draw(gui, 20, 20);
 		die2.draw(gui, 50, 20);
@@ -757,7 +757,7 @@ public class ArcadeMonopoly extends ArcadeGame {
 	private static final int CARD_WIDTH = 142;
 	private static final int CARD_HEIGHT = 80;
 	
-	private void drawCard(GuiMinecart gui, boolean isFront) {
+	private void drawCard(GuiVehicle gui, boolean isFront) {
 		GL11.glPushMatrix();
 		
 
@@ -786,7 +786,7 @@ public class ArcadeMonopoly extends ArcadeGame {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 		int id = 0;
 		for (Button button : buttons) {
 			if (button.isReallyVisible(this)) {
@@ -813,7 +813,7 @@ public class ArcadeMonopoly extends ArcadeGame {
 		
 	}
 	
-	private void drawStreetRent(GuiMinecart gui, Street street, int structures) {
+	private void drawStreetRent(GuiVehicle gui, Street street, int structures) {
 		loadTexture(gui, 1);
 		
 		int graphicalStructures = structures;
@@ -832,7 +832,7 @@ public class ArcadeMonopoly extends ArcadeGame {
 		Note.drawValue(this, gui, 370, yPos, 3, street.getRentCost(structures));
 	}
 	
-	private void drawStationRent(GuiMinecart gui, Station station, int ownedStations) {
+	private void drawStationRent(GuiVehicle gui, Station station, int ownedStations) {
 		loadTexture(gui, 1);
 		
 		int yPos = 181 + (ownedStations - 1) * 17;
@@ -844,7 +844,7 @@ public class ArcadeMonopoly extends ArcadeGame {
 		Note.drawValue(this, gui, 410, yPos, 2, station.getRentCost(ownedStations));
 	}
 	
-	private void drawUtilityRent(GuiMinecart gui, Utility utility, int utils) {
+	private void drawUtilityRent(GuiVehicle gui, Utility utility, int utils) {
 		loadTexture(gui, 1);
 		
 		int yPos = 181 + (utils - 1) * 17;
@@ -921,7 +921,7 @@ public class ArcadeMonopoly extends ArcadeGame {
 	}
 	
 	
-	private void drawPropertyOnBoard(GuiMinecart gui, Place place, int id, int side, int i, boolean hover) {
+	private void drawPropertyOnBoard(GuiVehicle gui, Place place, int id, int side, int i, boolean hover) {
 		int offX;
 		int offY;	
 		int rotation;
@@ -992,7 +992,7 @@ public class ArcadeMonopoly extends ArcadeGame {
 
 	}
 	
-	private void drawPropertyOnBoardWithPositionRotationAndScale(GuiMinecart gui, Place place, int id,  boolean zoom, boolean hover, int x, int y, int r, float s) {
+	private void drawPropertyOnBoardWithPositionRotationAndScale(GuiVehicle gui, Place place, int id,  boolean zoom, boolean hover, int x, int y, int r, float s) {
 		GL11.glPushMatrix();
 		
 		EnumSet<PLACE_STATE> states = EnumSet.noneOf(PLACE_STATE.class);
@@ -1046,7 +1046,7 @@ public class ArcadeMonopoly extends ArcadeGame {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void mouseClicked(GuiMinecart gui, int x, int y, int b) {
+	public void mouseClicked(GuiVehicle gui, int x, int y, int b) {
 		float smallgridX = x / SCALE - ((EntityModularCart.MODULAR_SPACE_WIDTH / SCALE) - (PLACE_HEIGHT * 2 + (BOARD_WIDTH - 1) * PLACE_WIDTH)) / 2;
 		float smallgridY = y / SCALE - ((EntityModularCart.MODULAR_SPACE_HEIGHT / SCALE) - (PLACE_HEIGHT * 2 + (BOARD_HEIGHT - 1) * PLACE_WIDTH)) / 2;
 
@@ -1103,7 +1103,7 @@ public class ArcadeMonopoly extends ArcadeGame {
 	
 	
 
-	public void loadTexture(GuiMinecart gui, int number) {
+	public void loadTexture(GuiVehicle gui, int number) {
 		ResourceHelper.bindResource(textures[number]);
 		GL11.glColor4f(1F, 1F, 1F, 1F);	
 	}

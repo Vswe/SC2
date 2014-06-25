@@ -1,7 +1,7 @@
 package vswe.stevescarts.old.Arcade;
 
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.old.StevesCarts;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 
 public class TetrisPiece {
 
@@ -152,7 +152,7 @@ public class TetrisPiece {
 	}		
 	
 	
-	public void render(ArcadeTetris game, GuiMinecart gui) {
+	public void render(ArcadeTetris game, GuiVehicle gui) {
 		for (int i = 0; i < parts.length; i++) {
 			parts[i].render(game, gui, x, y);
 		}

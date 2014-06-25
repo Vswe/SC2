@@ -6,10 +6,10 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import org.lwjgl.opengl.GL11;
 
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.Localization;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.modules.ModuleBase;
 
 public class ModuleNote extends ModuleBase {
@@ -103,7 +103,7 @@ public class ModuleNote extends ModuleBase {
 	}
 	
 	@Override
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 	    drawString(gui,getModuleName(), 8, 6, 0x404040);
 		
 		
@@ -316,13 +316,13 @@ public class ModuleNote extends ModuleBase {
 			return getScrollY() <= trackID && trackID < getScrollY() + tracksInView;
 		}
 		
-		public void draw(GuiMinecart gui, int x, int y) {
+		public void draw(GuiVehicle gui, int x, int y) {
 			if (isValid()) {
 				super.draw(gui, x, y);
 			}
 		}	
 
-		public void overlay(GuiMinecart gui, int x, int y) {
+		public void overlay(GuiVehicle gui, int x, int y) {
 			if (isValid()) {
 				super.overlay(gui, x, y);
 			}
@@ -355,7 +355,7 @@ public class ModuleNote extends ModuleBase {
 			return rect;
 		}
 		
-		public void overlay(GuiMinecart gui, int x, int y) {
+		public void overlay(GuiVehicle gui, int x, int y) {
 			drawStringOnMouseOver(gui, text,x, y, getRect());
 		}
 		
@@ -365,7 +365,7 @@ public class ModuleNote extends ModuleBase {
 			}	
 		}
 		
-		public void draw(GuiMinecart gui, int x, int y) {
+		public void draw(GuiVehicle gui, int x, int y) {
 			if (!inRect(x,y, getRect())) {
 				GL11.glColor4f((float)(color >> 16) / 255.0F, (float)(color >> 8 & 255) / 255.0F, (float)(color & 255) / 255.0F, 1F);
 			}
@@ -394,7 +394,7 @@ public class ModuleNote extends ModuleBase {
 			track.notes.add(this);
 		}
 		
-		public void drawText(GuiMinecart gui, int trackID, int noteID) {
+		public void drawText(GuiVehicle gui, int trackID, int noteID) {
 			if (instrumentId == 0) {
 				return;
 			}
@@ -410,7 +410,7 @@ public class ModuleNote extends ModuleBase {
 			drawString(gui, str, rect[0] + 3, rect[1] +6, instrumentColors[instrumentId]);
 		}
 		
-		public void draw(GuiMinecart gui, int x, int y, int trackID, int noteID) {
+		public void draw(GuiVehicle gui, int x, int y, int trackID, int noteID) {
 			int srcX = 0;
 			if (instrumentId == 0) {
 				srcX += 16;
@@ -570,7 +570,7 @@ public class ModuleNote extends ModuleBase {
 
 	
 	@Override
-	public void drawBackground(GuiMinecart gui, int x, int y) {
+	public void drawBackground(GuiVehicle gui, int x, int y) {
 		ResourceHelper.bindResource("/gui/note.png");
 
 
@@ -691,7 +691,7 @@ public class ModuleNote extends ModuleBase {
 	
 	
 	@Override
-	public void drawMouseOver(GuiMinecart gui, int x, int y) {
+	public void drawMouseOver(GuiVehicle gui, int x, int y) {
 		for(int i = getScrollY(); i < Math.min(tracks.size(), getScrollY() + tracksInView); i++) {
 			Track track = tracks.get(i);
 			
@@ -713,7 +713,7 @@ public class ModuleNote extends ModuleBase {
 	}	
 	
 	@Override
-	public void mouseMovedOrUp(GuiMinecart gui,int x, int y, int button) {
+	public void mouseMovedOrUp(GuiVehicle gui,int x, int y, int button) {
 		if (isScrollingX) {
 			setMarkerX(x);
 				
@@ -741,7 +741,7 @@ public class ModuleNote extends ModuleBase {
 	}	
 	
 	@Override
-	public void mouseClicked(GuiMinecart gui, int x, int y, int buttonId) {	
+	public void mouseClicked(GuiVehicle gui, int x, int y, int buttonId) {
 		if (buttonId == 0) {
 			for (Button button : buttons) {
 				button.clicked(x,y);

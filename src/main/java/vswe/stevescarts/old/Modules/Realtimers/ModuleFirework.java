@@ -7,8 +7,8 @@ import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.modules.ModuleBase;
 import vswe.stevescarts.old.Slots.SlotBase;
 import vswe.stevescarts.old.Slots.SlotFirework;
@@ -48,7 +48,7 @@ public class ModuleFirework extends ModuleBase {
 	}
 
 	@Override
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 	    drawString(gui,getModuleName(), 8, 6, 0x404040);
 	}
 

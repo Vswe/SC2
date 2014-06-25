@@ -1,6 +1,6 @@
 package vswe.stevescarts.old.Modules.Storages.Chests;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.old.Modules.Storages.ModuleStorage;
 import vswe.stevescarts.old.Slots.SlotBase;
 import vswe.stevescarts.old.Slots.SlotChest;
@@ -28,7 +28,7 @@ public abstract class ModuleChest extends ModuleStorage {
 	}
 
 	@Override
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 	    drawString(gui, getModuleName(), 8, 6, 0x404040);
 	}
 

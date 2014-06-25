@@ -2,11 +2,11 @@ package vswe.stevescarts.old.Arcade;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.old.Arcade.TetrisPiece.MOVE_RESULT;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.Localization;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.old.Modules.Realtimers.ModuleArcade;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -133,7 +133,7 @@ public class ArcadeTetris extends ArcadeGame {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawBackground(GuiMinecart gui, int x, int y) {
+	public void drawBackground(GuiVehicle gui, int x, int y) {
 		ResourceHelper.bindResource(texture);
 		
 		getModule().drawImage(gui, BOARD_START_X - 2, BOARD_START_Y - 2, 0, 40, 104, 154);
@@ -166,7 +166,7 @@ public class ArcadeTetris extends ArcadeGame {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void keyPress(GuiMinecart gui, char character, int extraInformation) {
+	public void keyPress(GuiVehicle gui, char character, int extraInformation) {
 		if (piece != null) {
 			if (Character.toLowerCase(character) == 'w') {			
 				piece.rotate(board);			
@@ -186,7 +186,7 @@ public class ArcadeTetris extends ArcadeGame {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void mouseClicked(GuiMinecart gui, int x, int y, int button) {
+	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0 && !isPlaying && gameOverTicks >= 150 && getModule().inRect(x, y, new int[] {BOARD_START_X, BOARD_START_Y, 100, 150})) {
 			newgame();
 		}
@@ -194,7 +194,7 @@ public class ArcadeTetris extends ArcadeGame {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 		getModule().drawString(gui, Localization.ARCADE.HIGH_SCORE.translate(String.valueOf(highscore)), 10, 20, 0x404040);
 		getModule().drawString(gui, Localization.ARCADE.SCORE.translate(String.valueOf(score)), 10, 40, 0x404040);
 		getModule().drawString(gui, Localization.ARCADE.REMOVED_LINES.translate(String.valueOf(removed)), 10, 60, 0x404040);

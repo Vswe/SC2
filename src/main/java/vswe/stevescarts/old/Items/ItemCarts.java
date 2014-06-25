@@ -10,9 +10,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagByteArray;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import vswe.stevescarts.vehicles.versions.VehicleVersion;
 import vswe.stevescarts.old.StevesCarts;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
-import vswe.stevescarts.old.Helpers.CartVersion;
 import vswe.stevescarts.old.Helpers.ColorHelper;
 import vswe.stevescarts.old.Helpers.GeneratedInfo;
 import vswe.stevescarts.old.Helpers.ModuleCountPair;
@@ -49,7 +49,7 @@ public class ItemCarts extends ItemMinecart
 	@Override
     public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
     {
-		CartVersion.updateItemStack(par1ItemStack);
+		VehicleVersion.updateItemStack(par1ItemStack);
 		
 	    if (BlockRailBase.func_150049_b_(par3World,par4, par5, par6))
         {
@@ -82,7 +82,7 @@ public class ItemCarts extends ItemMinecart
      * allows items to add custom lines of information to the mouseover description
      */
     public void addInformation(ItemStack item, EntityPlayer player, List list, boolean useExtraInfo) {
-		CartVersion.updateItemStack(item);
+		VehicleVersion.updateItemStack(item);
 		
 		NBTTagCompound info = item.getTagCompound();
 		if (info != null) {

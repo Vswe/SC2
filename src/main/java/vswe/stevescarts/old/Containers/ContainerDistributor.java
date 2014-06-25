@@ -1,6 +1,7 @@
 package vswe.stevescarts.old.Containers;
 import java.util.ArrayList;
 
+import vswe.stevescarts.containers.ContainerBase;
 import vswe.stevescarts.old.TileEntities.TileEntityBase;
 import net.minecraft.inventory.IInventory;
 import vswe.stevescarts.old.Helpers.DistributorSide;

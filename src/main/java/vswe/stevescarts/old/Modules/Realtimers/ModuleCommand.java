@@ -5,9 +5,9 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChunkCoordinates;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.modules.ModuleBase;
 
 public abstract /*remove the abstract*/ class ModuleCommand extends ModuleBase implements ICommandSender {
@@ -18,7 +18,7 @@ public abstract /*remove the abstract*/ class ModuleCommand extends ModuleBase i
 	private String command = "say HI";
 	
 	@Override
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 		List lines = gui.getFontRenderer().listFormattedStringToWidth(command,textbox[2] - 4);
 		for (int i = 0; i < lines.size(); i++) {
 			String line = lines.get(i).toString();
@@ -42,7 +42,7 @@ public abstract /*remove the abstract*/ class ModuleCommand extends ModuleBase i
 	
 	
 	@Override
-	public void drawBackground(GuiMinecart gui, int x, int y) {
+	public void drawBackground(GuiVehicle gui, int x, int y) {
 		ResourceHelper.bindResource("/gui/command.png");
 		
 		drawImage(gui, textbox, 0, 0);

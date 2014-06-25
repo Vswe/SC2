@@ -25,16 +25,16 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.old.Helpers.NBTHelper;
 import vswe.stevescarts.old.PacketHandler;
 import vswe.stevescarts.old.Buttons.ButtonBase;
 import vswe.stevescarts.vehicles.VehicleBase;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
-import vswe.stevescarts.old.Containers.ContainerMinecart;
+import vswe.stevescarts.containers.ContainerMinecart;
 import vswe.stevescarts.old.Helpers.CompButtons;
 import vswe.stevescarts.old.Helpers.SimulationInfo;
-import vswe.stevescarts.old.Interfaces.GuiBase.RENDER_ROTATION;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
+import vswe.stevescarts.client.interfaces.GuiBase.RENDER_ROTATION;
 import vswe.stevescarts.old.Models.Cart.ModelCartbase;
 import vswe.stevescarts.old.ModuleData.ModuleData;
 import vswe.stevescarts.old.Slots.SlotBase;
@@ -247,7 +247,7 @@ public abstract class ModuleBase {
 	 * @param character The character pressed
 	 * @param extraInformation Extra information of special keys
 	 */
-	public void keyPress(GuiMinecart gui, char character, int extraInformation) {}
+	public void keyPress(GuiVehicle gui, char character, int extraInformation) {}
 	
 	//the list of the slots used by this module
 	protected ArrayList<SlotBase> slotList;	
@@ -406,7 +406,7 @@ public abstract class ModuleBase {
 	 * @param gui The GUI that will draw the interface
 	 */
 	 @SideOnly(Side.CLIENT)
-	public void drawForeground(GuiMinecart gui) {}
+	public void drawForeground(GuiVehicle gui) {}
 
 	 /**
 	  * Draws a one lined string in the center of the given rectangle. It will handle scrolling as well as module offset.
@@ -416,7 +416,7 @@ public abstract class ModuleBase {
 	  * @param c The color to be used
 	  */
 	 @SideOnly(Side.CLIENT)
-	 public void drawString(GuiMinecart gui,String str, int[] rect, int c) {
+	 public void drawString(GuiVehicle gui,String str, int[] rect, int c) {
 		if (rect.length < 4) {
 			return;
 		}else{
@@ -433,12 +433,12 @@ public abstract class ModuleBase {
 	 * @param c The color to be used
 	 */
 	 @SideOnly(Side.CLIENT)
-	public void drawString(GuiMinecart gui,String str, int x, int y, int c) {
+	public void drawString(GuiVehicle gui,String str, int x, int y, int c) {
 		 drawString(gui, str, x, y, -1, false, c);
 	 }	 
 		 
 	 @SideOnly(Side.CLIENT)	 
-	public void drawString(GuiMinecart gui,String str, int x, int y, int w, boolean center, int c) {
+	public void drawString(GuiVehicle gui,String str, int x, int y, int w, boolean center, int c) {
 		 int j = gui.getGuiLeft();
 		 int k = gui.getGuiTop();
 		 int[] rect = new int[] {x, y , w, 8};
@@ -460,7 +460,7 @@ public abstract class ModuleBase {
 	}
 	 
 	 @SideOnly(Side.CLIENT)	 
-	public void drawStringWithShadow(GuiMinecart gui,String str, int x, int y, int c) {
+	public void drawStringWithShadow(GuiVehicle gui,String str, int x, int y, int c) {
 		 int j = gui.getGuiLeft();
 		 int k = gui.getGuiTop();
 		 int[] rect = new int[] {x, y , 0, 8};
@@ -486,13 +486,13 @@ public abstract class ModuleBase {
 	 * @param c The color to be used
 	 */
 	 @SideOnly(Side.CLIENT)
-	public void drawSplitString(GuiMinecart gui,String str, int x, int y, int w, int c) {
+	public void drawSplitString(GuiVehicle gui,String str, int x, int y, int w, int c) {
 		 drawSplitString(gui, str, x, y, w, false, c);
 	 }
 	 
 	 
 	 @SideOnly(Side.CLIENT)
-	public void drawSplitString(GuiMinecart gui,String str, int x, int y, int w, boolean center, int c) {
+	public void drawSplitString(GuiVehicle gui,String str, int x, int y, int w, boolean center, int c) {
 		//split the string in multiple lines
 		List newlines = gui.getFontRenderer().listFormattedStringToWidth(str,w);
 		
@@ -504,7 +504,7 @@ public abstract class ModuleBase {
 	}
 
 	 
-	public void drawItemInInterface(GuiMinecart gui, ItemStack item, int x, int y) {
+	public void drawItemInInterface(GuiVehicle gui, ItemStack item, int x, int y) {
 		int[] rect = new int[] {x, y, 16, 16};
 		handleScroll(rect);
 		if (rect[3] == 16) {
@@ -526,7 +526,7 @@ public abstract class ModuleBase {
 	 * @param sizeY The height of the image
 	 */
 	 @SideOnly(Side.CLIENT) 
-	public void drawImage(GuiMinecart gui, int targetX, int targetY, int srcX, int srcY, int sizeX, int sizeY) {
+	public void drawImage(GuiVehicle gui, int targetX, int targetY, int srcX, int srcY, int sizeX, int sizeY) {
 		drawImage(gui, targetX, targetY, srcX, srcY, sizeX, sizeY, RENDER_ROTATION.NORMAL);
 	}
 	 
@@ -542,7 +542,7 @@ public abstract class ModuleBase {
 	 * @param rotation The rotation this will be drawn with
 	 */
 	 @SideOnly(Side.CLIENT)
-	public void drawImage(GuiMinecart gui, int targetX, int targetY, int srcX, int srcY, int sizeX, int sizeY, RENDER_ROTATION rotation) {
+	public void drawImage(GuiVehicle gui, int targetX, int targetY, int srcX, int srcY, int sizeX, int sizeY, RENDER_ROTATION rotation) {
 		//create a rectangle and call the other drawImage function to do the job
 		drawImage(gui, new int[] {targetX,targetY,sizeX,sizeY}, srcX,srcY, rotation);
 	}
@@ -555,7 +555,7 @@ public abstract class ModuleBase {
 	 * @param srcY They y coordinate in the source file
 	 */
 	 @SideOnly(Side.CLIENT)
-	public void drawImage(GuiMinecart gui, int[] rect, int srcX, int srcY) {
+	public void drawImage(GuiVehicle gui, int[] rect, int srcX, int srcY) {
 		 drawImage(gui, rect, srcX, srcY, RENDER_ROTATION.NORMAL);
 	}
 	
@@ -568,7 +568,7 @@ public abstract class ModuleBase {
 	 * @param rotation The rotation this will be drawn with
 	 */
 	 @SideOnly(Side.CLIENT)
-	public void drawImage(GuiMinecart gui, int[] rect, int srcX, int srcY, RENDER_ROTATION rotation) {
+	public void drawImage(GuiVehicle gui, int[] rect, int srcX, int srcY, RENDER_ROTATION rotation) {
 		//the rectangle need to be valid
 		if (rect.length < 4) {
 			return;
@@ -599,7 +599,7 @@ public abstract class ModuleBase {
 	 * @param sizeY The height of the image
 	 */	
 	@SideOnly(Side.CLIENT)	 
-	public void drawImage(GuiMinecart gui, IIcon icon, int targetX, int targetY, int srcX, int srcY, int sizeX, int sizeY) {
+	public void drawImage(GuiVehicle gui, IIcon icon, int targetX, int targetY, int srcX, int srcY, int sizeX, int sizeY) {
 		//create a rectangle and call the other drawImage function to do the job
 		drawImage(gui, icon, new int[] {targetX,targetY,sizeX,sizeY}, srcX, srcY);
 	}
@@ -611,7 +611,7 @@ public abstract class ModuleBase {
 	 * @param srcY They y coordinate in the source file
 	 */
 	@SideOnly(Side.CLIENT)
-	public void drawImage(GuiMinecart gui, IIcon icon, int[] rect, int srcX, int srcY) {
+	public void drawImage(GuiVehicle gui, IIcon icon, int[] rect, int srcX, int srcY) {
 		//the rectangle need to be valid
 		if (rect.length < 4) {
 			return;
@@ -822,7 +822,7 @@ public abstract class ModuleBase {
 	 * @param gui The gui to draw on
 	 */
 	 @SideOnly(Side.CLIENT)
-	public final void drawButtonText(GuiMinecart gui) {
+	public final void drawButtonText(GuiVehicle gui) {
 		for (ButtonBase button : buttons) {
 			button.drawButtonText(gui, this);
 		}
@@ -834,7 +834,7 @@ public abstract class ModuleBase {
 	 * @param y The y coordinate of the mouse
 	 */
 	 @SideOnly(Side.CLIENT)
-	public final void drawButtons(GuiMinecart gui, int x, int y) {
+	public final void drawButtons(GuiVehicle gui, int x, int y) {
 		for (ButtonBase button : buttons) {
 			button.drawButton(gui, this, x, y);
 		}
@@ -846,7 +846,7 @@ public abstract class ModuleBase {
 	 * @param y The y coordinate of the mouse
 	 */	
 	 @SideOnly(Side.CLIENT)
-	public final void drawButtonOverlays(GuiMinecart gui, int x, int y) {
+	public final void drawButtonOverlays(GuiVehicle gui, int x, int y) {
 		for (ButtonBase button : buttons) {
 			if (button.isVisible()) {
 				drawStringOnMouseOver(gui, button.toString(), x, y, button.getBounds());
@@ -862,7 +862,7 @@ public abstract class ModuleBase {
 	 * @param mousebutton The button which was pressed
 	 */	
 	@SideOnly(Side.CLIENT)	 
-	public final void mouseClickedButton(GuiMinecart gui, int x, int y, int mousebutton) {
+	public final void mouseClickedButton(GuiVehicle gui, int x, int y, int mousebutton) {
 		for (ButtonBase button : buttons) {
 			if (inRect(x,y, button.getBounds())) {
 				button.computeOnClick(gui, mousebutton);
@@ -889,11 +889,11 @@ public abstract class ModuleBase {
 	 * @param y The y coordinate of the mouse
 	 */
 	 @SideOnly(Side.CLIENT)
-	public void drawBackground(GuiMinecart gui, int x, int y) {}
+	public void drawBackground(GuiVehicle gui, int x, int y) {}
 	
 	 
 	 @SideOnly(Side.CLIENT)
-	public void drawBackgroundItems(GuiMinecart gui, int x, int y) {}
+	public void drawBackgroundItems(GuiVehicle gui, int x, int y) {}
 	 
 	/**
 	 * Used to handle mouse clicks on the module's interface
@@ -903,7 +903,7 @@ public abstract class ModuleBase {
 	 * @param button The button that was pressed on the mouse
 	 */
 	 @SideOnly(Side.CLIENT)
-	public void mouseClicked(GuiMinecart gui,int x, int y, int button) {}
+	public void mouseClicked(GuiVehicle gui,int x, int y, int button) {}
 	
 	/**
 	 * Used to handle mouse movement and move releases in the module's interface
@@ -913,7 +913,7 @@ public abstract class ModuleBase {
 	 * @param button The button that was released, or -1 if the cursor is just being moved
 	 */
 	 @SideOnly(Side.CLIENT)
-	public void mouseMovedOrUp(GuiMinecart gui,int x, int y, int button) {}
+	public void mouseMovedOrUp(GuiVehicle gui,int x, int y, int button) {}
 	
 	/**
 	 * Used to draw mouse over text for a module
@@ -922,7 +922,7 @@ public abstract class ModuleBase {
 	 * @param y The y coordiante of the mouse
 	 */
 	 @SideOnly(Side.CLIENT)
-	public void drawMouseOver(GuiMinecart gui, int x, int y) {}
+	public void drawMouseOver(GuiVehicle gui, int x, int y) {}
 
 	/**
 	 * Detects if the given mouse coordinates are within the given rectangle
@@ -1425,7 +1425,7 @@ public abstract class ModuleBase {
 	 * @param h The height of the rectangle
 	 */
 	 @SideOnly(Side.CLIENT)
-	public final void drawStringOnMouseOver(GuiMinecart gui, String str, int x, int y, int x1, int y1, int w, int h) {
+	public final void drawStringOnMouseOver(GuiVehicle gui, String str, int x, int y, int x1, int y1, int w, int h) {
 		//creates a rectangle and calls the other drawStringOnMouseOver
 		drawStringOnMouseOver(gui, str, x, y, new int[] {x1, y1, w, h});
 	}
@@ -1439,7 +1439,7 @@ public abstract class ModuleBase {
 	 * @param rect The rectangle that the mouse has to be in, defin as {x,y,width,height}
 	 */
 	 @SideOnly(Side.CLIENT)
-	 public final void drawStringOnMouseOver(GuiMinecart gui, String str, int x, int y, int[] rect) {
+	 public final void drawStringOnMouseOver(GuiVehicle gui, String str, int x, int y, int[] rect) {
 		//if it's not in the rectangle the text shouldn't be written
 		if (!inRect(x,y, rect)) {
 			return;

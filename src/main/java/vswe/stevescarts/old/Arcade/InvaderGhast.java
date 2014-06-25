@@ -1,6 +1,6 @@
 package vswe.stevescarts.old.Arcade;
 
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 
 public class InvaderGhast extends Unit {
@@ -24,7 +24,7 @@ public class InvaderGhast extends Unit {
 	}
 
 	@Override
-	public void draw(GuiMinecart gui) {
+	public void draw(GuiVehicle gui) {
 		if (isPahighast) {
 			game.drawImageInArea(gui, x, y, 32, 32, 16, 16);
 		}else{

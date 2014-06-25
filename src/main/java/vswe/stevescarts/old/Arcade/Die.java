@@ -1,6 +1,6 @@
 package vswe.stevescarts.old.Arcade;
 
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 
 public class Die {
 
@@ -14,7 +14,7 @@ public class Die {
 		randomize();
 	}
 	
-	public void draw(GuiMinecart gui, int x, int y) {
+	public void draw(GuiVehicle gui, int x, int y) {
 		game.getModule().drawImage(gui, x, y, 256 - 24 * (graphicalId + 1), 256 - 24, 24, 24);
 		
 		switch (number) {
@@ -45,7 +45,7 @@ public class Die {
 		}
 	}
 
-	private void drawEye(GuiMinecart gui, int x, int y) {
+	private void drawEye(GuiVehicle gui, int x, int y) {
 		game.getModule().drawImage(gui, x, y, 256 - 6 * (graphicalId + 1), 256 - 24 - 6, 6, 6);
 	}
 	

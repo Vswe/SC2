@@ -2,11 +2,11 @@ package vswe.stevescarts.old.Arcade;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.old.Helpers.Localization;
 import vswe.stevescarts.old.StevesCarts;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.SoundHandler;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.old.Modules.Realtimers.ModuleArcade;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -41,22 +41,22 @@ public abstract class ArcadeGame {
 	
 	
 	@SideOnly(Side.CLIENT)
-	public void drawForeground(GuiMinecart gui) {}
+	public void drawForeground(GuiVehicle gui) {}
 	
 	@SideOnly(Side.CLIENT)
-	public void drawBackground(GuiMinecart gui, int x, int y) {}
+	public void drawBackground(GuiVehicle gui, int x, int y) {}
 	
 	@SideOnly(Side.CLIENT)
-	public void drawMouseOver(GuiMinecart gui, int x, int y) {}
+	public void drawMouseOver(GuiVehicle gui, int x, int y) {}
 	
 	@SideOnly(Side.CLIENT)
-	public void mouseClicked(GuiMinecart gui, int x, int y, int button) {}
+	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {}
 	
 	@SideOnly(Side.CLIENT)
-	public void mouseMovedOrUp(GuiMinecart gui,int x, int y, int button) {}	
+	public void mouseMovedOrUp(GuiVehicle gui,int x, int y, int button) {}
 	
 	@SideOnly(Side.CLIENT)
-	public void keyPress(GuiMinecart gui, char character, int extraInformation) {}	
+	public void keyPress(GuiVehicle gui, char character, int extraInformation) {}
 	
 	public void Save(NBTTagCompound tagCompound, int id) {}
 	public void Load(NBTTagCompound tagCompound, int id) {}
@@ -88,21 +88,21 @@ public abstract class ArcadeGame {
 	}
 
 
-	public void load(GuiMinecart gui) {
+	public void load(GuiVehicle gui) {
 		gui.enableKeyRepeat(allowKeyRepeat());
 	}
 	
-	public void unload(GuiMinecart gui) {
+	public void unload(GuiVehicle gui) {
 		if (allowKeyRepeat()) {
 			gui.enableKeyRepeat(false);
 		}
 	}	
 	
-	public void drawImageInArea(GuiMinecart gui, int x, int y, int u, int v, int w, int h) {
+	public void drawImageInArea(GuiVehicle gui, int x, int y, int u, int v, int w, int h) {
 		drawImageInArea(gui, x, y, u, v, w, h, 5, 4, EntityModularCart.MODULAR_SPACE_WIDTH,  EntityModularCart.MODULAR_SPACE_HEIGHT);
 	}
 	
-	public void drawImageInArea(GuiMinecart gui, int x, int y, int u, int v, int w, int h, int x1, int y1, int x2, int y2) {		
+	public void drawImageInArea(GuiVehicle gui, int x, int y, int u, int v, int w, int h, int x1, int y1, int x2, int y2) {
 		if (x < x1) {
 			w -= x1 - x;
 			u += x1 - x;

@@ -7,10 +7,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.Localization;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.modules.ModuleBase;
 import vswe.stevescarts.old.Slots.SlotBase;
 import vswe.stevescarts.old.Slots.SlotChest;
@@ -38,7 +38,7 @@ public abstract class ModuleRecipe extends ModuleAddon {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawBackground(GuiMinecart gui, int x, int y) {
+	public void drawBackground(GuiVehicle gui, int x, int y) {
 		if (canUseAdvancedFeatures()) {
 			int [] area = getArea();		
 			
@@ -56,7 +56,7 @@ public abstract class ModuleRecipe extends ModuleAddon {
 		}	
 	}
 	
-	private void drawControlRect(GuiMinecart gui, int x, int y, int i) {
+	private void drawControlRect(GuiVehicle gui, int x, int y, int i) {
 		int v = i * 11;
 		int[] rect = getControlRect(i);
 		
@@ -69,7 +69,7 @@ public abstract class ModuleRecipe extends ModuleAddon {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 		if (canUseAdvancedFeatures()) {
 			String str;
 			
@@ -90,7 +90,7 @@ public abstract class ModuleRecipe extends ModuleAddon {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawBackgroundItems(GuiMinecart gui, int x, int y) {
+	public void drawBackgroundItems(GuiVehicle gui, int x, int y) {
 		if (canUseAdvancedFeatures()) {
 			ItemStack icon;
 			if (isTargetInvalid()) {
@@ -109,7 +109,7 @@ public abstract class ModuleRecipe extends ModuleAddon {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawMouseOver(GuiMinecart gui, int x, int y) {
+	public void drawMouseOver(GuiVehicle gui, int x, int y) {
 		if (canUseAdvancedFeatures()) {
 			String str = Localization.MODULES.ADDONS.RECIPE_OUTPUT.translate() + "\n" + Localization.MODULES.ADDONS.CURRENT.translate() + ": ";
 			if (isTargetInvalid()) {
@@ -179,7 +179,7 @@ public abstract class ModuleRecipe extends ModuleAddon {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void mouseClicked(GuiMinecart gui, int x, int y, int button) {
+	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (canUseAdvancedFeatures()) {
 			if (inRect(x, y, getArea())) {
 				sendPacket(0, (byte)button);

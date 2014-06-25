@@ -2,9 +2,9 @@ package vswe.stevescarts.old.Modules.Engines;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.Localization;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.old.Slots.SlotBase;
 import vswe.stevescarts.old.Slots.SlotFuel;
 
@@ -122,7 +122,7 @@ public abstract class ModuleCoalBase extends ModuleEngine {
 	}
 
 	@Override
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 	    drawString(gui, Localization.MODULES.ENGINES.COAL.translate(), 8, 6, 0x404040);
         String strfuel = Localization.MODULES.ENGINES.NO_FUEL.translate();
 

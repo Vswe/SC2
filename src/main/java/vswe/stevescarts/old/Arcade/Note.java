@@ -2,8 +2,8 @@ package vswe.stevescarts.old.Arcade;
 
 import java.util.ArrayList;
 
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 
 public class Note {
 
@@ -35,21 +35,21 @@ public class Note {
 		return id;
 	}
 	
-	public void draw(ArcadeMonopoly game, GuiMinecart gui, int x, int y) {
+	public void draw(ArcadeMonopoly game, GuiVehicle gui, int x, int y) {
 		game.loadTexture(gui, 1);
 		game.getModule().drawImage(gui, x, y, ArcadeMonopoly.PLACE_WIDTH + u * 16, 22 + 16 + v * 16, 16, 16);		
 	}
 	
-	public void draw(ArcadeMonopoly game, GuiMinecart gui, int x, int y, int amount) {
+	public void draw(ArcadeMonopoly game, GuiVehicle gui, int x, int y, int amount) {
 		draw(game, gui, x, y, amount, 0x404040);
 	}
 	
-	public void draw(ArcadeMonopoly game, GuiMinecart gui, int x, int y, int amount, int color) {
+	public void draw(ArcadeMonopoly game, GuiVehicle gui, int x, int y, int amount, int color) {
 		draw(game, gui, x + 10, y);
 		game.getModule().drawString(gui, amount + "x ", new int[] {x + gui.getGuiLeft(), y + gui.getGuiTop(), 10, 16}, color);		
 	}
 	
-	public void drawPlayer(ArcadeMonopoly game, GuiMinecart gui, int x, int y, int amount) {
+	public void drawPlayer(ArcadeMonopoly game, GuiVehicle gui, int x, int y, int amount) {
 		game.loadTexture(gui, 1);
 		game.drawImageInArea(gui, x, y, ArcadeMonopoly.PLACE_WIDTH + u * 16, 22 + 16 + v * 16, 16, 16);
 		if (x + 16 < EntityModularCart.MODULAR_SPACE_WIDTH) {
@@ -57,7 +57,7 @@ public class Note {
 		}
 	}	
 	
-	public static int drawValue(ArcadeMonopoly game, GuiMinecart gui, int x, int y, int maxNoteCount, int value) {
+	public static int drawValue(ArcadeMonopoly game, GuiVehicle gui, int x, int y, int maxNoteCount, int value) {
 		int id = 0;
 		for (int i = notes.size() - 1; i >= 0; i--) {
 			if (value >= notes.get(i).units && (maxNoteCount != 1 || value % notes.get(i).units == 0)) {
@@ -71,7 +71,7 @@ public class Note {
 		return id;
 	}
 	
-	public static void drawPlayerValue(ArcadeMonopoly game, GuiMinecart gui, int x, int y, int[] values) {
+	public static void drawPlayerValue(ArcadeMonopoly game, GuiVehicle gui, int x, int y, int[] values) {
 		
 		for (int i = 0; i < notes.size(); i++) {
 			notes.get(i).drawPlayer(game, gui, x + (6 - i) * 20, y, values[i]);

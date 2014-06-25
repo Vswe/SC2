@@ -1,6 +1,6 @@
 package vswe.stevescarts.old.Arcade;
 
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 
 public class Tile {
 
@@ -43,7 +43,7 @@ public class Tile {
 		return nearbyCreepers == 9;
 	}
 
-	public void draw(ArcadeSweeper game, GuiMinecart gui, int x, int y, int mx, int my) {
+	public void draw(ArcadeSweeper game, GuiVehicle gui, int x, int y, int mx, int my) {
 		int[] rect = new int[] {x, y, 10, 10};
 		
 		if (isCreeper() && game.hasFinished) {			

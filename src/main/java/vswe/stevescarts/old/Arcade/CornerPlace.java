@@ -2,7 +2,7 @@ package vswe.stevescarts.old.Arcade;
 
 import java.util.EnumSet;
 
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 
 public class CornerPlace extends Place {
 
@@ -14,7 +14,7 @@ public class CornerPlace extends Place {
 	}
 	
 	@Override
-	public void draw(GuiMinecart gui, EnumSet<PLACE_STATE> states) {
+	public void draw(GuiVehicle gui, EnumSet<PLACE_STATE> states) {
 		game.loadTexture(gui, 2);
 		applyColorFilter(gui, states);
 		game.getModule().drawImage(gui, 0, 0, ArcadeMonopoly.PLACE_HEIGHT * (texture % 2), ArcadeMonopoly.PLACE_HEIGHT * (texture / 2), ArcadeMonopoly.PLACE_HEIGHT, ArcadeMonopoly.PLACE_HEIGHT);	

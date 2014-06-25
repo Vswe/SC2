@@ -2,7 +2,7 @@ package vswe.stevescarts.old.Arcade;
 
 import java.util.EnumSet;
 
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 
 public abstract class Property extends Place {
 
@@ -23,12 +23,12 @@ public abstract class Property extends Place {
 	}
 	
 
-	public void drawValue(GuiMinecart gui) {
+	public void drawValue(GuiVehicle gui) {
 		Note.drawValue(game, gui, 10, 103, 2, cost);
 	}
 	
 	@Override
-	public void drawText(GuiMinecart gui, EnumSet<PLACE_STATE> states) {
+	public void drawText(GuiVehicle gui, EnumSet<PLACE_STATE> states) {
 		game.getModule().drawSplitString(gui, name, 3 + gui.getGuiLeft(), getTextY() + gui.getGuiTop(), ArcadeMonopoly.PLACE_WIDTH - 6, true, 0x404040);
 	}
 

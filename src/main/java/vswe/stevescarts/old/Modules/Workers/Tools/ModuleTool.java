@@ -3,11 +3,11 @@ package vswe.stevescarts.old.Modules.Workers.Tools;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.EnchantmentInfo.ENCHANTMENT_TYPE;
 import vswe.stevescarts.old.Helpers.Localization;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.modules.ModuleBase;
 import vswe.stevescarts.old.Modules.Addons.ModuleEnchants;
 import vswe.stevescarts.old.Modules.Workers.ModuleWorker;
@@ -52,7 +52,7 @@ public abstract class ModuleTool extends ModuleWorker {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawBackground(GuiMinecart gui, int x, int y) {
+	public void drawBackground(GuiVehicle gui, int x, int y) {
 		ResourceHelper.bindResource("/gui/tool.png");
 		
 		drawBox(gui, 0, 0, 1F);
@@ -67,7 +67,7 @@ public abstract class ModuleTool extends ModuleWorker {
 	
 	private int[] durabilityRect = new int[] {10, 15, 52, 8};
 	
-	private void drawBox(GuiMinecart gui, int u, int v, float mult) {
+	private void drawBox(GuiVehicle gui, int u, int v, float mult) {
 		int w = (int)(durabilityRect[2] * mult);
 		if (w > 0) {
 			drawImage(gui, durabilityRect[0], durabilityRect[1], u, v, w, durabilityRect[3]);
@@ -107,7 +107,7 @@ public abstract class ModuleTool extends ModuleWorker {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawMouseOver(GuiMinecart gui, int x, int y) {
+	public void drawMouseOver(GuiVehicle gui, int x, int y) {
 		String str;
 		
 		if (useDurability()) {

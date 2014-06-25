@@ -1,6 +1,6 @@
 package vswe.stevescarts.old.Arcade;
 
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 
 public abstract class Card {
 
@@ -10,7 +10,7 @@ public abstract class Card {
 	}
 
 	
-	public void render(ArcadeMonopoly game, GuiMinecart gui, int[] rect, boolean isFront) {
+	public void render(ArcadeMonopoly game, GuiVehicle gui, int[] rect, boolean isFront) {
 		if (isFront) {
 			game.loadTexture(gui, 1);
 			game.getModule().drawImage(gui, rect, 67, 177);

@@ -3,10 +3,10 @@ package vswe.stevescarts.old.Modules.Addons;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import org.lwjgl.opengl.GL11;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.Localization;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 
 import java.util.Random;
 
@@ -32,7 +32,7 @@ public class ModuleColorRandomizer extends ModuleAddon {
 	}
 
 	@Override
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 		drawString(gui, getModuleName(), 8, 6, 0x404040);
 	}
 
@@ -47,7 +47,7 @@ public class ModuleColorRandomizer extends ModuleAddon {
 	}
 
 	@Override
-	public void drawBackground(GuiMinecart gui, int x, int y) {
+	public void drawBackground(GuiVehicle gui, int x, int y) {
 		ResourceHelper.bindResource("/gui/color_randomizer.png");
 
 		float[] color = getColor();
@@ -64,7 +64,7 @@ public class ModuleColorRandomizer extends ModuleAddon {
 	}
 
 	@Override
-	public void drawMouseOver(GuiMinecart gui, int x, int y) {
+	public void drawMouseOver(GuiVehicle gui, int x, int y) {
 		if (inRect(x, y, button)) {
 			String randomizeString = Localization.MODULES.ADDONS.BUTTON_RANDOMIZE.translate();
 			drawStringOnMouseOver(gui, randomizeString, x, y, button);
@@ -72,7 +72,7 @@ public class ModuleColorRandomizer extends ModuleAddon {
 	}
 
 	@Override
-	public void mouseClicked(GuiMinecart gui, int x, int y, int button) {
+	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0) {
 			if (inRect(x,y, this.button)) {
 				sendPacket(0);

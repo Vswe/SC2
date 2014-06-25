@@ -4,6 +4,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
+import vswe.stevescarts.client.interfaces.GuiBase;
 import vswe.stevescarts.old.Containers.ContainerUpgrade;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
 import vswe.stevescarts.old.TileEntities.TileEntityUpgrade;

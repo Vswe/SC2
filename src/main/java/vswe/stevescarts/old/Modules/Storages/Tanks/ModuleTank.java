@@ -7,10 +7,10 @@ import net.minecraft.util.IIcon;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidTank;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.*;
-import vswe.stevescarts.old.Interfaces.GuiBase;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
+import vswe.stevescarts.client.interfaces.GuiBase;
 import vswe.stevescarts.old.Modules.Storages.ModuleStorage;
 import vswe.stevescarts.old.Slots.SlotBase;
 import vswe.stevescarts.old.Slots.SlotLiquidInput;
@@ -46,7 +46,7 @@ public abstract class ModuleTank extends ModuleStorage implements IFluidTank, IT
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 	    drawString(gui, getModuleName() , 8, 6, 0x404040);
 	}
 
@@ -125,7 +125,7 @@ public abstract class ModuleTank extends ModuleStorage implements IFluidTank, IT
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawImage(int tankid, GuiBase gui, IIcon icon, int targetX, int targetY, int srcX, int srcY, int sizeX, int sizeY) {
-		drawImage((GuiMinecart)gui, icon, targetX, targetY, srcX, srcY, sizeX, sizeY);
+		drawImage((GuiVehicle)gui, icon, targetX, targetY, srcX, srcY, sizeX, sizeY);
 	}
 	
 
@@ -133,7 +133,7 @@ public abstract class ModuleTank extends ModuleStorage implements IFluidTank, IT
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawBackground(GuiMinecart gui, int x, int y) {
+	public void drawBackground(GuiVehicle gui, int x, int y) {
 
 		tank.drawFluid(gui, tankBounds[0], tankBounds[1]);
 	
@@ -145,7 +145,7 @@ public abstract class ModuleTank extends ModuleStorage implements IFluidTank, IT
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawMouseOver(GuiMinecart gui, int x, int y) {
+	public void drawMouseOver(GuiVehicle gui, int x, int y) {
 		drawStringOnMouseOver(gui, getTankInfo(), x,y, tankBounds);
 	}	
 	
@@ -302,7 +302,7 @@ public abstract class ModuleTank extends ModuleStorage implements IFluidTank, IT
 	}
 	
 	@Override
-	public void mouseClicked(GuiMinecart gui, int x, int y, int button) {
+	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (inRect(x, y, tankBounds)) {
 			byte data = (byte)button;
 			if (GuiScreen.isShiftKeyDown()) {

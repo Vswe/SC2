@@ -1,6 +1,6 @@
 package vswe.stevescarts.old.Arcade;
 
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 
 public class Projectile extends Unit {
@@ -15,7 +15,7 @@ public class Projectile extends Unit {
 	}
 
 	@Override
-	public void draw(GuiMinecart gui) {
+	public void draw(GuiVehicle gui) {
 		if (playerProjectile) {
 			game.getModule().drawImage(gui, x, y, 38, 0, 5, 16);
 		}else{

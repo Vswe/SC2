@@ -2,12 +2,12 @@ package vswe.stevescarts.old.Arcade;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.old.Arcade.Tile.TILE_OPEN_RESULT;
 import vswe.stevescarts.old.Arcade.Tile.TILE_STATE;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.Localization;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.old.Modules.Realtimers.ModuleArcade;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -129,7 +129,7 @@ public class ArcadeSweeper extends ArcadeGame {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawBackground(GuiMinecart gui, int x, int y) {
+	public void drawBackground(GuiVehicle gui, int x, int y) {
 		ResourceHelper.bindResource(textureMenu);
 		
 		for (int i = 0; i < tiles.length; i++) {
@@ -141,7 +141,7 @@ public class ArcadeSweeper extends ArcadeGame {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void mouseClicked(GuiMinecart gui, int x, int y, int button) {
+	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (!isPlaying) {
 			return;
 		}
@@ -235,7 +235,7 @@ public class ArcadeSweeper extends ArcadeGame {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void keyPress(GuiMinecart gui, char character, int extraInformation) {
+	public void keyPress(GuiVehicle gui, char character, int extraInformation) {
 		if (Character.toLowerCase(character) == 'r') {
 			newGame(currentGameType);
 		}else if(Character.toLowerCase(character) == 't') {
@@ -247,7 +247,7 @@ public class ArcadeSweeper extends ArcadeGame {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 		String[] mapnames = new String[] {Localization.ARCADE.MAP_1.translate(), Localization.ARCADE.MAP_2.translate(), Localization.ARCADE.MAP_3.translate()};
 		
 		getModule().drawString(gui, Localization.ARCADE.LEFT.translate(String.valueOf(creepersLeft)), 10, 180, 0x404040);

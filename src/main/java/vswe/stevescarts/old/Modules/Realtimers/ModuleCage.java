@@ -21,10 +21,10 @@ import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.passive.EntityWaterMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.Localization;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.old.Modules.IActivatorModule;
 import vswe.stevescarts.modules.ModuleBase;
 import cpw.mods.fml.relauncher.Side;
@@ -56,21 +56,21 @@ public class ModuleCage extends ModuleBase implements IActivatorModule {
 	}
 
 	@Override
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 	    drawString(gui, getModuleName(), 8, 6, 0x404040);
 	}
 	
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawBackground(GuiMinecart gui, int x, int y) {
+	public void drawBackground(GuiVehicle gui, int x, int y) {
 		ResourceHelper.bindResource("/gui/cage.png");
 
 		drawButton(gui, x, y, autoRect, disablePickup ? 2 : 3);
 		drawButton(gui, x, y, manualRect, isCageEmpty() ? 0 : 1);
 	}
 
-	private void drawButton(GuiMinecart gui, int x, int y, int[] coords, int imageID) {
+	private void drawButton(GuiVehicle gui, int x, int y, int[] coords, int imageID) {
 		if (inRect(x,y, coords)) {
 			drawImage(gui,coords, 0, coords[3]);
 		}else{
@@ -86,7 +86,7 @@ public class ModuleCage extends ModuleBase implements IActivatorModule {
 
 
 	@Override
-	public void drawMouseOver(GuiMinecart gui, int x, int y) {
+	public void drawMouseOver(GuiVehicle gui, int x, int y) {
 		drawStringOnMouseOver(gui, Localization.MODULES.ATTACHMENTS.CAGE_AUTO.translate(disablePickup ? "0" : "1"), x,y, autoRect);
 		drawStringOnMouseOver(gui, Localization.MODULES.ATTACHMENTS.CAGE.translate(isCageEmpty() ? "0" : "1"), x,y, manualRect);
 	}
@@ -97,7 +97,7 @@ public class ModuleCage extends ModuleBase implements IActivatorModule {
 
 
 	@Override
-	public void mouseClicked(GuiMinecart gui, int x, int y, int button) {
+	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0) {
 			if (inRect(x,y, autoRect)) {
 				sendPacket(0);

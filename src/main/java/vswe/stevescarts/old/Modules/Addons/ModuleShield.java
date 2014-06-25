@@ -2,10 +2,10 @@ package vswe.stevescarts.old.Modules.Addons;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.Localization;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.old.Modules.IActivatorModule;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -90,7 +90,7 @@ public class ModuleShield extends ModuleAddon implements IActivatorModule {
 	}
 
 	@Override
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 	    drawString(gui,getModuleName(), 8, 6, 0x404040);
 	}
 
@@ -113,7 +113,7 @@ public class ModuleShield extends ModuleAddon implements IActivatorModule {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawBackground(GuiMinecart gui, int x, int y) {
+	public void drawBackground(GuiVehicle gui, int x, int y) {
 		ResourceHelper.bindResource("/gui/shield.png");
 
 		int imageID = getShieldStatus() ? 1 : 0;
@@ -131,7 +131,7 @@ public class ModuleShield extends ModuleAddon implements IActivatorModule {
 	private int[] buttonRect = new int[] {20,20, 24, 12};
 
 	@Override
-	public void drawMouseOver(GuiMinecart gui, int x, int y) {
+	public void drawMouseOver(GuiVehicle gui, int x, int y) {
 		drawStringOnMouseOver(gui, getStateName(), x,y,buttonRect);
 	}
 
@@ -141,7 +141,7 @@ public class ModuleShield extends ModuleAddon implements IActivatorModule {
 	}
 
 	@Override
-	public void mouseClicked(GuiMinecart gui, int x, int y, int button) {
+	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0) {
 			if (inRect(x,y, buttonRect)) {
 				sendPacket(0);

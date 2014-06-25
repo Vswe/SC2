@@ -1,10 +1,10 @@
 package vswe.stevescarts.old.Modules.Addons;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.HeightControlOre;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 
 public class ModuleHeightControl extends ModuleAddon {
 	public ModuleHeightControl(EntityModularCart cart) {
@@ -40,7 +40,7 @@ public class ModuleHeightControl extends ModuleAddon {
 	private int oreMapY = 18;
 
 	@Override
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 	    drawString(gui, getModuleName(), 8, 6, 0x404040);
 
         String s = String.valueOf(getYTarget());
@@ -67,7 +67,7 @@ public class ModuleHeightControl extends ModuleAddon {
 		
 	
 	@Override
-	public void drawBackground(GuiMinecart gui, int x, int y) {
+	public void drawBackground(GuiVehicle gui, int x, int y) {
 		ResourceHelper.bindResource("/gui/heightcontrol.png");
 
 		//draw the box for the numbers
@@ -130,7 +130,7 @@ public class ModuleHeightControl extends ModuleAddon {
         }
 	}
 
-	private void drawMarker(GuiMinecart gui, int pos, boolean isTargetLevel) {
+	private void drawMarker(GuiVehicle gui, int pos, boolean isTargetLevel) {
 		int srcX = 4;
 		int srcY = isTargetLevel ? 6 : 0;
 
@@ -142,7 +142,7 @@ public class ModuleHeightControl extends ModuleAddon {
 	}
 
 	@Override
-	public void mouseClicked(GuiMinecart gui, int x, int y, int button) {
+	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0) {
 			byte packetData = 0;
 			if (inRect(x,y, arrowMiddle)) {

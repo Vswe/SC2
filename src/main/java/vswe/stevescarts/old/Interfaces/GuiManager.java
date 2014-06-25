@@ -5,6 +5,7 @@ import net.minecraft.item.ItemStack;
 
 import org.lwjgl.opengl.GL11;
 
+import vswe.stevescarts.client.interfaces.GuiBase;
 import vswe.stevescarts.old.Helpers.Localization;
 import vswe.stevescarts.old.Containers.ContainerManager;
 import vswe.stevescarts.old.TileEntities.TileEntityManager;

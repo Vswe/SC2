@@ -1,4 +1,4 @@
-package vswe.stevescarts.old.Interfaces;
+package vswe.stevescarts.client.interfaces;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -15,13 +15,12 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import vswe.stevescarts.old.Interfaces.GuiNEIKiller;
 
 @SideOnly(Side.CLIENT)
-public abstract class GuiBase extends GuiNEIKiller
-{
+public abstract class GuiBase extends GuiNEIKiller {
 
-    public GuiBase(Container container)
-    {
+    public GuiBase(Container container) {
         super(container);
     }
     
@@ -81,8 +80,7 @@ public abstract class GuiBase extends GuiNEIKiller
         this.drawGradientRect(var15 - 3, var16 - 3, var15 + var5 + 3, var16 - 3 + 1, var11, var11);
         this.drawGradientRect(var15 - 3, var16 + var9 + 2, var15 + var5 + 3, var16 + var9 + 3, var12, var12);
 
-        for (int var13 = 0; var13 < text.size(); ++var13)
-        {
+        for (int var13 = 0; var13 < text.size(); ++var13){
             String var14 = (String)text.get(var13);
 
             this.getFontRenderer().drawStringWithShadow(var14, var15, var16, -1);
@@ -250,35 +248,27 @@ public abstract class GuiBase extends GuiNEIKiller
      * Handles mouse input.
      */
 	@Override
-    public void handleMouseInput()
-    {
+    public void handleMouseInput() {
     	
         int i = Mouse.getEventX() * this.width / this.mc.displayWidth;
         int j = this.height - Mouse.getEventY() * this.height / this.mc.displayHeight - 1;
 
-        if (Mouse.getEventButtonState())
-        {
-            if (this.mc.gameSettings.touchscreen && this.myOwnTouchpadTimeWhineyThingy++ > 0)
-            {
+        if (Mouse.getEventButtonState()) {
+            if (this.mc.gameSettings.touchscreen && this.myOwnTouchpadTimeWhineyThingy++ > 0) {
                 return;
             }
 
             this.myOwnEventButton = Mouse.getEventButton();
             this.myOwnTimeyWhineyThingy = Minecraft.getSystemTime();
             this.mouseClicked(i, j, this.myOwnEventButton);
-        }
-        else if (Mouse.getEventButton() != -1)
-        {
-            if (this.mc.gameSettings.touchscreen && --this.myOwnTouchpadTimeWhineyThingy > 0)
-            {
+        }else if (Mouse.getEventButton() != -1){
+            if (this.mc.gameSettings.touchscreen && --this.myOwnTouchpadTimeWhineyThingy > 0){
                 return;
             }
 
             this.myOwnEventButton = -1;
             this.mouseMovedOrUp(i, j, Mouse.getEventButton());
-        }
-        else if (this.myOwnEventButton != -1 && this.myOwnTimeyWhineyThingy > 0L)
-        {
+        }else if (this.myOwnEventButton != -1 && this.myOwnTimeyWhineyThingy > 0L){
             long k = Minecraft.getSystemTime() - this.myOwnTimeyWhineyThingy;
             this.mouseClickMove(i, j, this.myOwnEventButton, k);
         }else{
@@ -352,8 +342,7 @@ public abstract class GuiBase extends GuiNEIKiller
     /**
      * Draws a textured rectangle at the stored z-value. Args: x, y, u, v, width, height
      */
-    public void drawTexturedModalRect(int x, int y, int u, int v, int w, int h, RENDER_ROTATION rotation)
-    {
+    public void drawTexturedModalRect(int x, int y, int u, int v, int w, int h, RENDER_ROTATION rotation) {
         float fw = 0.00390625F;
         float fy = 0.00390625F;
         

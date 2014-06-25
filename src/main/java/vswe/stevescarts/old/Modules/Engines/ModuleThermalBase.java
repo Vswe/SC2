@@ -1,9 +1,9 @@
 package vswe.stevescarts.old.Modules.Engines;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidRegistry;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.Localization;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 
 public abstract class ModuleThermalBase extends ModuleEngine {
 	public ModuleThermalBase(EntityModularCart cart) {
@@ -127,7 +127,7 @@ public abstract class ModuleThermalBase extends ModuleEngine {
 
 
 	@Override
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 	    drawString(gui, Localization.MODULES.ENGINES.THERMAL.translate(), 8, 6, 0x404040);
 		String str;
 		int consumption = getCart().getConsumption();

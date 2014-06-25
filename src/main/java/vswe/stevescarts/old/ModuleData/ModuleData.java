@@ -93,6 +93,8 @@ import vswe.stevescarts.old.Modules.Workers.Tools.ModuleWoodcutterGalgadorian;
 import vswe.stevescarts.old.Modules.Workers.Tools.ModuleWoodcutterHardened;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import vswe.stevescarts.vehicles.versions.VehicleVersion;
+
 public class ModuleData {
 
 
@@ -1409,7 +1411,7 @@ public class ModuleData {
 		}
 		save.setByteArray("Modules", moduleIDs);				
 		cart.setTagCompound(save);
-		CartVersion.addVersion(cart);
+		VehicleVersion.addVersion(cart);
 		
 		return cart;
 	}
@@ -1454,7 +1456,7 @@ public class ModuleData {
 		}
 		save.setByteArray("Modules", moduleIDs);				
 		cart.setTagCompound(save);
-		CartVersion.addVersion(cart);
+		VehicleVersion.addVersion(cart);
 		
 		return cart;		
 	}

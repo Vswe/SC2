@@ -1,10 +1,10 @@
 package vswe.stevescarts.old.Modules.Addons;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.Localization;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.old.Modules.ILeverModule;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -35,7 +35,7 @@ public class ModuleBrake extends ModuleAddon implements ILeverModule {
 	}
 
 	@Override
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 	    drawString(gui, Localization.MODULES.ADDONS.CONTROL_LEVER.translate(), 8, 6, 0x404040);
 	}
 
@@ -43,14 +43,14 @@ public class ModuleBrake extends ModuleAddon implements ILeverModule {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawBackground(GuiMinecart gui, int x, int y) {
+	public void drawBackground(GuiVehicle gui, int x, int y) {
 		ResourceHelper.bindResource("/gui/lever.png");
 
 		drawButton(gui, x,y, startstopRect, isForceStopping() ? 2 : 1);
 		drawButton(gui, x,y, turnbackRect, 0);
 	}
 
-	private void drawButton(GuiMinecart gui, int x, int y, int[] coords, int imageID) {
+	private void drawButton(GuiVehicle gui, int x, int y, int[] coords, int imageID) {
 		if (inRect(x,y, coords)) {
 			drawImage(gui,coords, 0, coords[3]);
 		}else{
@@ -82,13 +82,13 @@ public class ModuleBrake extends ModuleAddon implements ILeverModule {
 	}
 
 	@Override
-	public void drawMouseOver(GuiMinecart gui, int x, int y) {
+	public void drawMouseOver(GuiVehicle gui, int x, int y) {
 		drawStringOnMouseOver(gui, isForceStopping() ? Localization.MODULES.ADDONS.LEVER_START.translate() : Localization.MODULES.ADDONS.LEVER_STOP.translate(), x,y,startstopRect);
 		drawStringOnMouseOver(gui, Localization.MODULES.ADDONS.LEVER_TURN.translate(), x,y,turnbackRect);
 	}
 
 	@Override
-	public void mouseClicked(GuiMinecart gui, int x, int y, int button) {
+	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0) {
 			if (inRect(x,y, startstopRect)) {
 				sendPacket(0);

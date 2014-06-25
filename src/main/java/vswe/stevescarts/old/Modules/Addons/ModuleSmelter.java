@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.old.Slots.SlotBase;
 import vswe.stevescarts.old.Slots.SlotCartCrafterResult;
 import vswe.stevescarts.old.Slots.SlotFurnaceInput;
@@ -156,7 +156,7 @@ public class ModuleSmelter extends ModuleRecipe {
 	}
 	
 	@Override
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 		super.drawForeground(gui);
 	    drawString(gui,getModuleName(), 8, 6, 0x404040);
 	}		

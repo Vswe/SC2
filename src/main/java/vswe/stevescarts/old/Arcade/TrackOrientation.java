@@ -2,7 +2,7 @@ package vswe.stevescarts.old.Arcade;
 
 import java.util.ArrayList;
 
-import vswe.stevescarts.old.Interfaces.GuiBase.RENDER_ROTATION;
+import vswe.stevescarts.client.interfaces.GuiBase.RENDER_ROTATION;
 
 public abstract class TrackOrientation {	
 	

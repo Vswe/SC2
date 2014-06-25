@@ -1,7 +1,7 @@
 package vswe.stevescarts.old.Arcade;
 
-import vswe.stevescarts.old.Interfaces.GuiBase.RENDER_ROTATION;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
+import vswe.stevescarts.client.interfaces.GuiBase.RENDER_ROTATION;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 
 public class TetrisBlock {
 
@@ -17,7 +17,7 @@ public class TetrisBlock {
 	}
 	
 	
-	public void render(ArcadeTetris game, GuiMinecart gui, int x, int y) {
+	public void render(ArcadeTetris game, GuiVehicle gui, int x, int y) {
 		if (y >= 0) {
 			game.getModule().drawImage(gui, ArcadeTetris.BOARD_START_X + x * 10,  ArcadeTetris.BOARD_START_Y + y * 10, u, v, 10, 10, r);
 		}

@@ -4,7 +4,7 @@ import java.util.EnumSet;
 
 import org.lwjgl.opengl.GL11;
 
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 
 public class Street extends Property {
 
@@ -19,7 +19,7 @@ public class Street extends Property {
 	}
 	
 	@Override
-	public void draw(GuiMinecart gui, EnumSet<PLACE_STATE> states) {
+	public void draw(GuiVehicle gui, EnumSet<PLACE_STATE> states) {
 		super.draw(gui, states);
 		
 		GL11.glColor4f(color[0], color[1], color[2], 1.0F);		

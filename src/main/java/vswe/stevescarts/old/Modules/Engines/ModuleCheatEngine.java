@@ -1,7 +1,7 @@
 package vswe.stevescarts.old.Modules.Engines;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.Localization;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 
 public class ModuleCheatEngine extends ModuleEngine {
 
@@ -26,7 +26,7 @@ public class ModuleCheatEngine extends ModuleEngine {
 	}
 	
 	@Override
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
         String[] split = getModuleName().split(" ");
 	    drawString(gui, split[0], 8, 6, 0x404040);
         if (split.length > 1) {

@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.LabelInformation;
 import vswe.stevescarts.old.Helpers.Localization;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.modules.ModuleBase;
 import vswe.stevescarts.old.Modules.Engines.ModuleEngine;
 import vswe.stevescarts.old.Modules.Workers.Tools.ModuleTool;
@@ -157,7 +157,7 @@ public class ModuleLabel extends ModuleAddon {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawBackground(GuiMinecart gui, int x, int y) {
+	public void drawBackground(GuiVehicle gui, int x, int y) {
 		ResourceHelper.bindResource("/gui/label.png");
 		
 		for (int i = 0; i < labels.size(); i++) {
@@ -266,7 +266,7 @@ public class ModuleLabel extends ModuleAddon {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void mouseClicked(GuiMinecart gui, int x, int y, int button) {
+	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		for (int i = 0; i < labels.size(); i++) {
 			int[] rect = getBoxArea(i);
 			
@@ -292,7 +292,7 @@ public class ModuleLabel extends ModuleAddon {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 		drawString(gui, Localization.MODULES.ADDONS.LABELS.translate(), 8, 6, 0x404040);
 		
 		for (int i = 0; i < labels.size(); i++) {

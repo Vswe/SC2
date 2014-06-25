@@ -1,7 +1,7 @@
 package vswe.stevescarts.old.Arcade;
 
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.old.Arcade.TrackOrientation.DIRECTION;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 
 public class Cart {
 	private int x;
@@ -71,7 +71,7 @@ public class Cart {
 	public void onItemPickUp() {}
 	public void onCrash() {};
 	
-	public void render(ArcadeTracks game, GuiMinecart gui, int tick) {
+	public void render(ArcadeTracks game, GuiVehicle gui, int tick) {
 		if (!enabled) {
 			return;
 		}		

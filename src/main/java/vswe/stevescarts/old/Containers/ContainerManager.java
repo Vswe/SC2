@@ -1,4 +1,5 @@
 package vswe.stevescarts.old.Containers;
+import vswe.stevescarts.containers.ContainerBase;
 import vswe.stevescarts.old.TileEntities.TileEntityBase;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;

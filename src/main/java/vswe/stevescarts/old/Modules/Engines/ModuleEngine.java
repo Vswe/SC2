@@ -1,10 +1,10 @@
 package vswe.stevescarts.old.Modules.Engines;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.Localization;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.modules.ModuleBase;
 
 public abstract class ModuleEngine extends ModuleBase {
@@ -97,7 +97,7 @@ public abstract class ModuleEngine extends ModuleBase {
 		
 	
 	@Override
-	public void drawBackground(GuiMinecart gui, int x, int y) {
+	public void drawBackground(GuiVehicle gui, int x, int y) {
 		ResourceHelper.bindResource("/gui/engine.png");
 
 		int sourceX = 16 * getPriority();
@@ -109,7 +109,7 @@ public abstract class ModuleEngine extends ModuleBase {
 	}
 
 	@Override
-	public void drawMouseOver(GuiMinecart gui, int x, int y) {
+	public void drawMouseOver(GuiVehicle gui, int x, int y) {
 		drawStringOnMouseOver(gui, getPriorityText() , x, y , priorityButton);
 	}
 
@@ -122,7 +122,7 @@ public abstract class ModuleEngine extends ModuleBase {
 	}
 
 	@Override
-	public void mouseClicked(GuiMinecart gui, int x, int y, int button) {
+	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (inRect(x,y, priorityButton)) {
 			if (button == 0 || button == 1) {
 				sendPacket(0,(byte)button);

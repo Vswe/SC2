@@ -6,8 +6,8 @@ import net.minecraft.block.BlockRailBase;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Vec3;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.old.Modules.ISuppliesModule;
 import vswe.stevescarts.old.Slots.SlotBase;
 import vswe.stevescarts.old.Slots.SlotBridge;
@@ -32,7 +32,7 @@ public class ModuleBridge extends ModuleWorker implements ISuppliesModule {
 		return new SlotBridge(getCart(),slotId,8+x*18,23+y*18);
 	}
 	@Override
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 	    drawString(gui, getModuleName(), 8, 6, 0x404040);
 	}
 

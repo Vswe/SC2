@@ -10,10 +10,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.Localization;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.modules.ModuleBase;
 import vswe.stevescarts.old.Modules.Addons.Mobdetectors.ModuleMobdetector;
 
@@ -60,7 +60,7 @@ public class ModuleShooterAdv extends ModuleShooter {
 	protected void generateInterfaceRegions() {}
 	
 	@Override
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 	    drawString(gui, Localization.MODULES.ATTACHMENTS.SHOOTER.translate(), 8, 6, 0x404040);
 
 		for (int i = 0; i < detectors.size(); i++) {
@@ -71,7 +71,7 @@ public class ModuleShooterAdv extends ModuleShooter {
 
 
 	@Override
-	public void drawBackground(GuiMinecart gui, int x, int y) {
+	public void drawBackground(GuiVehicle gui, int x, int y) {
 		ResourceHelper.bindResource("/gui/mobdetector.png");
 		
 		for (int i = 0; i < detectors.size(); i++) {
@@ -82,7 +82,7 @@ public class ModuleShooterAdv extends ModuleShooter {
 	}
 
 	@Override
-	public void mouseClicked(GuiMinecart gui, int x, int y, int button) {
+	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0) {
 			for (int i = 0; i < detectors.size(); i++) {
 				if (inRect(x,y,getSelectionBox(i))) {
@@ -94,7 +94,7 @@ public class ModuleShooterAdv extends ModuleShooter {
 	}
 
 	@Override
-	public void mouseMovedOrUp(GuiMinecart gui,int x, int y, int button) {
+	public void mouseMovedOrUp(GuiVehicle gui,int x, int y, int button) {
 	}
 
 	

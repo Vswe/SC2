@@ -628,6 +628,7 @@ public class EntityModularCart extends EntityMinecart
         if (worldObj.isRemote) {
             updateSounds();
         }
+        setCurrentCartSpeedCapOnRail(getMaxCartSpeedOnRail());
 	}	
 
 	/**

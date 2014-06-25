@@ -5,9 +5,9 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Vec3;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.old.Modules.ISuppliesModule;
 import vswe.stevescarts.old.Slots.SlotBase;
 import vswe.stevescarts.old.Slots.SlotTorch;
@@ -33,7 +33,7 @@ public class ModuleTorch extends ModuleWorker implements ISuppliesModule  {
 	}
 
 	@Override
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 	    drawString(gui,getModuleName(), 8, 6, 0x404040);
 	}
 
@@ -118,7 +118,7 @@ public class ModuleTorch extends ModuleWorker implements ISuppliesModule  {
 	private int lightLimit = 8;
 
 	@Override
-	public void drawBackground(GuiMinecart gui, int x, int y) {
+	public void drawBackground(GuiVehicle gui, int x, int y) {
 		ResourceHelper.bindResource("/gui/torch.png");
 
 		int barLength = 3 * light;
@@ -141,7 +141,7 @@ public class ModuleTorch extends ModuleWorker implements ISuppliesModule  {
 	private int[] boxRect = new int[] {12, guiHeight()-10, 46, 9};
 
 	@Override
-	public void drawMouseOver(GuiMinecart gui, int x, int y) {
+	public void drawMouseOver(GuiVehicle gui, int x, int y) {
 		drawStringOnMouseOver(gui, "Threshold: " + lightLimit + " Current: " + light, x,y, boxRect);
 	}	
 	
@@ -190,7 +190,7 @@ public class ModuleTorch extends ModuleWorker implements ISuppliesModule  {
 	boolean markerMoving = false;
 	
 	@Override
-	public void mouseClicked(GuiMinecart gui, int x, int y, int button) {
+	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0) {
 			if (inRect(x,y, boxRect)) {
 				generatePacket(x,y);
@@ -200,7 +200,7 @@ public class ModuleTorch extends ModuleWorker implements ISuppliesModule  {
 	}	
 	
 	@Override
-	public void mouseMovedOrUp(GuiMinecart gui,int x, int y, int button) {
+	public void mouseMovedOrUp(GuiVehicle gui,int x, int y, int button) {
 		if(markerMoving){
 			generatePacket(x,y);
 		}

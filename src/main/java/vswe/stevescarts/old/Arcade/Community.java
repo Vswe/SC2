@@ -2,7 +2,7 @@ package vswe.stevescarts.old.Arcade;
 
 import java.util.EnumSet;
 
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 
 
 public class Community extends CardPlace {
@@ -17,7 +17,7 @@ public class Community extends CardPlace {
 	}
 	
 	@Override
-	public void drawText(GuiMinecart gui, EnumSet<PLACE_STATE> states) {
+	public void drawText(GuiVehicle gui, EnumSet<PLACE_STATE> states) {
 		game.getModule().drawSplitString(gui, "Dungeon Chest", 3 + gui.getGuiLeft(), 10 + gui.getGuiTop(), ArcadeMonopoly.PLACE_WIDTH - 6, true, 0x404040);
 	}
 

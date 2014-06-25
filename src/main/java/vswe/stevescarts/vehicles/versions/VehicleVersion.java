@@ -1,23 +1,24 @@
-package vswe.stevescarts.old.Helpers;
+package vswe.stevescarts.vehicles.versions;
 import vswe.stevescarts.old.Items.ItemCarts;
 import java.util.ArrayList;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.item.ItemStack;
-import vswe.stevescarts.vehicles.entities.EntityModularCart;
+import vswe.stevescarts.vehicles.VehicleBase;
 
-public abstract class CartVersion {
+public abstract class VehicleVersion {
 
-	private static ArrayList<CartVersion> versions;
+	private static ArrayList<VehicleVersion> versions;
 
-	public CartVersion() {
+	public VehicleVersion() {
 		versions.add(this);
 	}
 
+    public static final String NBT_VERSION_STRING = "VehicleVersion";
 	public abstract void update(ArrayList<Byte> modules);
 
 	
 	static {
-		versions = new ArrayList<CartVersion>();
+		versions = new ArrayList<VehicleVersion>();
 		
 		/**
 			------- THE LIQUID UPDATE -------
@@ -26,7 +27,7 @@ public abstract class CartVersion {
 			Hydrator will be replaced by the normal one. Also, if a cart
 			had a Hydrator that cart will receive a set of side tanks.
 		**/
-		new CartVersion() {
+		new VehicleVersion() {
 			public void update(ArrayList<Byte> modules) {
 				/*
 					Replace the large hydrator with a "normal" one.
@@ -57,14 +58,14 @@ public abstract class CartVersion {
 			and that is solved elsewhere (this is just a 
 			placeholder to give that change an id).
 		 **/
-		new CartVersion() {
+		new VehicleVersion() {
 			public void update(ArrayList<Byte> modules) {
 				
 			}
 		};
 	}
 
-	public static byte[] updateCart(EntityModularCart cart, byte[] data) {
+	public static byte[] updateCart(VehicleBase cart, byte[] data) {
 		if (cart.cartVersion != getCurrentVersion()) {	
 			data = updateArray(data, cart.cartVersion);
 			cart.cartVersion = (byte)getCurrentVersion();
@@ -94,7 +95,7 @@ public abstract class CartVersion {
 		if (item != null && item.getItem() instanceof ItemCarts) {
 			NBTTagCompound info = item.getTagCompound();
 			if (info != null) {
-				int version = info.getByte("CartVersion");
+				int version = info.getByte(NBT_VERSION_STRING);
 				if (version != getCurrentVersion()) {					
 					info.setByteArray("Modules", updateArray(info.getByteArray("Modules"), version));
 					addVersion(info);
@@ -113,7 +114,7 @@ public abstract class CartVersion {
 	}
 	
 	private static void addVersion(NBTTagCompound info) {
-		info.setByte("CartVersion", (byte)getCurrentVersion());
+		info.setByte(NBT_VERSION_STRING, (byte)getCurrentVersion());
 	}
 
 	private static int getCurrentVersion() {

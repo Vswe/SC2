@@ -5,7 +5,7 @@ import java.util.EnumSet;
 
 import org.lwjgl.opengl.GL11;
 
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 
 public class Place {
 	
@@ -19,7 +19,7 @@ public class Place {
 		return -1;
 	}
 	
-	public void draw(GuiMinecart gui, EnumSet<PLACE_STATE> states) {				
+	public void draw(GuiVehicle gui, EnumSet<PLACE_STATE> states) {
 		int t;
 		int u;
 		int v;
@@ -43,7 +43,7 @@ public class Place {
 
 	}
 	
-	public void applyColorFilter(GuiMinecart gui, EnumSet<PLACE_STATE> states) {
+	public void applyColorFilter(GuiVehicle gui, EnumSet<PLACE_STATE> states) {
 		if (states.contains(PLACE_STATE.SELECTED)) {
 			if (states.contains(PLACE_STATE.HOVER)) {
 				GL11.glColor4f(1F, 0.8F, 0.5F, 1.0F);
@@ -61,12 +61,12 @@ public class Place {
 		}		
 	}
 	
-	public void drawText(GuiMinecart gui, EnumSet<PLACE_STATE> states) {
+	public void drawText(GuiVehicle gui, EnumSet<PLACE_STATE> states) {
 		
 	}
 
 
-	public void drawPiece(GuiMinecart gui, Piece piece, int total, int pos, int area, EnumSet<PLACE_STATE> states) {
+	public void drawPiece(GuiVehicle gui, Piece piece, int total, int pos, int area, EnumSet<PLACE_STATE> states) {
 		final int SIZE = 24;
 		final int PADDING = 5;
 		final int MARGIN = 2;

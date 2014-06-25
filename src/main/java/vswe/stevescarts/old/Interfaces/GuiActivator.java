@@ -4,6 +4,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
+import vswe.stevescarts.client.interfaces.GuiBase;
 import vswe.stevescarts.old.Helpers.Localization;
 import vswe.stevescarts.old.PacketHandler;
 import vswe.stevescarts.old.Containers.ContainerActivator;

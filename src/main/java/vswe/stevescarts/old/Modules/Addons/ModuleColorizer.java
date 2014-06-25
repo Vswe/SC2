@@ -4,10 +4,10 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import org.lwjgl.opengl.GL11;
 
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.Localization;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 
 public class ModuleColorizer extends ModuleAddon {
 	public ModuleColorizer(EntityModularCart cart) {
@@ -26,7 +26,7 @@ public class ModuleColorizer extends ModuleAddon {
 	}	
 	
 	@Override
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 	    drawString(gui, getModuleName(), 8, 6, 0x404040);
 		
 		
@@ -55,7 +55,7 @@ public class ModuleColorizer extends ModuleAddon {
 
 	
 	@Override
-	public void drawBackground(GuiMinecart gui, int x, int y) {
+	public void drawBackground(GuiVehicle gui, int x, int y) {
 		ResourceHelper.bindResource("/gui/color.png");
 
 		for (int i = 0; i < 3; i++) {
@@ -69,14 +69,14 @@ public class ModuleColorizer extends ModuleAddon {
 	}
 	
 	@Override
-	public void drawMouseOver(GuiMinecart gui, int x, int y) {
+	public void drawMouseOver(GuiVehicle gui, int x, int y) {
 		String[] colorNames = new String[] {Localization.MODULES.ADDONS.COLOR_RED.translate(),Localization.MODULES.ADDONS.COLOR_GREEN.translate(), Localization.MODULES.ADDONS.COLOR_BLUE.translate()};
 		for (int i = 0; i < 3; i++) {
 			drawStringOnMouseOver(gui, colorNames[i] + ": " + getColorVal(i), x,y, getArea(i));
 		}
 	}
 	
-	private void drawMarker(GuiMinecart gui, int x, int y, int id) {
+	private void drawMarker(GuiVehicle gui, int x, int y, int id) {
 		float[] colorArea = new float[3];
 		float[] colorMarker = new float[3];
 		for (int i = 0; i < 3; i++) {
@@ -96,7 +96,7 @@ public class ModuleColorizer extends ModuleAddon {
 	}
 	
 	@Override
-	public void mouseClicked(GuiMinecart gui, int x, int y, int button) {
+	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0) {
 			for (int i = 0; i < 3; i++) {
 				if (inRect(x,y, getMovableMarker(i))) {
@@ -107,7 +107,7 @@ public class ModuleColorizer extends ModuleAddon {
 	}
 
 	@Override
-	public void mouseMovedOrUp(GuiMinecart gui,int x, int y, int button) {
+	public void mouseMovedOrUp(GuiVehicle gui,int x, int y, int button) {
 		if(markerMoving != -1){
             int tempColor = (int)((x - markerOffsetX)/(scrollWidth/255F));
 

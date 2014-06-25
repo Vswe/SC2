@@ -2,7 +2,7 @@ package vswe.stevescarts.old.Arcade;
 
 import java.util.EnumSet;
 
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 
 public class Go extends CornerPlace {
 
@@ -11,14 +11,14 @@ public class Go extends CornerPlace {
 	}
 
 	@Override
-	public void draw(GuiMinecart gui, EnumSet<PLACE_STATE> states) {
+	public void draw(GuiVehicle gui, EnumSet<PLACE_STATE> states) {
 		super.draw(gui, states);
 		
 		Note.DIAMOND.draw(game, gui, 45, 5, 2);
 	}
 	
 	@Override
-	public void drawText(GuiMinecart gui, EnumSet<PLACE_STATE> states) {
+	public void drawText(GuiVehicle gui, EnumSet<PLACE_STATE> states) {
 		game.getModule().drawString(gui, "Collect", 5, 10, 0x404040);
 		game.getModule().drawString(gui, "as you pass.", 5, 20, 0x404040);
 	}

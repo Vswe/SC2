@@ -2,10 +2,10 @@ package vswe.stevescarts.old.Modules.Addons;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.Localization;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.modules.ModuleBase;
 import vswe.stevescarts.old.Modules.Workers.Tools.ModuleDrill;
 public class ModuleDrillIntelligence extends ModuleAddon {
@@ -45,7 +45,7 @@ public class ModuleDrillIntelligence extends ModuleAddon {
 	}	
 	
 	@Override
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 	    drawString(gui, getModuleName(), 8, 6, 0x404040);
 	}
 	
@@ -90,7 +90,7 @@ public class ModuleDrillIntelligence extends ModuleAddon {
 	
 	
 	@Override
-	public void drawBackground(GuiMinecart gui, int x, int y) {
+	public void drawBackground(GuiVehicle gui, int x, int y) {
 		ResourceHelper.bindResource("/gui/intelligence.png");
 
 		int w = getDrillWidth();
@@ -177,7 +177,7 @@ public class ModuleDrillIntelligence extends ModuleAddon {
 	}
 	
 	@Override
-	public void drawMouseOver(GuiMinecart gui, int x, int y) {
+	public void drawMouseOver(GuiVehicle gui, int x, int y) {
 
 		int w = getDrillWidth();
 		int h = getDrillHeight();
@@ -254,7 +254,7 @@ public class ModuleDrillIntelligence extends ModuleAddon {
 	private boolean clicked;
 	private int lastId;
 	@Override
-	public void mouseMovedOrUp(GuiMinecart gui,  int x, int y, int button) {
+	public void mouseMovedOrUp(GuiVehicle gui,  int x, int y, int button) {
 		if (button == -1 && clicked) {
 			int w = getDrillWidth();
 			int h = getDrillHeight();
@@ -284,7 +284,7 @@ public class ModuleDrillIntelligence extends ModuleAddon {
 	
 	
 	@Override
-	public void mouseClicked(GuiMinecart gui, int x, int y, int button) {
+	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0) {
 			int w = getDrillWidth();
 			int h = getDrillHeight();

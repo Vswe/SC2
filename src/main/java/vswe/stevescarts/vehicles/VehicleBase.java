@@ -24,15 +24,15 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
-import vswe.stevescarts.old.Containers.ContainerMinecart;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
+import vswe.stevescarts.containers.ContainerMinecart;
 import vswe.stevescarts.old.Helpers.ActivatorOption;
-import vswe.stevescarts.old.Helpers.CartVersion;
+import vswe.stevescarts.vehicles.versions.VehicleVersion;
 import vswe.stevescarts.old.Helpers.CompWorkModule;
 import vswe.stevescarts.old.Helpers.DataWatcherLockable;
 import vswe.stevescarts.old.Helpers.GuiAllocationHelper;
 import vswe.stevescarts.old.Helpers.ModuleCountPair;
 import vswe.stevescarts.old.Helpers.TransferHandler;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.old.Models.Cart.ModelCartbase;
 import vswe.stevescarts.old.ModuleData.ModuleData;
 import vswe.stevescarts.old.Modules.Addons.ModuleCreativeSupplies;
@@ -45,7 +45,6 @@ import vswe.stevescarts.old.Modules.Workers.ModuleWorker;
 import vswe.stevescarts.old.Modules.Workers.Tools.ModuleTool;
 import vswe.stevescarts.old.StevesCarts;
 import vswe.stevescarts.old.TileEntities.TileEntityCartAssembler;
-import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.vehicles.entities.IVehicleEntity;
 
 import java.lang.reflect.Constructor;
@@ -119,7 +118,7 @@ public class VehicleBase {
 
     public VehicleBase(IVehicleEntity entity,NBTTagCompound info, String name) {
         this(entity);
-        cartVersion = info.getByte("CartVersion");
+        cartVersion = info.getByte(VehicleVersion.NBT_VERSION_STRING);
 
 
         loadModules(info);
@@ -172,7 +171,7 @@ public class VehicleBase {
     protected String name;
 
     /**
-     * The version this cart has, for more info about cersion see {@link vswe.stevescarts.old.Helpers.CartVersion}
+     * The version this cart has, for more info about cersion see {@link vswe.stevescarts.vehicles.versions.VehicleVersion}
      */
     public byte cartVersion;
 
@@ -259,7 +258,7 @@ public class VehicleBase {
         if (getWorld().isRemote) {
             moduleLoadingData = moduleIDTag.func_150292_c();
         }else{
-            moduleLoadingData = CartVersion.updateCart(this, moduleIDTag.func_150292_c());
+            moduleLoadingData = VehicleVersion.updateCart(this, moduleIDTag.func_150292_c());
         }
 
         loadModules(moduleLoadingData);
@@ -295,15 +294,12 @@ public class VehicleBase {
      * @param bytes The byte array representing the modules.
      */
     private void doLoadModules(byte[] bytes) {
-
         for (byte id : bytes) {
 
             try {
                 Class<? extends ModuleBase> moduleClass = ModuleData.getList().get((byte)id).getModuleClass();
-
-                Constructor moduleConstructor = moduleClass.getConstructor(new Class[] {EntityModularCart.class}); //TODO change this once the modules are independant of the cart
-
-                Object moduleObject = moduleConstructor.newInstance(new Object[] {this});
+                Constructor moduleConstructor = moduleClass.getConstructor(new Class[] {VehicleBase.class});
+                Object moduleObject = moduleConstructor.newInstance(this);
 
                 ModuleBase module = (ModuleBase)moduleObject;
                 module.setModuleId(id);
@@ -699,7 +695,6 @@ public class VehicleBase {
             }
 
             work();
-            setCurrentCartSpeedCapOnRail(getMaxCartSpeedOnRail());
         }
 
         if (isPlaceholder) {
@@ -977,12 +972,7 @@ public class VehicleBase {
         TransferHandler.TransferItem(iStack, vehicleEntity, getCon(null), validSlot, invalidSlot, -1);
     }
 
-    /**
-     Returns the container of this cart
-     **/
-    public Container getCon(InventoryPlayer player){
-        return new ContainerMinecart(player, this); //TODO
-    }
+
 
     /**
      * Mark this cart as a placeholder cart, a cart that is simulated in the Cart Assembler's interface
@@ -1049,9 +1039,15 @@ public class VehicleBase {
     /**
      Returns the gui of this cart
      **/
-    public GuiScreen getGui(EntityPlayer player)
-    {
-        return new GuiMinecart(player.inventory, this); //TODO
+    public GuiScreen getGui(EntityPlayer player) {
+        return new GuiVehicle(player.inventory, this);
+    }
+
+    /**
+     Returns the container of this cart
+     **/
+    public Container getCon(InventoryPlayer player){
+        return new ContainerMinecart(player, this); //TODO
     }
 
 
@@ -1528,5 +1524,9 @@ public class VehicleBase {
 
     public Entity getEntity() {
         return entity;
+    }
+
+    public IVehicleEntity getVehicleEntity() {
+        return vehicleEntity;
     }
 }

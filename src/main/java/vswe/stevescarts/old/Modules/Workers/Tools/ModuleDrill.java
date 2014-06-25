@@ -13,12 +13,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.old.Blocks.ModBlocks;
 import vswe.stevescarts.old.Helpers.Localization;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.BlockCoord;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.old.Modules.IActivatorModule;
 import vswe.stevescarts.modules.ModuleBase;
 import vswe.stevescarts.old.Modules.Addons.ModuleDrillIntelligence;
@@ -565,7 +565,7 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
 	}
 	
 	@Override
-	public void mouseClicked(GuiMinecart gui, int x, int y, int button) {
+	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0) {
 			if (inRect(x,y, buttonRect)) {
 				sendPacket(0);
@@ -591,7 +591,7 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
 	}
 
 	@Override
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 	    drawString(gui, Localization.MODULES.TOOLS.DRILL.translate(), 8, 6, 0x404040);
 	}
 
@@ -599,7 +599,7 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawBackground(GuiMinecart gui, int x, int y) {
+	public void drawBackground(GuiVehicle gui, int x, int y) {
 		super.drawBackground(gui, x, y);
 		
 		ResourceHelper.bindResource("/gui/drill.png");
@@ -619,7 +619,7 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
 	private int[] buttonRect = new int[] {15,30, 24, 12};
 
 	@Override
-	public void drawMouseOver(GuiMinecart gui, int x, int y) {
+	public void drawMouseOver(GuiVehicle gui, int x, int y) {
 		super.drawMouseOver(gui,x, y);
 		drawStringOnMouseOver(gui, getStateName(), x,y,buttonRect);
 	}	

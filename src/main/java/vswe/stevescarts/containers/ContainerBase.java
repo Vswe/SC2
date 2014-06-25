@@ -1,4 +1,4 @@
-package vswe.stevescarts.old.Containers;
+package vswe.stevescarts.containers;
 import java.util.Iterator;
 
 import cpw.mods.fml.relauncher.Side;
@@ -13,8 +13,7 @@ import vswe.stevescarts.old.Helpers.TransferHandler;
 import vswe.stevescarts.old.Helpers.TransferHandler.TRANSFER_TYPE;
 import vswe.stevescarts.old.TileEntities.TileEntityBase;
 
-public abstract class ContainerBase extends Container
-{
+public abstract class ContainerBase extends Container {
 	/**
 	 * The inventory associated with this container
 	 * @return The IInventory or null if no inventory exists.
@@ -29,42 +28,33 @@ public abstract class ContainerBase extends Container
 	
 	
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int i)
-    {
+	public ItemStack transferStackInSlot(EntityPlayer player, int i) {
 		if (getMyInventory() == null) {
 			return null;
 		}
 		
         ItemStack itemstack = null;
         Slot slot = (Slot)inventorySlots.get(i);
-        if(slot != null && slot.getHasStack())
-        {
+        if(slot != null && slot.getHasStack()) {
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
-            if(i < getMyInventory().getSizeInventory())
-            {
-                if(!mergeItemStack(itemstack1, getMyInventory().getSizeInventory()+28, getMyInventory().getSizeInventory()+36, false))
-                {
-					if(!mergeItemStack(itemstack1, getMyInventory().getSizeInventory(), getMyInventory().getSizeInventory()+28, false))
-					{
+            if(i < getMyInventory().getSizeInventory()) {
+                if(!mergeItemStack(itemstack1, getMyInventory().getSizeInventory()+28, getMyInventory().getSizeInventory()+36, false)) {
+					if(!mergeItemStack(itemstack1, getMyInventory().getSizeInventory(), getMyInventory().getSizeInventory()+28, false)) {
 						return null;
 					}
                 }
             }else if(!mergeItemStack(itemstack1, 0, getMyInventory().getSizeInventory(), false)){
                 return null;
             }
-            if(itemstack1.stackSize == 0)
-            {
+            if(itemstack1.stackSize == 0){
                 slot.putStack(null);
-            } else
-            {
+            }else{
                 slot.onSlotChanged();
             }
-            if(itemstack1.stackSize != itemstack.stackSize)
-            {			
+            if(itemstack1.stackSize != itemstack.stackSize){
                slot.onPickupFromSlot(player,itemstack1);
-            } else
-            {
+            }else{
                 return null;
             }
         }
@@ -72,8 +62,7 @@ public abstract class ContainerBase extends Container
     }
 
 	@Override
-    protected boolean mergeItemStack(ItemStack par1ItemStack, int par2, int par3, boolean par4)
-    {
+    protected boolean mergeItemStack(ItemStack par1ItemStack, int par2, int par3, boolean par4){
 		if (getMyInventory() == null) {
 			return false;
 		}		
@@ -81,35 +70,28 @@ public abstract class ContainerBase extends Container
         boolean var5 = false;
         int var6 = par2;
 
-        if (par4)
-        {
+        if (par4) {
             var6 = par3 - 1;
         }
 
         Slot var7;
         ItemStack var8;
 
-        if (par1ItemStack.isStackable())
-        {
-            while (par1ItemStack.stackSize > 0 && (!par4 && var6 < par3 || par4 && var6 >= par2))
-            {
+        if (par1ItemStack.isStackable()) {
+            while (par1ItemStack.stackSize > 0 && (!par4 && var6 < par3 || par4 && var6 >= par2)) {
                 var7 = (Slot)this.inventorySlots.get(var6);
                 var8 = var7.getStack();
 
-                if (var8 != null && var8.stackSize > 0 && var8.getItem() == par1ItemStack.getItem() && (!par1ItemStack.getHasSubtypes() || par1ItemStack.getItemDamage() == var8.getItemDamage()) && ItemStack.areItemStackTagsEqual(par1ItemStack, var8))
-                {
+                if (var8 != null && var8.stackSize > 0 && var8.getItem() == par1ItemStack.getItem() && (!par1ItemStack.getHasSubtypes() || par1ItemStack.getItemDamage() == var8.getItemDamage()) && ItemStack.areItemStackTagsEqual(par1ItemStack, var8)) {
                     int var9 = var8.stackSize + par1ItemStack.stackSize;
 
 					int maxLimit = Math.min(par1ItemStack.getMaxStackSize(),var7.getSlotStackLimit());
-                    if (var9 <= maxLimit)
-                    {
+                    if (var9 <= maxLimit) {
                         par1ItemStack.stackSize = 0;
                         var8.stackSize = var9;
                         var7.onSlotChanged();
                         var5 = true;
-                    }
-                    else if (var8.stackSize < maxLimit)
-                    {
+                    }else if (var8.stackSize < maxLimit) {
                         par1ItemStack.stackSize -= maxLimit - var8.stackSize;
                         var8.stackSize = maxLimit;
                         var7.onSlotChanged();
@@ -117,35 +99,26 @@ public abstract class ContainerBase extends Container
                     }
                 }
 
-                if (par4)
-                {
+                if (par4) {
                     --var6;
-                }
-                else
-                {
+                }else{
                     ++var6;
                 }
             }
         }
 
-        if (par1ItemStack.stackSize > 0)
-        {
-            if (par4)
-            {
+        if (par1ItemStack.stackSize > 0){
+            if (par4){
                 var6 = par3 - 1;
-            }
-            else
-            {
+            }else{
                 var6 = par2;
             }
 
-            while (!par4 && var6 < par3 || par4 && var6 >= par2)
-            {
+            while (!par4 && var6 < par3 || par4 && var6 >= par2){
                 var7 = (Slot)this.inventorySlots.get(var6);
                 var8 = var7.getStack();
 
-                if (var8 == null && TransferHandler.isItemValidForTransfer(var7, par1ItemStack, TRANSFER_TYPE.SHIFT))
-                {
+                if (var8 == null && TransferHandler.isItemValidForTransfer(var7, par1ItemStack, TRANSFER_TYPE.SHIFT)) {
 					int stackSize = Math.min(var7.getSlotStackLimit(), par1ItemStack.stackSize);
 					ItemStack newItem = par1ItemStack.copy();
 					newItem.stackSize = stackSize;
@@ -153,16 +126,13 @@ public abstract class ContainerBase extends Container
                     var7.putStack(newItem);
                     var7.onSlotChanged();
                     
-                    var5 = par1ItemStack.stackSize == 0;;
+                    var5 = par1ItemStack.stackSize == 0;
                     break;
                 }
 
-                if (par4)
-                {
+                if (par4){
                     --var6;
-                }
-                else
-                {
+                }else{
                     ++var6;
                 }
             }
@@ -173,45 +143,39 @@ public abstract class ContainerBase extends Container
 	
 
 	@Override
-	public boolean canInteractWith(EntityPlayer entityplayer)
-    {
-       return getTileEntity() != null && getTileEntity().isUseableByPlayer(entityplayer);
+	public boolean canInteractWith(EntityPlayer player) {
+       return getTileEntity() != null && getTileEntity().isUseableByPlayer(player);
     }
 	
 	@Override
-    public void addCraftingToCrafters(ICrafting par1ICrafting)
-    {
-        super.addCraftingToCrafters(par1ICrafting);
+    public void addCraftingToCrafters(ICrafting player) {
+        super.addCraftingToCrafters(player);
 
         if (getTileEntity() != null) {
-        	getTileEntity().initGuiData(this,par1ICrafting);
+        	getTileEntity().initGuiData(this,player);
         }
     }
 
 	@Override
 	@SideOnly(Side.CLIENT)
-    public void updateProgressBar(int par1, int par2)
-    {
-		par2 &= 65535;
+    public void updateProgressBar(int id, int val){
+		val &= 65535;
 
 		if (getTileEntity() != null) {
-			getTileEntity().receiveGuiData(par1, (short)par2);
+			getTileEntity().receiveGuiData(id, (short)val);
 		}
     }
 
 	@Override
-	public void detectAndSendChanges()
-    {
+	public void detectAndSendChanges() {
         super.detectAndSendChanges();
         if (getTileEntity() != null) {
-			Iterator var1 = this.crafters.iterator();
+			Iterator playerIterator = this.crafters.iterator();
 	
-			while (var1.hasNext())
-			{
-				ICrafting var2 = (ICrafting)var1.next();
-	
-				
-				getTileEntity().checkGuiData(this,var2);
+			while (playerIterator.hasNext()){
+				ICrafting player = (ICrafting)playerIterator.next();
+
+				getTileEntity().checkGuiData(this,player);
 			}
 		}
     }	

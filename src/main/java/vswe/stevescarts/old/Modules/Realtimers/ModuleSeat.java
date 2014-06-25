@@ -1,10 +1,10 @@
 package vswe.stevescarts.old.Modules.Realtimers;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.Localization;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.modules.ModuleBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -35,7 +35,7 @@ public class ModuleSeat extends ModuleBase {
 	}
 
 	@Override
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 	    drawString(gui,getModuleName(), 8, 6, 0x404040);
 	}
 
@@ -43,7 +43,7 @@ public class ModuleSeat extends ModuleBase {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawBackground(GuiMinecart gui, int x, int y) {
+	public void drawBackground(GuiVehicle gui, int x, int y) {
 		ResourceHelper.bindResource("/gui/chair.png");
 
 		int imageID = getState();
@@ -65,7 +65,7 @@ public class ModuleSeat extends ModuleBase {
 	private int[] buttonRect = new int[] {20,20, 24, 12};
 
 	@Override
-	public void drawMouseOver(GuiMinecart gui, int x, int y) {
+	public void drawMouseOver(GuiVehicle gui, int x, int y) {
 		drawStringOnMouseOver(gui, getStateName(), x,y,buttonRect);
 	}
 
@@ -84,7 +84,7 @@ public class ModuleSeat extends ModuleBase {
 	}
 
 	@Override
-	public void mouseClicked(GuiMinecart gui, int x, int y, int button) {
+	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0) {
 			if (inRect(x,y, buttonRect)) {
 				sendPacket(0);

@@ -3,13 +3,13 @@ package vswe.stevescarts.old.Modules.Addons;
 import java.util.ArrayList;
 
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.EnchantmentData;
 import vswe.stevescarts.old.Helpers.EnchantmentInfo;
 import vswe.stevescarts.old.Helpers.EnchantmentInfo.ENCHANTMENT_TYPE;
 import vswe.stevescarts.old.Helpers.Localization;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
-import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.old.Slots.SlotBase;
 import vswe.stevescarts.old.Slots.SlotEnchantment;
 import cpw.mods.fml.relauncher.Side;
@@ -77,7 +77,7 @@ public class ModuleEnchants extends ModuleAddon  {
 	
 
 	@Override
-	public void drawForeground(GuiMinecart gui) {
+	public void drawForeground(GuiVehicle gui) {
 	    drawString(gui, getModuleName(), 8, 6, 0x404040);
 	}	
 	
@@ -157,7 +157,7 @@ public class ModuleEnchants extends ModuleAddon  {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawBackground(GuiMinecart gui, int x, int y) {
+	public void drawBackground(GuiVehicle gui, int x, int y) {
 		ResourceHelper.bindResource("/gui/enchant.png");
 		
 		for (int i = 0; i < 3; i++) {
@@ -197,7 +197,7 @@ public class ModuleEnchants extends ModuleAddon  {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawMouseOver(GuiMinecart gui, int x, int y) {
+	public void drawMouseOver(GuiVehicle gui, int x, int y) {
 		for (int i = 0; i < 3; i++) {
 			EnchantmentData data = enchants[i];
 			String str;
