@@ -1,4 +1,4 @@
-package vswe.stevescarts.vehicles.modules;
+package vswe.stevescarts.modules;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;

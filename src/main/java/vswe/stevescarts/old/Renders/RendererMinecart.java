@@ -19,7 +19,7 @@ import vswe.stevescarts.old.Helpers.IconData;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
 import vswe.stevescarts.old.Helpers.Tank;
 import vswe.stevescarts.old.Models.Cart.ModelCartbase;
-import vswe.stevescarts.vehicles.modules.ModuleBase;
+import vswe.stevescarts.modules.ModuleBase;
 
 public class RendererMinecart extends Render
 {

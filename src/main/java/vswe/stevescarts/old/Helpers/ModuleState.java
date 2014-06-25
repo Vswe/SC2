@@ -31,7 +31,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Modules.IActivatorModule;
 import vswe.stevescarts.old.Modules.ISuppliesModule;
-import vswe.stevescarts.vehicles.modules.ModuleBase;
+import vswe.stevescarts.modules.ModuleBase;
 import vswe.stevescarts.old.Modules.Addons.ModuleChunkLoader;
 import vswe.stevescarts.old.Modules.Addons.ModuleInvisible;
 import vswe.stevescarts.old.Modules.Addons.ModulePowerObserver;

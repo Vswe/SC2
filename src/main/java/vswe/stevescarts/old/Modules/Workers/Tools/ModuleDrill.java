@@ -20,7 +20,7 @@ import vswe.stevescarts.old.Helpers.BlockCoord;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
 import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.old.Modules.IActivatorModule;
-import vswe.stevescarts.vehicles.modules.ModuleBase;
+import vswe.stevescarts.modules.ModuleBase;
 import vswe.stevescarts.old.Modules.Addons.ModuleDrillIntelligence;
 import vswe.stevescarts.old.Modules.Addons.ModuleIncinerator;
 import vswe.stevescarts.old.Modules.Addons.ModuleLiquidSensors;

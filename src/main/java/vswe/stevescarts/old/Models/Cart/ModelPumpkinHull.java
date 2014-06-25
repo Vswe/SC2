@@ -1,6 +1,6 @@
 package vswe.stevescarts.old.Models.Cart;
 import net.minecraft.util.ResourceLocation;
-import vswe.stevescarts.vehicles.modules.ModuleBase;
+import vswe.stevescarts.modules.ModuleBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)

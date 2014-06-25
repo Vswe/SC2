@@ -7,7 +7,7 @@ import vswe.stevescarts.old.PacketHandler;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Interfaces.GuiDetector;
 import vswe.stevescarts.old.ModuleData.ModuleData;
-import vswe.stevescarts.vehicles.modules.ModuleBase;
+import vswe.stevescarts.modules.ModuleBase;
 import vswe.stevescarts.old.TileEntities.TileEntityDetector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

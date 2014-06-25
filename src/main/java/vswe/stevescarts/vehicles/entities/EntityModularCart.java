@@ -28,7 +28,7 @@ import vswe.stevescarts.old.Items.ModItems;
 import vswe.stevescarts.old.Helpers.DataWatcherLockable;
 import vswe.stevescarts.old.Helpers.DetectorType;
 import vswe.stevescarts.old.ModuleData.ModuleData;
-import vswe.stevescarts.vehicles.modules.ModuleBase;
+import vswe.stevescarts.modules.ModuleBase;
 import vswe.stevescarts.old.TileEntities.TileEntityCartAssembler;
 
 

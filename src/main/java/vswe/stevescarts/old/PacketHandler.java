@@ -25,7 +25,7 @@ import vswe.stevescarts.vehicles.VehicleBase;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Containers.ContainerBase;
 import vswe.stevescarts.old.Containers.ContainerMinecart;
-import vswe.stevescarts.vehicles.modules.ModuleBase;
+import vswe.stevescarts.modules.ModuleBase;
 import vswe.stevescarts.old.TileEntities.TileEntityBase;
 
 import com.google.common.io.ByteArrayDataInput;

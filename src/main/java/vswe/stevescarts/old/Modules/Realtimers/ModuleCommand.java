@@ -8,7 +8,7 @@ import net.minecraft.util.ChunkCoordinates;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
 import vswe.stevescarts.old.Interfaces.GuiMinecart;
-import vswe.stevescarts.vehicles.modules.ModuleBase;
+import vswe.stevescarts.modules.ModuleBase;
 
 public abstract /*remove the abstract*/ class ModuleCommand extends ModuleBase implements ICommandSender {
 	public ModuleCommand(EntityModularCart cart) {

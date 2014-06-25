@@ -15,7 +15,7 @@ import vswe.stevescarts.old.Helpers.Localization;
 import vswe.stevescarts.old.Interfaces.GuiMinecart;
 import vswe.stevescarts.old.Modules.ICropModule;
 import vswe.stevescarts.old.Modules.ISuppliesModule;
-import vswe.stevescarts.vehicles.modules.ModuleBase;
+import vswe.stevescarts.modules.ModuleBase;
 import vswe.stevescarts.old.Slots.SlotBase;
 import vswe.stevescarts.old.Slots.SlotSeed;
 

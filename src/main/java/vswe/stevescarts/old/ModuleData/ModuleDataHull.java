@@ -3,7 +3,7 @@ import java.util.List;
 
 import vswe.stevescarts.old.Helpers.ColorHelper;
 import vswe.stevescarts.old.Helpers.Localization;
-import vswe.stevescarts.vehicles.modules.ModuleBase;
+import vswe.stevescarts.modules.ModuleBase;
 
 
 public class ModuleDataHull extends ModuleData {

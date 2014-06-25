@@ -4,7 +4,7 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
-import vswe.stevescarts.vehicles.modules.ModuleBase;
+import vswe.stevescarts.modules.ModuleBase;
 import vswe.stevescarts.old.Modules.Storages.Tanks.ModuleTank;
 import vswe.stevescarts.old.Renders.RendererMinecart;
 import cpw.mods.fml.relauncher.Side;
