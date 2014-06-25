@@ -6,7 +6,7 @@ import org.lwjgl.opengl.GL11;
 
 import vswe.stevescarts.client.interfaces.GuiBase;
 import vswe.stevescarts.old.Helpers.Localization;
-import vswe.stevescarts.old.PacketHandler;
+import vswe.stevescarts.network.PacketHandler;
 import vswe.stevescarts.old.Containers.ContainerActivator;
 import vswe.stevescarts.old.Helpers.ActivatorOption;
 import vswe.stevescarts.old.Helpers.ResourceHelper;

@@ -18,7 +18,7 @@ import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.FluidTank;
 import vswe.stevescarts.old.Helpers.Localization;
-import vswe.stevescarts.old.PacketHandler;
+import vswe.stevescarts.network.PacketHandler;
 import vswe.stevescarts.containers.ContainerBase;
 import vswe.stevescarts.old.Containers.ContainerDistributor;
 import vswe.stevescarts.old.Helpers.DistributorSetting;

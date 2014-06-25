@@ -4,6 +4,7 @@ import cpw.mods.fml.common.network.FMLEventChannel;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.Logger;
+import vswe.stevescarts.network.PacketHandler;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.CraftingHandler;
 import vswe.stevescarts.old.Helpers.CreativeTabSC2;

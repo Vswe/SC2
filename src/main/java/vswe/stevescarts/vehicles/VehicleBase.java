@@ -25,7 +25,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import vswe.stevescarts.client.interfaces.GuiVehicle;
-import vswe.stevescarts.containers.ContainerMinecart;
+import vswe.stevescarts.containers.ContainerVehicle;
 import vswe.stevescarts.old.Helpers.ActivatorOption;
 import vswe.stevescarts.vehicles.versions.VehicleVersion;
 import vswe.stevescarts.old.Helpers.CompWorkModule;
@@ -1047,7 +1047,7 @@ public class VehicleBase {
      Returns the container of this cart
      **/
     public Container getCon(InventoryPlayer player){
-        return new ContainerMinecart(player, this); //TODO
+        return new ContainerVehicle(player, this);
     }
 
 

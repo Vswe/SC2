@@ -15,7 +15,7 @@ import vswe.stevescarts.old.StevesCarts;
 import vswe.stevescarts.old.TileEntities.TileEntityCartAssembler;
 import vswe.stevescarts.old.TileEntities.TileEntityUpgrade;
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
-import vswe.stevescarts.old.PacketHandler;
+import vswe.stevescarts.network.PacketHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

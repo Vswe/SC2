@@ -15,7 +15,7 @@ import org.lwjgl.opengl.GL12;
 import vswe.stevescarts.client.interfaces.GuiBase;
 import vswe.stevescarts.old.Helpers.Localization;
 import vswe.stevescarts.old.Items.ModItems;
-import vswe.stevescarts.old.PacketHandler;
+import vswe.stevescarts.network.PacketHandler;
 import vswe.stevescarts.old.StevesCarts;
 import vswe.stevescarts.old.Containers.ContainerCartAssembler;
 import vswe.stevescarts.old.Helpers.DropDownMenuItem;

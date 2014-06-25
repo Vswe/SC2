@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
 
 import vswe.stevescarts.client.interfaces.GuiVehicle;
 import vswe.stevescarts.old.Helpers.Localization;
-import vswe.stevescarts.old.PacketHandler;
+import vswe.stevescarts.network.PacketHandler;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Helpers.ResourceHelper;
 import vswe.stevescarts.old.Modules.ILeverModule;

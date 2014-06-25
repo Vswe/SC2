@@ -11,10 +11,10 @@ import vswe.stevescarts.old.Slots.SlotBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ContainerMinecart extends ContainerBase {
+public class ContainerVehicle extends ContainerBase {
     private VehicleBase vehicle;
 
-    public ContainerMinecart(IInventory player, VehicleBase vehicle) {
+    public ContainerVehicle(IInventory player, VehicleBase vehicle) {
         initVehicleSlots(vehicle);
         initPlayerInventory(player);
     }
@@ -109,4 +109,7 @@ public class ContainerMinecart extends ContainerBase {
 		}
     }
 
+    public VehicleBase getVehicle() {
+        return vehicle;
+    }
 }

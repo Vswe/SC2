@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 import org.lwjgl.opengl.GL11;
 
-import vswe.stevescarts.old.PacketHandler;
+import vswe.stevescarts.network.PacketHandler;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.old.Interfaces.GuiDetector;
 import vswe.stevescarts.old.ModuleData.ModuleData;

@@ -1,4 +1,4 @@
-package vswe.stevescarts.old;
+package vswe.stevescarts.network;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -19,17 +19,18 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.world.World;
+import vswe.stevescarts.containers.ContainerVehicle;
 import vswe.stevescarts.old.Blocks.BlockCartAssembler;
 import vswe.stevescarts.old.Blocks.ModBlocks;
 import vswe.stevescarts.vehicles.VehicleBase;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
 import vswe.stevescarts.containers.ContainerBase;
-import vswe.stevescarts.containers.ContainerMinecart;
 import vswe.stevescarts.modules.ModuleBase;
 import vswe.stevescarts.old.TileEntities.TileEntityBase;
 
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
+import vswe.stevescarts.vehicles.entities.IVehicleEntity;
 
 
 import static vswe.stevescarts.old.StevesCarts.CHANNEL;
@@ -74,9 +75,9 @@ public class PacketHandler {
                 }
 
                 World world = player.worldObj;
-                EntityModularCart cart = getCart(entityid, world);
-                if (cart != null) {
-                    receivePacketAtCart(cart,id, data, player);
+                VehicleBase vehicle = getVehicle(entityid, world);
+                if (vehicle != null) {
+                    receivePacketAtVehicle(vehicle, id, data, player);
                 }
             }
 
@@ -109,9 +110,9 @@ public class PacketHandler {
                 for (int i = 0; i < len; i++) {
                     data[i] = reader.readByte();
                 }
-                EntityModularCart cart = getCart(entityid, world);
-                if (cart != null) {
-                    receivePacketAtCart(cart,id, data, player);
+                VehicleBase vehicle = getVehicle(entityid, world);
+                if (vehicle != null) {
+                    receivePacketAtVehicle(vehicle, id, data, player);
                 }
             }else{
 
@@ -123,14 +124,14 @@ public class PacketHandler {
 
                 Container con = player.openContainer;
 
-                if (con instanceof ContainerMinecart) {
-                    ContainerMinecart conMC = (ContainerMinecart)con;
-                    EntityModularCart cart = conMC.cart;
+                if (con instanceof ContainerVehicle) {
+                    ContainerVehicle containerVehicle = (ContainerVehicle)con;
+                    VehicleBase vehicle = containerVehicle.getVehicle();
 
-                    receivePacketAtCart(cart, id,data, player);
+                    receivePacketAtVehicle(vehicle, id, data, player);
                 }else if(con instanceof ContainerBase) {
-                    ContainerBase conBase =(ContainerBase)con;
-                    TileEntityBase base = conBase.getTileEntity();
+                    ContainerBase containerBase =(ContainerBase)con;
+                    TileEntityBase base = containerBase.getTileEntity();
                     if (base != null) {
                         base.receivePacket(id, data, player);
                     }
@@ -145,8 +146,8 @@ public class PacketHandler {
 
 
 
-	private void receivePacketAtCart(EntityModularCart cart, int id,byte [] data, EntityPlayer player) {
-		for (ModuleBase module : cart.getModules()) {
+	private void receivePacketAtVehicle(VehicleBase vehicle, int id,byte [] data, EntityPlayer player) {
+		for (ModuleBase module : vehicle.getModules()) {
 			if (id >= module.getPacketStart() && id < module.getPacketStart() + module.totalNumberOfPackets()) {
 				module.delegateReceivedPacket(id-module.getPacketStart(),data, player);
 				break;
@@ -154,12 +155,13 @@ public class PacketHandler {
 		}
 	}
 	
-	private EntityModularCart getCart(int ID, World world) {
-		for (Object e : world.loadedEntityList) {
-			if (e instanceof Entity && ((Entity)e).getEntityId() == ID && e instanceof EntityModularCart) {
-				return (EntityModularCart)e;
-			}
-		}
+	private VehicleBase getVehicle(int id, World world) {
+        Entity entity = world.getEntityByID(id);
+
+        if (entity instanceof IVehicleEntity) {
+            return ((IVehicleEntity)entity).getVehicle();
+        }
+
 		return null;
 	}
 	
@@ -175,7 +177,7 @@ public class PacketHandler {
 				ds.writeByte(b);
 			}
 			
-		} catch (IOException e) {
+		}catch (IOException e) {
 			
 		}
 		

@@ -26,12 +26,12 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
 import vswe.stevescarts.client.interfaces.GuiVehicle;
+import vswe.stevescarts.containers.ContainerVehicle;
 import vswe.stevescarts.old.Helpers.NBTHelper;
-import vswe.stevescarts.old.PacketHandler;
+import vswe.stevescarts.network.PacketHandler;
 import vswe.stevescarts.old.Buttons.ButtonBase;
 import vswe.stevescarts.vehicles.VehicleBase;
 import vswe.stevescarts.vehicles.entities.EntityModularCart;
-import vswe.stevescarts.containers.ContainerMinecart;
 import vswe.stevescarts.old.Helpers.CompButtons;
 import vswe.stevescarts.old.Helpers.SimulationInfo;
 import vswe.stevescarts.client.interfaces.GuiBase.RENDER_ROTATION;
@@ -1311,7 +1311,7 @@ public abstract class ModuleBase {
 	 */
 	public final void updateGuiData(Object[] info, int id, short data) {	
 		//get the container and see if it's valid
-		ContainerMinecart con = (ContainerMinecart)info[0];
+		ContainerVehicle con = (ContainerVehicle)info[0];
 		if (con == null) {
 			return;
 		}
