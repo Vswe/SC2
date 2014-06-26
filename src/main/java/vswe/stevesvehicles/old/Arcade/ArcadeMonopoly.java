@@ -8,6 +8,7 @@ import org.lwjgl.opengl.GL11;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
 import vswe.stevesvehicles.old.Arcade.Piece.CONTROLLED_BY;
 import vswe.stevesvehicles.old.Arcade.Place.PLACE_STATE;
+import vswe.stevesvehicles.vehicles.VehicleBase;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
@@ -586,20 +587,20 @@ public class ArcadeMonopoly extends ArcadeGame {
 		die.draw(gui, 20, 20);
 		die2.draw(gui, 50, 20);
 		
-		float smallgridX = x / SCALE - ((EntityModularCart.MODULAR_SPACE_WIDTH / SCALE) - (PLACE_HEIGHT * 2 + (BOARD_WIDTH - 1) * PLACE_WIDTH)) / 2;
-		float smallgridY = y / SCALE - ((EntityModularCart.MODULAR_SPACE_HEIGHT / SCALE) - (PLACE_HEIGHT * 2 + (BOARD_HEIGHT - 1) * PLACE_WIDTH)) / 2;
+		float smallgridX = x / SCALE - ((VehicleBase.MODULAR_SPACE_WIDTH / SCALE) - (PLACE_HEIGHT * 2 + (BOARD_WIDTH - 1) * PLACE_WIDTH)) / 2;
+		float smallgridY = y / SCALE - ((VehicleBase.MODULAR_SPACE_HEIGHT / SCALE) - (PLACE_HEIGHT * 2 + (BOARD_HEIGHT - 1) * PLACE_WIDTH)) / 2;
 
 		boolean foundHover = false;
 		
 		if (selectedPlace != -1) {
-			drawPropertyOnBoardWithPositionRotationAndScale(gui, places[selectedPlace], selectedPlace, true, false, (int)((EntityModularCart.MODULAR_SPACE_WIDTH / 0.75 - ((getId(selectedPlace) == 0) ? PLACE_HEIGHT : PLACE_WIDTH)) / 2),  (int)((EntityModularCart.MODULAR_SPACE_HEIGHT / 0.75 - PLACE_HEIGHT) / 2 ), 0, 0.75F);
+			drawPropertyOnBoardWithPositionRotationAndScale(gui, places[selectedPlace], selectedPlace, true, false, (int)((VehicleBase.MODULAR_SPACE_WIDTH / 0.75 - ((getId(selectedPlace) == 0) ? PLACE_HEIGHT : PLACE_WIDTH)) / 2),  (int)((VehicleBase.MODULAR_SPACE_HEIGHT / 0.75 - PLACE_HEIGHT) / 2 ), 0, 0.75F);
 		} 
 		
 		for (int i = 0; i < places.length; i++) {
 
 			if (!foundHover && getModule().inRect((int)smallgridX, (int)smallgridY, getSmallgridPlaceArea(i))) {
 				if (selectedPlace == -1) {
-					drawPropertyOnBoardWithPositionRotationAndScale(gui, places[i], i, true, false, (int)((EntityModularCart.MODULAR_SPACE_WIDTH / 0.75 - ((getId(i) == 0) ? PLACE_HEIGHT : PLACE_WIDTH)) / 2),  (int)((EntityModularCart.MODULAR_SPACE_HEIGHT / 0.75 - PLACE_HEIGHT) / 2 ), 0, 0.75F);
+					drawPropertyOnBoardWithPositionRotationAndScale(gui, places[i], i, true, false, (int)((VehicleBase.MODULAR_SPACE_WIDTH / 0.75 - ((getId(i) == 0) ? PLACE_HEIGHT : PLACE_WIDTH)) / 2),  (int)((VehicleBase.MODULAR_SPACE_HEIGHT / 0.75 - PLACE_HEIGHT) / 2 ), 0, 0.75F);
 				}
 				
 				foundHover = true;
@@ -647,7 +648,7 @@ public class ArcadeMonopoly extends ArcadeGame {
 				NoteAnimation animation = piece.getAnimationNotes().get(j);
 				int animX = menu[0] + 50 + (6- animation.getNote().getId()) * 20;
 				
-				if (animX + 16 > EntityModularCart.MODULAR_SPACE_WIDTH) {
+				if (animX + 16 > VehicleBase.MODULAR_SPACE_WIDTH) {
 					animX = player[0] + (player[2] - 16) / 2;
 				}
 				
@@ -762,8 +763,8 @@ public class ArcadeMonopoly extends ArcadeGame {
 		
 
 		
-		int x = (EntityModularCart.MODULAR_SPACE_WIDTH - CARD_WIDTH) / 2;
-		int y = (EntityModularCart.MODULAR_SPACE_HEIGHT - CARD_HEIGHT) / 2;
+		int x = (VehicleBase.MODULAR_SPACE_WIDTH - CARD_WIDTH) / 2;
+		int y = (VehicleBase.MODULAR_SPACE_HEIGHT - CARD_HEIGHT) / 2;
 		
 		float s = cardScale; 
 		
@@ -984,8 +985,8 @@ public class ArcadeMonopoly extends ArcadeGame {
 		
 		
 		
-		offX += ((int)(EntityModularCart.MODULAR_SPACE_WIDTH / SCALE) - (PLACE_HEIGHT * 2 + (BOARD_WIDTH - 1) * PLACE_WIDTH)) / 2;
-		offY += ((int)(EntityModularCart.MODULAR_SPACE_HEIGHT / SCALE) - (PLACE_HEIGHT * 2 + (BOARD_HEIGHT - 1) * PLACE_WIDTH)) / 2;
+		offX += ((int)(VehicleBase.MODULAR_SPACE_WIDTH / SCALE) - (PLACE_HEIGHT * 2 + (BOARD_WIDTH - 1) * PLACE_WIDTH)) / 2;
+		offY += ((int)(VehicleBase.MODULAR_SPACE_HEIGHT / SCALE) - (PLACE_HEIGHT * 2 + (BOARD_HEIGHT - 1) * PLACE_WIDTH)) / 2;
 		
 		
 		drawPropertyOnBoardWithPositionRotationAndScale(gui, place, id, false, hover, offX, offY, rotation, SCALE);
@@ -1047,8 +1048,8 @@ public class ArcadeMonopoly extends ArcadeGame {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void mouseClicked(GuiVehicle gui, int x, int y, int b) {
-		float smallgridX = x / SCALE - ((EntityModularCart.MODULAR_SPACE_WIDTH / SCALE) - (PLACE_HEIGHT * 2 + (BOARD_WIDTH - 1) * PLACE_WIDTH)) / 2;
-		float smallgridY = y / SCALE - ((EntityModularCart.MODULAR_SPACE_HEIGHT / SCALE) - (PLACE_HEIGHT * 2 + (BOARD_HEIGHT - 1) * PLACE_WIDTH)) / 2;
+		float smallgridX = x / SCALE - ((VehicleBase.MODULAR_SPACE_WIDTH / SCALE) - (PLACE_HEIGHT * 2 + (BOARD_WIDTH - 1) * PLACE_WIDTH)) / 2;
+		float smallgridY = y / SCALE - ((VehicleBase.MODULAR_SPACE_HEIGHT / SCALE) - (PLACE_HEIGHT * 2 + (BOARD_HEIGHT - 1) * PLACE_WIDTH)) / 2;
 
 		
 		for (int i = 0; i < places.length; i++) {
@@ -1081,7 +1082,7 @@ public class ArcadeMonopoly extends ArcadeGame {
 		}
 		
 		if (currentCard != null && cardScale == 1F) {
-			int[] rect = new int[] {(EntityModularCart.MODULAR_SPACE_WIDTH - CARD_WIDTH) / 2, (EntityModularCart.MODULAR_SPACE_HEIGHT - CARD_HEIGHT) / 2, CARD_WIDTH, CARD_HEIGHT};
+			int[] rect = new int[] {(VehicleBase.MODULAR_SPACE_WIDTH - CARD_WIDTH) / 2, (VehicleBase.MODULAR_SPACE_HEIGHT - CARD_HEIGHT) / 2, CARD_WIDTH, CARD_HEIGHT};
 			if (getModule().inRect(x, y, rect)) {
 				removeCard();
 			}

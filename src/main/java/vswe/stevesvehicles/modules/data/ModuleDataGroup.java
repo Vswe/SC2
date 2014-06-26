@@ -2,7 +2,9 @@ package vswe.stevesvehicles.modules.data;
 import vswe.stevesvehicles.old.Helpers.Localization;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ModuleDataGroup {
 	private Localization.MODULE_INFO name;
@@ -84,5 +86,5 @@ public class ModuleDataGroup {
 			add(obj);
 		}
 	}
-	
+
 }

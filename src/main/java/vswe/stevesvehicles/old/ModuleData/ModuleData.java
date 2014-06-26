@@ -167,47 +167,6 @@ public class ModuleData {
 	
 		moduleList = new HashMap<Byte,ModuleData> ();
 		
-		ModuleDataGroup engineGroup = new ModuleDataGroup(Localization.MODULE_INFO.ENGINE_GROUP);
-		
-		ModuleData coalStandard = new ModuleData(0, "Coal Engine", ModuleCoalStandard.class,15)/*.addSide(SIDE.BACK)*/			
-			.addRecipe(new Object[][] {
-				{Items.iron_ingot,Items.iron_ingot,Items.iron_ingot},
-				{Items.iron_ingot,Blocks.furnace,Items.iron_ingot},
-				{Blocks.piston,null,Blocks.piston}
-			});
-			
-		ModuleData coalTiny = new ModuleData(44, "Tiny Coal Engine", ModuleCoalTiny.class,2)/*.addSide(SIDE.BACK)*/
-			.addRecipe(new Object[][] {
-				{Items.iron_ingot,Blocks.furnace,Items.iron_ingot},
-				{null,Blocks.piston,null}
-			});	
-			
-		addNemesis(coalTiny, coalStandard);
-
-		
-		ModuleData solar1 = new ModuleData(1, "Solar Engine", ModuleSolarStandard.class, 20).addSides(new SIDE[] {SIDE.CENTER, SIDE.TOP})	
-			.removeModel("Top")		
-			.addRecipe(new Object[][] {
-				{Items.iron_ingot,ComponentTypes.SOLAR_PANEL.getItemStack(),Items.iron_ingot},
-				{ComponentTypes.SOLAR_PANEL.getItemStack(),ComponentTypes.ADVANCED_PCB.getItemStack(),ComponentTypes.SOLAR_PANEL.getItemStack()},
-				{Blocks.piston,ComponentTypes.SOLAR_PANEL.getItemStack(),Blocks.piston}
-			});			
-		
-		ModuleData solar0 = new ModuleData(45, "Basic Solar Engine", ModuleSolarBasic.class, 12).addSides(new SIDE[] {SIDE.CENTER, SIDE.TOP})
-			.removeModel("Top")			
-			.addRecipe(new Object[][] {
-				{ComponentTypes.SOLAR_PANEL.getItemStack(),Items.iron_ingot,ComponentTypes.SOLAR_PANEL.getItemStack()},
-				{Items.iron_ingot,ComponentTypes.SIMPLE_PCB.getItemStack(),Items.iron_ingot},
-				{null,Blocks.piston,null}
-			});
-
-		
-		ModuleData compactsolar = new ModuleData(56, "Compact Solar Engine", ModuleSolarCompact.class, 32).addSides(new SIDE[] {SIDE.RIGHT, SIDE.LEFT})
-			.addRecipe(new Object[][] {
-				{ComponentTypes.ADVANCED_SOLAR_PANEL.getItemStack(),Items.iron_ingot,ComponentTypes.ADVANCED_SOLAR_PANEL.getItemStack()},
-				{ComponentTypes.ADVANCED_PCB.getItemStack(),Items.redstone, ComponentTypes.ADVANCED_PCB.getItemStack()},
-				{Blocks.piston,Items.iron_ingot,Blocks.piston}
-			});		
 
 		
 		
@@ -501,53 +460,7 @@ public class ModuleData {
 									   {null, Items.golden_carrot, null}
 									  });
 				
-		new ModuleDataHull(37, "Wooden Hull", HullWood.class).setCapacity(50).setEngineMax(1).setAddonMax(0).setComplexityMax(15)
-			.addRecipe(new Object[][]{{planks, null, planks}, {planks, planks, planks}, {ComponentTypes.WOODEN_WHEELS
-                    .getItemStack(), null, ComponentTypes.WOODEN_WHEELS.getItemStack()}});
-		
-		new ModuleDataHull(38, "Standard Hull", HullStandard.class).setCapacity(200).setEngineMax(3).setAddonMax(6).setComplexityMax(50)
-			.addRecipe(new Object[][] {{Items.iron_ingot, null, Items.iron_ingot},
-									   {Items.iron_ingot, Items.iron_ingot, Items.iron_ingot},
-									   {ComponentTypes.IRON_WHEELS.getItemStack(), null, ComponentTypes.IRON_WHEELS.getItemStack()}
-									  });		
-		
-		ModuleData reinfhull = new ModuleDataHull(39, "Reinforced Hull", HullReinforced.class).setCapacity(500).setEngineMax(5).setAddonMax(12).setComplexityMax(150)
-			.addRecipe(new Object[][]{{ComponentTypes.REINFORCED_METAL.getItemStack(), null,
-                    ComponentTypes.REINFORCED_METAL.getItemStack()}, {ComponentTypes.REINFORCED_METAL.getItemStack(),
-                    ComponentTypes.REINFORCED_METAL.getItemStack(), ComponentTypes.REINFORCED_METAL.getItemStack()},
-                    {ComponentTypes.REINFORCED_WHEELS.getItemStack(), null, ComponentTypes.REINFORCED_WHEELS
-                            .getItemStack()}});
 
-		ModuleData pumpkinhull = new ModuleDataHull(47, "Pumpkin chariot", HullPumpkin.class).setCapacity(40).setEngineMax(1).setAddonMax(0).setComplexityMax(15)
-			.addRecipe(new Object[][]{{planks, null, planks}, {planks, Blocks.pumpkin, planks},
-                    {ComponentTypes.WOODEN_WHEELS.getItemStack(), null, ComponentTypes.WOODEN_WHEELS.getItemStack()}});
-									  
-		if (!StevesVehicles.isHalloween) {
-			pumpkinhull.lock();
-		}
-		
-		new ModuleDataHull(62, "Mechanical Pig", HullPig.class).setCapacity(150).setEngineMax(2).setAddonMax(4).setComplexityMax(50).addSide(SIDE.FRONT)
-			.addRecipe(new Object[][]{{Items.porkchop, null, Items.porkchop},
-                    {Items.porkchop, Items.porkchop, Items.porkchop},
-                    {ComponentTypes.IRON_WHEELS.getItemStack(), null, ComponentTypes.IRON_WHEELS.getItemStack()}
-            })
-		.addMessage(Localization.MODULE_INFO.PIG_MESSAGE);
-		
-		new ModuleDataHull(76, "Creative Hull", HullCreative.class).setCapacity(10000).setEngineMax(5).setAddonMax(12).setComplexityMax(150);
-
-		
-		
-		new ModuleDataHull(81, "Galgadorian Hull", HullGalgadorian.class).setCapacity(1000).setEngineMax(5).setAddonMax(12).setComplexityMax(150)
-				.addRecipe(new Object[][]{{ComponentTypes.GALGADORIAN_METAL.getItemStack(), null,
-                        ComponentTypes.GALGADORIAN_METAL.getItemStack()}, {ComponentTypes.GALGADORIAN_METAL
-                        .getItemStack(), ComponentTypes.GALGADORIAN_METAL.getItemStack(),
-                        ComponentTypes.GALGADORIAN_METAL.getItemStack()}, {ComponentTypes.GALGADORIAN_WHEELS
-                        .getItemStack(), null, ComponentTypes.GALGADORIAN_WHEELS.getItemStack()}});
-		
-		StevesVehicles.tabsSC2.setIcon(reinfhull.getItemStack());
-		StevesVehicles.tabsSC2Components.setIcon(ComponentTypes.REINFORCED_WHEELS.getItemStack());
-
-		
 		
 		new ModuleData(40, "Note Sequencer", ModuleNote.class, 30).addSides(new SIDE[] {SIDE.RIGHT, SIDE.LEFT})
 			.addRecipe(new Object[][] {
@@ -673,8 +586,7 @@ public class ModuleData {
 										{ComponentTypes.SIMPLE_PCB.getItemStack(), Items.flint_and_steel, ComponentTypes.SIMPLE_PCB.getItemStack()}
 									  });			
 		
-		
-		ModuleData cheatengine = new ModuleData(61, "Creative Engine", ModuleCheatEngine.class, 1);
+
 		
 		ModuleData internalTank = new ModuleData(63, "Internal Tank", ModuleInternalTank.class, 37).setAllowDuplicate()
 			.addRecipe(new Object[][] {{ComponentTypes.TANK_PANE.getItemStack(), ComponentTypes.TANK_PANE.getItemStack(), ComponentTypes.TANK_PANE.getItemStack()},
@@ -726,19 +638,7 @@ public class ModuleData {
 									   {Blocks.obsidian, Blocks.furnace, Blocks.obsidian},
 									   {Blocks.nether_brick,  Blocks.nether_brick, Blocks.nether_brick}
 									  });	
-				
-		ModuleData thermal0 = new ModuleData(69, "Thermal Engine", ModuleThermalStandard.class, 28).addRequirement(tankGroup)
-			.addRecipe(new Object[][] {{Blocks.nether_brick,  Blocks.nether_brick,  Blocks.nether_brick},
-									   {Blocks.obsidian, Blocks.furnace, Blocks.obsidian},
-									   {Blocks.piston, null, Blocks.piston}
-									  });	
-									  
-		ModuleData thermal1 = new ModuleData(70, "Advanced Thermal Engine", ModuleThermalAdvanced.class, 58).addRequirement(tankGroup.copy(2))
-			.addRecipe(new Object[][] {{Blocks.nether_brick,  Blocks.nether_brick,  Blocks.nether_brick},
-									   {ComponentTypes.REINFORCED_METAL.getItemStack(), thermal0.getItemStack(), ComponentTypes.REINFORCED_METAL.getItemStack()},
-									   {Blocks.piston, null, Blocks.piston}
-									  });		
-		addNemesis(thermal0, thermal1);
+
 
 		ModuleData cleanerliquid = new ModuleData(71, "Liquid Cleaner", ModuleLiquidDrainer.class, 30).addSide(SIDE.CENTER).addParent(liquidsensors).addRequirement(tankGroup)
 			.addRecipe(new Object[][] {{ComponentTypes.LIQUID_CLEANING_TUBE.getItemStack(), ComponentTypes.LIQUID_CLEANING_CORE.getItemStack(), ComponentTypes.LIQUID_CLEANING_TUBE.getItemStack()},
@@ -792,14 +692,7 @@ public class ModuleData {
 									  });			
 				
 
-		engineGroup.add(coalTiny);
-		engineGroup.add(coalStandard);
-		engineGroup.add(solar0);
-		engineGroup.add(solar1);		
-		engineGroup.add(thermal0);
-		engineGroup.add(thermal1);		
-		engineGroup.add(compactsolar);
-		engineGroup.add(cheatengine);	
+
 		
 
 		

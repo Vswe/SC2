@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class VehicleRegistry implements IRegistry<VehicleType> {
     public static final VehicleType CART = new VehicleType(EntityModularCart.class, "Steve's Cart");
-    //public static final VehicleType BOAT;
+    public static final VehicleType BOAT = new VehicleType(EntityModularCart.class, "Steve's Boat");
 
     public static void init() {
         loader = new RegistryLoader<VehicleRegistry, VehicleType>();
@@ -19,7 +19,7 @@ public class VehicleRegistry implements IRegistry<VehicleType> {
         loader.add(instance);
 
         instance.register(CART);
-        //instance.register(BOAT);
+        instance.register(BOAT);
     }
 
     private static RegistryLoader<VehicleRegistry, VehicleType> loader;

@@ -152,7 +152,7 @@ public class TileEntityActivator extends TileEntityBase
 		//tell the cart to update with any option that is not disabled
 		for (ActivatorOption option : options) {
 			if (!option.isDisabled()) {
-				cart.handleActivator(option, isOrange);
+				cart.getVehicle().handleActivator(option, isOrange);
 			}
 		}
 	}

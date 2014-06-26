@@ -1584,7 +1584,8 @@ public class TileEntityCartAssembler extends TileEntityBase
     }	
 
 	public ItemStack getOutputOnInterrupt() {
-		if (outputItem == null) {
+        //TODO rewrite to output an interrupted vehicle
+		/*if (outputItem == null) {
 			return null;
 		}else if (!outputItem.hasTagCompound()) {
 			return null;
@@ -1615,9 +1616,9 @@ public class TileEntityCartAssembler extends TileEntityBase
 				
 				return outputItem;
 			}
-		}
+		}*/
 		
-		
+		return null;
 	}
 
 	@Override

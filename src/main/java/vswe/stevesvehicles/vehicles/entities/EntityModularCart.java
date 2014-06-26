@@ -75,10 +75,6 @@ public class EntityModularCart extends EntityMinecart
 
 
 
-	
-	public Random rand = new Random();
-
-
     @Override
     public VehicleBase getVehicle() {
         return vehicleBase;

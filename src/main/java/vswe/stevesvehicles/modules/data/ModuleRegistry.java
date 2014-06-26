@@ -2,6 +2,7 @@ package vswe.stevesvehicles.modules.data;
 
 
 import vswe.stevesvehicles.modules.data.registries.ModuleRegistryCartHulls;
+import vswe.stevesvehicles.modules.data.registries.ModuleRegistryEngines;
 import vswe.stevesvehicles.registries.IRegistry;
 import vswe.stevesvehicles.registries.RegistryLoader;
 
@@ -17,6 +18,7 @@ public class ModuleRegistry implements IRegistry<ModuleData> {
         loader = new RegistryLoader<ModuleRegistry, ModuleData>();
         allModules = new ArrayList<ModuleData>();
         add(new ModuleRegistryCartHulls());
+        add(new ModuleRegistryEngines());
     }
 
     private static List<ModuleData> allModules;

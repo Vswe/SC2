@@ -71,6 +71,8 @@ public class VehicleBase {
     public static final int MODULAR_SPACE_WIDTH = 443;
     public static final int MODULAR_SPACE_HEIGHT = 168;
 
+    private static Random rand = new Random();
+
     /**
      * All Modules that belong to this cart
      */
@@ -1560,7 +1562,6 @@ public class VehicleBase {
     }
 
 	public Random getRandom() {
-		//ToDo: Return correct random generator
-		return new Random();
+		return rand;
 	}
 }

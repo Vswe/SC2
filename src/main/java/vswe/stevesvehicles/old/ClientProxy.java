@@ -4,6 +4,7 @@ import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.init.Items;
 import net.minecraft.world.World;
 import vswe.stevesvehicles.client.rendering.RenderVehicleItem;
+import vswe.stevesvehicles.client.rendering.RendererCart;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 import vswe.stevesvehicles.old.Fancy.FancyPancyLoader;
 import vswe.stevesvehicles.old.Helpers.*;
@@ -20,7 +21,7 @@ public class ClientProxy extends CommonProxy{
 
 	@Override
 	public void renderInit() {
-		RenderingRegistry.registerEntityRenderingHandler(EntityModularCart.class, new RenderMinecart());
+		RenderingRegistry.registerEntityRenderingHandler(EntityModularCart.class, new RendererCart());
 		RenderingRegistry.registerEntityRenderingHandler(EntityEasterEgg.class, new RenderSnowball(ModItems.component, ComponentTypes.PAINTED_EASTER_EGG.getId()));
 		StevesVehicles.instance.blockRenderer = new RendererUpgrade();
 		new RenderVehicleItem();
