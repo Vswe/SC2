@@ -29,6 +29,7 @@ import vswe.stevesvehicles.containers.ContainerVehicle;
 import vswe.stevesvehicles.modules.data.ModuleRegistry;
 import vswe.stevesvehicles.old.Helpers.ActivatorOption;
 import vswe.stevesvehicles.modules.data.ModuleData;
+import vswe.stevesvehicles.models.ModelVehicle;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicles.versions.VehicleVersion;
 import vswe.stevesvehicles.old.Helpers.CompWorkModule;
@@ -36,7 +37,6 @@ import vswe.stevesvehicles.old.Helpers.DataWatcherLockable;
 import vswe.stevesvehicles.old.Helpers.GuiAllocationHelper;
 import vswe.stevesvehicles.old.Helpers.ModuleCountPair;
 import vswe.stevesvehicles.old.Helpers.TransferHandler;
-import vswe.stevesvehicles.old.Models.Cart.ModelCartbase;
 import vswe.stevesvehicles.old.Modules.Addons.ModuleCreativeSupplies;
 import vswe.stevesvehicles.old.Modules.Engines.ModuleEngine;
 import vswe.stevesvehicles.old.Modules.IActivatorModule;
@@ -1024,7 +1024,7 @@ public class VehicleBase {
                 ModuleData data = module.getModuleData();
                 if (data != null) {
                     if (data.haveModels(isPlaceholder)) {
-                        ArrayList<ModelCartbase> models = new ArrayList<ModelCartbase>();
+                        ArrayList<ModelVehicle> models = new ArrayList<ModelVehicle>();
 
                         //add all the models
                         for (String str : data.getModels(isPlaceholder).keySet()) {

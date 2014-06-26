@@ -14,11 +14,11 @@ import net.minecraftforge.fluids.FluidStack;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import vswe.stevesvehicles.models.ModelVehicle;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.IconData;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.old.Helpers.Tank;
-import vswe.stevesvehicles.old.Models.Cart.ModelCartbase;
 import vswe.stevesvehicles.modules.ModuleBase;
 
 public class RendererMinecart extends Render
@@ -145,7 +145,7 @@ public class RendererMinecart extends Render
 		if (cart.getModules() != null) {
 			for (ModuleBase module : cart.getModules()) {
 				if (module.haveModels()) {
-					for (ModelCartbase model : module.getModels()) {
+					for (ModelVehicle model : module.getModels()) {
 						model.render(this, module, yaw, pitch, roll, mult, partialtime);
 					}
 				}

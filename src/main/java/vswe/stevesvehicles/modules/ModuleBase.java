@@ -31,12 +31,12 @@ import vswe.stevesvehicles.modules.data.ModuleRegistry;
 import vswe.stevesvehicles.old.Helpers.NBTHelper;
 import vswe.stevesvehicles.network.PacketHandler;
 import vswe.stevesvehicles.old.Buttons.ButtonBase;
+import vswe.stevesvehicles.models.ModelVehicle;
 import vswe.stevesvehicles.vehicles.VehicleBase;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.CompButtons;
 import vswe.stevesvehicles.old.Helpers.SimulationInfo;
 import vswe.stevesvehicles.client.interfaces.GuiBase.RENDER_ROTATION;
-import vswe.stevesvehicles.old.Models.Cart.ModelCartbase;
 import vswe.stevesvehicles.modules.data.ModuleData;
 import vswe.stevesvehicles.old.Slots.SlotBase;
 import cpw.mods.fml.relauncher.Side;
@@ -76,7 +76,7 @@ public abstract class ModuleBase {
 	private int moduleId;
 	
 	//the models this module is using, this is generated from the ModuleData creating this module
-	private ArrayList<ModelCartbase> models;
+	private ArrayList<ModelVehicle> models;
 	
 	/**
 	 * Creates a new instance of this module, the module will be created at the given vehicle.
@@ -1389,12 +1389,12 @@ public abstract class ModuleBase {
 	}
 
     @SideOnly(Side.CLIENT)
-	public void setModels(ArrayList<ModelCartbase> models){
+	public void setModels(ArrayList<ModelVehicle> models){
 		this.models = models;
 	}
 
     @SideOnly(Side.CLIENT)
-	public ArrayList<ModelCartbase> getModels() {
+	public ArrayList<ModelVehicle> getModels() {
 		return models;
 	}
 	

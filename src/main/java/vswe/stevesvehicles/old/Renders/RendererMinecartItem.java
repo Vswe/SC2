@@ -7,12 +7,13 @@ import vswe.stevesvehicles.old.Items.ModItems;
 import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 
+import vswe.stevesvehicles.models.ModelVehicle;
 import vswe.stevesvehicles.old.ModuleData.ModuleData;
 import net.minecraft.nbt.NBTTagByteArray;
 import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.HashMap;
-import vswe.stevesvehicles.old.Models.Cart.ModelCartbase;
+
 public class RendererMinecartItem implements IItemRenderer {
 	public RendererMinecartItem() {
 		MinecraftForgeClient.registerItemRenderer(ModItems.carts, this);
@@ -66,7 +67,7 @@ public class RendererMinecartItem implements IItemRenderer {
 			NBTTagByteArray moduleIDTag = (NBTTagByteArray)info.getTag("Modules");
 			byte [] bytes = moduleIDTag.func_150292_c();
 			
-			HashMap<String, ModelCartbase> models = new HashMap<String, ModelCartbase>();
+			HashMap<String, ModelVehicle> models = new HashMap<String, ModelVehicle>();
 			
 			float lowestMult = 1.0F;
 			
@@ -93,7 +94,7 @@ public class RendererMinecartItem implements IItemRenderer {
 				GL11.glScalef(lowestMult, lowestMult, lowestMult);
 			}			
 			
-			for (ModelCartbase model : models.values()) {
+			for (ModelVehicle model : models.values()) {
 				model.render(null, null, 0, 0, 0, 0.0625F, 0);
 			}
 		}

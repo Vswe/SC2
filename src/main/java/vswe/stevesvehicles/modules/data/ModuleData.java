@@ -14,7 +14,7 @@ import vswe.stevesvehicles.modules.ModuleBase;
 import vswe.stevesvehicles.old.Helpers.ColorHelper;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Items.ModItems;
-import vswe.stevesvehicles.old.Models.Cart.ModelCartbase;
+import vswe.stevesvehicles.models.ModelVehicle;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicles.VehicleType;
 
@@ -43,9 +43,9 @@ public class ModuleData {
     private ArrayList<VehicleType> validVehicles;
 
     @SideOnly(Side.CLIENT)
-    private HashMap<String,ModelCartbase> models;
+    private HashMap<String,ModelVehicle> models;
     @SideOnly(Side.CLIENT)
-    private HashMap<String,ModelCartbase> modelsPlaceholder;
+    private HashMap<String,ModelVehicle> modelsPlaceholder;
     @SideOnly(Side.CLIENT)
     private ArrayList<String> removedModels;
     @SideOnly(Side.CLIENT)
@@ -202,21 +202,21 @@ public class ModuleData {
         return this;
     }
 
-    public ModuleData addModel(String tag, ModelCartbase model) {
+    public ModuleData addModel(String tag, ModelVehicle model) {
         addModel(tag, model, false);
         addModel(tag, model, true);
         return this;
     }
-    public ModuleData addModel(String tag, ModelCartbase model, boolean placeholder) {
+    public ModuleData addModel(String tag, ModelVehicle model, boolean placeholder) {
         if (placeholder) {
             if (modelsPlaceholder == null) {
-                modelsPlaceholder = new HashMap<String,ModelCartbase>();
+                modelsPlaceholder = new HashMap<String,ModelVehicle>();
             }
 
             modelsPlaceholder.put(tag, model);
         }else{
             if (models == null) {
-                models = new HashMap<String,ModelCartbase>();
+                models = new HashMap<String,ModelVehicle>();
             }
 
             models.put(tag, model);
@@ -225,7 +225,7 @@ public class ModuleData {
         return this;
     }
 
-    public HashMap<String,ModelCartbase> getModels(boolean placeholder) {
+    public HashMap<String,ModelVehicle> getModels(boolean placeholder) {
         if (placeholder) {
             return modelsPlaceholder;
         }else{

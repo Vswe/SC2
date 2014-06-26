@@ -13,11 +13,57 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
+import vswe.stevesvehicles.models.ModelAdvancedTank;
+import vswe.stevesvehicles.models.ModelBridge;
+import vswe.stevesvehicles.models.ModelCage;
+import vswe.stevesvehicles.models.ModelCake;
+import vswe.stevesvehicles.models.ModelCleaner;
+import vswe.stevesvehicles.models.ModelCompactSolarPanel;
+import vswe.stevesvehicles.models.ModelDrill;
+import vswe.stevesvehicles.models.ModelDynamite;
+import vswe.stevesvehicles.models.ModelEggBasket;
+import vswe.stevesvehicles.models.ModelEngineFrame;
+import vswe.stevesvehicles.models.ModelEngineInside;
+import vswe.stevesvehicles.models.ModelExtractingChests;
+import vswe.stevesvehicles.models.ModelFarmer;
+import vswe.stevesvehicles.models.ModelFrontChest;
+import vswe.stevesvehicles.models.ModelFrontTank;
+import vswe.stevesvehicles.models.ModelGiftStorage;
+import vswe.stevesvehicles.models.ModelGun;
+import vswe.stevesvehicles.models.ModelHull;
+import vswe.stevesvehicles.models.ModelHullTop;
+import vswe.stevesvehicles.models.ModelLawnMower;
+import vswe.stevesvehicles.models.ModelLever;
+import vswe.stevesvehicles.models.ModelLiquidDrainer;
+import vswe.stevesvehicles.models.ModelLiquidSensors;
+import vswe.stevesvehicles.models.ModelMobDetector;
+import vswe.stevesvehicles.models.ModelNote;
+import vswe.stevesvehicles.models.ModelPigHead;
+import vswe.stevesvehicles.models.ModelPigHelmet;
+import vswe.stevesvehicles.models.ModelPigTail;
+import vswe.stevesvehicles.models.ModelPumpkinHull;
+import vswe.stevesvehicles.models.ModelPumpkinHullTop;
+import vswe.stevesvehicles.models.ModelRailer;
+import vswe.stevesvehicles.models.ModelSeat;
+import vswe.stevesvehicles.models.ModelShield;
+import vswe.stevesvehicles.models.ModelShootingRig;
+import vswe.stevesvehicles.models.ModelSideChests;
+import vswe.stevesvehicles.models.ModelSideTanks;
+import vswe.stevesvehicles.models.ModelSniperRifle;
+import vswe.stevesvehicles.models.ModelSolarPanelBase;
+import vswe.stevesvehicles.models.ModelSolarPanelHeads;
+import vswe.stevesvehicles.models.ModelToolPlate;
+import vswe.stevesvehicles.models.ModelTopChest;
+import vswe.stevesvehicles.models.ModelTopTank;
+import vswe.stevesvehicles.models.ModelTorchplacer;
+import vswe.stevesvehicles.models.ModelTrackRemover;
+import vswe.stevesvehicles.models.ModelVehicle;
+import vswe.stevesvehicles.models.ModelWheel;
+import vswe.stevesvehicles.models.ModelWoodCutter;
 import vswe.stevesvehicles.modules.data.ModuleDataGroup;
 import vswe.stevesvehicles.modules.hull.*;
 import vswe.stevesvehicles.old.Helpers.*;
 import vswe.stevesvehicles.old.Items.ModItems;
-import vswe.stevesvehicles.old.Models.Cart.*;
 import vswe.stevesvehicles.old.Modules.Addons.*;
 import vswe.stevesvehicles.old.Modules.Workers.*;
 import vswe.stevesvehicles.old.StevesVehicles;
@@ -457,7 +503,7 @@ public class ModuleData {
 				
 		new ModuleDataHull(37, "Wooden Hull", HullWood.class).setCapacity(50).setEngineMax(1).setAddonMax(0).setComplexityMax(15)
 			.addRecipe(new Object[][]{{planks, null, planks}, {planks, planks, planks}, {ComponentTypes.WOODEN_WHEELS
-					.getItemStack(), null, ComponentTypes.WOODEN_WHEELS.getItemStack()}});
+                    .getItemStack(), null, ComponentTypes.WOODEN_WHEELS.getItemStack()}});
 		
 		new ModuleDataHull(38, "Standard Hull", HullStandard.class).setCapacity(200).setEngineMax(3).setAddonMax(6).setComplexityMax(50)
 			.addRecipe(new Object[][] {{Items.iron_ingot, null, Items.iron_ingot},
@@ -467,24 +513,24 @@ public class ModuleData {
 		
 		ModuleData reinfhull = new ModuleDataHull(39, "Reinforced Hull", HullReinforced.class).setCapacity(500).setEngineMax(5).setAddonMax(12).setComplexityMax(150)
 			.addRecipe(new Object[][]{{ComponentTypes.REINFORCED_METAL.getItemStack(), null,
-					ComponentTypes.REINFORCED_METAL.getItemStack()}, {ComponentTypes.REINFORCED_METAL.getItemStack(),
-					ComponentTypes.REINFORCED_METAL.getItemStack(), ComponentTypes.REINFORCED_METAL.getItemStack()},
-					{ComponentTypes.REINFORCED_WHEELS.getItemStack(), null, ComponentTypes.REINFORCED_WHEELS
-							.getItemStack()}});
+                    ComponentTypes.REINFORCED_METAL.getItemStack()}, {ComponentTypes.REINFORCED_METAL.getItemStack(),
+                    ComponentTypes.REINFORCED_METAL.getItemStack(), ComponentTypes.REINFORCED_METAL.getItemStack()},
+                    {ComponentTypes.REINFORCED_WHEELS.getItemStack(), null, ComponentTypes.REINFORCED_WHEELS
+                            .getItemStack()}});
 
 		ModuleData pumpkinhull = new ModuleDataHull(47, "Pumpkin chariot", HullPumpkin.class).setCapacity(40).setEngineMax(1).setAddonMax(0).setComplexityMax(15)
 			.addRecipe(new Object[][]{{planks, null, planks}, {planks, Blocks.pumpkin, planks},
-					{ComponentTypes.WOODEN_WHEELS.getItemStack(), null, ComponentTypes.WOODEN_WHEELS.getItemStack()}});
+                    {ComponentTypes.WOODEN_WHEELS.getItemStack(), null, ComponentTypes.WOODEN_WHEELS.getItemStack()}});
 									  
 		if (!StevesVehicles.isHalloween) {
 			pumpkinhull.lock();
 		}
 		
 		new ModuleDataHull(62, "Mechanical Pig", HullPig.class).setCapacity(150).setEngineMax(2).setAddonMax(4).setComplexityMax(50).addSide(SIDE.FRONT)
-			.addRecipe(new Object[][] {{Items.porkchop, null, Items.porkchop},
-									   {Items.porkchop, Items.porkchop, Items.porkchop},
-									   {ComponentTypes.IRON_WHEELS.getItemStack(), null, ComponentTypes.IRON_WHEELS.getItemStack()}
-									  })
+			.addRecipe(new Object[][]{{Items.porkchop, null, Items.porkchop},
+                    {Items.porkchop, Items.porkchop, Items.porkchop},
+                    {ComponentTypes.IRON_WHEELS.getItemStack(), null, ComponentTypes.IRON_WHEELS.getItemStack()}
+            })
 		.addMessage(Localization.MODULE_INFO.PIG_MESSAGE);
 		
 		new ModuleDataHull(76, "Creative Hull", HullCreative.class).setCapacity(10000).setEngineMax(5).setAddonMax(12).setComplexityMax(150);
@@ -493,10 +539,10 @@ public class ModuleData {
 		
 		new ModuleDataHull(81, "Galgadorian Hull", HullGalgadorian.class).setCapacity(1000).setEngineMax(5).setAddonMax(12).setComplexityMax(150)
 				.addRecipe(new Object[][]{{ComponentTypes.GALGADORIAN_METAL.getItemStack(), null,
-						ComponentTypes.GALGADORIAN_METAL.getItemStack()}, {ComponentTypes.GALGADORIAN_METAL
-						.getItemStack(), ComponentTypes.GALGADORIAN_METAL.getItemStack(),
-						ComponentTypes.GALGADORIAN_METAL.getItemStack()}, {ComponentTypes.GALGADORIAN_WHEELS
-						.getItemStack(), null, ComponentTypes.GALGADORIAN_WHEELS.getItemStack()}});
+                        ComponentTypes.GALGADORIAN_METAL.getItemStack()}, {ComponentTypes.GALGADORIAN_METAL
+                        .getItemStack(), ComponentTypes.GALGADORIAN_METAL.getItemStack(),
+                        ComponentTypes.GALGADORIAN_METAL.getItemStack()}, {ComponentTypes.GALGADORIAN_WHEELS
+                        .getItemStack(), null, ComponentTypes.GALGADORIAN_WHEELS.getItemStack()}});
 		
 		StevesVehicles.tabsSC2.setIcon(reinfhull.getItemStack());
 		StevesVehicles.tabsSC2Components.setIcon(ComponentTypes.REINFORCED_WHEELS.getItemStack());
@@ -902,7 +948,7 @@ public class ModuleData {
 
 		moduleList.get((byte)3)
 		.removeModel("Top")
-		.addModel("TopChest", new ModelTopChest());	
+		.addModel("TopChest", new ModelTopChest());
 
 		moduleList.get((byte)4)
 		.addModel("FrontChest", new ModelFrontChest())
@@ -945,7 +991,7 @@ public class ModuleData {
 		.setModelMult(0.60F);
 
 		moduleList.get((byte)14)
-		.addModel("Farmer", new ModelFarmer(ResourceHelper.getResource("/models/farmerModelDiamond.png")))					
+		.addModel("Farmer", new ModelFarmer(ResourceHelper.getResource("/models/farmerModelDiamond.png")))
 		.setModelMult(0.45F);
 
 		moduleList.get((byte)84)
@@ -969,7 +1015,7 @@ public class ModuleData {
 
 		moduleList.get((byte)25)
 		.removeModel("Top")
-		.addModel("Chair", new ModelSeat());	
+		.addModel("Chair", new ModelSeat());
 
 		moduleList.get((byte)26)
 		.addModel("Lever", new ModelLever(ResourceHelper.getResource("/models/leverModel.png")));
@@ -1004,7 +1050,7 @@ public class ModuleData {
 		.addModel("Tnt",new ModelDynamite());
 
 		moduleList.get((byte)32)
-		.addModel("Shield", new ModelShield())	
+		.addModel("Shield", new ModelShield())
 		.setModelMult(0.68F);
 
 		moduleList.get((byte)37)
@@ -1051,7 +1097,7 @@ public class ModuleData {
 
 		moduleList.get((byte)57)
 		.removeModel("Top")
-		.addModel("Cage", new ModelCage(false), false)	
+		.addModel("Cage", new ModelCage(false), false)
 		.addModel("Cage", new ModelCage(true), true)	
 		.setModelMult(0.65F);
 
@@ -1110,8 +1156,8 @@ public class ModuleData {
 	private boolean defaultLock;
 	private boolean hasRecipe;
 	private ArrayList<Localization.MODULE_INFO> message;
-	private HashMap<String,ModelCartbase> models;
-	private HashMap<String,ModelCartbase> modelsPlaceholder;
+	private HashMap<String,ModelVehicle> models;
+	private HashMap<String,ModelVehicle> modelsPlaceholder;
 	private ArrayList<String> removedModels;
 	private float modelMult = 0.75F;
 	private boolean useExtraData;
@@ -1264,21 +1310,21 @@ public class ModuleData {
 		return this;
 	}
 	
-	protected ModuleData addModel(String tag, ModelCartbase model) {
+	protected ModuleData addModel(String tag, ModelVehicle model) {
 		addModel(tag, model, false);
 		addModel(tag, model, true);
 		return this;
 	}
-	protected ModuleData addModel(String tag, ModelCartbase model, boolean placeholder) {
+	protected ModuleData addModel(String tag, ModelVehicle model, boolean placeholder) {
 		if (placeholder) {
 			if (modelsPlaceholder == null) {
-				modelsPlaceholder = new HashMap<String,ModelCartbase>();
+				modelsPlaceholder = new HashMap<String,ModelVehicle>();
 			}
 		
 			modelsPlaceholder.put(tag, model);
 		}else{
 			if (models == null) {
-				models = new HashMap<String,ModelCartbase>();
+				models = new HashMap<String,ModelVehicle>();
 			}
 		
 			models.put(tag, model);		
@@ -1287,7 +1333,7 @@ public class ModuleData {
 		return this;
 	}
 	
-	public HashMap<String,ModelCartbase> getModels(boolean placeholder) {
+	public HashMap<String,ModelVehicle> getModels(boolean placeholder) {
 		if (placeholder) {
 			return modelsPlaceholder;
 		}else{
