@@ -230,7 +230,7 @@ public class LogicObject {
 			}
 			return false;	
 		}else if (isModule()) {
-			for (ModuleBase module : cart.getModules()) {
+			for (ModuleBase module : cart.getVehicle().getModules()) {
 				if (getData() == module.getModuleId()) {
 					return true;
 				}

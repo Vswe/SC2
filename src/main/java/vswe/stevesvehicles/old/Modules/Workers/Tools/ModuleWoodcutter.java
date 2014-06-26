@@ -9,8 +9,8 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Vec3;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
+import vswe.stevesvehicles.old.Helpers.BlockCoordinate;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
-import vswe.stevesvehicles.old.Helpers.BlockCoord;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Modules.ISuppliesModule;
 import vswe.stevesvehicles.old.Modules.ITreeModule;
@@ -301,7 +301,7 @@ private boolean plant(int size, int x, int y, int z, int cx, int cz)
 	
 	        if (b != null && isWoodHandler(b, x, y + 1, z))
 	        {
-				ArrayList<BlockCoord> checked = new ArrayList<BlockCoord>();
+				ArrayList<BlockCoordinate> checked = new ArrayList<BlockCoordinate>();
 	
 				if (removeAt(x,y+1,z,checked)) {
 					return true;
@@ -316,8 +316,8 @@ private boolean plant(int size, int x, int y, int z, int cx, int cz)
 
 
 
-	private boolean removeAt(int i, int j, int k, ArrayList<BlockCoord> checked) {
-		BlockCoord here = new BlockCoord(i,j,k);
+	private boolean removeAt(int i, int j, int k, ArrayList<BlockCoordinate> checked) {
+		BlockCoordinate here = new BlockCoordinate(i,j,k);
 		checked.add(here);
 
 		Block b = getCart().worldObj.getBlock(i, j, k);
@@ -342,7 +342,7 @@ private boolean plant(int size, int x, int y, int z, int cx, int cz)
 						for (int z = -1; z <= 1; z++) {
 							Block currentBlock = getCart().worldObj.getBlock(i + x, j + y, k + z);
 							if (currentBlock != null && (hitWood ? isWoodHandler(currentBlock, i+x, j+y, k+z) : isLeavesHandler(currentBlock, i+x, j+y, k+z))) {
-								if (!checked.contains(new BlockCoord(i+x,j+y,k+z))) {
+								if (!checked.contains(new BlockCoordinate(i+x,j+y,k+z))) {
 									return removeAt(i+x,j+y,k+z,checked);
 								}
 							}

@@ -7,8 +7,8 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidBlock;
+import vswe.stevesvehicles.old.Helpers.BlockCoordinate;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
-import vswe.stevesvehicles.old.Helpers.BlockCoord;
 import vswe.stevesvehicles.old.Modules.Workers.Tools.ModuleDrill;
 public class ModuleLiquidDrainer extends ModuleWorker {
 	public ModuleLiquidDrainer(EntityModularCart cart) {
@@ -27,8 +27,8 @@ public class ModuleLiquidDrainer extends ModuleWorker {
 	
 	public void handleLiquid(ModuleDrill drill, int x, int y, int z) {
 		
-		BlockCoord here = new BlockCoord(x,y,z);
-		ArrayList<BlockCoord> checked = new ArrayList<BlockCoord>();
+		BlockCoordinate here = new BlockCoordinate(x,y,z);
+		ArrayList<BlockCoordinate> checked = new ArrayList<BlockCoordinate>();
 		int result = drainAt(drill, checked, here, 0);
 		if (result > 0 && doPreWork()) {
 			drill.kill();
@@ -44,7 +44,7 @@ public class ModuleLiquidDrainer extends ModuleWorker {
 		return true;
 	}
 	
-	private int drainAt(ModuleDrill drill, ArrayList<BlockCoord> checked, BlockCoord here, int buckets) {		
+	private int drainAt(ModuleDrill drill, ArrayList<BlockCoordinate> checked, BlockCoordinate here, int buckets) {
 		int drained = 0;
 		Block b = getCart().worldObj.getBlock(here.getX(), here.getY(), here.getZ());
 		if (!isLiquid(b)) {
@@ -80,7 +80,7 @@ public class ModuleLiquidDrainer extends ModuleWorker {
 					for (int z = -1; z <= 1; z++) {	
 						if (Math.abs(x) + Math.abs(y) + Math.abs(z) == 1) {
 	
-							BlockCoord next = new BlockCoord(here.getX()+x,here.getY()+y,here.getZ()+z);
+							BlockCoordinate next = new BlockCoordinate(here.getX()+x,here.getY()+y,here.getZ()+z);
 							if (!checked.contains(next)) {
 								drained += drainAt(drill, checked, next, buckets);
 							}

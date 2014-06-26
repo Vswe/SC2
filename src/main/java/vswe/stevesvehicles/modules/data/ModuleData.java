@@ -14,7 +14,7 @@ import vswe.stevesvehicles.modules.ModuleBase;
 import vswe.stevesvehicles.old.Helpers.ColorHelper;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Items.ModItems;
-import vswe.stevesvehicles.models.ModelVehicle;
+import vswe.stevesvehicles.client.rendering.models.ModelVehicle;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicles.VehicleType;
 
@@ -294,7 +294,7 @@ public class ModuleData {
     }
 
     public void addSpecificInformation(List<String> list) {
-        list.add(ColorHelper.LIGHTGRAY + Localization.MODULE_INFO.MODULAR_COST.translate() + ": " + modularCost);
+        list.add(ColorHelper.LIGHT_GRAY + Localization.MODULE_INFO.MODULAR_COST.translate() + ": " + modularCost);
     }
 
     public final void addInformation(List<String> list, NBTTagCompound compound) {
@@ -375,7 +375,7 @@ public class ModuleData {
             }
         }
 
-        list.add(ColorHelper.LIGHTBLUE + Localization.MODULE_INFO.TYPE.translate() + ": " + moduleType.getName());
+        list.add(ColorHelper.LIGHT_BLUE + Localization.MODULE_INFO.TYPE.translate() + ": " + moduleType.getName());
         addExtraMessage(list);
     }
 

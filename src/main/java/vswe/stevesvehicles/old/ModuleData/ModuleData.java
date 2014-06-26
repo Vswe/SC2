@@ -13,53 +13,53 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
-import vswe.stevesvehicles.models.ModelAdvancedTank;
-import vswe.stevesvehicles.models.ModelBridge;
-import vswe.stevesvehicles.models.ModelCage;
-import vswe.stevesvehicles.models.ModelCake;
-import vswe.stevesvehicles.models.ModelCleaner;
-import vswe.stevesvehicles.models.ModelCompactSolarPanel;
-import vswe.stevesvehicles.models.ModelDrill;
-import vswe.stevesvehicles.models.ModelDynamite;
-import vswe.stevesvehicles.models.ModelEggBasket;
-import vswe.stevesvehicles.models.ModelEngineFrame;
-import vswe.stevesvehicles.models.ModelEngineInside;
-import vswe.stevesvehicles.models.ModelExtractingChests;
-import vswe.stevesvehicles.models.ModelFarmer;
-import vswe.stevesvehicles.models.ModelFrontChest;
-import vswe.stevesvehicles.models.ModelFrontTank;
-import vswe.stevesvehicles.models.ModelGiftStorage;
-import vswe.stevesvehicles.models.ModelGun;
-import vswe.stevesvehicles.models.ModelHull;
-import vswe.stevesvehicles.models.ModelHullTop;
-import vswe.stevesvehicles.models.ModelLawnMower;
-import vswe.stevesvehicles.models.ModelLever;
-import vswe.stevesvehicles.models.ModelLiquidDrainer;
-import vswe.stevesvehicles.models.ModelLiquidSensors;
-import vswe.stevesvehicles.models.ModelMobDetector;
-import vswe.stevesvehicles.models.ModelNote;
-import vswe.stevesvehicles.models.ModelPigHead;
-import vswe.stevesvehicles.models.ModelPigHelmet;
-import vswe.stevesvehicles.models.ModelPigTail;
-import vswe.stevesvehicles.models.ModelPumpkinHull;
-import vswe.stevesvehicles.models.ModelPumpkinHullTop;
-import vswe.stevesvehicles.models.ModelRailer;
-import vswe.stevesvehicles.models.ModelSeat;
-import vswe.stevesvehicles.models.ModelShield;
-import vswe.stevesvehicles.models.ModelShootingRig;
-import vswe.stevesvehicles.models.ModelSideChests;
-import vswe.stevesvehicles.models.ModelSideTanks;
-import vswe.stevesvehicles.models.ModelSniperRifle;
-import vswe.stevesvehicles.models.ModelSolarPanelBase;
-import vswe.stevesvehicles.models.ModelSolarPanelHeads;
-import vswe.stevesvehicles.models.ModelToolPlate;
-import vswe.stevesvehicles.models.ModelTopChest;
-import vswe.stevesvehicles.models.ModelTopTank;
-import vswe.stevesvehicles.models.ModelTorchplacer;
-import vswe.stevesvehicles.models.ModelTrackRemover;
-import vswe.stevesvehicles.models.ModelVehicle;
-import vswe.stevesvehicles.models.ModelWheel;
-import vswe.stevesvehicles.models.ModelWoodCutter;
+import vswe.stevesvehicles.client.rendering.models.ModelAdvancedTank;
+import vswe.stevesvehicles.client.rendering.models.ModelBridge;
+import vswe.stevesvehicles.client.rendering.models.ModelCage;
+import vswe.stevesvehicles.client.rendering.models.ModelCake;
+import vswe.stevesvehicles.client.rendering.models.ModelCleaner;
+import vswe.stevesvehicles.client.rendering.models.ModelCompactSolarPanel;
+import vswe.stevesvehicles.client.rendering.models.ModelDrill;
+import vswe.stevesvehicles.client.rendering.models.ModelDynamite;
+import vswe.stevesvehicles.client.rendering.models.ModelEggBasket;
+import vswe.stevesvehicles.client.rendering.models.ModelEngineFrame;
+import vswe.stevesvehicles.client.rendering.models.ModelEngineInside;
+import vswe.stevesvehicles.client.rendering.models.ModelExtractingChests;
+import vswe.stevesvehicles.client.rendering.models.ModelFarmer;
+import vswe.stevesvehicles.client.rendering.models.ModelFrontChest;
+import vswe.stevesvehicles.client.rendering.models.ModelFrontTank;
+import vswe.stevesvehicles.client.rendering.models.ModelGiftStorage;
+import vswe.stevesvehicles.client.rendering.models.ModelGun;
+import vswe.stevesvehicles.client.rendering.models.ModelHull;
+import vswe.stevesvehicles.client.rendering.models.ModelHullTop;
+import vswe.stevesvehicles.client.rendering.models.ModelLawnMower;
+import vswe.stevesvehicles.client.rendering.models.ModelLever;
+import vswe.stevesvehicles.client.rendering.models.ModelLiquidDrainer;
+import vswe.stevesvehicles.client.rendering.models.ModelLiquidSensors;
+import vswe.stevesvehicles.client.rendering.models.ModelMobDetector;
+import vswe.stevesvehicles.client.rendering.models.ModelNote;
+import vswe.stevesvehicles.client.rendering.models.ModelPigHead;
+import vswe.stevesvehicles.client.rendering.models.ModelPigHelmet;
+import vswe.stevesvehicles.client.rendering.models.ModelPigTail;
+import vswe.stevesvehicles.client.rendering.models.ModelPumpkinHull;
+import vswe.stevesvehicles.client.rendering.models.ModelPumpkinHullTop;
+import vswe.stevesvehicles.client.rendering.models.ModelRailer;
+import vswe.stevesvehicles.client.rendering.models.ModelSeat;
+import vswe.stevesvehicles.client.rendering.models.ModelShield;
+import vswe.stevesvehicles.client.rendering.models.ModelShootingRig;
+import vswe.stevesvehicles.client.rendering.models.ModelSideChests;
+import vswe.stevesvehicles.client.rendering.models.ModelSideTanks;
+import vswe.stevesvehicles.client.rendering.models.ModelSniperRifle;
+import vswe.stevesvehicles.client.rendering.models.ModelSolarPanelBase;
+import vswe.stevesvehicles.client.rendering.models.ModelSolarPanelHeads;
+import vswe.stevesvehicles.client.rendering.models.ModelToolPlate;
+import vswe.stevesvehicles.client.rendering.models.ModelTopChest;
+import vswe.stevesvehicles.client.rendering.models.ModelTopTank;
+import vswe.stevesvehicles.client.rendering.models.ModelTorchplacer;
+import vswe.stevesvehicles.client.rendering.models.ModelTrackRemover;
+import vswe.stevesvehicles.client.rendering.models.ModelVehicle;
+import vswe.stevesvehicles.client.rendering.models.ModelWheel;
+import vswe.stevesvehicles.client.rendering.models.ModelWoodCutter;
 import vswe.stevesvehicles.modules.data.ModuleDataGroup;
 import vswe.stevesvehicles.modules.hull.*;
 import vswe.stevesvehicles.old.Helpers.*;
@@ -1636,7 +1636,7 @@ public class ModuleData {
     }
 	
 	public void addSpecificInformation(List list) {
-		list.add(ColorHelper.LIGHTGRAY + Localization.MODULE_INFO.MODULAR_COST.translate() + ": " + modularCost);
+		list.add(ColorHelper.LIGHT_GRAY + Localization.MODULE_INFO.MODULAR_COST.translate() + ": " + modularCost);
 	}
 	
 	public final void addInformation(List list, NBTTagCompound compound) {
@@ -1698,7 +1698,7 @@ public class ModuleData {
 			
 		}
 		
-		list.add(ColorHelper.LIGHTBLUE + Localization.MODULE_INFO.TYPE.translate() + ": " + moduleGroupNames[groupID].translate());
+		list.add(ColorHelper.LIGHT_BLUE + Localization.MODULE_INFO.TYPE.translate() + ": " + moduleGroupNames[groupID].translate());
 		addExtraMessage(list);
 	}
 	

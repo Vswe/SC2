@@ -6,6 +6,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import vswe.stevesvehicles.modules.ModuleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
+import vswe.stevesvehicles.old.Helpers.NBTHelper;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.vehicles.VehicleBase;
 import vswe.stevesvehicles.vehicles.VehicleRegistry;
@@ -206,6 +207,22 @@ public final class ModuleDataItemHandler {
         return createModularVehicle(vehicle.getVehicleType(), vehicle.getModuleDataList());
     }
 
+    public static List<ModuleData> getModulesFromItem(ItemStack item) {
+        NBTTagCompound compound = item.getTagCompound();
+        if (compound != null && compound.hasKey(VehicleBase.NBT_MODULES)) {
+            List<ModuleData> modules = new ArrayList<ModuleData>();
+            NBTTagList modulesList = compound.getTagList(VehicleBase.NBT_MODULES, NBTHelper.COMPOUND.getId());
+            for (int i = 0; i < modulesList.tagCount(); i++) {
+                int id = modulesList.getCompoundTagAt(i).getShort(VehicleBase.NBT_ID);
+                ModuleData module = ModuleRegistry.getModuleFromId(id);
+                if (module != null) {
+                    modules.add(module);
+                }
+            }
+            return modules;
+        }
+        return null;
+    }
 
     private ModuleDataItemHandler(){}
 }

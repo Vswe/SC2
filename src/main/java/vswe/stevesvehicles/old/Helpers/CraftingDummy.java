@@ -67,7 +67,7 @@ public class CraftingDummy extends InventoryCrafting
 	}
 	
 	public ItemStack getResult() {
-		return CraftingManager.getInstance().findMatchingRecipe(this, module.getCart().worldObj);
+		return CraftingManager.getInstance().findMatchingRecipe(this, module.getVehicle().getWorld());
 	}
 	
 	public IRecipe getRecipe() {
@@ -75,7 +75,7 @@ public class CraftingDummy extends InventoryCrafting
         {
             IRecipe irecipe = (IRecipe) CraftingManager.getInstance().getRecipeList().get(i);
 
-            if (irecipe.matches(this, module.getCart().worldObj))
+            if (irecipe.matches(this, module.getVehicle().getWorld()))
             {
                 return irecipe;
             }

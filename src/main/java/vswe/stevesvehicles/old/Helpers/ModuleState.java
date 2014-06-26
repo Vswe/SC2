@@ -197,14 +197,14 @@ public class ModuleState {
 	
 		switch (type) {
 			case SUPPLY:
-				for (ModuleBase module : cart.getModules()) {
+				for (ModuleBase module : cart.getVehicle().getModules()) {
 					if (isModuleOfCorrectType(module) && module instanceof ISuppliesModule) {
 						return ((ISuppliesModule)module).haveSupplies();
 					}
 				}
 				break;
 			case ACTIVATION:
-				for (ModuleBase module : cart.getModules()) {
+				for (ModuleBase module : cart.getVehicle().getModules()) {
 					if (isModuleOfCorrectType(module) && module instanceof IActivatorModule) {
 						return ((IActivatorModule)module).isActive(0);
 					}
@@ -213,7 +213,7 @@ public class ModuleState {
 			case INVENTORY:
 				if (this instanceof ModuleStateInv) {
 					boolean hasModule = false;
-					for (ModuleBase module : cart.getModules()) {
+					for (ModuleBase module : cart.getVehicle().getModules()) {
 						if (isModuleOfCorrectType(module)) {
 							ModuleChest chest = (ModuleChest)module;
 							
@@ -237,7 +237,7 @@ public class ModuleState {
 				
 				break;
 			case POWER:
-				for (ModuleBase module : cart.getModules()) {
+				for (ModuleBase module : cart.getVehicle().getModules()) {
 					if (isModuleOfCorrectType(module)) {
 						return ((ModulePowerObserver)module).isAreaActive(((ModuleStatePower)this).areaId);
 					}
@@ -246,7 +246,7 @@ public class ModuleState {
 			case TANK:
 				if (this instanceof ModuleStateTank) {
 					boolean hasModule = false;
-					for (ModuleBase module : cart.getModules()) {
+					for (ModuleBase module : cart.getVehicle().getModules()) {
 						if (isModuleOfCorrectType(module)) {
 							ModuleTank tank = (ModuleTank)module;
 							

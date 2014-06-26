@@ -31,7 +31,7 @@ import vswe.stevesvehicles.modules.data.ModuleRegistry;
 import vswe.stevesvehicles.old.Helpers.NBTHelper;
 import vswe.stevesvehicles.network.PacketHandler;
 import vswe.stevesvehicles.old.Buttons.ButtonBase;
-import vswe.stevesvehicles.models.ModelVehicle;
+import vswe.stevesvehicles.client.rendering.models.ModelVehicle;
 import vswe.stevesvehicles.vehicles.VehicleBase;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.CompButtons;
@@ -1506,7 +1506,7 @@ public abstract class ModuleBase {
 	 * Allows a module to stop the vehicle from being rendered
 	 * @return False if the vehicle sohuldn't be rendered
 	 */
-	public boolean shouldvehicleRender() {
+	public boolean shouldVehicleRender() {
 		return true;
 	}
 	

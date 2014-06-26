@@ -29,7 +29,7 @@ import vswe.stevesvehicles.containers.ContainerVehicle;
 import vswe.stevesvehicles.modules.data.ModuleRegistry;
 import vswe.stevesvehicles.old.Helpers.ActivatorOption;
 import vswe.stevesvehicles.modules.data.ModuleData;
-import vswe.stevesvehicles.models.ModelVehicle;
+import vswe.stevesvehicles.client.rendering.models.ModelVehicle;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicles.versions.VehicleVersion;
 import vswe.stevesvehicles.old.Helpers.CompWorkModule;

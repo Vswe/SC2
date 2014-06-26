@@ -1,7 +1,7 @@
 package vswe.stevesvehicles.old.Helpers;
 
 import net.minecraft.util.StatCollector;
-import vswe.stevesvehicles.old.ModuleData.ModuleData;
+import vswe.stevesvehicles.modules.data.ModuleData;
 
 public class ModuleCountPair {
 	

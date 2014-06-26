@@ -21,8 +21,8 @@ import vswe.stevesvehicles.old.Containers.ContainerCartAssembler;
 import vswe.stevesvehicles.old.Helpers.DropDownMenuItem;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.old.Helpers.TitleBox;
-import vswe.stevesvehicles.old.ModuleData.ModuleData;
-import vswe.stevesvehicles.old.ModuleData.ModuleDataHull;
+import vswe.stevesvehicles.modules.data.ModuleData;
+import vswe.stevesvehicles.modules.data.ModuleDataHull;
 import vswe.stevesvehicles.old.Slots.SlotAssembler;
 import vswe.stevesvehicles.old.TileEntities.TileEntityCartAssembler;
 import cpw.mods.fml.relauncher.Side;
@@ -87,7 +87,7 @@ public class GuiCartAssembler extends GuiBase
 
 				ModuleDataHull hull = (ModuleDataHull)hulldata;
 
-				addText(lines, Localization.GUI.ASSEMBLER.HULL_CAPACITY.translate() + ": " + hull.getCapacity());
+				addText(lines, Localization.GUI.ASSEMBLER.HULL_CAPACITY.translate() + ": " + hull.getModularCapacity());
 				addText(lines, Localization.GUI.ASSEMBLER.COMPLEXITY_CAP.translate() + ": " + hull.getComplexityMax());
 				addText(lines, Localization.GUI.ASSEMBLER.TOTAL_COST.translate() + ": " + assembler.getTotalCost());
 				addText(lines, Localization.GUI.ASSEMBLER.TOTAl_TIME.translate() + ": " + formatTime((int)(assembler.generateAssemblingTime() / assembler.getEfficiency())));
@@ -394,7 +394,7 @@ public class GuiCartAssembler extends GuiBase
 		RenderHelper.disableStandardItemLighting();
 		GL11.glDisable(GL12.GL_RESCALE_NORMAL);
 		
-		assembler.getPlaceholder().keepAlive = 0;
+		assembler.getPlaceholder().getVehicle().keepAlive = 0;
 	}	
 	
 	private void renderDropDownMenu(int x, int y) {

@@ -15,9 +15,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
 import vswe.stevesvehicles.old.Blocks.ModBlocks;
+import vswe.stevesvehicles.old.Helpers.BlockCoordinate;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
-import vswe.stevesvehicles.old.Helpers.BlockCoord;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.old.Modules.IActivatorModule;
 import vswe.stevesvehicles.modules.ModuleBase;
@@ -186,8 +186,8 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
     protected boolean mineBlock(int coordX, int coordY, int coordZ, Vec3 next, int holeX, int holeY, boolean flag)
     {
     	if (tracker != null) {
-    		BlockCoord start = new BlockCoord(coordX, coordY, coordZ);
-    		BlockCoord target = tracker.findBlockToMine(this, start);
+    		BlockCoordinate start = new BlockCoordinate(coordX, coordY, coordZ);
+    		BlockCoordinate target = tracker.findBlockToMine(this, start);
     		if (target != null) {
 	    		coordX = target.getX();
 	    		coordY = target.getY();

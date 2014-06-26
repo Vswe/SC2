@@ -1,14 +1,14 @@
 package vswe.stevesvehicles.old;
+import net.minecraft.client.renderer.entity.RenderMinecart;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.init.Items;
 import net.minecraft.world.World;
+import vswe.stevesvehicles.client.rendering.RenderVehicleItem;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 import vswe.stevesvehicles.old.Fancy.FancyPancyLoader;
 import vswe.stevesvehicles.old.Helpers.*;
 import vswe.stevesvehicles.old.Items.ModItems;
-import vswe.stevesvehicles.old.Renders.RendererMinecart;
-import vswe.stevesvehicles.old.Renders.RendererMinecartItem;
-import vswe.stevesvehicles.old.Renders.RendererUpgrade;
+import vswe.stevesvehicles.client.rendering.RendererUpgrade;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import vswe.stevesvehicles.old.ModuleData.ModuleData;
@@ -20,10 +20,10 @@ public class ClientProxy extends CommonProxy{
 
 	@Override
 	public void renderInit() {
-		RenderingRegistry.registerEntityRenderingHandler(EntityModularCart.class, new RendererMinecart());
+		RenderingRegistry.registerEntityRenderingHandler(EntityModularCart.class, new RenderMinecart());
 		RenderingRegistry.registerEntityRenderingHandler(EntityEasterEgg.class, new RenderSnowball(ModItems.component, ComponentTypes.PAINTED_EASTER_EGG.getId()));
 		StevesVehicles.instance.blockRenderer = new RendererUpgrade();
-		new RendererMinecartItem();
+		new RenderVehicleItem();
 		RenderingRegistry.registerEntityRenderingHandler(EntityCake.class, new RenderSnowball(Items.cake));
 		ModuleData.initModels();
         if (StevesVehicles.instance.tradeHandler != null) {

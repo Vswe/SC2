@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import vswe.stevesvehicles.vehicles.entities.IVehicleEntity;
 
 public class OverlayRenderer
 {
@@ -28,9 +29,9 @@ public class OverlayRenderer
 		net.minecraft.client.Minecraft minecraft = net.minecraft.client.Minecraft.getMinecraft();		
 	    EntityPlayer player = minecraft.thePlayer;
 
-        if (minecraft.currentScreen == null && player.ridingEntity != null && player.ridingEntity instanceof EntityModularCart)
+        if (minecraft.currentScreen == null && player.ridingEntity != null && player.ridingEntity instanceof IVehicleEntity)
         {
-            ((EntityModularCart)player.ridingEntity).renderOverlay(minecraft);
+            ((IVehicleEntity)player.ridingEntity).getVehicle().renderOverlay(minecraft);
         }
 	}
 

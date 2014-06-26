@@ -6,8 +6,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockOre;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+import vswe.stevesvehicles.old.Helpers.BlockCoordinate;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
-import vswe.stevesvehicles.old.Helpers.BlockCoord;
 import vswe.stevesvehicles.old.Modules.Workers.Tools.ModuleDrill;
 
 public class ModuleOreTracker extends ModuleAddon {
@@ -16,12 +16,12 @@ public class ModuleOreTracker extends ModuleAddon {
 		super(cart);
 	}
 
-	public BlockCoord findBlockToMine(ModuleDrill drill, BlockCoord start) {
-		return findBlockToMine(drill, new ArrayList<BlockCoord>(), start, true);
+	public BlockCoordinate findBlockToMine(ModuleDrill drill, BlockCoordinate start) {
+		return findBlockToMine(drill, new ArrayList<BlockCoordinate>(), start, true);
 	}
 	
 	
-	private BlockCoord findBlockToMine(ModuleDrill drill, ArrayList<BlockCoord> checked, BlockCoord current, boolean first) {
+	private BlockCoordinate findBlockToMine(ModuleDrill drill, ArrayList<BlockCoordinate> checked, BlockCoordinate current, boolean first) {
 		if (current == null || checked.contains(current) || (!first && !isOre(current))) {
 			return null;
 		}
@@ -32,7 +32,7 @@ public class ModuleOreTracker extends ModuleAddon {
 				for (int y = -1; y <= 1; y++) {
 					for (int z = -1; z <= 1; z++) {
 						if (Math.abs(x) + Math.abs(y) + Math.abs(z) == 1) {
-							BlockCoord ret = findBlockToMine(drill, checked, new BlockCoord(current.getX() + x, current.getY() + y, current.getZ() + z), false);
+							BlockCoordinate ret = findBlockToMine(drill, checked, new BlockCoordinate(current.getX() + x, current.getY() + y, current.getZ() + z), false);
 							
 							if (ret != null) {
 								return ret;
@@ -54,7 +54,7 @@ public class ModuleOreTracker extends ModuleAddon {
 		return current;
 	}
 	
-	private boolean isOre(BlockCoord coord) {
+	private boolean isOre(BlockCoordinate coord) {
         Block b = getCart().worldObj.getBlock(coord.getX(), coord.getY(), coord.getZ());
         
         if (b != null) {
