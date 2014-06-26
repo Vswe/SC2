@@ -18,6 +18,7 @@ public class RegistryLoader<R extends IRegistry<E>, E> {
     }
 
     //TODO sync to the clients
+    private HashMap<E, Integer> objectToIdMapping = new HashMap<E, Integer>();
     private HashMap<Integer, E> idToObjectMapping = new HashMap<Integer, E>();
     private HashMap<String, Integer> nameToIdMapping = new HashMap<String, Integer>();
     private Map<String, R> registries = new HashMap<String, R>();
@@ -30,6 +31,11 @@ public class RegistryLoader<R extends IRegistry<E>, E> {
         }else{
             return getObjectFromId(id);
         }
+    }
+
+    public int getIdFromObject(E object) {
+        Integer result = objectToIdMapping.get(object);
+        return result == null ? -1 : result;
     }
 
     public E getObjectFromId(int id) {
@@ -94,6 +100,7 @@ public class RegistryLoader<R extends IRegistry<E>, E> {
 
     private void readRegistryData(NBTTagCompound compound) {
         nextId = 0;
+        objectToIdMapping.clear();
         idToObjectMapping.clear();
         nameToIdMapping.clear();
 
@@ -120,6 +127,7 @@ public class RegistryLoader<R extends IRegistry<E>, E> {
                 }
 
                 idToObjectMapping.put(id, module);
+                objectToIdMapping.put(module, id);
             }
         }
     }

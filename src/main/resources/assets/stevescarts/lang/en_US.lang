@@ -484,6 +484,7 @@ info.SC2:cartSideLeft=Left
 info.SC2:cartSideRight=Right
 info.SC2:cartSideFront=Front
 info.SC2:occupiedSides=Will occupy the [%1] [%2:side|sides]
+info.SC2:vehicleTypes=Will work on [%1]
 info.SC2:sidesAnd=and
 info.SC2:noSides=Won't occupy any sides
 info.SC2:moduleConflictHowever=Will however conflict with
@@ -501,6 +502,7 @@ info.SC2:missingParentError=[%1] requires [%2] to work!
 info.SC2:presentNemesisError=[%1] won't work with [%2]
 info.SC2:presentDuplicateError=[%1] is not allowed to be added twice.
 info.SC2:sideClashError=[%1] and [%2] will clash at the [%3]
+info.SC2:noVehicleError=This module isn't valid for any vehicle type. This is an error.
 # need beta 3 for these ones to show up (remove this note)
 info.SC2:toolUnbreakable=Unbreakable
 info.SC2:toolDurability=Durability: [%1]%

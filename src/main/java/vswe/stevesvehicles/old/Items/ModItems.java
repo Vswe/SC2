@@ -7,6 +7,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.common.config.Configuration;
+import vswe.stevesvehicles.items.ItemVehicleModule;
 import vswe.stevesvehicles.old.Blocks.ModBlocks;
 import vswe.stevesvehicles.old.Helpers.ComponentTypes;
 import vswe.stevesvehicles.old.Helpers.DetectorType;
@@ -21,7 +22,7 @@ public final class ModItems {
 
     public static ItemCarts carts;
     public static ItemCartComponent component;
-    public static ItemCartModule modules;
+    public static ItemVehicleModule modules;
     public static ItemUpgrade upgrades;
     public static ItemBlockStorage storages;
     public static ItemBlockDetector detectors;
@@ -36,7 +37,7 @@ public final class ModItems {
     public static void preBlockInit(Configuration config) {
         (carts = new ItemCarts()).setUnlocalizedName(StevesVehicles.localStart + CART_NAME);
         component = new ItemCartComponent();
-        modules = new ItemCartModule();
+        modules = new ItemVehicleModule();
 
         GameRegistry.registerItem(carts, CART_NAME);
         GameRegistry.registerItem(component, COMPONENTS_NAME);

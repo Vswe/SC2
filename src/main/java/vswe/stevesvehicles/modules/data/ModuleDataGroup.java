@@ -1,11 +1,12 @@
-package vswe.stevesvehicles.old.ModuleData;
+package vswe.stevesvehicles.modules.data;
 import vswe.stevesvehicles.old.Helpers.Localization;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ModuleDataGroup {
 	private Localization.MODULE_INFO name;
-	private ArrayList<ModuleData> modules;
+	private List<ModuleData> modules;
 	private int count;
 	public ModuleDataGroup(Localization.MODULE_INFO name) {
 		this.name = name;
@@ -17,7 +18,7 @@ public class ModuleDataGroup {
 		return name.translate(String.valueOf(getCount()));
 	}
 	
-	public ArrayList<ModuleData> getModules() {
+	public List<ModuleData> getModules() {
 		return modules;
 	}	
 	

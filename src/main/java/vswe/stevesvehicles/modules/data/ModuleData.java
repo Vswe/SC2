@@ -3,13 +3,18 @@ package vswe.stevesvehicles.modules.data;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import vswe.stevesvehicles.modules.ModuleBase;
 import vswe.stevesvehicles.old.Helpers.ColorHelper;
 import vswe.stevesvehicles.old.Helpers.Localization;
+import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.old.Models.Cart.ModelCartbase;
-import vswe.stevesvehicles.old.ModuleData.ModuleDataGroup;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicles.VehicleType;
 
@@ -45,6 +50,8 @@ public class ModuleData {
     private ArrayList<String> removedModels;
     @SideOnly(Side.CLIENT)
     private float modelMultiplier = 0.75F;
+    @SideOnly(Side.CLIENT)
+    private IIcon icon;
 
     public ModuleData(String unlocalizedName, Class<? extends ModuleBase> moduleClass, int modularCost) {
         this.moduleClass = moduleClass;
@@ -290,6 +297,118 @@ public class ModuleData {
         list.add(ColorHelper.LIGHTGRAY + Localization.MODULE_INFO.MODULAR_COST.translate() + ": " + modularCost);
     }
 
+    public final void addInformation(List<String> list, NBTTagCompound compound) {
+        addSpecificInformation(list);
+        if (compound != null && compound.hasKey("Data")) {
+            String extradatainfo = getModuleInfoText(compound.getByte("Data"));
+            if (extradatainfo != null) {
+                list.add(ColorHelper.WHITE + extradatainfo);
+            }
+        }
+
+
+        if (GuiScreen.isShiftKeyDown()) {
+
+            if (sides == null || sides.size() == 0) {
+                list.add(ColorHelper.CYAN + Localization.MODULE_INFO.NO_SIDES.translate());
+            }else{
+                String sidesText = "";
+                for (int i = 0; i < sides.size(); i++) {
+                    ModuleSide side = sides.get(i);
+
+                    if(i == 0) {
+                        sidesText += side.toString();
+                    }else if (i == sides.size() - 1) {
+                        sidesText += " " + Localization.MODULE_INFO.AND.translate() + " " + side.toString();
+                    }else{
+                        sidesText += ", " + side.toString();
+                    }
+                }
+
+
+                list.add(ColorHelper.CYAN + Localization.MODULE_INFO.OCCUPIED_SIDES.translate(sidesText, String.valueOf(sides.size())));
+            }
+
+            if (getNemesis() != null && getNemesis().size() != 0) {
+                if (sides == null || sides.size() == 0) {
+                    list.add(ColorHelper.RED + Localization.MODULE_INFO.CONFLICT_HOWEVER.translate() + ":");
+                }else{
+                    list.add(ColorHelper.RED + Localization.MODULE_INFO.CONFLICT_ALSO.translate() + ":");
+                }
+                for (ModuleData module : getNemesis()) {
+                    list.add(ColorHelper.RED + module.getName());
+                }
+            }
+
+            if (parent != null) {
+                list.add(ColorHelper.YELLOW + Localization.MODULE_INFO.REQUIREMENT.translate() + " " + parent.getName());
+            }
+
+            if (getRequirement() != null && getRequirement().size() != 0) {
+                for (ModuleDataGroup group : getRequirement()) {
+                    list.add(ColorHelper.YELLOW + Localization.MODULE_INFO.REQUIREMENT.translate() + " " + group.getCountName() + " " + group.getName());
+                }
+            }
+
+            if (getAllowDuplicate()) {
+                list.add(ColorHelper.LIME + Localization.MODULE_INFO.DUPLICATES.translate());
+            }
+
+            if (validVehicles == null || validVehicles.isEmpty()) {
+                list.add(ColorHelper.RED + Localization.MODULE_INFO.NO_VEHICLE_ERROR.translate());
+            }else{
+                String vehicleText = "";
+                for (int i = 0; i < validVehicles.size(); i++) {
+                    VehicleType vehicle = validVehicles.get(i);
+
+                    if(i == 0) {
+                        vehicleText += vehicle.toString();
+                    }else if (i == validVehicles.size() - 1) {
+                        vehicleText += " " + Localization.MODULE_INFO.AND.translate() + " " + vehicle.toString();
+                    }else{
+                        vehicleText += ", " + vehicle.toString();
+                    }
+                }
+
+
+                list.add(ColorHelper.MAGENTA + Localization.MODULE_INFO.VEHICLE_TYPES.translate(vehicleText, String.valueOf(validVehicles.size())));
+            }
+        }
+
+        list.add(ColorHelper.LIGHTBLUE + Localization.MODULE_INFO.TYPE.translate() + ": " + moduleType.getName());
+        addExtraMessage(list);
+    }
+
+
+    private static final int MAX_MESSAGE_ROW_LENGTH = 30;
+    public void addExtraMessage(List<String> list) {
+        if (message != null) {
+            list.add("");
+            for (Localization.MODULE_INFO m : message) {
+                String str = m.translate();
+                if (str.length() <= MAX_MESSAGE_ROW_LENGTH) {
+                    addExtraMessage(list, str);
+                }else{
+                    String[] words = str.split(" ");
+                    String row = "";
+                    for (String word : words) {
+                        String next = (row + " " + word).trim();
+                        if (next.length() <= MAX_MESSAGE_ROW_LENGTH) {
+                            row = next;
+                        }else{
+                            addExtraMessage(list, row);
+                            row = word;
+                        }
+                    }
+                    addExtraMessage(list, row);
+                }
+            }
+        }
+    }
+
+    private void addExtraMessage(List<String> list, String str) {
+        list.add(ColorHelper.GRAY + "\u00a7o" + str + "\u00a7r");
+    }
 
     public ModuleData addRecipe(IRecipe recipe) {
         if(this.recipes == null) {
@@ -320,12 +439,44 @@ public class ModuleData {
         }
 
         for (VehicleType type : types) {
+            if (validVehicles.size() > 0 && moduleType == ModuleType.HULL) {
+                System.out.println("You can't add more than one vehicle type to a hull module."); //TODO localization
+                break;
+            }
             validVehicles.add(type);
         }
 
         return this;
     }
 
+    public ArrayList<VehicleType> getValidVehicles() {
+        return validVehicles;
+    }
+
     @SideOnly(Side.CLIENT)
     public void loadModels() {}
+
+
+    @SideOnly(Side.CLIENT)
+    public void createIcon(IIconRegister register) {
+        icon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + getRawUnlocalizedName() + "_icon");
+    }
+
+    @SideOnly(Side.CLIENT)
+    public IIcon getIcon() {
+        return icon;
+    }
+
+    public ItemStack getItemStack(int count) {
+        int id = ModuleRegistry.getIdFromModule(this);
+        if (id >= 0) {
+            return new ItemStack(ModItems.modules, count, id);
+        }else{
+            return null;
+        }
+    }
+
+    public ItemStack getItemStack() {
+        return getItemStack(1);
+    }
 }

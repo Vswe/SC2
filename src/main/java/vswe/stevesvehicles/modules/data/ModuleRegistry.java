@@ -5,17 +5,21 @@ import vswe.stevesvehicles.modules.data.registries.ModuleRegistryCartHulls;
 import vswe.stevesvehicles.registries.IRegistry;
 import vswe.stevesvehicles.registries.RegistryLoader;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ModuleRegistry implements IRegistry<ModuleData> {
 
     public static void init() {
         loader = new RegistryLoader<ModuleRegistry, ModuleData>();
+        allModules = new ArrayList<ModuleData>();
         add(new ModuleRegistryCartHulls());
     }
 
+    private static List<ModuleData> allModules;
     private static RegistryLoader<ModuleRegistry, ModuleData> loader;
     private Map<String, ModuleData> modules;
 
@@ -43,6 +47,7 @@ public class ModuleRegistry implements IRegistry<ModuleData> {
             System.err.println("A module with this raw name has already been registered in this registry. Failed to register a second module with the raw name " + moduleData.getRawUnlocalizedName() + " in registry with code " + getCode());
         }else{
             modules.put(moduleData.getRawUnlocalizedName(), moduleData);
+            allModules.add(moduleData);
         }
     }
 
@@ -57,4 +62,15 @@ public class ModuleRegistry implements IRegistry<ModuleData> {
     }
 
 
+    public static ModuleData getModuleFromId(int id) {
+        return loader.getObjectFromId(id);
+    }
+
+    public static List<ModuleData> getAllModules() {
+        return allModules;
+    }
+
+    public static int getIdFromModule(ModuleData module) {
+        return loader.getIdFromObject(module);
+    }
 }
