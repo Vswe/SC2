@@ -9,6 +9,7 @@ import vswe.stevesvehicles.modules.data.ModuleData;
 import vswe.stevesvehicles.modules.data.ModuleDataHull;
 import vswe.stevesvehicles.modules.data.ModuleRegistry;
 import vswe.stevesvehicles.modules.data.ModuleSide;
+import vswe.stevesvehicles.modules.hull.*;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.old.Models.Cart.ModelHull;
@@ -18,13 +19,9 @@ import vswe.stevesvehicles.old.Models.Cart.ModelPigHelmet;
 import vswe.stevesvehicles.old.Models.Cart.ModelPigTail;
 import vswe.stevesvehicles.old.Models.Cart.ModelPumpkinHull;
 import vswe.stevesvehicles.old.Models.Cart.ModelPumpkinHullTop;
-import vswe.stevesvehicles.old.Modules.Hull.ModuleCheatHull;
-import vswe.stevesvehicles.old.Modules.Hull.ModuleGalgadorian;
-import vswe.stevesvehicles.old.Modules.Hull.ModulePig;
-import vswe.stevesvehicles.old.Modules.Hull.ModulePumpkin;
-import vswe.stevesvehicles.old.Modules.Hull.ModuleReinforced;
-import vswe.stevesvehicles.old.Modules.Hull.ModuleStandard;
-import vswe.stevesvehicles.old.Modules.Hull.ModuleWood;
+import vswe.stevesvehicles.modules.hull.HullGalgadorian;
+import vswe.stevesvehicles.modules.hull.HullPig;
+import vswe.stevesvehicles.modules.hull.HullPumpkin;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicles.VehicleRegistry;
 
@@ -34,7 +31,7 @@ public class ModuleRegistryCartHulls extends ModuleRegistry {
     public ModuleRegistryCartHulls() {
         super("steves_carts_hulls");
 
-        ModuleData wood = new ModuleDataHull("wooden_hull", ModuleWood.class, 50, 1, 0, 15) {
+        ModuleData wood = new ModuleDataHull("wooden_hull", HullWood.class, 50, 1, 0, 15) {
             @Override
             @SideOnly(Side.CLIENT)
             public void loadModels() {
@@ -52,7 +49,7 @@ public class ModuleRegistryCartHulls extends ModuleRegistry {
 
 
 
-        ModuleData standard = new ModuleDataHull("standard_hull", ModuleStandard.class, 200, 3, 6, 50) {
+        ModuleData standard = new ModuleDataHull("standard_hull", HullStandard.class, 200, 3, 6, 50) {
             @Override
             @SideOnly(Side.CLIENT)
             public void loadModels() {
@@ -70,7 +67,7 @@ public class ModuleRegistryCartHulls extends ModuleRegistry {
 
 
 
-        ModuleData reinforced = new ModuleDataHull("reinforced_hull", ModuleReinforced.class, 500, 5, 12, 150) {
+        ModuleData reinforced = new ModuleDataHull("reinforced_hull", HullReinforced.class, 500, 5, 12, 150) {
             @Override
             @SideOnly(Side.CLIENT)
             public void loadModels() {
@@ -88,7 +85,7 @@ public class ModuleRegistryCartHulls extends ModuleRegistry {
 
 
 
-        ModuleData galgadorian = new ModuleDataHull("galgadorian_hull", ModuleGalgadorian.class, 1000, 5, 12, 150) {
+        ModuleData galgadorian = new ModuleDataHull("galgadorian_hull", HullGalgadorian.class, 1000, 5, 12, 150) {
             @Override
             @SideOnly(Side.CLIENT)
             public void loadModels() {
@@ -106,7 +103,7 @@ public class ModuleRegistryCartHulls extends ModuleRegistry {
 
 
 
-        ModuleData pumpkin = new ModuleDataHull("pumpkin_chariot", ModulePumpkin.class, 40, 1, 0, 15) {
+        ModuleData pumpkin = new ModuleDataHull("pumpkin_chariot", HullPumpkin.class, 40, 1, 0, 15) {
             @Override
             @SideOnly(Side.CLIENT)
             public void loadModels() {
@@ -126,7 +123,7 @@ public class ModuleRegistryCartHulls extends ModuleRegistry {
         pumpkin.addVehicles(VehicleRegistry.CART);
         register(pumpkin);
 
-        ModuleData pig = new ModuleDataHull("mechanical_pig", ModulePig.class, 150, 2, 4, 50) {
+        ModuleData pig = new ModuleDataHull("mechanical_pig", HullPig.class, 150, 2, 4, 50) {
             @Override
             @SideOnly(Side.CLIENT)
             public void loadModels() {
@@ -150,7 +147,7 @@ public class ModuleRegistryCartHulls extends ModuleRegistry {
         register(pig);
 
 
-        ModuleData creative = new ModuleDataHull("creative_hull", ModuleCheatHull.class, 10000, 5, 12, 150) {
+        ModuleData creative = new ModuleDataHull("creative_hull", HullCreative.class, 10000, 5, 12, 150) {
             @Override
             @SideOnly(Side.CLIENT)
             public void loadModels() {

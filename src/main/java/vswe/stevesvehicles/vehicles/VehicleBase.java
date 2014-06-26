@@ -52,6 +52,7 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class VehicleBase {
     private ForgeChunkManager.Ticket cartTicket;
@@ -1557,4 +1558,9 @@ public class VehicleBase {
         }
         return result;
     }
+
+	public Random getRandom() {
+		//ToDo: Return correct random generator
+		return new Random();
+	}
 }

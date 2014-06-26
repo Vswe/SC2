@@ -6,7 +6,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import vswe.stevesvehicles.modules.ModuleBase;
-import vswe.stevesvehicles.old.Modules.Hull.ModulePig;
+import vswe.stevesvehicles.modules.hull.HullPig;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
@@ -15,7 +15,7 @@ public class ModelPigHelmet extends ModelCartbase
 
 	@Override
 	public ResourceLocation getResource(ModuleBase module) {
-		ModulePig pig = (ModulePig)module;
+		HullPig pig = (HullPig)module;
 		
 
 		return pig.getHelmetResource(isOverlay);	
@@ -62,7 +62,7 @@ public class ModelPigHelmet extends ModelCartbase
 			return;
 		}
 
-		ModulePig pig = (ModulePig)module;
+		HullPig pig = (HullPig)module;
 		
 		
 		if (!pig.hasHelment() || (isOverlay && !pig.getHelmetMultiRender())) {
