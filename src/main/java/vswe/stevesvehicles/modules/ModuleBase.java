@@ -27,6 +27,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
 import vswe.stevesvehicles.containers.ContainerVehicle;
+import vswe.stevesvehicles.modules.data.ModuleRegistry;
 import vswe.stevesvehicles.old.Helpers.NBTHelper;
 import vswe.stevesvehicles.network.PacketHandler;
 import vswe.stevesvehicles.old.Buttons.ButtonBase;
@@ -36,7 +37,7 @@ import vswe.stevesvehicles.old.Helpers.CompButtons;
 import vswe.stevesvehicles.old.Helpers.SimulationInfo;
 import vswe.stevesvehicles.client.interfaces.GuiBase.RENDER_ROTATION;
 import vswe.stevesvehicles.old.Models.Cart.ModelCartbase;
-import vswe.stevesvehicles.old.ModuleData.ModuleData;
+import vswe.stevesvehicles.modules.data.ModuleData;
 import vswe.stevesvehicles.old.Slots.SlotBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -72,7 +73,7 @@ public abstract class ModuleBase {
 	protected int slotGlobalStart;
 	
 	//the id of this module, this is assigned on creation. The id is the same as the ModuleData which created the module.
-	private byte moduleId;
+	private int moduleId;
 	
 	//the models this module is using, this is generated from the ModuleData creating this module
 	private ArrayList<ModelCartbase> models;
@@ -136,7 +137,7 @@ public abstract class ModuleBase {
 	 * Sets the modular id of this module, this is basically the id of the {@link ModuleData} used to create this module.
 	 * @param val The module id
 	 */
-	public void setModuleId(byte val) {
+	public void setModuleId(int val) {
 		moduleId = val;
 	}
 	
@@ -144,7 +145,7 @@ public abstract class ModuleBase {
 	 * Returns which modular id this module is associated with
 	 * @return The module id
 	 */
-	public byte getModuleId() {
+	public int getModuleId() {
 		return moduleId;
 	}
 	
@@ -736,23 +737,12 @@ public abstract class ModuleBase {
 		buttons.add(button);
 	}
 	
-	/**
-	 * Generates an NBT name from the base name and the number of the module. This is to prevent conflicts between 
-	 * two modules requesting the same value.
-	 * @param name The base name of the NBT name
-	 * @param id The number of the module
-	 * @return The string to be used as an NBT name
-	 */
-	public String generateNBTName(String name, int id) {
-		return "module" + id + name; 
-	}
-	
+
 	/**
 	 * Handles the writing of the NBT data when the world is being saved
 	 * @param tagCompound The tag compound to write the data to
-	 * @param id The number of this module
 	 */
-	public final void writeToNBT(NBTTagCompound tagCompound, int id) {
+	public final void writeToNBT(NBTTagCompound tagCompound) {
 		//write the content of the slots to the tag compound
         if (getInventorySize() > 0)
         {
@@ -769,11 +759,11 @@ public abstract class ModuleBase {
                 }
             }
 
-            tagCompound.setTag(generateNBTName("Items",id), items);
+            tagCompound.setTag("Items", items);
         }	
 
         //writes module specific data
-		Save(tagCompound, id);
+		Save(tagCompound, 0); //TODO refactor away the id in Save
 	}
 	
 	/**
@@ -787,12 +777,11 @@ public abstract class ModuleBase {
 	/**
 	 * Handles the reading of the NBT data when the world is being loaded
 	 * @param tagCompound The tag compound to read the data from
-	 * @param id The number of this module
 	 */
-	public final void readFromNBT(NBTTagCompound tagCompound, int id) {
+	public final void readFromNBT(NBTTagCompound tagCompound) {
 		//read the content of the slots to the tag compound
 		if (getInventorySize() > 0) {
-			NBTTagList items = tagCompound.getTagList(generateNBTName("Items",id), NBTHelper.COMPOUND.getId());
+			NBTTagList items = tagCompound.getTagList("Items", NBTHelper.COMPOUND.getId());
 
 			for (int i = 0; i < items.tagCount(); ++i)
 			{
@@ -807,7 +796,7 @@ public abstract class ModuleBase {
 		}	
 
 		//reads module specific data
-		Load(tagCompound,id);
+		Load(tagCompound, 0); //TODO refactor away the id in Load
 	}	
 	
 	/**
@@ -1587,8 +1576,8 @@ public abstract class ModuleBase {
 	 * Return the {@link ModuleData} which represents this module
 	 * @return
 	 */
-	public ModuleData getData() {
-		return ModuleData.getList().get((byte)getModuleId());
+	public ModuleData getModuleData() {
+		return ModuleRegistry.getModuleFromId(getModuleId());
 	}
 	
 	/**
@@ -1636,7 +1625,8 @@ public abstract class ModuleBase {
 	}
 
     public String getModuleName() {
-        return ModuleData.getList().get(getModuleId()).getName();
+        ModuleData data = getModuleData();
+        return data == null ? null : data.getName();
     }
 	
 }

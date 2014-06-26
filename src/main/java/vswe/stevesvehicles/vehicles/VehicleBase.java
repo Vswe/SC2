@@ -13,8 +13,8 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagByteArray;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.ChunkCoordIntPair;
@@ -26,7 +26,9 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
 import vswe.stevesvehicles.containers.ContainerVehicle;
+import vswe.stevesvehicles.modules.data.ModuleRegistry;
 import vswe.stevesvehicles.old.Helpers.ActivatorOption;
+import vswe.stevesvehicles.modules.data.ModuleData;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicles.versions.VehicleVersion;
 import vswe.stevesvehicles.old.Helpers.CompWorkModule;
@@ -35,7 +37,6 @@ import vswe.stevesvehicles.old.Helpers.GuiAllocationHelper;
 import vswe.stevesvehicles.old.Helpers.ModuleCountPair;
 import vswe.stevesvehicles.old.Helpers.TransferHandler;
 import vswe.stevesvehicles.old.Models.Cart.ModelCartbase;
-import vswe.stevesvehicles.old.ModuleData.ModuleData;
 import vswe.stevesvehicles.old.Modules.Addons.ModuleCreativeSupplies;
 import vswe.stevesvehicles.old.Modules.Engines.ModuleEngine;
 import vswe.stevesvehicles.old.Modules.IActivatorModule;
@@ -50,9 +51,9 @@ import vswe.stevesvehicles.vehicles.entities.IVehicleEntity;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class VehicleBase {
-    private byte [] moduleLoadingData;
     private ForgeChunkManager.Ticket cartTicket;
     private ModuleWorker workingComponent;
     public TileEntityCartAssembler placeholderAsssembler;
@@ -64,6 +65,7 @@ public class VehicleBase {
     private int workingTime;
     private int motorRotation;
     protected boolean engineFlag = false;
+    private VehicleType vehicleType;
 
     public static final int MODULAR_SPACE_WIDTH = 443;
     public static final int MODULAR_SPACE_HEIGHT = 168;
@@ -107,9 +109,15 @@ public class VehicleBase {
     public VehicleBase(IVehicleEntity entity) {
         this.vehicleEntity = entity;
         this.entity = (Entity)entity;
+        for (VehicleType type : VehicleRegistry.getInstance().getElements()) {
+            if (type.getClazz().equals(entity.getClass())) {
+                this.vehicleType = type;
+                break;
+            }
+        }
     }
 
-    public VehicleBase(IVehicleEntity entity, TileEntityCartAssembler assembler, byte[] data) {
+    public VehicleBase(IVehicleEntity entity, TileEntityCartAssembler assembler, int[] data) {
         this(entity);
         setPlaceholder(assembler);
 
@@ -121,14 +129,8 @@ public class VehicleBase {
         cartVersion = info.getByte(VehicleVersion.NBT_VERSION_STRING);
 
 
-        loadModules(info);
+        loadModules(info, true);
         this.name = name;
-
-        for (int i = 0; i < modules.size(); i++) {
-            if (modules.get(i).hasExtraData() && info.hasKey("Data" + i)) {
-                modules.get(i).setExtraData(info.getByte("Data" + i));
-            }
-        }
     }
 
 
@@ -185,7 +187,7 @@ public class VehicleBase {
      * old modules that are no longer present be removed.
      * @param data The byte array representing the modules.
      */
-    private void loadPlaceholderModules(byte[] data) {
+    private void loadPlaceholderModules(int[] data) {
         if (modules == null) {
             modules = new ArrayList<ModuleBase>();
             doLoadModules(data);
@@ -195,10 +197,11 @@ public class VehicleBase {
             //Rule 2 -> IN NEW, NOT OLD -> add module
             //Rule 3 -> IN OLD, IN NEW -> keep the module, do nothing
 
-            ArrayList<Byte> modulesToAdd = new ArrayList<Byte>();
-            ArrayList<Byte> oldModules = new ArrayList<Byte>();
-            for (int i = 0; i < moduleLoadingData.length; i++) {
-                oldModules.add(moduleLoadingData[i]);
+            ArrayList<Integer> modulesToAdd = new ArrayList<Integer>();
+            ArrayList<Integer> oldModules = new ArrayList<Integer>();
+
+            for (ModuleBase module : modules) {
+                oldModules.add(module.getModuleId());
             }
 
 
@@ -218,7 +221,7 @@ public class VehicleBase {
                 }
             }
 
-            for (byte id : oldModules) {
+            for (int id : oldModules) {
                 for (int i = 0; i < modules.size(); i++) {
                     if (id == modules.get(i).getModuleId()) {
                         //Rule 1
@@ -231,7 +234,7 @@ public class VehicleBase {
 
 
 
-            byte[] newModuleData = new byte[modulesToAdd.size()];
+            int[] newModuleData = new int[modulesToAdd.size()];
             for (int i = 0; i < modulesToAdd.size(); i++) {
                 newModuleData[i] = modulesToAdd.get(i);
             }
@@ -240,64 +243,75 @@ public class VehicleBase {
         }
 
         initModules();
-        moduleLoadingData = data;
     }
 
 
-    /**
-     * Load the cart modules from the tag compound from the Cart Item
-     * @param info The tag compound
-     */
-    private void loadModules(NBTTagCompound info) {
-        NBTTagByteArray moduleIDTag = (NBTTagByteArray)info.getTag("Modules");
-        if (moduleIDTag == null) {
+
+    private void loadModules(NBTTagCompound info, boolean isItemCompound) {
+        NBTTagList list = info.getTagList(NBT_MODULES, 10);
+
+        if (list == null) {
             return;
         }
 
-        //on the server, make sure the version is correct
-        if (getWorld().isRemote) {
-            moduleLoadingData = moduleIDTag.func_150292_c();
-        }else{
-            moduleLoadingData = VehicleVersion.updateCart(this, moduleIDTag.func_150292_c());
+        int[] ids = new int[list.tagCount()];
+        for (int i = 0; i < list.tagCount(); i++) {
+            NBTTagCompound moduleCompound = list.getCompoundTagAt(i);
+            ids[i] = moduleCompound.getShort(NBT_ID);
         }
 
-        loadModules(moduleLoadingData);
+        //on the server, make sure the version is correct
+        if (!getWorld().isRemote) {
+            ids = VehicleVersion.updateCart(this, ids);
+        }
+
+        loadModules(ids);
+
+        for (int i = 0; i < list.tagCount(); i++) {
+            NBTTagCompound moduleCompound = list.getCompoundTagAt(i);
+            ModuleBase module = modules.get(i);
+            if (isItemCompound) {
+                //TODO add item extra data loading
+            }else{
+                module.readFromNBT(moduleCompound);
+            }
+        }
     }
 
     /**
      * Updates the PlaceHolder cart by giving it the current setup of modules.
-     * @param bytes The byte array representing the modules.
+     * @param ids The array representing the modules.
      */
-    public void updateSimulationModules(byte[] bytes) {
+    public void updateSimulationModules(int[] ids) {
         if (!isPlaceholder) {
             System.out.println("You're stupid! This is not a placeholder cart.");
         }else {
-            loadPlaceholderModules(bytes);
+            loadPlaceholderModules(ids);
         }
     }
 
     /**
      * Create and initiate the cart with the given modules.
-     * @param bytes The byte array representing the modules.
+     * @param ids The byte array representing the modules.
      */
-    protected void loadModules(byte[] bytes) {
+    protected void loadModules(int[] ids) {
 
         modules = new ArrayList<ModuleBase>();
 
-        doLoadModules(bytes);
+        doLoadModules(ids);
 
         initModules();
     }
 
     /**
      * Create the given modules
-     * @param bytes The byte array representing the modules.
+     * @param ids The array representing the modules.
      */
-    private void doLoadModules(byte[] bytes) {
-        for (byte id : bytes) {
+    private void doLoadModules(int[] ids) {
+        for (int id : ids) {
 
             try {
-                Class<? extends ModuleBase> moduleClass = ModuleData.getList().get((byte)id).getModuleClass();
+                Class<? extends ModuleBase> moduleClass = ModuleRegistry.getModuleFromId(id).getModuleClass();
                 Constructor moduleConstructor = moduleClass.getConstructor(new Class[] {VehicleBase.class});
                 Object moduleObject = moduleConstructor.newInstance(this);
 
@@ -322,7 +336,7 @@ public class VehicleBase {
     private void initModules() {
         moduleCounts = new ArrayList<ModuleCountPair>();
         for (ModuleBase module : modules) {
-            ModuleData data = ModuleData.getList().get(module.getModuleId());
+            ModuleData data = ModuleRegistry.getModuleFromId(module.getModuleId());
 
             boolean found = false;
             for (ModuleCountPair count : moduleCounts) {
@@ -993,7 +1007,7 @@ public class VehicleBase {
             ArrayList<String> invalid = new ArrayList<String>();
             //loops through the modules to remove all models that should be prevented to render
             for (ModuleBase module : modules) {
-                ModuleData data = module.getData();
+                ModuleData data = module.getModuleData();
 
                 if (data.haveRemovedModels()) {
                     for (String remove : data.getRemovedModels()) {
@@ -1006,7 +1020,7 @@ public class VehicleBase {
             for (int i = modules.size() - 1; i >= 0; i--) {
                 ModuleBase module = modules.get(i);
 
-                ModuleData data = module.getData();
+                ModuleData data = module.getModuleData();
                 if (data != null) {
                     if (data.haveModels(isPlaceholder)) {
                         ArrayList<ModelCartbase> models = new ArrayList<ModelCartbase>();
@@ -1168,19 +1182,27 @@ public class VehicleBase {
         return slotCount;
     }
 
+
+    public static final String NBT_MODULES = "Modules";
+    public static final String NBT_ID = "Id";
     public void writeToNBT(NBTTagCompound compound) {
         compound.setString("cartName", name);
         compound.setShort("workingTime", (short)workingTime);
-        compound.setByteArray("Modules", moduleLoadingData);
+
         compound.setByte("CartVersion", cartVersion);
 
-        //TODO make a list of the modules, no need to keep this flat
+
+        NBTTagList moduleCompoundList = new NBTTagList();
         if (modules != null) {
-            for (int i = 0; i < modules.size(); i++) {
-                ModuleBase module = modules.get(i);
-                module.writeToNBT(compound,i);
+            for (ModuleBase module : modules) {
+                NBTTagCompound moduleCompound = new NBTTagCompound();
+                moduleCompound.setShort(NBT_ID, (short)module.getModuleId());
+                module.writeToNBT(moduleCompound);
+                moduleCompoundList.appendTag(moduleCompound);
             }
         }
+
+        compound.setTag(NBT_MODULES, moduleCompoundList);
     }
 
     public void readFromNBT(NBTTagCompound compound) {
@@ -1191,15 +1213,7 @@ public class VehicleBase {
 
         int oldVersion = cartVersion;
 
-        loadModules(compound);
-
-        if (modules != null) {
-            for (int i = 0; i < modules.size(); i++) {
-                ModuleBase module = modules.get(i);
-                module.readFromNBT(compound, i);
-
-            }
-        }
+        loadModules(compound, false);
 
 
         if (oldVersion < 2) {
@@ -1356,9 +1370,9 @@ public class VehicleBase {
     }
 
     public void writeSpawnData(ByteBuf data) {
-        data.writeByte(moduleLoadingData.length);
-        for (byte b : moduleLoadingData) {
-            data.writeByte(b);
+        data.writeByte(modules.size());
+        for (ModuleBase module : modules) {
+            data.writeShort((short) module.getModuleId());
         }
 
         data.writeByte(name.getBytes().length);
@@ -1369,9 +1383,11 @@ public class VehicleBase {
 
     public void readSpawnData(ByteBuf data) {
         byte length = data.readByte();
-        byte[] bytes  = new byte[length];
-        data.readBytes(bytes);
-        loadModules(bytes);
+        int[] ids  = new int[length];
+        for (int i = 0; i < length; i++) {
+            ids[i] = data.readShort();
+        }
+        loadModules(ids);
 
         int nameLength = data.readByte();
         byte[] nameBytes = new byte[nameLength];
@@ -1528,5 +1544,17 @@ public class VehicleBase {
 
     public IVehicleEntity getVehicleEntity() {
         return vehicleEntity;
+    }
+
+    public VehicleType getVehicleType() {
+        return vehicleType;
+    }
+
+    public List<ModuleData> getModuleDataList() {
+        List<ModuleData> result = new ArrayList<ModuleData>();
+        for (ModuleBase module : modules) {
+            result.add(module.getModuleData());
+        }
+        return result;
     }
 }

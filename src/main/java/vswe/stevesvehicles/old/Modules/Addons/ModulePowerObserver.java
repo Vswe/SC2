@@ -109,7 +109,7 @@ public class ModulePowerObserver extends ModuleAddon {
 		
 		ResourceHelper.bindResourcePath("/atlas/items.png");
 		
-		drawImage(gui, engine.getData().getIcon(), rect, 0, 0);	
+		drawImage(gui, engine.getModuleData().getIcon(), rect, 0, 0);
 	}
 		
 	private int[] getAreaRect(int id) {
@@ -142,7 +142,7 @@ public class ModulePowerObserver extends ModuleAddon {
 			if (!removeOnPickup() || currentEngine != i) {
 				ModuleEngine engine = getCart().getEngines().get(i);
 
-				drawStringOnMouseOver(gui, engine.getData().getName() + "\n" + Localization.MODULES.ADDONS.OBSERVER_INSTRUCTION.translate(), x, y, getEngineRect(i));
+				drawStringOnMouseOver(gui, engine.getModuleData().getName() + "\n" + Localization.MODULES.ADDONS.OBSERVER_INSTRUCTION.translate(), x, y, getEngineRect(i));
 			}
 		}
 		
@@ -152,7 +152,7 @@ public class ModulePowerObserver extends ModuleAddon {
 				if ((areaData[i] & (1 << j)) != 0) {
 					ModuleEngine engine = getCart().getEngines().get(j);
 
-					drawStringOnMouseOver(gui, engine.getData().getName() + "\n" + Localization.MODULES.ADDONS.OBSERVER_REMOVE.translate(), x, y, getEngineRectInArea(i, count));
+					drawStringOnMouseOver(gui, engine.getModuleData().getName() + "\n" + Localization.MODULES.ADDONS.OBSERVER_REMOVE.translate(), x, y, getEngineRectInArea(i, count));
 					count++;
 				}
 			}	

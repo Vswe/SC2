@@ -65,4 +65,8 @@ public class VehicleRegistry implements IRegistry<VehicleType> {
     public VehicleType getTypeFromId(int id) {
         return loader.getObjectFromId(id);
     }
+
+    public int getIdFromType(VehicleType vehicle) {
+        return loader.getIdFromObject(vehicle);
+    }
 }

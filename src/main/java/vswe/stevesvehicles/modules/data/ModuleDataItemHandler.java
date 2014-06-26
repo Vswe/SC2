@@ -8,6 +8,7 @@ import vswe.stevesvehicles.modules.ModuleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.vehicles.VehicleBase;
+import vswe.stevesvehicles.vehicles.VehicleRegistry;
 import vswe.stevesvehicles.vehicles.VehicleType;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 import vswe.stevesvehicles.vehicles.versions.VehicleVersion;
@@ -165,41 +166,50 @@ public final class ModuleDataItemHandler {
         }
 
         if (vehicleType != null) {
-            createModularVehicle(vehicleType, modules);
+            return createModularVehicle(vehicleType, modules);
         }else{
             return null;
         }
     }
 
-    private static final String NBT_MODULES = "Modules";
-    private static final String NBT_ID = "Id";
 
+
+    private static final String NBT_VEHICLE_ID = "VehicleId";
     public static ItemStack createModularVehicle(VehicleType vehicle, List<ModuleData> modules) {
-        ItemStack cart = new ItemStack(ModItems.carts, 1);
+        if (vehicle == null) {
+            return null;
+        }
 
+        int vehicleId = VehicleRegistry.getInstance().getIdFromType(vehicle);
+        if (vehicleId < 0) {
+            return null;
+        }
+
+        NBTTagCompound data = new NBTTagCompound();
+        data.setByte(NBT_VEHICLE_ID, (byte)vehicleId);
 
         NBTTagList modulesCompoundList = new NBTTagList();
         for (ModuleData module : modules) {
             NBTTagCompound moduleCompound = new NBTTagCompound();
             int id = ModuleRegistry.getIdFromModule(module);
             if (id > 0) {
-                moduleCompound.setShort(NBT_ID, (short)id);
+                moduleCompound.setShort(VehicleBase.NBT_ID, (short)id);
                 //TODO let the ModuleData save extra data if it feels like it (for instance if easter egg bags have been opened or not)
                 modulesCompoundList.appendTag(moduleCompound);
             }
         }
 
+        data.setTag(VehicleBase.NBT_MODULES, modulesCompoundList);
 
-        NBTTagCompound data = new NBTTagCompound();
-        data.setTag(NBT_MODULES, modulesCompoundList);
-        cart.setTagCompound(data);
-        VehicleVersion.addVersion(cart);
+        ItemStack vehicleItem = new ItemStack(ModItems.carts, 1);
+        vehicleItem.setTagCompound(data);
+        VehicleVersion.addVersion(vehicleItem);
 
-        return cart;
+        return vehicleItem;
     }
 
     public static ItemStack createModularVehicle(VehicleBase vehicle) {
-        return createModularVehicle(vehicle.getVehicleType(), vehicle.getModuleDatas());
+        return createModularVehicle(vehicle.getVehicleType(), vehicle.getModuleDataList());
     }
 
 

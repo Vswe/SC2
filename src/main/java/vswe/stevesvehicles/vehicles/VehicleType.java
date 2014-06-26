@@ -15,4 +15,8 @@ public class VehicleType {
     public String getName() {
         return name;
     }
+
+    public Class<? extends IVehicleEntity> getClazz() {
+        return clazz;
+    }
 }
