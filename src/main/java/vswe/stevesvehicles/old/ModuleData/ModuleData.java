@@ -14,6 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import vswe.stevesvehicles.modules.data.ModuleDataGroup;
+import vswe.stevesvehicles.modules.hull.*;
 import vswe.stevesvehicles.old.Helpers.*;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.old.Models.Cart.*;
@@ -44,14 +45,10 @@ import vswe.stevesvehicles.old.Modules.Engines.ModuleSolarCompact;
 import vswe.stevesvehicles.old.Modules.Engines.ModuleSolarStandard;
 import vswe.stevesvehicles.old.Modules.Engines.ModuleThermalAdvanced;
 import vswe.stevesvehicles.old.Modules.Engines.ModuleThermalStandard;
-import vswe.stevesvehicles.old.Modules.Hull.ModuleCheatHull;
-import vswe.stevesvehicles.old.Modules.Hull.ModuleGalgadorian;
-import vswe.stevesvehicles.old.Modules.Hull.ModuleHull;
-import vswe.stevesvehicles.old.Modules.Hull.ModulePig;
-import vswe.stevesvehicles.old.Modules.Hull.ModulePumpkin;
-import vswe.stevesvehicles.old.Modules.Hull.ModuleReinforced;
-import vswe.stevesvehicles.old.Modules.Hull.ModuleStandard;
-import vswe.stevesvehicles.old.Modules.Hull.ModuleWood;
+import vswe.stevesvehicles.modules.hull.HullGalgadorian;
+import vswe.stevesvehicles.modules.hull.HullPig;
+import vswe.stevesvehicles.modules.hull.HullPumpkin;
+import vswe.stevesvehicles.modules.hull.HullReinforced;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleAdvControl;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleArcade;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleCage;
@@ -458,50 +455,48 @@ public class ModuleData {
 									   {null, Items.golden_carrot, null}
 									  });
 				
-		new ModuleDataHull(37, "Wooden Hull", ModuleWood.class).setCapacity(50).setEngineMax(1).setAddonMax(0).setComplexityMax(15)		
-			.addRecipe(new Object[][] {{planks, null, planks},
-									   {planks, planks, planks},
-									   {ComponentTypes.WOODEN_WHEELS.getItemStack(), null, ComponentTypes.WOODEN_WHEELS.getItemStack()}
-									  });
+		new ModuleDataHull(37, "Wooden Hull", HullWood.class).setCapacity(50).setEngineMax(1).setAddonMax(0).setComplexityMax(15)
+			.addRecipe(new Object[][]{{planks, null, planks}, {planks, planks, planks}, {ComponentTypes.WOODEN_WHEELS
+					.getItemStack(), null, ComponentTypes.WOODEN_WHEELS.getItemStack()}});
 		
-		new ModuleDataHull(38, "Standard Hull", ModuleStandard.class).setCapacity(200).setEngineMax(3).setAddonMax(6).setComplexityMax(50)
+		new ModuleDataHull(38, "Standard Hull", HullStandard.class).setCapacity(200).setEngineMax(3).setAddonMax(6).setComplexityMax(50)
 			.addRecipe(new Object[][] {{Items.iron_ingot, null, Items.iron_ingot},
 									   {Items.iron_ingot, Items.iron_ingot, Items.iron_ingot},
 									   {ComponentTypes.IRON_WHEELS.getItemStack(), null, ComponentTypes.IRON_WHEELS.getItemStack()}
 									  });		
 		
-		ModuleData reinfhull = new ModuleDataHull(39, "Reinforced Hull", ModuleReinforced.class).setCapacity(500).setEngineMax(5).setAddonMax(12).setComplexityMax(150)		
-			.addRecipe(new Object[][] {{ComponentTypes.REINFORCED_METAL.getItemStack(), null, ComponentTypes.REINFORCED_METAL.getItemStack()},
-									   {ComponentTypes.REINFORCED_METAL.getItemStack(), ComponentTypes.REINFORCED_METAL.getItemStack(), ComponentTypes.REINFORCED_METAL.getItemStack()},
-									   {ComponentTypes.REINFORCED_WHEELS.getItemStack(), null, ComponentTypes.REINFORCED_WHEELS.getItemStack()}
-									  });
+		ModuleData reinfhull = new ModuleDataHull(39, "Reinforced Hull", HullReinforced.class).setCapacity(500).setEngineMax(5).setAddonMax(12).setComplexityMax(150)
+			.addRecipe(new Object[][]{{ComponentTypes.REINFORCED_METAL.getItemStack(), null,
+					ComponentTypes.REINFORCED_METAL.getItemStack()}, {ComponentTypes.REINFORCED_METAL.getItemStack(),
+					ComponentTypes.REINFORCED_METAL.getItemStack(), ComponentTypes.REINFORCED_METAL.getItemStack()},
+					{ComponentTypes.REINFORCED_WHEELS.getItemStack(), null, ComponentTypes.REINFORCED_WHEELS
+							.getItemStack()}});
 
-		ModuleData pumpkinhull = new ModuleDataHull(47, "Pumpkin chariot", ModulePumpkin.class).setCapacity(40).setEngineMax(1).setAddonMax(0).setComplexityMax(15)	
-			.addRecipe(new Object[][] {{planks, null, planks},
-									   {planks, Blocks.pumpkin, planks},
-									   {ComponentTypes.WOODEN_WHEELS.getItemStack(), null, ComponentTypes.WOODEN_WHEELS.getItemStack()}
-									  });
+		ModuleData pumpkinhull = new ModuleDataHull(47, "Pumpkin chariot", HullPumpkin.class).setCapacity(40).setEngineMax(1).setAddonMax(0).setComplexityMax(15)
+			.addRecipe(new Object[][]{{planks, null, planks}, {planks, Blocks.pumpkin, planks},
+					{ComponentTypes.WOODEN_WHEELS.getItemStack(), null, ComponentTypes.WOODEN_WHEELS.getItemStack()}});
 									  
 		if (!StevesVehicles.isHalloween) {
 			pumpkinhull.lock();
 		}
 		
-		new ModuleDataHull(62, "Mechanical Pig", ModulePig.class).setCapacity(150).setEngineMax(2).setAddonMax(4).setComplexityMax(50).addSide(SIDE.FRONT) 			
+		new ModuleDataHull(62, "Mechanical Pig", HullPig.class).setCapacity(150).setEngineMax(2).setAddonMax(4).setComplexityMax(50).addSide(SIDE.FRONT)
 			.addRecipe(new Object[][] {{Items.porkchop, null, Items.porkchop},
 									   {Items.porkchop, Items.porkchop, Items.porkchop},
 									   {ComponentTypes.IRON_WHEELS.getItemStack(), null, ComponentTypes.IRON_WHEELS.getItemStack()}
 									  })
 		.addMessage(Localization.MODULE_INFO.PIG_MESSAGE);
 		
-		new ModuleDataHull(76, "Creative Hull", ModuleCheatHull.class).setCapacity(10000).setEngineMax(5).setAddonMax(12).setComplexityMax(150);
+		new ModuleDataHull(76, "Creative Hull", HullCreative.class).setCapacity(10000).setEngineMax(5).setAddonMax(12).setComplexityMax(150);
 
 		
 		
-		new ModuleDataHull(81, "Galgadorian Hull", ModuleGalgadorian.class).setCapacity(1000).setEngineMax(5).setAddonMax(12).setComplexityMax(150)		
-				.addRecipe(new Object[][] {{ComponentTypes.GALGADORIAN_METAL.getItemStack(), null, ComponentTypes.GALGADORIAN_METAL.getItemStack()},
-										   {ComponentTypes.GALGADORIAN_METAL.getItemStack(), ComponentTypes.GALGADORIAN_METAL.getItemStack(), ComponentTypes.GALGADORIAN_METAL.getItemStack()},
-										   {ComponentTypes.GALGADORIAN_WHEELS.getItemStack(), null, ComponentTypes.GALGADORIAN_WHEELS.getItemStack()}
-										  });		
+		new ModuleDataHull(81, "Galgadorian Hull", HullGalgadorian.class).setCapacity(1000).setEngineMax(5).setAddonMax(12).setComplexityMax(150)
+				.addRecipe(new Object[][]{{ComponentTypes.GALGADORIAN_METAL.getItemStack(), null,
+						ComponentTypes.GALGADORIAN_METAL.getItemStack()}, {ComponentTypes.GALGADORIAN_METAL
+						.getItemStack(), ComponentTypes.GALGADORIAN_METAL.getItemStack(),
+						ComponentTypes.GALGADORIAN_METAL.getItemStack()}, {ComponentTypes.GALGADORIAN_WHEELS
+						.getItemStack(), null, ComponentTypes.GALGADORIAN_WHEELS.getItemStack()}});
 		
 		StevesVehicles.tabsSC2.setIcon(reinfhull.getItemStack());
 		StevesVehicles.tabsSC2Components.setIcon(ComponentTypes.REINFORCED_WHEELS.getItemStack());

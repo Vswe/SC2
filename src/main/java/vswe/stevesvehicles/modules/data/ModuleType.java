@@ -4,7 +4,7 @@ package vswe.stevesvehicles.modules.data;
 import vswe.stevesvehicles.modules.ModuleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Modules.Addons.ModuleAddon;
-import vswe.stevesvehicles.old.Modules.Hull.ModuleHull;
+import vswe.stevesvehicles.modules.hull.ModuleHull;
 import vswe.stevesvehicles.old.Modules.ModuleAttachment;
 import vswe.stevesvehicles.old.Modules.Storages.ModuleStorage;
 import vswe.stevesvehicles.old.Modules.Workers.Tools.ModuleTool;
