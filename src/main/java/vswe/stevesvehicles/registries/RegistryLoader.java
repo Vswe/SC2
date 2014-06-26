@@ -23,6 +23,24 @@ public class RegistryLoader<R extends IRegistry<E>, E> {
     private Map<String, R> registries = new HashMap<String, R>();
     private int nextId;
 
+    public E getObjectFromName(String name) {
+        int id = getIdFromName(name);
+        if (id == -1) {
+            return null;
+        }else{
+            return getObjectFromId(id);
+        }
+    }
+
+    public E getObjectFromId(int id) {
+        return idToObjectMapping.get(id);
+    }
+
+    public int getIdFromName(String name) {
+        Integer result = nameToIdMapping.get(name);
+        return result == null ? -1 : result;
+    }
+
 
     private static final String NBT_REGISTRIES = "Registries";
     private static final String NBT_NEXT_ID = "NextModuleId";

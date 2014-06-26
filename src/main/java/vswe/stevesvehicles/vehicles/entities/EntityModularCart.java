@@ -353,7 +353,7 @@ public class EntityModularCart extends EntityMinecart
         super.moveMinecartOnRail(x, y, z, acceleration);
 		if (vehicleBase.getModules() != null) {
 			for (ModuleBase module : vehicleBase.getModules()) {
-				module.moveMinecartOnRail(x,y,z);
+				module.moveMinecartOnRail(x, y, z);
 			}
 		}
 		

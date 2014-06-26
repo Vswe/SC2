@@ -57,4 +57,12 @@ public class VehicleRegistry implements IRegistry<VehicleType> {
     public Collection<VehicleType> getElements() {
         return vehicles.values();
     }
+
+    public VehicleType getTypeFromName(String name) {
+        return loader.getObjectFromName(name);
+    }
+
+    public VehicleType getTypeFromId(int id) {
+        return loader.getObjectFromId(id);
+    }
 }

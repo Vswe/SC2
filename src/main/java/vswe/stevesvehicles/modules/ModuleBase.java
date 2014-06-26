@@ -341,7 +341,7 @@ public abstract class ModuleBase {
 	 * @param y Y coordinate in the world
 	 * @param z Z coordinate in the world
 	 */
-	public void moveMinevehicleOnRail(int x, int y, int z) {}
+	public void moveMinecartOnRail(int x, int y, int z) {}
 
 	/**
 	 * Used to get the ItemStack in a specific slot of this module

@@ -3,15 +3,19 @@ package vswe.stevesvehicles.modules.data;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.StatCollector;
 import vswe.stevesvehicles.modules.ModuleBase;
+import vswe.stevesvehicles.old.Helpers.ColorHelper;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Models.Cart.ModelCartbase;
 import vswe.stevesvehicles.old.ModuleData.ModuleDataGroup;
 import vswe.stevesvehicles.old.StevesVehicles;
+import vswe.stevesvehicles.vehicles.VehicleType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class ModuleData {
     private final Class<? extends ModuleBase> moduleClass;
@@ -30,6 +34,8 @@ public class ModuleData {
     private ArrayList<Localization.MODULE_INFO> message;
     private boolean useExtraData;
     private byte extraDataDefaultValue;
+    private ArrayList<IRecipe> recipes;
+    private ArrayList<VehicleType> validVehicles;
 
     @SideOnly(Side.CLIENT)
     private HashMap<String,ModelCartbase> models;
@@ -82,7 +88,7 @@ public class ModuleData {
         return isLocked;
     }
 
-    protected ModuleData lock() {
+    public ModuleData lock() {
         isLocked = true;
 
         return this;
@@ -104,7 +110,7 @@ public class ModuleData {
         return this;
     }
 
-    protected boolean getAllowDuplicate() {
+    public boolean getAllowDuplicate() {
         return allowDuplicate;
     }
 
@@ -128,7 +134,7 @@ public class ModuleData {
         return sides;
     }
 
-    protected ModuleData addSides(ModuleSide ... sides) {
+    public ModuleData addSides(ModuleSide ... sides) {
         if (this.sides == null) {
             this.sides = new ArrayList<ModuleSide>();
         }
@@ -143,13 +149,13 @@ public class ModuleData {
         return this;
     }
 
-    protected ModuleData addParent(ModuleData parent) {
+    public ModuleData addParent(ModuleData parent) {
         this.parent = parent;
 
         return this;
     }
 
-    protected ModuleData addMessage(Localization.MODULE_INFO s) {
+    public ModuleData addMessage(Localization.MODULE_INFO s) {
         if (message == null) {
             message = new ArrayList<Localization.MODULE_INFO>();
         }
@@ -158,14 +164,14 @@ public class ModuleData {
         return this;
     }
 
-    protected void addNemesis(ModuleData nemesis) {
+    public void addNemesis(ModuleData nemesis) {
         if (this.nemesis == null) {
             this.nemesis = new ArrayList<ModuleData>();
         }
         this.nemesis.add(nemesis);
     }
 
-    protected ModuleData addRequirement(ModuleDataGroup requirement) {
+    public ModuleData addRequirement(ModuleDataGroup requirement) {
         if (this.requirement == null) {
             this.requirement = new ArrayList<ModuleDataGroup>();
         }
@@ -174,7 +180,7 @@ public class ModuleData {
         return this;
     }
 
-    protected static void addNemesis(ModuleData m1, ModuleData m2) {
+    public static void addNemesis(ModuleData m1, ModuleData m2) {
         m2.addNemesis(m1);
         m1.addNemesis(m2);
     }
@@ -183,18 +189,18 @@ public class ModuleData {
         return modelMultiplier;
     }
 
-    protected ModuleData setModelMultiplier(float val) {
+    public ModuleData setModelMultiplier(float val) {
         modelMultiplier = val;
 
         return this;
     }
 
-    protected ModuleData addModel(String tag, ModelCartbase model) {
+    public ModuleData addModel(String tag, ModelCartbase model) {
         addModel(tag, model, false);
         addModel(tag, model, true);
         return this;
     }
-    protected ModuleData addModel(String tag, ModelCartbase model, boolean placeholder) {
+    public ModuleData addModel(String tag, ModelCartbase model, boolean placeholder) {
         if (placeholder) {
             if (modelsPlaceholder == null) {
                 modelsPlaceholder = new HashMap<String,ModelCartbase>();
@@ -228,7 +234,7 @@ public class ModuleData {
         }
     }
 
-    protected ModuleData removeModel(String tag) {
+    public ModuleData removeModel(String tag) {
         if (removedModels == null) {
             removedModels = new ArrayList<String>();
         }
@@ -256,15 +262,15 @@ public class ModuleData {
     }
 
 
-    protected ModuleData getParent() {
+    public ModuleData getParent() {
         return parent;
     }
 
-    protected ArrayList<ModuleData> getNemesis() {
+    public ArrayList<ModuleData> getNemesis() {
         return nemesis;
     }
 
-    protected ArrayList<ModuleDataGroup> getRequirement() {
+    public ArrayList<ModuleDataGroup> getRequirement() {
         return requirement;
     }
 
@@ -280,4 +286,46 @@ public class ModuleData {
         return name;
     }
 
+    public void addSpecificInformation(List<String> list) {
+        list.add(ColorHelper.LIGHTGRAY + Localization.MODULE_INFO.MODULAR_COST.translate() + ": " + modularCost);
+    }
+
+
+    public ModuleData addRecipe(IRecipe recipe) {
+        if(this.recipes == null) {
+            this.recipes = new ArrayList<IRecipe>();
+        }
+
+        this.recipes.add(recipe);
+
+        return this;
+    }
+
+
+    public ModuleData addShapedRecipe(Object ... recipe) {
+        addRecipe(null); //TODO create a shaped recipe
+
+        return this;
+    }
+
+    public ModuleData addShapelessRecipe(Object ... recipe) {
+        addRecipe(null); //TODO create a shapeless recipe
+
+        return this;
+    }
+
+    public ModuleData addVehicles(VehicleType ... types) {
+        if (validVehicles == null) {
+            validVehicles = new ArrayList<VehicleType>();
+        }
+
+        for (VehicleType type : types) {
+            validVehicles.add(type);
+        }
+
+        return this;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void loadModels() {}
 }

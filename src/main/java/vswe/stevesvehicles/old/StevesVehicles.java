@@ -36,7 +36,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid = "StevesCarts", name = "Steve's Carts 2", version = GeneratedInfo.version)
+@Mod(modid = "StevesVehicles", name = "Steve's Vehicles", version = GeneratedInfo.version)
 public class StevesVehicles {
 	public static boolean hasGreenScreen = false;
 	public static boolean isChristmas = false;
