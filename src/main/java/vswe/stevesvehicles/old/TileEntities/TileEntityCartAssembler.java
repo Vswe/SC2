@@ -1,5 +1,6 @@
 package vswe.stevesvehicles.old.TileEntities;
 import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.block.BlockRailBase;
 import net.minecraft.entity.item.EntityItem;
@@ -13,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import vswe.stevesvehicles.modules.data.ModuleDataItemHandler;
 import vswe.stevesvehicles.old.Blocks.BlockCartAssembler;
 import vswe.stevesvehicles.old.Blocks.ModBlocks;
 import vswe.stevesvehicles.old.Helpers.*;
@@ -25,8 +27,8 @@ import vswe.stevesvehicles.old.Containers.ContainerUpgrade;
 import vswe.stevesvehicles.client.interfaces.GuiBase;
 import vswe.stevesvehicles.old.Interfaces.GuiCartAssembler;
 import vswe.stevesvehicles.old.Items.ItemCarts;
-import vswe.stevesvehicles.old.ModuleData.ModuleData;
-import vswe.stevesvehicles.old.ModuleData.ModuleDataHull;
+import vswe.stevesvehicles.modules.data.ModuleData;
+import vswe.stevesvehicles.modules.data.ModuleDataHull;
 import vswe.stevesvehicles.old.Slots.SlotAssembler;
 import vswe.stevesvehicles.old.Slots.SlotAssemblerFuel;
 import vswe.stevesvehicles.old.Slots.SlotHull;
@@ -120,7 +122,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 	/**
 	 * The simulated cart, this cart will only exist on the client side
 	 */
-	private EntityModularCart placeholder;
+	private EntityModularCart placeholder; //TODO this shouldn't be a cart
 	
 	/**
 	 * The current yaw (rotation) of the simulated cart
@@ -662,7 +664,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 				}
 			}
 		}
-		return ModuleData.createModularCartFromItems(items);	
+		return ModuleDataItemHandler.createModularVehicle(items);
 	}
 	
 	/**
@@ -711,7 +713,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 				}			
 				
 				if (validSize) {
-					ModuleData module = ModItems.modules.getModuleData(item, true);
+					ModuleData module = ModItems.modules.getModuleData(item);
 					if (module != null) {
 						modules.add(module);
 					}
@@ -765,7 +767,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 					}				
 				}
 				
-				String error = ModuleData.checkForErrors((ModuleDataHull)hulldata, modules);
+				String error = ModuleDataItemHandler.checkForErrors((ModuleDataHull)hulldata, modules);
 				if (error != null) {
 					errors.add(error);
 				}
@@ -786,7 +788,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 				}
 			}				
 		}
-		return ModuleData.getTotalCost(modules);
+		return ModuleDataItemHandler.getTotalCost(modules);
 	}	
 		
 
@@ -887,10 +889,10 @@ public class TileEntityCartAssembler extends TileEntityBase
 	private ArrayList<SlotAssembler> getValidSlotFromHull(ModuleDataHull hull) {
 		 ArrayList<SlotAssembler> slots = new ArrayList<SlotAssembler>();
 		 
-			for (int i = 0; i < hull.getEngineMax(); i++) {
+			for (int i = 0; i < hull.getEngineMaxCount(); i++) {
 				slots.add(getEngines().get(i));
 			}
-			for (int i = 0; i < hull.getAddonMax(); i++) {
+			for (int i = 0; i < hull.getAddonMaxCount(); i++) {
 				slots.add(getAddons().get(i));
 			}	
 			for (int i = 0; i < getChests().size(); i++) {
@@ -1110,8 +1112,9 @@ public class TileEntityCartAssembler extends TileEntityBase
             ((BlockCartAssembler) ModBlocks.CART_ASSEMBLER.getBlock()).updateMultiBlock(worldObj, xCoord, yCoord, zCoord);
 			loaded = true;
 		}
-	
-		if (!isAssembling && outputSlot != null && outputSlot.getStack() != null) {
+
+        //TODO rewrite this (this allows carts that were assembling when a assembler was broken to be put into the output slot and allow it to continue)
+		/*if (!isAssembling && outputSlot != null && outputSlot.getStack() != null) {
 			ItemStack itemInSlot = outputSlot.getStack();
 			if (itemInSlot.getItem() == ModItems.carts) {
 			
@@ -1148,7 +1151,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 					
 				}		
 			}	
-		}
+		}*/
 	
 		if (getFuelLevel() > getMaxFuelLevel()) {
 			setFuelLevel(getMaxFuelLevel());
@@ -1286,17 +1289,17 @@ public class TileEntityCartAssembler extends TileEntityBase
 				}
 			}
 			
-			placeholder.onCartUpdate();
+			placeholder.getVehicle().onUpdate();
 			if (placeholder == null) {
 				return;
 			}
-			placeholder.updateFuel();		
+			placeholder.getVehicle().updateFuel();
 		}	
 	}
 	
 	public void createPlaceholder() {
 		if (placeholder == null) {						
-			placeholder = new EntityModularCart(worldObj, this, getModularInfoBytes());
+			placeholder = new EntityModularCart(worldObj, this, getModularInfoIds());
 			updateRenderMenu();
 			isErrorListOutdated = true;
 		}	
@@ -1304,7 +1307,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 	
 	public void updatePlaceholder() {
 		if (placeholder != null) {
-			placeholder.updateSimulationModules(getModularInfoBytes());
+			placeholder.getVehicle().updateSimulationModules(getModularInfoIds());
 			updateRenderMenu();
 			isErrorListOutdated = true;
 		}
@@ -1320,7 +1323,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 			}else{
 				for (int i = 0; i < getSizeInventory() - nonModularSlots(); i++) {
 					if (getStackInSlot(i) != null) {
-						if (ModuleData.isItemOfModularType(getStackInSlot(i),item.getModuleClass()) && (item.getExcludedClass() == null || !ModuleData.isItemOfModularType(getStackInSlot(i),item.getExcludedClass()))) {
+						if (ModuleDataItemHandler.isItemOfModularType(getStackInSlot(i),item.getModuleClass()) && (item.getExcludedClass() == null || !ModuleDataItemHandler.isItemOfModularType(getStackInSlot(i),item.getExcludedClass()))) {
 							dropDownItems.add(item);	
 							break;
 						}
@@ -1330,22 +1333,22 @@ public class TileEntityCartAssembler extends TileEntityBase
 		} 
 	}
 	
-	private byte[] getModularInfoBytes() {
-		ArrayList<Byte> datalist = new ArrayList<Byte>();
+	private int[] getModularInfoIds() {
+		List<Integer> datalist = new ArrayList<Integer>();
 		for (int i = 0; i < getSizeInventory() - nonModularSlots(); i++) {
 			if (getStackInSlot(i) != null) {
 				ModuleData data = ModItems.modules.getModuleData(getStackInSlot(i));
 				if (data != null) {
-					datalist.add((byte)getStackInSlot(i).getItemDamage());
+					datalist.add(getStackInSlot(i).getItemDamage());
 				}
 			}
 		}
 		
-		byte[] bytes = new byte[datalist.size()];
+		int[] ids = new int[datalist.size()];
 		for (int i = 0; i < datalist.size(); i++) {
-			bytes[i] = datalist.get(i);				
+			ids[i] = datalist.get(i);
 		}
-		return bytes;
+		return ids;
 	}
 
 	public boolean getIsDisassembling() {
@@ -1580,7 +1583,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 		tagCompound.setBoolean("isAssembling", isAssembling);
     }	
 
-	public ItemStack getOutputOnInterupt() {
+	public ItemStack getOutputOnInterrupt() {
 		if (outputItem == null) {
 			return null;
 		}else if (!outputItem.hasTagCompound()) {
@@ -1618,9 +1621,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 	}
 
 	@Override
-    public boolean isItemValidForSlot(int slotId, ItemStack item)
-    {	
-
+    public boolean isItemValidForSlot(int slotId, ItemStack item) {
 		if (slotId >= 0 && slotId < slots.size()) {
 			return slots.get(slotId).isItemValid(item);
 		}else{

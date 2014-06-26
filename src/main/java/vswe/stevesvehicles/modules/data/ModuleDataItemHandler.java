@@ -29,20 +29,14 @@ public final class ModuleDataItemHandler {
 
     //vehicle item -> modules list
 
-    public static String checkForErrors(ArrayList<ModuleData> modules) {
-        for (ModuleData module : modules) {
-            if (isValidModuleItem(ModuleType.HULL, module)) {
-                if (module.getValidVehicles() == null ||module.getValidVehicles().isEmpty()) {
-                    return "The hull of this vehicle has no vehicle type"; //TODO localization
-                }
-                VehicleType vehicleType = module.getValidVehicles().get(0);
-                List<ModuleData> modulesCopy = new ArrayList<ModuleData>(modules);
-                modulesCopy.remove(module);
-                return checkForErrors(vehicleType, (ModuleDataHull)module, modulesCopy);
-            }
+    public static String checkForErrors(ModuleDataHull hull, ArrayList<ModuleData> modules) {
+        if (hull.getValidVehicles() == null || hull.getValidVehicles().isEmpty()) {
+            return "The hull of this vehicle has no vehicle type"; //TODO localization
         }
 
-        return "Couldn't find a valid hull."; //TODO localization
+        VehicleType vehicleType = hull.getValidVehicles().get(0);
+        return checkForErrors(vehicleType, hull, modules);
+
     }
 
     public static String checkForErrors(VehicleType vehicle, ModuleDataHull hull, List<ModuleData> modules) {

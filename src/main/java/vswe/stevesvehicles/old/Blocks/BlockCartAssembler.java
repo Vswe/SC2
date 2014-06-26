@@ -256,7 +256,7 @@ public class BlockCartAssembler extends BlockContainerBase
             }
        
 
-			ItemStack outputItem = var7.getOutputOnInterupt();
+			ItemStack outputItem = var7.getOutputOnInterrupt();
 			if (outputItem != null) {
 				EntityItem eItem = new EntityItem(world, (double)x + 0.2F, (double)y + 0.2F, (float)z + 0.2F, outputItem);
 				eItem.motionX = (double)((float)world.rand.nextGaussian() *  0.05F);

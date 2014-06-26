@@ -119,7 +119,7 @@ public class EntityModularCart extends EntityMinecart
 	 * @param assembler The CartAssembler this placeholder cart belongs to
 	 * @param data The byte array containing the modules of this cart
 	 */
-    public EntityModularCart(World world, TileEntityCartAssembler assembler, byte[] data)
+    public EntityModularCart(World world, TileEntityCartAssembler assembler, int[] data)
     {
         super(world);
         this.vehicleBase = new VehicleBase(this, assembler, data);
