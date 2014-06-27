@@ -22,6 +22,7 @@ import net.minecraft.world.World;
 import vswe.stevesvehicles.containers.ContainerVehicle;
 import vswe.stevesvehicles.old.Blocks.BlockCartAssembler;
 import vswe.stevesvehicles.old.Blocks.ModBlocks;
+import vswe.stevesvehicles.registries.RegistrySynchronizer;
 import vswe.stevesvehicles.vehicles.VehicleBase;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 import vswe.stevesvehicles.containers.ContainerBase;
@@ -38,21 +39,21 @@ import static vswe.stevesvehicles.old.StevesVehicles.packetHandler;
 
 public class PacketHandler {
 
+    //TODO? replace the networking with DataWriters and DataReaders maybe?
+    //TODO Might some clean up at least
 
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public void onClientPacket(FMLNetworkEvent.ClientCustomPacketEvent event) {
         EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
-        int idForCrash = -1;
         try {
             byte[] bytes = event.packet.payload().array();
             ByteArrayDataInput reader = ByteStreams.newDataInput(bytes);
 
-            int id = reader.readByte();
-            idForCrash = id;
+            PacketType type = PacketType.values()[reader.readByte()];
 
 
-            if (id == -1) {
+            if (type == PacketType.BLOCK) {
                 int x = reader.readInt();
                 int y = reader.readInt();
                 int z = reader.readInt();
@@ -66,9 +67,10 @@ public class PacketHandler {
                 World world = player.worldObj;
 
                 ((BlockCartAssembler) ModBlocks.CART_ASSEMBLER.getBlock()).updateMultiBlock(world, x, y, z);
-            }else{
+            }else if(type == PacketType.VEHICLE){
+                int id = reader.readByte();
                 int entityId = reader.readInt();
-                int len = bytes.length - 5;
+                int len = bytes.length - 6;
                 byte[] data = new byte[len];
                 for (int i = 0; i < len; i++) {
                     data[i] = reader.readByte();
@@ -79,11 +81,13 @@ public class PacketHandler {
                 if (vehicle != null) {
                     receivePacketAtVehicle(vehicle, id, data, player);
                 }
+            }else if(type == PacketType.REGISTRY) {
+                RegistrySynchronizer.onPacket(reader);
             }
 
 
         }catch(Exception ex) {
-            System.out.println("The client failed to process a packet with " + (idForCrash == -1 ?  "unknown id" : "id " + idForCrash ));
+            System.out.println("The client failed to process a packet.");
         }
 
     }
@@ -91,55 +95,53 @@ public class PacketHandler {
     @SubscribeEvent
     public void onServerPacket(FMLNetworkEvent.ServerCustomPacketEvent event) {
         EntityPlayer player = ((NetHandlerPlayServer)event.handler).playerEntity;
-        int idForCrash = -1;
         try {
             byte[] bytes = event.packet.payload().array();
             ByteArrayDataInput reader = ByteStreams.newDataInput(bytes);
 
-            int id = reader.readByte();
-            idForCrash = id;
-
-
-
+            PacketType type = PacketType.values()[reader.readByte()];
             World world = player.worldObj;
 
-            if (player.openContainer instanceof ContainerPlayer) {
-                int entityId = reader.readInt();
-                int len = bytes.length - 5;
-                byte[] data = new byte[len];
-                for (int i = 0; i < len; i++) {
-                    data[i] = reader.readByte();
-                }
-                VehicleBase vehicle = getVehicle(entityId, world);
-                if (vehicle != null) {
-                    receivePacketAtVehicle(vehicle, id, data, player);
-                }
-            }else{
+            if (type == PacketType.VEHICLE || type == PacketType.BLOCK) {
+                int id = reader.readByte();
+                if (player.openContainer instanceof ContainerPlayer) {
+                    int entityId = reader.readInt();
+                    int len = bytes.length - 5;
+                    byte[] data = new byte[len];
+                    for (int i = 0; i < len; i++) {
+                        data[i] = reader.readByte();
+                    }
+                    VehicleBase vehicle = getVehicle(entityId, world);
+                    if (vehicle != null) {
+                        receivePacketAtVehicle(vehicle, id, data, player);
+                    }
+                }else{
 
-                int len = bytes.length - 1;
-                byte[] data = new byte[len];
-                for (int i = 0; i < len; i++) {
-                    data[i] = reader.readByte();
-                }
+                    int len = bytes.length - 1;
+                    byte[] data = new byte[len];
+                    for (int i = 0; i < len; i++) {
+                        data[i] = reader.readByte();
+                    }
 
-                Container con = player.openContainer;
+                    Container con = player.openContainer;
 
-                if (con instanceof ContainerVehicle) {
-                    ContainerVehicle containerVehicle = (ContainerVehicle)con;
-                    VehicleBase vehicle = containerVehicle.getVehicle();
+                    if (con instanceof ContainerVehicle) {
+                        ContainerVehicle containerVehicle = (ContainerVehicle)con;
+                        VehicleBase vehicle = containerVehicle.getVehicle();
 
-                    receivePacketAtVehicle(vehicle, id, data, player);
-                }else if(con instanceof ContainerBase) {
-                    ContainerBase containerBase =(ContainerBase)con;
-                    TileEntityBase base = containerBase.getTileEntity();
-                    if (base != null) {
-                        base.receivePacket(id, data, player);
+                        receivePacketAtVehicle(vehicle, id, data, player);
+                    }else if(con instanceof ContainerBase) {
+                        ContainerBase containerBase =(ContainerBase)con;
+                        TileEntityBase base = containerBase.getTileEntity();
+                        if (base != null) {
+                            base.receivePacket(id, data, player);
+                        }
                     }
                 }
             }
 
         }catch(Exception ex) {
-            System.out.println("The server failed to process a packet with " + (idForCrash == -1 ?  "unknown id" : "id " + idForCrash ));
+            System.out.println("The server failed to process a packet.");
         }
 
     }
@@ -171,6 +173,7 @@ public class PacketHandler {
 		DataOutputStream ds = new DataOutputStream(bs);
 
 		try {
+            ds.writeByte((byte) PacketType.VEHICLE.ordinal());
 			ds.writeByte((byte)id);
 
 			for (byte b : extraData) {
@@ -180,6 +183,17 @@ public class PacketHandler {
 		}catch (IOException ignored) {}
 		
 		packetHandler.sendToServer(createPacket(bs.toByteArray()));
+
+        try {
+            bs.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            ds.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
 
     private static FMLProxyPacket createPacket(byte[] bytes) {
@@ -192,6 +206,7 @@ public class PacketHandler {
 		DataOutputStream ds = new DataOutputStream(bs);
 
 		try {
+            ds.writeByte((byte) PacketType.VEHICLE.ordinal());
 			ds.writeByte((byte)id);
 
 			ds.writeInt(cart.getEntityId());
@@ -203,13 +218,25 @@ public class PacketHandler {
 		}catch (IOException ignored) {}
 
         packetHandler.sendToServer(createPacket(bs.toByteArray()));
-	}	
+
+        try {
+            bs.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            ds.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 	
 	public static void sendPacketToPlayer(int id, byte[] data, EntityPlayer player, VehicleBase vehicle) {
 		ByteArrayOutputStream bs = new ByteArrayOutputStream();
 		DataOutputStream ds = new DataOutputStream(bs);
 
 		try {
+            ds.writeByte((byte) PacketType.VEHICLE.ordinal());
 			ds.writeByte((byte)id);
 
 			ds.writeInt(vehicle.getEntity().getEntityId());
@@ -221,7 +248,22 @@ public class PacketHandler {
 		}catch (IOException ignored) {}
 
         packetHandler.sendTo(createPacket(bs.toByteArray()), (EntityPlayerMP) player);
-	}	
+
+        try {
+            bs.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            ds.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+
+    public static void sendPacketToPlayer(byte[] data, EntityPlayer player) {
+        packetHandler.sendTo(createPacket(data), (EntityPlayerMP) player);
+    }
 	
 	
 
@@ -230,7 +272,7 @@ public class PacketHandler {
 		DataOutputStream ds = new DataOutputStream(bs);
 
 		try {
-			ds.writeByte((byte)-1);
+            ds.writeByte((byte)PacketType.BLOCK.ordinal());
 
 			ds.writeInt(x);
 			ds.writeInt(y);
@@ -243,6 +285,17 @@ public class PacketHandler {
 		}catch (IOException ignored) {}
 
         packetHandler.sendToAllAround(createPacket(bs.toByteArray()), new NetworkRegistry.TargetPoint(world.provider.dimensionId, x, y, z, 64));
+
+        try {
+            bs.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            ds.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
 
 	

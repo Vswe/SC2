@@ -99,7 +99,7 @@ public abstract class VehicleVersion {
 			if (info != null) {
 				int version = info.getByte(NBT_VERSION_STRING);
 				if (version != getCurrentVersion()) {					
-					info.setByteArray("Modules", updateArray(info.getByteArray("Modules"), version)); //TODO
+					//info.setByteArray("Modules", updateArray(info.getByteArray("Modules"), version)); //TODO
 					addVersion(info);
 				}	
 			}

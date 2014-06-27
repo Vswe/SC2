@@ -11,18 +11,18 @@ import java.util.Map;
 
 public class RegistryLoader<R extends IRegistry<E>, E> {
 
-    private static List<RegistryLoader> registryLoaderList = new ArrayList<RegistryLoader>();
+    static List<RegistryLoader> registryLoaderList = new ArrayList<RegistryLoader>();
 
     public RegistryLoader() {
         registryLoaderList.add(this);
     }
 
     //TODO sync to the clients
-    private HashMap<E, Integer> objectToIdMapping = new HashMap<E, Integer>();
-    private HashMap<Integer, E> idToObjectMapping = new HashMap<Integer, E>();
-    private HashMap<String, Integer> nameToIdMapping = new HashMap<String, Integer>();
+    private Map<E, Integer> objectToIdMapping = new HashMap<E, Integer>();
+    private Map<Integer, E> idToObjectMapping = new HashMap<Integer, E>();
+    Map<String, Integer> nameToIdMapping = new HashMap<String, Integer>();
     private Map<String, R> registries = new HashMap<String, R>();
-    private int nextId;
+    int nextId;
 
     public E getObjectFromName(String name) {
         int id = getIdFromName(name);
@@ -71,6 +71,7 @@ public class RegistryLoader<R extends IRegistry<E>, E> {
         compound.setShort(NBT_NEXT_ID, (short)nextId);
         NBTTagList list = new NBTTagList();
 
+
         for (Map.Entry<String, Integer> entry : nameToIdMapping.entrySet()) {
             if (idToObjectMapping.containsKey(entry.getValue())) {
                 NBTTagCompound moduleCompound = new NBTTagCompound();
@@ -83,7 +84,7 @@ public class RegistryLoader<R extends IRegistry<E>, E> {
         compound.setTag(NBT_MODULES, list);
     }
 
-    //TODO call this on world load
+    //TODO call this on world loadFromRegistries
     public static void readData(NBTTagCompound compound) {
         if (compound.hasKey(NBT_REGISTRIES)) {
             NBTTagList registriesList = compound.getTagList(NBT_REGISTRIES, NBT_COMPOUND_TYPE_ID);
@@ -99,10 +100,7 @@ public class RegistryLoader<R extends IRegistry<E>, E> {
     }
 
     private void readRegistryData(NBTTagCompound compound) {
-        nextId = 0;
-        objectToIdMapping.clear();
-        idToObjectMapping.clear();
-        nameToIdMapping.clear();
+        clearLoadedRegistryData();
 
         if (compound != null && compound.hasKey(NBT_NEXT_ID)) {
             nextId = compound.getShort(NBT_NEXT_ID);
@@ -116,6 +114,17 @@ public class RegistryLoader<R extends IRegistry<E>, E> {
             }
         }
 
+        loadFromRegistries();
+    }
+
+    void clearLoadedRegistryData() {
+        nextId = 0;
+        objectToIdMapping.clear();
+        idToObjectMapping.clear();
+        nameToIdMapping.clear();
+    }
+
+    void loadFromRegistries() {
         for (R moduleRegistry : registries.values()) {
             for (E module : moduleRegistry.getElements()) {
                 String code = moduleRegistry.getFullCode(module);

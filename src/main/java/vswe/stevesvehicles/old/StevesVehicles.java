@@ -6,6 +6,7 @@ import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.Logger;
 import vswe.stevesvehicles.modules.data.ModuleRegistry;
 import vswe.stevesvehicles.network.PacketHandler;
+import vswe.stevesvehicles.registries.RegistrySynchronizer;
 import vswe.stevesvehicles.vehicles.VehicleRegistry;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.CraftingHandler;
@@ -123,6 +124,7 @@ public class StevesVehicles {
 			new MobInteractListener();
 			new PlayerSleepListener();
 		}
+        new RegistrySynchronizer();
 
 		GiftItem.init();
 
