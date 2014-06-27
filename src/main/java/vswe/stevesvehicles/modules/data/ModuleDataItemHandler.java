@@ -8,6 +8,7 @@ import vswe.stevesvehicles.modules.ModuleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.NBTHelper;
 import vswe.stevesvehicles.old.Items.ModItems;
+import vswe.stevesvehicles.util.Tuple;
 import vswe.stevesvehicles.vehicles.VehicleBase;
 import vswe.stevesvehicles.vehicles.VehicleRegistry;
 import vswe.stevesvehicles.vehicles.VehicleType;
@@ -161,7 +162,7 @@ public final class ModuleDataItemHandler {
         }
 
         if (vehicleType != null) {
-            return createModularVehicle(vehicleType, modules);
+            return createModularVehicle(vehicleType, modules, null);
         }else{
             return null;
         }
@@ -170,7 +171,7 @@ public final class ModuleDataItemHandler {
 
 
     private static final String NBT_VEHICLE_ID = "VehicleId";
-    public static ItemStack createModularVehicle(VehicleType vehicle, List<ModuleData> modules) {
+    public static ItemStack createModularVehicle(VehicleType vehicle, List<ModuleData> moduleDataList, List<ModuleBase> modules) {
         if (vehicle == null) {
             return null;
         }
@@ -184,12 +185,20 @@ public final class ModuleDataItemHandler {
         data.setByte(NBT_VEHICLE_ID, (byte)vehicleId);
 
         NBTTagList modulesCompoundList = new NBTTagList();
-        for (ModuleData module : modules) {
+        for (int i = 0; i < moduleDataList.size(); i++) {
+            ModuleData moduleData = moduleDataList.get(i);
+            ModuleBase module = modules != null ? modules.get(i) : null;
             NBTTagCompound moduleCompound = new NBTTagCompound();
-            int id = ModuleRegistry.getIdFromModule(module);
+            int id = ModuleRegistry.getIdFromModule(moduleData);
             if (id > 0) {
-                moduleCompound.setShort(VehicleBase.NBT_ID, (short)id);
-                //TODO let the ModuleData save extra data if it feels like it (for instance if easter egg bags have been opened or not)
+                moduleCompound.setShort(VehicleBase.NBT_ID, (short) id);
+
+                if (module != null) {
+                    moduleData.addExtraData(moduleCompound, module);
+                }else{
+                    moduleData.addDefaultExtraData(moduleCompound);
+                }
+
                 modulesCompoundList.appendTag(moduleCompound);
             }
         }
@@ -204,14 +213,22 @@ public final class ModuleDataItemHandler {
     }
 
     public static ItemStack createModularVehicle(VehicleBase vehicle) {
-        return createModularVehicle(vehicle.getVehicleType(), vehicle.getModuleDataList());
+        return createModularVehicle(vehicle.getVehicleType(), vehicle.getModuleDataList(), vehicle.getModules());
     }
 
     public static List<ModuleData> getModulesFromItem(ItemStack item) {
+        return getModulesFromItem(item, VehicleBase.NBT_MODULES);
+    }
+
+    public static List<ModuleData> getSpareModulesFromItem(ItemStack item) {
+        return getModulesFromItem(item, VehicleBase.NBT_SPARES);
+    }
+
+    private static List<ModuleData> getModulesFromItem(ItemStack item, String tag) {
         NBTTagCompound compound = item.getTagCompound();
-        if (compound != null && compound.hasKey(VehicleBase.NBT_MODULES)) {
+        if (compound != null && compound.hasKey(tag)) {
             List<ModuleData> modules = new ArrayList<ModuleData>();
-            NBTTagList modulesList = compound.getTagList(VehicleBase.NBT_MODULES, NBTHelper.COMPOUND.getId());
+            NBTTagList modulesList = compound.getTagList(tag, NBTHelper.COMPOUND.getId());
             for (int i = 0; i < modulesList.tagCount(); i++) {
                 int id = modulesList.getCompoundTagAt(i).getShort(VehicleBase.NBT_ID);
                 ModuleData module = ModuleRegistry.getModuleFromId(id);
@@ -223,6 +240,34 @@ public final class ModuleDataItemHandler {
         }
         return null;
     }
+
+    public static List<Tuple<ModuleData, NBTTagCompound>> getModulesAndCompoundsFromItem(ItemStack item) {
+        return getModulesAndCompoundsFromItem(item, VehicleBase.NBT_MODULES);
+    }
+
+    public static List<Tuple<ModuleData, NBTTagCompound>> getSpareModulesAndCompoundsFromItem(ItemStack item) {
+        return getModulesAndCompoundsFromItem(item, VehicleBase.NBT_SPARES);
+    }
+
+    private static List<Tuple<ModuleData, NBTTagCompound>> getModulesAndCompoundsFromItem(ItemStack item, String tag, boolean compounds) {
+        NBTTagCompound compound = item.getTagCompound();
+        if (compound != null && compound.hasKey(tag)) {
+            List<Tuple<ModuleData, NBTTagCompound>> modules = new ArrayList<Tuple<ModuleData, NBTTagCompound>>();
+            NBTTagList modulesList = compound.getTagList(tag, NBTHelper.COMPOUND.getId());
+            for (int i = 0; i < modulesList.tagCount(); i++) {
+                NBTTagCompound moduleCompound = modulesList.getCompoundTagAt(i);
+                int id = moduleCompound.getShort(VehicleBase.NBT_ID);
+                ModuleData module = ModuleRegistry.getModuleFromId(id);
+                if (module != null) {
+                    modules.add(new Tuple<ModuleData, NBTTagCompound>(module, moduleCompound));
+                }
+            }
+            return modules;
+        }
+        return null;
+
+    }
+
 
     private ModuleDataItemHandler(){}
 }

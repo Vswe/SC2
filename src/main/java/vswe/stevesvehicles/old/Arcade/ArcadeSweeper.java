@@ -5,6 +5,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
 import vswe.stevesvehicles.old.Arcade.Tile.TILE_OPEN_RESULT;
 import vswe.stevesvehicles.old.Arcade.Tile.TILE_STATE;
+import vswe.stevesvehicles.vehicles.VehicleBase;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
@@ -85,8 +86,8 @@ public class ArcadeSweeper extends ArcadeGame {
 		
 		int creepers = 0;
 		while (creepers < totalCreepers) {
-			int x = getModule().getCart().rand.nextInt(width);
-			int y = getModule().getCart().rand.nextInt(height);
+			int x = getModule().getVehicle().getRandom().nextInt(width);
+			int y = getModule().getVehicle().getRandom().nextInt(height);
 			
 			if (!tiles[x][y].isCreeper()) {
 				tiles[x][y].setCreeper();
@@ -118,11 +119,11 @@ public class ArcadeSweeper extends ArcadeGame {
 	}
 	
 	private int getMarginLeft() {
-		return (EntityModularCart.MODULAR_SPACE_WIDTH - tiles.length * 10) / 2;
+		return (VehicleBase.MODULAR_SPACE_WIDTH - tiles.length * 10) / 2;
 	}
 	
 	private int getMarginTop() {
-		return (EntityModularCart.MODULAR_SPACE_HEIGHT - tiles[0].length * 10) / 2;
+		return (VehicleBase.MODULAR_SPACE_HEIGHT - tiles[0].length * 10) / 2;
 	}
 	
 	private static String textureMenu = "/gui/sweeper.png";
@@ -224,7 +225,7 @@ public class ArcadeSweeper extends ArcadeGame {
 					}
 				}else if(result == Tile.TILE_OPEN_RESULT.DEAD) {
 					isPlaying = false;					
-					playDefaultSound("random.explode", 1.0F, (1.0F + (getModule().getCart().rand.nextFloat() - getModule().getCart().rand.nextFloat()) * 0.2F) * 0.7F);				
+					playDefaultSound("random.explode", 1.0F, (1.0F + (getModule().getVehicle().getRandom().nextFloat() - getModule().getVehicle().getRandom().nextFloat()) * 0.2F) * 0.7F);
 				}else if(result == TILE_OPEN_RESULT.OK && first) {
 					playSound("click", 1, 1);
 				}
@@ -303,14 +304,14 @@ public class ArcadeSweeper extends ArcadeGame {
 	@Override
 	public void Save(NBTTagCompound tagCompound, int id) {
 		for (int i = 0; i < 3; i++) {
-			tagCompound.setShort(getModule().generateNBTName("HighscoreSweeper" + i,id), (short)highscore[i]);	
+			tagCompound.setShort("HighscoreSweeper" + i, (short)highscore[i]);
 		}
 	}
 	
 	@Override
 	public void Load(NBTTagCompound tagCompound, int id) {
 		for (int i = 0; i < 3; i++) {
-			highscore[i] = tagCompound.getShort(getModule().generateNBTName("HighscoreSweeper" + i,id));
+			highscore[i] = tagCompound.getShort("HighscoreSweeper" + i);
 		}
 	}		
 }

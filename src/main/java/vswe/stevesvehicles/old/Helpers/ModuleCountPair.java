@@ -1,5 +1,6 @@
 package vswe.stevesvehicles.old.Helpers;
 
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
 import vswe.stevesvehicles.modules.data.ModuleData;
 
@@ -8,7 +9,7 @@ public class ModuleCountPair {
 	private ModuleData data;
 	private int count;
 	private String name;
-    private byte extraData;
+    private NBTTagCompound extraData;
 	
 	public ModuleCountPair(ModuleData data) {
 		this.data = data;
@@ -36,8 +37,8 @@ public class ModuleCountPair {
 		return data;
 	}
 
-    public void setExtraData(byte b) {
-        extraData = b;
+    public void setExtraData(NBTTagCompound compound) {
+        extraData = compound;
     }
 	
 	public String toString() {

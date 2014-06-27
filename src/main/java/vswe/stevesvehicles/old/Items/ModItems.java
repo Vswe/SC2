@@ -7,6 +7,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.common.config.Configuration;
+import vswe.stevesvehicles.items.ItemVehicles;
 import vswe.stevesvehicles.items.ItemVehicleModule;
 import vswe.stevesvehicles.old.Blocks.ModBlocks;
 import vswe.stevesvehicles.old.Helpers.ComponentTypes;
@@ -20,7 +21,7 @@ import java.util.HashMap;
 
 public final class ModItems {
 
-    public static ItemCarts carts;
+    public static ItemVehicles carts;
     public static ItemCartComponent component;
     public static ItemVehicleModule modules;
     public static ItemUpgrade upgrades;
@@ -35,7 +36,7 @@ public final class ModItems {
     private static HashMap<Byte,Boolean> validModules = new HashMap<Byte,Boolean>();
 
     public static void preBlockInit(Configuration config) {
-        (carts = new ItemCarts()).setUnlocalizedName(StevesVehicles.localStart + CART_NAME);
+        (carts = new ItemVehicles()).setUnlocalizedName(StevesVehicles.localStart + CART_NAME);
         component = new ItemCartComponent();
         modules = new ItemVehicleModule();
 

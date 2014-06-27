@@ -14,7 +14,7 @@ public class Chance extends CardPlace {
 
 	@Override
 	public Card getCard() {
-		return CardChance.cards.get(game.getModule().getCart().rand.nextInt(CardChance.cards.size()));
+		return CardChance.cards.get(game.getModule().getVehicle().getRandom().nextInt(CardChance.cards.size()));
 	}
 	
 }

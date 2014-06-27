@@ -146,8 +146,8 @@ public class ModuleRegistryEngines extends ModuleRegistry {
         register(cheat);
     }
 
-
-    private ModuleDataGroup engines = new ModuleDataGroup(Localization.MODULE_INFO.ENGINE_GROUP);
+    public static final String ENGINE_KEY = "Engines";
+    private ModuleDataGroup engines = ModuleDataGroup.createGroup(ENGINE_KEY, Localization.MODULE_INFO.ENGINE_GROUP);
     @Override
     public void register(ModuleData moduleData) {
         super.register(moduleData);

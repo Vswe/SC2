@@ -8,6 +8,7 @@ import vswe.stevesvehicles.client.interfaces.GuiVehicle;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.old.Arcade.TrackOrientation.DIRECTION;
+import vswe.stevesvehicles.vehicles.VehicleBase;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleArcade;
@@ -69,7 +70,7 @@ public class ArcadeTracks extends ArcadeGame {
 		}
 		
 		loadStories();
-		if (getModule().getCart().worldObj.isRemote) {
+		if (getModule().getVehicle().getWorld().isRemote) {
 			loadUserMaps();
 		}
 	}
@@ -258,7 +259,7 @@ public class ArcadeTracks extends ArcadeGame {
 			}else{
 				getModule().drawString(gui, Localization.ARCADE.SAVE.translate(), menu[0] + 3, menu[1] + 3, 0x404040);
 			}
-			getModule().drawString(gui, saveName + (saveName.length() < 15 && getModule().getCart().worldObj.getWorldTime() % 20 < 10 ? "|" : ""), menu[0] + 5, menu[1] + 16, 0xFFFFFF);
+			getModule().drawString(gui, saveName + (saveName.length() < 15 && getModule().getVehicle().getWorld().getWorldTime() % 20 < 10 ? "|" : ""), menu[0] + 5, menu[1] + 16, 0xFFFFFF);
 			
 		}else if (isMenuOpen) {
 			for (ScrollableList list : lists) {
@@ -516,7 +517,7 @@ public class ArcadeTracks extends ArcadeGame {
 	}	
 	
 	public int[] getMenuArea() {
-		return new int[] {(EntityModularCart.MODULAR_SPACE_WIDTH - 256) / 2, (EntityModularCart.MODULAR_SPACE_HEIGHT - 113) / 2 ,256, 113};
+		return new int[] {(VehicleBase.MODULAR_SPACE_WIDTH - 256) / 2, (VehicleBase.MODULAR_SPACE_HEIGHT - 113) / 2 ,256, 113};
 	}
 	
 	private int[] getMenuTabArea(int id) {
@@ -526,7 +527,7 @@ public class ArcadeTracks extends ArcadeGame {
 	}
 	
 	private int[] getSaveMenuArea() {
-		return new int[] {(EntityModularCart.MODULAR_SPACE_WIDTH - 99) / 2, (EntityModularCart.MODULAR_SPACE_HEIGHT - 47) / 2 ,99, 47};
+		return new int[] {(VehicleBase.MODULAR_SPACE_WIDTH - 99) / 2, (VehicleBase.MODULAR_SPACE_HEIGHT - 47) / 2 ,99, 47};
 	}
 	
 
@@ -657,7 +658,7 @@ public class ArcadeTracks extends ArcadeGame {
 				break;
 			case 9:
 				userList.clear();
-				if (getModule().getCart().worldObj.isRemote) {
+				if (getModule().getVehicle().getWorld().isRemote) {
 					loadUserMaps();
 				}
 				break;
@@ -744,14 +745,14 @@ public class ArcadeTracks extends ArcadeGame {
 	@Override
 	public void Save(NBTTagCompound tagCompound, int id) {
 		for (int i = 0; i < unlockedLevels.length; i++) {
-			tagCompound.setByte(getModule().generateNBTName("Unlocked" + i,id), (byte)unlockedLevels[i]);
+			tagCompound.setByte("Unlocked" + i, (byte)unlockedLevels[i]);
 		}
 	}
 	
 	@Override
 	public void Load(NBTTagCompound tagCompound, int id) {
 		for (int i = 0; i < unlockedLevels.length; i++) {
-			unlockedLevels[i] = tagCompound.getByte(getModule().generateNBTName("Unlocked" + i,id));	
+			unlockedLevels[i] = tagCompound.getByte("Unlocked" + i);
 		}
 		loadStories();
 	}

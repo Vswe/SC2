@@ -1,6 +1,7 @@
 package vswe.stevesvehicles.old.Arcade;
 
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
+import vswe.stevesvehicles.vehicles.VehicleBase;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 
 public class Projectile extends Unit {
@@ -35,7 +36,7 @@ public class Projectile extends Unit {
 		}
 		
 		this.y += playerProjectile ? -5 : 5;
-		if (this.y < 0 || this.y > EntityModularCart.MODULAR_SPACE_HEIGHT) {
+		if (this.y < 0 || this.y > VehicleBase.MODULAR_SPACE_HEIGHT) {
 			this.dead = true;
 			return UPDATE_RESULT.DEAD;
 		}

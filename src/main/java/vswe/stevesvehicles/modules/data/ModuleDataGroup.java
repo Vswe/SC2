@@ -10,14 +10,16 @@ public class ModuleDataGroup {
 	private Localization.MODULE_INFO name;
 	private List<ModuleData> modules;
 	private int count;
-	public ModuleDataGroup(Localization.MODULE_INFO name) {
+    private List<ModuleDataGroup> clones;
+	private ModuleDataGroup(Localization.MODULE_INFO name) {
 		this.name = name;
 		count = 1;
 		modules = new ArrayList<ModuleData>();
-	}	
+	}
+
 
 	public String getName() {
-		return name.translate(String.valueOf(getCount()));
+		return name == null ? null : name.translate(String.valueOf(getCount()));
 	}
 	
 	public List<ModuleData> getModules() {
@@ -30,6 +32,11 @@ public class ModuleDataGroup {
 	
 	public ModuleDataGroup add(ModuleData module) {
 		modules.add(module);
+        if (clones != null) {
+            for (ModuleDataGroup clone : clones) {
+                clone.add(module);
+            }
+        }
 		
 		return this;
 	}
@@ -40,23 +47,26 @@ public class ModuleDataGroup {
 		return this;
 	}	
 	
-	public ModuleDataGroup copy() {
-		ModuleDataGroup newObj = new ModuleDataGroup(name).setCount(getCount());
-		for (ModuleData obj : getModules()) {
-			newObj.add(obj);
-		}
-		return newObj;
+	public ModuleDataGroup copy(String key) {
+        return copy(key, getCount());
 	}
 	
-	public ModuleDataGroup copy(int count) {
-		ModuleDataGroup newObj = new ModuleDataGroup(name).setCount(count);
-		for (ModuleData obj : getModules()) {
-			newObj.add(obj);
-		}
+	public ModuleDataGroup copy(String key, int count) {
+		ModuleDataGroup newObj = getUnlinkedCopy(key, count);
+        addClone(newObj);
 		return newObj;
 	}
-	
-	public String getCountName() {
+
+    public ModuleDataGroup getUnlinkedCopy(String key, int count) {
+        ModuleDataGroup newObj = createGroup(key, name).setCount(count);
+        for (ModuleData obj : getModules()) {
+            newObj.add(obj);
+        }
+        return newObj;
+    }
+
+
+    public String getCountName() {
 		switch (count) {
 			case 1:
 				return Localization.MODULE_INFO.MODULE_COUNT_1.translate();
@@ -68,23 +78,49 @@ public class ModuleDataGroup {
 				return "???";
 		}
 	}
-	
-	
-	public static ModuleDataGroup getCombinedGroup(Localization.MODULE_INFO name,  ModuleDataGroup group1, ModuleDataGroup group2) {
-		ModuleDataGroup newgroup = group1.copy();
-		
 
-		newgroup.add(group2);
-		
-		
-		newgroup.name = name;
-		return newgroup;
+	public static ModuleDataGroup getCombinedGroup(String key, Localization.MODULE_INFO name,  ModuleDataGroup group1, ModuleDataGroup group2) {
+		ModuleDataGroup newGroup = group1.copy(key);
+
+		newGroup.add(group2);
+		group1.addClone(newGroup);
+		group2.addClone(newGroup);
+
+		newGroup.name = name;
+		return newGroup;
 	}
+
+    private void addClone(ModuleDataGroup group) {
+        if (clones == null) {
+            clones = new ArrayList<ModuleDataGroup>();
+        }
+
+        clones.add(group);
+    }
 
 	public void add(ModuleDataGroup group) {
 		for (ModuleData obj : group.getModules()) {
 			add(obj);
 		}
 	}
+
+    private static Map<String, ModuleDataGroup> groups = new HashMap<String, ModuleDataGroup>();
+    public static ModuleDataGroup createGroup(String key, Localization.MODULE_INFO name) {
+        if (groups.containsKey(key)) {
+            ModuleDataGroup group = groups.get(key);
+            if (group.name == null && name != null) {
+                group.name = name;
+            }
+            return group;
+        }else{
+            ModuleDataGroup group = new ModuleDataGroup(name);
+            groups.put(key, group);
+            return group;
+        }
+    }
+
+    public static ModuleDataGroup getGroup(String key) {
+        return createGroup(key, null);
+    }
 
 }

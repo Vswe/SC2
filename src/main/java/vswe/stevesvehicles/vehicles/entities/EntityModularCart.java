@@ -23,11 +23,12 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
+import vswe.stevesvehicles.modules.data.ModuleDataItemHandler;
 import vswe.stevesvehicles.old.Blocks.ModBlocks;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.old.Helpers.DataWatcherLockable;
 import vswe.stevesvehicles.old.Helpers.DetectorType;
-import vswe.stevesvehicles.old.ModuleData.ModuleData;
+import vswe.stevesvehicles.modules.data.ModuleData;
 import vswe.stevesvehicles.modules.ModuleBase;
 import vswe.stevesvehicles.old.TileEntities.TileEntityCartAssembler;
 
@@ -199,8 +200,8 @@ public class EntityModularCart extends EntityMinecart
 	@Override
     public ItemStack getCartItem() {
 		if (vehicleBase.getModules() != null) {
-			ItemStack cart = ModuleData.createModularCart(this);	
-			if (vehicleBase.getVehicleName() != null && !vehicleBase.getVehicleName().equals("") && !vehicleBase.getVehicleName().equals(ModItems.carts.getName())) {
+			ItemStack cart = ModuleDataItemHandler.createModularVehicle(vehicleBase);
+			if (vehicleBase.getVehicleName() != null && !vehicleBase.getVehicleName().isEmpty()) {
 				cart.setStackDisplayName(vehicleBase.getVehicleName());
 			}
 

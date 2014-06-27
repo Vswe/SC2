@@ -1,5 +1,5 @@
 package vswe.stevesvehicles.vehicles.versions;
-import vswe.stevesvehicles.old.Items.ItemCarts;
+import vswe.stevesvehicles.items.ItemVehicles;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,7 +94,7 @@ public abstract class VehicleVersion {
 	}
 	
 	public static void updateItemStack(ItemStack item) {
-		if (item != null && item.getItem() instanceof ItemCarts) {
+		if (item != null && item.getItem() instanceof ItemVehicles) {
 			NBTTagCompound info = item.getTagCompound();
 			if (info != null) {
 				int version = info.getByte(NBT_VERSION_STRING);
@@ -107,7 +107,7 @@ public abstract class VehicleVersion {
 	}
 	
 	public static void addVersion(ItemStack item) {
-		if (item != null && item.getItem() instanceof ItemCarts) {
+		if (item != null && item.getItem() instanceof ItemVehicles) {
 			NBTTagCompound info = item.getTagCompound();
 			if (info != null) {
 				addVersion(info);

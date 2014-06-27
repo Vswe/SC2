@@ -5,6 +5,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.StevesVehicles;
+import vswe.stevesvehicles.vehicles.VehicleBase;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.SoundHandler;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleArcade;
@@ -35,7 +36,7 @@ public abstract class ArcadeGame {
 	@SideOnly(Side.CLIENT)
 	public void update() {
         if (StevesVehicles.instance.useArcadeSounds) {
-            getModule().getCart().silent();
+            ((EntityModularCart)getModule().getVehicle().getEntity()).silent();
         }
 	}
 	
@@ -99,7 +100,7 @@ public abstract class ArcadeGame {
 	}	
 	
 	public void drawImageInArea(GuiVehicle gui, int x, int y, int u, int v, int w, int h) {
-		drawImageInArea(gui, x, y, u, v, w, h, 5, 4, EntityModularCart.MODULAR_SPACE_WIDTH,  EntityModularCart.MODULAR_SPACE_HEIGHT);
+		drawImageInArea(gui, x, y, u, v, w, h, 5, 4, VehicleBase.MODULAR_SPACE_WIDTH,  VehicleBase.MODULAR_SPACE_HEIGHT);
 	}
 	
 	public void drawImageInArea(GuiVehicle gui, int x, int y, int u, int v, int w, int h, int x1, int y1, int x2, int y2) {

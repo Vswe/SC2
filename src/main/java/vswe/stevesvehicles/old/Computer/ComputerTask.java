@@ -1,5 +1,6 @@
 package vswe.stevesvehicles.old.Computer;
 import vswe.stevesvehicles.old.Modules.Workers.ModuleComputer;
+import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 
 import java.util.Random;
 
@@ -136,7 +137,7 @@ public class ComputerTask
 			}
 		}else if(isControl(getType()) && !isControlEmpty()) {
 			ComputerControl control = ComputerControl.getMap().get((byte)getControlType());
-			if (control != null && control.isControlValid(module.getCart())) {
+			if (control != null && control.isControlValid((EntityModularCart)module.getVehicle().getEntity())) {
 				int value;
 				if (getControlUseVar()) {
 					ComputerVar var = getControlVar();
@@ -149,14 +150,14 @@ public class ComputerTask
 					value = getControlInteger();
 				}		
 
-				control.runHandler(module.getCart(), (byte)value);
+				control.runHandler((EntityModularCart)module.getVehicle().getEntity(), (byte)value);
 			}	
 		}else if(isInfo(getType()) && !isInfoEmpty()) {
 			ComputerInfo info = ComputerInfo.getMap().get((byte)getControlType());
-			if (info != null && info.isInfoValid(module.getCart())) {
+			if (info != null && info.isInfoValid((EntityModularCart)module.getVehicle().getEntity())) {
 				ComputerVar var = getInfoVar();
 				if (var != null) {
-					info.getHandler(module.getCart(), var);
+					info.getHandler((EntityModularCart)module.getVehicle().getEntity(), var);
 				}
 			}
 		}else if(isVar(getType())) {

@@ -37,10 +37,9 @@ public class ModuleData {
     private boolean defaultLock;
     private boolean hasRecipe;
     private ArrayList<Localization.MODULE_INFO> message;
-    private boolean useExtraData;
-    private byte extraDataDefaultValue;
     private ArrayList<IRecipe> recipes;
     private ArrayList<VehicleType> validVehicles;
+    private boolean extraData;
 
     @SideOnly(Side.CLIENT)
     private HashMap<String,ModelVehicle> models;
@@ -121,25 +120,37 @@ public class ModuleData {
         return allowDuplicate;
     }
 
-    public ModuleData useExtraData(byte defaultValue) {
-        this.extraDataDefaultValue = defaultValue;
-        this.useExtraData = true;
+
+
+    public ModuleData setHasExtraData(boolean val) {
+        extraData = val;
 
         return this;
     }
 
-    public boolean isUsingExtraData() {
-        return useExtraData;
+    public boolean hasExtraData() {
+        return extraData;
     }
 
-    public byte getDefaultExtraData() {
-        return extraDataDefaultValue;
+    public void addDefaultExtraData(NBTTagCompound compound) {}
+    public void addExtraData(NBTTagCompound compound, ModuleBase module) {}
+    public void readExtraData(NBTTagCompound compound, ModuleBase moduleBase) {}
+
+    public String getModuleInfoText(NBTTagCompound compound) {
+        return null;
     }
+
+    public String getCartInfoText(String name, NBTTagCompound compound) {
+        return name;
+    }
+
+
 
 
     public ArrayList<ModuleSide> getSides() {
         return sides;
     }
+
 
     public ModuleData addSides(ModuleSide ... sides) {
         if (this.sides == null) {
@@ -285,24 +296,18 @@ public class ModuleData {
         return hasRecipe;
     }
 
-    public String getModuleInfoText(byte data) {
-        return null;
-    }
-
-    public String getCartInfoText(String name, byte data) {
-        return name;
-    }
 
     public void addSpecificInformation(List<String> list) {
         list.add(ColorHelper.LIGHT_GRAY + Localization.MODULE_INFO.MODULAR_COST.translate() + ": " + modularCost);
     }
 
+    public static final String NBT_MODULE_EXTRA_DATA = "ExtraData";
     public final void addInformation(List<String> list, NBTTagCompound compound) {
         addSpecificInformation(list);
-        if (compound != null && compound.hasKey("Data")) {
-            String extradatainfo = getModuleInfoText(compound.getByte("Data"));
-            if (extradatainfo != null) {
-                list.add(ColorHelper.WHITE + extradatainfo);
+        if (compound != null && compound.hasKey(NBT_MODULE_EXTRA_DATA)) {
+            String extraDataInfo = getModuleInfoText(compound.getCompoundTag(NBT_MODULE_EXTRA_DATA));
+            if (extraDataInfo != null) {
+                list.add(ColorHelper.WHITE + extraDataInfo);
             }
         }
 
@@ -488,4 +493,6 @@ public class ModuleData {
     public ItemStack getItemStack() {
         return getItemStack(1);
     }
+
+
 }

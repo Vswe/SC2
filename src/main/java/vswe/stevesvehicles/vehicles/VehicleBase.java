@@ -274,7 +274,11 @@ public class VehicleBase {
             NBTTagCompound moduleCompound = list.getCompoundTagAt(i);
             ModuleBase module = modules.get(i);
             if (isItemCompound) {
-                //TODO add item extra data loading
+                int id = module.getModuleId();
+                ModuleData data = ModuleRegistry.getModuleFromId(id);
+                if (data != null) {
+                    data.readExtraData(moduleCompound, module);
+                }
             }else{
                 module.readFromNBT(moduleCompound);
             }
@@ -1173,6 +1177,7 @@ public class VehicleBase {
 
 
     public static final String NBT_MODULES = "Modules";
+    public static final String NBT_SPARES = "Spares";
     public static final String NBT_ID = "Id";
     public void writeToNBT(NBTTagCompound compound) {
         compound.setString("cartName", name);

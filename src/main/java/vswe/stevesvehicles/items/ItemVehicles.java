@@ -1,54 +1,48 @@
-package vswe.stevesvehicles.old.Items;
+package vswe.stevesvehicles.items;
 import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.BlockRailBase;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemMinecart;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagByteArray;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import vswe.stevesvehicles.modules.data.ModuleDataItemHandler;
 import vswe.stevesvehicles.old.StevesVehicles;
+import vswe.stevesvehicles.util.Tuple;
 import vswe.stevesvehicles.vehicles.versions.VehicleVersion;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.ColorHelper;
 import vswe.stevesvehicles.old.Helpers.GeneratedInfo;
 import vswe.stevesvehicles.old.Helpers.ModuleCountPair;
-import vswe.stevesvehicles.old.ModuleData.ModuleData;
+import vswe.stevesvehicles.modules.data.ModuleData;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-public class ItemCarts extends ItemMinecart
-{
+public class ItemVehicles extends Item {
 
 	
 	
 	
-    public ItemCarts()
-    {
-        super(0);
+    public ItemVehicles() {
+        super();
         this.setHasSubtypes(true);
         this.setMaxDamage(0);
         setCreativeTab(null);	
     }
-	
 
-	public String getName()
-    {
-        return "Modular cart";
-    }
 	
 	@Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister register)
-    {
-        this.itemIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "modular_cart" + "_icon");
+    public void registerIcons(IIconRegister register) {
+        this.itemIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "modular_cart" + "_icon"); //fallback icon
     }	
-	
+
+
+    //TODO
 	@Override
-    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
-    {
+    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10) {
 		VehicleVersion.updateItemStack(par1ItemStack);
 		
 	    if (BlockRailBase.func_150049_b_(par3World,par4, par5, par6))
@@ -83,60 +77,13 @@ public class ItemCarts extends ItemMinecart
      */
     public void addInformation(ItemStack item, EntityPlayer player, List list, boolean useExtraInfo) {
 		VehicleVersion.updateItemStack(item);
-		
-		NBTTagCompound info = item.getTagCompound();
-		if (info != null) {
-			NBTTagByteArray moduleIDTag = (NBTTagByteArray)info.getTag("Modules");
-			byte [] bytes = moduleIDTag.func_150292_c();
-			
-			ArrayList<ModuleCountPair> counts = new ArrayList<ModuleCountPair>();
-			
-			for (int i = 0; i < bytes.length; i++) { 
-				byte id = bytes[i];
-				ModuleData module = ModuleData.getList().get(id);
-				if (module != null) {
-					boolean found = false;
-					if (!info.hasKey("Data" + i)) {
-						for (ModuleCountPair count : counts) {
-							if (count.isContainingData(module)) {
-								count.increase();
-								found = true;
-								break;
-							}
-						}
-					}
-					
-					if (!found) {
-						ModuleCountPair count = new ModuleCountPair(module);
-						if (info.hasKey("Data" + i)) {
-							count.setExtraData(info.getByte("Data" + i));
-						}						
-						counts.add(count);
-					}
-				}
-			}
-			
-			for (ModuleCountPair count : counts) {
-				list.add(count.toString());				
-			}
 
-			
-			if (info.hasKey("Spares")) {
-				byte[] spares = info.getByteArray("Spares");
-				for (int i = 0; i < spares.length; i++) {
-					byte id = spares[i];
-					ModuleData module = ModuleData.getList().get(id);
-					if (module != null) {
-						String name = module.getName();
-						if (info.hasKey("Data" + (bytes.length + i))) {
-							name = module.getCartInfoText(name, info.getByte("Data" + (bytes.length + i)));
-						}
-						
-						list.add(ColorHelper.ORANGE + name);
-					}
-				}
-			}			
-			
+        NBTTagCompound info = item.getTagCompound();
+
+		if (info != null) {
+            addInfo(ModuleDataItemHandler.getModulesAndCompoundsFromItem(item), list, null);
+            addInfo(ModuleDataItemHandler.getSpareModulesAndCompoundsFromItem(item), list, ColorHelper.ORANGE);
+
 			if (info.hasKey("maxTime")) {
 				list.add(ColorHelper.RED + "Incomplete cart!");
 				int maxTime = info.getInteger("maxTime");
@@ -152,6 +99,45 @@ public class ItemCarts extends ItemMinecart
 			list.add("No modules loaded");
 		}
 	}
+
+    private void addInfo(List<Tuple<ModuleData, NBTTagCompound>> modules, List list, ColorHelper color) {
+        if (modules != null) {
+
+            ArrayList<ModuleCountPair> counts = new ArrayList<ModuleCountPair>();
+
+            for (Tuple<ModuleData, NBTTagCompound> moduleTuple : modules) {
+                ModuleData module = moduleTuple.getFirstObject();
+                NBTTagCompound moduleCompound = moduleTuple.getSecondObject();
+                boolean found = false;
+                if (module.hasExtraData()) {
+                    for (ModuleCountPair count : counts) {
+                        if (count.isContainingData(module)) {
+                            count.increase();
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (!found) {
+                    ModuleCountPair count = new ModuleCountPair(module);
+                    if (module.hasExtraData()) {
+                        count.setExtraData(moduleCompound);
+                    }
+                    counts.add(count);
+                }
+            }
+
+            for (ModuleCountPair count : counts) {
+                if (color != null) {
+                    list.add(color + count.toString());
+                }else{
+                    list.add(count.toString());
+                }
+
+            }
+        }
+    }
 	
 	private String formatTime(int ticks) {
 		int seconds = ticks / 20;

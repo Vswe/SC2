@@ -90,7 +90,7 @@ public class StevesVehicles {
 
         ModItems.preBlockInit(config);
         ItemBlockStorage.init();
-        vswe.stevesvehicles.Blocks.ModBlocks.init();
+        vswe.stevesvehicles.old.Blocks.ModBlocks.init();
         ModItems.postBlockInit(config);
         AssemblerUpgrade.init();
 
@@ -131,12 +131,15 @@ public class StevesVehicles {
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
 		proxy.renderInit();
 
-		tabsSC2Blocks.setIcon(new ItemStack(vswe.stevesvehicles.Blocks.ModBlocks.CART_ASSEMBLER.getBlock(), 1));
+		tabsSC2Blocks.setIcon(new ItemStack(vswe.stevesvehicles.old.Blocks.ModBlocks.CART_ASSEMBLER.getBlock(), 1));
+
+        tabsSC2.setIcon(new ItemStack(vswe.stevesvehicles.old.Blocks.ModBlocks.CART_ASSEMBLER.getBlock(), 1)); //TODO just temporary to have something
+        tabsSC2Components.setIcon(new ItemStack(vswe.stevesvehicles.old.Blocks.ModBlocks.CART_ASSEMBLER.getBlock(), 1)); //TODO just temporary to have something
 
 		TileEntityCargo.loadSelectionSettings();
 
         ModItems.addRecipes();
-        vswe.stevesvehicles.Blocks.ModBlocks.addRecipes();
+        vswe.stevesvehicles.old.Blocks.ModBlocks.addRecipes();
 
 	}
 	

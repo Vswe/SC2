@@ -184,7 +184,7 @@ public class TetrisPiece {
 					}
 					if (StevesVehicles.instance.useArcadeMobSounds) {
 						if (sound != null) {
-							ArcadeGame.playDefaultSound(sound, volume, (game.getModule().getCart().rand.nextFloat() - game.getModule().getCart().rand.nextFloat()) * 0.2F + 1.0F);
+							ArcadeGame.playDefaultSound(sound, volume, (game.getModule().getVehicle().getRandom().nextFloat() - game.getModule().getVehicle().getRandom().nextFloat()) * 0.2F + 1.0F);
 						}
 					}else{
 						ArcadeGame.playSound("boop", 1, 1);

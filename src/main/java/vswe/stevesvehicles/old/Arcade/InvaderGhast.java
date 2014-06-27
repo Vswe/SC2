@@ -1,6 +1,7 @@
 package vswe.stevesvehicles.old.Arcade;
 
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
+import vswe.stevesvehicles.vehicles.VehicleBase;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 
 public class InvaderGhast extends Unit {
@@ -15,9 +16,9 @@ public class InvaderGhast extends Unit {
 	
 	public InvaderGhast(ArcadeInvaders game, int x, int y) {
 		super(game, x, y);
-		tentacleTextureId = game.getModule().getCart().rand.nextInt(4);
+		tentacleTextureId = game.getModule().getVehicle().getRandom().nextInt(4);
 		shooting = -10;
-		if (game.canSpawnPahighast && !game.hasPahighast && game.getModule().getCart().rand.nextInt(1000) == 0) {
+		if (game.canSpawnPahighast && !game.hasPahighast && game.getModule().getVehicle().getRandom().nextInt(1000) == 0) {
 			isPahighast = true;
 			game.hasPahighast = true;
 		}
@@ -79,13 +80,13 @@ public class InvaderGhast extends Unit {
 				
 				if (y > 130) {
 					return UPDATE_RESULT.GAME_OVER;
-				}else if (this.x > EntityModularCart.MODULAR_SPACE_WIDTH - 10 - 16 || this.x < 10) {
+				}else if (this.x > VehicleBase.MODULAR_SPACE_WIDTH - 10 - 16 || this.x < 10) {
 					return UPDATE_RESULT.TURN_BACK;
 				}
 			}
 			
 			
-			if (!isPahighast && shooting == -10 && game.getModule().getCart().rand.nextInt(300) == 0) {
+			if (!isPahighast && shooting == -10 && game.getModule().getVehicle().getRandom().nextInt(300) == 0) {
 				shooting = 10;
 			}
 		}

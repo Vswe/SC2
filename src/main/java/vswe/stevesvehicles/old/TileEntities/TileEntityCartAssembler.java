@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import vswe.stevesvehicles.items.ItemVehicles;
 import vswe.stevesvehicles.modules.data.ModuleDataItemHandler;
 import vswe.stevesvehicles.old.Blocks.BlockCartAssembler;
 import vswe.stevesvehicles.old.Blocks.ModBlocks;
@@ -26,7 +27,6 @@ import vswe.stevesvehicles.old.Containers.ContainerCartAssembler;
 import vswe.stevesvehicles.old.Containers.ContainerUpgrade;
 import vswe.stevesvehicles.client.interfaces.GuiBase;
 import vswe.stevesvehicles.old.Interfaces.GuiCartAssembler;
-import vswe.stevesvehicles.old.Items.ItemCarts;
 import vswe.stevesvehicles.modules.data.ModuleData;
 import vswe.stevesvehicles.modules.data.ModuleDataHull;
 import vswe.stevesvehicles.old.Slots.SlotAssembler;
@@ -542,7 +542,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 					for (BaseEffect effect : tile.getUpgrade().getEffects()) {
 						if (effect instanceof Disassemble) {
 							ItemStack oldcart = tile.getStackInSlot(0);
-							if (oldcart != null && oldcart.getItem() instanceof ItemCarts) {
+							if (oldcart != null && oldcart.getItem() instanceof ItemVehicles) {
 								if (oldcart.hasDisplayName()) {
 									outputItem.setStackDisplayName(oldcart.getDisplayName());
 								}
