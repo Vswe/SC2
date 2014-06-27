@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
 import vswe.stevesvehicles.old.Arcade.TetrisPiece.MOVE_RESULT;
+import vswe.stevesvehicles.vehicles.VehicleBase;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
@@ -40,7 +41,7 @@ public class ArcadeTetris extends ArcadeGame {
 	}
 	
 	private void generatePiece() {
-		piece = TetrisPiece.createPiece(getModule().getCart().rand.nextInt(7));		
+		piece = TetrisPiece.createPiece(getModule().getVehicle().getRandom().nextInt(7));
 	}
 	
 	private int ticks = 0;
@@ -127,7 +128,7 @@ public class ArcadeTetris extends ArcadeGame {
 	}
 	
 	public static final int BOARD_START_X = (478 - 100) / 2;
-	public static final int BOARD_START_Y = (EntityModularCart.MODULAR_SPACE_HEIGHT - 150) / 2;
+	public static final int BOARD_START_Y = (VehicleBase.MODULAR_SPACE_HEIGHT - 150) / 2;
 	
 	private static String texture = "/gui/tetris.png";
 	
@@ -257,12 +258,12 @@ public class ArcadeTetris extends ArcadeGame {
 	
 	@Override
 	public void Save(NBTTagCompound tagCompound, int id) {
-		tagCompound.setShort(getModule().generateNBTName("Highscore",id), (short)highscore);	
+		tagCompound.setShort("Highscore", (short)highscore);
 	}
 	
 	@Override
 	public void Load(NBTTagCompound tagCompound, int id) {
-		highscore = tagCompound.getShort(getModule().generateNBTName("Highscore",id));	
+		highscore = tagCompound.getShort("Highscore");
 	}	
 	
 }

@@ -1,12 +1,15 @@
 package vswe.stevesvehicles.old.Upgrades;
 
+import vswe.stevesvehicles.modules.data.ModuleDataItemHandler;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.TileEntities.TileEntityUpgrade;
 import net.minecraft.nbt.NBTTagByteArray;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.item.ItemStack;
-import vswe.stevesvehicles.old.ModuleData.ModuleData;
+import vswe.stevesvehicles.modules.data.ModuleData;
 import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.inventory.Slot;
 import vswe.stevesvehicles.old.Slots.SlotCart;
 
@@ -30,26 +33,23 @@ public class Blueprint extends SimpleInventoryEffect {
 	public boolean isValidForBluePrint(TileEntityUpgrade upgrade, ArrayList<ModuleData> modules, ModuleData module) {
 		ItemStack blueprint = upgrade.getStackInSlot(0);
 		if (blueprint != null) {
-			NBTTagCompound info = blueprint.getTagCompound();
-			if (info == null) {
+            List<ModuleData> blueprintModules = ModuleDataItemHandler.getModulesFromItem(blueprint);
+
+			if (blueprintModules == null) {
 				return false;
 			}
-			NBTTagByteArray moduleIDTag = (NBTTagByteArray)info.getTag("Modules");
-			if (moduleIDTag == null) {
-				return false;
-			}
-			byte[] IDs = moduleIDTag.func_150292_c();
+
 			ArrayList<ModuleData> missing = new ArrayList<ModuleData>();
-			for (byte id : IDs) {
-				ModuleData blueprintModule = ModuleData.getList().get(id);
-				int index = modules.indexOf(blueprintModule);
-				if (index != -1) {
-					modules.remove(index);
-				}else{
-					missing.add(blueprintModule);
-				}
-			}
-			
+
+            for (ModuleData blueprintModule : blueprintModules) {
+                int index = modules.indexOf(blueprintModule);
+                if (index != -1) {
+                    modules.remove(index);
+                }else{
+                    missing.add(blueprintModule);
+                }
+            }
+
 			return missing.contains(module);
 		}else{
 			//depends on setting, will return false for now

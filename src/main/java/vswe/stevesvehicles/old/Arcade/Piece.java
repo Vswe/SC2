@@ -2,6 +2,7 @@ package vswe.stevesvehicles.old.Arcade;
 
 import java.util.ArrayList;
 
+import vswe.stevesvehicles.vehicles.VehicleBase;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 
 public class Piece {
@@ -189,7 +190,7 @@ public class Piece {
 		int w = 50 + extended;
 		
 		
-		return new int[] {EntityModularCart.MODULAR_SPACE_WIDTH - w, 10 + i * 30, w, 30};
+		return new int[] {VehicleBase.MODULAR_SPACE_WIDTH - w, 10 + i * 30, w, 30};
 	}
 
 	public int[] getPlayerMenuRect(int i) {

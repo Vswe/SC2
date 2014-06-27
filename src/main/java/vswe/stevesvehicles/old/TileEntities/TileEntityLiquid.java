@@ -232,7 +232,7 @@ public class TileEntityLiquid extends TileEntityManager  implements IFluidHandle
 				}
 			}			
 		}else{
-			ArrayList<ModuleTank> cartTanks = transfer.getCart().getTanks();
+			ArrayList<ModuleTank> cartTanks = transfer.getCart().getVehicle().getTanks();
 			for (IFluidTank cartTank : cartTanks) {
 				int drain = drainTank(cartTank, transfer.getSetting(), maximumToTransfer, false);
 				if (drain > 0) {
@@ -265,7 +265,7 @@ public class TileEntityLiquid extends TileEntityManager  implements IFluidHandle
 			fillAmount = fluidToFill.amount;
 			
 			if (isFluidValid(sideId, fluidToFill)) {
-				ArrayList<ModuleTank> cartTanks = cart.getTanks();
+				ArrayList<ModuleTank> cartTanks = cart.getVehicle().getTanks();
 				for (IFluidTank cartTank : cartTanks) {
 					
 					fluidToFill.amount -= cartTank.fill(fluidToFill, doFill);

@@ -4,30 +4,28 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import vswe.stevesvehicles.vehicles.VehicleBase;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 import cpw.mods.fml.common.network.IGuiHandler;
 import vswe.stevesvehicles.old.TileEntities.TileEntityBase;
+import vswe.stevesvehicles.vehicles.entities.IVehicleEntity;
 
 public class CommonProxy implements IGuiHandler {
-	public void renderInit()
-	{
+	public void renderInit() {
 	}
 
 	
 	@Override
-	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {	
-		if (ID == 0) {	
-			EntityModularCart cart = getCart(x, world);
-			if (cart != null) {
-				return cart.getGui(player);
+	public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
+		if (id == 0) {
+			VehicleBase vehicle = getVehicle(x, world);
+			if (vehicle != null) {
+				return vehicle.getGui(player);
 			}
 		}else{	
 			TileEntity tileentity = world.getTileEntity(x, y, z);
-			
-			if (tileentity != null && tileentity instanceof TileEntityBase) {
-				
+			if (tileentity instanceof TileEntityBase) {
 				return ((TileEntityBase)tileentity).getGui(player.inventory);
-									
 			}
 		}
 		
@@ -35,33 +33,27 @@ public class CommonProxy implements IGuiHandler {
 	}
 
 	@Override
-	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-		if (ID == 0) {	
-			EntityModularCart cart = getCart(x, world);
-			if (cart != null) {
-				return cart.getCon(player.inventory);
+	public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
+		if (id == 0) {
+            VehicleBase vehicle = getVehicle(x, world);
+            if (vehicle != null) {
+				return vehicle.getCon(player.inventory);
 			}
 		}else{
 			TileEntity tileentity = world.getTileEntity(x, y, z);
-			if (tileentity != null && tileentity instanceof TileEntityBase) {
-				
+			if (tileentity instanceof TileEntityBase) {
 				return ((TileEntityBase)tileentity).getContainer(player.inventory);
-				
-				
 			}
 		}
-		
-		
 		
 		return null;
 	}
 	
-	private EntityModularCart getCart(int ID, World world) {
-		for (Object e : world.loadedEntityList) {
-			if (e instanceof Entity && ((Entity)e).getEntityId() == ID && e instanceof EntityModularCart) {
-				return (EntityModularCart)e;
-			}
-		}
+	private VehicleBase getVehicle(int id, World world) {
+        Entity entity = world.getEntityByID(id);
+        if (entity instanceof IVehicleEntity) {
+            return ((IVehicleEntity)entity).getVehicle();
+        }
 		return null;
 	}
 

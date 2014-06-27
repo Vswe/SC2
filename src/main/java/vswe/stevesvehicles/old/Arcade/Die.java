@@ -54,7 +54,7 @@ public class Die {
 	}
 	
 	public void randomize() {
-		number = game.getModule().getCart().rand.nextInt(6) + 1;
+		number = game.getModule().getVehicle().getRandom().nextInt(6) + 1;
 	}
 	
 }

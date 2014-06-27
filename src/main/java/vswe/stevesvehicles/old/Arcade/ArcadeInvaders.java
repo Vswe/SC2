@@ -9,6 +9,7 @@ import org.lwjgl.input.Keyboard;
 
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
 import vswe.stevesvehicles.old.Arcade.Unit.UPDATE_RESULT;
+import vswe.stevesvehicles.vehicles.VehicleBase;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
@@ -159,7 +160,7 @@ public class ArcadeInvaders extends ArcadeGame {
 				
 				if(fireDelay == 0 && Keyboard.isKeyDown(Keyboard.KEY_W)) {
 					projectiles.add(new Projectile(this, player.x + 8 - 2, player.y - 15, true));	
-					playDefaultSound("random.bow", 0.8F, 1.0F / (getModule().getCart().rand.nextFloat() * 0.4F + 1.2F) + 0.5F);
+					playDefaultSound("random.bow", 0.8F, 1.0F / (getModule().getVehicle().getRandom().nextFloat() * 0.4F + 1.2F) + 0.5F);
 					fireDelay = 10;
 				}else if(fireDelay > 0) {
 					fireDelay--;
@@ -374,7 +375,7 @@ public class ArcadeInvaders extends ArcadeGame {
 					if (line.charAt(k) == 'X') {
 						
 						
-						int x = (EntityModularCart.MODULAR_SPACE_WIDTH - (digits * 90 - 10)) / 2 + i * 90 + k * 20;
+						int x = (VehicleBase.MODULAR_SPACE_WIDTH - (digits * 90 - 10)) / 2 + i * 90 + k * 20;
 						int y = 5 + j * 20;
 						
 						InvaderGhast ghast;
@@ -446,12 +447,12 @@ public class ArcadeInvaders extends ArcadeGame {
 	
 	@Override
 	public void Save(NBTTagCompound tagCompound, int id) {
-		tagCompound.setShort(getModule().generateNBTName("HighscoreGhast",id), (short)highscore);	
+		tagCompound.setShort("HighscoreGhast", (short)highscore);
 	}
 	
 	@Override
 	public void Load(NBTTagCompound tagCompound, int id) {
-		highscore = tagCompound.getShort(getModule().generateNBTName("HighscoreGhast",id));	
+		highscore = tagCompound.getShort("HighscoreGhast");
 	}	
 	
 	

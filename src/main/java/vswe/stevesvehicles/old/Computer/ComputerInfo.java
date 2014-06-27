@@ -126,7 +126,7 @@ public class ComputerInfo {
 
 		new ComputerInfo(14, "Y level [-128-127]", 97, ModuleHeightControl.class) {
 			protected int get(ModuleBase module) {
-				return clamp((byte)(module.getCart().posY-128), -128, 127);
+				return clamp((byte)(module.getVehicle().y()-128), -128, 127);
 			}					
 		};			
 	}
@@ -158,7 +158,7 @@ public class ComputerInfo {
 	}
 	
 	public boolean isInfoValid(EntityModularCart cart) {
-		for(ModuleBase module : cart.getModules()) {
+		for(ModuleBase module : cart.getVehicle().getModules()) {
 			if (moduleClass.isAssignableFrom(module.getClass())) {
 				if (isValid(module)) {
 					return true;
@@ -177,7 +177,7 @@ public class ComputerInfo {
 	}
 	
 	public void getHandler(EntityModularCart cart, ComputerVar var) {
-		for(ModuleBase module : cart.getModules()) {
+		for(ModuleBase module : cart.getVehicle().getModules()) {
 			if (moduleClass.isAssignableFrom(module.getClass())) {
 				if (isValid(module)) {
 					var.setByteValue(get(module));

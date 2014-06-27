@@ -1,6 +1,7 @@
 package vswe.stevesvehicles.old.Arcade;
 
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
+import vswe.stevesvehicles.vehicles.VehicleBase;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 
 public class Player extends Unit {
@@ -63,8 +64,8 @@ public class Player extends Unit {
 		this.x += dir * 5;
 		if (x < 10) {
 			x = 10;
-		}else if(x > EntityModularCart.MODULAR_SPACE_WIDTH - 10 - 16) {
-			x = EntityModularCart.MODULAR_SPACE_WIDTH - 10 - 16;
+		}else if(x > VehicleBase.MODULAR_SPACE_WIDTH - 10 - 16) {
+			x = VehicleBase.MODULAR_SPACE_WIDTH - 10 - 16;
 		}
 	}
 	

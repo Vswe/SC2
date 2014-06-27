@@ -135,6 +135,7 @@ public class StevesVehicles {
 
         ModItems.addRecipes();
         vswe.stevesvehicles.Blocks.ModBlocks.addRecipes();
+
 	}
 	
 	private void initCart(int ID, Class<? extends EntityModularCart> cart) {

@@ -3,6 +3,7 @@ package vswe.stevesvehicles.old.Arcade;
 import java.util.ArrayList;
 
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
+import vswe.stevesvehicles.vehicles.VehicleBase;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 
 public class Note {
@@ -52,7 +53,7 @@ public class Note {
 	public void drawPlayer(ArcadeMonopoly game, GuiVehicle gui, int x, int y, int amount) {
 		game.loadTexture(gui, 1);
 		game.drawImageInArea(gui, x, y, ArcadeMonopoly.PLACE_WIDTH + u * 16, 22 + 16 + v * 16, 16, 16);
-		if (x + 16 < EntityModularCart.MODULAR_SPACE_WIDTH) {
+		if (x + 16 < VehicleBase.MODULAR_SPACE_WIDTH) {
 			game.getModule().drawString(gui, String.valueOf(amount), x + gui.getGuiLeft(), y + 17 + gui.getGuiTop(), 16, true, 0x404040);
 		}
 	}	

@@ -239,7 +239,7 @@ public class BlockRailAdvDetector extends BlockSpecialRailBase
 	private boolean isCartReadyForAction(EntityModularCart cart, int x, int y, int z) {
 		if ((int)cart.disabledX == x || (int)cart.disabledY == y || (int)cart.disabledZ == z)
 		{
-			return cart.isDisabled();		
+			return cart.getVehicle().isDisabled();
 		}
 		
 		return false;

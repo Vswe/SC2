@@ -420,7 +420,7 @@ public class ModuleData {
         return this;
     }
 
-    public ModuleData addShapedRecipe(int width, int height, Object ... recipe) {
+    public ModuleData addShapedRecipeWithSize(int width, int height, Object ... recipe) {
         addRecipe(null); //TODO create a shaped recipe
 
         return this;
@@ -428,9 +428,9 @@ public class ModuleData {
 
     public ModuleData addShapedRecipe(Object ... recipe) {
         if (recipe.length == 9) {
-            addShapedRecipe(3, 3, recipe);
+            addShapedRecipeWithSize(3, 3, recipe);
         }else if(recipe.length == 4) {
-            addShapedRecipe(2, 2, recipe);
+            addShapedRecipeWithSize(2, 2, recipe);
         }
 
         return this;

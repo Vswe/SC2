@@ -273,13 +273,13 @@ public class TileEntityCargo extends TileEntityManager
 			fromCont = new ContainerCargo(null, this);
 			fromValid = slotCargo;
 			toInv = transfer.getCart();
-			toCont = transfer.getCart().getCon(null);
+			toCont = transfer.getCart().getVehicle().getCon(null);
 			toValid = slotCart;
 		}
 		else
 		{
 			fromInv = transfer.getCart();
-			fromCont = transfer.getCart().getCon(null);
+			fromCont = transfer.getCart().getVehicle().getCon(null);
 			fromValid = slotCart;
 			toInv = this;
 			toCont = new ContainerCargo(null, this);

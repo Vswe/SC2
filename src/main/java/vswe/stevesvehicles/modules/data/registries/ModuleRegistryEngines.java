@@ -40,7 +40,7 @@ public class ModuleRegistryEngines extends ModuleRegistry {
             }
         };
 
-        coalSmall.addShapedRecipe(3, 2,
+        coalSmall.addShapedRecipeWithSize(3, 2,
                 Items.iron_ingot,   Blocks.furnace,     Items.iron_ingot,
                 null,               Blocks.piston,      null);
 

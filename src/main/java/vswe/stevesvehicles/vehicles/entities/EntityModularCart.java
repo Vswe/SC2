@@ -35,6 +35,7 @@ import vswe.stevesvehicles.old.TileEntities.TileEntityCartAssembler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import vswe.stevesvehicles.vehicles.VehicleBase;
+import vswe.stevesvehicles.vehicles.VehicleCart;
 
 /**
  * The modular minecart class, this is the cart. This is what controls all modules whereas 
@@ -93,7 +94,7 @@ public class EntityModularCart extends EntityMinecart
     public EntityModularCart(World world, double x, double y, double z, NBTTagCompound info, String name)
     {
         super(world, x, y, z);
-        this.vehicleBase = new VehicleBase(this, info, name);
+        this.vehicleBase = new VehicleCart(this, info, name);
 		overrideDatawatcher();
     }
 	
@@ -105,7 +106,7 @@ public class EntityModularCart extends EntityMinecart
     public EntityModularCart(World world)
     {
         super(world);
-        this.vehicleBase = new VehicleBase(this);
+        this.vehicleBase = new VehicleCart(this);
 		overrideDatawatcher();
     }
 	
@@ -118,7 +119,7 @@ public class EntityModularCart extends EntityMinecart
     public EntityModularCart(World world, TileEntityCartAssembler assembler, int[] data)
     {
         super(world);
-        this.vehicleBase = new VehicleBase(this, assembler, data);
+        this.vehicleBase = new VehicleCart(this, assembler, data);
         overrideDatawatcher();
     }	
 	

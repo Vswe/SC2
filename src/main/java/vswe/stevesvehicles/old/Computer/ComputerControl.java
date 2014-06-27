@@ -196,7 +196,7 @@ public class ComputerControl {
 	}
 	
 	public boolean isControlValid(EntityModularCart cart) {
-		for(ModuleBase module : cart.getModules()) {
+		for(ModuleBase module : cart.getVehicle().getModules()) {
 			if (moduleClass.isAssignableFrom(module.getClass())) {
 				if (isValid(module)) {
 					return true;
@@ -215,7 +215,7 @@ public class ComputerControl {
 	}
 	
 	public void runHandler(EntityModularCart cart, byte val) {
-		for(ModuleBase module : cart.getModules()) {
+		for(ModuleBase module : cart.getVehicle().getModules()) {
 			if (moduleClass.isAssignableFrom(module.getClass())) {
 				if (isValid(module)) {
 					run(module, clamp(val,(byte)getIntegerMin(), (byte)getIntegerMax()));

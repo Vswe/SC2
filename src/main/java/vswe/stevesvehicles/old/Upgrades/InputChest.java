@@ -5,12 +5,13 @@ import java.util.ArrayList;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevesvehicles.modules.data.ModuleDataItemHandler;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.old.Containers.ContainerCartAssembler;
 import vswe.stevesvehicles.old.Helpers.TransferHandler;
-import vswe.stevesvehicles.old.ModuleData.ModuleData;
-import vswe.stevesvehicles.old.ModuleData.ModuleDataHull;
+import vswe.stevesvehicles.modules.data.ModuleData;
+import vswe.stevesvehicles.modules.data.ModuleDataHull;
 import vswe.stevesvehicles.old.Slots.SlotAssemblerFuel;
 import vswe.stevesvehicles.old.Slots.SlotModule;
 import vswe.stevesvehicles.old.TileEntities.TileEntityCartAssembler;
@@ -105,7 +106,7 @@ public class InputChest extends SimpleInventoryEffect {
 		ArrayList<ModuleData> modules = assembler.getNonHullModules();
 		modules.add(module);
 		
-		if (ModuleData.checkForErrors(hull, modules) != null) {
+		if (ModuleDataItemHandler.checkForErrors(hull, modules) != null) {
 			return true;
 		}	
 		

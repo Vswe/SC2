@@ -555,20 +555,6 @@ public class VehicleBase {
             }
         }
 
-        //if a cart is not moving but has fuel for it, start it
-        if (hasFuel()) {
-            if (!engineFlag) {
-                pushX = temppushX;
-                pushZ = temppushZ;
-            }
-
-            //if the cart doesn't have fuel but is moving, stop it
-        }else if(engineFlag){
-            temppushX = pushX;
-            temppushZ = pushZ;
-            pushX = pushZ = 0.0D;
-        }
-
 
         //set the current state of the engine
         setEngineBurning(hasFuel() && !isDisabled());
@@ -716,7 +702,7 @@ public class VehicleBase {
 
         if (isPlaceholder) {
             if (keepAlive++ > 20) {
-                entity.kill();
+                entity.setDead();
                 placeholderAsssembler.resetPlaceholder();
             }
         }
