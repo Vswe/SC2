@@ -181,31 +181,6 @@ public class ModuleData {
 		
 
 
-		ModuleData railer = new ModuleData(10, "Railer", ModuleRailer.class,3)/*.addSide(SIDE.TOP)*/	
-			.addRecipe(new Object[][] {{Blocks.stone,Blocks.stone,Blocks.stone},
-										{Items.iron_ingot,Blocks.rail,Items.iron_ingot},
-										{Blocks.stone,Blocks.stone,Blocks.stone}
-									  });											  	
-		ModuleData largerailer = new ModuleData(11, "Large Railer", ModuleRailerLarge.class,17)/*.addSide(SIDE.TOP)*/			
-			.addRecipe(new Object[][] {{Items.iron_ingot,Items.iron_ingot,Items.iron_ingot},
-										{railer.getItemStack(),Blocks.rail,railer.getItemStack()},
-										{Items.iron_ingot,Items.iron_ingot,Items.iron_ingot}
-									  });				
-		addNemesis(railer, largerailer);
-
-		
-		
-		new ModuleData(12, "Bridge Builder", ModuleBridge.class,14)	
-			.addRecipe(new Object[][] {
-				{null,Items.redstone,null},
-				{Blocks.brick_block,ComponentTypes.SIMPLE_PCB.getItemStack(),Blocks.brick_block},
-				{null,Blocks.piston,null}
-			});			
-		new ModuleData(13, "Track Remover", ModuleRemover.class,8).addSides(new SIDE[] {SIDE.TOP, SIDE.BACK})	
-			.addRecipe(new Object[][] {	{Items.iron_ingot,Items.iron_ingot,Items.iron_ingot},
-										{Items.iron_ingot,null,Items.iron_ingot},
-										{Items.iron_ingot,null,null}	
-									});
 
 		
 		ModuleDataGroup tankGroup = new ModuleDataGroup(Localization.MODULE_INFO.TANK_GROUP);
@@ -222,20 +197,6 @@ public class ModuleData {
 									});		
 
 
-		new ModuleData(19, "Height Controller", ModuleHeightControl.class, 20)
-			.addRecipe(new Object[][] {
-				{null,Items.compass,null},
-				{Items.paper,ComponentTypes.SIMPLE_PCB.getItemStack(),Items.paper},
-				{Items.paper,Items.paper,Items.paper}
-			});		
-		ModuleData liquidsensors = new ModuleData(20, "Liquid Sensors", ModuleLiquidSensors.class,27).addRequirement(drillGroup)
-			.addRecipe(new Object[][] {
-				{Items.redstone,null,Items.redstone},
-				{Items.lava_bucket,Items.diamond,Items.water_bucket},
-				{Items.iron_ingot,ComponentTypes.ADVANCED_PCB.getItemStack(),Items.iron_ingot}
-			});			
-		
-									
 		ModuleData seat = new ModuleData(25, "Seat", ModuleSeat.class,3).addSides(new SIDE[] {SIDE.CENTER, SIDE.TOP})		
 			.addRecipe(new Object[][] {{null, planks},
 									   {null, planks},
@@ -402,12 +363,6 @@ public class ModuleData {
 
 		tankGroup.add(internalTank).add(sideTank).add(topTank).add(advancedTank).add(frontTank).add(creativeTank).add(topTankOpen);
 		
-		new ModuleData(68, "Incinerator", ModuleIncinerator.class, 23).addRequirement(tankGroup).addRequirement(drillGroup)
-			.addRecipe(new Object[][] {{Blocks.nether_brick,  Blocks.nether_brick,  Blocks.nether_brick},
-									   {Blocks.obsidian, Blocks.furnace, Blocks.obsidian},
-									   {Blocks.nether_brick,  Blocks.nether_brick, Blocks.nether_brick}
-									  });	
-
 
 		ModuleData cleanerliquid = new ModuleData(71, "Liquid Cleaner", ModuleLiquidDrainer.class, 30).addSide(SIDE.CENTER).addParent(liquidsensors).addRequirement(tankGroup)
 			.addRecipe(new Object[][] {{ComponentTypes.LIQUID_CLEANING_TUBE.getItemStack(), ComponentTypes.LIQUID_CLEANING_CORE.getItemStack(), ComponentTypes.LIQUID_CLEANING_TUBE.getItemStack()},
@@ -448,11 +403,7 @@ public class ModuleData {
 			eggBasket.lock();
 		}			
 		
-		ModuleData intelligence = new ModuleData(75, "Drill Intelligence", ModuleDrillIntelligence.class, 21).addRequirement(drillGroup)
-			.addRecipe(new Object[][] {{Items.gold_ingot, Items.gold_ingot, Items.gold_ingot},
-									   {Items.iron_ingot, ComponentTypes.ADVANCED_PCB.getItemStack(), Items.iron_ingot},
-									   {ComponentTypes.ADVANCED_PCB.getItemStack(), Items.redstone , ComponentTypes.ADVANCED_PCB.getItemStack()}
-									  });	
+
 
 		new ModuleData(77, "Power Observer", ModulePowerObserver.class, 12).addRequirement(engineGroup)
 			.addRecipe(new Object[][] {{null, Blocks.piston, null},
@@ -477,12 +428,7 @@ public class ModuleData {
 					   {Items.redstone,  ComponentTypes.ADVANCED_PCB.getItemStack(), Items.redstone}
 					  });	
 		
-		new ModuleData(83, "Ore Extractor", ModuleOreTracker.class, 80).addRequirement(drillGroup)
-		.addRecipe(new Object[][] {{Blocks.redstone_torch, null, Blocks.redstone_torch},
-				   {ComponentTypes.EYE_OF_GALGADOR.getItemStack(), ComponentTypes.GALGADORIAN_METAL.getItemStack(), ComponentTypes.EYE_OF_GALGADOR.getItemStack()},
-				   {Items.quartz,  ComponentTypes.ADVANCED_PCB.getItemStack(), Items.quartz}
-				  });			
-		
+
 		
 		ModuleData flowerremover = new ModuleData(85, "Lawn Mower", ModuleFlowerRemover.class, 38).addSides(new SIDE[] {SIDE.RIGHT, SIDE.LEFT})	
 				.addRecipe(new Object[][] {{ComponentTypes.BLADE_ARM.getItemStack(), null,ComponentTypes.BLADE_ARM.getItemStack()},
@@ -551,8 +497,7 @@ public class ModuleData {
 			   {ComponentTypes.SIMPLE_PCB.getItemStack(), Blocks.cauldron, ComponentTypes.SIMPLE_PCB.getItemStack()}
 			  });		
 		
-		
-		new ModuleData(96, "Creative Incinerator", ModuleCreativeIncinerator.class, 1).addRequirement(drillGroup);
+
 	
 		new ModuleData(97, "Creative Supplies", ModuleCreativeSupplies.class, 1);
 		

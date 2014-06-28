@@ -31,7 +31,9 @@ public class ModuleDataGroup {
 	}
 	
 	public ModuleDataGroup add(ModuleData module) {
-		modules.add(module);
+        if (!modules.contains(module)) {
+            modules.add(module);
+        }
         if (clones != null) {
             for (ModuleDataGroup clone : clones) {
                 clone.add(module);
@@ -66,6 +68,7 @@ public class ModuleDataGroup {
     }
 
 
+
     public String getCountName() {
 		switch (count) {
 			case 1:
@@ -98,7 +101,9 @@ public class ModuleDataGroup {
             clones = new ArrayList<ModuleDataGroup>();
         }
 
-        clones.add(group);
+        if (!clones.contains(group)) {
+            clones.add(group);
+        }
     }
 
 	public void add(ModuleDataGroup group) {

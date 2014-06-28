@@ -73,6 +73,7 @@ public class ModuleRegistryEngines extends ModuleRegistry {
 
 
         thermalSmall.addVehicles(VehicleRegistry.CART, VehicleRegistry.BOAT);
+        thermalSmall.addRequirement(ModuleDataGroup.getGroup(ModuleRegistryTanks.TANK_KEY));
         register(thermalSmall);
 
         ModuleData coalLarge = new ModuleData("coal_engine", ModuleCoalStandard.class, 15) {
@@ -122,6 +123,7 @@ public class ModuleRegistryEngines extends ModuleRegistry {
 
 
         thermalLarge.addVehicles(VehicleRegistry.CART, VehicleRegistry.BOAT);
+        thermalLarge.addRequirement(ModuleDataGroup.getGroup(ModuleRegistryTanks.TANK_KEY).copy(ModuleRegistryTanks.TANK_KEY + 2, 2));
         register(thermalLarge);
         ModuleData.addNemesis(thermalLarge, thermalSmall);
 
