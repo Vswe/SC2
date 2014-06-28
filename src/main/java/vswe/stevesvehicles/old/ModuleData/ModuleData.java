@@ -169,40 +169,7 @@ public class ModuleData {
 		
 
 		
-		
-		new ModuleData(2, "Side Chests", ModuleSideChests.class,3).addSides(new SIDE[] {SIDE.RIGHT, SIDE.LEFT})
-			.addRecipe(new Object[][] {
-				{ComponentTypes.HUGE_CHEST_PANE.getItemStack(),ComponentTypes.CHEST_PANE.getItemStack(), ComponentTypes.HUGE_CHEST_PANE.getItemStack()},
-				{ComponentTypes.LARGE_CHEST_PANE.getItemStack(),ComponentTypes.CHEST_LOCK.getItemStack(),ComponentTypes.LARGE_CHEST_PANE.getItemStack()},
-				{ComponentTypes.HUGE_CHEST_PANE.getItemStack(),ComponentTypes.CHEST_PANE.getItemStack(),ComponentTypes.HUGE_CHEST_PANE.getItemStack()}
-			});			
-		new ModuleData(3, "Top Chest", ModuleTopChest.class,6).addSide(SIDE.TOP)
-			.addRecipe(new Object[][] {
-				{ComponentTypes.HUGE_CHEST_PANE.getItemStack(),ComponentTypes.HUGE_CHEST_PANE.getItemStack(), ComponentTypes.HUGE_CHEST_PANE.getItemStack()},
-				{ComponentTypes.CHEST_PANE.getItemStack(),ComponentTypes.CHEST_LOCK.getItemStack(),ComponentTypes.CHEST_PANE.getItemStack()},
-				{ComponentTypes.HUGE_CHEST_PANE.getItemStack(),ComponentTypes.HUGE_CHEST_PANE.getItemStack(),ComponentTypes.HUGE_CHEST_PANE.getItemStack()}
-			});			
-		ModuleData frontChest = new ModuleData(4, "Front Chest", ModuleFrontChest.class,5).addSide(SIDE.FRONT)
-			.addRecipe(new Object[][] {
-				{ComponentTypes.CHEST_PANE.getItemStack(),ComponentTypes.LARGE_CHEST_PANE.getItemStack(), ComponentTypes.CHEST_PANE.getItemStack()},
-				{ComponentTypes.CHEST_PANE.getItemStack(),ComponentTypes.CHEST_LOCK.getItemStack(),ComponentTypes.CHEST_PANE.getItemStack()},
-				{ComponentTypes.LARGE_CHEST_PANE.getItemStack(),ComponentTypes.LARGE_CHEST_PANE.getItemStack(),ComponentTypes.LARGE_CHEST_PANE.getItemStack()}
-			});	
-		
-			
-		new ModuleData(5, "Internal Storage", ModuleInternalStorage.class,25).setAllowDuplicate()			
-			.addRecipe(new Object[][] {
-				{ComponentTypes.CHEST_PANE.getItemStack(),ComponentTypes.CHEST_PANE.getItemStack(), ComponentTypes.CHEST_PANE.getItemStack()},
-				{ComponentTypes.CHEST_PANE.getItemStack(),ComponentTypes.CHEST_LOCK.getItemStack(),ComponentTypes.CHEST_PANE.getItemStack()},
-				{ComponentTypes.CHEST_PANE.getItemStack(),ComponentTypes.CHEST_PANE.getItemStack(),ComponentTypes.CHEST_PANE.getItemStack()}
-			});		
-		new ModuleData(6, "Extracting Chests", ModuleExtractingChests.class, 75).addSides(new SIDE[] {SIDE.CENTER, SIDE.RIGHT, SIDE.LEFT})
-			.addRecipe(new Object[][] {
-				{ComponentTypes.HUGE_IRON_PANE.getItemStack(), ComponentTypes.HUGE_IRON_PANE.getItemStack(), ComponentTypes.HUGE_IRON_PANE.getItemStack()},
-				{ComponentTypes.LARGE_IRON_PANE.getItemStack(),ComponentTypes.CHEST_LOCK.getItemStack(),ComponentTypes.LARGE_IRON_PANE.getItemStack()},
-				{ComponentTypes.HUGE_DYNAMIC_PANE.getItemStack(),ComponentTypes.LARGE_DYNAMIC_PANE.getItemStack(),ComponentTypes.HUGE_DYNAMIC_PANE.getItemStack()}
-			});		
-			
+
 		new ModuleData(7, "Torch Placer", ModuleTorch.class,14).addSides(new SIDE[] {SIDE.RIGHT, SIDE.LEFT})
 			.addRecipe(new Object[][] {
 				{ComponentTypes.TRI_TORCH.getItemStack(),null, ComponentTypes.TRI_TORCH.getItemStack()},
