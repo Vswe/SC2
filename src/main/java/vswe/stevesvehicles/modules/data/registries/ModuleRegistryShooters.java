@@ -14,6 +14,10 @@ import vswe.stevesvehicles.old.Modules.Addons.Mobdetectors.ModuleBat;
 import vswe.stevesvehicles.old.Modules.Addons.Mobdetectors.ModuleMonster;
 import vswe.stevesvehicles.old.Modules.Addons.Mobdetectors.ModulePlayer;
 import vswe.stevesvehicles.old.Modules.Addons.Mobdetectors.ModuleVillager;
+import vswe.stevesvehicles.old.Modules.Addons.Projectiles.ModuleCake;
+import vswe.stevesvehicles.old.Modules.Addons.Projectiles.ModuleEgg;
+import vswe.stevesvehicles.old.Modules.Addons.Projectiles.ModulePotion;
+import vswe.stevesvehicles.old.Modules.Addons.Projectiles.ModuleSnowball;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleShooter;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleShooterAdv;
 import vswe.stevesvehicles.old.StevesVehicles;
@@ -25,11 +29,19 @@ import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
 public class ModuleRegistryShooters extends ModuleRegistry {
     public static final String SHOOTER_KEY = "Shooters";
     public static final String DETECTOR_KEY = "EntityDetectors";
+    private ModuleData advanced;
     public ModuleRegistryShooters() {
         super("steves_vehicles_shooters");
 
+        loadShooters();
+        loadDetectors();
+        loadProjectiles();
+    }
+
+
+    private void loadShooters() {
         ModuleDataGroup shooters = ModuleDataGroup.createGroup(SHOOTER_KEY, Localization.MODULE_INFO.SHOOTER_GROUP);
-        ModuleDataGroup detectors = ModuleDataGroup.createGroup(DETECTOR_KEY, Localization.MODULE_INFO.ENTITY_GROUP);
+        ModuleDataGroup detectors = ModuleDataGroup.getGroup(DETECTOR_KEY);
 
         ModuleData shooter = new ModuleData("shooter", ModuleShooter.class, 15) {
             @Override
@@ -51,7 +63,7 @@ public class ModuleRegistryShooters extends ModuleRegistry {
 
 
 
-        ModuleData advanced = new ModuleData("advanced_shooter", ModuleShooterAdv.class, 50) {
+        advanced = new ModuleData("advanced_shooter", ModuleShooterAdv.class, 50) {
             @Override
             @SideOnly(Side.CLIENT)
             public void loadModels() {
@@ -71,6 +83,10 @@ public class ModuleRegistryShooters extends ModuleRegistry {
         register(advanced);
 
 
+    }
+
+    private void loadDetectors() {
+        ModuleDataGroup detectors = ModuleDataGroup.createGroup(DETECTOR_KEY, Localization.MODULE_INFO.ENTITY_GROUP);
 
         ModuleData animal = new ModuleData("entity_detector_animal", ModuleAnimal.class, 1);
         animal.addShapedRecipeWithSize(1, 2,
@@ -133,5 +149,68 @@ public class ModuleRegistryShooters extends ModuleRegistry {
         if (!StevesVehicles.isHalloween) {
             bat.lock();
         }
+    }
+
+    private void loadProjectiles() {
+        ModuleDataGroup shooters = ModuleDataGroup.getGroup(SHOOTER_KEY);
+
+        ModuleData potion = new ModuleData("projectile_potion", ModulePotion.class, 10);
+        potion.addShapedRecipeWithSize(1, 2,
+                Items.glass_bottle,
+                EMPTY_DISK);
+
+
+        potion.addVehicles(VehicleRegistry.CART, VehicleRegistry.BOAT);
+        potion.addRequirement(shooters);
+        register(potion);
+
+
+        ModuleData fire = new ModuleData("projectile_fire_charge", ModulePotion.class, 10);
+        fire.addShapedRecipeWithSize(1, 2,
+                Items.fire_charge,
+                EMPTY_DISK);
+
+
+        fire.addVehicles(VehicleRegistry.CART, VehicleRegistry.BOAT);
+        fire.addRequirement(shooters);
+        fire.lockByDefault();
+        register(fire);
+
+
+        ModuleData egg = new ModuleData("projectile_egg", ModuleEgg.class, 10);
+        egg.addShapedRecipeWithSize(1, 2,
+                Items.egg,
+                EMPTY_DISK);
+
+
+        egg.addVehicles(VehicleRegistry.CART, VehicleRegistry.BOAT);
+        egg.addRequirement(shooters);
+        register(egg);
+
+
+        ModuleData snowball = new ModuleData("projectile_snowball", ModuleSnowball.class, 10);
+        snowball.addShapedRecipeWithSize(1, 2,
+                Items.snowball,
+                EMPTY_DISK);
+
+
+        snowball.addVehicles(VehicleRegistry.CART, VehicleRegistry.BOAT);
+        snowball.addRequirement(shooters);
+        register(snowball);
+        if (!StevesVehicles.isChristmas) {
+            snowball.lock();
+        }
+
+
+        ModuleData cake = new ModuleData("projectile_cake", ModuleCake.class, 10);
+        cake.addShapedRecipeWithSize(1, 2,
+                Items.cake,
+                EMPTY_DISK);
+
+
+        cake.addVehicles(VehicleRegistry.CART, VehicleRegistry.BOAT);
+        cake.addRequirement(shooters);
+        cake.lock();
+        register(cake);
     }
 }

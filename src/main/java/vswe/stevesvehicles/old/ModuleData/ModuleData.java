@@ -362,35 +362,6 @@ public class ModuleData {
 			gift.lock();
 		}	
 		
-		
-		new ModuleData(51, "Projectile: Potion", ModulePotion.class, 10).addRequirement(shooterGroup)
-			.addRecipe(new Object[][] {	{Items.glass_bottle},
-										{ComponentTypes.EMPTY_DISK.getItemStack()}
-									});		
-		new ModuleData(52, "Projectile: Fire Charge", ModuleFireball.class, 10).lockByDefault().addRequirement(shooterGroup)
-			.addRecipe(new Object[][] {	{Items.fire_charge},
-										{ComponentTypes.EMPTY_DISK.getItemStack()}
-									});			
-		new ModuleData(53, "Projectile: Egg", ModuleEgg.class, 10).addRequirement(shooterGroup)
-			.addRecipe(new Object[][] {	{Items.egg},
-										{ComponentTypes.EMPTY_DISK.getItemStack()}
-			
-										});				
-		ModuleData snowballshooter = new ModuleData(54, "Projectile: Snowball", ModuleSnowball.class, 10).addRequirement(shooterGroup)
-			.addRecipe(new Object[][] {	{Items.snowball},
-										{ComponentTypes.EMPTY_DISK.getItemStack()}
-									});	
-			
-		if (!StevesVehicles.isChristmas) {
-			snowballshooter.lock();
-		}	
-
-			
-	ModuleData cake = new ModuleData(90, "Projectile: Cake", ModuleCake.class, 10).addRequirement(shooterGroup).lock()
-	.addRecipe(new Object[][] {	{Items.cake},
-			{ComponentTypes.EMPTY_DISK.getItemStack()}	
-	});
-		
 
 	
 		ModuleData snowgenerator = new ModuleData(55, "Freezer", ModuleSnowCannon.class, 24)
