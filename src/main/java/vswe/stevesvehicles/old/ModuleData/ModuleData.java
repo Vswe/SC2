@@ -254,56 +254,7 @@ public class ModuleData {
 									   {Items.iron_ingot, Items.iron_ingot, ComponentTypes.SPEED_HANDLE.getItemStack()}
 									  });			
 		
-		
-		ModuleDataGroup detectorGroup = new ModuleDataGroup(Localization.MODULE_INFO.ENTITY_GROUP);
-		
 
-		
-		ModuleData shooter = new ModuleData(28, "Shooter", ModuleShooter.class,15).addSide(SIDE.TOP)	
-			.addRecipe(new Object[][] {{ComponentTypes.PIPE.getItemStack(), ComponentTypes.PIPE.getItemStack(), ComponentTypes.PIPE.getItemStack()},
-									   {ComponentTypes.PIPE.getItemStack(), ComponentTypes.SHOOTING_STATION.getItemStack(), ComponentTypes.PIPE.getItemStack()},
-									   {ComponentTypes.PIPE.getItemStack(), ComponentTypes.PIPE.getItemStack(),ComponentTypes.PIPE.getItemStack()}
-									  });			
-		
-		ModuleData advshooter = new ModuleData(29, "Advanced Shooter", ModuleShooterAdv.class,50).addSide(SIDE.TOP).addRequirement(detectorGroup)		
-			.addRecipe(new Object[][] {{null, ComponentTypes.ENTITY_SCANNER.getItemStack(), null},
-									   {null, ComponentTypes.SHOOTING_STATION.getItemStack(), ComponentTypes.PIPE.getItemStack()},
-									   {Items.iron_ingot, ComponentTypes.ENTITY_ANALYZER.getItemStack() ,Items.iron_ingot}
-									  });		
-
-		ModuleDataGroup shooterGroup = new ModuleDataGroup(Localization.MODULE_INFO.SHOOTER_GROUP);
-		shooterGroup.add(shooter);
-		shooterGroup.add(advshooter);
-		
-		ModuleData animal = new ModuleData(21, "Entity Detector: Animal", ModuleAnimal.class,1).addParent(advshooter)
-			.addRecipe(new Object[][] {{Items.porkchop},
-										{ComponentTypes.EMPTY_DISK.getItemStack()}
-									});		
-		ModuleData player = new ModuleData(22, "Entity Detector: Player", ModulePlayer.class,7).addParent(advshooter)
-			.addRecipe(new Object[][] {	{Items.diamond},
-										{ComponentTypes.EMPTY_DISK.getItemStack()}
-									});			
-		ModuleData villager = new ModuleData(23, "Entity Detector: Villager", ModuleVillager.class,1).addParent(advshooter)
-			.addRecipe(new Object[][] {	{Items.emerald},
-										{ComponentTypes.EMPTY_DISK.getItemStack()}
-									});			
-		ModuleData monster = new ModuleData(24, "Entity Detector: Monster", ModuleMonster.class,1).addParent(advshooter)
-			.addRecipe(new Object[][] {	{Items.slime_ball},
-										{ComponentTypes.EMPTY_DISK.getItemStack()}
-									});			
-		ModuleData bats = new ModuleData(48, "Entity Detector: Bat", ModuleBat.class,1).addParent(advshooter)
-			.addRecipe(new Object[][] {	{Blocks.pumpkin},
-										{ComponentTypes.EMPTY_DISK.getItemStack()}
-									});	
-		if (!StevesVehicles.isHalloween) {
-			bats.lock();
-		}	
-
-		detectorGroup.add(animal);
-		detectorGroup.add(player);
-		detectorGroup.add(villager);
-		detectorGroup.add(monster);
-		detectorGroup.add(bats);			
 		
 		ModuleData cleaner = new ModuleData(30, "Cleaning Machine", ModuleCleaner.class,23).addSide(SIDE.CENTER)		
 			.addRecipe(new Object[][] {{ComponentTypes.CLEANING_TUBE.getItemStack(), ComponentTypes.CLEANING_CORE.getItemStack(), ComponentTypes.CLEANING_TUBE.getItemStack()},
