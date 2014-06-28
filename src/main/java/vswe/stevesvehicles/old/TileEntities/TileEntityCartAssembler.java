@@ -1643,7 +1643,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 	@Override
     public boolean canInsertItem(int slot, ItemStack item, int side)
     {
-        return (side == 0 || side == 1) ? this.isItemValidForSlot(slot, item) : false;
+        return (side == 0 || side == 1) && this.isItemValidForSlot(slot, item);
     }
 
     //out

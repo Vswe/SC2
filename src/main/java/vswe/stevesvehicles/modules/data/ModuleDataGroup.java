@@ -79,12 +79,15 @@ public class ModuleDataGroup {
 		}
 	}
 
-	public static ModuleDataGroup getCombinedGroup(String key, Localization.MODULE_INFO name,  ModuleDataGroup group1, ModuleDataGroup group2) {
-		ModuleDataGroup newGroup = group1.copy(key);
+	public static ModuleDataGroup getCombinedGroup(String key, Localization.MODULE_INFO name,  ModuleDataGroup mainGroup, ModuleDataGroup ... extraGroups) {
+		ModuleDataGroup newGroup = mainGroup.copy(key);
+        mainGroup.addClone(newGroup);
 
-		newGroup.add(group2);
-		group1.addClone(newGroup);
-		group2.addClone(newGroup);
+        for (ModuleDataGroup extraGroup : extraGroups) {
+            newGroup.add(extraGroup);
+            extraGroup.addClone(newGroup);
+        }
+
 
 		newGroup.name = name;
 		return newGroup;
@@ -99,6 +102,8 @@ public class ModuleDataGroup {
     }
 
 	public void add(ModuleDataGroup group) {
+        group.addClone(this);
+
 		for (ModuleData obj : group.getModules()) {
 			add(obj);
 		}

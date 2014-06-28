@@ -212,36 +212,8 @@ public class ModuleData {
 		
 		
 		
-		ModuleData drill = new ModuleDataTool(8, "Basic Drill", ModuleDrillDiamond.class,10, false).addSide(SIDE.FRONT)	
-			.addRecipe(new Object[][] {{Items.iron_ingot, Items.diamond,  null},
-							   {null, Items.iron_ingot,  Items.diamond},
-							   {Items.iron_ingot,  Items.diamond, null}
-							  });
 
-		ModuleData ironDrill = new ModuleDataTool(42, "Iron Drill", ModuleDrillIron.class,3, false).addSide(SIDE.FRONT)			
-			.addRecipe(new Object[][] {{Items.iron_ingot, Items.iron_ingot,  null},
-									   {null, Items.iron_ingot,  Items.iron_ingot},
-									   {Items.iron_ingot,  Items.iron_ingot, null}
-									  });
-						  
-		ModuleData hardeneddrill = new ModuleDataTool(43, "Hardened Drill", ModuleDrillHardened.class,45, false).addSide(SIDE.FRONT)
-			.addRecipe(new Object[][] {{ComponentTypes.HARDENED_MESH.getItemStack(), ComponentTypes.REINFORCED_METAL.getItemStack(),  null},
-							   {Blocks.diamond_block, drill.getItemStack(), ComponentTypes.REINFORCED_METAL.getItemStack()},
-							   {ComponentTypes.HARDENED_MESH.getItemStack(),  ComponentTypes.REINFORCED_METAL.getItemStack(), null}
-							  });	
-							  
-		ModuleData galgdrill = new ModuleDataTool(9, "Galgadorian Drill", ModuleDrillGalgadorian.class,150, true).addSide(SIDE.FRONT)		
-			.addRecipe(new Object[][] {{ComponentTypes.GALGADORIAN_METAL.getItemStack(), ComponentTypes.ENHANCED_GALGADORIAN_METAL.getItemStack(),  null},
-							   {Blocks.diamond_block, hardeneddrill.getItemStack(), ComponentTypes.ENHANCED_GALGADORIAN_METAL.getItemStack()},
-							   {ComponentTypes.GALGADORIAN_METAL.getItemStack(),  ComponentTypes.ENHANCED_GALGADORIAN_METAL.getItemStack(), null}
-							  });	
 
-		ModuleDataGroup drillGroup = new ModuleDataGroup(Localization.MODULE_INFO.DRILL_GROUP);
-		drillGroup.add(drill);
-		drillGroup.add(ironDrill);
-		drillGroup.add(hardeneddrill);
-		drillGroup.add(galgdrill);
-		
 		ModuleData railer = new ModuleData(10, "Railer", ModuleRailer.class,3)/*.addSide(SIDE.TOP)*/	
 			.addRecipe(new Object[][] {{Blocks.stone,Blocks.stone,Blocks.stone},
 										{Items.iron_ingot,Blocks.rail,Items.iron_ingot},
@@ -267,60 +239,7 @@ public class ModuleData {
 										{Items.iron_ingot,null,Items.iron_ingot},
 										{Items.iron_ingot,null,null}	
 									});
-			
-		ModuleDataGroup farmerGroup = new ModuleDataGroup(Localization.MODULE_INFO.FARMER_GROUP);
-		
-		ModuleData farmerbasic = new ModuleDataTool(14, "Basic Farmer", ModuleFarmerDiamond.class,36, false).addSide(SIDE.FRONT)
-			.addRecipe(new Object[][] {	{Items.diamond,Items.diamond,Items.diamond},
-										{null,Items.iron_ingot,null},
-										{ComponentTypes.SIMPLE_PCB.getItemStack(),Items.gold_ingot,ComponentTypes.SIMPLE_PCB.getItemStack()}	
-									});			
-		
-		ModuleData farmergalg = new ModuleDataTool(84, "Galgadorian Farmer", ModuleFarmerGalgadorian.class,55, true).addSide(SIDE.FRONT)
-				.addRecipe(new Object[][]{{ComponentTypes.GALGADORIAN_METAL.getItemStack(), ComponentTypes.GALGADORIAN_METAL.getItemStack(), ComponentTypes.GALGADORIAN_METAL.getItemStack()},
-                        {null, ComponentTypes.REINFORCED_METAL.getItemStack(), null},
-                        {ComponentTypes.ADVANCED_PCB.getItemStack(), Items.gold_ingot, ComponentTypes.ADVANCED_PCB.getItemStack()}
-                })
-				.addRecipe(new Object[][] {	{ComponentTypes.GALGADORIAN_METAL.getItemStack(),ComponentTypes.GALGADORIAN_METAL.getItemStack(),ComponentTypes.GALGADORIAN_METAL.getItemStack()},
-						{null,farmerbasic.getItemStack(),null},
-						{null,ComponentTypes.SIMPLE_PCB.getItemStack(),null}	
-					});			
-		
-		farmerGroup.add(farmerbasic);
-		farmerGroup.add(farmergalg);
-	
-		ModuleDataGroup woodcutterGroup = new ModuleDataGroup(Localization.MODULE_INFO.CUTTER_GROUP);
-		
-		ModuleData woodcutter = new ModuleDataTool(15, "Basic Wood Cutter", ModuleWoodcutterDiamond.class,34, false).addSide(SIDE.FRONT)		
-			.addRecipe(new Object[][] {	{ComponentTypes.SAW_BLADE.getItemStack(),ComponentTypes.SAW_BLADE.getItemStack(),ComponentTypes.SAW_BLADE.getItemStack()},
-										{ComponentTypes.SAW_BLADE.getItemStack(),Items.iron_ingot,ComponentTypes.SAW_BLADE.getItemStack()},
-										{null,ComponentTypes.WOOD_CUTTING_CORE.getItemStack(),null}
-									});	
-		
-		ModuleData woodcutterHardened = new ModuleDataTool(79, "Hardened Wood Cutter", ModuleWoodcutterHardened.class, 65, false).addSide(SIDE.FRONT)	
-		.addRecipe(new Object[][]{{ComponentTypes.HARDENED_SAW_BLADE.getItemStack(), ComponentTypes.HARDENED_SAW_BLADE.getItemStack(), ComponentTypes.HARDENED_SAW_BLADE.getItemStack()},
-                {ComponentTypes.HARDENED_SAW_BLADE.getItemStack(), Items.diamond, ComponentTypes.HARDENED_SAW_BLADE.getItemStack()},
-                {null, ComponentTypes.WOOD_CUTTING_CORE.getItemStack(), null}
-        })
-		.addRecipe(new Object[][]{{ComponentTypes.REINFORCED_METAL.getItemStack(), ComponentTypes.REINFORCED_METAL.getItemStack(), ComponentTypes.REINFORCED_METAL.getItemStack()},
-                {ComponentTypes.REINFORCED_METAL.getItemStack(), Items.iron_ingot, ComponentTypes.REINFORCED_METAL.getItemStack()},
-                {null, woodcutter.getItemStack(), null}
-        });
-		
-		ModuleData woodcutterGalgadorian  = new ModuleDataTool(80, "Galgadorian Wood Cutter", ModuleWoodcutterGalgadorian.class,120, true).addSide(SIDE.FRONT)	
-		.addRecipe(new Object[][]{{ComponentTypes.GALGADORIAN_SAW_BLADE.getItemStack(), ComponentTypes.GALGADORIAN_SAW_BLADE.getItemStack(), ComponentTypes.GALGADORIAN_SAW_BLADE.getItemStack()},
-                {ComponentTypes.GALGADORIAN_SAW_BLADE.getItemStack(), ComponentTypes.REINFORCED_METAL.getItemStack(), ComponentTypes.GALGADORIAN_SAW_BLADE.getItemStack()},
-                {null, ComponentTypes.WOOD_CUTTING_CORE.getItemStack(), null}
-        })
-		.addRecipe(new Object[][]{{ComponentTypes.GALGADORIAN_METAL.getItemStack(), ComponentTypes.GALGADORIAN_METAL.getItemStack(), ComponentTypes.GALGADORIAN_METAL.getItemStack()},
-                {ComponentTypes.GALGADORIAN_METAL.getItemStack(), Items.iron_ingot, ComponentTypes.GALGADORIAN_METAL.getItemStack()},
-                {null, woodcutterHardened.getItemStack(), null}
-        });
-		
-		
-		woodcutterGroup.add(woodcutter);
-		woodcutterGroup.add(woodcutterHardened);
-		woodcutterGroup.add(woodcutterGalgadorian);
+
 		
 		ModuleDataGroup tankGroup = new ModuleDataGroup(Localization.MODULE_INFO.TANK_GROUP);
 		new ModuleData(16, "Hydrator", ModuleHydrater.class,6).addRequirement(tankGroup)		
