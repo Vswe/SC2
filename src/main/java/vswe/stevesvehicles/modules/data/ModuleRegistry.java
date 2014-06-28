@@ -1,15 +1,17 @@
 package vswe.stevesvehicles.modules.data;
 
 
-import vswe.stevesvehicles.modules.data.registries.carts.ModuleRegistryCultivationUtil;
-import vswe.stevesvehicles.modules.data.registries.carts.ModuleRegistryDrillUtility;
-import vswe.stevesvehicles.modules.data.registries.carts.ModuleRegistryHulls;
-import vswe.stevesvehicles.modules.data.registries.carts.ModuleRegistryRails;
-import vswe.stevesvehicles.modules.data.registries.carts.ModuleRegistryTools;
+import vswe.stevesvehicles.modules.data.registries.ModuleRegistryTravel;
+import vswe.stevesvehicles.modules.data.registries.carts.ModuleRegistryCartCultivationUtil;
+import vswe.stevesvehicles.modules.data.registries.carts.ModuleRegistryCartDrillUtility;
+import vswe.stevesvehicles.modules.data.registries.carts.ModuleRegistryCartHulls;
+import vswe.stevesvehicles.modules.data.registries.carts.ModuleRegistryCartRails;
+import vswe.stevesvehicles.modules.data.registries.carts.ModuleRegistryCartTools;
 import vswe.stevesvehicles.modules.data.registries.ModuleRegistryChests;
 import vswe.stevesvehicles.modules.data.registries.ModuleRegistryEngines;
 import vswe.stevesvehicles.modules.data.registries.ModuleRegistryShooters;
 import vswe.stevesvehicles.modules.data.registries.ModuleRegistryTanks;
+import vswe.stevesvehicles.modules.data.registries.carts.ModuleRegistryCartTravel;
 import vswe.stevesvehicles.registries.IRegistry;
 import vswe.stevesvehicles.registries.RegistryLoader;
 
@@ -24,15 +26,17 @@ public class ModuleRegistry implements IRegistry<ModuleData> {
     public static void init() {
         loader = new RegistryLoader<ModuleRegistry, ModuleData>();
         allModules = new ArrayList<ModuleData>();
-        add(new ModuleRegistryHulls());
+        add(new ModuleRegistryCartHulls());
         add(new ModuleRegistryEngines());
-        add(new ModuleRegistryTools());
+        add(new ModuleRegistryCartTools());
         add(new ModuleRegistryChests());
         add(new ModuleRegistryTanks());
         add(new ModuleRegistryShooters());
-        add(new ModuleRegistryDrillUtility());
-        add(new ModuleRegistryRails());
-        add(new ModuleRegistryCultivationUtil());
+        add(new ModuleRegistryCartDrillUtility());
+        add(new ModuleRegistryCartRails());
+        add(new ModuleRegistryCartCultivationUtil());
+        add(new ModuleRegistryTravel());
+        add(new ModuleRegistryCartTravel());
     }
 
     private static List<ModuleData> allModules;

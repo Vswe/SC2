@@ -19,8 +19,8 @@ import vswe.stevesvehicles.modules.data.ModuleRegistry;
 
 import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
 
-public class ModuleRegistryDrillUtility extends ModuleRegistry{
-    public ModuleRegistryDrillUtility() {
+public class ModuleRegistryCartDrillUtility extends ModuleRegistry{
+    public ModuleRegistryCartDrillUtility() {
         super("steves_carts_drill_utility");
 
         ModuleData liquidSensors = new ModuleData("liquid_sensors", ModuleLiquidSensors.class, 27) {
@@ -77,7 +77,7 @@ public class ModuleRegistryDrillUtility extends ModuleRegistry{
     }
 
 
-    private ModuleDataGroup drills = ModuleDataGroup.getGroup(ModuleRegistryTools.TOOL_KEY);
+    private ModuleDataGroup drills = ModuleDataGroup.getGroup(ModuleRegistryCartTools.TOOL_KEY);
     @Override
     public void register(ModuleData moduleData) {
         super.register(moduleData);

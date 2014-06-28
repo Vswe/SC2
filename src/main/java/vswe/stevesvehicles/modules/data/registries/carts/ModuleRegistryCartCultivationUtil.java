@@ -7,10 +7,12 @@ import net.minecraft.item.ItemStack;
 import vswe.stevesvehicles.modules.data.ModuleData;
 import vswe.stevesvehicles.modules.data.ModuleDataGroup;
 import vswe.stevesvehicles.modules.data.ModuleRegistry;
+import vswe.stevesvehicles.modules.data.ModuleSide;
 import vswe.stevesvehicles.modules.data.registries.ModuleRegistryTanks;
 import vswe.stevesvehicles.old.Modules.Addons.Plants.ModuleModTrees;
 import vswe.stevesvehicles.old.Modules.Addons.Plants.ModuleNetherwart;
 import vswe.stevesvehicles.old.Modules.Addons.Plants.ModulePlantSize;
+import vswe.stevesvehicles.old.Modules.Realtimers.ModuleFlowerRemover;
 import vswe.stevesvehicles.old.Modules.Workers.ModuleFertilizer;
 import vswe.stevesvehicles.old.Modules.Workers.ModuleHydrater;
 import vswe.stevesvehicles.vehicles.VehicleRegistry;
@@ -19,8 +21,8 @@ import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
 
 import static vswe.stevesvehicles.old.Helpers.ComponentTypes.EMPTY_DISK;
 
-public class ModuleRegistryCultivationUtil extends ModuleRegistry {
-    public ModuleRegistryCultivationUtil() {
+public class ModuleRegistryCartCultivationUtil extends ModuleRegistry {
+    public ModuleRegistryCartCultivationUtil() {
         super("steves_carts_cultivation");
 
         loadFarmingUtil();
@@ -28,7 +30,7 @@ public class ModuleRegistryCultivationUtil extends ModuleRegistry {
     }
 
     private void loadFarmingUtil() {
-        ModuleDataGroup farmers = ModuleDataGroup.getGroup(ModuleRegistryTools.FARM_KEY);
+        ModuleDataGroup farmers = ModuleDataGroup.getGroup(ModuleRegistryCartTools.FARM_KEY);
 
         ModuleData netherWart = new ModuleData("crop_nether_wart", ModuleNetherwart.class, 20);
         netherWart.addShapedRecipeWithSize(1, 2,
@@ -62,10 +64,23 @@ public class ModuleRegistryCultivationUtil extends ModuleRegistry {
 
         fertilizer.addVehicles(VehicleRegistry.CART);
         register(fertilizer);
+
+
+
+
+        ModuleData mower = new ModuleData("lawn_mower", ModuleFlowerRemover.class, 38);
+        mower.addShapedRecipe(      BLADE_ARM,      null,           BLADE_ARM,
+                                    null,           SIMPLE_PCB,     null,
+                                    BLADE_ARM,      null,           BLADE_ARM);
+
+
+        mower.addSides(ModuleSide.RIGHT, ModuleSide.LEFT);
+        mower.addVehicles(VehicleRegistry.CART);
+        register(mower);
     }
 
     private void loadWoodCuttingUtil() {
-        ModuleDataGroup cutters = ModuleDataGroup.getGroup(ModuleRegistryTools.WOOD_KEY);
+        ModuleDataGroup cutters = ModuleDataGroup.getGroup(ModuleRegistryCartTools.WOOD_KEY);
 
         ModuleData exotic = new ModuleData("tree_exotic", ModuleModTrees.class, 30);
         exotic.addShapedRecipeWithSize(1, 2,

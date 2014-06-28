@@ -12,6 +12,7 @@ import vswe.stevesvehicles.modules.data.ModuleSide;
 import vswe.stevesvehicles.old.Modules.Addons.ModuleColorRandomizer;
 import vswe.stevesvehicles.old.Modules.Addons.ModuleColorizer;
 import vswe.stevesvehicles.old.Modules.Addons.ModuleInvisible;
+import vswe.stevesvehicles.old.Modules.Addons.ModuleLabel;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleFirework;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleNote;
 import vswe.stevesvehicles.vehicles.VehicleRegistry;
@@ -74,5 +75,15 @@ public class ModuleRegistryVisual extends ModuleRegistry {
         note.addSides(ModuleSide.RIGHT, ModuleSide.LEFT);
         note.addVehicles(VehicleRegistry.CART, VehicleRegistry.BOAT);
         register(note);
+
+
+
+        ModuleData info = new ModuleData("information_provider", ModuleLabel.class, 12);
+        info.addShapedRecipe(   Blocks.glass_pane,      Blocks.glass_pane,          Blocks.glass_pane,
+                                Items.iron_ingot,       Items.glowstone_dust,       Items.iron_ingot,
+                                SIMPLE_PCB,             Items.sign,                 SIMPLE_PCB);
+
+        info.addVehicles(VehicleRegistry.CART, VehicleRegistry.BOAT);
+        register(info);
     }
 }

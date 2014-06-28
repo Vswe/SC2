@@ -20,8 +20,8 @@ import vswe.stevesvehicles.vehicles.VehicleRegistry;
 
 import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
 
-public class ModuleRegistryRails extends ModuleRegistry {
-    public ModuleRegistryRails() {
+public class ModuleRegistryCartRails extends ModuleRegistry {
+    public ModuleRegistryCartRails() {
         super("steves_vehicle_rails");
 
         ModuleData railer = new ModuleData("railer", ModuleRailer.class, 3) {

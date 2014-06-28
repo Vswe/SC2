@@ -181,25 +181,6 @@ public class ModuleData {
 		
 
 
-		ModuleData seat = new ModuleData(25, "Seat", ModuleSeat.class,3).addSides(new SIDE[] {SIDE.CENTER, SIDE.TOP})		
-			.addRecipe(new Object[][] {{null, planks},
-									   {null, planks},
-									   {woodSingleSlab, planks}
-									  });
-									  
-		new ModuleData(26, "Brake Handle", ModuleBrake.class,12).addSide(SIDE.RIGHT).addParent(seat)
-			.addRecipe(new Object[][] {{null, null, new ItemStack(Items.dye, 1, 1)},
-									   {Items.iron_ingot, ComponentTypes.REFINED_HANDLE.getItemStack(), null},
-									   {Items.redstone, Items.iron_ingot, null}
-									  });
-									  
-		new ModuleData(27, "Advanced Control System", ModuleAdvControl.class,38).addSide(SIDE.RIGHT).addParent(seat)		
-			.addRecipe(new Object[][] {{null, ComponentTypes.GRAPHICAL_INTERFACE.getItemStack(), null},
-									   {Items.redstone, ComponentTypes.WHEEL.getItemStack(), Items.redstone},
-									   {Items.iron_ingot, Items.iron_ingot, ComponentTypes.SPEED_HANDLE.getItemStack()}
-									  });			
-		
-
 		
 		ModuleData cleaner = new ModuleData(30, "Cleaning Machine", ModuleCleaner.class,23).addSide(SIDE.CENTER)		
 			.addRecipe(new Object[][] {{ComponentTypes.CLEANING_TUBE.getItemStack(), ComponentTypes.CLEANING_CORE.getItemStack(), ComponentTypes.CLEANING_TUBE.getItemStack()},
@@ -289,12 +270,6 @@ public class ModuleData {
 		addNemesis(snowgenerator, extrememelter);
 				
 
-		ModuleData cage = new ModuleData(57, "Cage", ModuleCage.class, 7).addSides(new SIDE[] {SIDE.TOP, SIDE.CENTER})						
-			.addRecipe(new Object[][] {	{Blocks.fence, Blocks.fence, Blocks.fence},
-										{Blocks.fence, ComponentTypes.SIMPLE_PCB.getItemStack(), Blocks.fence},
-										{Blocks.fence, Blocks.fence, Blocks.fence}
-									  });				
-			
 
 
 		addNemesis(frontTank, cleaner);
@@ -369,55 +344,8 @@ public class ModuleData {
 					  });	
 		
 
-		
-		ModuleData flowerremover = new ModuleData(85, "Lawn Mower", ModuleFlowerRemover.class, 38).addSides(new SIDE[] {SIDE.RIGHT, SIDE.LEFT})	
-				.addRecipe(new Object[][] {{ComponentTypes.BLADE_ARM.getItemStack(), null,ComponentTypes.BLADE_ARM.getItemStack()},
-						   {null, ComponentTypes.SIMPLE_PCB.getItemStack(), null},
-						   {ComponentTypes.BLADE_ARM.getItemStack(),  null, ComponentTypes.BLADE_ARM.getItemStack()}
-						  });	
-		
-		new ModuleData(86, "Milker", ModuleMilker.class, 26).addParent(cage)
-			.addRecipe(new Object[][] {{Items.wheat, Items.wheat, Items.wheat},
-					{ComponentTypes.SIMPLE_PCB.getItemStack(), Items.bucket, ComponentTypes.SIMPLE_PCB.getItemStack()},
-					{null, ComponentTypes.SIMPLE_PCB.getItemStack(), null},
-					  });		
-		
-		ModuleData crafter = new ModuleData(87, "Crafter", ModuleCrafter.class, 22).setAllowDuplicate()
-			.addRecipe(new Object[][] {{ComponentTypes.SIMPLE_PCB.getItemStack()},
-					   {Blocks.crafting_table}
-					  });	
+		n
 
-
-		new ModuleData(78, "Steve's Arcade", ModuleArcade.class, 10).addParent(seat)
-			.addRecipe(new Object[][] {{null, Blocks.glass_pane, null},
-					{planks, ComponentTypes.SIMPLE_PCB.getItemStack(), planks},
-					{Items.redstone, planks, Items.redstone}
-				});	
-		
-		ModuleData smelter = new ModuleData(91, "Smelter", ModuleSmelter.class, 22).setAllowDuplicate()
-		.addRecipe(new Object[][] {{ComponentTypes.SIMPLE_PCB.getItemStack()},
-				   {Blocks.furnace}
-				  });	
-		
-		new ModuleData(92, "Advanced Crafter", ModuleCrafterAdv.class, 42).setAllowDuplicate()
-		.addRecipe(new Object[][] {{null, Items.diamond, null},
-					{null, ComponentTypes.ADVANCED_PCB.getItemStack(), null},
-				   {ComponentTypes.SIMPLE_PCB.getItemStack(), crafter.getItemStack(), ComponentTypes.SIMPLE_PCB.getItemStack()}
-				  });			
-
-		new ModuleData(93, "Advanced Smelter", ModuleSmelterAdv.class, 42).setAllowDuplicate()
-		.addRecipe(new Object[][] {{null, Items.diamond, null},
-					{null, ComponentTypes.ADVANCED_PCB.getItemStack(), null},
-				   {ComponentTypes.SIMPLE_PCB.getItemStack(), smelter.getItemStack(), ComponentTypes.SIMPLE_PCB.getItemStack()}
-				  });		
-		
-		new ModuleData(94, "Information Provider", ModuleLabel.class, 12)
-		.addRecipe(new Object[][] {{ Blocks.glass_pane, Blocks.glass_pane,  Blocks.glass_pane},
-				{Items.iron_ingot, Items.glowstone_dust, Items.iron_ingot},
-			   {ComponentTypes.SIMPLE_PCB.getItemStack(), Items.sign, ComponentTypes.SIMPLE_PCB.getItemStack()}
-			  });	
-			
-		
 		new ModuleData(95, "Experience Bank", ModuleExperience.class, 36)
 		.addRecipe(new Object[][] {{null, Items.redstone,  null},
 				{Items.glowstone_dust, Items.emerald, Items.glowstone_dust},
