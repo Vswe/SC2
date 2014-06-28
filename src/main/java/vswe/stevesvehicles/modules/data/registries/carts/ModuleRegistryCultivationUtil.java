@@ -3,12 +3,16 @@ package vswe.stevesvehicles.modules.data.registries.carts;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import vswe.stevesvehicles.modules.data.ModuleData;
 import vswe.stevesvehicles.modules.data.ModuleDataGroup;
 import vswe.stevesvehicles.modules.data.ModuleRegistry;
+import vswe.stevesvehicles.modules.data.registries.ModuleRegistryTanks;
 import vswe.stevesvehicles.old.Modules.Addons.Plants.ModuleModTrees;
 import vswe.stevesvehicles.old.Modules.Addons.Plants.ModuleNetherwart;
 import vswe.stevesvehicles.old.Modules.Addons.Plants.ModulePlantSize;
+import vswe.stevesvehicles.old.Modules.Workers.ModuleFertilizer;
+import vswe.stevesvehicles.old.Modules.Workers.ModuleHydrater;
 import vswe.stevesvehicles.vehicles.VehicleRegistry;
 
 import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
@@ -35,6 +39,29 @@ public class ModuleRegistryCultivationUtil extends ModuleRegistry {
         netherWart.addVehicles(VehicleRegistry.CART);
         netherWart.addRequirement(farmers);
         register(netherWart);
+
+
+
+        ModuleData hydrator = new ModuleData("hydrator", ModuleHydrater.class, 6);
+        hydrator.addShapedRecipeWithSize(3, 2,
+                Items.iron_ingot,       Items.glass_bottle,         Items.iron_ingot,
+                null,                   Blocks.iron_bars,           null);
+
+
+        hydrator.addVehicles(VehicleRegistry.CART);
+        hydrator.addRequirement(ModuleDataGroup.getGroup(ModuleRegistryTanks.TANK_KEY));
+        register(hydrator);
+
+
+
+        ModuleData fertilizer = new ModuleData("fertilizer", ModuleFertilizer.class, 10);
+        fertilizer.addShapedRecipe(     new ItemStack(Items.dye, 1, 15),        null,                   new ItemStack(Items.dye, 1, 15),
+                                        Items.glass_bottle,                     Items.leather,          Items.glass_bottle,
+                                        Items.leather,                          SIMPLE_PCB,             Items.leather);
+
+
+        fertilizer.addVehicles(VehicleRegistry.CART);
+        register(fertilizer);
     }
 
     private void loadWoodCuttingUtil() {

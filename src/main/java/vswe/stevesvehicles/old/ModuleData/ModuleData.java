@@ -181,21 +181,6 @@ public class ModuleData {
 		
 
 
-
-
-		new ModuleData(16, "Hydrator", ModuleHydrater.class,6).addRequirement(tankGroup)		
-			.addRecipe(new Object[][] {	{Items.iron_ingot,Items.glass_bottle,Items.iron_ingot},
-										{null,Blocks.fence,null},
-									});				
-
-		
-		new ModuleData(18, "Fertilizer", ModuleFertilizer.class,10)	
-			.addRecipe(new Object[][] {	{bonemeal,null,bonemeal},
-										{Items.glass_bottle,Items.leather,Items.glass_bottle},
-										{Items.leather,ComponentTypes.SIMPLE_PCB.getItemStack(),Items.leather}
-									});		
-
-
 		ModuleData seat = new ModuleData(25, "Seat", ModuleSeat.class,3).addSides(new SIDE[] {SIDE.CENTER, SIDE.TOP})		
 			.addRecipe(new Object[][] {{null, planks},
 									   {null, planks},
@@ -250,40 +235,8 @@ public class ModuleData {
 									  });	
 		addNemesis(melter, extrememelter);
 								  
-		
-		new ModuleData(36, "Invisibility Core", ModuleInvisible.class, 21)
-			.addRecipe(new Object[][] {{null, ComponentTypes.GLASS_O_MAGIC.getItemStack(), null},
-									   {ComponentTypes.GLASS_O_MAGIC.getItemStack(), Items.ender_eye, ComponentTypes.GLASS_O_MAGIC.getItemStack()},
-									   {null, Items.golden_carrot, null}
-									  });
-				
 
-		
-		new ModuleData(40, "Note Sequencer", ModuleNote.class, 30).addSides(new SIDE[] {SIDE.RIGHT, SIDE.LEFT})
-			.addRecipe(new Object[][] {
-									   {Blocks.noteblock, null, Blocks.noteblock},
-									   {Blocks.noteblock, Blocks.jukebox, Blocks.noteblock},
-									   {planks, Items.redstone, planks}
-									  });
-									  
 
-		
-		ModuleData colorizer = new ModuleData(41, "Colorizer", ModuleColorizer.class, 15)
-			.addRecipe(new Object[][] {
-									   {ComponentTypes.RED_PIGMENT.getItemStack(), ComponentTypes.GREEN_PIGMENT.getItemStack(), ComponentTypes.BLUE_PIGMENT.getItemStack()},
-									   {Items.iron_ingot, Items.redstone, Items.iron_ingot},
-									   {null, Items.iron_ingot, null}
-									  });
-
-		ModuleData colorRandomizer = new ModuleData(101, "Color Randomizer", ModuleColorRandomizer.class, 20)
-			.addRecipe(new Object[][] {
-									   {colorizer.getItemStack()},
-									   {ComponentTypes.SIMPLE_PCB.getItemStack()}
-									  });
-
-		// Having two modules try to set the color doesn't sound like a good idea
-		addNemesis(colorizer, colorRandomizer);
-		
 		//new ModuleData(46, "Commander", realtimeModuleCommand.class, 15);
 		
 		new ModuleData(49, "Chunk Loader", ModuleChunkLoader.class, 84)
@@ -342,14 +295,6 @@ public class ModuleData {
 										{Blocks.fence, Blocks.fence, Blocks.fence}
 									  });				
 			
-
-
-		new ModuleData(59, "Firework display", ModuleFirework.class, 45)
-			.addRecipe(new Object[][] {	{Blocks.fence, Blocks.dispenser, Blocks.fence},
-										{Blocks.crafting_table, ComponentTypes.FUSE.getItemStack(), Blocks.crafting_table},
-										{ComponentTypes.SIMPLE_PCB.getItemStack(), Items.flint_and_steel, ComponentTypes.SIMPLE_PCB.getItemStack()}
-									  });			
-		
 
 
 		addNemesis(frontTank, cleaner);
