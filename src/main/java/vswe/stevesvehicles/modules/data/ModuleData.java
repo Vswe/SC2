@@ -104,14 +104,14 @@ public class ModuleData {
         return !defaultLock;
     }
 
-    protected ModuleData lockByDefault() {
+    public ModuleData lockByDefault() {
         defaultLock = true;
 
         return this;
     }
 
-    protected ModuleData setAllowDuplicate() {
-        allowDuplicate = true;
+    public ModuleData setAllowDuplicate(boolean b) {
+        allowDuplicate = b;
 
         return this;
     }

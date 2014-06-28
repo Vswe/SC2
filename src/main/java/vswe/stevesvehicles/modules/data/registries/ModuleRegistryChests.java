@@ -88,6 +88,7 @@ public class ModuleRegistryChests extends ModuleRegistry {
 
 
         internal.addVehicles(VehicleRegistry.CART, VehicleRegistry.BOAT);
+        internal.setAllowDuplicate(true);
         register(internal);
 
 

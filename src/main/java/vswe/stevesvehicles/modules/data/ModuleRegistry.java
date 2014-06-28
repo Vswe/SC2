@@ -5,6 +5,7 @@ import vswe.stevesvehicles.modules.data.registries.ModuleRegistryCartHulls;
 import vswe.stevesvehicles.modules.data.registries.ModuleRegistryCartTools;
 import vswe.stevesvehicles.modules.data.registries.ModuleRegistryChests;
 import vswe.stevesvehicles.modules.data.registries.ModuleRegistryEngines;
+import vswe.stevesvehicles.modules.data.registries.ModuleRegistryTanks;
 import vswe.stevesvehicles.registries.IRegistry;
 import vswe.stevesvehicles.registries.RegistryLoader;
 
@@ -23,6 +24,7 @@ public class ModuleRegistry implements IRegistry<ModuleData> {
         add(new ModuleRegistryEngines());
         add(new ModuleRegistryCartTools());
         add(new ModuleRegistryChests());
+        add(new ModuleRegistryTanks());
     }
 
     private static List<ModuleData> allModules;
