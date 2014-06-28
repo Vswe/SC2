@@ -4,6 +4,10 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import vswe.stevesvehicles.client.rendering.models.ModelGun;
+import vswe.stevesvehicles.client.rendering.models.ModelMobDetector;
+import vswe.stevesvehicles.client.rendering.models.ModelShootingRig;
+import vswe.stevesvehicles.client.rendering.models.ModelSniperRifle;
 import vswe.stevesvehicles.modules.data.ModuleData;
 import vswe.stevesvehicles.modules.data.ModuleDataGroup;
 import vswe.stevesvehicles.modules.data.ModuleRegistry;
@@ -22,6 +26,8 @@ import vswe.stevesvehicles.old.Modules.Realtimers.ModuleShooter;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleShooterAdv;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicles.VehicleRegistry;
+
+import java.util.ArrayList;
 
 import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
 
@@ -47,7 +53,15 @@ public class ModuleRegistryShooters extends ModuleRegistry {
             @Override
             @SideOnly(Side.CLIENT)
             public void loadModels() {
+                ArrayList<Integer> pipes = new ArrayList<Integer>();
+                for (int i = 0; i < 9; i++) {
+                    if (i == 4) continue;
+                    pipes.add(i);
+                }
 
+
+                addModel("Rig",  new ModelShootingRig());
+                addModel("Pipes", new ModelGun(pipes));
             }
         };
 
@@ -67,7 +81,9 @@ public class ModuleRegistryShooters extends ModuleRegistry {
             @Override
             @SideOnly(Side.CLIENT)
             public void loadModels() {
-
+                addModel("Rig",  new ModelShootingRig());
+                addModel("MobDetector", new ModelMobDetector());
+                addModel("Pipes", new ModelSniperRifle());
             }
         };
 
