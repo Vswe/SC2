@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.modules.data.registries;
+package vswe.stevesvehicles.modules.data.registries.carts;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -30,13 +30,13 @@ import vswe.stevesvehicles.vehicles.VehicleRegistry;
 import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
 
 
-public class ModuleRegistryCartTools extends ModuleRegistry {
+public class ModuleRegistryTools extends ModuleRegistry {
     public static final String TOOL_KEY = "Tools";
     public static final String DRILL_KEY = "Drills";
     public static final String WOOD_KEY = "WoodCutters";
     public static final String FARM_KEY = "Farmers";
 
-    public ModuleRegistryCartTools() {
+    public ModuleRegistryTools() {
         super("steves_carts_tools");
 
         //Create a combined group for all the tool groups. The order groups are being accessed is irrelevant.

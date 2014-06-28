@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.modules.data.registries;
+package vswe.stevesvehicles.modules.data.registries.carts;
 
 
 import cpw.mods.fml.relauncher.Side;
@@ -27,8 +27,8 @@ import vswe.stevesvehicles.vehicles.VehicleRegistry;
 
 import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
 
-public class ModuleRegistryCartHulls extends ModuleRegistry {
-    public ModuleRegistryCartHulls() {
+public class ModuleRegistryHulls extends ModuleRegistry {
+    public ModuleRegistryHulls() {
         super("steves_carts_hulls");
 
         ModuleData wood = new ModuleDataHull("wooden_hull", HullWood.class, 50, 1, 0, 15) {

@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.modules.data.registries;
+package vswe.stevesvehicles.modules.data.registries.carts;
 
 
 import cpw.mods.fml.relauncher.Side;
@@ -8,6 +8,7 @@ import net.minecraft.init.Items;
 import vswe.stevesvehicles.client.rendering.models.ModelLiquidSensors;
 import vswe.stevesvehicles.modules.data.ModuleData;
 import vswe.stevesvehicles.modules.data.ModuleDataGroup;
+import vswe.stevesvehicles.modules.data.registries.ModuleRegistryTanks;
 import vswe.stevesvehicles.old.Modules.Addons.ModuleCreativeIncinerator;
 import vswe.stevesvehicles.old.Modules.Addons.ModuleDrillIntelligence;
 import vswe.stevesvehicles.old.Modules.Addons.ModuleIncinerator;
@@ -18,8 +19,8 @@ import vswe.stevesvehicles.modules.data.ModuleRegistry;
 
 import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
 
-public class ModuleRegistryCartDrillUtility extends ModuleRegistry{
-    public ModuleRegistryCartDrillUtility() {
+public class ModuleRegistryDrillUtility extends ModuleRegistry{
+    public ModuleRegistryDrillUtility() {
         super("steves_carts_drill_utility");
 
         ModuleData liquidSensors = new ModuleData("liquid_sensors", ModuleLiquidSensors.class, 27) {
@@ -76,7 +77,7 @@ public class ModuleRegistryCartDrillUtility extends ModuleRegistry{
     }
 
 
-    private ModuleDataGroup drills = ModuleDataGroup.getGroup(ModuleRegistryCartTools.TOOL_KEY);
+    private ModuleDataGroup drills = ModuleDataGroup.getGroup(ModuleRegistryTools.TOOL_KEY);
     @Override
     public void register(ModuleData moduleData) {
         super.register(moduleData);

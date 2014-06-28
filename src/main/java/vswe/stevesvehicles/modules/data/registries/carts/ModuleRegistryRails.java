@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.modules.data.registries;
+package vswe.stevesvehicles.modules.data.registries.carts;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -20,8 +20,8 @@ import vswe.stevesvehicles.vehicles.VehicleRegistry;
 
 import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
 
-public class ModuleRegistryCartRails extends ModuleRegistry {
-    public ModuleRegistryCartRails() {
+public class ModuleRegistryRails extends ModuleRegistry {
+    public ModuleRegistryRails() {
         super("steves_vehicle_rails");
 
         ModuleData railer = new ModuleData("railer", ModuleRailer.class, 3) {

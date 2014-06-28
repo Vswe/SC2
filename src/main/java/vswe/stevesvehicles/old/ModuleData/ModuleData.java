@@ -182,8 +182,7 @@ public class ModuleData {
 
 
 
-		
-		ModuleDataGroup tankGroup = new ModuleDataGroup(Localization.MODULE_INFO.TANK_GROUP);
+
 		new ModuleData(16, "Hydrator", ModuleHydrater.class,6).addRequirement(tankGroup)		
 			.addRecipe(new Object[][] {	{Items.iron_ingot,Items.glass_bottle,Items.iron_ingot},
 										{null,Blocks.fence,null},
@@ -344,11 +343,7 @@ public class ModuleData {
 									  });				
 			
 
-		new ModuleData(58, "Crop: Nether Wart", ModuleNetherwart.class, 20).addRequirement(farmerGroup)
-			.addRecipe(new Object[][] {{Items.nether_wart},
-										{ComponentTypes.EMPTY_DISK.getItemStack()}
-									  });	
-									  
+
 		new ModuleData(59, "Firework display", ModuleFirework.class, 45)
 			.addRecipe(new Object[][] {	{Blocks.fence, Blocks.dispenser, Blocks.fence},
 										{Blocks.crafting_table, ComponentTypes.FUSE.getItemStack(), Blocks.crafting_table},
@@ -446,21 +441,8 @@ public class ModuleData {
 			.addRecipe(new Object[][] {{ComponentTypes.SIMPLE_PCB.getItemStack()},
 					   {Blocks.crafting_table}
 					  });	
-		
-		new ModuleData(88, "Tree: Exotic", ModuleModTrees.class, 30).addRequirement(woodcutterGroup)
-			.addRecipe(new Object[][] {{Items.glowstone_dust, null, Items.glowstone_dust},
-					{Items.redstone, Blocks.sapling, Items.redstone},
-					{ComponentTypes.SIMPLE_PCB.getItemStack(), ComponentTypes.EMPTY_DISK.getItemStack(), ComponentTypes.SIMPLE_PCB.getItemStack()}
-				});					
-			
-		
-		new ModuleData(89, "Planter Range Extender", ModulePlantSize.class, 20).addRequirement(woodcutterGroup)
-			.addRecipe(new Object[][] {{Items.redstone, ComponentTypes.ADVANCED_PCB.getItemStack(), Items.redstone},
-					{null, Blocks.sapling, null},
-					{ComponentTypes.SIMPLE_PCB.getItemStack(), Blocks.sapling, ComponentTypes.SIMPLE_PCB.getItemStack()}
-				});		
-		
-		
+
+
 		new ModuleData(78, "Steve's Arcade", ModuleArcade.class, 10).addParent(seat)
 			.addRecipe(new Object[][] {{null, Blocks.glass_pane, null},
 					{planks, ComponentTypes.SIMPLE_PCB.getItemStack(), planks},

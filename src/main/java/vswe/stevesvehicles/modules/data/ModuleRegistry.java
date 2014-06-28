@@ -1,8 +1,11 @@
 package vswe.stevesvehicles.modules.data;
 
 
-import vswe.stevesvehicles.modules.data.registries.ModuleRegistryCartHulls;
-import vswe.stevesvehicles.modules.data.registries.ModuleRegistryCartTools;
+import vswe.stevesvehicles.modules.data.registries.carts.ModuleRegistryCultivationUtil;
+import vswe.stevesvehicles.modules.data.registries.carts.ModuleRegistryDrillUtility;
+import vswe.stevesvehicles.modules.data.registries.carts.ModuleRegistryHulls;
+import vswe.stevesvehicles.modules.data.registries.carts.ModuleRegistryRails;
+import vswe.stevesvehicles.modules.data.registries.carts.ModuleRegistryTools;
 import vswe.stevesvehicles.modules.data.registries.ModuleRegistryChests;
 import vswe.stevesvehicles.modules.data.registries.ModuleRegistryEngines;
 import vswe.stevesvehicles.modules.data.registries.ModuleRegistryShooters;
@@ -21,12 +24,15 @@ public class ModuleRegistry implements IRegistry<ModuleData> {
     public static void init() {
         loader = new RegistryLoader<ModuleRegistry, ModuleData>();
         allModules = new ArrayList<ModuleData>();
-        add(new ModuleRegistryCartHulls());
+        add(new ModuleRegistryHulls());
         add(new ModuleRegistryEngines());
-        add(new ModuleRegistryCartTools());
+        add(new ModuleRegistryTools());
         add(new ModuleRegistryChests());
         add(new ModuleRegistryTanks());
         add(new ModuleRegistryShooters());
+        add(new ModuleRegistryDrillUtility());
+        add(new ModuleRegistryRails());
+        add(new ModuleRegistryCultivationUtil());
     }
 
     private static List<ModuleData> allModules;
