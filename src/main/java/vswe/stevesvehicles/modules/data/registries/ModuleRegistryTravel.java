@@ -74,9 +74,9 @@ public class ModuleRegistryTravel extends ModuleRegistry {
             }
         };
 
-        cage.addShapedRecipe(   Blocks.fence,     Blocks.fence,      Blocks.fence,
-                                Blocks.fence,     SIMPLE_PCB,        Blocks.fence,
-                                Blocks.fence,     Blocks.fence,      Blocks.fence);
+        cage.addShapedRecipe(   Blocks.iron_bars,     Blocks.iron_bars,     Blocks.iron_bars,
+                                Blocks.iron_bars,     SIMPLE_PCB,           Blocks.iron_bars,
+                                Blocks.iron_bars,     Blocks.iron_bars,     Blocks.iron_bars);
 
         cage.addVehicles(VehicleRegistry.CART, VehicleRegistry.BOAT);
         cage.addSides(ModuleSide.CENTER, ModuleSide.TOP);

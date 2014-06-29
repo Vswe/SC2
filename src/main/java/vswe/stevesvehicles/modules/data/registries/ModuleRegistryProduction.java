@@ -5,7 +5,6 @@ import net.minecraft.init.Items;
 import vswe.stevesvehicles.modules.data.ModuleData;
 import vswe.stevesvehicles.modules.data.ModuleDataGroup;
 import vswe.stevesvehicles.modules.data.ModuleRegistry;
-import vswe.stevesvehicles.old.Modules.Addons.ModuleColorizer;
 import vswe.stevesvehicles.old.Modules.Addons.ModuleCrafter;
 import vswe.stevesvehicles.old.Modules.Addons.ModuleCrafterAdv;
 import vswe.stevesvehicles.old.Modules.Addons.ModuleSmelter;

@@ -1,7 +1,12 @@
 package vswe.stevesvehicles.modules.data;
 
 
+import vswe.stevesvehicles.modules.data.registries.ModuleRegistryCake;
+import vswe.stevesvehicles.modules.data.registries.ModuleRegistryIndependence;
+import vswe.stevesvehicles.modules.data.registries.ModuleRegistryTemperature;
 import vswe.stevesvehicles.modules.data.registries.ModuleRegistryTravel;
+import vswe.stevesvehicles.modules.data.registries.ModuleRegistryUtility;
+import vswe.stevesvehicles.modules.data.registries.carts.ModuleRegistryCartCleaning;
 import vswe.stevesvehicles.modules.data.registries.carts.ModuleRegistryCartCultivationUtil;
 import vswe.stevesvehicles.modules.data.registries.carts.ModuleRegistryCartDrillUtility;
 import vswe.stevesvehicles.modules.data.registries.carts.ModuleRegistryCartHulls;
@@ -23,9 +28,12 @@ import java.util.Map;
 
 public class ModuleRegistry implements IRegistry<ModuleData> {
 
-    public static void init() {
+    private static void preInit() {
         loader = new RegistryLoader<ModuleRegistry, ModuleData>();
         allModules = new ArrayList<ModuleData>();
+    }
+
+    public static void init() {
         add(new ModuleRegistryCartHulls());
         add(new ModuleRegistryEngines());
         add(new ModuleRegistryCartTools());
@@ -37,6 +45,11 @@ public class ModuleRegistry implements IRegistry<ModuleData> {
         add(new ModuleRegistryCartCultivationUtil());
         add(new ModuleRegistryTravel());
         add(new ModuleRegistryCartTravel());
+        add(new ModuleRegistryTemperature());
+        add(new ModuleRegistryCartCleaning());
+        add(new ModuleRegistryUtility());
+        add(new ModuleRegistryCake());
+        add(new ModuleRegistryIndependence());
     }
 
     private static List<ModuleData> allModules;
@@ -59,6 +72,10 @@ public class ModuleRegistry implements IRegistry<ModuleData> {
     }
 
     public static void add(ModuleRegistry registry) {
+        if(loader == null) {
+            preInit();
+        }
+
         loader.add(registry);
     }
 

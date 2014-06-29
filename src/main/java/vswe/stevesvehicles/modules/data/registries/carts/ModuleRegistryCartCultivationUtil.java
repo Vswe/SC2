@@ -1,9 +1,12 @@
 package vswe.stevesvehicles.modules.data.registries.carts;
 
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import vswe.stevesvehicles.client.rendering.models.ModelLawnMower;
 import vswe.stevesvehicles.modules.data.ModuleData;
 import vswe.stevesvehicles.modules.data.ModuleDataGroup;
 import vswe.stevesvehicles.modules.data.ModuleRegistry;
@@ -68,7 +71,14 @@ public class ModuleRegistryCartCultivationUtil extends ModuleRegistry {
 
 
 
-        ModuleData mower = new ModuleData("lawn_mower", ModuleFlowerRemover.class, 38);
+        ModuleData mower = new ModuleData("lawn_mower", ModuleFlowerRemover.class, 38) {
+            @Override
+            @SideOnly(Side.CLIENT)
+            public void loadModels() {
+                addModel("LawnMower", new ModelLawnMower());
+                setModelMultiplier(0.4F);
+            }
+        };
         mower.addShapedRecipe(      BLADE_ARM,      null,           BLADE_ARM,
                                     null,           SIMPLE_PCB,     null,
                                     BLADE_ARM,      null,           BLADE_ARM);

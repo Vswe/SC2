@@ -7,6 +7,7 @@ import net.minecraft.init.Items;
 import vswe.stevesvehicles.client.rendering.models.ModelBridge;
 import vswe.stevesvehicles.client.rendering.models.ModelRailer;
 import vswe.stevesvehicles.client.rendering.models.ModelToolPlate;
+import vswe.stevesvehicles.client.rendering.models.ModelTorchplacer;
 import vswe.stevesvehicles.client.rendering.models.ModelTrackRemover;
 import vswe.stevesvehicles.modules.data.ModuleData;
 import vswe.stevesvehicles.modules.data.ModuleRegistry;
@@ -16,6 +17,7 @@ import vswe.stevesvehicles.old.Modules.Workers.ModuleBridge;
 import vswe.stevesvehicles.old.Modules.Workers.ModuleRailer;
 import vswe.stevesvehicles.old.Modules.Workers.ModuleRailerLarge;
 import vswe.stevesvehicles.old.Modules.Workers.ModuleRemover;
+import vswe.stevesvehicles.old.Modules.Workers.ModuleTorch;
 import vswe.stevesvehicles.vehicles.VehicleRegistry;
 
 import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
@@ -58,6 +60,22 @@ public class ModuleRegistryCartRails extends ModuleRegistry {
 
         ModuleData.addNemesis(railer, railerLarge);
 
+
+        ModuleData torch = new ModuleData("torch_placer", ModuleTorch.class, 14) {
+            @Override
+            @SideOnly(Side.CLIENT)
+            public void loadModels() {
+                addModel("Torch", new ModelTorchplacer());
+            }
+        };
+
+        torch.addShapedRecipe(  TRI_TORCH,              null,                   TRI_TORCH,
+                                Items.iron_ingot,       null,                   Items.iron_ingot,
+                                Items.iron_ingot,       Items.iron_ingot,       Items.iron_ingot);
+
+        torch.addSides(ModuleSide.RIGHT, ModuleSide.LEFT);
+        torch.addVehicles(VehicleRegistry.CART);
+        register(torch);
 
 
         ModuleData bridge = new ModuleData("bridge_builder", ModuleBridge.class, 14) {
