@@ -9,11 +9,12 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.common.config.Configuration;
 import vswe.stevesvehicles.items.ItemVehicles;
 import vswe.stevesvehicles.items.ItemVehicleModule;
+import vswe.stevesvehicles.modules.data.ModuleRegistry;
 import vswe.stevesvehicles.old.Blocks.ModBlocks;
 import vswe.stevesvehicles.old.Helpers.ComponentTypes;
 import vswe.stevesvehicles.old.Helpers.DetectorType;
 import vswe.stevesvehicles.old.Helpers.RecipeHelper;
-import vswe.stevesvehicles.old.ModuleData.ModuleData;
+import vswe.stevesvehicles.modules.data.ModuleData;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.old.Upgrades.AssemblerUpgrade;
 
@@ -33,7 +34,7 @@ public final class ModItems {
     private static final String COMPONENTS_NAME = "ModuleComponents";
     private static final String MODULES_NAME = "CartModule";
 
-    private static HashMap<Byte,Boolean> validModules = new HashMap<Byte,Boolean>();
+    private static HashMap<String,Boolean> validModules = new HashMap<String,Boolean>();
 
     public static void preBlockInit(Configuration config) {
         (carts = new ItemVehicles()).setUnlocalizedName(StevesVehicles.localStart + CART_NAME);
@@ -44,11 +45,11 @@ public final class ModItems {
         GameRegistry.registerItem(component, COMPONENTS_NAME);
         GameRegistry.registerItem(modules, MODULES_NAME);
 
-        ModuleData.init();
 
-        for (ModuleData module : ModuleData.getList().values()) {
+        //TODO this is being called before all modules have been added, needs to be figured out
+        for (ModuleData module : ModuleRegistry.getAllModules()) {
             if (!module.getIsLocked()) {
-                validModules.put(module.getID(), config.get("EnabledModules", module.getName().replace(" ", "").replace(":","_"), module.getEnabledByDefault()).getBoolean(true));
+                validModules.put(module.getFullRawUnlocalizedName(), config.get("EnabledModules", module.getName().replace(" ", "").replace(":","_"), module.getEnabledByDefault()).getBoolean(true));
             }
         }
 
@@ -57,10 +58,6 @@ public final class ModItems {
             GameRegistry.registerCustomItemStack(subcomponent.getUnlocalizedName(), subcomponent);
         }
 
-        for (ModuleData module : ModuleData.getList().values()) {
-            ItemStack submodule = new ItemStack(modules,1,module.getID());
-            GameRegistry.registerCustomItemStack(submodule.getUnlocalizedName(), submodule);
-        }
     }
 
     public static void postBlockInit(Configuration config) {
@@ -88,11 +85,9 @@ public final class ModItems {
 
 
     public static void addRecipes() {
-        for (ModuleData module : ModuleData.getList().values()) {
-            ItemStack submodule = new ItemStack(modules,1,module.getID());
-
-            if (!module.getIsLocked() && validModules.get(module.getID())) {
-                module.loadRecipe();
+        for (ModuleData module : ModuleRegistry.getAllModules()) {
+            if (!module.getIsLocked() && validModules.get(module.getFullRawUnlocalizedName())) {
+                //module.loadRecipe(); //TODO how should the recipes be loaded?
             }
         }
 

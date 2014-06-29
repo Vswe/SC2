@@ -78,6 +78,10 @@ public class ModuleData {
         return unlocalizedName;
     }
 
+    public final String getFullRawUnlocalizedName() {
+        return unlocalizedName;
+    } //TODO make it take into account what registry registered it
+
     public final int getCost() {
         return modularCost;
     }

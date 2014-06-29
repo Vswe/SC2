@@ -1,6 +1,7 @@
 package vswe.stevesvehicles.old.Slots;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevesvehicles.modules.data.ModuleType;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.old.TileEntities.TileEntityCartAssembler;
 
@@ -10,7 +11,7 @@ public class SlotOutput extends SlotAssembler
 
     public SlotOutput(TileEntityCartAssembler assembler, int i, int j, int k)
     {
-        super(assembler, i, j, k, 0, true,0);
+        super(assembler, i, j, k, ModuleType.INVALID, true,0);
 
     }
 

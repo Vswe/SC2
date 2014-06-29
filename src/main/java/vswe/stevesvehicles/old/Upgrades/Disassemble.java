@@ -9,7 +9,7 @@ import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.old.Containers.ContainerCartAssembler;
 import vswe.stevesvehicles.old.Helpers.TransferHandler;
-import vswe.stevesvehicles.old.ModuleData.ModuleData;
+import vswe.stevesvehicles.modules.data.ModuleData;
 import vswe.stevesvehicles.old.Slots.SlotCart;
 import vswe.stevesvehicles.old.Slots.SlotModule;
 import vswe.stevesvehicles.old.TileEntities.TileEntityCartAssembler;
@@ -154,7 +154,7 @@ public class Disassemble extends InventoryEffect {
 
 						
 				boolean addedHull = false;
-				ArrayList<ItemStack> modules = ModuleData.getModularItems(cart);
+				ArrayList<ItemStack> modules = ModuleData.getModularItems(cart); //TODO
 				for (ItemStack item : modules) {
 					item.stackSize = 0;	
 					

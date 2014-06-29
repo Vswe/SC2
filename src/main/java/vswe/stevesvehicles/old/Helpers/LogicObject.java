@@ -3,10 +3,11 @@ import java.util.ArrayList;
 
 import org.lwjgl.opengl.GL11;
 
+import vswe.stevesvehicles.modules.data.ModuleRegistry;
 import vswe.stevesvehicles.network.PacketHandler;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 import vswe.stevesvehicles.old.Interfaces.GuiDetector;
-import vswe.stevesvehicles.old.ModuleData.ModuleData;
+import vswe.stevesvehicles.modules.data.ModuleData;
 import vswe.stevesvehicles.modules.ModuleBase;
 import vswe.stevesvehicles.old.TileEntities.TileEntityDetector;
 import cpw.mods.fml.relauncher.Side;
@@ -22,7 +23,7 @@ public class LogicObject {
 	private int level;
 	
 	//if module then the data will be its id, otherwise the logical operator's id
-	private byte data;
+	private byte data; //TODO shouldn't work with bytes anymore
 	
 	
 	public LogicObject(byte id, byte type, byte data) {
@@ -117,7 +118,7 @@ public class LogicObject {
 			if (isModule()) {
 				ResourceHelper.bindResource(gui.moduleTexture);
 				
-				ModuleData module = ModuleData.getList().get(data);
+				ModuleData module = ModuleRegistry.getModuleFromId(data);
 				if (module != null) {
 					gui.drawIcon(module.getIcon(), gui.getGuiLeft()+x, gui.getGuiTop() + y, 1F, 1F, 0F, 0F);
 				}
@@ -340,7 +341,7 @@ public class LogicObject {
 				return state.getName();
 			}
 		}else if (isModule()) {
-			ModuleData module = ModuleData.getList().get(getData());
+			ModuleData module = ModuleRegistry.getModuleFromId(getData());
 			if (module == null) {
 				return "Undefined";
 			}else{

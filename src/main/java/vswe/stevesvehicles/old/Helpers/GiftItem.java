@@ -6,8 +6,8 @@ import net.minecraft.item.ItemStack;
 import java.util.ArrayList;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import vswe.stevesvehicles.old.Items.ModItems;
-import vswe.stevesvehicles.old.ModuleData.ModuleData;
+import vswe.stevesvehicles.modules.data.ModuleRegistry;
+import vswe.stevesvehicles.modules.data.ModuleData;
 public class GiftItem {
 	private int chanceWeight;
 	private int costPerItem;
@@ -28,6 +28,22 @@ public class GiftItem {
 		this(new ItemStack(item,1), costPerItem, chanceWeight);
 	}
 
+    public ItemStack getItem() {
+        return item;
+    }
+
+    private static class GiftItemModule extends GiftItem {
+        private ModuleData module;
+        private GiftItemModule(ModuleData module, int costPerItem, int chanceWeight) {
+            super((ItemStack)null, costPerItem, chanceWeight);
+            this.module = module;
+        }
+
+        @Override
+        public ItemStack getItem() {
+            return module.getItemStack();
+        }
+    }
 	
 	public static ArrayList<GiftItem> ChristmasList;
 	public static ArrayList<GiftItem> EasterList;
@@ -48,10 +64,10 @@ public class GiftItem {
 	}
 	
 	public static void addModuleGifts(ArrayList<GiftItem> gifts) {
-		for (ModuleData module : ModuleData.getList().values()) {
+		for (ModuleData module : ModuleRegistry.getAllModules()) {
 			if (module.getIsValid() && !module.getIsLocked() && module.getHasRecipe()) {
 				if (module.getCost() > 0) {		
-					GiftItem item = new GiftItem(new ItemStack(ModItems.modules, 1, module.getID()), module.getCost() * 20, (int)Math.pow(151 - module.getCost(), 2));
+					GiftItem item = new GiftItemModule(module, module.getCost() * 20, (int)Math.pow(151 - module.getCost(), 2));
 					item.fixedSize = true;
 					gifts.add(item);
 				}
@@ -77,8 +93,8 @@ public class GiftItem {
 			for (GiftItem gift : gifts) {
 				if (chance < gift.chanceWeight) {
 					int maxSetSize = (value / gift.costPerItem);
-					if (maxSetSize * gift.item.stackSize > gift.item.getItem().getItemStackLimit(gift.item)) {
-						maxSetSize = gift.item.getItem().getItemStackLimit(gift.item) / gift.item.stackSize;
+					if (maxSetSize * gift.getItem().stackSize > gift.getItem().getItem().getItemStackLimit(gift.getItem())) {
+						maxSetSize = gift.getItem().getItem().getItemStackLimit(gift.getItem()) / gift.getItem().stackSize;
 					}
 					if (maxSetSize > 0) {
 						int setSize = 1;
@@ -90,7 +106,7 @@ public class GiftItem {
 							}
 						}
 						
-						ItemStack item = gift.item.copy();
+						ItemStack item = gift.getItem().copy();
 						item.stackSize *= setSize;
 						items.add(item);
 						

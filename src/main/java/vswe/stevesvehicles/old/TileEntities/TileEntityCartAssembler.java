@@ -16,6 +16,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import vswe.stevesvehicles.items.ItemVehicles;
 import vswe.stevesvehicles.modules.data.ModuleDataItemHandler;
+import vswe.stevesvehicles.modules.data.ModuleType;
 import vswe.stevesvehicles.old.Blocks.BlockCartAssembler;
 import vswe.stevesvehicles.old.Blocks.ModBlocks;
 import vswe.stevesvehicles.old.Helpers.*;
@@ -279,7 +280,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 		
 		///create the engine slots
 		for (int i = 0; i < 5; i++) {
-			SlotAssembler slot = new SlotAssembler(this, slotID++, engineBox.getX() + 2 + 18*i,engineBox.getY(), 1, false,i);
+			SlotAssembler slot = new SlotAssembler(this, slotID++, engineBox.getX() + 2 + 18*i,engineBox.getY(), ModuleType.ENGINE, false,i);
 			slot.invalidate();
 			slots.add(slot);
 			engineSlots.add(slot);
@@ -287,13 +288,13 @@ public class TileEntityCartAssembler extends TileEntityBase
 		
 
 		//create the tool slot
-		toolSlot = new SlotAssembler(this, slotID++, toolBox.getX() + 2,toolBox.getY(), 2, false,0);
+		toolSlot = new SlotAssembler(this, slotID++, toolBox.getX() + 2,toolBox.getY(), ModuleType.TOOL, false,0);
 		slots.add(toolSlot);		
 		toolSlot.invalidate();
 		
 		//create the attachment slots
 		for (int i = 0; i < 6; i++) {
-			SlotAssembler slot = new SlotAssembler(this, slotID++, attachBox.getX() + 2 + 18*i,attachBox.getY(), -1, false,i);
+			SlotAssembler slot = new SlotAssembler(this, slotID++, attachBox.getX() + 2 + 18*i,attachBox.getY(), ModuleType.ATTACHMENT, false,i);
 			slot.invalidate();
 			slots.add(slot);
 			funcSlots.add(slot);
@@ -301,7 +302,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 		
 		//create the storage slots
 		for (int i = 0; i < 4; i++) {
-			SlotAssembler slot = new SlotAssembler(this, slotID++, storageBox.getX() + 2 + 18*i,storageBox.getY(), 3, false,i);
+			SlotAssembler slot = new SlotAssembler(this, slotID++, storageBox.getX() + 2 + 18*i,storageBox.getY(), ModuleType.STORAGE, false,i);
 			slot.invalidate();
 			slots.add(slot);
 			chestSlots.add(slot);
@@ -309,7 +310,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 		
 		//create the addon slots
 		for (int i = 0; i < 12; i++) {
-			SlotAssembler slot = new SlotAssembler(this, slotID++, addonBox.getX() + 2 + 18*(i%6),addonBox.getY()+18*(i/6), 4, false,i);
+			SlotAssembler slot = new SlotAssembler(this, slotID++, addonBox.getX() + 2 + 18*(i%6),addonBox.getY()+18*(i/6), ModuleType.ADDON, false,i);
 			slot.invalidate();
 			slots.add(slot);
 			addonSlots.add(slot);

@@ -2,24 +2,26 @@ package vswe.stevesvehicles.old.Slots;
 
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import vswe.stevesvehicles.old.ModuleData.ModuleData;
+import vswe.stevesvehicles.modules.data.ModuleData;
+import vswe.stevesvehicles.modules.data.ModuleDataItemHandler;
+import vswe.stevesvehicles.modules.data.ModuleType;
 import vswe.stevesvehicles.old.TileEntities.TileEntityCartAssembler;
 import net.minecraft.entity.player.EntityPlayer;
 public class SlotAssembler extends Slot
 {
 	
-	private int  groupID;
+	private ModuleType type;
 	private int x;
 	private int y;
 	private TileEntityCartAssembler assembler;
 	private int openingAnimation;
 	private int id;
-    public SlotAssembler(TileEntityCartAssembler assembler, int i, int j, int k, int groupID, boolean useLarge, int id)
+    public SlotAssembler(TileEntityCartAssembler assembler, int i, int j, int k, ModuleType type, boolean useLarge, int id)
     {
         super(assembler, i, j, k);
 		this.assembler = assembler;
 		this.useLarge = useLarge;
-		this. groupID =  groupID;
+		this.type =  type;
 		x = j;
 		y = k;
 		isValid = true;
@@ -37,7 +39,7 @@ public class SlotAssembler extends Slot
 
     public boolean isItemValid(ItemStack itemstack)
     {
-        return itemstack != null && isValid && ModuleData.isValidModuleItem( groupID, itemstack) && (!getHasStack() || (getStack().stackSize > 0 && itemstack.stackSize > 0));
+        return itemstack != null && isValid && ModuleDataItemHandler.isValidModuleItem(type, itemstack) && (!getHasStack() || (getStack().stackSize > 0 && itemstack.stackSize > 0));
     }
 	
 	//boolean fullInvalidation = false;

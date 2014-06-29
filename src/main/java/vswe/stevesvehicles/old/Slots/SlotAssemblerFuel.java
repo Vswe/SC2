@@ -3,6 +3,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.fluids.FluidContainerRegistry;
+import vswe.stevesvehicles.modules.data.ModuleType;
 import vswe.stevesvehicles.old.TileEntities.TileEntityCartAssembler;
 
 public class SlotAssemblerFuel extends SlotAssembler
@@ -11,7 +12,7 @@ public class SlotAssemblerFuel extends SlotAssembler
 
     public SlotAssemblerFuel(TileEntityCartAssembler assembler, int i, int j, int k)
     {
-        super(assembler, i, j, k, 0, true,0);
+        super(assembler, i, j, k, ModuleType.INVALID, true,0);
 
     }
 

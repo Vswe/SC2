@@ -8,10 +8,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import vswe.stevesvehicles.modules.data.ModuleDataItemHandler;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.DetectorType;
-import vswe.stevesvehicles.old.ModuleData.ModuleData;
+import vswe.stevesvehicles.modules.data.ModuleData;
 import vswe.stevesvehicles.old.TileEntities.TileEntityActivator;
 import vswe.stevesvehicles.old.TileEntities.TileEntityDetector;
 import vswe.stevesvehicles.old.TileEntities.TileEntityManager;
@@ -156,7 +157,7 @@ public class BlockRailAdvDetector extends BlockSpecialRailBase
 													if (effect2 instanceof Disassemble) {
 														Disassemble disassembler = (Disassemble)effect2;
 														if (tile.getStackInSlot(0) == null) {
-															tile.setInventorySlotContents(0, ModuleData.createModularCart(cart));
+															tile.setInventorySlotContents(0, ModuleDataItemHandler.createModularVehicle(cart.getVehicle()));
 															upgrade.getMaster().managerInteract(cart, false);
 															for (int p = 0; p < cart.getSizeInventory(); p++) {
 																ItemStack item = cart.getStackInSlotOnClosing(p);

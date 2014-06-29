@@ -249,7 +249,7 @@ public final class ModuleDataItemHandler {
         return getModulesAndCompoundsFromItem(item, VehicleBase.NBT_SPARES);
     }
 
-    private static List<Tuple<ModuleData, NBTTagCompound>> getModulesAndCompoundsFromItem(ItemStack item, String tag, boolean compounds) {
+    private static List<Tuple<ModuleData, NBTTagCompound>> getModulesAndCompoundsFromItem(ItemStack item, String tag) {
         NBTTagCompound compound = item.getTagCompound();
         if (compound != null && compound.hasKey(tag)) {
             List<Tuple<ModuleData, NBTTagCompound>> modules = new ArrayList<Tuple<ModuleData, NBTTagCompound>>();

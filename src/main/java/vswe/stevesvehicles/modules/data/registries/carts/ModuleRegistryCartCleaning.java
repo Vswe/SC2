@@ -6,7 +6,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import vswe.stevesvehicles.client.rendering.models.ModelCleaner;
 import vswe.stevesvehicles.client.rendering.models.ModelHullTop;
-import vswe.stevesvehicles.client.rendering.models.ModelLawnMower;
 import vswe.stevesvehicles.client.rendering.models.ModelLiquidDrainer;
 import vswe.stevesvehicles.modules.data.ModuleData;
 import vswe.stevesvehicles.modules.data.ModuleRegistry;
@@ -14,7 +13,6 @@ import vswe.stevesvehicles.modules.data.ModuleSide;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleCleaner;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleExperience;
-import vswe.stevesvehicles.old.Modules.Realtimers.ModuleFlowerRemover;
 import vswe.stevesvehicles.old.Modules.Workers.ModuleLiquidDrainer;
 import vswe.stevesvehicles.vehicles.VehicleRegistry;
 

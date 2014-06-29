@@ -7,6 +7,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import vswe.stevesvehicles.client.interfaces.GuiBase;
+import vswe.stevesvehicles.modules.data.ModuleRegistry;
 import vswe.stevesvehicles.old.Containers.ContainerDetector;
 import vswe.stevesvehicles.old.Helpers.DetectorType;
 import vswe.stevesvehicles.old.Helpers.DropDownMenu;
@@ -15,7 +16,7 @@ import vswe.stevesvehicles.old.Helpers.LogicObject;
 import vswe.stevesvehicles.old.Helpers.ModuleState;
 import vswe.stevesvehicles.old.Helpers.OperatorObject;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
-import vswe.stevesvehicles.old.ModuleData.ModuleData;
+import vswe.stevesvehicles.modules.data.ModuleData;
 import vswe.stevesvehicles.old.TileEntities.TileEntityDetector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -57,7 +58,7 @@ public class GuiDetector extends GuiBase
 		
 		if (modulesMenu.getScroll() != 0) {
 			int modulePosId = 0;
-			for (ModuleData module : ModuleData.getModules()) {
+			for (ModuleData module : ModuleRegistry.getAllModules()) {
 				if (module.getIsValid()) {
 			
 					int[] target = modulesMenu.getContentRect(modulePosId);			
@@ -179,7 +180,7 @@ public class GuiDetector extends GuiBase
 
         ResourceHelper.bindResource(moduleTexture);
 		int modulePosId = 0;
-		for (ModuleData module : ModuleData.getModules()) {
+		for (ModuleData module : ModuleRegistry.getAllModules()) {
 			if (module.getIsValid()) {	
 				modulesMenu.drawContent(this,modulePosId, module.getIcon());
 
@@ -238,12 +239,12 @@ public class GuiDetector extends GuiBase
 
 				
 				int modulePosId = 0;
-				for (ModuleData module : ModuleData.getModules()) {
+				for (ModuleData module : ModuleRegistry.getAllModules()) {
 					if (module.getIsValid()) {
 				
 						int[] target = modulesMenu.getContentRect(modulePosId);			
 						if (inRect(x,y, target)) {
-							currentObject = new LogicObject((byte)0, module.getID());
+							currentObject = new LogicObject((byte)0, (byte)ModuleRegistry.getIdFromModule(module));
 						
 							return;
 						}
