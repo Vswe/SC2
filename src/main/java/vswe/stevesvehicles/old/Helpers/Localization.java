@@ -2,13 +2,16 @@ package vswe.stevesvehicles.old.Helpers;
 
 
 import net.minecraft.util.StatCollector;
+import vswe.stevesvehicles.localization.ILocalizedText;
+
+//TODO get rid of this class and use PlainText, LocalizedTextSimple and LocalizedTextAdvanced. Needs changes in the whole project.
 
 public final class Localization {
     private Localization() {}
 
     public static class GUI {
 
-        public static enum ASSEMBLER {
+        public static enum ASSEMBLER implements ILocalizedText {
             TITLE("cartAssembler"),
             ASSEMBLE_INSTRUCTION("basicAssembleInstruction"),
             INVALID_HULL("invalidHullError"),
@@ -34,12 +37,18 @@ public final class Localization {
             }
 
 
+
             public String translate(String ... vars) {
                 return doTranslate("gui.SC2:" + name, vars);
             }
+
+            @Override
+            public String toString() {
+                return super.toString();
+            }
         }
 
-        public static enum MANAGER {
+        public static enum MANAGER implements ILocalizedText {
             TITLE("manager"),
             CURRENT_SETTING("currentSetting"),
             CHANGE_TRANSFER_DIRECTION("changeTransferDirection"),
@@ -70,7 +79,7 @@ public final class Localization {
             }
         }
 
-        public static enum CARGO {
+        public static enum CARGO implements ILocalizedText {
             TITLE("cargoManager"),
             CHANGE_SLOT_LAYOUT("changeSlotLayout"),
             LAYOUT_SHARED("layoutShared"),
@@ -114,7 +123,7 @@ public final class Localization {
             }
         }
 
-        public static enum LIQUID {
+        public static enum LIQUID implements ILocalizedText {
             TITLE("liquidManager"),
             CHANGE_LAYOUT("changeTankLayout"),
             LAYOUT_ALL("layoutSharedTanks"),
@@ -137,7 +146,7 @@ public final class Localization {
         }
 
 
-        public static enum TOGGLER {
+        public static enum TOGGLER implements ILocalizedText {
             TITLE("moduleToggler"),
             OPTION_DRILL("optionDrill"),
             OPTION_SHIELD("optionShield"),
@@ -163,7 +172,7 @@ public final class Localization {
             }
         }
 
-        public static enum DISTRIBUTOR {
+        public static enum DISTRIBUTOR implements ILocalizedText {
             TITLE("externalDistributor"),
             NOT_CONNECTED("distributorNotConnected"),
             SIDE("sideName"),
@@ -202,7 +211,7 @@ public final class Localization {
             }
         }
 
-        public static enum DETECTOR {
+        public static enum DETECTOR implements ILocalizedText {
             OUTPUT("operatorOutput"),
             AND("operatorAnd"),
             OR("operatorOr"),
@@ -288,7 +297,7 @@ public final class Localization {
 
     }
 
-    public static enum MODULE_INFO {
+    public static enum MODULE_INFO implements ILocalizedText {
         ENGINE_GROUP("moduleGroupEngine"),
         DRILL_GROUP("moduleGroupDrill"),
         FARMER_GROUP("moduleGroupFarmer"),
@@ -359,7 +368,7 @@ public final class Localization {
         }
     }
 
-    public static enum UPGRADES {
+    public static enum UPGRADES implements ILocalizedText {
         BLUEPRINT("effectBlueprint"),
         COMBUSTION("effectCombustionFuel"),
         DEPLOYER("effectDeployer"),
@@ -392,7 +401,7 @@ public final class Localization {
 
     public static class MODULES {
 
-        public static enum ADDONS {
+        public static enum ADDONS implements ILocalizedText {
             BUTTON_RANDOMIZE("buttonRandomize"),
             DETECTOR_ANIMALS("detectorAnimals"),
             DETECTOR_BATS("detectorBats"),
@@ -456,7 +465,7 @@ public final class Localization {
             }
         }
 
-        public static enum ENGINES {
+        public static enum ENGINES implements ILocalizedText {
             OVER_9000("creativePowerLevel"),
             COAL("coalEngineTitle"),
             NO_FUEL("outOfFuel"),
@@ -484,7 +493,7 @@ public final class Localization {
             }
         }
 
-        public static enum TANKS {
+        public static enum TANKS implements ILocalizedText {
             CREATIVE_MODE("creativeTankMode"),
             CHANGE_MODE("creativeTankChangeMode"),
             RESET_MODE("creativeTankResetMode"),
@@ -504,7 +513,7 @@ public final class Localization {
             }
         }
 
-        public static enum TOOLS {
+        public static enum TOOLS implements ILocalizedText {
             DURABILITY("toolDurability"),
             BROKEN("toolBroken"),
             REPAIRING("toolRepairing"),
@@ -530,7 +539,7 @@ public final class Localization {
             }
         }
 
-        public static enum ATTACHMENTS {
+        public static enum ATTACHMENTS implements ILocalizedText {
             FERTILIZERS("fertilizers"),
             RAILER("railerTitle"),
             CONTROL_SYSTEM("controlSystemTitle"),
@@ -586,7 +595,7 @@ public final class Localization {
     }
 
 
-    public static enum ARCADE {
+    public static enum ARCADE implements ILocalizedText {
         GHAST("ghastInvaders"),
         EXTRA_LIVES("ghastLives"),
         HIGH_SCORE("highScore"),
@@ -660,7 +669,7 @@ public final class Localization {
     }
 
     public static class STORIES {
-        public static enum THE_BEGINNING {
+        public static enum THE_BEGINNING implements ILocalizedText {
             MAP_EDITOR("mapEditor"),
             TITLE("title"),
             MISSION("mission"),

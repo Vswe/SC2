@@ -11,6 +11,7 @@ import vswe.stevesvehicles.client.rendering.models.ModelFrontChest;
 import vswe.stevesvehicles.client.rendering.models.ModelGiftStorage;
 import vswe.stevesvehicles.client.rendering.models.ModelSideChests;
 import vswe.stevesvehicles.client.rendering.models.ModelTopChest;
+import vswe.stevesvehicles.localization.ILocalizedText;
 import vswe.stevesvehicles.modules.ModuleBase;
 import vswe.stevesvehicles.modules.data.ModuleData;
 import vswe.stevesvehicles.modules.data.ModuleRegistry;
@@ -188,8 +189,8 @@ public class ModuleRegistryChests extends ModuleRegistry {
 
     private static final String STORAGE_OPENED = "Opened";
     private static abstract class ModuleDataTreatStorage extends ModuleData {
-        private Localization.MODULE_INFO fullText;
-        public ModuleDataTreatStorage(String unlocalizedName, Class<? extends ModuleBase> moduleClass, int modularCost, Localization.MODULE_INFO fullText) {
+        private ILocalizedText fullText;
+        public ModuleDataTreatStorage(String unlocalizedName, Class<? extends ModuleBase> moduleClass, int modularCost, ILocalizedText fullText) {
             super(unlocalizedName, moduleClass, modularCost);
             setHasExtraData(true);
             this.fullText = fullText;

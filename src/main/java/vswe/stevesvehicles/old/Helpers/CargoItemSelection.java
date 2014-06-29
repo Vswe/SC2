@@ -1,13 +1,14 @@
 package vswe.stevesvehicles.old.Helpers;
 import net.minecraft.item.ItemStack;
-	
+import vswe.stevesvehicles.localization.ILocalizedText;
+
 public class CargoItemSelection {
 
 	private Class validSlot;
 	private ItemStack icon;
-	private Localization.GUI.CARGO name;
+	private ILocalizedText name;
 	
-	public CargoItemSelection(Localization.GUI.CARGO name, Class validSlot, ItemStack icon) {
+	public CargoItemSelection(ILocalizedText name, Class validSlot, ItemStack icon) {
 		this.name = name;
 		this.validSlot = validSlot;
 		this.icon = icon;

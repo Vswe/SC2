@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import net.minecraft.tileentity.TileEntity;
+import vswe.stevesvehicles.localization.ILocalizedText;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 import vswe.stevesvehicles.old.TileEntities.TileEntityDetector;
 
@@ -78,7 +79,7 @@ public class OperatorObject {
 		private int x;
 		private int y;
 		private int z;
-		public OperatorObjectRedirector(HashMap<Byte, OperatorObject> operators, int ID, Localization.GUI.DETECTOR name, int x, int y, int z) {
+		public OperatorObjectRedirector(HashMap<Byte, OperatorObject> operators, int ID, ILocalizedText name, int x, int y, int z) {
 			super(operators, ID, name, 0);
 			
 			this.x = x;
@@ -105,7 +106,7 @@ public class OperatorObject {
 		private int x;
 		private int y;
 		private int z;
-		public OperatorObjectRedstone(HashMap<Byte, OperatorObject> operators, int ID, Localization.GUI.DETECTOR name, int x, int y, int z) {
+		public OperatorObjectRedstone(HashMap<Byte, OperatorObject> operators, int ID, ILocalizedText name, int x, int y, int z) {
 			super(operators, ID, name, 0);
 			
 			this.x = x;
@@ -144,11 +145,11 @@ public class OperatorObject {
 	}	
 	
 	private byte ID;
-	private Localization.GUI.DETECTOR name;
+	private ILocalizedText name;
 	private int childs;
 	
 	
-	public OperatorObject(HashMap<Byte, OperatorObject> operators, int ID, Localization.GUI.DETECTOR name, int childs) {
+	public OperatorObject(HashMap<Byte, OperatorObject> operators, int ID, ILocalizedText name, int childs) {
 		this.ID = (byte)ID;
 		this.name = name;
 		this.childs = childs;

@@ -1,9 +1,11 @@
 package vswe.stevesvehicles.old.Helpers;
 
+import vswe.stevesvehicles.localization.ILocalizedText;
+
 public abstract class LabelInformation {
 
-	private Localization.MODULES.ADDONS name;
-	public LabelInformation(Localization.MODULES.ADDONS name) {
+	private ILocalizedText name;
+	public LabelInformation(ILocalizedText name) {
 		this.name = name;
 	}
 	

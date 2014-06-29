@@ -1,16 +1,17 @@
 package vswe.stevesvehicles.old.Helpers;
 import net.minecraftforge.common.util.ForgeDirection;
+import vswe.stevesvehicles.localization.ILocalizedText;
 import vswe.stevesvehicles.old.TileEntities.TileEntityDistributor;
 	
 public class DistributorSide {
 
 
 	private int id;
-	private Localization.GUI.DISTRIBUTOR name;
+	private ILocalizedText name;
 	private ForgeDirection side;
 	private int data;
 	
-	public DistributorSide(int id, Localization.GUI.DISTRIBUTOR name, ForgeDirection side) {
+	public DistributorSide(int id, ILocalizedText name, ForgeDirection side) {
 		this.name = name;
 		this.id = id;
 		this.side = side;

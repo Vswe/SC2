@@ -1,5 +1,6 @@
 package vswe.stevesvehicles.modules.data;
 
+import vswe.stevesvehicles.localization.ILocalizedText;
 import vswe.stevesvehicles.old.Helpers.Localization;
 
 public enum ModuleSide {
@@ -12,8 +13,8 @@ public enum ModuleSide {
     RIGHT(Localization.MODULE_INFO.SIDE_RIGHT),
     FRONT(Localization.MODULE_INFO.SIDE_FRONT);
 
-    private Localization.MODULE_INFO name;
-    private ModuleSide(Localization.MODULE_INFO name) {
+    private ILocalizedText name;
+    private ModuleSide(ILocalizedText name) {
         this.name = name;
     }
 

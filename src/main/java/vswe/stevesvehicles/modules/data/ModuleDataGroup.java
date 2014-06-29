@@ -1,4 +1,5 @@
 package vswe.stevesvehicles.modules.data;
+import vswe.stevesvehicles.localization.ILocalizedText;
 import vswe.stevesvehicles.old.Helpers.Localization;
 
 import java.util.ArrayList;
@@ -7,11 +8,11 @@ import java.util.List;
 import java.util.Map;
 
 public class ModuleDataGroup {
-	private Localization.MODULE_INFO name;
+	private ILocalizedText name;
 	private List<ModuleData> modules;
 	private int count;
     private List<ModuleDataGroup> clones;
-	private ModuleDataGroup(Localization.MODULE_INFO name) {
+	private ModuleDataGroup(ILocalizedText name) {
 		this.name = name;
 		count = 1;
 		modules = new ArrayList<ModuleData>();
@@ -82,7 +83,7 @@ public class ModuleDataGroup {
 		}
 	}
 
-	public static ModuleDataGroup getCombinedGroup(String key, Localization.MODULE_INFO name,  ModuleDataGroup mainGroup, ModuleDataGroup ... extraGroups) {
+	public static ModuleDataGroup getCombinedGroup(String key, ILocalizedText name,  ModuleDataGroup mainGroup, ModuleDataGroup ... extraGroups) {
 		ModuleDataGroup newGroup = mainGroup.copy(key);
         mainGroup.addClone(newGroup);
 
@@ -115,7 +116,7 @@ public class ModuleDataGroup {
 	}
 
     private static Map<String, ModuleDataGroup> groups = new HashMap<String, ModuleDataGroup>();
-    public static ModuleDataGroup createGroup(String key, Localization.MODULE_INFO name) {
+    public static ModuleDataGroup createGroup(String key, ILocalizedText name) {
         if (groups.containsKey(key)) {
             ModuleDataGroup group = groups.get(key);
             if (group.name == null && name != null) {

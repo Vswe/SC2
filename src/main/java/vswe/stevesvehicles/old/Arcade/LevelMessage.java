@@ -1,18 +1,18 @@
 package vswe.stevesvehicles.old.Arcade;
 
-import vswe.stevesvehicles.old.Helpers.Localization;
+import vswe.stevesvehicles.localization.ILocalizedText;
 
 public class LevelMessage {
 	private int x;
 	private int y;
 	private int w;
-	private Localization.STORIES.THE_BEGINNING message;
+	private ILocalizedText message;
 	
 	private int isRunning;
 	private int isStill;
 	private int isDone;
 	
-	public LevelMessage(int x, int y, int w, Localization.STORIES.THE_BEGINNING message) {
+	public LevelMessage(int x, int y, int w, ILocalizedText message) {
 		this.x = x;
 		this.y = y;
 		this.w = w;

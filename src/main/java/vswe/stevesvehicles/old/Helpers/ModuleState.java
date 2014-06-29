@@ -28,6 +28,7 @@ import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
+import vswe.stevesvehicles.localization.ILocalizedText;
 import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 import vswe.stevesvehicles.old.Modules.IActivatorModule;
 import vswe.stevesvehicles.old.Modules.ISuppliesModule;
@@ -140,10 +141,10 @@ public class ModuleState {
 	
 
 	private Class<? extends ModuleBase> moduleClass;
-	private Localization.GUI.DETECTOR name;
+	private ILocalizedText name;
 	private byte id;
 	private STATETYPE type;
-	public ModuleState(int id, Class<? extends ModuleBase> moduleClass, Localization.GUI.DETECTOR name, STATETYPE type) {
+	public ModuleState(int id, Class<? extends ModuleBase> moduleClass, ILocalizedText name, STATETYPE type) {
 		this.moduleClass = moduleClass;
 		this.name = name;
 		this.id = (byte)id;
@@ -155,7 +156,7 @@ public class ModuleState {
 	
 	private static class ModuleStateInv extends ModuleState {
 		private boolean full;
-		public ModuleStateInv(int id, Localization.GUI.DETECTOR name, boolean full) {
+		public ModuleStateInv(int id, ILocalizedText name, boolean full) {
 			super(id, ModuleChest.class, name, STATETYPE.INVENTORY);
 			this.full = full;
 		}
@@ -164,7 +165,7 @@ public class ModuleState {
 	private static class ModuleStateTank extends ModuleState {
 		private boolean full;
 		private boolean individual;
-		public ModuleStateTank(int id, Localization.GUI.DETECTOR name, boolean full, boolean individual) {
+		public ModuleStateTank(int id, ILocalizedText name, boolean full, boolean individual) {
 			super(id, ModuleTank.class, name, STATETYPE.TANK);
 			this.full = full;
 			this.individual = individual;
@@ -173,7 +174,7 @@ public class ModuleState {
 	
 	private static class ModuleStatePassenger extends ModuleState {
 		private Class passengerClass;
-		public ModuleStatePassenger(int id, Localization.GUI.DETECTOR name, Class passengerClass) {
+		public ModuleStatePassenger(int id, ILocalizedText name, Class passengerClass) {
 			super(id, null, name, STATETYPE.PASSENGER);
 			this.passengerClass = passengerClass;
 		}
@@ -185,7 +186,7 @@ public class ModuleState {
 	
 	private static class ModuleStatePower extends ModuleState {
 		private int areaId;
-		public ModuleStatePower(int id, Localization.GUI.DETECTOR name, int areaId) {
+		public ModuleStatePower(int id, ILocalizedText name, int areaId) {
 			super(id, ModulePowerObserver.class, name, STATETYPE.POWER);
 			this.areaId = areaId;
 		}

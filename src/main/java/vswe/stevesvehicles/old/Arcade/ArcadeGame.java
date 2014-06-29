@@ -3,6 +3,7 @@ package vswe.stevesvehicles.old.Arcade;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
+import vswe.stevesvehicles.localization.ILocalizedText;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicles.VehicleBase;
@@ -16,10 +17,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 public abstract class ArcadeGame {
 	
 	private ModuleArcade module;
-	private Localization.ARCADE name;
+	private ILocalizedText name;
 
 	
-	public ArcadeGame(ModuleArcade module, Localization.ARCADE name) {
+	public ArcadeGame(ModuleArcade module, ILocalizedText name) {
 		this.name = name;
 		this.module = module;
 	}

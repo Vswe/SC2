@@ -1,20 +1,21 @@
 package vswe.stevesvehicles.old.Helpers;
+import vswe.stevesvehicles.localization.ILocalizedText;
 import vswe.stevesvehicles.modules.ModuleBase;
 	
 public class ActivatorOption {
 
 	private Class<? extends ModuleBase> module;
 	private int id;
-	private Localization.GUI.TOGGLER name;
+	private ILocalizedText name;
 	private int option;
 	
-	public ActivatorOption(Localization.GUI.TOGGLER name, Class<? extends ModuleBase> module, int id) {
+	public ActivatorOption(ILocalizedText name, Class<? extends ModuleBase> module, int id) {
 		this.name = name;
 		this.module = module;
 		this.id = id;
 	}
 	
-	public ActivatorOption(Localization.GUI.TOGGLER name, Class<? extends ModuleBase> module) {
+	public ActivatorOption(ILocalizedText name, Class<? extends ModuleBase> module) {
 		this(name, module, 0);
 	}	
 	

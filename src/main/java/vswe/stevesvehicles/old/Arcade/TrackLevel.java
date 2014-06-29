@@ -14,6 +14,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraft.client.Minecraft;
+import vswe.stevesvehicles.localization.ILocalizedText;
 import vswe.stevesvehicles.old.Arcade.TrackOrientation.DIRECTION;
 import vswe.stevesvehicles.old.Helpers.Localization;
 
@@ -251,7 +252,7 @@ public class TrackLevel {
 	
 
 	
-	private Localization.STORIES.THE_BEGINNING name;
+	private ILocalizedText name;
 	private int playerX;
 	private int playerY;
 	private DIRECTION playerDir;
@@ -278,7 +279,7 @@ public class TrackLevel {
 		return name.translate();
 	}
 
-    public void setName(Localization.STORIES.THE_BEGINNING name) {
+    public void setName(ILocalizedText name) {
         this.name = name;
     }
 		

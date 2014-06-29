@@ -1,6 +1,7 @@
 package vswe.stevesvehicles.old.Helpers;
 import java.util.ArrayList;
 
+import vswe.stevesvehicles.localization.ILocalizedText;
 import vswe.stevesvehicles.old.TileEntities.TileEntityDistributor;
 import vswe.stevesvehicles.old.TileEntities.TileEntityManager;
 	
@@ -42,8 +43,8 @@ public class DistributorSetting {
 	private int id;
 	private int imageId;
 	private boolean top;
-	private Localization.GUI.DISTRIBUTOR name;
-	public DistributorSetting(int id, boolean top, Localization.GUI.DISTRIBUTOR name) {
+	private ILocalizedText name;
+	public DistributorSetting(int id, boolean top, ILocalizedText name) {
 		this.id = id;
 		this.top = top;
 		this.name = name;
@@ -89,7 +90,7 @@ public class DistributorSetting {
 	
 	private static class distributorSettingColor extends DistributorSetting {
 		private int color;
-		public distributorSettingColor(int id, boolean top, Localization.GUI.DISTRIBUTOR name, int color) {
+		public distributorSettingColor(int id, boolean top, ILocalizedText name, int color) {
 			super(id,top,name);
 			this.color = color;
 		}	
@@ -106,7 +107,7 @@ public class DistributorSetting {
 	
 	private static class distributorSettingChunk extends DistributorSetting {
 		private int chunk;
-		public distributorSettingChunk(int id, boolean top, Localization.GUI.DISTRIBUTOR name, int chunk) {
+		public distributorSettingChunk(int id, boolean top, ILocalizedText name, int chunk) {
 			super(id,top,name);
 			this.chunk = chunk;
 		}	
@@ -122,7 +123,7 @@ public class DistributorSetting {
 	
 	private static class distributorSettingDirection extends DistributorSetting {
 		private boolean toCart;
-		public distributorSettingDirection(int id, boolean top, Localization.GUI.DISTRIBUTOR name, boolean toCart) {
+		public distributorSettingDirection(int id, boolean top, ILocalizedText name, boolean toCart) {
 			super(id,top,name);
 			this.toCart = toCart;
 		}	

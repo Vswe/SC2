@@ -10,6 +10,7 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
+import vswe.stevesvehicles.localization.ILocalizedText;
 import vswe.stevesvehicles.modules.ModuleBase;
 import vswe.stevesvehicles.old.Helpers.ColorHelper;
 import vswe.stevesvehicles.old.Helpers.Localization;
@@ -36,7 +37,7 @@ public class ModuleData {
     private boolean isLocked;
     private boolean defaultLock;
     private boolean hasRecipe;
-    private ArrayList<Localization.MODULE_INFO> message;
+    private ArrayList<ILocalizedText> message;
     private ArrayList<IRecipe> recipes;
     private ArrayList<VehicleType> validVehicles;
     private boolean extraData;
@@ -177,9 +178,9 @@ public class ModuleData {
         return this;
     }
 
-    public ModuleData addMessage(Localization.MODULE_INFO s) {
+    public ModuleData addMessage(ILocalizedText s) {
         if (message == null) {
-            message = new ArrayList<Localization.MODULE_INFO>();
+            message = new ArrayList<ILocalizedText>();
         }
         message.add(s);
 
@@ -393,7 +394,7 @@ public class ModuleData {
     public void addExtraMessage(List<String> list) {
         if (message != null) {
             list.add("");
-            for (Localization.MODULE_INFO m : message) {
+            for (ILocalizedText m : message) {
                 String str = m.translate();
                 if (str.length() <= MAX_MESSAGE_ROW_LENGTH) {
                     addExtraMessage(list, str);
