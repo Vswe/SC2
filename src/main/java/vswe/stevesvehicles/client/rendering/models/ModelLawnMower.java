@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.util.ResourceLocation;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
-import vswe.stevesvehicles.modules.ModuleBase;
+import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleFlowerRemover;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

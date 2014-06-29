@@ -5,7 +5,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import org.lwjgl.opengl.GL11;
 
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 

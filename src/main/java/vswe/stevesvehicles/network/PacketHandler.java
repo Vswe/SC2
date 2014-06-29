@@ -19,19 +19,19 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.world.World;
-import vswe.stevesvehicles.containers.ContainerVehicle;
+import vswe.stevesvehicles.container.ContainerVehicle;
 import vswe.stevesvehicles.old.Blocks.BlockCartAssembler;
 import vswe.stevesvehicles.old.Blocks.ModBlocks;
-import vswe.stevesvehicles.registries.RegistrySynchronizer;
-import vswe.stevesvehicles.vehicles.VehicleBase;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
-import vswe.stevesvehicles.containers.ContainerBase;
-import vswe.stevesvehicles.modules.ModuleBase;
+import vswe.stevesvehicles.registry.RegistrySynchronizer;
+import vswe.stevesvehicles.vehicle.VehicleBase;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
+import vswe.stevesvehicles.container.ContainerBase;
+import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.old.TileEntities.TileEntityBase;
 
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
-import vswe.stevesvehicles.vehicles.entities.IVehicleEntity;
+import vswe.stevesvehicles.vehicle.entity.IVehicleEntity;
 
 
 import static vswe.stevesvehicles.old.StevesVehicles.CHANNEL;

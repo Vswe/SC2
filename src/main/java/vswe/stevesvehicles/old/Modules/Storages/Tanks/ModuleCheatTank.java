@@ -1,7 +1,7 @@
 package vswe.stevesvehicles.old.Modules.Storages.Tanks;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.ColorHelper;
 import vswe.stevesvehicles.old.Helpers.Localization;
 

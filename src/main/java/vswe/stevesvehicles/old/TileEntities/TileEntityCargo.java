@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.old.Helpers.*;
 import vswe.stevesvehicles.old.Items.ModItems;
-import vswe.stevesvehicles.containers.ContainerBase;
+import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.old.Containers.ContainerCargo;
 import vswe.stevesvehicles.old.Containers.ContainerManager;
 import vswe.stevesvehicles.old.Helpers.TransferHandler.TRANSFER_TYPE;

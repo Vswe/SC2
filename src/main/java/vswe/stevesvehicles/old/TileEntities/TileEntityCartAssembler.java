@@ -14,22 +14,22 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import vswe.stevesvehicles.items.ItemVehicles;
-import vswe.stevesvehicles.modules.data.ModuleDataItemHandler;
-import vswe.stevesvehicles.modules.data.ModuleType;
+import vswe.stevesvehicles.item.ItemVehicles;
+import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
+import vswe.stevesvehicles.module.data.ModuleType;
 import vswe.stevesvehicles.old.Blocks.BlockCartAssembler;
 import vswe.stevesvehicles.old.Blocks.ModBlocks;
 import vswe.stevesvehicles.old.Helpers.*;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.old.StevesVehicles;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
-import vswe.stevesvehicles.containers.ContainerBase;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
+import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.old.Containers.ContainerCartAssembler;
 import vswe.stevesvehicles.old.Containers.ContainerUpgrade;
 import vswe.stevesvehicles.client.interfaces.GuiBase;
 import vswe.stevesvehicles.old.Interfaces.GuiCartAssembler;
-import vswe.stevesvehicles.modules.data.ModuleData;
-import vswe.stevesvehicles.modules.data.ModuleDataHull;
+import vswe.stevesvehicles.module.data.ModuleData;
+import vswe.stevesvehicles.module.data.ModuleDataHull;
 import vswe.stevesvehicles.old.Slots.SlotAssembler;
 import vswe.stevesvehicles.old.Slots.SlotAssemblerFuel;
 import vswe.stevesvehicles.old.Slots.SlotHull;
@@ -78,7 +78,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 	protected ItemStack outputItem;
 	
 	/**
-	 * Modules that are being removed by the assembler, used when modifying carts
+	 * Modules that are being removed by the assembler, used when modifying cart
 	 */
 	protected ArrayList<ItemStack> spareModules;
 	
@@ -1114,14 +1114,14 @@ public class TileEntityCartAssembler extends TileEntityBase
 			loaded = true;
 		}
 
-        //TODO rewrite this (this allows carts that were assembling when a assembler was broken to be put into the output slot and allow it to continue)
+        //TODO rewrite this (this allows cart that were assembling when a assembler was broken to be put into the output slot and allow it to continue)
 		/*if (!isAssembling && outputSlot != null && outputSlot.getStack() != null) {
 			ItemStack itemInSlot = outputSlot.getStack();
-			if (itemInSlot.getItem() == ModItems.carts) {
+			if (itemInSlot.getItem() == ModItems.cart) {
 			
 				NBTTagCompound info = itemInSlot.getTagCompound();
 				if (info != null && info.hasKey("maxTime")) {
-					ItemStack newItem = new ItemStack(ModItems.carts);
+					ItemStack newItem = new ItemStack(ModItems.cart);
 					
 					NBTTagCompound save = new NBTTagCompound();
 					save.setByteArray("Modules", info.getByteArray("Modules"));				

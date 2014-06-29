@@ -1,5 +1,5 @@
 package vswe.stevesvehicles.old.Modules.Storages.Chests;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 
 public class ModuleInternalStorage extends ModuleChest {
 	public ModuleInternalStorage(EntityModularCart cart) {

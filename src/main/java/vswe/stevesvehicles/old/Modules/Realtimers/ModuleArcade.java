@@ -11,9 +11,9 @@ import vswe.stevesvehicles.old.Arcade.ArcadeSweeper;
 import vswe.stevesvehicles.old.Arcade.ArcadeTetris;
 import vswe.stevesvehicles.old.Arcade.ArcadeTracks;
 import vswe.stevesvehicles.old.Arcade.TrackStory;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
-import vswe.stevesvehicles.modules.ModuleBase;
+import vswe.stevesvehicles.module.ModuleBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

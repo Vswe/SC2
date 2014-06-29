@@ -1,6 +1,6 @@
 package vswe.stevesvehicles.old.Modules.Realtimers;
 
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.AnimationRig;
 import vswe.stevesvehicles.old.Helpers.AnimationRigVal;
 

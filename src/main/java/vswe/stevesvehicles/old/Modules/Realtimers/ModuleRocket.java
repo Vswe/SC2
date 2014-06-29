@@ -1,8 +1,8 @@
 package vswe.stevesvehicles.old.Modules.Realtimers;
 
 import net.minecraft.block.BlockRailBase;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
-import vswe.stevesvehicles.modules.ModuleBase;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
+import vswe.stevesvehicles.module.ModuleBase;
 
 public class ModuleRocket extends ModuleBase {
 

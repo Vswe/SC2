@@ -4,10 +4,9 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import net.minecraft.entity.player.EntityPlayer;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import vswe.stevesvehicles.vehicles.entities.IVehicleEntity;
+import vswe.stevesvehicles.vehicle.entity.IVehicleEntity;
 
 public class OverlayRenderer
 {

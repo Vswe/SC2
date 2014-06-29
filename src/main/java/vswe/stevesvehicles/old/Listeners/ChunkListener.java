@@ -2,8 +2,7 @@ package vswe.stevesvehicles.old.Listeners;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityEvent;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
-import vswe.stevesvehicles.vehicles.entities.IVehicleEntity;
+import vswe.stevesvehicles.vehicle.entity.IVehicleEntity;
 
 public class ChunkListener
 {

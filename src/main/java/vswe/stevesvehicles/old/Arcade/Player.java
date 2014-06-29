@@ -1,8 +1,7 @@
 package vswe.stevesvehicles.old.Arcade;
 
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
-import vswe.stevesvehicles.vehicles.VehicleBase;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.VehicleBase;
 
 public class Player extends Unit {
 

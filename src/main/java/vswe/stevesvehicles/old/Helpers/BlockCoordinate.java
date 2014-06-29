@@ -1,6 +1,5 @@
 package vswe.stevesvehicles.old.Helpers;
-import vswe.stevesvehicles.vehicles.VehicleBase;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.VehicleBase;
 
 public class BlockCoordinate {
 	private int x;

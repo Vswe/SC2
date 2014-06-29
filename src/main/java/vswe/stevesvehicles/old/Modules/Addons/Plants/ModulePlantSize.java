@@ -3,7 +3,7 @@ package vswe.stevesvehicles.old.Modules.Addons.Plants;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.old.Modules.Addons.ModuleAddon;

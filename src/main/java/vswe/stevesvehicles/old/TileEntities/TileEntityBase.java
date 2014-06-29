@@ -8,7 +8,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.tileentity.TileEntity;
-import vswe.stevesvehicles.containers.ContainerBase;
+import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.client.interfaces.GuiBase;
 
 public abstract class TileEntityBase extends TileEntity {

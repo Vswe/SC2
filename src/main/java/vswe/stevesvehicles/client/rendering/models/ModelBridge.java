@@ -3,11 +3,11 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Vec3;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
-import vswe.stevesvehicles.modules.ModuleBase;
-import vswe.stevesvehicles.old.Modules.Workers.ModuleBridge;
+import vswe.stevesvehicles.module.ModuleBase;
+import vswe.stevesvehicles.module.cart.attachment.ModuleBridge;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 
 @SideOnly(Side.CLIENT)
 public class ModelBridge extends ModelVehicle
@@ -31,7 +31,7 @@ public class ModelBridge extends ModelVehicle
 
 
 		needBridge = ((ModuleBridge)module).needBridge();
-		Vec3 next = ((ModuleBridge)module).getNextblock();
+		Vec3 next = ((ModuleBridge)module).getNextBlock();
 		int y = (int) next.yCoord;
 		yDif =  ((EntityModularCart)module.getVehicle().getEntity()).getYTarget() - y;
 

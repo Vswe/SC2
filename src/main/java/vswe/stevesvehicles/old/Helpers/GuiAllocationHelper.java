@@ -1,7 +1,7 @@
 package vswe.stevesvehicles.old.Helpers;
 
 import java.util.ArrayList;
-import vswe.stevesvehicles.modules.ModuleBase;
+import vswe.stevesvehicles.module.ModuleBase;
 
 public class GuiAllocationHelper {
 	public int width;

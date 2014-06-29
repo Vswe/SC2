@@ -2,7 +2,7 @@ package vswe.stevesvehicles.old.Helpers;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
-import vswe.stevesvehicles.modules.data.ModuleData;
+import vswe.stevesvehicles.module.data.ModuleData;
 
 public class ModuleCountPair {
 	

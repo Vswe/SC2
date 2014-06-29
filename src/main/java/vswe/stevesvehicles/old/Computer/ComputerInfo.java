@@ -3,11 +3,11 @@ package vswe.stevesvehicles.old.Computer;
 import java.util.Collection;
 import java.util.HashMap;
 
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
-import vswe.stevesvehicles.modules.ModuleBase;
-import vswe.stevesvehicles.old.Modules.Workers.ModuleComputer;
-import vswe.stevesvehicles.old.Modules.Workers.ModuleTorch;
-import vswe.stevesvehicles.old.Modules.Workers.Tools.ModuleDrill;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
+import vswe.stevesvehicles.module.ModuleBase;
+import vswe.stevesvehicles.module.cart.attachment.ModuleComputer;
+import vswe.stevesvehicles.module.cart.attachment.ModuleTorch;
+import vswe.stevesvehicles.module.cart.tool.ModuleDrill;
 import vswe.stevesvehicles.old.Modules.Addons.ModuleShield;
 import vswe.stevesvehicles.old.Modules.Addons.ModuleInvisible;
 import vswe.stevesvehicles.old.Modules.Addons.ModuleChunkLoader;

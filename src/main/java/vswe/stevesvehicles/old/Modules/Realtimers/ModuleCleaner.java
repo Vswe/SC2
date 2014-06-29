@@ -5,8 +5,8 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
-import vswe.stevesvehicles.modules.ModuleBase;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
+import vswe.stevesvehicles.module.ModuleBase;
 
 public class ModuleCleaner extends ModuleBase {
 	public ModuleCleaner(EntityModularCart cart) {

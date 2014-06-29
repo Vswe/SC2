@@ -2,7 +2,7 @@ package vswe.stevesvehicles.old.Containers;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import vswe.stevesvehicles.containers.ContainerBase;
+import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.old.TileEntities.TileEntityBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

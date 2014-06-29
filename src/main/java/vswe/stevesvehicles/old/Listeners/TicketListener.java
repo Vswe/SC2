@@ -7,8 +7,7 @@ import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.LoadingCallback;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import vswe.stevesvehicles.old.StevesVehicles;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
-import vswe.stevesvehicles.vehicles.entities.IVehicleEntity;
+import vswe.stevesvehicles.vehicle.entity.IVehicleEntity;
 
 public class TicketListener implements LoadingCallback {
 	public TicketListener() {

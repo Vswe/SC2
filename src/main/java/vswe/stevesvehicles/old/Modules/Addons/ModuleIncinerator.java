@@ -2,7 +2,7 @@ package vswe.stevesvehicles.old.Modules.Addons;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Slots.SlotBase;
 import vswe.stevesvehicles.old.Slots.SlotIncinerator;
 public class ModuleIncinerator extends ModuleAddon {

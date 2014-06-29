@@ -3,7 +3,7 @@ package vswe.stevesvehicles.client.rendering.models;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.util.ResourceLocation;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
-import vswe.stevesvehicles.modules.ModuleBase;
+import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleShooterAdvSide;
 
 public class ModelSideGuns extends ModelVehicle {

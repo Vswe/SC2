@@ -1,5 +1,5 @@
 package vswe.stevesvehicles.old.Containers;
-import vswe.stevesvehicles.containers.ContainerBase;
+import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.old.TileEntities.TileEntityBase;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.IInventory;

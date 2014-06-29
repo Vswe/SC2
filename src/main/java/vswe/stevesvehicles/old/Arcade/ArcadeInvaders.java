@@ -9,8 +9,7 @@ import org.lwjgl.input.Keyboard;
 
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
 import vswe.stevesvehicles.old.Arcade.Unit.UPDATE_RESULT;
-import vswe.stevesvehicles.vehicles.VehicleBase;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleArcade;

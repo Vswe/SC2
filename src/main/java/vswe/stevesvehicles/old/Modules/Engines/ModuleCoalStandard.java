@@ -1,6 +1,6 @@
 package vswe.stevesvehicles.old.Modules.Engines;
 
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 
 public class ModuleCoalStandard extends ModuleCoalBase {
 	public ModuleCoalStandard(EntityModularCart cart) {

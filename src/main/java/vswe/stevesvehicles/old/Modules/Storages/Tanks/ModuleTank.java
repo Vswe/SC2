@@ -8,7 +8,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidTank;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.*;
 import vswe.stevesvehicles.client.interfaces.GuiBase;
 import vswe.stevesvehicles.old.Modules.Storages.ModuleStorage;

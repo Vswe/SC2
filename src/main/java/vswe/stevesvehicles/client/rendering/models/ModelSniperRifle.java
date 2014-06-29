@@ -2,7 +2,7 @@ package vswe.stevesvehicles.client.rendering.models;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelRenderer;
-import vswe.stevesvehicles.modules.ModuleBase;
+import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleShooterAdv;
 @SideOnly(Side.CLIENT)
 public class ModelSniperRifle extends ModelGun

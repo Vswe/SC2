@@ -5,8 +5,8 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import vswe.stevesvehicles.modules.ModuleBase;
-import vswe.stevesvehicles.modules.hull.HullPig;
+import vswe.stevesvehicles.module.ModuleBase;
+import vswe.stevesvehicles.module.cart.hull.HullPig;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)

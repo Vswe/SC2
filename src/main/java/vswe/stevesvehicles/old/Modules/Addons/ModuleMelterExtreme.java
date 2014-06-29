@@ -1,7 +1,7 @@
 package vswe.stevesvehicles.old.Modules.Addons;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 
 public class ModuleMelterExtreme extends ModuleMelter {
 	public ModuleMelterExtreme(EntityModularCart cart) {

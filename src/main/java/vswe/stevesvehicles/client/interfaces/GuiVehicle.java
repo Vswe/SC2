@@ -6,11 +6,11 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import vswe.stevesvehicles.vehicles.VehicleBase;
+import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.GeneratedInfo;
 import vswe.stevesvehicles.old.Helpers.ModuleCountPair;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
-import vswe.stevesvehicles.modules.ModuleBase;
+import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.old.Slots.SlotBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

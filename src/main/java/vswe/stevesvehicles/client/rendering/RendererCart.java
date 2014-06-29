@@ -2,8 +2,8 @@ package vswe.stevesvehicles.client.rendering;
 
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
-import vswe.stevesvehicles.vehicles.VehicleBase;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.VehicleBase;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 
 
 public class RendererCart extends RendererVehicle {

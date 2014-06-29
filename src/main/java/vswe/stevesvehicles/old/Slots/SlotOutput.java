@@ -1,7 +1,7 @@
 package vswe.stevesvehicles.old.Slots;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import vswe.stevesvehicles.modules.data.ModuleType;
+import vswe.stevesvehicles.module.data.ModuleType;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.old.TileEntities.TileEntityCartAssembler;
 

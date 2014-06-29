@@ -19,7 +19,7 @@ import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.FluidTank;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.network.PacketHandler;
-import vswe.stevesvehicles.containers.ContainerBase;
+import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.old.Containers.ContainerDistributor;
 import vswe.stevesvehicles.old.Helpers.DistributorSetting;
 import vswe.stevesvehicles.old.Helpers.DistributorSide;

@@ -4,7 +4,7 @@ import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import vswe.stevesvehicles.old.StevesVehicles;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 public class BlockRailJunction extends BlockSpecialRailBase

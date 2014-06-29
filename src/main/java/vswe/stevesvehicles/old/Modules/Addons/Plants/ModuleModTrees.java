@@ -4,7 +4,7 @@ import net.minecraft.block.BlockSapling;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Modules.ITreeModule;
 import vswe.stevesvehicles.old.Modules.Addons.ModuleAddon;
 

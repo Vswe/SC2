@@ -3,10 +3,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.init.Blocks;
 import net.minecraftforge.fluids.IFluidBlock;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
-import vswe.stevesvehicles.modules.ModuleBase;
-import vswe.stevesvehicles.old.Modules.Workers.ModuleLiquidDrainer;
-import vswe.stevesvehicles.old.Modules.Workers.Tools.ModuleDrill;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
+import vswe.stevesvehicles.module.ModuleBase;
+import vswe.stevesvehicles.module.cart.attachment.ModuleLiquidDrainer;
+import vswe.stevesvehicles.module.cart.tool.ModuleDrill;
 public class ModuleLiquidSensors extends ModuleAddon {
 	public ModuleLiquidSensors(EntityModularCart cart) {
 		super(cart);

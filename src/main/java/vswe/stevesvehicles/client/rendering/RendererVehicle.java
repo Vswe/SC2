@@ -13,12 +13,12 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import vswe.stevesvehicles.client.rendering.models.ModelVehicle;
-import vswe.stevesvehicles.vehicles.VehicleBase;
+import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.IconData;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.old.Helpers.Tank;
-import vswe.stevesvehicles.modules.ModuleBase;
-import vswe.stevesvehicles.vehicles.entities.IVehicleEntity;
+import vswe.stevesvehicles.module.ModuleBase;
+import vswe.stevesvehicles.vehicle.entity.IVehicleEntity;
 
 public abstract class RendererVehicle extends Render {
     public RendererVehicle() {

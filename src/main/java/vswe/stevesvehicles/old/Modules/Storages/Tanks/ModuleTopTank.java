@@ -1,5 +1,5 @@
 package vswe.stevesvehicles.old.Modules.Storages.Tanks;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 
 public class ModuleTopTank extends ModuleTank{
 	public ModuleTopTank(EntityModularCart cart) {

@@ -2,7 +2,7 @@ package vswe.stevesvehicles.old.Slots;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import vswe.stevesvehicles.old.Helpers.TransferHandler.TRANSFER_TYPE;
-import vswe.stevesvehicles.old.Modules.Workers.Tools.ModuleTool;
+import vswe.stevesvehicles.module.cart.tool.ModuleTool;
 public class SlotRepair extends SlotBase implements ISpecialItemTransferValidator
 {
 	private ModuleTool tool;

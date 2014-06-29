@@ -8,7 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import vswe.stevesvehicles.old.Helpers.NBTHelper;
 import vswe.stevesvehicles.network.PacketHandler;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Containers.ContainerManager;
 import vswe.stevesvehicles.old.Helpers.ManagerTransfer;
 

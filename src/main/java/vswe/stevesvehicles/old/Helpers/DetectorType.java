@@ -8,7 +8,7 @@ import net.minecraft.util.StatCollector;
 import vswe.stevesvehicles.old.Blocks.BlockRailAdvDetector;
 import vswe.stevesvehicles.old.Blocks.ModBlocks;
 import vswe.stevesvehicles.old.StevesVehicles;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.TileEntities.TileEntityDetector;
 
 

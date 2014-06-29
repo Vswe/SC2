@@ -9,7 +9,7 @@ import net.minecraft.client.audio.MovingSoundMinecartRiding;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraftforge.client.event.sound.PlaySoundEvent17;
 import net.minecraftforge.common.MinecraftForge;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 
 public class MinecartSoundMuter {
 

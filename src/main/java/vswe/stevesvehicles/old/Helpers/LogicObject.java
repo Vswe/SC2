@@ -3,12 +3,12 @@ import java.util.ArrayList;
 
 import org.lwjgl.opengl.GL11;
 
-import vswe.stevesvehicles.modules.data.ModuleRegistry;
+import vswe.stevesvehicles.module.data.ModuleRegistry;
 import vswe.stevesvehicles.network.PacketHandler;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Interfaces.GuiDetector;
-import vswe.stevesvehicles.modules.data.ModuleData;
-import vswe.stevesvehicles.modules.ModuleBase;
+import vswe.stevesvehicles.module.data.ModuleData;
+import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.old.TileEntities.TileEntityDetector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

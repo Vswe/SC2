@@ -1,7 +1,7 @@
 package vswe.stevesvehicles.old.Modules.Storages.Chests;
 
 import vswe.stevesvehicles.old.Helpers.ComponentTypes;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import net.minecraft.item.ItemStack;
 public class ModuleEggBasket extends ModuleChest {
 	public ModuleEggBasket(EntityModularCart cart) {

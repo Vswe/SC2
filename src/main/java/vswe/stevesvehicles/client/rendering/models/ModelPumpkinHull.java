@@ -1,6 +1,6 @@
 package vswe.stevesvehicles.client.rendering.models;
 import net.minecraft.util.ResourceLocation;
-import vswe.stevesvehicles.modules.ModuleBase;
+import vswe.stevesvehicles.module.ModuleBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)

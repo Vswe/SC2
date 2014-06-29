@@ -2,9 +2,8 @@ package vswe.stevesvehicles.old.Slots;
 
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import vswe.stevesvehicles.modules.data.ModuleData;
-import vswe.stevesvehicles.modules.data.ModuleDataItemHandler;
-import vswe.stevesvehicles.modules.data.ModuleType;
+import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
+import vswe.stevesvehicles.module.data.ModuleType;
 import vswe.stevesvehicles.old.TileEntities.TileEntityCartAssembler;
 import net.minecraft.entity.player.EntityPlayer;
 public class SlotAssembler extends Slot

@@ -1,6 +1,6 @@
 package vswe.stevesvehicles.old.Modules.Storages;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
-import vswe.stevesvehicles.modules.ModuleBase;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
+import vswe.stevesvehicles.module.ModuleBase;
 
 //currently this class isn't doing much more than determine which modules counts as storages. Might come more later.
 

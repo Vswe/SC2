@@ -1,6 +1,6 @@
 package vswe.stevesvehicles.old.Modules.Addons;
 
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 
 public class ModuleSmelterAdv extends ModuleSmelter {
 

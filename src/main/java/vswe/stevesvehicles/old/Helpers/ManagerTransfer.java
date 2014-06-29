@@ -1,6 +1,6 @@
 package vswe.stevesvehicles.old.Helpers;
 
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 
 public class ManagerTransfer {
 	private int side;

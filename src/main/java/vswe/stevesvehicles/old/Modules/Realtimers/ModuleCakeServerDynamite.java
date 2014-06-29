@@ -4,7 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.old.StevesVehicles;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Slots.SlotBase;
 import vswe.stevesvehicles.old.Slots.SlotCakeDynamite;
 

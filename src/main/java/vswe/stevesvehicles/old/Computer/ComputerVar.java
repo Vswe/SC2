@@ -1,5 +1,5 @@
 package vswe.stevesvehicles.old.Computer;
-import vswe.stevesvehicles.old.Modules.Workers.ModuleComputer;
+import vswe.stevesvehicles.module.cart.attachment.ModuleComputer;
 
 public class ComputerVar implements IWriting
 {

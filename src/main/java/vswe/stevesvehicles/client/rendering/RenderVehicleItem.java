@@ -2,8 +2,8 @@ package vswe.stevesvehicles.client.rendering;
 
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
-import vswe.stevesvehicles.modules.data.ModuleData;
-import vswe.stevesvehicles.modules.data.ModuleDataItemHandler;
+import vswe.stevesvehicles.module.data.ModuleData;
+import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
 import vswe.stevesvehicles.old.Items.ModItems;
 
 import net.minecraft.item.ItemStack;

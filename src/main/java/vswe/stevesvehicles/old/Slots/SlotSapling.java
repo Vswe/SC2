@@ -1,5 +1,5 @@
 package vswe.stevesvehicles.old.Slots;
-import vswe.stevesvehicles.old.Modules.Workers.Tools.ModuleWoodcutter;
+import vswe.stevesvehicles.module.cart.tool.ModuleWoodcutter;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 

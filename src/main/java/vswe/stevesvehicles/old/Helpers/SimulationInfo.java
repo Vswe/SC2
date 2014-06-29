@@ -12,13 +12,13 @@ import vswe.stevesvehicles.old.Modules.Engines.ModuleSolarBase;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleShooter;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleShooterAdv;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleDynamite;
-import vswe.stevesvehicles.old.Modules.Workers.ModuleBridge;
-import vswe.stevesvehicles.old.Modules.Workers.ModuleHydrater;
-import vswe.stevesvehicles.old.Modules.Workers.ModuleRailer;
-import vswe.stevesvehicles.old.Modules.Workers.ModuleTorch;
-import vswe.stevesvehicles.old.Modules.Workers.Tools.ModuleDrill;
-import vswe.stevesvehicles.old.Modules.Workers.Tools.ModuleFarmer;
-import vswe.stevesvehicles.old.Modules.Workers.Tools.ModuleWoodcutter;
+import vswe.stevesvehicles.module.cart.attachment.ModuleBridge;
+import vswe.stevesvehicles.module.cart.attachment.ModuleHydrater;
+import vswe.stevesvehicles.module.cart.attachment.ModuleRailer;
+import vswe.stevesvehicles.module.cart.attachment.ModuleTorch;
+import vswe.stevesvehicles.module.cart.tool.ModuleDrill;
+import vswe.stevesvehicles.module.cart.tool.ModuleFarmer;
+import vswe.stevesvehicles.module.cart.tool.ModuleWoodcutter;
 
 public class SimulationInfo {
 

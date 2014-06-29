@@ -7,8 +7,8 @@ import net.minecraft.block.BlockOre;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import vswe.stevesvehicles.old.Helpers.BlockCoordinate;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
-import vswe.stevesvehicles.old.Modules.Workers.Tools.ModuleDrill;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
+import vswe.stevesvehicles.module.cart.tool.ModuleDrill;
 
 public class ModuleOreTracker extends ModuleAddon {
 

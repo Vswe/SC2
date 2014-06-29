@@ -1,7 +1,7 @@
 package vswe.stevesvehicles.old.Computer;
 import java.util.ArrayList;
 
-import vswe.stevesvehicles.old.Modules.Workers.ModuleComputer;
+import vswe.stevesvehicles.module.cart.attachment.ModuleComputer;
 public class ComputerProg {
 
 	private ModuleComputer module;

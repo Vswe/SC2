@@ -1,6 +1,6 @@
 package vswe.stevesvehicles.old.Modules.Engines;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.Localization;
 
 public class ModuleCheatEngine extends ModuleEngine {

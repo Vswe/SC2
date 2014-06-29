@@ -1,7 +1,7 @@
 package vswe.stevesvehicles.old.Modules.Storages.Tanks;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 
 public class ModuleOpenTank extends ModuleTank{
 	public ModuleOpenTank(EntityModularCart cart) {

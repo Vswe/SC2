@@ -4,11 +4,11 @@ import cpw.mods.fml.common.network.FMLEventChannel;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.Logger;
-import vswe.stevesvehicles.modules.data.ModuleRegistry;
+import vswe.stevesvehicles.module.data.ModuleRegistry;
 import vswe.stevesvehicles.network.PacketHandler;
-import vswe.stevesvehicles.registries.RegistrySynchronizer;
-import vswe.stevesvehicles.vehicles.VehicleRegistry;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.registry.RegistrySynchronizer;
+import vswe.stevesvehicles.vehicle.VehicleRegistry;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.CraftingHandler;
 import vswe.stevesvehicles.old.Helpers.CreativeTabSC2;
 import vswe.stevesvehicles.old.Helpers.EntityCake;
@@ -145,6 +145,6 @@ public class StevesVehicles {
 	
 	private void initCart(int ID, Class<? extends EntityModularCart> cart) {
 		EntityRegistry.registerModEntity(cart, "Minecart.Vswe." + ID, ID, instance, 80, 3, true);
-		//MinecartRegistry.registerMinecart(cart, new ItemStack(carts, 1, ID));
+		//MinecartRegistry.registerMinecart(cart, new ItemStack(cart, 1, ID));
 	}
 }

@@ -1,7 +1,7 @@
 package vswe.stevesvehicles.old.Helpers;
 import java.util.Comparator;
 
-import vswe.stevesvehicles.old.Modules.Workers.ModuleWorker;
+import vswe.stevesvehicles.module.cart.ModuleWorker;
 
 public class CompWorkModule implements Comparator
 {

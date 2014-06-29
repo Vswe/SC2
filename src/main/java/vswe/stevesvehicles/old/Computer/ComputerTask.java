@@ -1,6 +1,6 @@
 package vswe.stevesvehicles.old.Computer;
-import vswe.stevesvehicles.old.Modules.Workers.ModuleComputer;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.module.cart.attachment.ModuleComputer;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 
 import java.util.Random;
 

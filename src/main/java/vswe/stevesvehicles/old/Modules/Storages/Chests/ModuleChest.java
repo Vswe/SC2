@@ -1,6 +1,6 @@
 package vswe.stevesvehicles.old.Modules.Storages.Chests;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Modules.Storages.ModuleStorage;
 import vswe.stevesvehicles.old.Slots.SlotBase;
 import vswe.stevesvehicles.old.Slots.SlotChest;

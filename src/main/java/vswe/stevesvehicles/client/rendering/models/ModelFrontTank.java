@@ -4,7 +4,7 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
-import vswe.stevesvehicles.modules.ModuleBase;
+import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.old.Modules.Storages.Tanks.ModuleTank;
 import vswe.stevesvehicles.client.rendering.RendererVehicle;
 import cpw.mods.fml.relauncher.Side;

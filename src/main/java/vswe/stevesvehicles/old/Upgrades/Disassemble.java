@@ -9,7 +9,7 @@ import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.old.Containers.ContainerCartAssembler;
 import vswe.stevesvehicles.old.Helpers.TransferHandler;
-import vswe.stevesvehicles.modules.data.ModuleData;
+import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.old.Slots.SlotCart;
 import vswe.stevesvehicles.old.Slots.SlotModule;
 import vswe.stevesvehicles.old.TileEntities.TileEntityCartAssembler;

@@ -1,5 +1,5 @@
 package vswe.stevesvehicles.old.Modules.Engines;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 
 public class ModuleThermalAdvanced extends ModuleThermalBase {
 	public ModuleThermalAdvanced(EntityModularCart cart) {

@@ -1,6 +1,6 @@
 package vswe.stevesvehicles.old.Modules.Addons.Mobdetectors;
 import net.minecraft.entity.Entity;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Modules.Addons.ModuleAddon;
 
 public abstract class ModuleMobdetector extends ModuleAddon {

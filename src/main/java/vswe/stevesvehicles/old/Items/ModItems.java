@@ -7,14 +7,14 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.common.config.Configuration;
-import vswe.stevesvehicles.items.ItemVehicles;
-import vswe.stevesvehicles.items.ItemVehicleModule;
-import vswe.stevesvehicles.modules.data.ModuleRegistry;
+import vswe.stevesvehicles.item.ItemVehicles;
+import vswe.stevesvehicles.item.ItemVehicleModule;
+import vswe.stevesvehicles.module.data.ModuleRegistry;
 import vswe.stevesvehicles.old.Blocks.ModBlocks;
 import vswe.stevesvehicles.old.Helpers.ComponentTypes;
 import vswe.stevesvehicles.old.Helpers.DetectorType;
 import vswe.stevesvehicles.old.Helpers.RecipeHelper;
-import vswe.stevesvehicles.modules.data.ModuleData;
+import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.old.Upgrades.AssemblerUpgrade;
 

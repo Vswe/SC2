@@ -1,6 +1,6 @@
 package vswe.stevesvehicles.old.Modules.Storages.Chests;
 
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 
 public class ModuleSideChests extends ModuleChest {
 	public ModuleSideChests(EntityModularCart cart) {

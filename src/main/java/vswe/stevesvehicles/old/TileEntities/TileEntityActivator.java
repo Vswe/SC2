@@ -10,9 +10,9 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.old.Helpers.Localization;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Containers.ContainerActivator;
-import vswe.stevesvehicles.containers.ContainerBase;
+import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.old.Helpers.ActivatorOption;
 import vswe.stevesvehicles.old.Interfaces.GuiActivator;
 import vswe.stevesvehicles.client.interfaces.GuiBase;
@@ -20,7 +20,7 @@ import vswe.stevesvehicles.old.Modules.Addons.ModuleChunkLoader;
 import vswe.stevesvehicles.old.Modules.Addons.ModuleInvisible;
 import vswe.stevesvehicles.old.Modules.Addons.ModuleShield;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleCage;
-import vswe.stevesvehicles.old.Modules.Workers.Tools.ModuleDrill;
+import vswe.stevesvehicles.module.cart.tool.ModuleDrill;
 
 /**
  * The tile entity used by the Module Toggler

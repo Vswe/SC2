@@ -1,12 +1,10 @@
 package vswe.stevesvehicles.old.Upgrades;
 
-import vswe.stevesvehicles.modules.data.ModuleDataItemHandler;
+import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.TileEntities.TileEntityUpgrade;
-import net.minecraft.nbt.NBTTagByteArray;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.item.ItemStack;
-import vswe.stevesvehicles.modules.data.ModuleData;
+import vswe.stevesvehicles.module.data.ModuleData;
 import java.util.ArrayList;
 import java.util.List;
 

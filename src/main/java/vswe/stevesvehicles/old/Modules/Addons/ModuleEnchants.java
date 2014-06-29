@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
-import vswe.stevesvehicles.vehicles.entities.EntityModularCart;
+import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.EnchantmentData;
 import vswe.stevesvehicles.old.Helpers.EnchantmentInfo;
 import vswe.stevesvehicles.old.Helpers.EnchantmentInfo.ENCHANTMENT_TYPE;
