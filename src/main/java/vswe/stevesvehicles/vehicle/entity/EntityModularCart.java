@@ -46,7 +46,7 @@ public class EntityModularCart extends EntityMinecart
     implements IVehicleEntity
 {
 
-	private VehicleBase vehicleBase;
+	private vswe.stevesvehicles.vehicle.VehicleBase vehicleBase;
     public int disabledX;
     public int disabledY;
     public int disabledZ;
@@ -76,7 +76,7 @@ public class EntityModularCart extends EntityMinecart
 
 
     @Override
-    public VehicleBase getVehicle() {
+    public vswe.stevesvehicles.vehicle.VehicleBase getVehicle() {
         return vehicleBase;
     }
 

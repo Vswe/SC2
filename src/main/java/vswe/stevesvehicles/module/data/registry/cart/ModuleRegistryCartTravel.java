@@ -11,7 +11,7 @@ import vswe.stevesvehicles.module.data.ModuleRegistry;
 import vswe.stevesvehicles.module.data.ModuleSide;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistryTravel;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
-import vswe.stevesvehicles.old.Modules.Addons.ModuleBrake;
+import vswe.stevesvehicles.module.cart.addon.ModuleBrake;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleAdvControl;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 

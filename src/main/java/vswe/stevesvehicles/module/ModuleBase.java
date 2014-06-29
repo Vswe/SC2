@@ -113,7 +113,7 @@ public abstract class ModuleBase {
 	 * Get the vehicle this module is a part of
 	 * @return The vehicle this module was created at
 	 */
-	public VehicleBase getVehicle() {
+	public vswe.stevesvehicles.vehicle.VehicleBase getVehicle() {
 		return vehicle;
 	}
 
@@ -653,8 +653,8 @@ public abstract class ModuleBase {
 			return dif;
 			
 		//if it's too far down
-		}else if(y + rect[3] > VehicleBase.MODULAR_SPACE_HEIGHT) {
-			rect[3] = Math.max(0, VehicleBase.MODULAR_SPACE_HEIGHT-y);
+		}else if(y + rect[3] > vswe.stevesvehicles.vehicle.VehicleBase.MODULAR_SPACE_HEIGHT) {
+			rect[3] = Math.max(0, vswe.stevesvehicles.vehicle.VehicleBase.MODULAR_SPACE_HEIGHT-y);
 			return 0;
 			
 		//if the whole rectangle do fit

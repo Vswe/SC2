@@ -11,11 +11,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
+import vswe.stevesvehicles.module.common.addon.mobdetector.ModuleEntityDetector;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.ModuleBase;
-import vswe.stevesvehicles.old.Modules.Addons.Mobdetectors.ModuleMobdetector;
 
 public class ModuleShooterAdv extends ModuleShooter {
 	public ModuleShooterAdv(EntityModularCart cart) {
@@ -23,15 +23,15 @@ public class ModuleShooterAdv extends ModuleShooter {
 	}
 
 	
-	private ArrayList<ModuleMobdetector> detectors;
+	private ArrayList<ModuleEntityDetector> detectors;
 	@Override
 	public void preInit() {
 		super.preInit();
-		detectors = new ArrayList<ModuleMobdetector>();
+		detectors = new ArrayList<ModuleEntityDetector>();
 		
 		for (ModuleBase module : getCart().getModules()) {
-			if (module instanceof ModuleMobdetector) {
-				detectors.add((ModuleMobdetector)module);
+			if (module instanceof ModuleEntityDetector) {
+				detectors.add((ModuleEntityDetector)module);
 			}
 		}
 	}		
@@ -189,7 +189,7 @@ public class ModuleShooterAdv extends ModuleShooter {
 			{
 				for (int i = 0; i < detectors.size(); i++) {
 					if (isOptionActive(i)) {
-						ModuleMobdetector detector = detectors.get(i);
+						ModuleEntityDetector detector = detectors.get(i);
 						if (detector.isValidTarget(target)) {
 							return target;
 						}

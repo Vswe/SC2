@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import net.minecraft.item.ItemStack;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.GiftItem;
+
 public class ModuleGiftStorage extends ModuleChest {
 	public ModuleGiftStorage(EntityModularCart cart) {
 		super(cart);

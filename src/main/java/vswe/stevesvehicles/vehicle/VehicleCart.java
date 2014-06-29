@@ -5,7 +5,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.old.TileEntities.TileEntityCartAssembler;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 
-public class VehicleCart extends VehicleBase {
+public class VehicleCart extends vswe.stevesvehicles.vehicle.VehicleBase {
     public VehicleCart(EntityModularCart entity) {
         super(entity);
     }

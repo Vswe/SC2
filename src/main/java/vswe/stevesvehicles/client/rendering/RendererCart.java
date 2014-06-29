@@ -2,13 +2,12 @@ package vswe.stevesvehicles.client.rendering;
 
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
-import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 
 
 public class RendererCart extends RendererVehicle {
     @Override
-    protected void applyMatrixUpdates(VehicleBase vehicle, MatrixObject matrix, float partialTickTime) {
+    protected void applyMatrixUpdates(vswe.stevesvehicles.vehicle.VehicleBase vehicle, MatrixObject matrix, float partialTickTime) {
         EntityModularCart cart = (EntityModularCart)vehicle.getEntity();
         //calculate the current positions and the current pitch(since the cart should still be rendered between ticks)
         double partialPosX = cart.lastTickPosX + (cart.posX - cart.lastTickPosX) * (double)partialTickTime;

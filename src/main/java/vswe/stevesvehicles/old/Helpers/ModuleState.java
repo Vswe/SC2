@@ -33,10 +33,10 @@ import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Modules.IActivatorModule;
 import vswe.stevesvehicles.old.Modules.ISuppliesModule;
 import vswe.stevesvehicles.module.ModuleBase;
-import vswe.stevesvehicles.old.Modules.Addons.ModuleChunkLoader;
-import vswe.stevesvehicles.old.Modules.Addons.ModuleInvisible;
-import vswe.stevesvehicles.old.Modules.Addons.ModulePowerObserver;
-import vswe.stevesvehicles.old.Modules.Addons.ModuleShield;
+import vswe.stevesvehicles.module.common.addon.ModuleChunkLoader;
+import vswe.stevesvehicles.module.common.addon.ModuleInvisible;
+import vswe.stevesvehicles.module.common.addon.ModulePowerObserver;
+import vswe.stevesvehicles.module.common.addon.ModuleShield;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleCage;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleCakeServer;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleShooter;
@@ -49,8 +49,8 @@ import vswe.stevesvehicles.module.cart.attachment.ModuleTorch;
 import vswe.stevesvehicles.module.cart.tool.ModuleDrill;
 import vswe.stevesvehicles.module.cart.tool.ModuleFarmer;
 import vswe.stevesvehicles.module.cart.tool.ModuleWoodcutter;
-	
-	
+
+
 public class ModuleState {
 
 	private static HashMap<Byte, ModuleState> states;

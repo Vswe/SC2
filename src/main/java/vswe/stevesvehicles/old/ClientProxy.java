@@ -14,6 +14,7 @@ import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.client.rendering.RendererUpgrade;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+
 public class ClientProxy extends CommonProxy{
 
 	public ClientProxy() {

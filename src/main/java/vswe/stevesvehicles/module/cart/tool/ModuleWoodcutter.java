@@ -14,7 +14,7 @@ import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Modules.ISuppliesModule;
 import vswe.stevesvehicles.old.Modules.ITreeModule;
 import vswe.stevesvehicles.module.ModuleBase;
-import vswe.stevesvehicles.old.Modules.Addons.Plants.ModulePlantSize;
+import vswe.stevesvehicles.module.cart.addon.cultivation.ModulePlantSize;
 import vswe.stevesvehicles.old.Slots.SlotBase;
 import vswe.stevesvehicles.old.Slots.SlotFuel;
 import vswe.stevesvehicles.old.Slots.SlotSapling;

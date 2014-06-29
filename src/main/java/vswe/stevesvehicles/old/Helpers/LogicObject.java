@@ -12,6 +12,7 @@ import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.old.TileEntities.TileEntityDetector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
 public class LogicObject {
 	private byte id;
 	private LogicObject parent;

@@ -9,11 +9,11 @@ import vswe.stevesvehicles.client.rendering.models.ModelLiquidSensors;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataGroup;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistryTanks;
-import vswe.stevesvehicles.old.Modules.Addons.ModuleCreativeIncinerator;
-import vswe.stevesvehicles.old.Modules.Addons.ModuleDrillIntelligence;
-import vswe.stevesvehicles.old.Modules.Addons.ModuleIncinerator;
-import vswe.stevesvehicles.old.Modules.Addons.ModuleLiquidSensors;
-import vswe.stevesvehicles.old.Modules.Addons.ModuleOreTracker;
+import vswe.stevesvehicles.module.cart.addon.ModuleCreativeIncinerator;
+import vswe.stevesvehicles.module.cart.addon.ModuleDrillIntelligence;
+import vswe.stevesvehicles.module.cart.addon.ModuleIncinerator;
+import vswe.stevesvehicles.module.cart.addon.ModuleLiquidSensors;
+import vswe.stevesvehicles.module.cart.addon.ModuleOreTracker;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 import vswe.stevesvehicles.module.data.ModuleRegistry;
 

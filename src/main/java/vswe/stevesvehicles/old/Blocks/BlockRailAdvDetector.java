@@ -21,6 +21,7 @@ import vswe.stevesvehicles.old.Upgrades.Disassemble;
 import vswe.stevesvehicles.old.Upgrades.Transposer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
 public class BlockRailAdvDetector extends BlockSpecialRailBase
 {
 	

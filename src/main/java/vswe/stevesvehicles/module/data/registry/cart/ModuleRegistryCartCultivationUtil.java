@@ -12,9 +12,9 @@ import vswe.stevesvehicles.module.data.ModuleDataGroup;
 import vswe.stevesvehicles.module.data.ModuleRegistry;
 import vswe.stevesvehicles.module.data.ModuleSide;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistryTanks;
-import vswe.stevesvehicles.old.Modules.Addons.Plants.ModuleModTrees;
-import vswe.stevesvehicles.old.Modules.Addons.Plants.ModuleNetherwart;
-import vswe.stevesvehicles.old.Modules.Addons.Plants.ModulePlantSize;
+import vswe.stevesvehicles.module.cart.addon.cultivation.ModuleModTrees;
+import vswe.stevesvehicles.module.cart.addon.cultivation.ModuleNetherWart;
+import vswe.stevesvehicles.module.cart.addon.cultivation.ModulePlantSize;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleFlowerRemover;
 import vswe.stevesvehicles.module.cart.attachment.ModuleFertilizer;
 import vswe.stevesvehicles.module.cart.attachment.ModuleHydrater;
@@ -35,7 +35,7 @@ public class ModuleRegistryCartCultivationUtil extends ModuleRegistry {
     private void loadFarmingUtil() {
         ModuleDataGroup farmers = ModuleDataGroup.getGroup(ModuleRegistryCartTools.FARM_KEY);
 
-        ModuleData netherWart = new ModuleData("crop_nether_wart", ModuleNetherwart.class, 20);
+        ModuleData netherWart = new ModuleData("crop_nether_wart", ModuleNetherWart.class, 20);
         netherWart.addShapedRecipeWithSize(1, 2,
                 Items.nether_wart,
                 EMPTY_DISK);

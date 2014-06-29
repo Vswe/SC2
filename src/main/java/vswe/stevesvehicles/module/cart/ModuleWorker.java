@@ -6,14 +6,13 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.IFluidBlock;
 import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
-import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 
 public abstract class ModuleWorker extends ModuleAttachment {
 	private boolean preWork;
 	private boolean shouldDie;
 	
-	public ModuleWorker(VehicleBase vehicleBase) {
+	public ModuleWorker(vswe.stevesvehicles.vehicle.VehicleBase vehicleBase) {
 		super(vehicleBase);
 		preWork = true;
 	}

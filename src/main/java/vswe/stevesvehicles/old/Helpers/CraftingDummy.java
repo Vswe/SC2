@@ -4,7 +4,7 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
-import vswe.stevesvehicles.old.Modules.Addons.ModuleCrafter;
+import vswe.stevesvehicles.module.common.addon.ModuleCrafter;
 
 public class CraftingDummy extends InventoryCrafting
 {

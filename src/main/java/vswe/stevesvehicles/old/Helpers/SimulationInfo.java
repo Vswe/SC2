@@ -2,10 +2,10 @@ package vswe.stevesvehicles.old.Helpers;
 import java.util.ArrayList;
 
 import vswe.stevesvehicles.old.StevesVehicles;
-import vswe.stevesvehicles.old.Modules.Addons.ModuleInvisible;
-import vswe.stevesvehicles.old.Modules.Addons.ModuleBrake;
-import vswe.stevesvehicles.old.Modules.Addons.ModuleLiquidSensors;
-import vswe.stevesvehicles.old.Modules.Addons.ModuleShield;
+import vswe.stevesvehicles.module.common.addon.ModuleInvisible;
+import vswe.stevesvehicles.module.cart.addon.ModuleBrake;
+import vswe.stevesvehicles.module.cart.addon.ModuleLiquidSensors;
+import vswe.stevesvehicles.module.common.addon.ModuleShield;
 import vswe.stevesvehicles.old.Modules.Storages.Chests.ModuleChest;
 import vswe.stevesvehicles.old.Modules.Storages.Chests.ModuleInternalStorage;
 import vswe.stevesvehicles.module.common.engine.ModuleSolarBase;

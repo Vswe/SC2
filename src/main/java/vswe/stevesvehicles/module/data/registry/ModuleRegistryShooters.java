@@ -13,15 +13,16 @@ import vswe.stevesvehicles.module.data.ModuleDataGroup;
 import vswe.stevesvehicles.module.data.ModuleRegistry;
 import vswe.stevesvehicles.module.data.ModuleSide;
 import vswe.stevesvehicles.old.Helpers.Localization;
-import vswe.stevesvehicles.old.Modules.Addons.Mobdetectors.ModuleAnimal;
-import vswe.stevesvehicles.old.Modules.Addons.Mobdetectors.ModuleBat;
-import vswe.stevesvehicles.old.Modules.Addons.Mobdetectors.ModuleMonster;
-import vswe.stevesvehicles.old.Modules.Addons.Mobdetectors.ModulePlayer;
-import vswe.stevesvehicles.old.Modules.Addons.Mobdetectors.ModuleVillager;
-import vswe.stevesvehicles.old.Modules.Addons.Projectiles.ModuleCake;
-import vswe.stevesvehicles.old.Modules.Addons.Projectiles.ModuleEgg;
-import vswe.stevesvehicles.old.Modules.Addons.Projectiles.ModulePotion;
-import vswe.stevesvehicles.old.Modules.Addons.Projectiles.ModuleSnowball;
+import vswe.stevesvehicles.module.common.addon.mobdetector.ModuleAnimal;
+import vswe.stevesvehicles.module.common.addon.mobdetector.ModuleBat;
+import vswe.stevesvehicles.module.common.addon.mobdetector.ModuleMonster;
+import vswe.stevesvehicles.module.common.addon.mobdetector.ModulePlayer;
+import vswe.stevesvehicles.module.common.addon.mobdetector.ModuleVillager;
+import vswe.stevesvehicles.module.common.addon.projectile.ModuleCake;
+import vswe.stevesvehicles.module.common.addon.projectile.ModuleEgg;
+import vswe.stevesvehicles.module.common.addon.projectile.ModuleFireball;
+import vswe.stevesvehicles.module.common.addon.projectile.ModulePotion;
+import vswe.stevesvehicles.module.common.addon.projectile.ModuleSnowball;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleShooter;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleShooterAdv;
 import vswe.stevesvehicles.old.StevesVehicles;
@@ -181,7 +182,7 @@ public class ModuleRegistryShooters extends ModuleRegistry {
         register(potion);
 
 
-        ModuleData fire = new ModuleData("projectile_fire_charge", ModulePotion.class, 10);
+        ModuleData fire = new ModuleData("projectile_fire_charge", ModuleFireball.class, 10);
         fire.addShapedRecipeWithSize(1, 2,
                 Items.fire_charge,
                 EMPTY_DISK);

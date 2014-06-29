@@ -17,8 +17,8 @@ import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.old.Modules.ISuppliesModule;
 import vswe.stevesvehicles.module.ModuleBase;
-import vswe.stevesvehicles.old.Modules.Addons.ModuleEnchants;
-import vswe.stevesvehicles.old.Modules.Addons.Projectiles.ModuleProjectile;
+import vswe.stevesvehicles.module.common.addon.ModuleEnchants;
+import vswe.stevesvehicles.module.common.addon.projectile.ModuleProjectile;
 import vswe.stevesvehicles.old.Slots.SlotArrow;
 import vswe.stevesvehicles.old.Slots.SlotBase;
 

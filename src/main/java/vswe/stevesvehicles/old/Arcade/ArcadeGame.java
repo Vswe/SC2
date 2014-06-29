@@ -5,7 +5,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
 import vswe.stevesvehicles.localization.ILocalizedText;
 import vswe.stevesvehicles.old.StevesVehicles;
-import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.SoundHandler;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleArcade;
@@ -100,7 +99,7 @@ public abstract class ArcadeGame {
 	}	
 	
 	public void drawImageInArea(GuiVehicle gui, int x, int y, int u, int v, int w, int h) {
-		drawImageInArea(gui, x, y, u, v, w, h, 5, 4, VehicleBase.MODULAR_SPACE_WIDTH,  VehicleBase.MODULAR_SPACE_HEIGHT);
+		drawImageInArea(gui, x, y, u, v, w, h, 5, 4, vswe.stevesvehicles.vehicle.VehicleBase.MODULAR_SPACE_WIDTH,  vswe.stevesvehicles.vehicle.VehicleBase.MODULAR_SPACE_HEIGHT);
 	}
 	
 	public void drawImageInArea(GuiVehicle gui, int x, int y, int u, int v, int w, int h, int x1, int y1, int x2, int y2) {

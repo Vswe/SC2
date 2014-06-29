@@ -16,9 +16,9 @@ import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.old.Helpers.ActivatorOption;
 import vswe.stevesvehicles.old.Interfaces.GuiActivator;
 import vswe.stevesvehicles.client.interfaces.GuiBase;
-import vswe.stevesvehicles.old.Modules.Addons.ModuleChunkLoader;
-import vswe.stevesvehicles.old.Modules.Addons.ModuleInvisible;
-import vswe.stevesvehicles.old.Modules.Addons.ModuleShield;
+import vswe.stevesvehicles.module.common.addon.ModuleChunkLoader;
+import vswe.stevesvehicles.module.common.addon.ModuleInvisible;
+import vswe.stevesvehicles.module.common.addon.ModuleShield;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleCage;
 import vswe.stevesvehicles.module.cart.tool.ModuleDrill;
 

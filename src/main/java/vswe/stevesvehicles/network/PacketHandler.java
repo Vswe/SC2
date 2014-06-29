@@ -23,7 +23,6 @@ import vswe.stevesvehicles.container.ContainerVehicle;
 import vswe.stevesvehicles.old.Blocks.BlockCartAssembler;
 import vswe.stevesvehicles.old.Blocks.ModBlocks;
 import vswe.stevesvehicles.registry.RegistrySynchronizer;
-import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.module.ModuleBase;
@@ -77,7 +76,7 @@ public class PacketHandler {
                 }
 
                 World world = player.worldObj;
-                VehicleBase vehicle = getVehicle(entityId, world);
+                vswe.stevesvehicles.vehicle.VehicleBase vehicle = getVehicle(entityId, world);
                 if (vehicle != null) {
                     receivePacketAtVehicle(vehicle, id, data, player);
                 }
@@ -111,7 +110,7 @@ public class PacketHandler {
                     for (int i = 0; i < len; i++) {
                         data[i] = reader.readByte();
                     }
-                    VehicleBase vehicle = getVehicle(entityId, world);
+                    vswe.stevesvehicles.vehicle.VehicleBase vehicle = getVehicle(entityId, world);
                     if (vehicle != null) {
                         receivePacketAtVehicle(vehicle, id, data, player);
                     }
@@ -127,7 +126,7 @@ public class PacketHandler {
 
                     if (con instanceof ContainerVehicle) {
                         ContainerVehicle containerVehicle = (ContainerVehicle)con;
-                        VehicleBase vehicle = containerVehicle.getVehicle();
+                        vswe.stevesvehicles.vehicle.VehicleBase vehicle = containerVehicle.getVehicle();
 
                         receivePacketAtVehicle(vehicle, id, data, player);
                     }else if(con instanceof ContainerBase) {
@@ -148,7 +147,7 @@ public class PacketHandler {
 
 
 
-	private void receivePacketAtVehicle(VehicleBase vehicle, int id,byte [] data, EntityPlayer player) {
+	private void receivePacketAtVehicle(vswe.stevesvehicles.vehicle.VehicleBase vehicle, int id,byte [] data, EntityPlayer player) {
 		for (ModuleBase module : vehicle.getModules()) {
 			if (id >= module.getPacketStart() && id < module.getPacketStart() + module.totalNumberOfPackets()) {
 				module.delegateReceivedPacket(id-module.getPacketStart(),data, player);
@@ -157,7 +156,7 @@ public class PacketHandler {
 		}
 	}
 	
-	private VehicleBase getVehicle(int id, World world) {
+	private vswe.stevesvehicles.vehicle.VehicleBase getVehicle(int id, World world) {
         Entity entity = world.getEntityByID(id);
 
         if (entity instanceof IVehicleEntity) {
@@ -231,7 +230,7 @@ public class PacketHandler {
         }
     }
 	
-	public static void sendPacketToPlayer(int id, byte[] data, EntityPlayer player, VehicleBase vehicle) {
+	public static void sendPacketToPlayer(int id, byte[] data, EntityPlayer player, vswe.stevesvehicles.vehicle.VehicleBase vehicle) {
 		ByteArrayOutputStream bs = new ByteArrayOutputStream();
 		DataOutputStream ds = new DataOutputStream(bs);
 

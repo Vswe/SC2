@@ -9,8 +9,8 @@ import vswe.stevesvehicles.client.rendering.models.ModelShield;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleRegistry;
 import vswe.stevesvehicles.module.data.ModuleSide;
-import vswe.stevesvehicles.old.Modules.Addons.ModuleChunkLoader;
-import vswe.stevesvehicles.old.Modules.Addons.ModuleShield;
+import vswe.stevesvehicles.module.common.addon.ModuleChunkLoader;
+import vswe.stevesvehicles.module.common.addon.ModuleShield;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleDynamite;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 

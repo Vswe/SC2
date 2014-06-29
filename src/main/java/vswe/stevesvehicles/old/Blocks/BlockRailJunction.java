@@ -7,6 +7,7 @@ import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
 public class BlockRailJunction extends BlockSpecialRailBase
 {
 

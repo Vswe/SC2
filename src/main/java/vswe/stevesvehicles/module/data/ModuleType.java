@@ -3,7 +3,7 @@ package vswe.stevesvehicles.module.data;
 
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
-import vswe.stevesvehicles.old.Modules.Addons.ModuleAddon;
+import vswe.stevesvehicles.module.common.addon.ModuleAddon;
 import vswe.stevesvehicles.module.cart.hull.ModuleHull;
 import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
 import vswe.stevesvehicles.old.Modules.Storages.ModuleStorage;

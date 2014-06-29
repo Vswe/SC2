@@ -37,7 +37,7 @@ import vswe.stevesvehicles.old.Helpers.DataWatcherLockable;
 import vswe.stevesvehicles.old.Helpers.GuiAllocationHelper;
 import vswe.stevesvehicles.old.Helpers.ModuleCountPair;
 import vswe.stevesvehicles.old.Helpers.TransferHandler;
-import vswe.stevesvehicles.old.Modules.Addons.ModuleCreativeSupplies;
+import vswe.stevesvehicles.module.common.addon.ModuleCreativeSupplies;
 import vswe.stevesvehicles.module.common.engine.ModuleEngine;
 import vswe.stevesvehicles.old.Modules.IActivatorModule;
 import vswe.stevesvehicles.module.ModuleBase;

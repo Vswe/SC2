@@ -4,9 +4,9 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleRegistry;
-import vswe.stevesvehicles.old.Modules.Addons.ModuleMelter;
-import vswe.stevesvehicles.old.Modules.Addons.ModuleMelterExtreme;
-import vswe.stevesvehicles.old.Modules.Addons.ModuleSnowCannon;
+import vswe.stevesvehicles.module.common.addon.ModuleMelter;
+import vswe.stevesvehicles.module.common.addon.ModuleMelterExtreme;
+import vswe.stevesvehicles.module.common.addon.ModuleSnowCannon;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 

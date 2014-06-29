@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.EnchantmentInfo.ENCHANTMENT_TYPE;
 import vswe.stevesvehicles.module.ModuleBase;
-import vswe.stevesvehicles.old.Modules.Addons.ModuleEnchants;
+import vswe.stevesvehicles.module.common.addon.ModuleEnchants;
 import vswe.stevesvehicles.module.cart.ModuleWorker;
 
 public abstract class ModuleTool extends ModuleWorker {

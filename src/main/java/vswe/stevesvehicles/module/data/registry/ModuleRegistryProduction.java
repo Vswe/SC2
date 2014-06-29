@@ -5,10 +5,10 @@ import net.minecraft.init.Items;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataGroup;
 import vswe.stevesvehicles.module.data.ModuleRegistry;
-import vswe.stevesvehicles.old.Modules.Addons.ModuleCrafter;
-import vswe.stevesvehicles.old.Modules.Addons.ModuleCrafterAdv;
-import vswe.stevesvehicles.old.Modules.Addons.ModuleSmelter;
-import vswe.stevesvehicles.old.Modules.Addons.ModuleSmelterAdv;
+import vswe.stevesvehicles.module.common.addon.ModuleCrafter;
+import vswe.stevesvehicles.module.common.addon.ModuleCrafterAdv;
+import vswe.stevesvehicles.module.common.addon.ModuleSmelter;
+import vswe.stevesvehicles.module.common.addon.ModuleSmelterAdv;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleMilker;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 
