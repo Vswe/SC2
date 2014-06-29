@@ -19,7 +19,7 @@ import vswe.stevesvehicles.client.interfaces.GuiBase;
 import vswe.stevesvehicles.module.common.addon.ModuleChunkLoader;
 import vswe.stevesvehicles.module.common.addon.ModuleInvisible;
 import vswe.stevesvehicles.module.common.addon.ModuleShield;
-import vswe.stevesvehicles.old.Modules.Realtimers.ModuleCage;
+import vswe.stevesvehicles.module.common.attachment.ModuleCage;
 import vswe.stevesvehicles.module.cart.tool.ModuleDrill;
 
 /**

@@ -4,7 +4,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Modules.ICropModule;
+import vswe.stevesvehicles.module.cart.ICropModule;
 import vswe.stevesvehicles.module.common.addon.ModuleAddon;
 
 public class ModuleNetherWart extends ModuleAddon implements ICropModule {

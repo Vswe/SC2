@@ -1,7 +1,6 @@
-package vswe.stevesvehicles.old.Modules.Realtimers;
+package vswe.stevesvehicles.module.common.attachment;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.entity.Entity;
@@ -22,17 +21,17 @@ import net.minecraft.entity.passive.EntityWaterMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
-import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
+import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
-import vswe.stevesvehicles.old.Modules.IActivatorModule;
+import vswe.stevesvehicles.module.IActivatorModule;
 import vswe.stevesvehicles.module.ModuleBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ModuleCage extends ModuleBase implements IActivatorModule {
-	public ModuleCage(EntityModularCart cart) {
-		super(cart);
+	public ModuleCage(VehicleBase vehicleBase) {
+		super(vehicleBase);
 	}
 
 	@Override
@@ -66,42 +65,42 @@ public class ModuleCage extends ModuleBase implements IActivatorModule {
 	public void drawBackground(GuiVehicle gui, int x, int y) {
 		ResourceHelper.bindResource("/gui/cage.png");
 
-		drawButton(gui, x, y, autoRect, disablePickup ? 2 : 3);
-		drawButton(gui, x, y, manualRect, isCageEmpty() ? 0 : 1);
+		drawButton(gui, x, y, AUTO_RECT, disablePickup ? 2 : 3);
+		drawButton(gui, x, y, MANUAL_RECT, isCageEmpty() ? 0 : 1);
 	}
 
-	private void drawButton(GuiVehicle gui, int x, int y, int[] coords, int imageID) {
-		if (inRect(x,y, coords)) {
-			drawImage(gui,coords, 0, coords[3]);
+	private void drawButton(GuiVehicle gui, int x, int y, int[] coordinates, int imageID) {
+		if (inRect(x,y, coordinates)) {
+			drawImage(gui,coordinates, 0, coordinates[3]);
 		}else{
-			drawImage(gui,coords, 0, 0);
+			drawImage(gui,coordinates, 0, 0);
 		}
 
-		int srcY = coords[3] * 2 + imageID * (coords[3] - 2);
-		drawImage(gui, coords[0] + 1, coords[1] + 1, 0, srcY, coords[2] - 2, coords[3] - 2);
+		int srcY = coordinates[3] * 2 + imageID * (coordinates[3] - 2);
+		drawImage(gui, coordinates[0] + 1, coordinates[1] + 1, 0, srcY, coordinates[2] - 2, coordinates[3] - 2);
 	}	
 	
-	private int[] autoRect = new int[] {15,20, 24, 12};
-	private int[] manualRect = new int[] {autoRect[0] + autoRect[2] + 5,autoRect[1], autoRect[2], autoRect[3]};
+	private static final int[] AUTO_RECT = new int[] {15, 20, 24, 12};
+	private static final int[] MANUAL_RECT = new int[] {AUTO_RECT[0] + AUTO_RECT[2] + 5, AUTO_RECT[1], AUTO_RECT[2], AUTO_RECT[3]};
 
 
 	@Override
 	public void drawMouseOver(GuiVehicle gui, int x, int y) {
-		drawStringOnMouseOver(gui, Localization.MODULES.ATTACHMENTS.CAGE_AUTO.translate(disablePickup ? "0" : "1"), x,y, autoRect);
-		drawStringOnMouseOver(gui, Localization.MODULES.ATTACHMENTS.CAGE.translate(isCageEmpty() ? "0" : "1"), x,y, manualRect);
+		drawStringOnMouseOver(gui, Localization.MODULES.ATTACHMENTS.CAGE_AUTO.translate(disablePickup ? "0" : "1"), x, y, AUTO_RECT);
+		drawStringOnMouseOver(gui, Localization.MODULES.ATTACHMENTS.CAGE.translate(isCageEmpty() ? "0" : "1"), x, y, MANUAL_RECT);
 	}
 
 	private boolean isCageEmpty() {		
-		return getCart().riddenByEntity == null;
+		return getVehicle().getEntity().riddenByEntity == null;
 	}
 
 
 	@Override
 	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0) {
-			if (inRect(x,y, autoRect)) {
+			if (inRect(x,y, AUTO_RECT)) {
 				sendPacket(0);
-			}else if (inRect(x,y, manualRect)) {
+			}else if (inRect(x,y, MANUAL_RECT)) {
 				sendPacket(1);
 			}
 		}
@@ -125,6 +124,9 @@ public class ModuleCage extends ModuleBase implements IActivatorModule {
 		return 2;
 	}
 
+    private int cooldown = 0;
+    private static int PICK_UP_COOLDOWN = 20;
+
 	@Override
 	public void update() {
 		super.update();
@@ -133,14 +135,14 @@ public class ModuleCage extends ModuleBase implements IActivatorModule {
 			cooldown--;
 		}else if(!disablePickup) {
 			pickUpCreature(2);
-			cooldown = 20;
+			cooldown = PICK_UP_COOLDOWN;
 		}
 	}
 
 	private void manualDrop() {
 		if (!isCageEmpty()) {
-			getCart().riddenByEntity.mountEntity(null);		
-			cooldown = 20;	
+			getVehicle().getEntity().riddenByEntity.mountEntity(null);
+			cooldown = PICK_UP_COOLDOWN;
 		}
 	}
 	
@@ -148,48 +150,45 @@ public class ModuleCage extends ModuleBase implements IActivatorModule {
 		pickUpCreature(5);
 	}
 
-	private EntityNearestTarget sorter = new EntityNearestTarget(getCart());
+	private EntityNearestTarget sorter = new EntityNearestTarget(getVehicle().getEntity());
 	private void pickUpCreature(int searchDistance) {
-		if (getCart().worldObj.isRemote || !isCageEmpty()) {
+		if (getVehicle().getWorld().isRemote || !isCageEmpty()) {
 			return;
 		}
 		
-		List entities = getCart().worldObj.getEntitiesWithinAABB(EntityLivingBase.class, getCart().boundingBox.expand((double)searchDistance, 4.0D, (double)searchDistance));
+		List entities = getVehicle().getWorld().getEntitiesWithinAABB(EntityLivingBase.class, getVehicle().getEntity().boundingBox.expand((double) searchDistance, 4.0D, (double) searchDistance));
 		Collections.sort(entities, sorter);
-		Iterator itt = entities.iterator();
 
-		while (itt.hasNext())
-		{
-			EntityLivingBase target = (EntityLivingBase)itt.next();
+        for (Object entity : entities) {
+            EntityLivingBase target = (EntityLivingBase) entity;
 
-			
-			
-			if (target instanceof EntityPlayer || 
-				target instanceof EntityIronGolem ||
-				target instanceof EntityDragon ||
-				target instanceof EntitySlime ||
-				target instanceof EntityWaterMob ||
-				target instanceof EntityWither ||
-				target instanceof EntityEnderman ||
-				(target instanceof EntitySpider && !(target instanceof EntityCaveSpider)) ||
-				target instanceof EntityGiantZombie ||
-				target instanceof EntityFlying ||
-				(target instanceof EntitySkeleton && ((EntitySkeleton)target).getSkeletonType() == 1)) {
-				
-					continue;
-			}
-		
-		
-			if (target.ridingEntity == null) {
-				target.mountEntity(getCart());
-				return;
-			}
-		}
+
+            if (target instanceof EntityPlayer ||
+                    target instanceof EntityIronGolem ||
+                    target instanceof EntityDragon ||
+                    target instanceof EntitySlime ||
+                    target instanceof EntityWaterMob ||
+                    target instanceof EntityWither ||
+                    target instanceof EntityEnderman ||
+                    (target instanceof EntitySpider && !(target instanceof EntityCaveSpider)) ||
+                    target instanceof EntityGiantZombie ||
+                    target instanceof EntityFlying ||
+                    (target instanceof EntitySkeleton && ((EntitySkeleton) target).getSkeletonType() == 1)) {
+
+                continue;
+            }
+
+
+            if (target.ridingEntity == null) {
+                target.mountEntity(getVehicle().getEntity());
+                return;
+            }
+        }
 
 	}
 
 	
-	private int cooldown = 0;
+
 
 
 	
@@ -222,12 +221,12 @@ public class ModuleCage extends ModuleBase implements IActivatorModule {
 	
 	@Override
 	protected void Save(NBTTagCompound tagCompound, int id) {
-		tagCompound.setBoolean(generateNBTName("disablePickup",id), disablePickup);
+		tagCompound.setBoolean("disablePickup", disablePickup);
 	}	
 	
 	@Override
 	protected void Load(NBTTagCompound tagCompound, int id) {
-		disablePickup = tagCompound.getBoolean(generateNBTName("disablePickup",id));
+		disablePickup = tagCompound.getBoolean("disablePickup");
 	}		
 	
 	private boolean disablePickup;

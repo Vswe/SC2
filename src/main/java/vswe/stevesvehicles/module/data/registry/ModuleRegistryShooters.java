@@ -23,8 +23,8 @@ import vswe.stevesvehicles.module.common.addon.projectile.ModuleEgg;
 import vswe.stevesvehicles.module.common.addon.projectile.ModuleFireball;
 import vswe.stevesvehicles.module.common.addon.projectile.ModulePotion;
 import vswe.stevesvehicles.module.common.addon.projectile.ModuleSnowball;
-import vswe.stevesvehicles.old.Modules.Realtimers.ModuleShooter;
-import vswe.stevesvehicles.old.Modules.Realtimers.ModuleShooterAdv;
+import vswe.stevesvehicles.module.common.attachment.ModuleShooter;
+import vswe.stevesvehicles.module.common.attachment.ModuleShooterAdvanced;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 
@@ -78,7 +78,7 @@ public class ModuleRegistryShooters extends ModuleRegistry {
 
 
 
-        advanced = new ModuleData("advanced_shooter", ModuleShooterAdv.class, 50) {
+        advanced = new ModuleData("advanced_shooter", ModuleShooterAdvanced.class, 50) {
             @Override
             @SideOnly(Side.CLIENT)
             public void loadModels() {

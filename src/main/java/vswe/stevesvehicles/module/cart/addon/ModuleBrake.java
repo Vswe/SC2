@@ -6,7 +6,7 @@ import vswe.stevesvehicles.module.common.addon.ModuleAddon;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
-import vswe.stevesvehicles.old.Modules.ILeverModule;
+import vswe.stevesvehicles.module.cart.ILeverModule;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

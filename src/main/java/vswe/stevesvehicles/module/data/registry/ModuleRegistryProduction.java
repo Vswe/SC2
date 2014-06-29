@@ -9,7 +9,7 @@ import vswe.stevesvehicles.module.common.addon.ModuleCrafter;
 import vswe.stevesvehicles.module.common.addon.ModuleCrafterAdv;
 import vswe.stevesvehicles.module.common.addon.ModuleSmelter;
 import vswe.stevesvehicles.module.common.addon.ModuleSmelterAdv;
-import vswe.stevesvehicles.old.Modules.Realtimers.ModuleMilker;
+import vswe.stevesvehicles.module.common.attachment.ModuleMilker;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 
 

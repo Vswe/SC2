@@ -12,7 +12,7 @@ import vswe.stevesvehicles.module.data.ModuleSide;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistryTravel;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.cart.addon.ModuleBrake;
-import vswe.stevesvehicles.old.Modules.Realtimers.ModuleAdvControl;
+import vswe.stevesvehicles.module.cart.attachment.ModuleAdvancedControl;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 
 import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
@@ -43,7 +43,7 @@ public class ModuleRegistryCartTravel extends ModuleRegistry {
 
 
 
-        ModuleData controller = new ModuleData("advanced_control_system", ModuleAdvControl.class, 38) {
+        ModuleData controller = new ModuleData("advanced_control_system", ModuleAdvancedControl.class, 38) {
             @Override
             @SideOnly(Side.CLIENT)
             public void loadModels() {

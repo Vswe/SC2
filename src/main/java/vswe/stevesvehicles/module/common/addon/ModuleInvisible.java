@@ -5,7 +5,7 @@ import vswe.stevesvehicles.client.interfaces.GuiVehicle;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
-import vswe.stevesvehicles.old.Modules.IActivatorModule;
+import vswe.stevesvehicles.module.IActivatorModule;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

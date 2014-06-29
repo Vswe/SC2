@@ -23,6 +23,7 @@ import vswe.stevesvehicles.container.ContainerVehicle;
 import vswe.stevesvehicles.old.Blocks.BlockCartAssembler;
 import vswe.stevesvehicles.old.Blocks.ModBlocks;
 import vswe.stevesvehicles.registry.RegistrySynchronizer;
+import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.module.ModuleBase;
@@ -200,7 +201,7 @@ public class PacketHandler {
         return new FMLProxyPacket(buf, CHANNEL);
     }
 
-	public static void sendPacket(EntityModularCart cart,int id, byte[] extraData) {
+	public static void sendPacket(VehicleBase vehicleBase,int id, byte[] extraData) {
 		ByteArrayOutputStream bs = new ByteArrayOutputStream();
 		DataOutputStream ds = new DataOutputStream(bs);
 
@@ -208,7 +209,7 @@ public class PacketHandler {
             ds.writeByte((byte) PacketType.VEHICLE.ordinal());
 			ds.writeByte((byte)id);
 
-			ds.writeInt(cart.getEntityId());
+			ds.writeInt(vehicleBase.getEntity().getEntityId());
 			
 			for (byte b : extraData) {
 				ds.writeByte(b);

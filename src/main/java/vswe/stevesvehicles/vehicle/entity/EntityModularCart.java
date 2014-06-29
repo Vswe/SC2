@@ -33,7 +33,6 @@ import vswe.stevesvehicles.old.TileEntities.TileEntityCartAssembler;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.vehicle.VehicleCart;
 
 /**
@@ -407,15 +406,15 @@ public class EntityModularCart extends EntityMinecart
 	 * @return The meta data of the rail
 	 */
 	public int getRailMeta(int x, int y, int z) {		
-		ModuleBase.RAILDIRECTION dir = ModuleBase.RAILDIRECTION.DEFAULT;
+		ModuleBase.RAIL_DIRECTION dir = ModuleBase.RAIL_DIRECTION.DEFAULT;
 		for (ModuleBase module : vehicleBase.getModules()) {
 			dir = module.getSpecialRailDirection(x,y,z);
-			if (dir != ModuleBase.RAILDIRECTION.DEFAULT) {
+			if (dir != ModuleBase.RAIL_DIRECTION.DEFAULT) {
 				break;
 			}
 		}
 	
-		if (dir == ModuleBase.RAILDIRECTION.DEFAULT)  {
+		if (dir == ModuleBase.RAIL_DIRECTION.DEFAULT)  {
 			return -1;
 		}
 	

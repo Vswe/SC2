@@ -1,7 +1,7 @@
 package vswe.stevesvehicles.old.Slots;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import vswe.stevesvehicles.old.Modules.Realtimers.ModuleShooter;
+import vswe.stevesvehicles.module.common.attachment.ModuleShooter;
 
 public class SlotArrow extends SlotBase
 {

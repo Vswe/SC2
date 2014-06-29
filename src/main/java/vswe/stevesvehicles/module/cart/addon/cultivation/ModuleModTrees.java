@@ -5,7 +5,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Modules.ITreeModule;
+import vswe.stevesvehicles.module.cart.ITreeModule;
 import vswe.stevesvehicles.module.common.addon.ModuleAddon;
 
 public class ModuleModTrees extends ModuleAddon implements ITreeModule {

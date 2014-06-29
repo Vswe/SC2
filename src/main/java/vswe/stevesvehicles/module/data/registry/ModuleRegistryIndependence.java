@@ -11,7 +11,7 @@ import vswe.stevesvehicles.module.data.ModuleRegistry;
 import vswe.stevesvehicles.module.data.ModuleSide;
 import vswe.stevesvehicles.module.common.addon.ModuleChunkLoader;
 import vswe.stevesvehicles.module.common.addon.ModuleShield;
-import vswe.stevesvehicles.old.Modules.Realtimers.ModuleDynamite;
+import vswe.stevesvehicles.module.common.attachment.ModuleDynamite;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 
 import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;

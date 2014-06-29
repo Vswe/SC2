@@ -1,6 +1,7 @@
 package vswe.stevesvehicles.old.Helpers;
 import java.util.ArrayList;
 
+import vswe.stevesvehicles.module.common.attachment.ModuleShooterAdvanced;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.module.common.addon.ModuleInvisible;
 import vswe.stevesvehicles.module.cart.addon.ModuleBrake;
@@ -9,9 +10,8 @@ import vswe.stevesvehicles.module.common.addon.ModuleShield;
 import vswe.stevesvehicles.old.Modules.Storages.Chests.ModuleChest;
 import vswe.stevesvehicles.old.Modules.Storages.Chests.ModuleInternalStorage;
 import vswe.stevesvehicles.module.common.engine.ModuleSolarBase;
-import vswe.stevesvehicles.old.Modules.Realtimers.ModuleShooter;
-import vswe.stevesvehicles.old.Modules.Realtimers.ModuleShooterAdv;
-import vswe.stevesvehicles.old.Modules.Realtimers.ModuleDynamite;
+import vswe.stevesvehicles.module.common.attachment.ModuleShooter;
+import vswe.stevesvehicles.module.common.attachment.ModuleDynamite;
 import vswe.stevesvehicles.module.cart.attachment.ModuleBridge;
 import vswe.stevesvehicles.module.cart.attachment.ModuleHydrater;
 import vswe.stevesvehicles.module.cart.attachment.ModuleRailer;
@@ -153,12 +153,12 @@ public class SimulationInfo {
 		itemMULTIBOOLTorch = new DropDownMenuItem("Torches",15, DropDownMenuItem.VALUETYPE.MULTIBOOL, ModuleTorch.class);	
 		itemMULTIBOOLTorch.setMULTIBOOLCount(3);
 
-		itemMULTIBOOLPipes1 = new DropDownMenuItem("Pipes",16, DropDownMenuItem.VALUETYPE.MULTIBOOL, ModuleShooter.class,  ModuleShooterAdv.class);	
+		itemMULTIBOOLPipes1 = new DropDownMenuItem("Pipes",16, DropDownMenuItem.VALUETYPE.MULTIBOOL, ModuleShooter.class,  ModuleShooterAdvanced.class);
 		itemMULTIBOOLPipes1.setMULTIBOOLCount(4);
-		itemMULTIBOOLPipes2 = new DropDownMenuItem("Pipes",16, DropDownMenuItem.VALUETYPE.MULTIBOOL, ModuleShooter.class,  ModuleShooterAdv.class);	
+		itemMULTIBOOLPipes2 = new DropDownMenuItem("Pipes",16, DropDownMenuItem.VALUETYPE.MULTIBOOL, ModuleShooter.class,  ModuleShooterAdvanced.class);
 		itemMULTIBOOLPipes2.setMULTIBOOLCount(4);
 		
-		itemBOOLPipe = new DropDownMenuItem("Pipe",17, DropDownMenuItem.VALUETYPE.BOOL, ModuleShooterAdv.class);	
+		itemBOOLPipe = new DropDownMenuItem("Pipe",17, DropDownMenuItem.VALUETYPE.BOOL, ModuleShooterAdvanced.class);
 
 		itemINTBackground = new DropDownMenuItem("Background",18, DropDownMenuItem.VALUETYPE.INT, null);	
 		itemINTBackground.setINTLimit(StevesVehicles.hasGreenScreen ? 0 : 1,3);

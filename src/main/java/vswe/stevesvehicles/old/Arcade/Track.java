@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
 import vswe.stevesvehicles.client.interfaces.GuiBase.RENDER_ROTATION;
-import vswe.stevesvehicles.old.Modules.Realtimers.ModuleArcade;
+import vswe.stevesvehicles.module.common.attachment.ModuleArcade;
 
 public class Track  {
 	private int x;

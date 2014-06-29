@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.Modules;
+package vswe.stevesvehicles.module;
 
 public interface IActivatorModule {
 

@@ -5,7 +5,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.util.ResourceLocation;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.ModuleBase;
-import vswe.stevesvehicles.old.Modules.Realtimers.ModuleFlowerRemover;
+import vswe.stevesvehicles.module.cart.attachment.ModuleFlowerRemover;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)

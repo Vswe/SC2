@@ -708,8 +708,8 @@ public abstract class ModuleBase {
 	 * @param z The z coordinate in the world
 	 * @return The direction to go, default means that the module won't chane it
 	 */
-	public RAILDIRECTION getSpecialRailDirection(int x, int y, int z) {
-		return RAILDIRECTION.DEFAULT;
+	public RAIL_DIRECTION getSpecialRailDirection(int x, int y, int z) {
+		return RAIL_DIRECTION.DEFAULT;
 	}
 
 	/**
@@ -717,7 +717,7 @@ public abstract class ModuleBase {
 	 * @author Vswe
 	 *
 	 */
-	public enum RAILDIRECTION {DEFAULT, NORTH, WEST, SOUTH, EAST, LEFT, FORWARD, RIGHT}
+	public enum RAIL_DIRECTION {DEFAULT, NORTH, WEST, SOUTH, EAST, LEFT, FORWARD, RIGHT}
 	
 	
 	/**

@@ -3,7 +3,7 @@ package vswe.stevesvehicles.old.Arcade;
 import java.util.ArrayList;
 
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
-import vswe.stevesvehicles.old.Modules.Realtimers.ModuleArcade;
+import vswe.stevesvehicles.module.common.attachment.ModuleArcade;
 
 
 public class TrackDetector extends Track {

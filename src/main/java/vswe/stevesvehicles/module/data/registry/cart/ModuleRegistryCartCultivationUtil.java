@@ -15,7 +15,7 @@ import vswe.stevesvehicles.module.data.registry.ModuleRegistryTanks;
 import vswe.stevesvehicles.module.cart.addon.cultivation.ModuleModTrees;
 import vswe.stevesvehicles.module.cart.addon.cultivation.ModuleNetherWart;
 import vswe.stevesvehicles.module.cart.addon.cultivation.ModulePlantSize;
-import vswe.stevesvehicles.old.Modules.Realtimers.ModuleFlowerRemover;
+import vswe.stevesvehicles.module.cart.attachment.ModuleFlowerRemover;
 import vswe.stevesvehicles.module.cart.attachment.ModuleFertilizer;
 import vswe.stevesvehicles.module.cart.attachment.ModuleHydrater;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;

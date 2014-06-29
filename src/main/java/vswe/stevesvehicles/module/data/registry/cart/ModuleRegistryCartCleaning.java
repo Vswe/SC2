@@ -11,8 +11,8 @@ import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleRegistry;
 import vswe.stevesvehicles.module.data.ModuleSide;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
-import vswe.stevesvehicles.old.Modules.Realtimers.ModuleCleaner;
-import vswe.stevesvehicles.old.Modules.Realtimers.ModuleExperience;
+import vswe.stevesvehicles.module.cart.attachment.ModuleCleaner;
+import vswe.stevesvehicles.module.cart.attachment.ModuleExperience;
 import vswe.stevesvehicles.module.cart.attachment.ModuleLiquidDrainer;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 

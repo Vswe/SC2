@@ -7,7 +7,7 @@ import org.lwjgl.opengl.GL11;
 
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.ModuleBase;
-import vswe.stevesvehicles.old.Modules.Realtimers.ModuleDynamite;
+import vswe.stevesvehicles.module.common.attachment.ModuleDynamite;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)

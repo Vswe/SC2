@@ -13,9 +13,9 @@ import vswe.stevesvehicles.module.data.ModuleDataGroup;
 import vswe.stevesvehicles.module.data.ModuleRegistry;
 import vswe.stevesvehicles.module.data.ModuleSide;
 import vswe.stevesvehicles.old.Helpers.Localization;
-import vswe.stevesvehicles.old.Modules.Realtimers.ModuleArcade;
-import vswe.stevesvehicles.old.Modules.Realtimers.ModuleCage;
-import vswe.stevesvehicles.old.Modules.Realtimers.ModuleSeat;
+import vswe.stevesvehicles.module.common.attachment.ModuleArcade;
+import vswe.stevesvehicles.module.common.attachment.ModuleCage;
+import vswe.stevesvehicles.module.common.attachment.ModuleSeat;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 
 import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;

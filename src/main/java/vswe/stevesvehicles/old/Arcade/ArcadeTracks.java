@@ -10,7 +10,7 @@ import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.old.Arcade.TrackOrientation.DIRECTION;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
-import vswe.stevesvehicles.old.Modules.Realtimers.ModuleArcade;
+import vswe.stevesvehicles.module.common.attachment.ModuleArcade;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

@@ -19,7 +19,7 @@ import vswe.stevesvehicles.old.Helpers.BlockCoordinate;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
-import vswe.stevesvehicles.old.Modules.IActivatorModule;
+import vswe.stevesvehicles.module.IActivatorModule;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.cart.addon.ModuleDrillIntelligence;
 import vswe.stevesvehicles.module.cart.addon.ModuleIncinerator;

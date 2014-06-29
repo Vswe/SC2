@@ -11,7 +11,7 @@ import vswe.stevesvehicles.module.cart.ModuleWorker;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
-import vswe.stevesvehicles.old.Modules.ISuppliesModule;
+import vswe.stevesvehicles.module.ISuppliesModule;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.cart.tool.ModuleFarmer;
 import vswe.stevesvehicles.old.Slots.SlotBase;

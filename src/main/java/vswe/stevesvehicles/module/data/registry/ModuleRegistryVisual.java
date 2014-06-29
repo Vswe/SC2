@@ -13,8 +13,8 @@ import vswe.stevesvehicles.module.common.addon.ModuleColorRandomizer;
 import vswe.stevesvehicles.module.common.addon.ModuleColorizer;
 import vswe.stevesvehicles.module.common.addon.ModuleInvisible;
 import vswe.stevesvehicles.module.common.addon.ModuleLabel;
-import vswe.stevesvehicles.old.Modules.Realtimers.ModuleFirework;
-import vswe.stevesvehicles.old.Modules.Realtimers.ModuleNote;
+import vswe.stevesvehicles.module.common.attachment.ModuleFirework;
+import vswe.stevesvehicles.module.common.attachment.ModuleNote;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 
 import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;

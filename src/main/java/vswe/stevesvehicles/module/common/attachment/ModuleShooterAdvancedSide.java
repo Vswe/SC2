@@ -1,10 +1,10 @@
-package vswe.stevesvehicles.old.Modules.Realtimers;
+package vswe.stevesvehicles.module.common.attachment;
 
-import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
+import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.AnimationRig;
 import vswe.stevesvehicles.old.Helpers.AnimationRigVal;
 
-public class ModuleShooterAdvSide extends ModuleShooterAdv {
+public class ModuleShooterAdvancedSide extends ModuleShooterAdvanced {
 
 	private AnimationRig rig;
 	private AnimationRigVal handlePos;
@@ -28,8 +28,8 @@ public class ModuleShooterAdvSide extends ModuleShooterAdv {
 	private AnimationRigVal armPos2;
 	private AnimationRigVal armRot2;
 	
-	public ModuleShooterAdvSide(EntityModularCart cart) {
-		super(cart);
+	public ModuleShooterAdvancedSide(VehicleBase vehicleBase) {
+		super(vehicleBase);
 		
 		rig = new AnimationRig();
 		
@@ -74,67 +74,67 @@ public class ModuleShooterAdvSide extends ModuleShooterAdv {
 		rig.update(!isPipeActive(0));
 	}
 	
-	public float getHandlePos(int mult) {
-		return handlePos.getVal() * mult;
+	public float getHandlePos(int multiplier) {
+		return handlePos.getVal() * multiplier;
 	}
 	
-	public float getBasePos(int mult) {
-		return basePos.getVal() * mult;
+	public float getBasePos(int multiplier) {
+		return basePos.getVal() * multiplier;
 	}
 	
-	public float getHandleRot(int mult) {
+	public float getHandleRot(int multiplier) {
 		return handleRot.getVal();
 	}
 
-	public float getGunRot(int mult) {
+	public float getGunRot(int multiplier) {
 		return gunRot.getVal();
 	}
 
-	public float getBackPos(int mult) {
+	public float getBackPos(int multiplier) {
 		return backPos.getVal();
 	}
 	
-	public float getBackRot(int mult) {
-		return backRot.getVal() * mult;
+	public float getBackRot(int multiplier) {
+		return backRot.getVal() * multiplier;
 	}
 
-	public float getAttacherRot(int mult) {
-		return attacherRot.getVal() * mult;
+	public float getAttacherRot(int multiplier) {
+		return attacherRot.getVal() * multiplier;
 	}
 
-	public float getStabalizerOut(int mult) {
-		return stabalizerOut.getVal() * mult;
+	public float getStabalizerOut(int multiplier) {
+		return stabalizerOut.getVal() * multiplier;
 	}
 	
-	public float getStabalizerDown(int mult) {
+	public float getStabalizerDown(int multiplier) {
 		return stabalizerDown.getVal();
 	}
 
-	public float getStandOut(int mult, int i, int j) {
-		return standOut.getVal() * j + mult * i * 0.5F + 0.003F;
+	public float getStandOut(int multiplier, int i, int j) {
+		return standOut.getVal() * j + multiplier * i * 0.5F + 0.003F;
 	}
 	
-	public float getStandUp(int mult, int i, int j) {
-		return standUp.getVal() - standSlide.getVal() * (i * 2 - 1) * j * mult;
+	public float getStandUp(int multiplier, int i, int j) {
+		return standUp.getVal() - standSlide.getVal() * (i * 2 - 1) * j * multiplier;
 	}
 
-	public float getArmBasePos(int mult, boolean fake) {
+	public float getArmBasePos(int multiplier, boolean fake) {
 		return armBasePos.getVal() - (!fake ? armBasePos2.getVal() : 0);
 	}	
 	
-	public float getArmRot(int mult, boolean fake) {
-		return (armRot.getVal() - (!fake ? armRot2.getVal() : 0)) * mult;
+	public float getArmRot(int multiplier, boolean fake) {
+		return (armRot.getVal() - (!fake ? armRot2.getVal() : 0)) * multiplier;
 	}	
 	
-	public float getArmPos(int mult, boolean fake) {
+	public float getArmPos(int multiplier, boolean fake) {
 		return armPos.getVal() - (!fake ? armPos2.getVal() : 0);
 	}
 
-	public float getMissilePos(int mult) {
+	public float getMissilePos(int multiplier) {
 		return missilePos.getVal();
 	}
 
-	public float getMissileRot(int mult) {
-		return missileRot.getVal() * mult;
+	public float getMissileRot(int multiplier) {
+		return missileRot.getVal() * multiplier;
 	}
 }

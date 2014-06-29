@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.Modules.Realtimers;
+package vswe.stevesvehicles.module.common.attachment;
 
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ import vswe.stevesvehicles.old.Arcade.ArcadeSweeper;
 import vswe.stevesvehicles.old.Arcade.ArcadeTetris;
 import vswe.stevesvehicles.old.Arcade.ArcadeTracks;
 import vswe.stevesvehicles.old.Arcade.TrackStory;
-import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
+import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.ModuleBase;
 import cpw.mods.fml.relauncher.Side;
@@ -20,8 +20,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ModuleArcade extends ModuleBase {
 
-	public ModuleArcade(EntityModularCart cart) {
-		super(cart);
+	public ModuleArcade(VehicleBase vehicleBase) {
+		super(vehicleBase);
 		
 		games = new  ArrayList<ArcadeGame>();
 		games.add(new ArcadeTracks(this));
@@ -36,7 +36,7 @@ public class ModuleArcade extends ModuleBase {
 	private int afkTimer;
 
 	private boolean isGameActive() {
-		return getCart().worldObj.isRemote && currentGame != null;
+		return getVehicle().getWorld().isRemote && currentGame != null;
 	}
 	
 	
@@ -49,8 +49,6 @@ public class ModuleArcade extends ModuleBase {
 	public boolean hasSlots() {
 		return false;
 	}	
-	
-	
 
 	@Override
 	public boolean hasGui() {
@@ -77,8 +75,6 @@ public class ModuleArcade extends ModuleBase {
 	@Override
 	public void drawForeground(GuiVehicle gui) {
 		if (isGameActive()) {
-		    //drawString(gui, currentGame.getName(), 8, 6, 0x404040);
-			
 			currentGame.drawForeground(gui);
 		}else{
 		    drawString(gui,getModuleName(), 8, 6, 0x404040);
@@ -103,19 +99,15 @@ public class ModuleArcade extends ModuleBase {
 		
 		afkTimer = 0;
 		
-		if (isGameActive()) {	
-			int[] rect = getExitArea();
-			
+		if (isGameActive()) {
 			int srcX = 0;
-			int srcY = 104 + (inRect(x, y, rect) ? 16 : 0);
+			int srcY = 104 + (inRect(x, y, EXIT_AREA) ? 16 : 0);
 			
-			drawImage(gui, rect, srcX, srcY);
+			drawImage(gui, EXIT_AREA, srcX, srcY);
 			
 			currentGame.drawBackground(gui, x, y);			
 		}else{
-			int[] rect = getListArea();
-			
-			drawImage(gui, rect, 0, 0);
+			drawImage(gui, LIST_AREA, 0, 0);
 			
 			for (int i = 0; i < games.size(); i++) {
 				int[] button = getButtonGraphicArea(i);				
@@ -128,7 +120,7 @@ public class ModuleArcade extends ModuleBase {
 					
 					int[] icon = getButtonIconArea(i);
 					
-					drawImage(gui, icon, i * 16, rect[3]);
+					drawImage(gui, icon, i * 16, LIST_AREA[3]);
 				}
 			}
 		}
@@ -138,20 +130,17 @@ public class ModuleArcade extends ModuleBase {
 	@SideOnly(Side.CLIENT)
 	public void drawMouseOver(GuiVehicle gui, int x, int y) {
 		if (isGameActive()) {
-			drawStringOnMouseOver(gui, "Exit", x, y, getExitArea());
+			drawStringOnMouseOver(gui, "Exit", x, y, EXIT_AREA);
 			currentGame.drawMouseOver(gui, x, y);
 		}
 	}	
 	
 
-	
-	private int[] getExitArea() {
-		return new int[] {455, 6, 16, 16};
-	}
-	
-	private int[] getListArea() {
-		return new int[] {15, 20, 170, 88};
-	}
+
+    private static final int[] EXIT_AREA = new int[] {455, 6, 16, 16};
+    private static final int[] LIST_AREA = new int[] {15, 20, 170, 88};
+
+
 	
 	private int[] getButtonBoundsArea(int i) {
 		return getButtonArea(i, false);
@@ -162,9 +151,7 @@ public class ModuleArcade extends ModuleBase {
 	}	
 	
 	private int[] getButtonArea(int i, boolean graphic) {
-		int[] list = getListArea();
-		
-		return new int[] {list[0] + 2, list[1] + 2 + i*21, 166, graphic ? 21 : 20};
+		return new int[] {LIST_AREA[0] + 2, LIST_AREA[1] + 2 + i * 21, 166, graphic ? 21 : 20};
 	}
 	
 	private int[] getButtonTextArea(int i) {
@@ -183,7 +170,7 @@ public class ModuleArcade extends ModuleBase {
 	@Override
 	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (isGameActive()) {
-			if (button == 0 && inRect(x,y, getExitArea())) {
+			if (button == 0 && inRect(x,y, EXIT_AREA)) {
 				currentGame.unload(gui);
 				currentGame = null;
 			}else{
@@ -263,11 +250,8 @@ public class ModuleArcade extends ModuleBase {
 	
 	@Override
 	public boolean disableStandardKeyFunctionality() {
-		if (currentGame != null) {
-			return currentGame.disableStandardKeyFunctionality();
-		}
+        return currentGame != null && currentGame.disableStandardKeyFunctionality();
 
-		return false;
-	}	
+    }
 	
 }

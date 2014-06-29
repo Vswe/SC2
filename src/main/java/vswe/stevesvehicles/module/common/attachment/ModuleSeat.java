@@ -1,8 +1,8 @@
-package vswe.stevesvehicles.old.Modules.Realtimers;
+package vswe.stevesvehicles.module.common.attachment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
-import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
+import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.ModuleBase;
@@ -10,8 +10,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ModuleSeat extends ModuleBase {
-	public ModuleSeat(EntityModularCart cart) {
-		super(cart);
+	public ModuleSeat(VehicleBase vehicleBase) {
+		super(vehicleBase);
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class ModuleSeat extends ModuleBase {
 
 		int imageID = getState();
 		int borderID = 0;
-		if (inRect(x,y, buttonRect)) {
+		if (inRect(x,y, BUTTON_RECT)) {
 			if (imageID == 0) {
 				borderID = 2;
 			}else{
@@ -56,23 +56,23 @@ public class ModuleSeat extends ModuleBase {
 			}
 		}
 
-		drawImage(gui,buttonRect, 0, buttonRect[3] * borderID);
+		drawImage(gui, BUTTON_RECT, 0, BUTTON_RECT[3] * borderID);
 
-		int srcY = buttonRect[3] * 3 + imageID * (buttonRect[3] - 2);
-		drawImage(gui, buttonRect[0] + 1, buttonRect[1] + 1, 0, srcY, buttonRect[2] - 2, buttonRect[3] - 2);
+		int srcY = BUTTON_RECT[3] * 3 + imageID * (BUTTON_RECT[3] - 2);
+		drawImage(gui, BUTTON_RECT[0] + 1, BUTTON_RECT[1] + 1, 0, srcY, BUTTON_RECT[2] - 2, BUTTON_RECT[3] - 2);
 	}
 
-	private int[] buttonRect = new int[] {20,20, 24, 12};
+	private static final int[] BUTTON_RECT = new int[] {20,20, 24, 12};
 
 	@Override
 	public void drawMouseOver(GuiVehicle gui, int x, int y) {
-		drawStringOnMouseOver(gui, getStateName(), x,y,buttonRect);
+		drawStringOnMouseOver(gui, getStateName(), x,y, BUTTON_RECT);
 	}
 
 	private int getState() {
-		if (getCart().riddenByEntity == null) {
+		if (getVehicle().getEntity().riddenByEntity == null) {
 			return 1;
-		}else if(getCart().riddenByEntity == getClientPlayer()) {
+		}else if(getVehicle().getEntity().riddenByEntity == getClientPlayer()) {
 			return 2;
 		}else {
 			return 0;
@@ -86,7 +86,7 @@ public class ModuleSeat extends ModuleBase {
 	@Override
 	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0) {
-			if (inRect(x,y, buttonRect)) {
+			if (inRect(x,y, BUTTON_RECT)) {
 				sendPacket(0);
 			}
 		}
@@ -96,9 +96,9 @@ public class ModuleSeat extends ModuleBase {
 	protected void receivePacket(int id, byte[] data, EntityPlayer player) {
 		if (id == 0) {
 			if (player != null) { 
-				if (getCart().riddenByEntity == null) {
-					player.mountEntity(getCart());
-				}else if (getCart().riddenByEntity == player){
+				if (getVehicle().getEntity().riddenByEntity == null) {
+					player.mountEntity(getVehicle().getEntity());
+				}else if (getVehicle().getEntity().riddenByEntity == player){
 					player.mountEntity(null);
 				}
 			}
@@ -114,9 +114,9 @@ public class ModuleSeat extends ModuleBase {
 	public void update() {
 		super.update();
 
-		if (getCart().riddenByEntity != null) {
+		if (getVehicle().getEntity().riddenByEntity != null) {
 			relative = false;
-			chairAngle = (float)(Math.PI + Math.PI * getCart().riddenByEntity.rotationYaw / 180F);
+			chairAngle = (float)(Math.PI + Math.PI * getVehicle().getEntity().riddenByEntity.rotationYaw / 180F);
 		}else{
 			relative = true;
 			chairAngle = (float)Math.PI / 2;
@@ -139,23 +139,7 @@ public class ModuleSeat extends ModuleBase {
 		return -0.1F;
 	}
 	
-	/*
-	@Override
-	public boolean onInteractFirst(EntityPlayer entityplayer) {
-		if (getCart().riddenByEntity == null) {
-			if (!getCart().worldObj.isRemote) {
-				entityplayer.mountEntity(getCart());
-			}
-			return true;
-		}else if (getCart().riddenByEntity == entityplayer){
-			if (!getCart().worldObj.isRemote) {
-				entityplayer.mountEntity(null);
-			}
-			return true;
-		}
-		return false;
-	}*/
-	
+
 
 	
 }

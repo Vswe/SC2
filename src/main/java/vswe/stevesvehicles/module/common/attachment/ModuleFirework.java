@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.Modules.Realtimers;
+package vswe.stevesvehicles.module.common.attachment;
 import java.util.ArrayList;
 
 import net.minecraft.entity.item.EntityFireworkRocket;
@@ -8,14 +8,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
-import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
+import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.old.Slots.SlotBase;
 import vswe.stevesvehicles.old.Slots.SlotFirework;
 
 public class ModuleFirework extends ModuleBase {
-	public ModuleFirework(EntityModularCart cart) {
-		super(cart);
+	public ModuleFirework(VehicleBase vehicleBase) {
+		super(vehicleBase);
 	}
 
 	private int fireCooldown;
@@ -30,7 +30,7 @@ public class ModuleFirework extends ModuleBase {
 	
 	@Override
 	public void activatedByRail(int x, int y, int z, boolean active) {
-		if (active && fireCooldown == 0 && getCart().hasFuel()) {
+		if (active && fireCooldown == 0 && getVehicle().hasFuel()) {
 			fire();
 			fireCooldown = 20;
 		}
@@ -44,7 +44,7 @@ public class ModuleFirework extends ModuleBase {
 
 	@Override
 	protected SlotBase getSlot(int slotId, int x, int y) {
-		return new SlotFirework(getCart(),slotId,8+x*18,16+y*18);
+		return new SlotFirework(getVehicle().getVehicleEntity() ,slotId, 8 + x * 18, 16 + y * 18);
 	}
 
 	@Override
@@ -63,8 +63,7 @@ public class ModuleFirework extends ModuleBase {
 	}
 
 	@Override
-	protected int getInventoryWidth()
-	{
+	protected int getInventoryWidth() {
 		return 8;
 	}
 	@Override
@@ -73,7 +72,7 @@ public class ModuleFirework extends ModuleBase {
 	}	
 	
 	public void fire() {
-		if (getCart().worldObj.isRemote) {
+		if (getVehicle().getWorld().isRemote) {
 			return;
 		}
 	
@@ -110,10 +109,9 @@ public class ModuleFirework extends ModuleBase {
 		
 		if (hasPaper && hasGunpowder) {
 
-		
 			ItemStack firework = new ItemStack(Items.fireworks);
 			
-			int maxGunpowder = getCart().rand.nextInt(3) + 1;
+			int maxGunpowder = getVehicle().getRandom().nextInt(3) + 1;
 			int countGunpowder = 0;
 			boolean removedPaper = false;
 			for (int i = 0; i < getInventorySize(); i++) {
@@ -134,11 +132,11 @@ public class ModuleFirework extends ModuleBase {
 			
 			int chargeCount = 1;
 			
-			while (chargeCount < 7 && getCart().rand.nextInt(3 + chargeCount / 3) == 0) {
+			while (chargeCount < 7 && getVehicle().getRandom().nextInt(3 + chargeCount / 3) == 0) {
 				chargeCount++;
 			}
 			
-			NBTTagCompound itemstackNBT = new NBTTagCompound();
+			NBTTagCompound itemStackNBT = new NBTTagCompound();
 			NBTTagCompound fireworksNBT = new NBTTagCompound();
 			NBTTagList explosionsNBT = new NBTTagList();
 			
@@ -153,8 +151,8 @@ public class ModuleFirework extends ModuleBase {
 			
 			fireworksNBT.setTag("Explosions", explosionsNBT);
 			fireworksNBT.setByte("Flight", (byte)countGunpowder);
-			itemstackNBT.setTag("Fireworks", fireworksNBT);
-			firework.setTagCompound(itemstackNBT);			
+			itemStackNBT.setTag("Fireworks", fireworksNBT);
+			firework.setTagCompound(itemStackNBT);
 			
 			return firework;
 		}
@@ -188,10 +186,10 @@ public class ModuleFirework extends ModuleBase {
 		
 
 		boolean removedGunpowder = false;
-		boolean canHasTrail = getCart().rand.nextInt(16) == 0;
-		boolean canHasFlicker = getCart().rand.nextInt(8) == 0;
-		boolean canHasModifier = getCart().rand.nextInt(4) == 0;
-		byte modifierType = (byte)(getCart().rand.nextInt(4) + 1);
+		boolean canHasTrail = getVehicle().getRandom().nextInt(16) == 0;
+		boolean canHasFlicker = getVehicle().getRandom().nextInt(8) == 0;
+		boolean canHasModifier = getVehicle().getRandom().nextInt(4) == 0;
+		byte modifierType = (byte)(getVehicle().getRandom().nextInt(4) + 1);
 		boolean removedModifier = false;
 		boolean removedDiamond = false;
 		boolean removedGlow = false;
@@ -236,7 +234,7 @@ public class ModuleFirework extends ModuleBase {
 			return null;
 		}
 		explosionNBT.setIntArray("Colors", colors);	
-		if (getCart().rand.nextInt(4) == 0) {
+		if (getVehicle().getRandom().nextInt(4) == 0) {
 			int[] fade = generateColors(8);
 			if (fade != null) {
 				explosionNBT.setIntArray("FadeColors", fade);
@@ -265,8 +263,8 @@ public class ModuleFirework extends ModuleBase {
 			}
 		}
 		
-		int colorCount = getCart().rand.nextInt(2) + 1;
-		while (colorCount <= maxColorCount - 2 && getCart().rand.nextInt(2) == 0) {
+		int colorCount = getVehicle().getRandom().nextInt(2) + 1;
+		while (colorCount <= maxColorCount - 2 && getVehicle().getRandom().nextInt(2) == 0) {
 			colorCount+=2;
 		}	
 
@@ -283,7 +281,7 @@ public class ModuleFirework extends ModuleBase {
 		
 		ArrayList<Integer> usedColors = new ArrayList<Integer>();
 		while (colorCount > 0 && colorPointers.size() > 0) {
-			int pointerId = getCart().rand.nextInt(colorPointers.size());
+			int pointerId = getVehicle().getRandom().nextInt(colorPointers.size());
 			int colorId = colorPointers.get(pointerId);
 			currentColors[colorId]++;
 			if(--maxColors[colorId] <= 0) {
@@ -295,8 +293,7 @@ public class ModuleFirework extends ModuleBase {
 		
 		int[] colors = new int[usedColors.size()];
 
-		for (int i = 0; i < colors.length; ++i)
-		{
+		for (int i = 0; i < colors.length; ++i) {
 			colors[i] = ItemDye.field_150922_c[usedColors.get(i)];
 		}
 
@@ -318,7 +315,7 @@ public class ModuleFirework extends ModuleBase {
 	
 
 	private void removeItemStack(ItemStack item, int count,  int id) {
-        if (!getCart().hasCreativeSupplies()) {
+        if (!getVehicle().hasCreativeSupplies()) {
             item.stackSize -= count;
             if (item.stackSize <= 0) {
                 setStack(id, null);
@@ -327,8 +324,8 @@ public class ModuleFirework extends ModuleBase {
     }
 	
 	private void launchFirework(ItemStack firework) {
-		EntityFireworkRocket rocket = new EntityFireworkRocket(getCart().worldObj, getCart().posX, getCart().posY + 1, getCart().posZ, firework);
-		getCart().worldObj.spawnEntityInWorld(rocket);	
+		EntityFireworkRocket rocket = new EntityFireworkRocket(getVehicle().getWorld(), getVehicle().getEntity().posX, getVehicle().getEntity().posY + 1, getVehicle().getEntity().posZ, firework);
+		getVehicle().getWorld().spawnEntityInWorld(rocket);
 	}
 	
 	

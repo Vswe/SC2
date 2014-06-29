@@ -39,7 +39,7 @@ import vswe.stevesvehicles.old.Helpers.ModuleCountPair;
 import vswe.stevesvehicles.old.Helpers.TransferHandler;
 import vswe.stevesvehicles.module.common.addon.ModuleCreativeSupplies;
 import vswe.stevesvehicles.module.common.engine.ModuleEngine;
-import vswe.stevesvehicles.old.Modules.IActivatorModule;
+import vswe.stevesvehicles.module.IActivatorModule;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.old.Modules.Storages.Chests.ModuleChest;
 import vswe.stevesvehicles.old.Modules.Storages.Tanks.ModuleTank;

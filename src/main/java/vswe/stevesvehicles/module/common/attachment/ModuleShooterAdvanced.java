@@ -1,8 +1,7 @@
-package vswe.stevesvehicles.old.Modules.Realtimers;
+package vswe.stevesvehicles.module.common.attachment;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.entity.Entity;
@@ -12,14 +11,14 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
 import vswe.stevesvehicles.module.common.addon.mobdetector.ModuleEntityDetector;
-import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
+import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.ModuleBase;
 
-public class ModuleShooterAdv extends ModuleShooter {
-	public ModuleShooterAdv(EntityModularCart cart) {
-		super(cart);
+public class ModuleShooterAdvanced extends ModuleShooter {
+	public ModuleShooterAdvanced(VehicleBase vehicleBase) {
+		super(vehicleBase);
 	}
 
 	
@@ -29,7 +28,7 @@ public class ModuleShooterAdv extends ModuleShooter {
 		super.preInit();
 		detectors = new ArrayList<ModuleEntityDetector>();
 		
-		for (ModuleBase module : getCart().getModules()) {
+		for (ModuleBase module : getVehicle().getModules()) {
 			if (module instanceof ModuleEntityDetector) {
 				detectors.add((ModuleEntityDetector)module);
 			}
@@ -108,10 +107,9 @@ public class ModuleShooterAdv extends ModuleShooter {
 	}	
 
 	@Override
-	protected void Shoot()
-    {
+	protected void shoot() {
 		setTimeToNext(15);
-		if (!getCart().hasFuel())
+		if (!getVehicle().hasFuel())
 		{
 			return;
 		}
@@ -121,7 +119,7 @@ public class ModuleShooterAdv extends ModuleShooter {
 			if (hasProjectileItem()) {
 				shootAtTarget(target);
 			}else{
-				getCart().worldObj.playAuxSFX(1001, (int)getCart().posX, (int)getCart().posY, (int)getCart().posZ, 0);
+				getVehicle().getWorld().playAuxSFX(1001, getVehicle().x(), getVehicle().y(), getVehicle().z(), 0);
 			}
 		}
     }
@@ -135,18 +133,15 @@ public class ModuleShooterAdv extends ModuleShooter {
 		Entity projectile = getProjectile(target, getProjectileItem(true));
 		
 
-		//re-add if the EntityMob file behaves again
-		//arrow.shootingEntity = getCart();
-		projectile.posY = getCart().posY + (double)getCart().getEyeHeight() - 0.10000000149011612D;
+		projectile.posY = getVehicle().getEntity().posY + (double)getVehicle().getEntity().getEyeHeight() - 0.10000000149011612D;
 
-		double disX = target.posX - getCart().posX;
+		double disX = target.posX - getVehicle().getEntity().posX;
 		double disY = target.posY + (double)target.getEyeHeight() - 0.699999988079071D - projectile.posY;
-		double disZ = target.posZ - getCart().posZ;
+		double disZ = target.posZ - getVehicle().getEntity().posZ;
 
 		double dis = (double)MathHelper.sqrt_double(disX * disX + disZ * disZ);
 
-		if (dis >= 1.0E-7D)
-        {
+		if (dis >= 1.0E-7D){
 			float theta = (float)(Math.atan2(disZ, disX) * 180.0D / Math.PI) - 90.0F;
 			float phi = (float)(-(Math.atan2(disY, dis) * 180.0D / Math.PI));
 
@@ -155,19 +150,19 @@ public class ModuleShooterAdv extends ModuleShooter {
 			double disPX = disX / dis;
             double disPZ = disZ / dis;
 
-			projectile.setLocationAndAngles(getCart().posX + disPX * 1.5F, projectile.posY, getCart().posZ + disPZ * 1.5, theta, phi);
+			projectile.setLocationAndAngles(getVehicle().getEntity().posX + disPX * 1.5F, projectile.posY, getVehicle().getEntity().posZ + disPZ * 1.5, theta, phi);
 
 			projectile.yOffset = 0.0F;
             float disD5 = (float)dis * 0.2F;
 			setHeading(projectile, disX, disY + (double)disD5, disZ, 1.6F, 0/*12.0F*/);
 		}
 
-		getCart().worldObj.playSoundAtEntity(getCart(), "random.bow", 1.0F, 1.0F / (getCart().rand.nextFloat() * 0.4F + 0.8F));
+		getVehicle().getWorld().playSoundAtEntity(getVehicle().getEntity(), "random.bow", 1.0F, 1.0F / (getVehicle().getRandom().nextFloat() * 0.4F + 0.8F));
 		
 		setProjectileDamage(projectile);
 		setProjectileOnFire(projectile);	
-		setProjectileKnockback(projectile);
-        getCart().worldObj.spawnEntityInWorld(projectile);
+		setProjectileKnockBack(projectile);
+        getVehicle().getWorld().spawnEntityInWorld(projectile);
 		damageEnchant();
 	}
 
@@ -175,39 +170,31 @@ public class ModuleShooterAdv extends ModuleShooter {
 		return 16;
 	}
 
-	private EntityNearestTarget sorter = new EntityNearestTarget(getCart());
+	private EntityNearestTarget sorter = new EntityNearestTarget(getVehicle().getEntity());
 	private Entity getTarget() {
-		List entities = getCart().worldObj.getEntitiesWithinAABB(Entity.class, getCart().boundingBox.expand((double)getTargetDistance(), 4.0D, (double)getTargetDistance()));
+		List entities = getVehicle().getWorld().getEntitiesWithinAABB(Entity.class, getVehicle().getEntity().boundingBox.expand((double) getTargetDistance(), 4.0D, (double) getTargetDistance()));
 		Collections.sort(entities, sorter);
-		Iterator itt = entities.iterator();
 
-		while (itt.hasNext())
-		{
-			Entity target = (Entity)itt.next();
+        for (Object entity : entities) {
+            Entity target = (Entity) entity;
 
-			if (target != getCart() && canSee(target))
-			{
-				for (int i = 0; i < detectors.size(); i++) {
-					if (isOptionActive(i)) {
-						ModuleEntityDetector detector = detectors.get(i);
-						if (detector.isValidTarget(target)) {
-							return target;
-						}
-					}
-				}
-			}
-		}
+            if (target != getVehicle().getEntity() && canSee(target)) {
+                for (int i = 0; i < detectors.size(); i++) {
+                    if (isOptionActive(i)) {
+                        ModuleEntityDetector detector = detectors.get(i);
+                        if (detector.isValidTarget(target)) {
+                            return target;
+                        }
+                    }
+                }
+            }
+        }
 
 		return null;
 	}
 
 	private boolean canSee(Entity target) {
-		if (target == null) {
-			return false;
-		}
-
-
-        return getCart().worldObj.rayTraceBlocks(Vec3.createVectorHelper(getCart().posX, getCart().posY + (double)getCart().getEyeHeight(), getCart().posZ), Vec3.createVectorHelper(target.posX, target.posY + (double)target.getEyeHeight(), target.posZ)) == null;
+        return target != null && getVehicle().getWorld().rayTraceBlocks(Vec3.createVectorHelper(getVehicle().getEntity().posX, getVehicle().getEntity().posY + (double) getVehicle().getEntity().getEyeHeight(), getVehicle().getEntity().posZ), Vec3.createVectorHelper(target.posX, target.posY + (double) target.getEyeHeight(), target.posZ)) == null;
     }
 
 	@Override
@@ -296,14 +283,14 @@ public class ModuleShooterAdv extends ModuleShooter {
 	
 	@Override
 	protected void Save(NBTTagCompound tagCompound, int id) {
-		tagCompound.setByte(generateNBTName("Options",id), selectedOptions());	
-		saveTick(tagCompound,id);
+		tagCompound.setByte("Options", selectedOptions());
+		saveTick(tagCompound);
 	}
 	
 	@Override
 	protected void Load(NBTTagCompound tagCompound, int id) {
-        setOptions(tagCompound.getByte(generateNBTName("Options",id)));	
-        loadTick(tagCompound, id);		
+        setOptions(tagCompound.getByte("Options"));
+        loadTick(tagCompound);
 	}
 
     private static class EntityNearestTarget implements Comparator {

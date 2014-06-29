@@ -8,8 +8,8 @@ import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleRegistry;
 import vswe.stevesvehicles.module.data.ModuleSide;
 import vswe.stevesvehicles.old.Helpers.Localization;
-import vswe.stevesvehicles.old.Modules.Realtimers.ModuleCakeServer;
-import vswe.stevesvehicles.old.Modules.Realtimers.ModuleCakeServerDynamite;
+import vswe.stevesvehicles.module.common.attachment.ModuleCakeServer;
+import vswe.stevesvehicles.module.common.attachment.ModuleCakeServerDynamite;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 

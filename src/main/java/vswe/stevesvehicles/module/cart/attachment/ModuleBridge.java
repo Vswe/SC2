@@ -9,7 +9,7 @@ import net.minecraft.util.Vec3;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
 import vswe.stevesvehicles.module.cart.ModuleWorker;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Modules.ISuppliesModule;
+import vswe.stevesvehicles.module.ISuppliesModule;
 import vswe.stevesvehicles.old.Slots.SlotBase;
 import vswe.stevesvehicles.old.Slots.SlotBridge;
 

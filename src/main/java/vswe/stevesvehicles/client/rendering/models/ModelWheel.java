@@ -3,9 +3,10 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.util.ResourceLocation;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.ModuleBase;
-import vswe.stevesvehicles.old.Modules.Realtimers.ModuleAdvControl;
+import vswe.stevesvehicles.module.cart.attachment.ModuleAdvancedControl;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
 @SideOnly(Side.CLIENT)
 public class ModelWheel extends ModelVehicle
 {
@@ -396,7 +397,7 @@ public class ModelWheel extends ModelVehicle
     }
 	
 	public void applyEffects(ModuleBase module,  float yaw, float pitch, float roll) {
-		anchor.rotateAngleX = module == null ? 0 : ((ModuleAdvControl)module).getWheelAngle();	
+		anchor.rotateAngleX = module == null ? 0 : ((ModuleAdvancedControl)module).getWheelAngle();
 	}
 	
 	

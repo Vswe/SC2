@@ -5,6 +5,7 @@ import vswe.stevesvehicles.client.interfaces.GuiVehicle;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.ModuleBase;
+import vswe.stevesvehicles.vehicle.VehicleBase;
 
 public abstract class ModuleEngine extends ModuleBase {
 	private int fuel;

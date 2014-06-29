@@ -1,18 +1,18 @@
-package vswe.stevesvehicles.old.Modules.Realtimers;
+package vswe.stevesvehicles.module.common.attachment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
 import vswe.stevesvehicles.old.Helpers.ComponentTypes;
 import vswe.stevesvehicles.old.Helpers.Localization;
-import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
+import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.old.Slots.SlotBase;
 import vswe.stevesvehicles.old.Slots.SlotExplosion;
 
 public class ModuleDynamite extends ModuleBase {
-	public ModuleDynamite(EntityModularCart cart) {
-		super(cart);
+	public ModuleDynamite(VehicleBase vehicleBase) {
+		super(vehicleBase);
 	}
 
 	@Override
@@ -22,7 +22,7 @@ public class ModuleDynamite extends ModuleBase {
 
 	@Override
 	protected SlotBase getSlot(int slotId, int x, int y) {
-		return new SlotExplosion(getCart(),slotId,8+x*18,23+y*18);
+		return new SlotExplosion(getVehicle().getVehicleEntity(), slotId, 8 + x * 18, 23 + y * 18);
 	}
 
 	@Override
@@ -45,8 +45,7 @@ public class ModuleDynamite extends ModuleBase {
 
 
 	@Override
-	public void update()
-    {
+	public void update() {
         super.update();
 
 		if (isPlaceholder()) {
@@ -58,15 +57,13 @@ public class ModuleDynamite extends ModuleBase {
 		}
 		
 		
-        if (getFuse() > 0)
-        {
+        if (getFuse() > 0) {
             setFuse(getFuse()+1);
 
-            if (getFuse() == getFuseLength())
-            {
+            if (getFuse() == getFuseLength()) {
                 explode();
 				if (!isPlaceholder()) {
-					getCart().setDead();				
+					getVehicle().getEntity().setDead();
 				}
             }
         }
@@ -81,7 +78,7 @@ public class ModuleDynamite extends ModuleBase {
 	private int fuseStartX = super.guiWidth() + 5;
 	private int fuseStartY = 27;
 	private int[] getMovableMarker() {
-		return new int[] {fuseStartX + (int)(105 *  (1F - getFuseLength() / (float)maxFuseLength)), fuseStartY, 4, 10};
+		return new int[] {fuseStartX + (int)(105 *  (1F - getFuseLength() / (float) MAX_FUSE_LENGTH)), fuseStartY, 4, 10};
 	}
 
 
@@ -92,7 +89,7 @@ public class ModuleDynamite extends ModuleBase {
 
 		drawImage(gui, fuseStartX, fuseStartY + 3, 12, 0, 105 , 4);
 		drawImage(gui, fuseStartX + 105, fuseStartY - 4, 0, 10 , 16, 16);
-		drawImage(gui, fuseStartX + (int)(105 *  (1F - (getFuseLength()-getFuse()) / (float)maxFuseLength)), fuseStartY,  (isPrimed() ? 8 : 4), 0, 4, 10);
+		drawImage(gui, fuseStartX + (int)(105 *  (1F - (getFuseLength()-getFuse()) / (float) MAX_FUSE_LENGTH)), fuseStartY,  (isPrimed() ? 8 : 4), 0, 4, 10);
 		drawImage(gui, getMovableMarker(), 0, 0);
 	}
 
@@ -110,22 +107,18 @@ public class ModuleDynamite extends ModuleBase {
 		if (getFuse() != 0) {
 			markerMoving = false;
 		}else if(markerMoving){
-            int tempfuse = maxFuseLength - (int)((x - fuseStartX)/(105F/maxFuseLength));
+            int tempFuse = MAX_FUSE_LENGTH - (int)((x - fuseStartX)/(105F/ MAX_FUSE_LENGTH));
 
-            if (tempfuse < 2)
-            {
-                tempfuse = 2;
-            }
-            else if (tempfuse > maxFuseLength)
-            {
-               tempfuse = maxFuseLength;
+            if (tempFuse < 2) {
+                tempFuse = 2;
+            }else if (tempFuse > MAX_FUSE_LENGTH) {
+               tempFuse = MAX_FUSE_LENGTH;
             }
 
-			sendPacket(0, (byte)tempfuse);
+			sendPacket(0, (byte)tempFuse);
 		}
 
-        if (button != -1)
-        {
+        if (button != -1) {
             markerMoving = false;
         }
 	}
@@ -134,15 +127,14 @@ public class ModuleDynamite extends ModuleBase {
 		return (getFuse() / 5) % 2 == 0 && getFuse() != 0;
 	}
 
-    private void explode()
-    {
+    private void explode() {
 		if (isPlaceholder()) {
 			setFuse(1);
 		}else{
 			float f = explosionSize();
 			setStack(0,null);
 
-			getCart().worldObj.createExplosion(null, getCart().posX, getCart().posY, getCart().posZ, f, true/*true means huge, false otherwise*/);
+			getVehicle().getWorld().createExplosion(null, getVehicle().getEntity().posX, getVehicle().getEntity().posY, getVehicle().getEntity().posZ, f, true/*true means real, false otherwise*/);
 		}
     }
 
@@ -153,14 +145,14 @@ public class ModuleDynamite extends ModuleBase {
 		createExplosives();
 	}
 
+    @Override
 	public boolean dropOnDeath() {
 		return getFuse() == 0;
 	}
 
-    public void onDeath()
-    {
-        if (getFuse() > 0 && getFuse() < getFuseLength())
-        {
+    @Override
+    public void onDeath() {
+        if (getFuse() > 0 && getFuse() < getFuseLength()) {
             explode();
         }
     }
@@ -174,21 +166,11 @@ public class ModuleDynamite extends ModuleBase {
 	}
 
 	public void createExplosives() {
-		if (isPlaceholder() || getCart().worldObj.isRemote) {
+		if (isPlaceholder() || getVehicle().getWorld().isRemote) {
 			return;
 		}
 	
         int f = 8;
-
-		/*if (getStack(0) != null && getStack(0).getItem().itemID == Item.gunpowder.itemID)
-		{
-			f += getStack(0).stackSize * 1;
-		}
-		else if (getStack(0) != null && getStack(0).getItem().itemID == Block.tnt.blockID)
-		{
-			f += getStack(0).stackSize * 5;
-		}*/
-		
 		if (ComponentTypes.DYNAMITE.isStackOfType(getStack(0))) {
 			f += getStack(0).stackSize * 2;
 		}
@@ -207,7 +189,6 @@ public class ModuleDynamite extends ModuleBase {
 		addDw(0,0);
 		addDw(1,70);
 		addDw(2,8);
-	
 	}
 
 	public int getFuse() {
@@ -232,8 +213,8 @@ public class ModuleDynamite extends ModuleBase {
 	}
 
 	public void setFuseLength(int val) {
-		if (val > maxFuseLength) {
-			val = maxFuseLength;
+		if (val > MAX_FUSE_LENGTH) {
+			val = MAX_FUSE_LENGTH;
 		}
 
 		updateDw(1, (byte)val);
@@ -256,11 +237,7 @@ public class ModuleDynamite extends ModuleBase {
 		setFuse(1);
 	}
 
-	private final int maxFuseLength = 150;
-
-	protected int getMaxFuse() {
-		return maxFuseLength;
-	}
+	private static final int MAX_FUSE_LENGTH = 150;
 
 	@Override
 	public int numberOfPackets() {
@@ -277,14 +254,14 @@ public class ModuleDynamite extends ModuleBase {
 	
 	@Override
 	protected void Save(NBTTagCompound tagCompound, int id) {
-		tagCompound.setShort(generateNBTName("FuseLength",id), (short)getFuseLength());
-		tagCompound.setShort(generateNBTName("Fuse",id), (short)getFuse());		
+		tagCompound.setShort("FuseLength", (short)getFuseLength());
+		tagCompound.setShort("Fuse", (short)getFuse());
 	}
 	
 	@Override
 	protected void Load(NBTTagCompound tagCompound, int id) {
-		setFuseLength(tagCompound.getShort(generateNBTName("FuseLength",id)));
-		setFuse(tagCompound.getShort(generateNBTName("Fuse",id)));		
+		setFuseLength(tagCompound.getShort("FuseLength"));
+		setFuse(tagCompound.getShort("Fuse"));
 		
 		createExplosives();		
 	}		

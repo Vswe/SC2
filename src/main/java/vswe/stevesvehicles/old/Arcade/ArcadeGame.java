@@ -7,7 +7,7 @@ import vswe.stevesvehicles.localization.ILocalizedText;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.SoundHandler;
-import vswe.stevesvehicles.old.Modules.Realtimers.ModuleArcade;
+import vswe.stevesvehicles.module.common.attachment.ModuleArcade;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

@@ -3,6 +3,7 @@ package vswe.stevesvehicles.old.Computer;
 import java.util.Collection;
 import java.util.HashMap;
 
+import vswe.stevesvehicles.module.common.attachment.ModuleShooterAdvanced;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.cart.attachment.ModuleComputer;
@@ -13,9 +14,8 @@ import vswe.stevesvehicles.module.common.addon.ModuleInvisible;
 import vswe.stevesvehicles.module.common.addon.ModuleChunkLoader;
 import vswe.stevesvehicles.module.common.addon.ModuleColorizer;
 import vswe.stevesvehicles.module.cart.addon.ModuleHeightControl;
-import vswe.stevesvehicles.old.Modules.Realtimers.ModuleDynamite;
-import vswe.stevesvehicles.old.Modules.Realtimers.ModuleShooter;
-import vswe.stevesvehicles.old.Modules.Realtimers.ModuleShooterAdv;
+import vswe.stevesvehicles.module.common.attachment.ModuleDynamite;
+import vswe.stevesvehicles.module.common.attachment.ModuleShooter;
 import vswe.stevesvehicles.old.Buttons.ButtonBase;
 import vswe.stevesvehicles.old.Buttons.ButtonInfoType;
 
@@ -90,13 +90,13 @@ public class ComputerInfo {
 			}
 			
 			protected boolean isValid(ModuleBase module) {
-				return !(module instanceof ModuleShooterAdv);
+				return !(module instanceof ModuleShooterAdvanced);
 			}			
 		};		
 
-		new ComputerInfo(9, "Selected Target", 92, ModuleShooterAdv.class) {
+		new ComputerInfo(9, "Selected Target", 92, ModuleShooterAdvanced.class) {
 			protected int get(ModuleBase module) {
-				return ((ModuleShooterAdv)module).selectedOptions();
+				return ((ModuleShooterAdvanced)module).selectedOptions();
 			}					
 		};
 

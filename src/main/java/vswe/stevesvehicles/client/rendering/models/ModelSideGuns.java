@@ -4,7 +4,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.util.ResourceLocation;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.ModuleBase;
-import vswe.stevesvehicles.old.Modules.Realtimers.ModuleShooterAdvSide;
+import vswe.stevesvehicles.module.common.attachment.ModuleShooterAdvancedSide;
 
 public class ModelSideGuns extends ModelVehicle {
 
@@ -323,7 +323,7 @@ public class ModelSideGuns extends ModelVehicle {
 			}
 		}else{
 	
-			ModuleShooterAdvSide shooter = (ModuleShooterAdvSide)module;
+			ModuleShooterAdvancedSide shooter = (ModuleShooterAdvancedSide)module;
 		
 			for (int i = 0; i < 2; i++) {
 				ModelRenderer[] models = this.models[i];
