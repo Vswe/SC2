@@ -3,7 +3,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.fluids.FluidContainerRegistry;
-import vswe.stevesvehicles.old.Modules.Engines.ModuleCoalBase;
+import vswe.stevesvehicles.module.common.engine.ModuleCoalBase;
 public class SlotFuel extends SlotBase
 {
     public SlotFuel(IInventory iinventory, int i, int j, int k)

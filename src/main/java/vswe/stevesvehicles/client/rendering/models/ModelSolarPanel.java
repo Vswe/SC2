@@ -3,7 +3,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelRenderer;
 import vswe.stevesvehicles.module.ModuleBase;
-import vswe.stevesvehicles.old.Modules.Engines.ModuleSolarTop;
+import vswe.stevesvehicles.module.common.engine.ModuleSolarTop;
 @SideOnly(Side.CLIENT)
 public abstract class ModelSolarPanel extends ModelVehicle
 {

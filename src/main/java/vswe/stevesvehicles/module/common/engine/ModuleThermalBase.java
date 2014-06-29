@@ -1,13 +1,13 @@
-package vswe.stevesvehicles.old.Modules.Engines;
+package vswe.stevesvehicles.module.common.engine;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidRegistry;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
-import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
+import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 
 public abstract class ModuleThermalBase extends ModuleEngine {
-	public ModuleThermalBase(EntityModularCart cart) {
-		super(cart);
+	public ModuleThermalBase(VehicleBase vehicleBase) {
+		super(vehicleBase);
 	}
 
 	private short coolantLevel;
@@ -41,11 +41,7 @@ public abstract class ModuleThermalBase extends ModuleEngine {
 	
 	@Override
 	public boolean hasFuel(int consumption) {
-		if (super.hasFuel(consumption)) {
-			return !requiresCoolant() || getCoolantLevel() >= consumption;
-		}else{
-			return false;
-		}
+        return super.hasFuel(consumption) && (!requiresCoolant() || getCoolantLevel() >= consumption);
 	}
 	
 	@Override
@@ -58,15 +54,14 @@ public abstract class ModuleThermalBase extends ModuleEngine {
     Load new fuel, this is called all the time but has an if statement checking if it's necessary to re-fill fuel.
     **/
 	@Override
-    protected void loadFuel()
-    {
-		int consumption =  getCart().getConsumption(true) * 2;
+    protected void loadFuel() {
+		int consumption =  getVehicle().getConsumption(true) * 2;
 	
         //if there's no fuel left it's time to re-fill
         while (getFuelLevel() <= consumption) {
-			int amount = getCart().drain(FluidRegistry.LAVA, RELOAD_LIQUID_SIZE, false);
+			int amount = getVehicle().drain(FluidRegistry.LAVA, RELOAD_LIQUID_SIZE, false);
 			if (amount > 0) {
-				getCart().drain(FluidRegistry.LAVA, amount, true);
+				getVehicle().drain(FluidRegistry.LAVA, amount, true);
 				setFuelLevel(getFuelLevel() + amount * getEfficiency());
 			}else{
 				break;
@@ -75,9 +70,9 @@ public abstract class ModuleThermalBase extends ModuleEngine {
 		
 		//if there's no coolant left it's time to re-fill
         while (requiresCoolant() && getCoolantLevel() <= consumption) {
-			int amount = getCart().drain(FluidRegistry.WATER, RELOAD_LIQUID_SIZE, false);
+			int amount = getVehicle().drain(FluidRegistry.WATER, RELOAD_LIQUID_SIZE, false);
 			if (amount > 0) {
-				getCart().drain(FluidRegistry.WATER, amount, true);
+				getVehicle().drain(FluidRegistry.WATER, amount, true);
 				setCoolantLevel(getCoolantLevel() + amount * getCoolantEfficiency());
 			}else{
 				break;
@@ -87,13 +82,13 @@ public abstract class ModuleThermalBase extends ModuleEngine {
 
 	@Override
 	public int getTotalFuel() {
-		int totalfuel = getFuelLevel() + getCart().drain(FluidRegistry.LAVA, Integer.MAX_VALUE, false) * getEfficiency();
+		int totalFuel = getFuelLevel() + getVehicle().drain(FluidRegistry.LAVA, Integer.MAX_VALUE, false) * getEfficiency();
 				
 		if (requiresCoolant()) {
-			int totalcoolant = getCoolantLevel() + getCart().drain(FluidRegistry.WATER, Integer.MAX_VALUE, false) * getCoolantEfficiency();
-			return Math.min(totalcoolant, totalfuel);
+			int totalCoolant = getCoolantLevel() + getVehicle().drain(FluidRegistry.WATER, Integer.MAX_VALUE, false) * getCoolantEfficiency();
+			return Math.min(totalCoolant, totalFuel);
 		}else{
-			return totalfuel;
+			return totalFuel;
 		}
 	}
 	
@@ -105,24 +100,8 @@ public abstract class ModuleThermalBase extends ModuleEngine {
 	
 	
 	@Override
-	public void smoke()
-    {
-        /*double oX = 0.0;
-        double oZ = 0.0;
+	public void smoke(){
 
-		if (getCart().motionX != 0)
-		{
-			oX =  (getCart().motionX > 0 ? -1 : 1);
-		}
-
-		if (getCart().motionZ != 0)
-		{
-			oZ =  (getCart().motionZ > 0 ? -1 : 1);
-		}
-
-        if (getCart().rand.nextInt(2) == 0) {
-			getCart().worldObj.spawnParticle("largesmoke", getCart().posX + oX * 0.85, getCart().posY + 0.12D, getCart().posZ + oZ * 0.85, 0.0D, 0.0D, 0.0D);
-		}*/
     }
 
 
@@ -130,7 +109,7 @@ public abstract class ModuleThermalBase extends ModuleEngine {
 	public void drawForeground(GuiVehicle gui) {
 	    drawString(gui, Localization.MODULES.ENGINES.THERMAL.translate(), 8, 6, 0x404040);
 		String str;
-		int consumption = getCart().getConsumption();
+		int consumption = getVehicle().getConsumption();
 		if (consumption == 0) {
 			consumption = 1;
 		}
@@ -178,18 +157,18 @@ public abstract class ModuleThermalBase extends ModuleEngine {
 	@Override
 	protected void Save(NBTTagCompound tagCompound, int id) {
 		super.Save(tagCompound, id);
-		tagCompound.setShort(generateNBTName("Fuel",id), (short)getFuelLevel());
+		tagCompound.setShort("Fuel", (short)getFuelLevel());
 		if (requiresCoolant()) {
-			tagCompound.setShort(generateNBTName("Coolant",id), (short)getCoolantLevel());
+			tagCompound.setShort("Coolant", (short)getCoolantLevel());
 		}	
 	}
 	
 	@Override
 	protected void Load(NBTTagCompound tagCompound, int id) {
 		super.Load(tagCompound, id);
-		setFuelLevel(tagCompound.getShort(generateNBTName("Fuel",id)));
+		setFuelLevel(tagCompound.getShort("Fuel"));
 		if (requiresCoolant()) {
-			setCoolantLevel(tagCompound.getShort(generateNBTName("Coolant",id)));
+			setCoolantLevel(tagCompound.getShort("Coolant"));
 		}
 	}	
 	

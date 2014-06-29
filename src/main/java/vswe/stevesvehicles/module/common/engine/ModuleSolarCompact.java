@@ -1,25 +1,25 @@
-package vswe.stevesvehicles.old.Modules.Engines;
+package vswe.stevesvehicles.module.common.engine;
 
-import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
+import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.AnimationRig;
 import vswe.stevesvehicles.old.Helpers.AnimationRigVal;
 
 public class ModuleSolarCompact extends ModuleSolarBase {
-	public ModuleSolarCompact(EntityModularCart cart) {
-		super(cart);
+	public ModuleSolarCompact(VehicleBase vehicleBase) {
+		super(vehicleBase);
 		
 		
 		rig = new AnimationRig();
 		
 		extraction = new AnimationRigVal(rig, 0.4F, 2F, 0.1F);
-		topbot = new AnimationRigVal(rig, 0.1F, 4F, 0.25F);
-		leftright = new AnimationRigVal(rig, 0.01F, 6F, 0.2F);
+		topBot = new AnimationRigVal(rig, 0.1F, 4F, 0.25F);
+		leftRight = new AnimationRigVal(rig, 0.01F, 6F, 0.2F);
 		corner = new AnimationRigVal(rig, 0.1F, 4F, 0.25F);
 		extraction2 = new AnimationRigVal(rig, 0F, 1.8F, 0.1F);
-		innerextraction = new AnimationRigVal(rig, 0.4F, 3, 0.2F);
+		innerExtraction = new AnimationRigVal(rig, 0.4F, 3, 0.2F);
 		angle = new AnimationRigVal(rig, 0F, (float)Math.PI / 2, 0.1F);	
 
-		innerextraction.setUpAndDown(angle);
+		innerExtraction.setUpAndDown(angle);
 	}
 
 	
@@ -35,12 +35,12 @@ public class ModuleSolarCompact extends ModuleSolarBase {
 	
 	private AnimationRig rig;
 	private AnimationRigVal extraction;
-	private AnimationRigVal topbot;
-	private AnimationRigVal leftright;
+	private AnimationRigVal topBot;
+	private AnimationRigVal leftRight;
 	private AnimationRigVal corner;
 	private AnimationRigVal angle;
 	private AnimationRigVal extraction2;
-	private AnimationRigVal innerextraction;
+	private AnimationRigVal innerExtraction;
 		
 	@Override
 	public boolean updatePanels() {
@@ -54,11 +54,11 @@ public class ModuleSolarCompact extends ModuleSolarBase {
 	}
 	
 	public float getTopBotExtractionDist() {
-		return topbot.getVal();
+		return topBot.getVal();
 	}
 	
 	public float getLeftRightExtractionDist() {
-		return leftright.getVal();
+		return leftRight.getVal();
 	}
 	
 	public float getCornerExtractionDist() {
@@ -71,7 +71,7 @@ public class ModuleSolarCompact extends ModuleSolarBase {
 	
 
 	public float getInnerExtraction() {
-		return innerextraction.getVal();
+		return innerExtraction.getVal();
 	}	
 	
 	

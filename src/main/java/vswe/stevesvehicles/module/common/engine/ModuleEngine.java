@@ -1,7 +1,8 @@
-package vswe.stevesvehicles.old.Modules.Engines;
+package vswe.stevesvehicles.module.common.engine;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
+import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
@@ -11,8 +12,8 @@ public abstract class ModuleEngine extends ModuleBase {
 	private int fuel;
 	protected int[] priorityButton;
 
-	public ModuleEngine(EntityModularCart cart) {
-		super(cart);
+	public ModuleEngine(VehicleBase vehicleBase) {
+		super(vehicleBase);
 		initPriorityButton();
 	}
 
@@ -28,8 +29,8 @@ public abstract class ModuleEngine extends ModuleBase {
 	}
 
 	//returns if this cart supplies the cart with fuel
-	public boolean hasFuel(int comsumption) {
-		return getFuelLevel() >= comsumption && !isDisabled();
+	public boolean hasFuel(int consumption) {
+		return getFuelLevel() >= consumption && !isDisabled();
 	}
 
 	public int getFuelLevel() {
@@ -66,8 +67,8 @@ public abstract class ModuleEngine extends ModuleBase {
 		updateDw(0, data);
 	}
 
-	public void consumeFuel(int comsumption) {
-		setFuelLevel(getFuelLevel() - comsumption);
+	public void consumeFuel(int consumption) {
+		setFuelLevel(getFuelLevel() - consumption);
 	}
 
     protected abstract void loadFuel();
@@ -132,13 +133,13 @@ public abstract class ModuleEngine extends ModuleBase {
 	@Override
 	protected void receivePacket(int id, byte[] data, EntityPlayer player) {
 		if (id == 0) {
-			int prio = getPriority();
-			prio += data[0] == 0 ? 1 : -1;
-			prio %= 4;
-			if (prio < 0) {
-				prio += 4;
+			int priority = getPriority();
+			priority += data[0] == 0 ? 1 : -1;
+			priority %= 4;
+			if (priority < 0) {
+				priority += 4;
 			}
-			setPriority(prio);
+			setPriority(priority);
 		}
 	}
 	@Override
@@ -157,12 +158,12 @@ public abstract class ModuleEngine extends ModuleBase {
 
 	@Override
 	protected void Save(NBTTagCompound tagCompound, int id) {
-		tagCompound.setByte(generateNBTName("Priority",id),(byte)getPriority());
+		tagCompound.setByte("Priority",(byte)getPriority());
 	}
 	
 	@Override
 	protected void Load(NBTTagCompound tagCompound, int id) {
-		setPriority(tagCompound.getByte(generateNBTName("Priority",id)));
+		setPriority(tagCompound.getByte("Priority"));
 	}
 
 }

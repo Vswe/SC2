@@ -1,13 +1,12 @@
-package vswe.stevesvehicles.old.Modules.Engines;
+package vswe.stevesvehicles.module.common.engine;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
-import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
+import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 
 public class ModuleCheatEngine extends ModuleEngine {
 
-	public ModuleCheatEngine(EntityModularCart cart) {
-		super(cart);
-
+	public ModuleCheatEngine(VehicleBase vehicleBase) {
+		super(vehicleBase);
 	}
 
 	@Override

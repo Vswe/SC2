@@ -8,7 +8,7 @@ import vswe.stevesvehicles.old.Modules.Addons.ModuleLiquidSensors;
 import vswe.stevesvehicles.old.Modules.Addons.ModuleShield;
 import vswe.stevesvehicles.old.Modules.Storages.Chests.ModuleChest;
 import vswe.stevesvehicles.old.Modules.Storages.Chests.ModuleInternalStorage;
-import vswe.stevesvehicles.old.Modules.Engines.ModuleSolarBase;
+import vswe.stevesvehicles.module.common.engine.ModuleSolarBase;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleShooter;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleShooterAdv;
 import vswe.stevesvehicles.old.Modules.Realtimers.ModuleDynamite;

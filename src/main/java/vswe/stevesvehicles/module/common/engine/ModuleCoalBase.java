@@ -1,65 +1,49 @@
-package vswe.stevesvehicles.old.Modules.Engines;
+package vswe.stevesvehicles.module.common.engine;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
-import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
+import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Slots.SlotBase;
 import vswe.stevesvehicles.old.Slots.SlotFuel;
 
 public abstract class ModuleCoalBase extends ModuleEngine {
-	public ModuleCoalBase(EntityModularCart cart) {
-		super(cart);
+	public ModuleCoalBase(VehicleBase vehicleBase) {
+		super(vehicleBase);
 	}
 
     /**
     Load new fuel, this is called all the time but has an if statement checking if it's necessary to re-fill fuel.
     **/
 	@Override
-    protected void loadFuel()
-    {
-		int consumption =  getCart().getConsumption(true) * 2;
+    protected void loadFuel() {
+		int consumption =  getVehicle().getConsumption(true) * 2; //compare the fuel to how much would be required to move 2 ticks
 	
         //if there's no fuel left it's time to re-fill
-        if (getFuelLevel() <= consumption)
-        {
+        if (getFuelLevel() <= consumption) {
             //loop through the slots of fuel
-            for (int i = 0; i < getInventorySize(); i++)
-            {
+            for (int i = 0; i < getInventorySize(); i++) {
                 //get the burn time of the fuel
                 setFuelLevel(getFuelLevel() + SlotFuel.getItemBurnTime(this, getStack(i)));
 
                 //if the new fuel did a difference that fuel should be remove from its inventory
-                if (getFuelLevel() > consumption)
-                {
+                if (getFuelLevel() > consumption) {
                     //just to make sure
-                    if (getStack(i) != null)
-                    {
+                    if (getStack(i) != null) {
                         //code for emptying buckets and the like
-                        if (getStack(i).getItem().hasContainerItem(getStack(i)))
-                        {
+                        if (getStack(i).getItem().hasContainerItem(getStack(i))) {
                             setStack(i,new ItemStack(getStack(i).getItem().getContainerItem()));
-                        }
-                        else
-                        {
+                        }else {
                             //if this isn't a bucket of lava or something similar decrease the number of items.
                             getStack(i).stackSize--;
                         }
 
                         //an empty stack is not worth anything, remove the stack if so.
-                        if (getStack(i).stackSize == 0)
-                        {
+                        if (getStack(i).stackSize == 0) {
                            setStack(i,null);
                         }
                     }
-
-                    //start the cart if it isn't moving
-                    /*if (getCart().pushX == 0.0D && getCart().pushZ == 0.0D && getCart().StartOnActivate())
-                    {
-                        getCart().pushX = getCart().temppushX;
-                        getCart().pushZ = getCart().temppushZ;
-                    }*/
 
                     //after filling the cart with fuel we're done here
                     break;
@@ -70,69 +54,60 @@ public abstract class ModuleCoalBase extends ModuleEngine {
 
 	@Override
 	public int getTotalFuel() {
-		int totalfuel = getFuelLevel();
+		int totalFuel = getFuelLevel();
 				
 		for (int i = 0; i < getInventorySize(); i++) {
 			if (getStack(i) != null) {
-				totalfuel += SlotFuel.getItemBurnTime(this, getStack(i)) * getStack(i).stackSize;
+				totalFuel += SlotFuel.getItemBurnTime(this, getStack(i)) * getStack(i).stackSize;
 			}			
 		}
 				
-		return totalfuel;
+		return totalFuel;
 	}
+
 	@Override
 	public float[] getGuiBarColor() {
-		return new float[] {0F,0F,0F};
+		return new float[] {0F, 0F, 0F};
 	}	
-	
-	
+
 	
 	@Override
-	public void smoke()
-    {
-        double oX = 0.0;
-        double oZ = 0.0;
+	public void smoke() {
+        double offsetX = 0.0;
+        double offsetZ = 0.0;
 
-		if (getCart().motionX != 0)
-		{
-			oX =  (getCart().motionX > 0 ? -1 : 1);
+		if (getVehicle().getEntity().motionX != 0) {
+			offsetX =  (getVehicle().getEntity().motionX > 0 ? -1 : 1);
 		}
 
-		if (getCart().motionZ != 0)
-		{
-			oZ =  (getCart().motionZ > 0 ? -1 : 1);
+		if (getVehicle().getEntity().motionZ != 0) {
+			offsetZ =  (getVehicle().getEntity().motionZ > 0 ? -1 : 1);
 		}
 
-        if (getCart().rand.nextInt(2) == 0) {
-			getCart().worldObj.spawnParticle("largesmoke", getCart().posX + oX * 0.85, getCart().posY + 0.12D, getCart().posZ + oZ * 0.85, 0.0D, 0.0D, 0.0D);
+        if (getVehicle().getRandom().nextInt(2) == 0) {
+			getVehicle().getWorld().spawnParticle("largesmoke", getVehicle().getEntity().posX + offsetX * 0.85, getVehicle().getEntity().posY + 0.12D, getVehicle().getEntity().posZ + offsetZ * 0.85, 0.0D, 0.0D, 0.0D);
 		}
 
-		if (getCart().rand.nextInt(30) == 0) {
-			//if (getCart().getMaxSpeedRail() == 0) {
-				//getCart().worldObj.spawnParticle("flame",getCart().posX + oX* 0.75, getCart().posY + 0.15D, getCart().posZ + oZ*0.75, 0, 0,0);
-			//}else{
-				getCart().worldObj.spawnParticle("flame",getCart().posX + oX* 0.75, getCart().posY + 0.15D, getCart().posZ + oZ*0.75, getCart().motionX, getCart().motionY, getCart().motionZ);
-			//}
+		if (getVehicle().getRandom().nextInt(30) == 0) {
+            getVehicle().getWorld().spawnParticle("flame", getVehicle().getEntity().posX + offsetX * 0.75, getVehicle().getEntity().posY + 0.15D, getVehicle().getEntity().posZ + offsetZ * 0.75, getVehicle().getEntity().motionX, getVehicle().getEntity().motionY, getVehicle().getEntity().motionZ);
 		}
     }
 
 	@Override
 	protected SlotBase getSlot(int slotId, int x, int y) {
-		return new SlotFuel(getCart(),slotId,8+x*18,23+18*y);
+		return new SlotFuel(getVehicle().getVehicleEntity(), slotId, 8 + x * 18, 23 + 18 * y);
 	}
 
 	@Override
 	public void drawForeground(GuiVehicle gui) {
 	    drawString(gui, Localization.MODULES.ENGINES.COAL.translate(), 8, 6, 0x404040);
-        String strfuel = Localization.MODULES.ENGINES.NO_FUEL.translate();
+        String str = Localization.MODULES.ENGINES.NO_FUEL.translate();
 
-        if (getFuelLevel() > 0)
-        {
-            strfuel = Localization.MODULES.ENGINES.FUEL.translate(String.valueOf(getFuelLevel()));
+        if (getFuelLevel() > 0) {
+            str = Localization.MODULES.ENGINES.FUEL.translate(String.valueOf(getFuelLevel()));
         }
 
-        drawString(gui,strfuel, 8, 42, 0x404040);
-		//drawString(gui,"Consumption: " + getCart().getConsumption(), 8, 50, 0x404040);
+        drawString(gui,str, 8, 42, 0x404040);
 	}
 
 	@Override
@@ -159,7 +134,7 @@ public abstract class ModuleCoalBase extends ModuleEngine {
 		super.update();
 		
 		if (fireCoolDown <= 0) {
-			fireIndex = getCart().rand.nextInt(4) + 1;
+			fireIndex = getVehicle().getRandom().nextInt(4) + 1;
 			fireCoolDown = 2;
 		}else{
 			fireCoolDown--;
@@ -169,7 +144,7 @@ public abstract class ModuleCoalBase extends ModuleEngine {
 	private int fireCoolDown;
 	private int fireIndex;
 	public int getFireIndex() {
-		if (getCart().isEngineBurning()) {
+		if (getVehicle().isEngineBurning()) {
 			return fireIndex;
 		}else{
 			return 0;
@@ -179,13 +154,13 @@ public abstract class ModuleCoalBase extends ModuleEngine {
 	@Override
 	protected void Save(NBTTagCompound tagCompound, int id) {
 		super.Save(tagCompound, id);
-		tagCompound.setShort(generateNBTName("Fuel",id), (short)getFuelLevel());
+		tagCompound.setShort("Fuel", (short)getFuelLevel());
 	}
 	
 	@Override
 	protected void Load(NBTTagCompound tagCompound, int id) {
 		super.Load(tagCompound, id);
-		setFuelLevel(tagCompound.getShort(generateNBTName("Fuel",id)));
+		setFuelLevel(tagCompound.getShort("Fuel"));
 		if (getFuelLevel() < 0) {
 			setFuelLevel(getFuelLevel() + 65536);
 		}

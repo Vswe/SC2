@@ -16,7 +16,7 @@ import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.old.Modules.ILeverModule;
 import vswe.stevesvehicles.module.ModuleBase;
-import vswe.stevesvehicles.old.Modules.Engines.ModuleEngine;
+import vswe.stevesvehicles.module.common.engine.ModuleEngine;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
