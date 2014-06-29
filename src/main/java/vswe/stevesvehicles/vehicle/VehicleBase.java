@@ -41,8 +41,7 @@ import vswe.stevesvehicles.module.common.addon.ModuleCreativeSupplies;
 import vswe.stevesvehicles.module.common.engine.ModuleEngine;
 import vswe.stevesvehicles.module.IActivatorModule;
 import vswe.stevesvehicles.module.ModuleBase;
-import vswe.stevesvehicles.old.Modules.Storages.Chests.ModuleChest;
-import vswe.stevesvehicles.old.Modules.Storages.Tanks.ModuleTank;
+import vswe.stevesvehicles.module.common.storage.tank.ModuleTank;
 import vswe.stevesvehicles.module.cart.ModuleWorker;
 import vswe.stevesvehicles.module.cart.tool.ModuleTool;
 import vswe.stevesvehicles.old.TileEntities.TileEntityCartAssembler;
@@ -1346,9 +1345,7 @@ public class VehicleBase {
     public void openInventory() {
         if (modules != null) {
             for (ModuleBase module : modules) {
-                if (module instanceof ModuleChest) {
-                    ((ModuleChest)module).openInventory();
-                }
+                module.openInventory();
             }
         }
     }
@@ -1356,9 +1353,7 @@ public class VehicleBase {
     public void closeInventory() {
         if (modules != null) {
             for (ModuleBase module : modules) {
-                if (module instanceof ModuleChest) {
-                    ((ModuleChest)module).closeInventory();
-                }
+                module.closeInventory();
             }
         }
     }

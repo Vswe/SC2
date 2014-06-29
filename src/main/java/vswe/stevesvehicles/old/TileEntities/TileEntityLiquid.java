@@ -25,7 +25,7 @@ import vswe.stevesvehicles.old.Helpers.Tank;
 import vswe.stevesvehicles.old.Helpers.TransferHandler;
 import vswe.stevesvehicles.client.interfaces.GuiBase;
 import vswe.stevesvehicles.old.Interfaces.GuiLiquid;
-import vswe.stevesvehicles.old.Modules.Storages.Tanks.ModuleTank;
+import vswe.stevesvehicles.module.common.storage.tank.ModuleTank;
 import vswe.stevesvehicles.old.Slots.SlotLiquidFilter;
 import vswe.stevesvehicles.old.Slots.SlotLiquidManagerInput;
 import vswe.stevesvehicles.old.Slots.SlotLiquidOutput;

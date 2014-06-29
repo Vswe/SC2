@@ -25,7 +25,7 @@ import vswe.stevesvehicles.module.cart.addon.ModuleDrillIntelligence;
 import vswe.stevesvehicles.module.cart.addon.ModuleIncinerator;
 import vswe.stevesvehicles.module.cart.addon.ModuleLiquidSensors;
 import vswe.stevesvehicles.module.cart.addon.ModuleOreTracker;
-import vswe.stevesvehicles.old.Modules.Storages.Chests.ModuleChest;
+import vswe.stevesvehicles.module.common.storage.chest.ModuleChest;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -579,14 +579,14 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
 	}	
 	
 	@Override
-	protected void Save(NBTTagCompound tagCompound, int id) {
-		super.Save(tagCompound, id);
+	protected void save(NBTTagCompound tagCompound) {
+		super.save(tagCompound);
 		tagCompound.setBoolean("DrillEnabled", isDrillEnabled());
 	}
 	
 	@Override
-	protected void Load(NBTTagCompound tagCompound, int id) {
-		super.Load(tagCompound, id);
+	protected void load(NBTTagCompound tagCompound) {
+		super.load(tagCompound);
 		setDrillEnabled(tagCompound.getBoolean("DrillEnabled"));
 	}	
 

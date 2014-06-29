@@ -204,14 +204,14 @@ public class ModuleArcade extends ModuleBase {
 	}
 	
 	@Override
-	protected void Save(NBTTagCompound tagCompound, int id) {
+	protected void save(NBTTagCompound tagCompound) {
 		for(ArcadeGame game : games) {
 			game.Save(tagCompound, id);
 		}
 	}	
 	
 	@Override
-	protected void Load(NBTTagCompound tagCompound, int id) {
+	protected void load(NBTTagCompound tagCompound) {
 		for(ArcadeGame game : games) {
 			game.Load(tagCompound, id);
 		}

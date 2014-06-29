@@ -120,12 +120,12 @@ public class ModulePlantSize extends ModuleAddon {
 	}
 	
 	@Override
-	protected void Save(NBTTagCompound tagCompound, int id) {
+	protected void save(NBTTagCompound tagCompound) {
 		tagCompound.setByte("size", (byte)size);
 	}	
 	
 	@Override
-	protected void Load(NBTTagCompound tagCompound, int id) {
+	protected void load(NBTTagCompound tagCompound) {
 		size = tagCompound.getByte("size");
 	}		
 	

@@ -6,7 +6,7 @@ import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.module.common.addon.ModuleAddon;
 import vswe.stevesvehicles.module.cart.hull.ModuleHull;
 import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
-import vswe.stevesvehicles.old.Modules.Storages.ModuleStorage;
+import vswe.stevesvehicles.module.common.storage.ModuleStorage;
 import vswe.stevesvehicles.module.cart.tool.ModuleTool;
 
 public enum  ModuleType {

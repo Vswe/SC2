@@ -132,12 +132,12 @@ public class ModuleInvisible extends ModuleAddon implements IActivatorModule {
 	}
 	
 	@Override
-	protected void Save(NBTTagCompound tagCompound, int id) {
+	protected void save(NBTTagCompound tagCompound) {
 		tagCompound.setBoolean("Invisible", !isVisible());
 	}
 	
 	@Override
-	protected void Load(NBTTagCompound tagCompound, int id) {
+	protected void load(NBTTagCompound tagCompound) {
 		setIsVisible(!tagCompound.getBoolean("Invisible"));
 	}	
 

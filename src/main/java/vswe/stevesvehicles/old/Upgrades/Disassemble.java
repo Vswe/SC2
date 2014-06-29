@@ -1,10 +1,12 @@
 package vswe.stevesvehicles.old.Upgrades;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.old.Containers.ContainerCartAssembler;
@@ -154,7 +156,7 @@ public class Disassemble extends InventoryEffect {
 
 						
 				boolean addedHull = false;
-				ArrayList<ItemStack> modules = ModuleData.getModularItems(cart); //TODO
+				List<ItemStack> modules = ModuleDataItemHandler.getModularItems(cart);
 				for (ItemStack item : modules) {
 					item.stackSize = 0;	
 					

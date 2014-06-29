@@ -155,13 +155,13 @@ public class ModuleExperience extends ModuleBase {
 	
 	
 	@Override
-	protected void Load(NBTTagCompound tagCompound, int id) {
+	protected void load(NBTTagCompound tagCompound) {
 		experienceAmount = tagCompound.getShort("Experience");
 	}
 
 	
 	@Override
-	protected void Save(NBTTagCompound tagCompound, int id) {
+	protected void save(NBTTagCompound tagCompound) {
 		tagCompound.setShort("Experience", (short)experienceAmount);
 	}
 		

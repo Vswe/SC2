@@ -273,8 +273,8 @@ public class ModuleEnchants extends ModuleAddon  {
 	
 	
 	@Override
-	protected void Save(NBTTagCompound tagCompound, int id) {
-		super.Save(tagCompound, id);
+	protected void save(NBTTagCompound tagCompound) {
+		super.save(tagCompound);
 		for (int i = 0; i < 3; i++) {
 			if (enchants[i] == null) {
 				tagCompound.setShort("EffectId" + i, (short)-1);
@@ -286,8 +286,8 @@ public class ModuleEnchants extends ModuleAddon  {
 	}
 	
 	@Override
-	protected void Load(NBTTagCompound tagCompound, int id) {
-		super.Load(tagCompound, id);
+	protected void load(NBTTagCompound tagCompound) {
+		super.load(tagCompound);
 		for (int i = 0; i < 3; i++) {
 			short effect = (tagCompound.getShort("EffectId" + i));
 			if (effect == -1) {

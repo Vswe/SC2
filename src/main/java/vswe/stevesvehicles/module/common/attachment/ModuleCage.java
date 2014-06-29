@@ -220,12 +220,12 @@ public class ModuleCage extends ModuleBase implements IActivatorModule {
 	}	
 	
 	@Override
-	protected void Save(NBTTagCompound tagCompound, int id) {
+	protected void save(NBTTagCompound tagCompound) {
 		tagCompound.setBoolean("disablePickup", disablePickup);
 	}	
 	
 	@Override
-	protected void Load(NBTTagCompound tagCompound, int id) {
+	protected void load(NBTTagCompound tagCompound) {
 		disablePickup = tagCompound.getBoolean("disablePickup");
 	}		
 	

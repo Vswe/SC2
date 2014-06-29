@@ -152,14 +152,14 @@ public abstract class ModuleCoalBase extends ModuleEngine {
 	}
 	
 	@Override
-	protected void Save(NBTTagCompound tagCompound, int id) {
-		super.Save(tagCompound, id);
+	protected void save(NBTTagCompound tagCompound) {
+		super.save(tagCompound);
 		tagCompound.setShort("Fuel", (short)getFuelLevel());
 	}
 	
 	@Override
-	protected void Load(NBTTagCompound tagCompound, int id) {
-		super.Load(tagCompound, id);
+	protected void load(NBTTagCompound tagCompound) {
+		super.load(tagCompound);
 		setFuelLevel(tagCompound.getShort("Fuel"));
 		if (getFuelLevel() < 0) {
 			setFuelLevel(getFuelLevel() + 65536);

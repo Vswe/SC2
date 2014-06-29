@@ -271,7 +271,7 @@ public abstract class ModuleRecipe extends ModuleAddon {
 	}
 	
 	@Override
-	protected void Load(NBTTagCompound tagCompound, int id) {
+	protected void load(NBTTagCompound tagCompound) {
 		if (canUseAdvancedFeatures()) {
 			target = tagCompound.getByte("Target");
 			mode = tagCompound.getByte("Mode");
@@ -281,7 +281,7 @@ public abstract class ModuleRecipe extends ModuleAddon {
 
 	
 	@Override
-	protected void Save(NBTTagCompound tagCompound, int id) {
+	protected void save(NBTTagCompound tagCompound) {
 		if (canUseAdvancedFeatures()) {
 			tagCompound.setByte("Target", (byte)target);
 			tagCompound.setByte("Mode", (byte)mode);

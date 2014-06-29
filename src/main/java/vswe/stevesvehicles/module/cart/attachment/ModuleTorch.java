@@ -275,12 +275,12 @@ public class ModuleTorch extends ModuleWorker implements ISuppliesModule  {
 
 	
 	@Override
-	protected void Save(NBTTagCompound tagCompound, int id) {
+	protected void save(NBTTagCompound tagCompound) {
 		tagCompound.setByte("lightLimit", (byte)lightLimit);
 	}	
 	
 	@Override
-	protected void Load(NBTTagCompound tagCompound, int id) {
+	protected void load(NBTTagCompound tagCompound) {
 		lightLimit = tagCompound.getByte("lightLimit");
 	
 		calculateTorches();

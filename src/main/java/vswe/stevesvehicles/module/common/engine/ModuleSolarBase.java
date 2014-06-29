@@ -198,15 +198,15 @@ public abstract class ModuleSolarBase extends ModuleEngine {
 
 	
 	@Override
-	protected void Save(NBTTagCompound tagCompound, int id) {
-		super.Save(tagCompound, id);
+	protected void save(NBTTagCompound tagCompound) {
+		super.save(tagCompound);
 		tagCompound.setInteger("Fuel", getFuelLevel());
 		tagCompound.setBoolean("Up", upState);
 	}
 	
 	@Override
-	protected void Load(NBTTagCompound tagCompound, int id) {
-		super.Load(tagCompound, id);
+	protected void load(NBTTagCompound tagCompound) {
+		super.load(tagCompound);
 		setFuelLevel(tagCompound.getInteger("Fuel"));
 		upState = tagCompound.getBoolean("Up");
 	}

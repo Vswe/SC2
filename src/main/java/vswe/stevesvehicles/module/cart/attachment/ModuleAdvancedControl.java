@@ -499,14 +499,14 @@ public class ModuleAdvancedControl extends ModuleBase implements ILeverModule {
 	
 	
 	@Override
-	protected void Save(NBTTagCompound tagCompound, int id) {
+	protected void save(NBTTagCompound tagCompound) {
 		tagCompound.setByte("Speed", (byte)getSpeedSetting());
 		tagCompound.setDouble("ODO", odo);
 		tagCompound.setDouble("TRIP", trip);
 	}
 	
 	@Override
-	protected void Load(NBTTagCompound tagCompound, int id) {
+	protected void load(NBTTagCompound tagCompound) {
 		setSpeedSetting(tagCompound.getByte("Speed"));
 		odo = tagCompound.getDouble("ODO");
 		trip = tagCompound.getDouble("TRIP");

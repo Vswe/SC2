@@ -253,13 +253,13 @@ public class ModuleDynamite extends ModuleBase {
 
 	
 	@Override
-	protected void Save(NBTTagCompound tagCompound, int id) {
+	protected void save(NBTTagCompound tagCompound) {
 		tagCompound.setShort("FuseLength", (short)getFuseLength());
 		tagCompound.setShort("Fuse", (short)getFuse());
 	}
 	
 	@Override
-	protected void Load(NBTTagCompound tagCompound, int id) {
+	protected void load(NBTTagCompound tagCompound) {
 		setFuseLength(tagCompound.getShort("FuseLength"));
 		setFuse(tagCompound.getShort("Fuse"));
 		

@@ -220,7 +220,7 @@ public class ModuleRailer extends ModuleWorker implements ISuppliesModule {
 
 	
 	@Override
-	protected void Load(NBTTagCompound tagCompound, int id) {
+	protected void load(NBTTagCompound tagCompound) {
 		calculateRails();
 	}	
 	

@@ -105,12 +105,12 @@ public abstract /*remove the abstract*/ class ModuleCommand extends ModuleBase i
 	}	
 	
 	@Override
-	protected void Save(NBTTagCompound tagCompound, int id) {
+	protected void save(NBTTagCompound tagCompound) {
 		tagCompound.setString("Command", command);
 	}
 	
 	@Override
-	protected void Load(NBTTagCompound tagCompound, int id) {
+	protected void load(NBTTagCompound tagCompound) {
 		command = tagCompound.getString("Command");
 	}	
 	

@@ -1,16 +1,16 @@
-package vswe.stevesvehicles.old.Modules.Storages.Chests;
-import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
+package vswe.stevesvehicles.module.common.storage.chest;
+import vswe.stevesvehicles.vehicle.VehicleBase;
 
 public class ModuleInternalStorage extends ModuleChest {
-	public ModuleInternalStorage(EntityModularCart cart) {
-		super(cart);
+	public ModuleInternalStorage(VehicleBase vehicleBase) {
+		super(vehicleBase);
 	}
 
 	@Override
-	protected int getInventoryWidth()
-	{
+	protected int getInventoryWidth() {
 		return 3;
 	}
+
 	@Override
 	protected int getInventoryHeight() {
 		return 3;
@@ -20,6 +20,7 @@ public class ModuleInternalStorage extends ModuleChest {
 	protected boolean hasVisualChest() {
 		return false;
 	}
+
 	@Override
 	public int guiWidth() {
 		return super.guiWidth() + 30;

@@ -136,12 +136,12 @@ public class ModuleBrake extends ModuleAddon implements ILeverModule {
 	
 	
 	@Override
-	protected void Save(NBTTagCompound tagCompound, int id) {
+	protected void save(NBTTagCompound tagCompound) {
 		tagCompound.setBoolean("ForceStop", isForceStopping());
 	}
 	
 	@Override
-	protected void Load(NBTTagCompound tagCompound, int id) {
+	protected void load(NBTTagCompound tagCompound) {
 		setForceStopping(tagCompound.getBoolean("ForceStop"));
 	}		
 }

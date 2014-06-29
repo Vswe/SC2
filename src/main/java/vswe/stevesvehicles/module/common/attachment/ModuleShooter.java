@@ -514,14 +514,14 @@ public class ModuleShooter extends ModuleBase implements ISuppliesModule {
 
 	
 	@Override
-	protected void Save(NBTTagCompound tagCompound, int id) {
+	protected void save(NBTTagCompound tagCompound) {
 		tagCompound.setByte("Pipes", getActivePipes());
 		tagCompound.setByte("Interval", (byte)arrowInterval);
 		saveTick(tagCompound);
 	}
 	
 	@Override
-	protected void Load(NBTTagCompound tagCompound, int id) {
+	protected void load(NBTTagCompound tagCompound) {
 		setActivePipes(tagCompound.getByte("Pipes"));
 		arrowInterval = tagCompound.getByte("Interval");
         loadTick(tagCompound);

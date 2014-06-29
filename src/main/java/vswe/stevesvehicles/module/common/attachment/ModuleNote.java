@@ -928,7 +928,7 @@ public class ModuleNote extends ModuleBase {
 
 
 	@Override
-	protected void Save(NBTTagCompound tagCompound, int id) {	
+	protected void save(NBTTagCompound tagCompound) {
 		short headerInfo = (short)tracks.size();
 		headerInfo |= (short)(speedSetting << MAXIMUM_TRACKS_PER_MODULE_BIT_COUNT);
 
@@ -947,7 +947,7 @@ public class ModuleNote extends ModuleBase {
 	}
 	
 	@Override
-	protected void Load(NBTTagCompound tagCompound, int id) {
+	protected void load(NBTTagCompound tagCompound) {
 		short headerInfo = tagCompound.getShort("Header");
 		receiveGuiData(0, headerInfo);
 		for (int i = 0; i < tracks.size(); i++) {

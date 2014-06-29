@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.Modules.Storages.Tanks;
+package vswe.stevesvehicles.module.common.storage.tank;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -8,10 +8,10 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidTank;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
-import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
+import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.*;
 import vswe.stevesvehicles.client.interfaces.GuiBase;
-import vswe.stevesvehicles.old.Modules.Storages.ModuleStorage;
+import vswe.stevesvehicles.module.common.storage.ModuleStorage;
 import vswe.stevesvehicles.old.Slots.SlotBase;
 import vswe.stevesvehicles.old.Slots.SlotLiquidInput;
 import vswe.stevesvehicles.old.Slots.SlotLiquidOutput;
@@ -19,8 +19,9 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class ModuleTank extends ModuleStorage implements IFluidTank, ITankHolder {
-	public ModuleTank(EntityModularCart cart) {
-		super(cart);
+
+	public ModuleTank(VehicleBase vehicleBase) {
+		super(vehicleBase);
 		
 		tank = new Tank(this, getTankSize(), 0);
 	}
@@ -38,9 +39,9 @@ public abstract class ModuleTank extends ModuleStorage implements IFluidTank, IT
 	@Override
 	protected SlotBase getSlot(int slotId, int x, int y) {
 		if (y == 0) {
-			return new SlotLiquidInput(getCart(), tank, -1,  slotId,8+x*18,24+y*24);
+			return new SlotLiquidInput(getVehicle().getVehicleEntity(), tank, -1,  slotId, 8 + x * 18, 24 + y * 24);
 		}else{
-			return new SlotLiquidOutput(getCart(), slotId,8+x*18,24+y*24);
+			return new SlotLiquidOutput(getVehicle().getVehicleEntity(), slotId, 8 + x * 18, 24 + y * 24);
 		}
 	}
 
@@ -86,7 +87,7 @@ public abstract class ModuleTank extends ModuleStorage implements IFluidTank, IT
 			return;
 		}
 		
-		if (!getCart().worldObj.isRemote) {
+		if (!getVehicle().getWorld().isRemote) {
 			tank.containerTransfer();
 		}else if(!isPlaceholder()) {
 			if (getShortDw(0) == -1) {
@@ -98,23 +99,23 @@ public abstract class ModuleTank extends ModuleStorage implements IFluidTank, IT
 	}
 	
 	@Override
-	public ItemStack getInputContainer(int tankid) {
+	public ItemStack getInputContainer(int tankId) {
 		return getStack(0);
 	}	
 	
 	@Override
-	public void clearInputContainer(int tankid) {
+	public void clearInputContainer(int tankId) {
 		setStack(0, null);	
 	}
 	
 	@Override
-	public void addToOutputContainer(int tankid, ItemStack item) {
+	public void addToOutputContainer(int tankId, ItemStack item) {
 		addStack(1, item);
 	}
 	
 	@Override
-	public void onFluidUpdated(int tankid) {
-		if (getCart().worldObj.isRemote) {
+	public void onFluidUpdated(int tankId) {
+		if (getVehicle().getWorld().isRemote) {
 			return;
 		}
 	
@@ -124,29 +125,27 @@ public abstract class ModuleTank extends ModuleStorage implements IFluidTank, IT
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawImage(int tankid, GuiBase gui, IIcon icon, int targetX, int targetY, int srcX, int srcY, int sizeX, int sizeY) {
+	public void drawImage(int tankId, GuiBase gui, IIcon icon, int targetX, int targetY, int srcX, int srcY, int sizeX, int sizeY) {
 		drawImage((GuiVehicle)gui, icon, targetX, targetY, srcX, srcY, sizeX, sizeY);
 	}
 	
 
-	protected int[] tankBounds = {35, 20, 36, 51};
+	protected static final int[] TANK_BOUNDS = {35, 20, 36, 51};
 	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawBackground(GuiVehicle gui, int x, int y) {
-
-		tank.drawFluid(gui, tankBounds[0], tankBounds[1]);
-	
+		tank.drawFluid(gui, TANK_BOUNDS[0], TANK_BOUNDS[1]);
 
 		ResourceHelper.bindResource("/gui/tank.png");		
-		drawImage(gui, tankBounds, 0, 0);
+		drawImage(gui, TANK_BOUNDS, 0, 0);
 	
 	}
 	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawMouseOver(GuiVehicle gui, int x, int y) {
-		drawStringOnMouseOver(gui, getTankInfo(), x,y, tankBounds);
+		drawStringOnMouseOver(gui, getTankInfo(), x, y, TANK_BOUNDS);
 	}	
 	
 
@@ -161,60 +160,44 @@ public abstract class ModuleTank extends ModuleStorage implements IFluidTank, IT
 	}
 
 
-	/**
-	 * @return FluidStack representing the fluid contained in the tank, null if empty.
-	 */
+
 	@Override
 	public FluidStack getFluid() {
 		return tank.getFluid() == null ? null : tank.getFluid().copy();
 	}
 
-	/**
-	 * @return capacity of this tank
-	 */
+
 	@Override
 	public int getCapacity() {
 		return getTankSize();
 	}
 
-	/**
-	 *
-	 * @param resource
-	 * @param doFill
-	 * @return Amount of fluid used for filling.
-	 */
+
 	@Override
 	public int fill(FluidStack resource, boolean doFill) {
-		return tank.fill(resource, doFill, getCart().worldObj.isRemote);
+		return tank.fill(resource, doFill, getVehicle().getWorld().isRemote);
 	}
-	/**
-	 *
-	 * @param maxDrain
-	 * @param doDrain
-	 * @return Null if nothing was drained, otherwise a FluidStack containing the drained.
-	 */
+
 	@Override
 	public FluidStack drain(int maxDrain, boolean doDrain) {
-		return tank.drain(maxDrain, doDrain, getCart().worldObj.isRemote);
+		return tank.drain(maxDrain, doDrain, getVehicle().getWorld().isRemote);
 	}
 
 
-
-
 	@Override
-	protected void Save(NBTTagCompound tagCompound, int id) {
+	protected void save(NBTTagCompound tagCompound) {
 		if (tank.getFluid() != null) {
 			NBTTagCompound compound = new NBTTagCompound();
 			tank.getFluid().writeToNBT(compound);
-			tagCompound.setTag(generateNBTName("Fluid", id), compound);
+			tagCompound.setTag("Fluid", compound);
 		}
-		tagCompound.setBoolean(generateNBTName("Locked",id), tank.isLocked());
+		tagCompound.setBoolean("Locked", tank.isLocked());
 	}
 	
 	@Override
-	protected void Load(NBTTagCompound tagCompound, int id) {
-		tank.setFluid(FluidStack.loadFluidStackFromNBT(tagCompound.getCompoundTag(generateNBTName("Fluid", id))));
-		tank.setLocked(tagCompound.getBoolean(generateNBTName("Locked",id)));
+	protected void load(NBTTagCompound tagCompound) {
+		tank.setFluid(FluidStack.loadFluidStackFromNBT(tagCompound.getCompoundTag("Fluid")));
+		tank.setLocked(tagCompound.getBoolean("Locked"));
 		updateDw();	
 	}		
 	
@@ -228,6 +211,7 @@ public abstract class ModuleTank extends ModuleStorage implements IFluidTank, IT
 		updateShortDw(0, tank.getFluid() == null ? -1 : tank.getFluid().fluidID);
 		updateIntDw(1, tank.getFluid() == null ? -1 : tank.getFluid().amount);	
 	}
+
 	@Override
 	public void initDw() {
 		addShortDw(0, tank.getFluid() == null ? -1 : tank.getFluid().fluidID);
@@ -243,18 +227,12 @@ public abstract class ModuleTank extends ModuleStorage implements IFluidTank, IT
 	}
 	
 	public boolean isCompletelyFilled() {
-		if (getFluid() == null || getFluid().amount < getTankSize()) {
-			return false;
-		}
-		return true;
-	}
+        return !(getFluid() == null || getFluid().amount < getTankSize());
+    }
 	
 	public boolean isCompletelyEmpty() {
-		if (getFluid() == null || getFluid().amount == 0) {
-			return true;
-		}
-		return false;
-	}	
+        return getFluid() == null || getFluid().amount == 0;
+    }
 	
 
 	@Override
@@ -303,7 +281,7 @@ public abstract class ModuleTank extends ModuleStorage implements IFluidTank, IT
 	
 	@Override
 	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
-		if (inRect(x, y, tankBounds)) {
+		if (inRect(x, y, TANK_BOUNDS)) {
 			byte data = (byte)button;
 			if (GuiScreen.isShiftKeyDown()) {
 				data |= 2;

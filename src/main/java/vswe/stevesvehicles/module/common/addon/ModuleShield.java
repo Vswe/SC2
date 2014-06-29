@@ -177,12 +177,12 @@ public class ModuleShield extends ModuleAddon implements IActivatorModule {
 	}	
 	
 	@Override
-	protected void Save(NBTTagCompound tagCompound, int id) {
+	protected void save(NBTTagCompound tagCompound) {
 		tagCompound.setBoolean("Shield", getShieldStatus());
 	}
 	
 	@Override
-	protected void Load(NBTTagCompound tagCompound, int id) {
+	protected void load(NBTTagCompound tagCompound) {
 		setShieldStatus(tagCompound.getBoolean("Shield"));
 	}		
 

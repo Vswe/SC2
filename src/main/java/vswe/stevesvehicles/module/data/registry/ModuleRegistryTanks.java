@@ -11,12 +11,13 @@ import vswe.stevesvehicles.module.data.ModuleDataGroup;
 import vswe.stevesvehicles.module.data.ModuleRegistry;
 import vswe.stevesvehicles.module.data.ModuleSide;
 import vswe.stevesvehicles.old.Helpers.Localization;
-import vswe.stevesvehicles.old.Modules.Storages.Tanks.ModuleAdvancedTank;
-import vswe.stevesvehicles.old.Modules.Storages.Tanks.ModuleFrontTank;
-import vswe.stevesvehicles.old.Modules.Storages.Tanks.ModuleInternalTank;
-import vswe.stevesvehicles.old.Modules.Storages.Tanks.ModuleOpenTank;
-import vswe.stevesvehicles.old.Modules.Storages.Tanks.ModuleSideTanks;
-import vswe.stevesvehicles.old.Modules.Storages.Tanks.ModuleTopTank;
+import vswe.stevesvehicles.module.common.storage.tank.ModuleAdvancedTank;
+import vswe.stevesvehicles.module.common.storage.tank.ModuleCheatTank;
+import vswe.stevesvehicles.module.common.storage.tank.ModuleFrontTank;
+import vswe.stevesvehicles.module.common.storage.tank.ModuleInternalTank;
+import vswe.stevesvehicles.module.common.storage.tank.ModuleOpenTank;
+import vswe.stevesvehicles.module.common.storage.tank.ModuleSideTanks;
+import vswe.stevesvehicles.module.common.storage.tank.ModuleTopTank;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 
 import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
@@ -134,7 +135,7 @@ public class ModuleRegistryTanks extends ModuleRegistry {
         register(advanced);
 
 
-        ModuleData cheat = new ModuleData("creative_tank", ModuleOpenTank.class, 1);
+        ModuleData cheat = new ModuleData("creative_tank", ModuleCheatTank.class, 1);
         cheat.setAllowDuplicate(true);
         cheat.addVehicles(VehicleRegistry.CART, VehicleRegistry.BOAT);
         register(cheat);

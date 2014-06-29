@@ -252,12 +252,12 @@ public class ModuleLabel extends ModuleAddon {
 	}
 	
 	@Override
-	protected void Load(NBTTagCompound tagCompound, int id) {
+	protected void load(NBTTagCompound tagCompound) {
 		updateDw(0, tagCompound.getByte("Active"));
 	}
 	
 	@Override
-	protected void Save(NBTTagCompound tagCompound, int id) {
+	protected void save(NBTTagCompound tagCompound) {
 		tagCompound.setByte("Active", getDw(0));
 	}
 }

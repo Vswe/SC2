@@ -268,4 +268,26 @@ public final class ModuleDataItemHandler {
 
 
     private ModuleDataItemHandler(){}
+
+    public static List<ItemStack> getModularItems(ItemStack cart) {
+        List<Tuple<ModuleData, NBTTagCompound>> modules = getModulesAndCompoundsFromItem(cart);
+        List<ItemStack> items = new ArrayList<ItemStack>();
+        for (Tuple<ModuleData, NBTTagCompound> module : modules) {
+            ModuleData moduleData = module.getFirstObject();
+            NBTTagCompound compound = module.getSecondObject();
+
+            ItemStack item = new ItemStack(ModItems.modules, 1, ModuleRegistry.getIdFromModule(moduleData));
+            if (moduleData.hasExtraData() && compound != null) {
+                NBTTagCompound moduleCompound = (NBTTagCompound)compound.copy();
+                moduleCompound.removeTag(VehicleBase.NBT_ID);
+                NBTTagCompound itemCompound = new NBTTagCompound();
+                item.setTagCompound(itemCompound);
+                itemCompound.setTag(ModuleData.NBT_MODULE_EXTRA_DATA, moduleCompound);
+            }
+
+            items.add(item);
+        }
+
+        return items;
+    }
 }

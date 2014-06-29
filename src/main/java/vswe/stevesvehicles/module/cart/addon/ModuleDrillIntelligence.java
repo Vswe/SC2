@@ -222,7 +222,7 @@ public class ModuleDrillIntelligence extends ModuleAddon {
 	}	
 	
 	@Override
-	protected void Save(NBTTagCompound tagCompound, int id) {
+	protected void save(NBTTagCompound tagCompound) {
 		initDisabledData();
 
         for (short anIsDisabled : isDisabled) {
@@ -231,7 +231,7 @@ public class ModuleDrillIntelligence extends ModuleAddon {
 	}	
 	
 	@Override
-	protected void Load(NBTTagCompound tagCompound, int id) {
+	protected void load(NBTTagCompound tagCompound) {
 		initDisabledData();
 	
 		for (int i = 0; i < isDisabled.length; i++) {

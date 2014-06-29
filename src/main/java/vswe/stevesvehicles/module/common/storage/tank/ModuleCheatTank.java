@@ -1,14 +1,14 @@
-package vswe.stevesvehicles.old.Modules.Storages.Tanks;
+package vswe.stevesvehicles.module.common.storage.tank;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
+import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ColorHelper;
 import vswe.stevesvehicles.old.Helpers.Localization;
 
 
 public class ModuleCheatTank extends ModuleTank{
-	public ModuleCheatTank(EntityModularCart cart) {
-		super(cart);
+	public ModuleCheatTank(VehicleBase vehicleBase) {
+		super(vehicleBase);
 	}
 
 	private static final ColorHelper[] colors = {ColorHelper.YELLOW, ColorHelper.GREEN, ColorHelper.RED, ColorHelper.ORANGE};
@@ -75,15 +75,15 @@ public class ModuleCheatTank extends ModuleTank{
 	}	
 	
 	@Override
-	protected void Save(NBTTagCompound tagCompound, int id) {
-		super.Save(tagCompound, id);
-		tagCompound.setByte(generateNBTName("mode",id), (byte)mode);
+	protected void save(NBTTagCompound tagCompound) {
+		super.save(tagCompound);
+		tagCompound.setByte("mode", (byte)mode);
 	}
 	
 	@Override
-	protected void Load(NBTTagCompound tagCompound, int id) {
-		super.Load(tagCompound, id);
-		mode = tagCompound.getByte(generateNBTName("mode",id));	
+	protected void load(NBTTagCompound tagCompound) {
+		super.load(tagCompound);
+		mode = tagCompound.getByte("mode");
 	}	
 		
 	private void updateAmount() {
@@ -102,9 +102,9 @@ public class ModuleCheatTank extends ModuleTank{
 	}
 	
 	@Override
-	public void onFluidUpdated(int tankid) {		
+	public void onFluidUpdated(int tankId) {
 		updateAmount();		
-		super.onFluidUpdated(tankid);
+		super.onFluidUpdated(tankId);
 	}
 	
 }

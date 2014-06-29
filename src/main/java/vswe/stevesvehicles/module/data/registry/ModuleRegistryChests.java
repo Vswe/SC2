@@ -18,12 +18,12 @@ import vswe.stevesvehicles.module.data.ModuleRegistry;
 import vswe.stevesvehicles.module.data.ModuleSide;
 import vswe.stevesvehicles.old.Helpers.GiftItem;
 import vswe.stevesvehicles.old.Helpers.Localization;
-import vswe.stevesvehicles.old.Modules.Storages.Chests.ModuleEggBasket;
-import vswe.stevesvehicles.old.Modules.Storages.Chests.ModuleExtractingChests;
-import vswe.stevesvehicles.old.Modules.Storages.Chests.ModuleFrontChest;
-import vswe.stevesvehicles.old.Modules.Storages.Chests.ModuleGiftStorage;
-import vswe.stevesvehicles.old.Modules.Storages.Chests.ModuleSideChests;
-import vswe.stevesvehicles.old.Modules.Storages.Chests.ModuleTopChest;
+import vswe.stevesvehicles.module.common.storage.chest.ModuleEggBasket;
+import vswe.stevesvehicles.module.common.storage.chest.ModuleExtractingChests;
+import vswe.stevesvehicles.module.common.storage.chest.ModuleFrontChest;
+import vswe.stevesvehicles.module.common.storage.chest.ModuleGiftStorage;
+import vswe.stevesvehicles.module.common.storage.chest.ModuleSideChests;
+import vswe.stevesvehicles.module.common.storage.chest.ModuleTopChest;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 

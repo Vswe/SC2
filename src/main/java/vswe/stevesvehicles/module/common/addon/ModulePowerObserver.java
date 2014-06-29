@@ -303,7 +303,7 @@ public class ModulePowerObserver extends ModuleAddon {
 	}
 	
 	@Override
-	protected void Save(NBTTagCompound tagCompound, int id) {
+	protected void save(NBTTagCompound tagCompound) {
 		for (int i = 0; i < 4; i++) {
 			tagCompound.setShort("AreaData" + i, areaData[i]);
 			tagCompound.setShort("PowerLevel" + i, powerLevel[i]);
@@ -311,7 +311,7 @@ public class ModulePowerObserver extends ModuleAddon {
 	}	
 	
 	@Override
-	protected void Load(NBTTagCompound tagCompound, int id) {
+	protected void load(NBTTagCompound tagCompound) {
 		for (int i = 0; i < 4; i++) {
 			areaData[i] = tagCompound.getShort("AreaData" + i);
 			powerLevel[i] = tagCompound.getShort("PowerLevel" + i);

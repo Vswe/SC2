@@ -202,12 +202,12 @@ public class ModuleFertilizer extends ModuleWorker implements ISuppliesModule {
 	private static final int MAX_STACKS_OF_BONES = 1;
 	
 	@Override
-	protected void Save(NBTTagCompound tagCompound, int id) {
+	protected void save(NBTTagCompound tagCompound) {
 		tagCompound.setShort("Fertilizers", (short) fertilizerStorage);
 	}
 	
 	@Override
-	protected void Load(NBTTagCompound tagCompound, int id) {
+	protected void load(NBTTagCompound tagCompound) {
 		fertilizerStorage = tagCompound.getShort("Fertilizers");
 	}	
 	

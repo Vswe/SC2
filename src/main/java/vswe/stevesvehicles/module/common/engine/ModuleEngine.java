@@ -156,12 +156,12 @@ public abstract class ModuleEngine extends ModuleBase {
 	}
 
 	@Override
-	protected void Save(NBTTagCompound tagCompound, int id) {
+	protected void save(NBTTagCompound tagCompound) {
 		tagCompound.setByte("Priority",(byte)getPriority());
 	}
 	
 	@Override
-	protected void Load(NBTTagCompound tagCompound, int id) {
+	protected void load(NBTTagCompound tagCompound) {
 		setPriority(tagCompound.getByte("Priority"));
 	}
 

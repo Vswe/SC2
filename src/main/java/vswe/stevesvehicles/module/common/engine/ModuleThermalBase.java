@@ -155,8 +155,8 @@ public abstract class ModuleThermalBase extends ModuleEngine {
 	
 	
 	@Override
-	protected void Save(NBTTagCompound tagCompound, int id) {
-		super.Save(tagCompound, id);
+	protected void save(NBTTagCompound tagCompound) {
+		super.save(tagCompound);
 		tagCompound.setShort("Fuel", (short)getFuelLevel());
 		if (requiresCoolant()) {
 			tagCompound.setShort("Coolant", (short)getCoolantLevel());
@@ -164,8 +164,8 @@ public abstract class ModuleThermalBase extends ModuleEngine {
 	}
 	
 	@Override
-	protected void Load(NBTTagCompound tagCompound, int id) {
-		super.Load(tagCompound, id);
+	protected void load(NBTTagCompound tagCompound) {
+		super.load(tagCompound);
 		setFuelLevel(tagCompound.getShort("Fuel"));
 		if (requiresCoolant()) {
 			setCoolantLevel(tagCompound.getShort("Coolant"));

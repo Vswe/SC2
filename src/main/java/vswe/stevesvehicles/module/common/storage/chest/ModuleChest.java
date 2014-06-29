@@ -1,13 +1,13 @@
-package vswe.stevesvehicles.old.Modules.Storages.Chests;
+package vswe.stevesvehicles.module.common.storage.chest;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
-import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
-import vswe.stevesvehicles.old.Modules.Storages.ModuleStorage;
+import vswe.stevesvehicles.vehicle.VehicleBase;
+import vswe.stevesvehicles.module.common.storage.ModuleStorage;
 import vswe.stevesvehicles.old.Slots.SlotBase;
 import vswe.stevesvehicles.old.Slots.SlotChest;
 
 public abstract class ModuleChest extends ModuleStorage {
-	public ModuleChest(EntityModularCart cart) {
-		super(cart);
+	public ModuleChest(VehicleBase vehicleBase) {
+		super(vehicleBase);
 	}
 
 	//called to update the module's actions. Called by the cart's update code.
@@ -24,7 +24,7 @@ public abstract class ModuleChest extends ModuleStorage {
 
 	@Override
 	protected SlotBase getSlot(int slotId, int x, int y) {
-		return new SlotChest(getCart(),slotId,8+x*18,16+y*18);
+		return new SlotChest(getVehicle().getVehicleEntity() ,slotId, 8 + x * 18, 16 + y * 18);
 	}
 
 	@Override
@@ -84,12 +84,14 @@ public abstract class ModuleChest extends ModuleStorage {
 		}
 	}
 
+    @Override
 	public void openInventory() {
 		if (hasVisualChest()) {
 			updateDw(0,getDw(0)+1);
 		}
 	}
 
+    @Override
 	public void closeInventory() {
 		if (hasVisualChest()) {
 			updateDw(0,getDw(0)-1);
@@ -113,30 +115,25 @@ public abstract class ModuleChest extends ModuleStorage {
 			return;
 		}
 
-		if (isChestActive() && lidClosed() && playChestSound())
-		{
-			getCart().worldObj.playSoundEffect(getCart().posX, getCart().posY, getCart().posZ, "random.chestopen", 0.5F, getCart().worldObj.rand.nextFloat() * 0.1F + 0.9F);
+		if (isChestActive() && lidClosed() && playChestSound()) {
+			getVehicle().getWorld().playSoundEffect(getVehicle().getEntity().posX, getVehicle().getEntity().posY, getVehicle().getEntity().posZ, "random.chestopen", 0.5F, getVehicle().getRandom().nextFloat() * 0.1F + 0.9F);
 		}
 
 		if (isChestActive() && chestAngle < chestFullyOpenAngle()) {
 			chestAngle += getLidSpeed();
-			if (chestAngle >chestFullyOpenAngle())
-			{
+			if (chestAngle > chestFullyOpenAngle()) {
 				chestAngle = chestFullyOpenAngle();
 			}
-		}else if (!isChestActive() && !lidClosed())
-		{
+		}else if (!isChestActive() && !lidClosed()){
 			float lastAngle = chestAngle;
 
 			chestAngle -= getLidSpeed();
 
-			if (chestAngle < Math.PI * 3 / 8 && lastAngle >= Math.PI * 3 / 8 && playChestSound())
-			{
-				getCart().worldObj.playSoundEffect(getCart().posX, getCart().posY, getCart().posZ, "random.chestclosed", 0.5F, getCart().worldObj.rand.nextFloat() * 0.1F + 0.9F);
+			if (chestAngle < Math.PI * 3 / 8 && lastAngle >= Math.PI * 3 / 8 && playChestSound()){
+				getVehicle().getWorld().playSoundEffect(getVehicle().getEntity().posX, getVehicle().getEntity().posY, getVehicle().getEntity().posZ, "random.chestclosed", 0.5F, getVehicle().getRandom().nextFloat() * 0.1F + 0.9F);
 			}
 
-			if (chestAngle < 0.0F)
-			{
+			if (chestAngle < 0.0F){
 				chestAngle = 0.0F;
 			}
 		}

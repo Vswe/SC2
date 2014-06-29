@@ -151,14 +151,14 @@ public class ModuleColorRandomizer extends ModuleAddon {
 	}
 
 	@Override
-	protected void Save(NBTTagCompound tagCompound, int id) {
+	protected void save(NBTTagCompound tagCompound) {
 		tagCompound.setByte("Red", (byte)getColorVal(0));
 		tagCompound.setByte("Green", (byte)getColorVal(1));
 		tagCompound.setByte("Blue", (byte)getColorVal(2));
 	}
 
 	@Override
-	protected void Load(NBTTagCompound tagCompound, int id) {
+	protected void load(NBTTagCompound tagCompound) {
 		setColorVal(0,tagCompound.getByte("Red"));
 		setColorVal(1,tagCompound.getByte("Green"));
 		setColorVal(2,tagCompound.getByte("Blue"));

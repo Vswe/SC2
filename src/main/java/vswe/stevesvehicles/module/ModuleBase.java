@@ -712,7 +712,15 @@ public abstract class ModuleBase {
 		return RAIL_DIRECTION.DEFAULT;
 	}
 
-	/**
+    public void openInventory() {
+    }
+
+    public void closeInventory() {
+
+    }
+
+
+    /**
 	 * Handles the different directions that the module can force a vehicle to go in. {@see getSpecialRailDirection}
 	 * @author Vswe
 	 *
@@ -763,15 +771,15 @@ public abstract class ModuleBase {
         }	
 
         //writes module specific data
-		Save(tagCompound, 0); //TODO refactor away the id in Save
+		save(tagCompound);
 	}
 	
 	/**
 	 * Allows a module to save specific data when world is saved
-	 * @param tagCompound The NBT tag compound to write to
-	 * @param id The number of the module
-	 */
-	protected void Save(NBTTagCompound tagCompound, int id) {}
+     * @param tagCompound The NBT tag compound to write to
+     *
+     */
+	protected void save(NBTTagCompound tagCompound) {}
 	
 	
 	/**
@@ -796,15 +804,15 @@ public abstract class ModuleBase {
 		}	
 
 		//reads module specific data
-		Load(tagCompound, 0); //TODO refactor away the id in Load
+		load(tagCompound);
 	}	
 	
 	/**
 	 * Allows a module to load specific data when world is loaded
-	 * @param tagCompound The NBT tag compound to read from
-	 * @param id The number of the module
-	 */
-	protected void Load(NBTTagCompound tagCompound, int id) {}
+     * @param tagCompound The NBT tag compound to read from
+     *
+     */
+	protected void load(NBTTagCompound tagCompound) {}
 	
 	/**
 	 * Draw the text of server/client buttons
@@ -1589,20 +1597,6 @@ public abstract class ModuleBase {
 	public boolean doStealInterface() {
 		return false;
 	}
-	
-	
-	public boolean hasExtraData() {
-		return false;
-	}
-	
-	public byte getExtraData() {
-		return (byte)0;
-	}
-	
-	public void setExtraData(byte b) {
-		
-	}
-	
 
 	protected FakePlayer getFakePlayer() {
 		return FakePlayerFactory.getMinecraft((WorldServer)getVehicle().getWorld());

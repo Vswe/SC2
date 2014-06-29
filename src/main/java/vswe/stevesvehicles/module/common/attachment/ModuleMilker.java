@@ -101,12 +101,12 @@ public class ModuleMilker extends ModuleBase {
 	}	
 	
 	@Override
-	protected void Save(NBTTagCompound tagCompound, int id) {
+	protected void save(NBTTagCompound tagCompound) {
 		tagCompound.setShort("Milk", (short) milkBuffer);
 	}
 	
 	@Override
-	protected void Load(NBTTagCompound tagCompound, int id) {
+	protected void load(NBTTagCompound tagCompound) {
 		milkBuffer = tagCompound.getShort("Milk");
 	}		
 }

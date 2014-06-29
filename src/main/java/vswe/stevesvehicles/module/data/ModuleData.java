@@ -310,9 +310,12 @@ public class ModuleData {
     public final void addInformation(List<String> list, NBTTagCompound compound) {
         addSpecificInformation(list);
         if (compound != null && compound.hasKey(NBT_MODULE_EXTRA_DATA)) {
-            String extraDataInfo = getModuleInfoText(compound.getCompoundTag(NBT_MODULE_EXTRA_DATA));
-            if (extraDataInfo != null) {
-                list.add(ColorHelper.WHITE + extraDataInfo);
+            NBTTagCompound extraData = compound.getCompoundTag(NBT_MODULE_EXTRA_DATA);
+            if (extraData != null) {
+                String extraDataInfo = getModuleInfoText(extraData);
+                if (extraDataInfo != null) {
+                    list.add(ColorHelper.WHITE + extraDataInfo);
+                }
             }
         }
 
@@ -489,7 +492,15 @@ public class ModuleData {
     public ItemStack getItemStack(int count) {
         int id = ModuleRegistry.getIdFromModule(this);
         if (id >= 0) {
-            return new ItemStack(ModItems.modules, count, id);
+            ItemStack item = new ItemStack(ModItems.modules, count, id);
+            if (hasExtraData()) {
+                NBTTagCompound compound = new NBTTagCompound();
+                NBTTagCompound moduleCompound = new NBTTagCompound();
+                addDefaultExtraData(moduleCompound);
+                compound.setTag(NBT_MODULE_EXTRA_DATA, moduleCompound);
+                item.setTagCompound(compound);
+            }
+            return item;
         }else{
             return null;
         }
@@ -498,6 +509,5 @@ public class ModuleData {
     public ItemStack getItemStack() {
         return getItemStack(1);
     }
-
 
 }

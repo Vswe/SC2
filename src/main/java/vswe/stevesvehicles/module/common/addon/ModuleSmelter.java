@@ -178,14 +178,14 @@ public class ModuleSmelter extends ModuleRecipe {
 	}
 	
 	@Override
-	protected void Load(NBTTagCompound tagCompound, int id) {
-		super.Load(tagCompound, id);
+	protected void load(NBTTagCompound tagCompound) {
+		super.load(tagCompound);
 		energyBuffer = tagCompound.getByte("Buffer");
 	}
 	
 	@Override
-	protected void Save(NBTTagCompound tagCompound, int id) {
-		super.Save(tagCompound, id);		
+	protected void save(NBTTagCompound tagCompound) {
+		super.save(tagCompound);
 		tagCompound.setByte("Buffer", (byte)energyBuffer);
 	}
 	
