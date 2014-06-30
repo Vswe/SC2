@@ -282,9 +282,12 @@ public class ModuleData {
     }
 
     public String getUnlocalizedName() {
-        return "item." + StevesVehicles.localStart + unlocalizedName + ".name";
+        return getUnlocalizedNameForItem() + ".name";
     }
 
+    public String getUnlocalizedNameForItem() {
+        return "item." + StevesVehicles.localStart + unlocalizedName ;
+    }
 
     public ModuleData getParent() {
         return parent;

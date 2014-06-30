@@ -172,7 +172,7 @@ public class VehicleBase {
     /**
      * The name the cart has if renamed /by an anvil)
      */
-    protected String name;
+    private String name;
 
     /**
      * The version this cart has, for more info about cersion see {@link vswe.stevesvehicles.vehicle.version.VehicleVersion}
@@ -345,15 +345,23 @@ public class VehicleBase {
             ModuleData data = ModuleRegistry.getModuleFromId(module.getModuleId());
 
             boolean found = false;
-            for (ModuleCountPair count : moduleCounts) {
-                if (count.isContainingData(data)) {
-                    count.increase();
-                    found = true;
-                    break;
+            if (!data.hasExtraData()) {
+                for (ModuleCountPair count : moduleCounts) {
+                    if (count.isContainingData(data)) {
+                        count.increase();
+                        found = true;
+                        break;
+                    }
                 }
             }
             if (!found) {
-                moduleCounts.add(new ModuleCountPair(data));
+                ModuleCountPair count = new ModuleCountPair(data);
+                moduleCounts.add(count);
+                if (data.hasExtraData()) {
+                    NBTTagCompound compound = new NBTTagCompound();
+                    data.addExtraData(compound, module);
+                    count.setExtraData(compound);
+                }
             }
         }
 
@@ -1082,6 +1090,10 @@ public class VehicleBase {
         }
     }
 
+    public String getVehicleRawName() {
+        return name;
+    }
+
     public boolean hasCreativeSupplies() {
         return creativeSupplies != null;
     }
@@ -1179,7 +1191,9 @@ public class VehicleBase {
     public static final String NBT_SPARES = "Spares";
     public static final String NBT_ID = "Id";
     public void writeToNBT(NBTTagCompound compound) {
-        compound.setString("cartName", name);
+        if (name != null) {
+            compound.setString("cartName", name);
+        }
         compound.setShort("workingTime", (short)workingTime);
 
         compound.setByte("CartVersion", cartVersion);
@@ -1199,8 +1213,11 @@ public class VehicleBase {
     }
 
     public void readFromNBT(NBTTagCompound compound) {
-
-        name = compound.getString("cartName");
+        if (compound.hasKey("cartName")) {
+            name = compound.getString("cartName");
+        }else{
+            name = null;
+        }
         workingTime = compound.getShort("workingTime");
         cartVersion = compound.getByte("CartVersion");
 
@@ -1364,9 +1381,13 @@ public class VehicleBase {
             data.writeShort((short) module.getModuleId());
         }
 
-        data.writeByte(name.getBytes().length);
-        for (byte b : name.getBytes()) {
-            data.writeByte(b);
+        if (name == null){
+            data.writeByte(0);
+        }else{
+            data.writeByte(name.getBytes().length);
+            for (byte b : name.getBytes()) {
+                data.writeByte(b);
+            }
         }
     }
 
@@ -1379,11 +1400,15 @@ public class VehicleBase {
         loadModules(ids);
 
         int nameLength = data.readByte();
-        byte[] nameBytes = new byte[nameLength];
-        for (int i = 0; i < nameLength; i++) {
-            nameBytes[i] = data.readByte();
+            if (nameLength == 0) {
+                name = null;
+            }else{
+            byte[] nameBytes = new byte[nameLength];
+            for (int i = 0; i < nameLength; i++) {
+                nameBytes[i] = data.readByte();
+            }
+            name = new String(nameBytes);
         }
-        name = new String(nameBytes);
 
         if (entity.getDataWatcher() instanceof DataWatcherLockable) {
             ((DataWatcherLockable)entity.getDataWatcher()).release();

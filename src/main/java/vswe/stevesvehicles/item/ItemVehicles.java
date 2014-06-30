@@ -52,7 +52,7 @@ public class ItemVehicles extends Item {
                     NBTTagCompound info = par1ItemStack.getTagCompound();
                     if (info != null) {
                         if (!info.hasKey("maxTime")) {
-                            EntityModularCart cart = new EntityModularCart(par3World, (double)((float)par4 + 0.5F), (double)((float)par5 + 0.5F), (double)((float)par6 + 0.5F), info, par1ItemStack.getDisplayName());
+                            EntityModularCart cart = new EntityModularCart(par3World, (double)((float)par4 + 0.5F), (double)((float)par5 + 0.5F), (double)((float)par6 + 0.5F), info, par1ItemStack.hasDisplayName() ? par1ItemStack.getDisplayName() : null);
                             par3World.spawnEntityInWorld(cart);
                         }
                     }

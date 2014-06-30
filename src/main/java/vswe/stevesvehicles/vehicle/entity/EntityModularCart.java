@@ -33,6 +33,7 @@ import vswe.stevesvehicles.old.TileEntities.TileEntityCartAssembler;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.vehicle.VehicleCart;
 
 /**
@@ -45,7 +46,7 @@ public class EntityModularCart extends EntityMinecart
     implements IVehicleEntity
 {
 
-	private vswe.stevesvehicles.vehicle.VehicleBase vehicleBase;
+	private VehicleBase vehicleBase;
     public int disabledX;
     public int disabledY;
     public int disabledZ;
@@ -75,7 +76,7 @@ public class EntityModularCart extends EntityMinecart
 
 
     @Override
-    public vswe.stevesvehicles.vehicle.VehicleBase getVehicle() {
+    public VehicleBase getVehicle() {
         return vehicleBase;
     }
 
@@ -89,8 +90,7 @@ public class EntityModularCart extends EntityMinecart
 	 * @param info The tag compound with mostly the cart's modules.
 	 * @param name The name of this cart
 	 */
-    public EntityModularCart(World world, double x, double y, double z, NBTTagCompound info, String name)
-    {
+    public EntityModularCart(World world, double x, double y, double z, NBTTagCompound info, String name) {
         super(world, x, y, z);
         this.vehicleBase = new VehicleCart(this, info, name);
 		overrideDatawatcher();
@@ -101,8 +101,7 @@ public class EntityModularCart extends EntityMinecart
      * Creates a cart in the world. This is used when a cart is loaded on the server, or when a cart is created on the client.
      * @param world The world the cart is created in
      */
-    public EntityModularCart(World world)
-    {
+    public EntityModularCart(World world) {
         super(world);
         this.vehicleBase = new VehicleCart(this);
 		overrideDatawatcher();
@@ -114,8 +113,7 @@ public class EntityModularCart extends EntityMinecart
 	 * @param assembler The CartAssembler this placeholder cart belongs to
 	 * @param data The byte array containing the modules of this cart
 	 */
-    public EntityModularCart(World world, TileEntityCartAssembler assembler, int[] data)
-    {
+    public EntityModularCart(World world, TileEntityCartAssembler assembler, int[] data) {
         super(world);
         this.vehicleBase = new VehicleCart(this, assembler, data);
         overrideDatawatcher();
@@ -198,8 +196,8 @@ public class EntityModularCart extends EntityMinecart
     public ItemStack getCartItem() {
 		if (vehicleBase.getModules() != null) {
 			ItemStack cart = ModuleDataItemHandler.createModularVehicle(vehicleBase);
-			if (vehicleBase.getVehicleName() != null && !vehicleBase.getVehicleName().isEmpty()) {
-				cart.setStackDisplayName(vehicleBase.getVehicleName());
+			if (vehicleBase.getVehicleRawName() != null && !vehicleBase.getVehicleRawName().isEmpty()) {
+				cart.setStackDisplayName(vehicleBase.getVehicleRawName());
 			}
 
 			return cart;
@@ -259,7 +257,7 @@ public class EntityModularCart extends EntityMinecart
 	 */
 	@Override
     public float getMaxCartSpeedOnRail() {
-        return vehicleBase.getMaxSpeed(super.getMaxCartSpeedOnRail());
+        return vehicleBase == null ? super.getMaxCartSpeedOnRail() : vehicleBase.getMaxSpeed(super.getMaxCartSpeedOnRail());
     }
 
     /**

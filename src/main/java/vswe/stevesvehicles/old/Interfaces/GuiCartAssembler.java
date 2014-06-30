@@ -588,7 +588,8 @@ public class GuiCartAssembler extends GuiBase
 		int y = y0 - getGuiTop();
 		
 		if (inRect(x,y, assembleRect)) {
-			PacketHandler.sendPacket(0, new byte[0]);
+            System.out.println("ASSEMBLE! client");
+            PacketHandler.sendPacket(0, new byte[0]);
 		}else if (inRect(x,y, blackBackground)) {
 			if (button == 0) {
 				if (!isScrolling) {

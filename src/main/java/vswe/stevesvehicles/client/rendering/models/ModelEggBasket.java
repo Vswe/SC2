@@ -259,8 +259,10 @@ public class ModelEggBasket extends ModelVehicle
 
 	public void applyEffects(ModuleBase module,  float yaw, float pitch, float roll) {
 		if (module != null) {
-			chesttop.rotateAngleY =  0.1F + ((ModuleEggBasket)module).getChestAngle();
-		}
+			chesttop.rotateAngleY = 0.1F + ((ModuleEggBasket)module).getChestAngle();
+		}else{
+            chesttop.rotateAngleY = 0.1F;
+        }
 	}	
 
 }

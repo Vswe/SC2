@@ -12,9 +12,8 @@ public abstract class ModuleTool extends ModuleWorker {
 	public ModuleTool(VehicleBase vehicleBase) {
 		super(vehicleBase);
 	}
-	
 
-	protected ModuleEnchants enchanter;
+    protected ModuleEnchants enchanter;
 	@Override
 	public void init() {
 		super.init();

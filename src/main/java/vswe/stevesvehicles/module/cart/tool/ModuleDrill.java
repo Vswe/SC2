@@ -533,9 +533,14 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
 	@Override
 	public int numberOfPackets() {
 		return 1;
-	}	
-	
-	@Override
+	}
+
+    @Override
+    public boolean hasSlots() {
+        return false;
+    }
+
+    @Override
 	public boolean hasGui(){
 		return true;
 	}

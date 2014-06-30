@@ -2,6 +2,7 @@ package vswe.stevesvehicles.old.Helpers;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
+import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.data.ModuleData;
 
 public class ModuleCountPair {
@@ -15,6 +16,7 @@ public class ModuleCountPair {
 		this.data = data;
 		count = 1;
 		name = data.getUnlocalizedName();
+
 	}
 	
 	public int getCount() {

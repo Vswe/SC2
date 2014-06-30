@@ -88,6 +88,7 @@ public class PacketHandler {
 
         }catch(Exception ex) {
             System.out.println("The client failed to process a packet.");
+            ex.printStackTrace();
         }
 
     }
@@ -106,18 +107,18 @@ public class PacketHandler {
                 int id = reader.readByte();
                 if (player.openContainer instanceof ContainerPlayer) {
                     int entityId = reader.readInt();
-                    int len = bytes.length - 5;
+                    int len = bytes.length - 6;
                     byte[] data = new byte[len];
                     for (int i = 0; i < len; i++) {
                         data[i] = reader.readByte();
                     }
-                    vswe.stevesvehicles.vehicle.VehicleBase vehicle = getVehicle(entityId, world);
+                    VehicleBase vehicle = getVehicle(entityId, world);
                     if (vehicle != null) {
                         receivePacketAtVehicle(vehicle, id, data, player);
                     }
                 }else{
 
-                    int len = bytes.length - 1;
+                    int len = bytes.length - 2;
                     byte[] data = new byte[len];
                     for (int i = 0; i < len; i++) {
                         data[i] = reader.readByte();
@@ -142,13 +143,14 @@ public class PacketHandler {
 
         }catch(Exception ex) {
             System.out.println("The server failed to process a packet.");
+            ex.printStackTrace();
         }
 
     }
 
 
 
-	private void receivePacketAtVehicle(vswe.stevesvehicles.vehicle.VehicleBase vehicle, int id,byte [] data, EntityPlayer player) {
+	private void receivePacketAtVehicle(VehicleBase vehicle, int id,byte [] data, EntityPlayer player) {
 		for (ModuleBase module : vehicle.getModules()) {
 			if (id >= module.getPacketStart() && id < module.getPacketStart() + module.totalNumberOfPackets()) {
 				module.delegateReceivedPacket(id-module.getPacketStart(),data, player);
@@ -157,7 +159,7 @@ public class PacketHandler {
 		}
 	}
 	
-	private vswe.stevesvehicles.vehicle.VehicleBase getVehicle(int id, World world) {
+	private VehicleBase getVehicle(int id, World world) {
         Entity entity = world.getEntityByID(id);
 
         if (entity instanceof IVehicleEntity) {

@@ -558,7 +558,9 @@ public class TileEntityCartAssembler extends TileEntityBase
 	
 	@Override
 	public void receivePacket(int id, byte[] data, EntityPlayer player) {
+        System.out.println("packet server " + id);
 		if (id == 0) {
+            System.out.println("ASSEMBLE! server");
 			//if a player clicked the assemble button, try to assemble the cart
 			doAssemble();
 		}else if(id == 1) {
@@ -1004,7 +1006,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 					    try {
 							NBTTagCompound info = outputItem.getTagCompound();
 							if (info != null) {			
-								EntityModularCart cart = new EntityModularCart(worldObj, x + 0.5F, y + 0.5F, z + 0.5F, info, outputItem.getDisplayName());
+								EntityModularCart cart = new EntityModularCart(worldObj, x + 0.5F, y + 0.5F, z + 0.5F, info, outputItem.hasDisplayName() ? outputItem.getDisplayName() : null);
 								
 												
 								worldObj.spawnEntityInWorld(cart);

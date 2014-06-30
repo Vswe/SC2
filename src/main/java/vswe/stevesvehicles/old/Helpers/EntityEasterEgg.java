@@ -55,8 +55,7 @@ public class EntityEasterEgg extends EntityEgg
 					worldObj.spawnEntityInWorld(entitychicken);
 				}
 			}else{
-				
-				ArrayList<ItemStack> items = GiftItem.generateItems(rand, GiftItem.EasterList, 25 + rand.nextInt(300), 1);
+                ArrayList<ItemStack> items = GiftItem.generateItems(rand, GiftItem.EasterList, 25 + rand.nextInt(300), 1);
 				for (ItemStack item : items) {
 					EntityItem eItem = new EntityItem(worldObj, posX, posY, posZ, item);
 					eItem.motionX = rand.nextGaussian() * 0.05F;
