@@ -12,8 +12,8 @@ import vswe.stevesvehicles.old.Containers.ContainerCartAssembler;
 import vswe.stevesvehicles.old.Helpers.TransferHandler;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataHull;
-import vswe.stevesvehicles.old.Slots.SlotAssemblerFuel;
-import vswe.stevesvehicles.old.Slots.SlotModule;
+import vswe.stevesvehicles.container.slots.SlotAssemblerFuel;
+import vswe.stevesvehicles.container.slots.SlotModule;
 import vswe.stevesvehicles.old.TileEntities.TileEntityCartAssembler;
 import vswe.stevesvehicles.old.TileEntities.TileEntityUpgrade;
 

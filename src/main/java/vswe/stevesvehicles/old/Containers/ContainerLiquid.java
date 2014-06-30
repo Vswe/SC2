@@ -1,9 +1,9 @@
 package vswe.stevesvehicles.old.Containers;
 import net.minecraft.inventory.IInventory;
 import net.minecraftforge.fluids.FluidStack;
-import vswe.stevesvehicles.old.Slots.SlotLiquidFilter;
-import vswe.stevesvehicles.old.Slots.SlotLiquidManagerInput;
-import vswe.stevesvehicles.old.Slots.SlotLiquidOutput;
+import vswe.stevesvehicles.container.slots.SlotLiquidFilter;
+import vswe.stevesvehicles.container.slots.SlotLiquidManagerInput;
+import vswe.stevesvehicles.container.slots.SlotLiquidOutput;
 import vswe.stevesvehicles.old.TileEntities.TileEntityLiquid;
 
 public class ContainerLiquid extends ContainerManager

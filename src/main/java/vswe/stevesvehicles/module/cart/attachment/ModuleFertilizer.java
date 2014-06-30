@@ -14,8 +14,8 @@ import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.ISuppliesModule;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.cart.tool.ModuleFarmer;
-import vswe.stevesvehicles.old.Slots.SlotBase;
-import vswe.stevesvehicles.old.Slots.SlotFertilizer;
+import vswe.stevesvehicles.container.slots.SlotBase;
+import vswe.stevesvehicles.container.slots.SlotFertilizer;
 
 public class ModuleFertilizer extends ModuleWorker implements ISuppliesModule {
 	public ModuleFertilizer(VehicleBase vehicleBase) {

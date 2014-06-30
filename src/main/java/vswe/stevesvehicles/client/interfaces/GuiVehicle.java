@@ -11,7 +11,7 @@ import vswe.stevesvehicles.old.Helpers.GeneratedInfo;
 import vswe.stevesvehicles.old.Helpers.ModuleCountPair;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.ModuleBase;
-import vswe.stevesvehicles.old.Slots.SlotBase;
+import vswe.stevesvehicles.container.slots.SlotBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

@@ -7,11 +7,10 @@ import vswe.stevesvehicles.client.interfaces.GuiVehicle;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.EnchantmentData;
 import vswe.stevesvehicles.old.Helpers.EnchantmentInfo;
-import vswe.stevesvehicles.old.Helpers.EnchantmentInfo.ENCHANTMENT_TYPE;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
-import vswe.stevesvehicles.old.Slots.SlotBase;
-import vswe.stevesvehicles.old.Slots.SlotEnchantment;
+import vswe.stevesvehicles.container.slots.SlotBase;
+import vswe.stevesvehicles.container.slots.SlotEnchantment;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -20,11 +19,11 @@ public class ModuleEnchants extends ModuleAddon  {
 	public ModuleEnchants(VehicleBase vehicleBase) {
 		super(vehicleBase);
 		enchants = new EnchantmentData[3];
-		enabledTypes = new ArrayList<ENCHANTMENT_TYPE>();
+		enabledTypes = new ArrayList<EnchantmentInfo.Enchantment_Type>();
 	}
 
 	private EnchantmentData[] enchants;
-	private ArrayList<ENCHANTMENT_TYPE> enabledTypes;
+	private ArrayList<EnchantmentInfo.Enchantment_Type> enabledTypes;
 	
 	
 	//---------TOOLS---------
@@ -130,7 +129,7 @@ public class ModuleEnchants extends ModuleAddon  {
 		}
 	}
 	
-	public void damageEnchant(ENCHANTMENT_TYPE type, int dmg) {
+	public void damageEnchant(EnchantmentInfo.Enchantment_Type type, int dmg) {
 		for (int i = 0; i < 3; i++) {
 			if (enchants[i] != null && enchants[i].getEnchantment().getType() == type) {
 				enchants[i].damageEnchant(dmg);
@@ -306,7 +305,7 @@ public class ModuleEnchants extends ModuleAddon  {
 		return 110;
 	}
 
-	public void addType(ENCHANTMENT_TYPE type) {
+	public void addType(EnchantmentInfo.Enchantment_Type type) {
 		enabledTypes.add(type);
 	}
 }

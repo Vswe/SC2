@@ -7,22 +7,21 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
 import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
+import vswe.stevesvehicles.old.Helpers.EnchantmentInfo;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.EnchantmentInfo.ENCHANTMENT_TYPE;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.ISuppliesModule;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.common.addon.ModuleEnchants;
 import vswe.stevesvehicles.module.common.addon.projectile.ModuleProjectile;
-import vswe.stevesvehicles.old.Slots.SlotArrow;
-import vswe.stevesvehicles.old.Slots.SlotBase;
+import vswe.stevesvehicles.container.slots.SlotArrow;
+import vswe.stevesvehicles.container.slots.SlotBase;
 
 
 //TODO this module has so many numbers that should be replaced with constants
@@ -49,7 +48,7 @@ public class ModuleShooter extends ModuleAttachment implements ISuppliesModule {
 				projectiles.add((ModuleProjectile)module);
 			}else if(module instanceof ModuleEnchants) {
 				enchanter = (ModuleEnchants)module;
-				enchanter.addType(ENCHANTMENT_TYPE.SHOOTER);
+				enchanter.addType(EnchantmentInfo.Enchantment_Type.SHOOTER);
 			}
 		}
 	}		
@@ -387,7 +386,7 @@ public class ModuleShooter extends ModuleAttachment implements ISuppliesModule {
 	
 	protected void damageEnchant() {
 		if (enchanter != null) {
-			enchanter.damageEnchant(ENCHANTMENT_TYPE.SHOOTER, 1);
+			enchanter.damageEnchant(EnchantmentInfo.Enchantment_Type.SHOOTER, 1);
 		}
 	}
 	

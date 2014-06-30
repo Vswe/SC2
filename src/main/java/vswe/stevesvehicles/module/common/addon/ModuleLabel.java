@@ -11,8 +11,8 @@ import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.common.engine.ModuleEngine;
-import vswe.stevesvehicles.old.Slots.SlotBase;
-import vswe.stevesvehicles.old.Slots.SlotChest;
+import vswe.stevesvehicles.container.slots.SlotBase;
+import vswe.stevesvehicles.container.slots.SlotChest;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

@@ -2,8 +2,8 @@ package vswe.stevesvehicles.module.common.storage.chest;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.module.common.storage.ModuleStorage;
-import vswe.stevesvehicles.old.Slots.SlotBase;
-import vswe.stevesvehicles.old.Slots.SlotChest;
+import vswe.stevesvehicles.container.slots.SlotBase;
+import vswe.stevesvehicles.container.slots.SlotChest;
 
 public abstract class ModuleChest extends ModuleStorage {
 	public ModuleChest(VehicleBase vehicleBase) {

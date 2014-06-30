@@ -15,9 +15,9 @@ import vswe.stevesvehicles.module.ISuppliesModule;
 import vswe.stevesvehicles.module.cart.ITreeModule;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.cart.addon.cultivation.ModulePlantSize;
-import vswe.stevesvehicles.old.Slots.SlotBase;
-import vswe.stevesvehicles.old.Slots.SlotFuel;
-import vswe.stevesvehicles.old.Slots.SlotSapling;
+import vswe.stevesvehicles.container.slots.SlotBase;
+import vswe.stevesvehicles.container.slots.SlotFuel;
+import vswe.stevesvehicles.container.slots.SlotSapling;
 public abstract class ModuleWoodcutter extends ModuleTool implements ISuppliesModule, ITreeModule {
 	public ModuleWoodcutter(VehicleBase vehicleBase) {
 		super(vehicleBase);

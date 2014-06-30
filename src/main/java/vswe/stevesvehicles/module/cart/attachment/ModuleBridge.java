@@ -10,8 +10,8 @@ import vswe.stevesvehicles.client.interfaces.GuiVehicle;
 import vswe.stevesvehicles.module.cart.ModuleWorker;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.module.ISuppliesModule;
-import vswe.stevesvehicles.old.Slots.SlotBase;
-import vswe.stevesvehicles.old.Slots.SlotBridge;
+import vswe.stevesvehicles.container.slots.SlotBase;
+import vswe.stevesvehicles.container.slots.SlotBridge;
 
 public class ModuleBridge extends ModuleWorker implements ISuppliesModule {
 	public ModuleBridge(VehicleBase vehicleBase) {

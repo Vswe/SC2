@@ -12,9 +12,9 @@ import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.*;
 import vswe.stevesvehicles.client.interfaces.GuiBase;
 import vswe.stevesvehicles.module.common.storage.ModuleStorage;
-import vswe.stevesvehicles.old.Slots.SlotBase;
-import vswe.stevesvehicles.old.Slots.SlotLiquidInput;
-import vswe.stevesvehicles.old.Slots.SlotLiquidOutput;
+import vswe.stevesvehicles.container.slots.SlotBase;
+import vswe.stevesvehicles.container.slots.SlotLiquidInput;
+import vswe.stevesvehicles.container.slots.SlotLiquidOutput;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

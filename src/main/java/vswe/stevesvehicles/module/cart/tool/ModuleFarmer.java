@@ -16,8 +16,8 @@ import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.module.cart.ICropModule;
 import vswe.stevesvehicles.module.ISuppliesModule;
 import vswe.stevesvehicles.module.ModuleBase;
-import vswe.stevesvehicles.old.Slots.SlotBase;
-import vswe.stevesvehicles.old.Slots.SlotSeed;
+import vswe.stevesvehicles.container.slots.SlotBase;
+import vswe.stevesvehicles.container.slots.SlotSeed;
 
 public abstract class ModuleFarmer extends ModuleTool implements ISuppliesModule, ICropModule  {
 	public ModuleFarmer(VehicleBase vehicleBase) {

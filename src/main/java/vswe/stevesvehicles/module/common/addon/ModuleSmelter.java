@@ -7,9 +7,9 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Slots.SlotBase;
-import vswe.stevesvehicles.old.Slots.SlotCartCrafterResult;
-import vswe.stevesvehicles.old.Slots.SlotFurnaceInput;
+import vswe.stevesvehicles.container.slots.SlotBase;
+import vswe.stevesvehicles.container.slots.SlotCartCrafterResult;
+import vswe.stevesvehicles.container.slots.SlotFurnaceInput;
 
 public class ModuleSmelter extends ModuleRecipe {
 

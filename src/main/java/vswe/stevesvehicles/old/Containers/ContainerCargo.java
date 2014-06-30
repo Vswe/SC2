@@ -2,7 +2,7 @@ package vswe.stevesvehicles.old.Containers;
 import java.util.ArrayList;
 
 import net.minecraft.inventory.IInventory;
-import vswe.stevesvehicles.old.Slots.SlotCargo;
+import vswe.stevesvehicles.container.slots.SlotCargo;
 import vswe.stevesvehicles.old.TileEntities.TileEntityCargo;
 
 public class ContainerCargo extends ContainerManager

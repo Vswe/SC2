@@ -10,9 +10,8 @@ import net.minecraftforge.fluids.FluidStack;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
 import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.module.ModuleBase;
-import vswe.stevesvehicles.old.Slots.SlotBase;
-import vswe.stevesvehicles.old.Slots.SlotMilker;
+import vswe.stevesvehicles.container.slots.SlotBase;
+import vswe.stevesvehicles.container.slots.SlotMilker;
 
 public class ModuleMilker extends ModuleAttachment {
 

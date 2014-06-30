@@ -5,8 +5,8 @@ import net.minecraft.item.ItemStack;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Slots.SlotBase;
-import vswe.stevesvehicles.old.Slots.SlotCakeDynamite;
+import vswe.stevesvehicles.container.slots.SlotBase;
+import vswe.stevesvehicles.container.slots.SlotCakeDynamite;
 
 public class ModuleCakeServerDynamite extends ModuleCakeServer {
 

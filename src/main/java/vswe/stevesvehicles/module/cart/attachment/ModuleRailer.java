@@ -13,8 +13,8 @@ import vswe.stevesvehicles.module.cart.ModuleWorker;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.module.ISuppliesModule;
-import vswe.stevesvehicles.old.Slots.SlotBase;
-import vswe.stevesvehicles.old.Slots.SlotBuilder;
+import vswe.stevesvehicles.container.slots.SlotBase;
+import vswe.stevesvehicles.container.slots.SlotBuilder;
 
 public class ModuleRailer extends ModuleWorker implements ISuppliesModule {
 	public ModuleRailer(VehicleBase vehicleBase) {

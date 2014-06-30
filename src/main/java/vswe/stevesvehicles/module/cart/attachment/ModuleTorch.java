@@ -10,8 +10,8 @@ import vswe.stevesvehicles.module.cart.ModuleWorker;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.ISuppliesModule;
-import vswe.stevesvehicles.old.Slots.SlotBase;
-import vswe.stevesvehicles.old.Slots.SlotTorch;
+import vswe.stevesvehicles.container.slots.SlotBase;
+import vswe.stevesvehicles.container.slots.SlotTorch;
 
 public class ModuleTorch extends ModuleWorker implements ISuppliesModule  {
 	public ModuleTorch(VehicleBase vehicleBase) {

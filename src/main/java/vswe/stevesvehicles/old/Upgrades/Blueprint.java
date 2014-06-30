@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.inventory.Slot;
-import vswe.stevesvehicles.old.Slots.SlotCart;
+import vswe.stevesvehicles.container.slots.SlotCart;
 
 public class Blueprint extends SimpleInventoryEffect {
 

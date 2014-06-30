@@ -4,12 +4,12 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import vswe.stevesvehicles.old.Slots.ISpecialItemTransferValidator;
-import vswe.stevesvehicles.old.Slots.ISpecialSlotValidator;
+import vswe.stevesvehicles.container.slots.ISpecialItemTransferValidator;
+import vswe.stevesvehicles.container.slots.ISpecialSlotValidator;
 
 public class TransferHandler {
 	
-	public static enum TRANSFER_TYPE {
+	public static enum TransferType {
 		SHIFT,
 		MANAGER,
 		OTHER
@@ -24,7 +24,7 @@ public class TransferHandler {
 		return slotType.isInstance(slot);
 	}	
 	
-	public static boolean isItemValidForTransfer(Slot slot, ItemStack item, TRANSFER_TYPE type) {
+	public static boolean isItemValidForTransfer(Slot slot, ItemStack item, TransferType type) {
 		if (slot instanceof ISpecialItemTransferValidator) {
 			ISpecialItemTransferValidator specSlot = (ISpecialItemTransferValidator)slot;
 			return specSlot.isItemValidForTransfer(item, type);			
@@ -37,7 +37,7 @@ public class TransferHandler {
     {
 		TransferItem(iStack, inv, cont, Slot.class, null, maxItems);
 	}	
-	public static void TransferItem(ItemStack iStack, IInventory inv, Container cont, java.lang.Class validSlot, int maxItems, TRANSFER_TYPE type)
+	public static void TransferItem(ItemStack iStack, IInventory inv, Container cont, java.lang.Class validSlot, int maxItems, TransferType type)
     {
 		TransferItem(iStack, inv, 0, inv.getSizeInventory() -1, cont, validSlot, null, maxItems, type, false);
 	}
@@ -46,9 +46,9 @@ public class TransferHandler {
     	TransferItem(iStack, inv, 0, inv.getSizeInventory() -1, cont, validSlot,invalidSlot, maxItems);
 	}
     public static void TransferItem(ItemStack iStack, IInventory inv, int start, int end, Container cont, java.lang.Class validSlot,java.lang.Class invalidSlot, int maxItems) {
-    	TransferItem(iStack, inv, start, end, cont, validSlot, invalidSlot, maxItems, TRANSFER_TYPE.OTHER, false);
+    	TransferItem(iStack, inv, start, end, cont, validSlot, invalidSlot, maxItems, TransferType.OTHER, false);
     }  
-    public static void TransferItem(ItemStack iStack, IInventory inv, int start, int end, Container cont, java.lang.Class validSlot,java.lang.Class invalidSlot, int maxItems, TRANSFER_TYPE type, boolean fake)
+    public static void TransferItem(ItemStack iStack, IInventory inv, int start, int end, Container cont, java.lang.Class validSlot,java.lang.Class invalidSlot, int maxItems, TransferType type, boolean fake)
     {
 		start = Math.max(0, start);
 		end = Math.min(inv.getSizeInventory() -1, end);

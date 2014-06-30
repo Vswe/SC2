@@ -26,9 +26,9 @@ import vswe.stevesvehicles.old.Helpers.TransferHandler;
 import vswe.stevesvehicles.client.interfaces.GuiBase;
 import vswe.stevesvehicles.old.Interfaces.GuiLiquid;
 import vswe.stevesvehicles.module.common.storage.tank.ModuleTank;
-import vswe.stevesvehicles.old.Slots.SlotLiquidFilter;
-import vswe.stevesvehicles.old.Slots.SlotLiquidManagerInput;
-import vswe.stevesvehicles.old.Slots.SlotLiquidOutput;
+import vswe.stevesvehicles.container.slots.SlotLiquidFilter;
+import vswe.stevesvehicles.container.slots.SlotLiquidManagerInput;
+import vswe.stevesvehicles.container.slots.SlotLiquidOutput;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

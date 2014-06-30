@@ -2,8 +2,8 @@ package vswe.stevesvehicles.module.cart.tool;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
+import vswe.stevesvehicles.old.Helpers.EnchantmentInfo;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.EnchantmentInfo.ENCHANTMENT_TYPE;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.common.addon.ModuleEnchants;
 import vswe.stevesvehicles.module.cart.ModuleWorker;
@@ -20,7 +20,7 @@ public abstract class ModuleTool extends ModuleWorker {
 		for (ModuleBase module : getVehicle().getModules()) {
 			if (module instanceof ModuleEnchants) {
 				enchanter = (ModuleEnchants)module;
-				enchanter.addType(ENCHANTMENT_TYPE.TOOL);
+				enchanter.addType(EnchantmentInfo.Enchantment_Type.TOOL);
 				break;
 			}			
 		}		

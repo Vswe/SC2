@@ -4,8 +4,8 @@ import net.minecraftforge.fluids.FluidRegistry;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
 import vswe.stevesvehicles.module.common.addon.ModuleAddon;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Slots.SlotBase;
-import vswe.stevesvehicles.old.Slots.SlotIncinerator;
+import vswe.stevesvehicles.container.slots.SlotBase;
+import vswe.stevesvehicles.container.slots.SlotIncinerator;
 
 public class ModuleIncinerator extends ModuleAddon {
 	public ModuleIncinerator(VehicleBase vehicleBase) {

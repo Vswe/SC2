@@ -12,9 +12,9 @@ public class EnchantmentInfo {
 	
 	private Enchantment enchantment;
 	private int rank1Value;
-	private ENCHANTMENT_TYPE type;
+	private Enchantment_Type type;
 	
-	public EnchantmentInfo(Enchantment enchantment, ENCHANTMENT_TYPE type,  int rank1Value) {
+	public EnchantmentInfo(Enchantment enchantment, Enchantment_Type type,  int rank1Value) {
 		this.enchantment = enchantment;
 		this.rank1Value = rank1Value;
 		this.type = type;
@@ -44,17 +44,17 @@ public class EnchantmentInfo {
 	
 	public static ArrayList<EnchantmentInfo> enchants = new ArrayList<EnchantmentInfo>();
 	
-	public static EnchantmentInfo fortune = new EnchantmentInfo(Enchantment.fortune, ENCHANTMENT_TYPE.TOOL, 50000);
-	public static EnchantmentInfo efficiency = new EnchantmentInfo(Enchantment.efficiency, ENCHANTMENT_TYPE.TOOL, 50000);
-	public static EnchantmentInfo unbreaking = new EnchantmentInfo(Enchantment.unbreaking, ENCHANTMENT_TYPE.TOOL, 64000);
+	public static EnchantmentInfo fortune = new EnchantmentInfo(Enchantment.fortune, Enchantment_Type.TOOL, 50000);
+	public static EnchantmentInfo efficiency = new EnchantmentInfo(Enchantment.efficiency, Enchantment_Type.TOOL, 50000);
+	public static EnchantmentInfo unbreaking = new EnchantmentInfo(Enchantment.unbreaking, Enchantment_Type.TOOL, 64000);
 	
 	
-	public static EnchantmentInfo power = new EnchantmentInfo(Enchantment.power, ENCHANTMENT_TYPE.SHOOTER, 750);
-	public static EnchantmentInfo punch = new EnchantmentInfo(Enchantment.punch, ENCHANTMENT_TYPE.SHOOTER, 1000);
-	public static EnchantmentInfo flame = new EnchantmentInfo(Enchantment.flame, ENCHANTMENT_TYPE.SHOOTER, 1000);
-	public static EnchantmentInfo infinity = new EnchantmentInfo(Enchantment.infinity, ENCHANTMENT_TYPE.SHOOTER, 500);
+	public static EnchantmentInfo power = new EnchantmentInfo(Enchantment.power, Enchantment_Type.SHOOTER, 750);
+	public static EnchantmentInfo punch = new EnchantmentInfo(Enchantment.punch, Enchantment_Type.SHOOTER, 1000);
+	public static EnchantmentInfo flame = new EnchantmentInfo(Enchantment.flame, Enchantment_Type.SHOOTER, 1000);
+	public static EnchantmentInfo infinity = new EnchantmentInfo(Enchantment.infinity, Enchantment_Type.SHOOTER, 500);
 
-	public static boolean isItemValid(ArrayList<ENCHANTMENT_TYPE> enabledTypes, ItemStack itemstack) {
+	public static boolean isItemValid(ArrayList<Enchantment_Type> enabledTypes, ItemStack itemstack) {
 	
 		
 		if (itemstack != null && itemstack.getItem() == Items.enchanted_book) {
@@ -62,7 +62,7 @@ public class EnchantmentInfo {
 			for (EnchantmentInfo info : enchants) {
 				
 				boolean isValid = false;
-				for (ENCHANTMENT_TYPE type : enabledTypes) {
+				for (Enchantment_Type type : enabledTypes) {
 					if (info.type == type) {
 						isValid = true;
 					}
@@ -79,7 +79,7 @@ public class EnchantmentInfo {
 		return false;
 	}
 	
-	public static EnchantmentData addBook(ArrayList<ENCHANTMENT_TYPE> enabledTypes, EnchantmentData data, ItemStack itemstack) {
+	public static EnchantmentData addBook(ArrayList<Enchantment_Type> enabledTypes, EnchantmentData data, ItemStack itemstack) {
 		if (itemstack != null && itemstack.getItem() == Items.enchanted_book) {
 			if (data == null) {
 				for (EnchantmentInfo info : enchants) {
@@ -94,9 +94,9 @@ public class EnchantmentInfo {
 	}
 	
 	
-	private static EnchantmentData addEnchantment(ArrayList<ENCHANTMENT_TYPE> enabledTypes, EnchantmentData data, ItemStack itemstack, EnchantmentInfo info) {
+	private static EnchantmentData addEnchantment(ArrayList<Enchantment_Type> enabledTypes, EnchantmentData data, ItemStack itemstack, EnchantmentInfo info) {
 		boolean isValid = false;
-		for (ENCHANTMENT_TYPE type : enabledTypes) {
+		for (Enchantment_Type type : enabledTypes) {
 			if (info.type == type) {
 				isValid = true;
 			}
@@ -169,13 +169,13 @@ public class EnchantmentInfo {
 	}
 	
 	
-	public static enum ENCHANTMENT_TYPE {
+	public static enum Enchantment_Type {
 		TOOL,
 		SHOOTER
 	}
 
 
-	public ENCHANTMENT_TYPE getType() {
+	public Enchantment_Type getType() {
 		return type;
 	}
 	

@@ -38,7 +38,7 @@ import vswe.stevesvehicles.old.Helpers.CompButtons;
 import vswe.stevesvehicles.old.Helpers.SimulationInfo;
 import vswe.stevesvehicles.client.interfaces.GuiBase.RENDER_ROTATION;
 import vswe.stevesvehicles.module.data.ModuleData;
-import vswe.stevesvehicles.old.Slots.SlotBase;
+import vswe.stevesvehicles.container.slots.SlotBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

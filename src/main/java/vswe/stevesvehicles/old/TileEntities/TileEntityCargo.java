@@ -15,23 +15,22 @@ import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.old.Containers.ContainerCargo;
 import vswe.stevesvehicles.old.Containers.ContainerManager;
-import vswe.stevesvehicles.old.Helpers.TransferHandler.TRANSFER_TYPE;
 import vswe.stevesvehicles.client.interfaces.GuiBase;
 import vswe.stevesvehicles.old.Interfaces.GuiCargo;
-import vswe.stevesvehicles.old.Slots.ISlotExplosions;
-import vswe.stevesvehicles.old.Slots.SlotArrow;
-import vswe.stevesvehicles.old.Slots.SlotBridge;
-import vswe.stevesvehicles.old.Slots.SlotBuilder;
-import vswe.stevesvehicles.old.Slots.SlotCake;
-import vswe.stevesvehicles.old.Slots.SlotCargo;
-import vswe.stevesvehicles.old.Slots.SlotChest;
-import vswe.stevesvehicles.old.Slots.SlotFertilizer;
-import vswe.stevesvehicles.old.Slots.SlotFirework;
-import vswe.stevesvehicles.old.Slots.SlotFuel;
-import vswe.stevesvehicles.old.Slots.SlotMilker;
-import vswe.stevesvehicles.old.Slots.SlotSapling;
-import vswe.stevesvehicles.old.Slots.SlotSeed;
-import vswe.stevesvehicles.old.Slots.SlotTorch;
+import vswe.stevesvehicles.container.slots.ISlotExplosions;
+import vswe.stevesvehicles.container.slots.SlotArrow;
+import vswe.stevesvehicles.container.slots.SlotBridge;
+import vswe.stevesvehicles.container.slots.SlotBuilder;
+import vswe.stevesvehicles.container.slots.SlotCake;
+import vswe.stevesvehicles.container.slots.SlotCargo;
+import vswe.stevesvehicles.container.slots.SlotChest;
+import vswe.stevesvehicles.container.slots.SlotFertilizer;
+import vswe.stevesvehicles.container.slots.SlotFirework;
+import vswe.stevesvehicles.container.slots.SlotFuel;
+import vswe.stevesvehicles.container.slots.SlotMilker;
+import vswe.stevesvehicles.container.slots.SlotSapling;
+import vswe.stevesvehicles.container.slots.SlotSeed;
+import vswe.stevesvehicles.container.slots.SlotTorch;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 public class TileEntityCargo extends TileEntityManager
@@ -304,7 +303,7 @@ public class TileEntityCargo extends TileEntityManager
 					maxNumber = -1;
 				}
 				
-				TransferHandler.TransferItem(iStack, toInv, toCont, toValid, maxNumber, TRANSFER_TYPE.MANAGER);
+				TransferHandler.TransferItem(iStack, toInv, toCont, toValid, maxNumber, TransferHandler.TransferType.MANAGER);
 
 				if (iStack.stackSize != stacksize)
 				{

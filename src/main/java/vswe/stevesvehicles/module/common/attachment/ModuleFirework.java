@@ -10,9 +10,8 @@ import net.minecraft.nbt.NBTTagList;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
 import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.module.ModuleBase;
-import vswe.stevesvehicles.old.Slots.SlotBase;
-import vswe.stevesvehicles.old.Slots.SlotFirework;
+import vswe.stevesvehicles.container.slots.SlotBase;
+import vswe.stevesvehicles.container.slots.SlotFirework;
 
 public class ModuleFirework extends ModuleAttachment {
 	public ModuleFirework(VehicleBase vehicleBase) {

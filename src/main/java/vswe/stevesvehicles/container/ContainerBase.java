@@ -10,7 +10,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import vswe.stevesvehicles.old.Helpers.TransferHandler;
-import vswe.stevesvehicles.old.Helpers.TransferHandler.TRANSFER_TYPE;
 import vswe.stevesvehicles.old.TileEntities.TileEntityBase;
 
 public abstract class ContainerBase extends Container {
@@ -118,7 +117,7 @@ public abstract class ContainerBase extends Container {
                 var7 = (Slot)this.inventorySlots.get(var6);
                 var8 = var7.getStack();
 
-                if (var8 == null && TransferHandler.isItemValidForTransfer(var7, par1ItemStack, TRANSFER_TYPE.SHIFT)) {
+                if (var8 == null && TransferHandler.isItemValidForTransfer(var7, par1ItemStack, TransferHandler.TransferType.SHIFT)) {
 					int stackSize = Math.min(var7.getSlotStackLimit(), par1ItemStack.stackSize);
 					ItemStack newItem = par1ItemStack.copy();
 					newItem.stackSize = stackSize;
