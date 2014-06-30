@@ -70,7 +70,7 @@ public class ModuleRegistryVisual extends ModuleRegistry {
 
         note.addShapedRecipe(   Blocks.noteblock,      null,                Blocks.noteblock,
                                 Blocks.noteblock,      Blocks.jukebox,      Blocks.noteblock,
-                                "planks",              Items.redstone,      "planks");
+                                "plankWood",           Items.redstone,      "plankWood");
 
         note.addSides(ModuleSide.RIGHT, ModuleSide.LEFT);
         note.addVehicles(VehicleRegistry.CART, VehicleRegistry.BOAT);

@@ -40,9 +40,9 @@ public class ModuleRegistryCartHulls extends ModuleRegistry {
             }
         };
 
-        wood.addShapedRecipe(   "planks",        null,          "planks",
-                                "planks",       "planks",       "planks",
-                                WOODEN_WHEELS,   null,          WOODEN_WHEELS   );
+        wood.addShapedRecipe(   "plankWood",        null,               "plankWood",
+                                "plankWood",        "plankWood",        "plankWood",
+                                WOODEN_WHEELS,      null,               WOODEN_WHEELS   );
 
         wood.addVehicles(VehicleRegistry.CART);
         register(wood);
@@ -112,9 +112,9 @@ public class ModuleRegistryCartHulls extends ModuleRegistry {
             }
         };
 
-        pumpkin.addShapedRecipe(    "planks",       null,           "planks",
-                                    "planks",       Blocks.pumpkin, "planks",
-                                    WOODEN_WHEELS,  null,           WOODEN_WHEELS);
+        pumpkin.addShapedRecipe(    "plankWood",        null,               "plankWood",
+                                    "plankWood",        Blocks.pumpkin,     "plankWood",
+                                    WOODEN_WHEELS,      null,               WOODEN_WHEELS);
 
         if (!StevesVehicles.isHalloween) {
             pumpkin.lock();

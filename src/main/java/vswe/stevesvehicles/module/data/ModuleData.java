@@ -1,6 +1,7 @@
 package vswe.stevesvehicles.module.data;
 
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.GuiScreen;
@@ -17,6 +18,8 @@ import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.client.rendering.models.ModelVehicle;
 import vswe.stevesvehicles.old.StevesVehicles;
+import vswe.stevesvehicles.recipe.ModuleRecipeShaped;
+import vswe.stevesvehicles.recipe.ModuleRecipeShapeless;
 import vswe.stevesvehicles.vehicle.VehicleType;
 
 import java.util.ArrayList;
@@ -33,7 +36,7 @@ public class ModuleData {
     private ArrayList<ModuleData> nemesis;
     private ArrayList<ModuleDataGroup> requirement;
     private ModuleData parent;
-    private boolean isValid = true; //TODO set this depending on config option
+    private boolean isValid;
     private boolean isLocked;
     private boolean defaultLock;
     private boolean hasRecipe;
@@ -427,6 +430,18 @@ public class ModuleData {
         list.add(ColorHelper.GRAY + "\u00a7o" + str + "\u00a7r");
     }
 
+    public void loadRecipes() {
+        if (!isLocked) {
+            isValid = true;
+            if(recipes != null) {
+                hasRecipe = true;
+                for (IRecipe recipe : recipes) {
+                    GameRegistry.addRecipe(recipe);
+                }
+            }
+        }
+    }
+
     public ModuleData addRecipe(IRecipe recipe) {
         if(this.recipes == null) {
             this.recipes = new ArrayList<IRecipe>();
@@ -438,7 +453,7 @@ public class ModuleData {
     }
 
     public ModuleData addShapedRecipeWithSize(int width, int height, Object ... recipe) {
-        addRecipe(null); //TODO create a shaped recipe
+        addRecipe(new ModuleRecipeShaped(this, width, height, recipe));
 
         return this;
     }
@@ -454,7 +469,7 @@ public class ModuleData {
     }
 
     public ModuleData addShapelessRecipe(Object ... recipe) {
-        addRecipe(null); //TODO create a shapeless recipe
+       addRecipe(new ModuleRecipeShapeless(this, recipe));
 
         return this;
     }

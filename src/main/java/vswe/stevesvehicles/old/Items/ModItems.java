@@ -86,8 +86,8 @@ public final class ModItems {
 
     public static void addRecipes() {
         for (ModuleData module : ModuleRegistry.getAllModules()) {
-            if (!module.getIsLocked() && validModules.get(module.getFullRawUnlocalizedName())) {
-                //module.loadRecipe(); //TODO how should the recipes be loaded?
+            if (!module.getIsLocked()) { //&& validModules.get(module.getFullRawUnlocalizedName())) { //TODO see todo further up
+                module.loadRecipes();
             }
         }
 

@@ -3,9 +3,12 @@ package vswe.stevesvehicles.old;
 import cpw.mods.fml.common.network.FMLEventChannel;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.oredict.RecipeSorter;
 import org.apache.logging.log4j.Logger;
 import vswe.stevesvehicles.module.data.ModuleRegistry;
 import vswe.stevesvehicles.network.PacketHandler;
+import vswe.stevesvehicles.recipe.ModuleRecipeShaped;
+import vswe.stevesvehicles.recipe.ModuleRecipeShapeless;
 import vswe.stevesvehicles.registry.RegistrySynchronizer;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
@@ -108,6 +111,9 @@ public class StevesVehicles {
 
     @EventHandler
 	public void load(FMLInitializationEvent evt) {
+        RecipeSorter.register("steves_vehicles:shaped", ModuleRecipeShaped.class, RecipeSorter.Category.SHAPED, "before:minecraft:shaped before:steves_vehicles:shapeless");
+        RecipeSorter.register("steves_vehicles:shapeless", ModuleRecipeShapeless.class, RecipeSorter.Category.SHAPELESS, "after:steves_vehicles:shaped");
+
         packetHandler.register(new PacketHandler());
 		LanguageRegistry.instance().addStringLocalization("itemGroup.SC2Modules", "en_US", "Steve's Carts 2 Modules");
 		LanguageRegistry.instance().addStringLocalization("itemGroup.SC2Items", "en_US", "Steve's Carts 2 Components");

@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
@@ -338,7 +339,7 @@ public class ModuleShooter extends ModuleAttachment implements ISuppliesModule {
 			return;
 		}
 
-		boolean hasShot = false;
+        boolean hasShot = false;
 
 		for (int i = 0; i < pipes.size(); i++) {
 			if (!isPipeActive(i)){

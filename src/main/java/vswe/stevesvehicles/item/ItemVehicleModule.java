@@ -53,7 +53,7 @@ public class ItemVehicleModule extends Item {
     public String getUnlocalizedName(ItemStack item){
         ModuleData data = getModuleData(item);
         if (data != null) {
-            return data.getUnlocalizedName();
+            return data.getUnlocalizedNameForItem();
         }
         return getUnlocalizedName();
     }

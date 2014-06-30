@@ -39,9 +39,9 @@ public class ModuleRegistryTravel extends ModuleRegistry {
         };
 
         seat.addShapedRecipeWithSize(2, 3,
-                null,                                                               "planks",
-                null,                                                               "planks",
-                new ItemStack(Blocks.wooden_slab, 1, OreDictionary.WILDCARD_VALUE), "planks");
+                null,           "plankWood",
+                null,           "plankWood",
+                "slabWood",     "plankWood");
 
         seat.addVehicles(VehicleRegistry.CART, VehicleRegistry.BOAT);
         seat.addSides(ModuleSide.CENTER, ModuleSide.TOP);
@@ -52,9 +52,9 @@ public class ModuleRegistryTravel extends ModuleRegistry {
 
         ModuleData arcade = new ModuleData("steves_arcade", ModuleArcade.class, 10);
 
-        arcade.addShapedRecipe( null,               Blocks.glass_pane,      null,
-                                "planks",           SIMPLE_PCB,             "planks",
-                                Items.redstone,     "planks",               Items.redstone);
+        arcade.addShapedRecipe( null,                   Blocks.glass_pane,          null,
+                                "plankWood",            SIMPLE_PCB,                 "plankWood",
+                                Items.redstone,         "plankWood",                Items.redstone);
 
         arcade.addVehicles(VehicleRegistry.CART, VehicleRegistry.BOAT);
         arcade.addRequirement(seats);
