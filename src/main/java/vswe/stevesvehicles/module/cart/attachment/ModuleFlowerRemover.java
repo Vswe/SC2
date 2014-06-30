@@ -12,7 +12,7 @@ import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.module.ModuleBase;
 import net.minecraftforge.common.IShearable;
 
-public class ModuleFlowerRemover extends ModuleBase {
+public class ModuleFlowerRemover extends ModuleAttachment {
 
 	public ModuleFlowerRemover(VehicleBase vehicleBase) {
 		super(vehicleBase);

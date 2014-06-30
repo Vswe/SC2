@@ -64,6 +64,7 @@ public class RegistrySynchronizer {
             for (Object o : registryLoader.nameToIdMapping.entrySet()) {
                 Map.Entry<String, Integer> entry = (Map.Entry<String, Integer>)o;
 
+                System.out.println("Sending registry data from server. (K = " + entry.getKey() + ", V = " + entry.getValue() + ")");
                 ds.writeUTF(entry.getKey());
                 ds.writeShort(entry.getValue());
             }
@@ -79,7 +80,9 @@ public class RegistrySynchronizer {
             for (int i = 0; i < count; i++) {
                 String name = reader.readUTF();
                 int id = reader.readShort();
-                registryLoader.nameToIdMapping.put(name, id); //WHAT THE SERIOUSLY FUCK 2, for some reaosn it has no clue nameToIdMapping is a <String, Integer>
+
+                System.out.println("Receiving registry data at client. (K = " + name + ", V = " + id + ")");
+                registryLoader.nameToIdMapping.put(name, id); //WHAT THE SERIOUSLY FUCK 2, for some reason it has no clue nameToIdMapping is a <String, Integer>
             }
 
             registryLoader.loadFromRegistries();
@@ -93,13 +96,14 @@ public class RegistrySynchronizer {
     @SubscribeEvent
     public void onLoad(WorldEvent.Load event) {
         if (!event.world.isRemote && event.world.provider.dimensionId == 0) {
+            RegistryLoader.clearAllRegistryData();
             boolean success = false;
             try {
                 File mainFile = getInfoPath(event.world, MAIN_NAME);
                 File oldFile = getInfoPath(event.world, OLD_NAME);
 
                 if (mainFile == null || oldFile == null) {
-                    System.out.println("Aborted registry reading, failed to locate where to find the files.");
+                    System.err.println("Aborted registry reading, failed to locate where to find the files.");
                     return;
                 }
 
@@ -115,13 +119,14 @@ public class RegistrySynchronizer {
                 }
             }finally {
                 if (!success) {
-                    System.out.println("Failed to load registry state");
+                    System.err.println("Failed to load registry state");
                 }
             }
         }
     }
 
     private NBTTagCompound loadCompound(File file) {
+        System.out.println("Trying to load registries from " + file.getAbsolutePath());
         if (file.exists()) {
             try {
                 return CompressedStreamTools.readCompressed(new FileInputStream(file));
@@ -146,7 +151,7 @@ public class RegistrySynchronizer {
                 File newFile = getInfoPath(event.world, NEW_NAME);
 
                 if (mainFile == null || oldFile == null || newFile == null) {
-                    System.out.println("Aborted registry writing, failed to locate where to put the files.");
+                    System.err.println("Aborted registry writing, failed to locate where to put the files.");
                     return;
                 }
 
@@ -154,17 +159,15 @@ public class RegistrySynchronizer {
                 CompressedStreamTools.writeCompressed(compound, new FileOutputStream(newFile));
 
                 if (newFile.exists()) {
-                    if (oldFile.exists()) {
-                        if (!oldFile.delete()) return;
-                    }
+                    if (oldFile.exists() &&!oldFile.delete()) return;
 
                     if (mainFile.exists()) {
                         if (!mainFile.renameTo(oldFile)) return;
-                        if (!mainFile.delete()) return;
+                        if (mainFile.exists() && !mainFile.delete()) return;
                     }
 
-                    if (newFile.renameTo(mainFile)) return;
-                    if (!newFile.delete()) return;
+                    if (!newFile.renameTo(mainFile)) return;
+                    if (newFile.exists() && !newFile.delete()) return;
 
                     success = true;
                     System.out.println("Saving registry state successfully");
@@ -173,7 +176,7 @@ public class RegistrySynchronizer {
                 e.printStackTrace();
             }finally {
                 if (!success) {
-                    System.out.println("Failed to save registry state");
+                    System.err.println("Failed to save registry state");
                 }
             }
         }

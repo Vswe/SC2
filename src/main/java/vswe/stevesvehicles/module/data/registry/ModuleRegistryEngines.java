@@ -145,6 +145,7 @@ public class ModuleRegistryEngines extends ModuleRegistry {
         register(solarAdvanced);
 
         ModuleData cheat = new ModuleData("creative_engine", ModuleCheatEngine.class, 1);
+        cheat.addVehicles(VehicleRegistry.CART, VehicleRegistry.BOAT);
         register(cheat);
     }
 

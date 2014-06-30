@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
+import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
 import vswe.stevesvehicles.old.Arcade.ArcadeGame;
 import vswe.stevesvehicles.old.Arcade.ArcadeInvaders;
 import vswe.stevesvehicles.old.Arcade.ArcadeSweeper;
@@ -18,7 +19,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 
-public class ModuleArcade extends ModuleBase {
+public class ModuleArcade extends ModuleAttachment {
 
 	public ModuleArcade(VehicleBase vehicleBase) {
 		super(vehicleBase);
@@ -206,14 +207,14 @@ public class ModuleArcade extends ModuleBase {
 	@Override
 	protected void save(NBTTagCompound tagCompound) {
 		for(ArcadeGame game : games) {
-			game.Save(tagCompound, id);
+			game.save(tagCompound);
 		}
 	}	
 	
 	@Override
 	protected void load(NBTTagCompound tagCompound) {
 		for(ArcadeGame game : games) {
-			game.Load(tagCompound, id);
+			game.load(tagCompound);
 		}
 	}	
 	

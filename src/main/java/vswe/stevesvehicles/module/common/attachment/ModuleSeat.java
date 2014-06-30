@@ -2,6 +2,7 @@ package vswe.stevesvehicles.module.common.attachment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
+import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
@@ -9,7 +10,7 @@ import vswe.stevesvehicles.module.ModuleBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ModuleSeat extends ModuleBase {
+public class ModuleSeat extends ModuleAttachment {
 	public ModuleSeat(VehicleBase vehicleBase) {
 		super(vehicleBase);
 	}

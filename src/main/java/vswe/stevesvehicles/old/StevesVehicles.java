@@ -54,9 +54,9 @@ public class StevesVehicles {
 	public final String textureHeader = "stevescarts";
 	public static final String localStart = "SC2:";
 
-	@SidedProxy(clientSide = "vswe.stevescarts.old.ClientProxy", serverSide = "vswe.stevescarts.old.CommonProxy")
+	@SidedProxy(clientSide = "vswe.stevesvehicles.old.ClientProxy", serverSide = "vswe.stevesvehicles.old.CommonProxy")
 	public static CommonProxy proxy;
-	@Instance("StevesCarts")
+	@Instance("StevesVehicles")
 	public static StevesVehicles instance;
 
 	public static CreativeTabSC2 tabsSC2 = new CreativeTabSC2("SC2Modules");

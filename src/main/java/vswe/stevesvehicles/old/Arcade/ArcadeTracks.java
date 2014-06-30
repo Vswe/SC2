@@ -742,14 +742,14 @@ public class ArcadeTracks extends ArcadeGame {
 	}	
 	
 	@Override
-	public void Save(NBTTagCompound tagCompound, int id) {
+	public void save(NBTTagCompound tagCompound) {
 		for (int i = 0; i < unlockedLevels.length; i++) {
 			tagCompound.setByte("Unlocked" + i, (byte)unlockedLevels[i]);
 		}
 	}
 	
 	@Override
-	public void Load(NBTTagCompound tagCompound, int id) {
+	public void load(NBTTagCompound tagCompound) {
 		for (int i = 0; i < unlockedLevels.length; i++) {
 			unlockedLevels[i] = tagCompound.getByte("Unlocked" + i);
 		}

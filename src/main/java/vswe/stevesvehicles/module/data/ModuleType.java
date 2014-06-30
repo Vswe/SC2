@@ -1,7 +1,9 @@
 package vswe.stevesvehicles.module.data;
 
 
+import vswe.stevesvehicles.localization.ILocalizedText;
 import vswe.stevesvehicles.module.ModuleBase;
+import vswe.stevesvehicles.module.common.engine.ModuleEngine;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.module.common.addon.ModuleAddon;
 import vswe.stevesvehicles.module.cart.hull.ModuleHull;
@@ -11,7 +13,7 @@ import vswe.stevesvehicles.module.cart.tool.ModuleTool;
 
 public enum  ModuleType {
     HULL(ModuleHull.class, Localization.MODULE_INFO.HULL_CATEGORY),
-    ENGINE(ModuleHull.class, Localization.MODULE_INFO.ENGINE_CATEGORY),
+    ENGINE(ModuleEngine.class, Localization.MODULE_INFO.ENGINE_CATEGORY),
     TOOL(ModuleTool.class, Localization.MODULE_INFO.TOOL_CATEGORY),
     ATTACHMENT(ModuleAttachment.class, Localization.MODULE_INFO.ATTACHMENT_CATEGORY),
     STORAGE(ModuleStorage.class, Localization.MODULE_INFO.STORAGE_CATEGORY),
@@ -20,9 +22,9 @@ public enum  ModuleType {
 
 
     private Class<? extends ModuleBase> clazz;
-    private Localization.MODULE_INFO name;
+    private ILocalizedText name;
 
-    ModuleType(Class<? extends ModuleBase> clazz, Localization.MODULE_INFO name) {
+    ModuleType(Class<? extends ModuleBase> clazz, ILocalizedText name) {
         this.clazz = clazz;
         this.name = name;
     }
@@ -34,4 +36,5 @@ public enum  ModuleType {
     public String getName() {
         return name.translate();
     }
+
 }

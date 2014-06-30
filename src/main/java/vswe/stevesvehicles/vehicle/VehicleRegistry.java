@@ -10,8 +10,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VehicleRegistry implements IRegistry<VehicleType> {
-    public static final VehicleType CART = new VehicleType(EntityModularCart.class, "Steve's Cart");
-    public static final VehicleType BOAT = new VehicleType(EntityModularCart.class, "Steve's Boat");
+    public static final VehicleType CART = new VehicleType(EntityModularCart.class, "Carts"); //TODO these strings will be the unlocalized name of the vehicles
+    public static final VehicleType BOAT = new VehicleType(EntityModularCart.class, "Boats");
 
     public static void init() {
         loader = new RegistryLoader<VehicleRegistry, VehicleType>();

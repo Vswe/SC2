@@ -8,12 +8,13 @@ import org.lwjgl.opengl.GL11;
 
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
 import vswe.stevesvehicles.localization.ILocalizedText;
+import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.ModuleBase;
 
-public class ModuleNote extends ModuleBase {
+public class ModuleNote extends ModuleAttachment {
 
 	private static final int MAXIMUM_TRACKS_PER_MODULE_BIT_COUNT = 4;
 	private static final int MAXIMUM_NOTES_PER_TRACK_BIT_COUNT = 12;

@@ -453,6 +453,7 @@ info.SC2:moduleCategoryTool=Tool
 info.SC2:moduleCategoryStorage=Storage
 info.SC2:moduleCategoryAddon=Addon
 info.SC2:moduleCategoryAttachment=Attachment
+info.SC2:moduleCategoryInvalid=Invalid
 
 # Groups
 info.SC2:moduleGroupEngine=[%1:Engine|Engines]

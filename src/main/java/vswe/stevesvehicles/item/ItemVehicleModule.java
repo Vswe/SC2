@@ -18,6 +18,7 @@ import java.util.List;
 public class ItemVehicleModule extends Item {
     public ItemVehicleModule() {
         setCreativeTab(StevesVehicles.tabsSC2);
+        setHasSubtypes(true);
     }
 
     @Override

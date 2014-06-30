@@ -301,14 +301,14 @@ public class ArcadeSweeper extends ArcadeGame {
 	}	
 	
 	@Override
-	public void Save(NBTTagCompound tagCompound, int id) {
+	public void save(NBTTagCompound tagCompound) {
 		for (int i = 0; i < 3; i++) {
 			tagCompound.setShort("HighscoreSweeper" + i, (short)highscore[i]);
 		}
 	}
 	
 	@Override
-	public void Load(NBTTagCompound tagCompound, int id) {
+	public void load(NBTTagCompound tagCompound) {
 		for (int i = 0; i < 3; i++) {
 			highscore[i] = tagCompound.getShort("HighscoreSweeper" + i);
 		}

@@ -46,7 +46,7 @@ public class ModuleRegistryProduction extends ModuleRegistry {
         register(crafterAdvanced);
 
 
-        ModuleData smelterAdvanced = new ModuleData("advanced_crafter", ModuleSmelterAdv.class, 42);
+        ModuleData smelterAdvanced = new ModuleData("advanced_smelter", ModuleSmelterAdv.class, 42);
         smelterAdvanced.addShapedRecipe(    Items.redstone,         SIMPLE_PCB,       Items.redstone,
                                             SIMPLE_PCB,             smelter,          SIMPLE_PCB,
                                             Items.redstone,         SIMPLE_PCB,       Items.redstone);
@@ -57,12 +57,12 @@ public class ModuleRegistryProduction extends ModuleRegistry {
 
 
         ModuleData milker = new ModuleData("milker", ModuleMilker.class, 26);
-        smelterAdvanced.addShapedRecipe(    Items.redstone,         SIMPLE_PCB,       Items.redstone,
-                SIMPLE_PCB,             smelter,          SIMPLE_PCB,
-                Items.redstone,         SIMPLE_PCB,       Items.redstone);
+        //milker.addShapedRecipe(    Items.redstone,         SIMPLE_PCB,       Items.redstone,
+        //        SIMPLE_PCB,             smelter,          SIMPLE_PCB,
+        //        Items.redstone,         SIMPLE_PCB,       Items.redstone); //TODO add the recipe, forgot to add it
 
-        smelterAdvanced.addVehicles(VehicleRegistry.CART, VehicleRegistry.BOAT);
+        milker.addVehicles(VehicleRegistry.CART, VehicleRegistry.BOAT);
         milker.addRequirement(ModuleDataGroup.getGroup(ModuleRegistryTravel.CAGE_KEY));
-        register(smelterAdvanced);
+        register(milker);
     }
 }

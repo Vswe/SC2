@@ -256,12 +256,12 @@ public class ArcadeTetris extends ArcadeGame {
 	}
 	
 	@Override
-	public void Save(NBTTagCompound tagCompound, int id) {
+	public void save(NBTTagCompound tagCompound) {
 		tagCompound.setShort("Highscore", (short)highscore);
 	}
 	
 	@Override
-	public void Load(NBTTagCompound tagCompound, int id) {
+	public void load(NBTTagCompound tagCompound) {
 		highscore = tagCompound.getShort("Highscore");
 	}	
 	

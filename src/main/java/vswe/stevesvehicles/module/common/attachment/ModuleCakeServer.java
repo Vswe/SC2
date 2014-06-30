@@ -5,6 +5,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
+import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
@@ -15,7 +16,7 @@ import vswe.stevesvehicles.old.Slots.SlotCake;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ModuleCakeServer extends ModuleBase implements ISuppliesModule {
+public class ModuleCakeServer extends ModuleAttachment implements ISuppliesModule {
 
 	public ModuleCakeServer(VehicleBase vehicleBase) {
 		super(vehicleBase);

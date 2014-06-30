@@ -33,7 +33,7 @@ public class ModuleData {
     private ArrayList<ModuleData> nemesis;
     private ArrayList<ModuleDataGroup> requirement;
     private ModuleData parent;
-    private boolean isValid;
+    private boolean isValid = true; //TODO set this depending on config option
     private boolean isLocked;
     private boolean defaultLock;
     private boolean hasRecipe;
@@ -63,12 +63,13 @@ public class ModuleData {
 
         ModuleType moduleType = ModuleType.INVALID;
         for (ModuleType type : ModuleType.values()) {
-            if (moduleType.getClazz().isAssignableFrom(moduleClass)) {
+            if (type.getClazz().isAssignableFrom(moduleClass)) {
                 moduleType = type;
-                break;
+               break;
             }
         }
         this.moduleType = moduleType;
+        System.out.println("Created " + this.unlocalizedName + "(" + this.moduleClass.getName() + ") with type " + this.moduleType.getName());
     }
 
     public final Class<? extends ModuleBase> getModuleClass() {
@@ -375,11 +376,11 @@ public class ModuleData {
                     VehicleType vehicle = validVehicles.get(i);
 
                     if(i == 0) {
-                        vehicleText += vehicle.toString();
+                        vehicleText += vehicle.getName();
                     }else if (i == validVehicles.size() - 1) {
-                        vehicleText += " " + Localization.MODULE_INFO.AND.translate() + " " + vehicle.toString();
+                        vehicleText += " " + Localization.MODULE_INFO.AND.translate() + " " + vehicle.getName();
                     }else{
-                        vehicleText += ", " + vehicle.toString();
+                        vehicleText += ", " + vehicle.getName();
                     }
                 }
 
@@ -462,7 +463,7 @@ public class ModuleData {
 
         for (VehicleType type : types) {
             if (validVehicles.size() > 0 && moduleType == ModuleType.HULL) {
-                System.out.println("You can't add more than one vehicle type to a hull module."); //TODO localization
+                System.err.println("You can't add more than one vehicle type to a hull module. Failed to add type " + type.getName() + " to " + getRawUnlocalizedName()); //TODO localization
                 break;
             }
             validVehicles.add(type);
@@ -509,5 +510,7 @@ public class ModuleData {
     public ItemStack getItemStack() {
         return getItemStack(1);
     }
+
+
 
 }

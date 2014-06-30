@@ -47,7 +47,7 @@ public class ModuleRegistryCartDrillUtility extends ModuleRegistry{
 
         incinerator.addVehicles(VehicleRegistry.CART);
         incinerator.addRequirement(ModuleDataGroup.getGroup(ModuleRegistryTanks.TANK_KEY));
-        register(liquidSensors);
+        register(incinerator);
 
 
 

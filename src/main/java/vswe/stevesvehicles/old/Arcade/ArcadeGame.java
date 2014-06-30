@@ -58,8 +58,8 @@ public abstract class ArcadeGame {
 	@SideOnly(Side.CLIENT)
 	public void keyPress(GuiVehicle gui, char character, int extraInformation) {}
 	
-	public void Save(NBTTagCompound tagCompound, int id) {}
-	public void Load(NBTTagCompound tagCompound, int id) {}
+	public void save(NBTTagCompound tagCompound) {}
+	public void load(NBTTagCompound tagCompound) {}
 	public void receivePacket(int id, byte[] data, EntityPlayer player) {}
 	public void checkGuiData(Object[] info) {}
 	public void receiveGuiData(int id, short data) {}

@@ -3,9 +3,11 @@ package vswe.stevesvehicles.module.data;
 
 import vswe.stevesvehicles.module.data.registry.ModuleRegistryCake;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistryIndependence;
+import vswe.stevesvehicles.module.data.registry.ModuleRegistryProduction;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistryTemperature;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistryTravel;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistryUtility;
+import vswe.stevesvehicles.module.data.registry.ModuleRegistryVisual;
 import vswe.stevesvehicles.module.data.registry.cart.ModuleRegistryCartCleaning;
 import vswe.stevesvehicles.module.data.registry.cart.ModuleRegistryCartCultivationUtil;
 import vswe.stevesvehicles.module.data.registry.cart.ModuleRegistryCartDrillUtility;
@@ -44,12 +46,15 @@ public class ModuleRegistry implements IRegistry<ModuleData> {
         add(new ModuleRegistryCartRails());
         add(new ModuleRegistryCartCultivationUtil());
         add(new ModuleRegistryTravel());
+        add(new ModuleRegistryVisual());
         add(new ModuleRegistryCartTravel());
         add(new ModuleRegistryTemperature());
         add(new ModuleRegistryCartCleaning());
         add(new ModuleRegistryUtility());
         add(new ModuleRegistryCake());
         add(new ModuleRegistryIndependence());
+        add(new ModuleRegistryProduction());
+
     }
 
     private static List<ModuleData> allModules;
@@ -80,6 +85,10 @@ public class ModuleRegistry implements IRegistry<ModuleData> {
     }
 
     public void register(ModuleData moduleData) {
+        if (loader == null) {
+            preInit();
+        }
+
         if (modules.containsKey(moduleData.getRawUnlocalizedName())) {
             System.err.println("A module with this raw name has already been registered in this registry. Failed to register a second module with the raw name " + moduleData.getRawUnlocalizedName() + " in registry with code " + getCode());
         }else{

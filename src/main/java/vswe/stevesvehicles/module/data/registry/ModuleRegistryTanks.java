@@ -116,7 +116,7 @@ public class ModuleRegistryTanks extends ModuleRegistry {
 
 
 
-        ModuleData advanced = new ModuleData("advanced_tank ", ModuleAdvancedTank.class, 54) {
+        ModuleData advanced = new ModuleData("advanced_tank", ModuleAdvancedTank.class, 54) {
             @Override
             @SideOnly(Side.CLIENT)
             public void loadModels() {

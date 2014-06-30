@@ -103,7 +103,7 @@ public class ModuleRegistryCartCultivationUtil extends ModuleRegistry {
         register(exotic);
 
 
-        ModuleData range = new ModuleData("planter_ranger_extender", ModulePlantSize.class, 20);
+        ModuleData range = new ModuleData("planter_range_extender", ModulePlantSize.class, 20);
         range.addShapedRecipe(Items.redstone, ADVANCED_PCB, Items.redstone,
                 null, Blocks.sapling, null,
                 SIMPLE_PCB, Blocks.sapling, SIMPLE_PCB);

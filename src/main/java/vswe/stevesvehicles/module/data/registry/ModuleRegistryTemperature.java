@@ -41,11 +41,11 @@ public class ModuleRegistryTemperature extends ModuleRegistry {
 
         ModuleData freezer = new ModuleData("freezer", ModuleSnowCannon.class, 24);
 
-        extreme.addShapedRecipe(    Blocks.snow,            Items.water_bucket,     Blocks.snow,
+        freezer.addShapedRecipe(    Blocks.snow,            Items.water_bucket,     Blocks.snow,
                                     Items.water_bucket,     SIMPLE_PCB,             Items.water_bucket,
                                     Blocks.snow,            Items.water_bucket,     Blocks.snow);
 
-        extreme.addVehicles(VehicleRegistry.CART, VehicleRegistry.BOAT);
+        freezer.addVehicles(VehicleRegistry.CART, VehicleRegistry.BOAT);
         register(freezer);
         if (!StevesVehicles.isChristmas) {
             freezer.lock();

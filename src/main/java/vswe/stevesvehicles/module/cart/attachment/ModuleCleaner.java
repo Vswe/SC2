@@ -9,7 +9,7 @@ import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 
-public class ModuleCleaner extends ModuleBase {
+public class ModuleCleaner extends ModuleAttachment {
 	public ModuleCleaner(VehicleBase vehicleBase) {
 		super(vehicleBase);
 	}

@@ -14,7 +14,7 @@ import vswe.stevesvehicles.module.ModuleBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ModuleExperience extends ModuleBase {
+public class ModuleExperience extends ModuleAttachment {
 
 	public ModuleExperience(VehicleBase vehicleBase) {
 		super(vehicleBase);

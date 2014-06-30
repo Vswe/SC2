@@ -6,11 +6,12 @@ import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChunkCoordinates;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
+import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.ModuleBase;
 
-public abstract /*remove the abstract*/ class ModuleCommand extends ModuleBase implements ICommandSender {
+public abstract /*remove the abstract*/ class ModuleCommand extends ModuleAttachment implements ICommandSender {
 	public ModuleCommand(VehicleBase vehicleBase) {
 		super(vehicleBase);
 	}

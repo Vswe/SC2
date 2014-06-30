@@ -2,6 +2,7 @@ package vswe.stevesvehicles.module.common.attachment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
+import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
 import vswe.stevesvehicles.old.Helpers.ComponentTypes;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.vehicle.VehicleBase;
@@ -10,7 +11,7 @@ import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.old.Slots.SlotBase;
 import vswe.stevesvehicles.old.Slots.SlotExplosion;
 
-public class ModuleDynamite extends ModuleBase {
+public class ModuleDynamite extends ModuleAttachment {
 	public ModuleDynamite(VehicleBase vehicleBase) {
 		super(vehicleBase);
 	}

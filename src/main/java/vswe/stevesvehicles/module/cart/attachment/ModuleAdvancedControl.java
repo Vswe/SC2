@@ -22,7 +22,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 
 
-public class ModuleAdvancedControl extends ModuleBase implements ILeverModule {
+public class ModuleAdvancedControl extends ModuleAttachment implements ILeverModule {
 	public ModuleAdvancedControl(VehicleBase vehicleBase) {
 		super(vehicleBase);
 	}

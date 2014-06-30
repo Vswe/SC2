@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
+import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.EnchantmentInfo.ENCHANTMENT_TYPE;
 import vswe.stevesvehicles.old.Helpers.Localization;
@@ -25,7 +26,7 @@ import vswe.stevesvehicles.old.Slots.SlotBase;
 
 //TODO this module has so many numbers that should be replaced with constants
 
-public class ModuleShooter extends ModuleBase implements ISuppliesModule {
+public class ModuleShooter extends ModuleAttachment implements ISuppliesModule {
 	public ModuleShooter(VehicleBase vehicleBase) {
 		super(vehicleBase);
 		pipes = new ArrayList<Integer>();

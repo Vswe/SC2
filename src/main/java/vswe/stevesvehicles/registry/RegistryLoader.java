@@ -17,7 +17,7 @@ public class RegistryLoader<R extends IRegistry<E>, E> {
         registryLoaderList.add(this);
     }
 
-    //TODO sync to the clients
+
     private Map<E, Integer> objectToIdMapping = new HashMap<E, Integer>();
     private Map<Integer, E> idToObjectMapping = new HashMap<Integer, E>();
     Map<String, Integer> nameToIdMapping = new HashMap<String, Integer>();
@@ -55,7 +55,6 @@ public class RegistryLoader<R extends IRegistry<E>, E> {
     private static final String NBT_VALUE = "V";
     private static final int NBT_COMPOUND_TYPE_ID = 10;
 
-    //TODO call this on world save
     public static void writeData(NBTTagCompound compound) {
         NBTTagList registriesList = new NBTTagList();
         for (RegistryLoader registryLoader : registryLoaderList) {
@@ -84,7 +83,6 @@ public class RegistryLoader<R extends IRegistry<E>, E> {
         compound.setTag(NBT_MODULES, list);
     }
 
-    //TODO call this on world loadFromRegistries
     public static void readData(NBTTagCompound compound) {
         if (compound.hasKey(NBT_REGISTRIES)) {
             NBTTagList registriesList = compound.getTagList(NBT_REGISTRIES, NBT_COMPOUND_TYPE_ID);
@@ -148,4 +146,12 @@ public class RegistryLoader<R extends IRegistry<E>, E> {
             registries.put(registry.getCode(), registry);
         }
     }
+
+    public static void clearAllRegistryData() {
+        for (RegistryLoader registryLoader : registryLoaderList) {
+            registryLoader.clearLoadedRegistryData();
+        }
+    }
+
+
 }
