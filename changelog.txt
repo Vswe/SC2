@@ -1,0 +1,13 @@
+Changed features, from a player's perspective.
+
+* Modules now have dynamic ids. This means that the id of modules may change between worlds, but are constant within the same world. Given this new system other mods may register new modules as well without having any issues with other mods also registering new modules. The change to how modules are loaded also means that the modules listed in the creative window are sorted in categories (hulls together, engines together etc.) rather than the more scrambled old version.
+
+* The Tiny Coal Engine received a fuel multiplier buff. It went from 0.5 to 1.5 (compared to the 2.25 of the standard one). This makes the Tiny Coal Engine a viable early game option.
+
+* The Advanced Thermal Engine received a ratio buff for both power/lava and coolant/water. The power/lava ratio used to be 60 and is now 100 (25 for the normal Thermal Engine) and the coolant/water ration was increased from 90 to 150 (the normal Thermal Engine doesn't use coolant). The Advanced Thermal Engine is much more expensive than the normal one and it's an extra step to make sure it also has water, now that water is drained slower and it will generate 4 times as much power as the normal Thermal Engine. 
+
+* The Color Randomizer, the Crafter and the Smelter modules now uses shapeless recipes. Their recipes are otherwise the same. The 3 modules' recipes all have in common that one feature specific item is combined with just a Simple PCB.
+
+* The Advanced Crafter and the Advanced Smelter have both received tweaked recipes. The diamond and Advanced PCB have been replaced with 4 redstone and two simple PCBs. In a raw material cost this reduces the cost with one diamond and three iron ingots. The change was made since the diamond was added purely to make it more expensive, the new recipes makes more sense.
+
+* All tools (drills, farmers and woodcutters) are now indestructible. The durability of the tools have been removed and has at the current stage not been replaced by anything else. However, the drills still have their speed and size difference, the farmers their range difference and the wood cutters their drop chance different that keeps the tiers apart. The change was made since the durability made early game usage very expensive and made the tool carts unreliable.
