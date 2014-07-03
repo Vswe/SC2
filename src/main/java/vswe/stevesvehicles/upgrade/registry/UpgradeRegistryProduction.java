@@ -23,7 +23,6 @@ public class UpgradeRegistryProduction extends UpgradeRegistry {
         Upgrade knowledge = new Upgrade("module_knowledge");
         knowledge.addEffect(TimeFlat.class, -750);
         knowledge.addEffect(TimeFlatCart.class, -5000);
-        knowledge.addEffect(WorkEfficiency.class, -0.01F);
 
         knowledge.addShapedRecipe(  Items.book,         Blocks.bookshelf,           Items.book,
                                     Blocks.bookshelf,   Blocks.enchanting_table,    Blocks.bookshelf,
@@ -36,7 +35,6 @@ public class UpgradeRegistryProduction extends UpgradeRegistry {
         Upgrade espionage = new Upgrade("industrial_espionage");
         espionage.addEffect(TimeFlat.class, -2500);
         espionage.addEffect(TimeFlatCart.class, -14000);
-        espionage.addEffect(WorkEfficiency.class, -0.01F);
 
         espionage.addShapedRecipe(  Blocks.bookshelf,       Items.iron_ingot,   Blocks.bookshelf,
                                     Items.glowstone_dust,   REINFORCED_METAL,   Items.glowstone_dust,
@@ -47,8 +45,8 @@ public class UpgradeRegistryProduction extends UpgradeRegistry {
 
 
         Upgrade experienced = new Upgrade("experienced_assembler");
-        experienced.addEffect(WorkEfficiency.class, 0.1F);
-        experienced.addEffect(FuelCost.class, 1.5F);
+        experienced.addEffect(WorkEfficiency.class, 1.0F);
+        experienced.addEffect(FuelCost.class, 2F);
 
         experienced.addShapedRecipe(    SIMPLE_PCB,             Items.book,         SIMPLE_PCB,
                                         Items.iron_ingot,       ADVANCED_PCB,       Items.iron_ingot,
@@ -59,8 +57,8 @@ public class UpgradeRegistryProduction extends UpgradeRegistry {
 
 
         Upgrade era = new Upgrade("new_era");
-        era.addEffect(WorkEfficiency.class, 1F);
-        era.addEffect(FuelCost.class, 11F);
+        era.addEffect(WorkEfficiency.class, 2.5F);
+        era.addEffect(FuelCost.class, 6F);
 
         era.addShapedRecipe(    EYE_OF_GALGADOR,    Items.book,     EYE_OF_GALGADOR,
                                 Items.iron_ingot,    SIMPLE_PCB,    Items.iron_ingot,

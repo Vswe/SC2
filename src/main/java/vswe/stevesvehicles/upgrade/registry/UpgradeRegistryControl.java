@@ -9,6 +9,7 @@ import vswe.stevesvehicles.upgrade.effect.assembly.Disassemble;
 import vswe.stevesvehicles.upgrade.effect.assembly.InputChest;
 import vswe.stevesvehicles.upgrade.effect.external.Deployer;
 import vswe.stevesvehicles.upgrade.effect.external.Manager;
+import vswe.stevesvehicles.upgrade.effect.external.Redstone;
 import vswe.stevesvehicles.upgrade.effect.external.Transposer;
 import vswe.stevesvehicles.upgrade.effect.time.TimeFlatCart;
 
@@ -79,7 +80,7 @@ public class UpgradeRegistryControl extends UpgradeRegistry {
                 return true;
             }
         };
-        redstone.addEffect(Transposer.class);
+        redstone.addEffect(Redstone.class);
 
         redstone.addShapedRecipe(   Blocks.redstone_torch,  null,           Blocks.redstone_torch,
                                     Items.redstone,         SIMPLE_PCB,     Items.redstone,

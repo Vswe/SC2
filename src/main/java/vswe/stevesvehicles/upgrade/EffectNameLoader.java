@@ -1,6 +1,7 @@
 package vswe.stevesvehicles.upgrade;
 
 
+import net.minecraft.util.MathHelper;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.upgrade.effect.assembly.Blueprint;
 import vswe.stevesvehicles.upgrade.effect.assembly.Disassemble;
@@ -98,7 +99,8 @@ public final class EffectNameLoader {
         Upgrade.registerInfo(FuelCost.class, new IEffectInfo() {
             @Override
             public String getName(Object... params) {
-                int percentage = (int)((((float)(Float)params[0]) - 1) * 100);
+                float p = (((Float)params[0]) - 1) * 100;
+                int percentage = Math.round(p * 10) / 10;
                 return Localization.UPGRADES.FUEL_COST.translate((percentage >= 0 ? "+" : "") + percentage);
             }
         });

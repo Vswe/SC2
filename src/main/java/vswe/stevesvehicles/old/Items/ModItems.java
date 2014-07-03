@@ -500,8 +500,8 @@ public final class ModItems {
 
         RecipeHelper.addRecipe(ComponentTypes.BLANK_UPGRADE.getItemStack(2),new Object[][] {
                 {Items.iron_ingot,Items.iron_ingot,Items.iron_ingot},
-                {ComponentTypes.REINFORCED_METAL.getItemStack(), Items.redstone, ComponentTypes.REINFORCED_METAL.getItemStack()},
-                {Items.iron_ingot,ComponentTypes.ADVANCED_PCB.getItemStack(),Items.iron_ingot}
+                {Items.redstone, Blocks.obsidian, Items.redstone},
+                {Items.iron_ingot,ComponentTypes.SIMPLE_PCB.getItemStack(),Items.iron_ingot}
         });
 
 

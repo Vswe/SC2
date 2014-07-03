@@ -12,4 +12,16 @@ Changed features, from a player's perspective.
 
 * All tools (drills, farmers and woodcutters) are now indestructible. The durability of the tools have been removed and has at the current stage not been replaced by anything else. However, the drills still have their speed and size difference, the farmers their range difference and the wood cutters their drop chance different that keeps the tiers apart. The change was made since the durability made early game usage very expensive and made the tool carts unreliable.
 
-//TODO the tree exotic recipe also changed
+* The recipe of the Tree: Exotic module was made cheaper. It's now just the disc and the sapling which makes it possible to craft it without visiting the nether. This recipe is like other type upgrades: a disc and a feature specific item on top. It's extra high modular cost remains untouched.
+
+* Upgrades now have dynamic ids. This means that the ids of the upgrades can change between worlds. Upgrades may be registered by other mods without having to bother about any conflicts with other mods.
+
+* The blank upgrade (the base in all tier 1 upgrades) has been made cheaper. It no longer includes any reinforced metals and the Advanced PCB has been replaced by a simple one. All upgrade recipes have also been made cheaper, some just slightly cheaper and some quite drastically. Tier 2 upgrades still requires galgadorian material, but not as much. Control upgrades (redstone, crane, production line etc.) only use very basic components. All these recipe changes have been made to make it worth it to craft and use upgrades, the old recipes were too expensive compared to what they gave the player.
+
+* Fuel cost changes on upgrades are now multiplied with each other rather than added to each other. The standard fuel cost is 1 and with an upgrade increasing it with 3000% (New Era) and one decreasing it with %15 (CO2 friendly) would result in a fuel cost of 2986. However, in the new system the same number would be 2550 (3000 * 0.85). However, due to this change, upgrades with fuel cost change has had their percentages modified. New era now has a 1000% fuel change and CO2 friendly has a 50% one therefore giving a resulting fuel cost of 1*600*0.5 = 300. This change was made to give the CO2 friendly upgrade a better use as well as giving a penalty to stack 6 New Era upgrades (rather than combining them with other upgrades).
+
+* Due to the fuel cost change, both the Experienced Assembler and the New Era upgrades have received efficiency buffs.
+
+* The Entropy assembly time increase for modules have been decreased. This is to make it a more viable option for disassembling carts.
+
+* The negative effects of Module Knowledge and Industrial Espionage have been removed to make them work better with Experienced Assembler and New Era.
