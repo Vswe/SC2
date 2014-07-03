@@ -10,7 +10,7 @@ import vswe.stevesvehicles.client.rendering.models.ModelToolPlate;
 import vswe.stevesvehicles.client.rendering.models.ModelTorchplacer;
 import vswe.stevesvehicles.client.rendering.models.ModelTrackRemover;
 import vswe.stevesvehicles.module.data.ModuleData;
-import vswe.stevesvehicles.module.data.ModuleRegistry;
+import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.module.data.ModuleSide;
 import vswe.stevesvehicles.module.cart.addon.ModuleHeightControl;
 import vswe.stevesvehicles.module.cart.attachment.ModuleBridge;

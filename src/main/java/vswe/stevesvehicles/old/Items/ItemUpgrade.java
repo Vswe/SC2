@@ -6,8 +6,8 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 
 import vswe.stevesvehicles.old.StevesVehicles;
-import vswe.stevesvehicles.old.Upgrades.AssemblerUpgrade;
-import vswe.stevesvehicles.old.Upgrades.BaseEffect;
+import vswe.stevesvehicles.upgrade.Upgrade;
+import vswe.stevesvehicles.upgrade.effect.BaseEffect;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -18,12 +18,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.world.World;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-public class ItemUpgrade extends ItemBlock
-{
+import vswe.stevesvehicles.upgrade.registry.UpgradeRegistry;
+
+public class ItemUpgrade extends ItemBlock {
 
 
-    public ItemUpgrade(Block block)
-    {
+    public ItemUpgrade(Block block) {
         super(block);
         setHasSubtypes(true);
         setMaxDamage(0);
@@ -32,9 +32,8 @@ public class ItemUpgrade extends ItemBlock
 
 	@Override
     @SideOnly(Side.CLIENT)
-    public IIcon getIconFromDamage(int dmg)
-    {
-		AssemblerUpgrade upgrade = AssemblerUpgrade.getUpgrade(dmg);
+    public IIcon getIconFromDamage(int dmg){
+		Upgrade upgrade = UpgradeRegistry.getUpgradeFromId(dmg);
 		if (upgrade != null) {
 			return upgrade.getIcon();
 		}
@@ -43,18 +42,16 @@ public class ItemUpgrade extends ItemBlock
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister register)
-    {
-		for (AssemblerUpgrade upgrade : AssemblerUpgrade.getUpgradesList()) {
-			upgrade.createIcon(register);
-		}
-      
-		AssemblerUpgrade.initSides(register);
+    public void registerIcons(IIconRegister register) {
+        for (Upgrade upgrade : UpgradeRegistry.getAllUpgrades()) {
+            upgrade.createIcon(register);
+        }
+
+		Upgrade.initSides(register);
     }	
 
-	public String getName(ItemStack item)
-    {
-		AssemblerUpgrade upgrade = AssemblerUpgrade.getUpgrade(item.getItemDamage());
+	public String getName(ItemStack item) {
+		Upgrade upgrade = UpgradeRegistry.getUpgradeFromId(item.getItemDamage());
 		if (upgrade != null) {
 			return upgrade.getName();
 		}	
@@ -63,33 +60,26 @@ public class ItemUpgrade extends ItemBlock
     }
 
  	@Override
-    public String getUnlocalizedName(ItemStack item)
-    {
-		AssemblerUpgrade upgrade = AssemblerUpgrade.getUpgrade(item.getItemDamage());
+    public String getUnlocalizedName(ItemStack item) {
+		Upgrade upgrade = UpgradeRegistry.getUpgradeFromId(item.getItemDamage());
 		if (upgrade != null) {
-			return "item." + StevesVehicles.localStart + upgrade.getRawName();
+			return "item." + StevesVehicles.localStart + upgrade.getUnlocalizedName();
 		}	
 	
         return "item.unknown";
     }	
 	
     @SideOnly(Side.CLIENT)
-    /**
-     * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
-     */
-    public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List)
-    {
-		for (AssemblerUpgrade upgrade : AssemblerUpgrade.getUpgradesList()) {
-			ItemStack iStack = new ItemStack(par1, 1, upgrade.getId());
-			par3List.add(iStack);
+    @Override
+    public void getSubItems(Item item, CreativeTabs tab, List lst) {
+        for (Upgrade upgrade : UpgradeRegistry.getAllUpgrades()) {
+            lst.add(upgrade.getItemStack());
         }
     }
 
 	@Override
-	public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata)
-    {
-		
-	
+	public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata){
+
 		if (super.placeBlockAt(stack, player, world, x, y, z, side, hitX, hitY, hitZ, metadata)) {
 			TileEntity tile = world.getTileEntity(x,y,z);
 			if (tile != null && tile instanceof TileEntityUpgrade) {
@@ -102,17 +92,12 @@ public class ItemUpgrade extends ItemBlock
        return false;
     }	
 	
-   @SideOnly(Side.CLIENT)
-
-    /**
-     * allows items to add custom lines of information to the mouseover description
-     */
-    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
-		AssemblerUpgrade upgrade = AssemblerUpgrade.getUpgrade(par1ItemStack.getItemDamage());
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void addInformation(ItemStack item, EntityPlayer player, List lst, boolean useExtraInfo) {
+		Upgrade upgrade = UpgradeRegistry.getUpgradeFromId(item.getItemDamage());
 		if (upgrade != null) {
-			for (BaseEffect effect : upgrade.getEffects()) {
-				par3List.add(effect.getName());
-			}
+            upgrade.addInfo(lst);
 		}
 	}		
 

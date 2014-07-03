@@ -3,7 +3,6 @@ package vswe.stevesvehicles.module.data.registry;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import vswe.stevesvehicles.module.data.ModuleData;
-import vswe.stevesvehicles.module.data.ModuleRegistry;
 import vswe.stevesvehicles.module.common.addon.ModuleMelter;
 import vswe.stevesvehicles.module.common.addon.ModuleMelterExtreme;
 import vswe.stevesvehicles.module.common.addon.ModuleSnowCannon;

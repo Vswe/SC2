@@ -22,17 +22,17 @@ public class Tank implements IFluidTank {
 	private FluidStack fluid;
 	private int tankSize;
 	private ITankHolder owner;
-	private int tankid;
+	private int tankId;
 	private boolean isLocked;
 	
-	public Tank(ITankHolder owner,int tankSize, int tankid) {
+	public Tank(ITankHolder owner,int tankSize, int tankId) {
 		this.owner = owner;
 		this.tankSize = tankSize;
-		this.tankid = tankid;
+		this.tankId = tankId;
 	}
 
 	public Tank copy() {
-		Tank tank = new Tank(owner, tankSize, tankid);
+		Tank tank = new Tank(owner, tankSize, tankId);
 		if (getFluid() != null) {
 			tank.setFluid(getFluid().copy());
 		}		
@@ -58,7 +58,7 @@ public class Tank implements IFluidTank {
 	}	
 	
 	public void containerTransfer() {
-		ItemStack item = owner.getInputContainer(tankid);
+		ItemStack item = owner.getInputContainer(tankId);
 		
 		if (item != null) {
 
@@ -75,14 +75,14 @@ public class Tank implements IFluidTank {
 						if (container != null) {
 							containerStack = new ItemStack(container, 1);
 						
-							owner.addToOutputContainer(tankid, containerStack);
+							owner.addToOutputContainer(tankId, containerStack);
 						}
 						
 						if (containerStack == null || containerStack.stackSize == 0) {
 						
 							item.stackSize--;
 							if (item.stackSize <= 0) {
-								owner.clearInputContainer(tankid);
+								owner.clearInputContainer(tankId);
 							}
 							
 							fill(fluidContent, true, false);	
@@ -95,13 +95,13 @@ public class Tank implements IFluidTank {
 					FluidStack fluidContent = FluidContainerRegistry.getFluidForFilledItem(full);
 					
 					if (fluidContent != null) {
-						owner.addToOutputContainer(tankid, full);
+						owner.addToOutputContainer(tankId, full);
 						
 						if (full.stackSize == 0) {
 						
 							item.stackSize--;
 							if (item.stackSize <= 0) {
-								owner.clearInputContainer(tankid);
+								owner.clearInputContainer(tankId);
 							}
 							
 							
@@ -135,7 +135,7 @@ public class Tank implements IFluidTank {
 				}
 			
 				fluid.amount += fill;
-				owner.onFluidUpdated(tankid);
+				owner.onFluidUpdated(tankId);
 			}
 			
 			return fill;
@@ -165,7 +165,7 @@ public class Tank implements IFluidTank {
 				fluid = null;
 			}
 			
-			owner.onFluidUpdated(tankid);
+			owner.onFluidUpdated(tankId);
 		}
 		
 
@@ -278,7 +278,7 @@ public class Tank implements IFluidTank {
 				}
 				
 				for (int x = 0;x < 2; x++) {					
-					owner.drawImage(tankid, gui, data.getIcon(), startX + 2 + 16*x, startY + 1 + 16*y + (16-pixels), 0, (16-pixels), 16, pixels);			
+					owner.drawImage(tankId, gui, data.getIcon(), startX + 2 + 16*x, startY + 1 + 16*y + (16-pixels), 0, (16-pixels), 16, pixels);
 				}
 			}		
 			GL11.glColor4f(1F, 1F, 1F, 1F);

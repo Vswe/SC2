@@ -9,7 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import vswe.stevesvehicles.module.data.ModuleData;
-import vswe.stevesvehicles.module.data.ModuleRegistry;
+import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.old.StevesVehicles;
 
 import java.util.List;

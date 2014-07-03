@@ -9,14 +9,13 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.common.config.Configuration;
 import vswe.stevesvehicles.item.ItemVehicles;
 import vswe.stevesvehicles.item.ItemVehicleModule;
-import vswe.stevesvehicles.module.data.ModuleRegistry;
+import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.old.Blocks.ModBlocks;
 import vswe.stevesvehicles.old.Helpers.ComponentTypes;
 import vswe.stevesvehicles.old.Helpers.DetectorType;
 import vswe.stevesvehicles.old.Helpers.RecipeHelper;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.old.StevesVehicles;
-import vswe.stevesvehicles.old.Upgrades.AssemblerUpgrade;
 
 import java.util.HashMap;
 
@@ -72,10 +71,10 @@ public final class ModItems {
             GameRegistry.registerCustomItemStack(storage.getUnlocalizedName(), storage);
         }
 
-        for (AssemblerUpgrade upgrade : AssemblerUpgrade.getUpgradesList()) {
-            ItemStack upgradeStack = new ItemStack(upgrades, 1, upgrade.getId());
-            GameRegistry.registerCustomItemStack(upgradeStack.getUnlocalizedName(), upgradeStack);
-        }
+        //for (AssemblerUpgrade upgrade : AssemblerUpgrade.getUpgradesList()) {
+        //    ItemStack upgradeStack = new ItemStack(upgrades, 1, upgrade.getId());
+        //    GameRegistry.registerCustomItemStack(upgradeStack.getUnlocalizedName(), upgradeStack);
+        //}
 
         for (DetectorType type : DetectorType.values()) {
             ItemStack stack = new ItemStack(detectors, 1, type.getMeta());

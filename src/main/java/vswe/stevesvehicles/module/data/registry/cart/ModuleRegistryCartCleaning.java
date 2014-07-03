@@ -8,7 +8,7 @@ import vswe.stevesvehicles.client.rendering.models.ModelCleaner;
 import vswe.stevesvehicles.client.rendering.models.ModelHullTop;
 import vswe.stevesvehicles.client.rendering.models.ModelLiquidDrainer;
 import vswe.stevesvehicles.module.data.ModuleData;
-import vswe.stevesvehicles.module.data.ModuleRegistry;
+import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.module.data.ModuleSide;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.cart.attachment.ModuleCleaner;

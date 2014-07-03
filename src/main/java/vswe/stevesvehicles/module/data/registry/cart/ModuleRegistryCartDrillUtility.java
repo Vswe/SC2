@@ -15,7 +15,7 @@ import vswe.stevesvehicles.module.cart.addon.ModuleIncinerator;
 import vswe.stevesvehicles.module.cart.addon.ModuleLiquidSensors;
 import vswe.stevesvehicles.module.cart.addon.ModuleOreTracker;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
-import vswe.stevesvehicles.module.data.ModuleRegistry;
+import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 
 import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
 

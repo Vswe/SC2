@@ -6,6 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.old.Helpers.ComponentTypes;
+import vswe.stevesvehicles.upgrade.Upgrade;
 import vswe.stevesvehicles.util.Tuple;
 
 import java.lang.reflect.Constructor;
@@ -22,6 +23,7 @@ public abstract class RecipeItem {
         register(RecipeItemStandard.class, Item.class);
         register(RecipeItemComponent.class, ComponentTypes.class);
         register(RecipeItemModule.class, ModuleData.class);
+        register(RecipeItemUpgrade.class, Upgrade.class);
         register(RecipeItemOreDictionary.class, String.class);
         register(RecipeItemCluster.class, Object[].class);
     }

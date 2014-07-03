@@ -7,7 +7,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import vswe.stevesvehicles.client.rendering.models.ModelNote;
 import vswe.stevesvehicles.module.data.ModuleData;
-import vswe.stevesvehicles.module.data.ModuleRegistry;
 import vswe.stevesvehicles.module.data.ModuleSide;
 import vswe.stevesvehicles.module.common.addon.ModuleColorRandomizer;
 import vswe.stevesvehicles.module.common.addon.ModuleColorizer;

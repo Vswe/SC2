@@ -4,7 +4,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataGroup;
-import vswe.stevesvehicles.module.data.ModuleRegistry;
 import vswe.stevesvehicles.module.common.addon.ModuleCrafter;
 import vswe.stevesvehicles.module.common.addon.ModuleCrafterAdv;
 import vswe.stevesvehicles.module.common.addon.ModuleSmelter;

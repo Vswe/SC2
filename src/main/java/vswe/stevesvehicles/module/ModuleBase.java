@@ -27,7 +27,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
 import vswe.stevesvehicles.container.ContainerVehicle;
-import vswe.stevesvehicles.module.data.ModuleRegistry;
+import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.old.Helpers.NBTHelper;
 import vswe.stevesvehicles.network.PacketHandler;
 import vswe.stevesvehicles.old.Buttons.ButtonBase;

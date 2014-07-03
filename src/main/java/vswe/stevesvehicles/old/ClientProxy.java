@@ -5,7 +5,7 @@ import net.minecraft.init.Items;
 import net.minecraft.world.World;
 import vswe.stevesvehicles.client.rendering.RenderVehicleItem;
 import vswe.stevesvehicles.client.rendering.RendererCart;
-import vswe.stevesvehicles.module.data.ModuleRegistry;
+import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Fancy.FancyPancyLoader;

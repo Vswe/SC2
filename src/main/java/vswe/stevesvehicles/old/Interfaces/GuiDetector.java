@@ -7,7 +7,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import vswe.stevesvehicles.client.interfaces.GuiBase;
-import vswe.stevesvehicles.module.data.ModuleRegistry;
+import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.old.Containers.ContainerDetector;
 import vswe.stevesvehicles.old.Helpers.DetectorType;
 import vswe.stevesvehicles.old.Helpers.DropDownMenu;

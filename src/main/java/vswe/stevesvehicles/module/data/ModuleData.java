@@ -13,11 +13,13 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import vswe.stevesvehicles.localization.ILocalizedText;
 import vswe.stevesvehicles.module.ModuleBase;
+import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.old.Helpers.ColorHelper;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.client.rendering.models.ModelVehicle;
 import vswe.stevesvehicles.old.StevesVehicles;
+import vswe.stevesvehicles.recipe.IRecipeOutput;
 import vswe.stevesvehicles.recipe.ModuleRecipeShaped;
 import vswe.stevesvehicles.recipe.ModuleRecipeShapeless;
 import vswe.stevesvehicles.vehicle.VehicleType;
@@ -26,7 +28,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ModuleData {
+public class ModuleData implements IRecipeOutput {
     private final Class<? extends ModuleBase> moduleClass;
     private final String unlocalizedName;
     private final int modularCost;

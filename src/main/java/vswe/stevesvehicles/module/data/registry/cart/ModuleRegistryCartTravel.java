@@ -7,7 +7,7 @@ import vswe.stevesvehicles.client.rendering.models.ModelLever;
 import vswe.stevesvehicles.client.rendering.models.ModelWheel;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataGroup;
-import vswe.stevesvehicles.module.data.ModuleRegistry;
+import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.module.data.ModuleSide;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistryTravel;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;

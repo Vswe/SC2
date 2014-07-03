@@ -9,7 +9,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.old.TileEntities.TileEntityCartAssembler;
 import vswe.stevesvehicles.old.TileEntities.TileEntityUpgrade;
@@ -20,7 +19,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import vswe.stevesvehicles.old.Upgrades.AssemblerUpgrade;
+import vswe.stevesvehicles.upgrade.Upgrade;
 
 public class BlockUpgrade extends BlockContainerBase
 {
@@ -36,7 +35,7 @@ public class BlockUpgrade extends BlockContainerBase
 	@Override
     public IIcon getIcon(int side, int meta)
     {
-		return AssemblerUpgrade.getStandardIcon();
+		return Upgrade.getStandardIcon();
     }	
 	
 	@Override
@@ -56,19 +55,19 @@ public class BlockUpgrade extends BlockContainerBase
         return super.collisionRayTrace(par1World, par2, par3, par4, par5Vec3, par6Vec3);
     }	
 	
-	private int getUpgradeId(IBlockAccess world, int x, int y, int z) {
+	private Upgrade getUpgrade(IBlockAccess world, int x, int y, int z) {
 		TileEntity tile = world.getTileEntity(x, y, z);
 		if (tile != null && tile instanceof TileEntityUpgrade) {
 			TileEntityUpgrade upgrade = (TileEntityUpgrade)tile;
-			return upgrade.getType();
+			return upgrade.getUpgrade();
 		}	
-		return 0;
+		return null;
 	}
 	
 	@Override
-    public int getDamageValue(World world, int x, int y, int z)
-    {
-        return getUpgradeId(world, x, y, z);
+    public int getDamageValue(World world, int x, int y, int z) {
+        Upgrade upgrade = getUpgrade(world, x, y, z);
+        return upgrade != null ? upgrade.getItemStack().getItemDamage() : 0;
     }
 	
 	@Override
@@ -76,7 +75,13 @@ public class BlockUpgrade extends BlockContainerBase
 
     @Override
     public boolean canConnectRedstone(IBlockAccess world, int x, int y, int z, int side) {
-        return side != -1 && getUpgradeId(world, x, y, z) == 13;
+        if (side == -1) {
+            return false;
+        }
+
+        Upgrade upgrade = getUpgrade(world, x, y, z);
+
+        return upgrade != null && upgrade.connectToRedstone();
     }
 	
 	
@@ -86,8 +91,7 @@ public class BlockUpgrade extends BlockContainerBase
         ((BlockCartAssembler) ModBlocks.CART_ASSEMBLER.getBlock()).addUpgrade(world, x, y, z);
 	}
 	@Override
-    public void onBlockHarvested(World world, int x, int y, int z, int meta, EntityPlayer player)
-    {
+    public void onBlockHarvested(World world, int x, int y, int z, int meta, EntityPlayer player) {
         if (player.capabilities.isCreativeMode)
         {
             world.setBlockMetadataWithNotify(x, y, z, 1, 0);
@@ -97,18 +101,19 @@ public class BlockUpgrade extends BlockContainerBase
     }
 	
 	@Override
-   public void breakBlock(World world, int x, int y, int z, Block id, int meta)
-    {
+   public void breakBlock(World world, int x, int y, int z, Block id, int meta) {
 		TileEntity tile = world.getTileEntity(x, y, z);
 		if (tile != null && tile instanceof TileEntityUpgrade) {
 			TileEntityUpgrade upgrade = (TileEntityUpgrade)tile;
-			if (upgrade.getUpgrade() != null) {
-				upgrade.getUpgrade().removed(upgrade);
-			}
+			upgrade.removed();
+
 		
 		
 			if (meta != 1) {
-                dropBlockAsItem(world, x, y, z, new ItemStack(ModItems.upgrades, 1, getUpgradeId(world, x, y, z)));
+                Upgrade assemblerUpgrade = getUpgrade(world, x, y, z);
+                if (assemblerUpgrade != null) {
+                    dropBlockAsItem(world, x, y, z, assemblerUpgrade.getItemStack());
+                }
 			}
 			
 			if (upgrade.hasInventory()) {
@@ -248,8 +253,7 @@ public class BlockUpgrade extends BlockContainerBase
 	}
 
 	@Override
-    public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
-    {
+    public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9) {
 		
 		
 		if (entityplayer.isSneaking()) {
@@ -273,8 +277,7 @@ public class BlockUpgrade extends BlockContainerBase
 			}
 			
 
-			if (upgrade.getUpgrade().useStandardInterface())
-			{
+			if (upgrade.useStandardInterface()) {
 				FMLNetworkHandler.openGui(entityplayer, StevesVehicles.instance, 3, world, upgrade.getMaster().xCoord, upgrade.getMaster().yCoord, upgrade.getMaster().zCoord);
 				return true;
 			}

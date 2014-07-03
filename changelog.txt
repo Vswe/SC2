@@ -11,3 +11,5 @@ Changed features, from a player's perspective.
 * The Advanced Crafter and the Advanced Smelter have both received tweaked recipes. The diamond and Advanced PCB have been replaced with 4 redstone and two simple PCBs. In a raw material cost this reduces the cost with one diamond and three iron ingots. The change was made since the diamond was added purely to make it more expensive, the new recipes makes more sense.
 
 * All tools (drills, farmers and woodcutters) are now indestructible. The durability of the tools have been removed and has at the current stage not been replaced by anything else. However, the drills still have their speed and size difference, the farmers their range difference and the wood cutters their drop chance different that keeps the tiers apart. The change was made since the durability made early game usage very expensive and made the tool carts unreliable.
+
+//TODO the tree exotic recipe also changed

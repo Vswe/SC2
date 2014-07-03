@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import vswe.stevesvehicles.client.rendering.models.ModelLawnMower;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataGroup;
-import vswe.stevesvehicles.module.data.ModuleRegistry;
+import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.module.data.ModuleSide;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistryTanks;
 import vswe.stevesvehicles.module.cart.addon.cultivation.ModuleModTrees;

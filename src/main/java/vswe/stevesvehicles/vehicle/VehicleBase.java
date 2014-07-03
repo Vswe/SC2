@@ -26,7 +26,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import vswe.stevesvehicles.client.interfaces.GuiVehicle;
 import vswe.stevesvehicles.container.ContainerVehicle;
-import vswe.stevesvehicles.module.data.ModuleRegistry;
+import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.old.Helpers.ActivatorOption;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.client.rendering.models.ModelVehicle;

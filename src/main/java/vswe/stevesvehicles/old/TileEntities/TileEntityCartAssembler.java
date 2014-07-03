@@ -14,7 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import vswe.stevesvehicles.item.ItemVehicles;
 import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
 import vswe.stevesvehicles.module.data.ModuleType;
 import vswe.stevesvehicles.old.Blocks.BlockCartAssembler;
@@ -34,18 +33,17 @@ import vswe.stevesvehicles.container.slots.SlotAssembler;
 import vswe.stevesvehicles.container.slots.SlotAssemblerFuel;
 import vswe.stevesvehicles.container.slots.SlotHull;
 import vswe.stevesvehicles.container.slots.SlotOutput;
-import vswe.stevesvehicles.old.Upgrades.AssemblerUpgrade;
-import vswe.stevesvehicles.old.Upgrades.BaseEffect;
-import vswe.stevesvehicles.old.Upgrades.CombustionFuel;
-import vswe.stevesvehicles.old.Upgrades.Deployer;
-import vswe.stevesvehicles.old.Upgrades.Disassemble;
-import vswe.stevesvehicles.old.Upgrades.FuelCapacity;
-import vswe.stevesvehicles.old.Upgrades.FuelCost;
-import vswe.stevesvehicles.old.Upgrades.Manager;
-import vswe.stevesvehicles.old.Upgrades.TimeFlat;
-import vswe.stevesvehicles.old.Upgrades.TimeFlatCart;
-import vswe.stevesvehicles.old.Upgrades.TimeFlatRemoved;
-import vswe.stevesvehicles.old.Upgrades.WorkEfficiency;
+import vswe.stevesvehicles.upgrade.effect.BaseEffect;
+import vswe.stevesvehicles.upgrade.effect.fuel.CombustionFuel;
+import vswe.stevesvehicles.upgrade.effect.external.Deployer;
+import vswe.stevesvehicles.upgrade.effect.assembly.Disassemble;
+import vswe.stevesvehicles.upgrade.effect.fuel.FuelCapacity;
+import vswe.stevesvehicles.upgrade.effect.fuel.FuelCost;
+import vswe.stevesvehicles.upgrade.effect.external.Manager;
+import vswe.stevesvehicles.upgrade.effect.time.TimeFlat;
+import vswe.stevesvehicles.upgrade.effect.time.TimeFlatCart;
+import vswe.stevesvehicles.upgrade.effect.time.TimeFlatRemoved;
+import vswe.stevesvehicles.upgrade.effect.assembly.WorkEfficiency;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -365,21 +363,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 		return upgrades;
 	}
 
-	/**
-	 * Get a list of all the upgrades. These are not the tile entities, these are the actual upgrades.
-	 * @return A list of the upgrades
-	 */
-	public ArrayList<AssemblerUpgrade> getUpgrades() {
-		ArrayList<AssemblerUpgrade> lst = new ArrayList<AssemblerUpgrade>();
-		
-		//loop through the tile entities and get their upgrades
-		for (TileEntityUpgrade tile : upgrades) {
-			lst.add(tile.getUpgrade());
-		}
-		
-		return lst;
-	}
-	
+
 	/**
 	 * Get a list of all the upgrade effects of this Cart Assembler. This is every effect on the upgrade on every tile entity upgrade.
 	 * @return A list of all the effects.
@@ -389,13 +373,9 @@ public class TileEntityCartAssembler extends TileEntityBase
 		
 		//go through all the upgrades attached to the cart assembler
 		for (TileEntityUpgrade tile : upgrades) {
-			AssemblerUpgrade upgrade = tile.getUpgrade();
-			if (upgrade != null) {
-				
-				//go through all effects on th upgrade
-				for (BaseEffect effect : upgrade.getEffects()) {
-					lst.add(effect);
-				}
+			List<BaseEffect> effects = tile.getEffects();
+			if (effects != null) {
+                lst.addAll(effects);
 			}
 		}
 		return lst;
@@ -538,29 +518,19 @@ public class TileEntityCartAssembler extends TileEntityBase
 			isAssembling = true;
 			
 			//remove the cart being edited, if any
-			for (TileEntityUpgrade tile : getUpgradeTiles()) {
-				if (tile.getUpgrade() != null) {
-					for (BaseEffect effect : tile.getUpgrade().getEffects()) {
-						if (effect instanceof Disassemble) {
-							ItemStack oldcart = tile.getStackInSlot(0);
-							if (oldcart != null && oldcart.getItem() instanceof ItemVehicles) {
-								if (oldcart.hasDisplayName()) {
-									outputItem.setStackDisplayName(oldcart.getDisplayName());
-								}
-							}
-							tile.setInventorySlotContents(0, null);
-						}
-					}
-				}
-			}
+            for (BaseEffect effect : getEffects()) {
+                if (effect instanceof Disassemble) {
+                    Disassemble disassemble = (Disassemble)effect;
+                    disassemble.onVehicleCreation(outputItem);
+                }
+            }
+
 		}	
 	}
 	
 	@Override
 	public void receivePacket(int id, byte[] data, EntityPlayer player) {
-        System.out.println("packet server " + id);
 		if (id == 0) {
-            System.out.println("ASSEMBLE! server");
 			//if a player clicked the assemble button, try to assemble the cart
 			doAssemble();
 		}else if(id == 1) {
@@ -967,14 +937,10 @@ public class TileEntityCartAssembler extends TileEntityBase
 	
 		for (BaseEffect effect : getEffects()) {
 			if (effect instanceof FuelCost) {
-				cost += ((FuelCost)effect).getCost();
+				cost *= ((FuelCost)effect).getCost();
 			}
 		}
 
-		if (cost < 0.05F) {
-			//cost = 0.05F;
-		}
-	
 		return cost;
 	}
 	
@@ -991,114 +957,109 @@ public class TileEntityCartAssembler extends TileEntityBase
 	}
 	
 	private void deployCart() {
-		for (TileEntityUpgrade tile : getUpgradeTiles()) {
-			for (BaseEffect effect : tile.getUpgrade().getEffects()) {
-				if (effect instanceof Deployer) {
-					int x = 2 * tile.xCoord - xCoord;
-					int y = 2 * tile.yCoord - yCoord;
-					int z = 2 * tile.zCoord - zCoord;
-					
-					if (tile.yCoord > yCoord) {
-						y += 1;
-					}
-					
-					if (BlockRailBase.func_150049_b_(worldObj, x, y, z)) {
-					    try {
-							NBTTagCompound info = outputItem.getTagCompound();
-							if (info != null) {			
-								EntityModularCart cart = new EntityModularCart(worldObj, x + 0.5F, y + 0.5F, z + 0.5F, info, outputItem.hasDisplayName() ? outputItem.getDisplayName() : null);
-								
-												
-								worldObj.spawnEntityInWorld(cart);
-								cart.temppushX = tile.xCoord - xCoord;
-								cart.temppushZ = tile.zCoord - zCoord;
-								managerInteract(cart, true);	
-								
-								return;
-							}
-						}catch(Exception e) {
-							e.printStackTrace();
-						}
-						
-					} 
-				}
-			}
-		}	
+        for (BaseEffect effect : getEffects()) {
+            if (effect instanceof Deployer) {
+                TileEntityUpgrade tile = effect.getUpgrade();
+                int x = 2 * tile.xCoord - xCoord;
+                int y = 2 * tile.yCoord - yCoord;
+                int z = 2 * tile.zCoord - zCoord;
+
+                if (tile.yCoord > yCoord) {
+                    y += 1;
+                }
+
+                if (BlockRailBase.func_150049_b_(worldObj, x, y, z)) {
+                    try {
+                        NBTTagCompound info = outputItem.getTagCompound();
+                        if (info != null) {
+                            EntityModularCart cart = new EntityModularCart(worldObj, x + 0.5F, y + 0.5F, z + 0.5F, info, outputItem.hasDisplayName() ? outputItem.getDisplayName() : null);
+
+
+                            worldObj.spawnEntityInWorld(cart);
+                            cart.temppushX = tile.xCoord - xCoord;
+                            cart.temppushZ = tile.zCoord - zCoord;
+                            managerInteract(cart, true);
+
+                            return;
+                        }
+                    }catch(Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        }
+
 		
 		outputSlot.putStack(outputItem);
 	}
 	
 	public void managerInteract(EntityModularCart cart, boolean toCart) {
-		for (TileEntityUpgrade tile : getUpgradeTiles()) {
-			for (BaseEffect effect : tile.getUpgrade().getEffects()) {
-				if (effect instanceof Manager) {
-					int x2 = 2 * tile.xCoord - xCoord;
-					int y2 = 2 * tile.yCoord - yCoord;
-					int z2 = 2 * tile.zCoord - zCoord;
-					
-					if (tile.yCoord > yCoord) {
-						y2 += 1;
-					}
-					
-					TileEntity managerentity = worldObj.getTileEntity(x2, y2, z2);
-					if (managerentity != null && managerentity instanceof TileEntityManager) {
-						ManagerTransfer transfer = new ManagerTransfer();
-						
-						transfer.setCart(cart);
-						if (tile.yCoord != yCoord) {
-							transfer.setSide(-1);
-						}else if(tile.xCoord < xCoord) {
-							//red
-							transfer.setSide(0);
-						}else if(tile.xCoord > xCoord) {
-							//green
-							transfer.setSide(3);
-						}else if(tile.zCoord < zCoord) {
-							//blue
-							transfer.setSide(1);
-						}else if(tile.zCoord > zCoord) {
-							//yellow
-							transfer.setSide(2);
-						}
-						
-						if (toCart) {
-							transfer.setFromCartEnabled(false);
-						}else{
-							transfer.setToCartEnabled(false);
-						}
-						
-						
-						TileEntityManager manager = ((TileEntityManager)managerentity);
-						
-						while (manager.exchangeItems(transfer));
-					}
-				}
-			}
+        for (BaseEffect effect : getEffects()) {
+            if (effect instanceof Manager) {
+                TileEntityUpgrade tile = effect.getUpgrade();
+                int x2 = 2 * tile.xCoord - xCoord;
+                int y2 = 2 * tile.yCoord - yCoord;
+                int z2 = 2 * tile.zCoord - zCoord;
+
+                if (tile.yCoord > yCoord) {
+                    y2 += 1;
+                }
+
+                TileEntity managerentity = worldObj.getTileEntity(x2, y2, z2);
+                if (managerentity != null && managerentity instanceof TileEntityManager) {
+                    ManagerTransfer transfer = new ManagerTransfer();
+
+                    transfer.setCart(cart);
+                    if (tile.yCoord != yCoord) {
+                        transfer.setSide(-1);
+                    }else if(tile.xCoord < xCoord) {
+                        //red
+                        transfer.setSide(0);
+                    }else if(tile.xCoord > xCoord) {
+                        //green
+                        transfer.setSide(3);
+                    }else if(tile.zCoord < zCoord) {
+                        //blue
+                        transfer.setSide(1);
+                    }else if(tile.zCoord > zCoord) {
+                        //yellow
+                        transfer.setSide(2);
+                    }
+
+                    if (toCart) {
+                        transfer.setFromCartEnabled(false);
+                    }else{
+                        transfer.setToCartEnabled(false);
+                    }
+
+
+                    TileEntityManager manager = ((TileEntityManager)managerentity);
+
+                    while (manager.exchangeItems(transfer));
+                }
+            }
+
 		}		
 	}
 	
 	private void deploySpares() {
-		for (TileEntityUpgrade tile : getUpgradeTiles()) {
-			if (tile.getUpgrade() != null) {
-				for (BaseEffect effect : tile.getUpgrade().getEffects()) {
-					if (effect instanceof Disassemble) {
-						for (ItemStack item : spareModules)  {
-							TransferHandler.TransferItem(
-										item, 
-										tile, 
-										new ContainerUpgrade(null,tile),
-										1
-										);	
-							if (item.stackSize > 0) {
-								puke(item);
-							}
-						}						
-						return;
-					}
-				}
-			}
-		}	
-
+        for (BaseEffect effect : getEffects()) {
+            if (effect instanceof Disassemble) {
+                for (ItemStack item : spareModules)  {
+                    TransferHandler.TransferItem(
+                                item,
+                                effect.getUpgrade(),
+                                new ContainerUpgrade(null,effect.getUpgrade()),
+                                1
+                                );
+                    if (item.stackSize > 0) {
+                        puke(item);
+                    }
+                }
+                return;
+            }
+        }
 	}
 	
 	public void puke(ItemStack item) {

@@ -4,7 +4,7 @@ import vswe.stevesvehicles.old.TileEntities.TileEntityBase;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.IInventory;
 import vswe.stevesvehicles.old.TileEntities.TileEntityUpgrade;
-import vswe.stevesvehicles.old.Upgrades.InventoryEffect;
+import vswe.stevesvehicles.upgrade.effect.util.InventoryEffect;
 public class ContainerUpgrade extends ContainerBase
 {
 
@@ -17,20 +17,18 @@ public class ContainerUpgrade extends ContainerBase
 	}	
 
     private TileEntityUpgrade upgrade;
-    public ContainerUpgrade(IInventory invPlayer, TileEntityUpgrade upgrade)
-    {
+    public ContainerUpgrade(IInventory invPlayer, TileEntityUpgrade upgrade) {
         this.upgrade = upgrade;
 		
-		if (upgrade.getUpgrade() == null || upgrade.getUpgrade().getInventoryEffect() == null) {
+		if (upgrade.getEffects() == null || upgrade.getInventoryEffect() == null) {
 			return;
 		}
 
-		InventoryEffect inventory = upgrade.getUpgrade().getInventoryEffect();
+		InventoryEffect inventory = upgrade.getInventoryEffect();
 		inventory.clear();
 	
-        for (int id = 0; id < inventory.getInventorySize(); id++)
-         {	
-			Slot slot = inventory.createSlot(upgrade, id);
+        for (int id = 0; id < inventory.getInventorySize(); id++) {
+			Slot slot = inventory.createSlot(id);
 			addSlotToContainer(slot);
 			inventory.addSlot(slot);
         }

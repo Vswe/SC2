@@ -8,7 +8,6 @@ import vswe.stevesvehicles.client.rendering.models.ModelSideTanks;
 import vswe.stevesvehicles.client.rendering.models.ModelTopTank;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataGroup;
-import vswe.stevesvehicles.module.data.ModuleRegistry;
 import vswe.stevesvehicles.module.data.ModuleSide;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.module.common.storage.tank.ModuleAdvancedTank;

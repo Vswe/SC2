@@ -14,7 +14,6 @@ import vswe.stevesvehicles.client.rendering.models.ModelTopChest;
 import vswe.stevesvehicles.localization.ILocalizedText;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.data.ModuleData;
-import vswe.stevesvehicles.module.data.ModuleRegistry;
 import vswe.stevesvehicles.module.data.ModuleSide;
 import vswe.stevesvehicles.old.Helpers.GiftItem;
 import vswe.stevesvehicles.old.Helpers.Localization;

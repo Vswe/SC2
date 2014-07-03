@@ -16,9 +16,9 @@ import vswe.stevesvehicles.old.TileEntities.TileEntityActivator;
 import vswe.stevesvehicles.old.TileEntities.TileEntityDetector;
 import vswe.stevesvehicles.old.TileEntities.TileEntityManager;
 import vswe.stevesvehicles.old.TileEntities.TileEntityUpgrade;
-import vswe.stevesvehicles.old.Upgrades.BaseEffect;
-import vswe.stevesvehicles.old.Upgrades.Disassemble;
-import vswe.stevesvehicles.old.Upgrades.Transposer;
+import vswe.stevesvehicles.upgrade.effect.BaseEffect;
+import vswe.stevesvehicles.upgrade.effect.assembly.Disassemble;
+import vswe.stevesvehicles.upgrade.effect.external.Transposer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -146,14 +146,14 @@ public class BlockRailAdvDetector extends BlockSpecialRailBase
 						TileEntity tileentity = world.getTileEntity(x+i, y, z+j);
 						
 						TileEntityUpgrade upgrade = (TileEntityUpgrade)tileentity;
-						if(upgrade != null && upgrade.getUpgrade() != null) {
-							for (BaseEffect effect : upgrade.getUpgrade().getEffects()) {
+						if(upgrade != null && upgrade.getEffects() != null) {
+							for (BaseEffect effect : upgrade.getEffects()) {
 								if (effect instanceof Transposer) {
 									Transposer transposer = (Transposer)effect;
 									if (upgrade.getMaster() != null) {
 										for (TileEntityUpgrade tile : upgrade.getMaster().getUpgradeTiles()) {
-											if (tile.getUpgrade() != null) {
-												for (BaseEffect effect2 : tile.getUpgrade().getEffects()) {
+											if (tile.getEffects() != null) {
+												for (BaseEffect effect2 : tile.getEffects()) {
 													if (effect2 instanceof Disassemble) {
 														Disassemble disassembler = (Disassemble)effect2;
 														if (tile.getStackInSlot(0) == null) {
@@ -211,13 +211,13 @@ public class BlockRailAdvDetector extends BlockSpecialRailBase
                         TileEntity tileentity = world.getTileEntity(x+i, y, z+j);
 
                         TileEntityUpgrade upgrade = (TileEntityUpgrade)tileentity;
-                        if(upgrade != null && upgrade.getUpgrade() != null) {
-                            for (BaseEffect effect : upgrade.getUpgrade().getEffects()) {
+                        if(upgrade != null && upgrade.getEffects() != null) {
+                            for (BaseEffect effect : upgrade.getEffects()) {
                                 if (effect instanceof Transposer) {
                                     if (upgrade.getMaster() != null) {
                                         for (TileEntityUpgrade tile : upgrade.getMaster().getUpgradeTiles()) {
-                                            if (tile.getUpgrade() != null) {
-                                                for (BaseEffect effect2 : tile.getUpgrade().getEffects()) {
+                                            if (tile.getEffects() != null) {
+                                                for (BaseEffect effect2 : tile.getEffects()) {
                                                     if (effect2 instanceof Disassemble) {
                                                         return false;
                                                     }

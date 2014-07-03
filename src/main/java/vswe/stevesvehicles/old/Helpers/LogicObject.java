@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 import org.lwjgl.opengl.GL11;
 
-import vswe.stevesvehicles.module.data.ModuleRegistry;
+import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.network.PacketHandler;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Interfaces.GuiDetector;

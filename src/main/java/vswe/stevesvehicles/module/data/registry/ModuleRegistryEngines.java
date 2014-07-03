@@ -11,7 +11,6 @@ import vswe.stevesvehicles.client.rendering.models.ModelSolarPanelBase;
 import vswe.stevesvehicles.client.rendering.models.ModelSolarPanelHeads;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataGroup;
-import vswe.stevesvehicles.module.data.ModuleRegistry;
 import vswe.stevesvehicles.module.data.ModuleSide;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.module.common.engine.ModuleCheatEngine;

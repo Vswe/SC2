@@ -5,11 +5,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.oredict.RecipeSorter;
 import org.apache.logging.log4j.Logger;
-import vswe.stevesvehicles.module.data.ModuleRegistry;
+import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.network.PacketHandler;
 import vswe.stevesvehicles.recipe.ModuleRecipeShaped;
 import vswe.stevesvehicles.recipe.ModuleRecipeShapeless;
 import vswe.stevesvehicles.registry.RegistrySynchronizer;
+import vswe.stevesvehicles.upgrade.Upgrade;
+import vswe.stevesvehicles.upgrade.registry.UpgradeRegistry;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.CraftingHandler;
@@ -28,7 +30,6 @@ import vswe.stevesvehicles.old.Listeners.OverlayRenderer;
 import vswe.stevesvehicles.old.Listeners.PlayerSleepListener;
 import vswe.stevesvehicles.old.Listeners.TicketListener;
 import vswe.stevesvehicles.old.TileEntities.TileEntityCargo;
-import vswe.stevesvehicles.old.Upgrades.AssemblerUpgrade;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -80,6 +81,7 @@ public class StevesVehicles {
 	public void preInit(FMLPreInitializationEvent event) {
         VehicleRegistry.init();
         ModuleRegistry.init();
+        UpgradeRegistry.init();
 
 		logger = event.getModLog();
 
@@ -95,7 +97,6 @@ public class StevesVehicles {
         ItemBlockStorage.init();
         vswe.stevesvehicles.old.Blocks.ModBlocks.init();
         ModItems.postBlockInit(config);
-        AssemblerUpgrade.init();
 
         initCart(0, EntityModularCart.class);
 

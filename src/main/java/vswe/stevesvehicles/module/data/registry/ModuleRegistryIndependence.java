@@ -7,7 +7,6 @@ import net.minecraft.init.Items;
 import vswe.stevesvehicles.client.rendering.models.ModelDynamite;
 import vswe.stevesvehicles.client.rendering.models.ModelShield;
 import vswe.stevesvehicles.module.data.ModuleData;
-import vswe.stevesvehicles.module.data.ModuleRegistry;
 import vswe.stevesvehicles.module.data.ModuleSide;
 import vswe.stevesvehicles.module.common.addon.ModuleChunkLoader;
 import vswe.stevesvehicles.module.common.addon.ModuleShield;

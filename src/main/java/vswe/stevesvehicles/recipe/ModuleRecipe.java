@@ -12,13 +12,13 @@ import vswe.stevesvehicles.recipe.item.RecipeItem;
 
 public abstract class ModuleRecipe implements IRecipe {
 
-    private ModuleData result;
+    private IRecipeOutput result;
     protected RecipeItem[] recipe;
 
     protected static final int GRID_WIDTH = 3;
     protected static final int GRID_HEIGHT = 3;
 
-    public ModuleRecipe(ModuleData result, Object[] recipe) {
+    public ModuleRecipe(IRecipeOutput result, Object[] recipe) {
         this.result = result;
         this.recipe = new RecipeItem[recipe.length];
         for (int i = 0; i < recipe.length; i++) {

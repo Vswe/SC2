@@ -15,7 +15,7 @@ public class ModuleRecipeShaped extends ModuleRecipe {
 
 
 
-    public ModuleRecipeShaped(ModuleData result, int width, int height, Object[] recipe) {
+    public ModuleRecipeShaped(IRecipeOutput result, int width, int height, Object[] recipe) {
         super(result, recipe);
 
         recipeStartX = width;

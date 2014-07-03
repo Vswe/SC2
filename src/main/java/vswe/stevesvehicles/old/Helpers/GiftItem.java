@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import java.util.ArrayList;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import vswe.stevesvehicles.module.data.ModuleRegistry;
+import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.module.data.ModuleData;
 public class GiftItem {
 	private int chanceWeight;

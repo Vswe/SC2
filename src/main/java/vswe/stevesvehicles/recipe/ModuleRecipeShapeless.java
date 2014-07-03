@@ -12,7 +12,7 @@ import java.util.List;
 
 
 public class ModuleRecipeShapeless extends ModuleRecipe {
-    public ModuleRecipeShapeless(ModuleData result, Object[] recipe) {
+    public ModuleRecipeShapeless(IRecipeOutput result, Object[] recipe) {
         super(result, recipe);
     }
 

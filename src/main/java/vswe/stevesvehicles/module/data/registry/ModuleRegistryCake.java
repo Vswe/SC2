@@ -5,7 +5,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.init.Items;
 import vswe.stevesvehicles.client.rendering.models.ModelCake;
 import vswe.stevesvehicles.module.data.ModuleData;
-import vswe.stevesvehicles.module.data.ModuleRegistry;
 import vswe.stevesvehicles.module.data.ModuleSide;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.module.common.attachment.ModuleCakeServer;
