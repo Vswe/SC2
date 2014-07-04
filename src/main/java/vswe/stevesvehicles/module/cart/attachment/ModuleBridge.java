@@ -6,7 +6,7 @@ import net.minecraft.block.BlockRailBase;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Vec3;
-import vswe.stevesvehicles.client.interfaces.GuiVehicle;
+import vswe.stevesvehicles.client.gui.GuiVehicle;
 import vswe.stevesvehicles.module.cart.ModuleWorker;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.module.ISuppliesModule;

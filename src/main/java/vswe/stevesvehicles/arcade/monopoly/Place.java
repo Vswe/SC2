@@ -5,7 +5,7 @@ import java.util.EnumSet;
 
 import org.lwjgl.opengl.GL11;
 
-import vswe.stevesvehicles.client.interfaces.GuiVehicle;
+import vswe.stevesvehicles.client.gui.GuiVehicle;
 
 public class Place {
 	

@@ -79,13 +79,14 @@ public class StevesVehicles {
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+        packetHandler = NetworkRegistry.INSTANCE.newEventDrivenChannel(CHANNEL);
+
         VehicleRegistry.init();
         ModuleRegistry.init();
         UpgradeRegistry.init();
 
 		logger = event.getModLog();
 
-        packetHandler = NetworkRegistry.INSTANCE.newEventDrivenChannel(CHANNEL);
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 		config.load();
 

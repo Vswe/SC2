@@ -1,6 +1,6 @@
 package vswe.stevesvehicles.arcade.tetris;
 
-import vswe.stevesvehicles.client.interfaces.GuiVehicle;
+import vswe.stevesvehicles.client.gui.GuiVehicle;
 
 public class TetrisPiecePart {
 

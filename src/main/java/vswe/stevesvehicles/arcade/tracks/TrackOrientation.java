@@ -2,7 +2,7 @@ package vswe.stevesvehicles.arcade.tracks;
 
 import java.util.ArrayList;
 
-import vswe.stevesvehicles.client.interfaces.GuiBase.RENDER_ROTATION;
+import vswe.stevesvehicles.client.gui.GuiBase.RENDER_ROTATION;
 
 public abstract class TrackOrientation {	
 	

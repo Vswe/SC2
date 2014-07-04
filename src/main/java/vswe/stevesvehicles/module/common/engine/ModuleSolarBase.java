@@ -1,6 +1,6 @@
 package vswe.stevesvehicles.module.common.engine;
 import net.minecraft.nbt.NBTTagCompound;
-import vswe.stevesvehicles.client.interfaces.GuiVehicle;
+import vswe.stevesvehicles.client.gui.GuiVehicle;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;

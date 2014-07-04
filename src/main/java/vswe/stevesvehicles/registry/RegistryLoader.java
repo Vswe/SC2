@@ -65,6 +65,7 @@ public class RegistryLoader<R extends IRegistry<E>, E> {
         compound.setTag(NBT_REGISTRIES, registriesList);
     }
 
+    private static final boolean REGISTRY_FILE_CLEANUP = false;
 
     private void writeRegistryData(NBTTagCompound compound) {
         compound.setShort(NBT_NEXT_ID, (short)nextId);
@@ -72,7 +73,8 @@ public class RegistryLoader<R extends IRegistry<E>, E> {
 
 
         for (Map.Entry<String, Integer> entry : nameToIdMapping.entrySet()) {
-            if (idToObjectMapping.containsKey(entry.getValue())) {
+            //noinspection PointlessBooleanExpression, ConstantConditions
+            if (!REGISTRY_FILE_CLEANUP || idToObjectMapping.containsKey(entry.getValue())) {
                 NBTTagCompound moduleCompound = new NBTTagCompound();
                 moduleCompound.setString(NBT_KEY, entry.getKey());
                 moduleCompound.setShort(NBT_VALUE, (short)(int)entry.getValue());

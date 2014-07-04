@@ -15,7 +15,7 @@ import vswe.stevesvehicles.old.Containers.ContainerActivator;
 import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.old.Helpers.ActivatorOption;
 import vswe.stevesvehicles.old.Interfaces.GuiActivator;
-import vswe.stevesvehicles.client.interfaces.GuiBase;
+import vswe.stevesvehicles.client.gui.GuiBase;
 import vswe.stevesvehicles.module.common.addon.ModuleChunkLoader;
 import vswe.stevesvehicles.module.common.addon.ModuleInvisible;
 import vswe.stevesvehicles.module.common.addon.ModuleShield;

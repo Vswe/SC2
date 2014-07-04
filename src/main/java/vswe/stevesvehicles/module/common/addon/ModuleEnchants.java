@@ -3,7 +3,7 @@ package vswe.stevesvehicles.module.common.addon;
 import java.util.ArrayList;
 
 import net.minecraft.nbt.NBTTagCompound;
-import vswe.stevesvehicles.client.interfaces.GuiVehicle;
+import vswe.stevesvehicles.client.gui.GuiVehicle;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.EnchantmentData;
 import vswe.stevesvehicles.old.Helpers.EnchantmentInfo;

@@ -4,7 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import vswe.stevesvehicles.client.interfaces.GuiBase;
+import vswe.stevesvehicles.client.gui.GuiBase;
 
 public interface ITankHolder {
 

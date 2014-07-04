@@ -13,6 +13,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.WorldEvent;
+import vswe.stevesvehicles.network.DataReader;
+import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.network.PacketHandler;
 import vswe.stevesvehicles.network.PacketType;
 
@@ -35,50 +37,34 @@ public class RegistrySynchronizer {
     @SubscribeEvent
     public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
         EntityPlayer player = event.player;
-        ByteArrayOutputStream bs = new ByteArrayOutputStream();
-        DataOutputStream ds = new DataOutputStream(bs);
-
-        try {
-            ds.writeByte((byte) PacketType.REGISTRY.ordinal());
-            writeSynchronizedData(ds);
-        }catch (IOException ignored) {}
-
-        PacketHandler.sendPacketToPlayer(bs.toByteArray(), player);
-        try {
-            bs.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            ds.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        DataWriter dw = PacketHandler.getDataWriter(PacketType.REGISTRY);
+        writeSynchronizedData(dw);
+        PacketHandler.sendPacketToPlayer(dw, player);
     }
 
-    private static void writeSynchronizedData(DataOutputStream ds) throws IOException {
+    private static void writeSynchronizedData(DataWriter dw){
         for (RegistryLoader registryLoader : RegistryLoader.registryLoaderList) {
-            ds.writeShort((short)registryLoader.nextId);
-            ds.writeShort(registryLoader.nameToIdMapping.size());
+            dw.writeShort((short)registryLoader.nextId);
+            dw.writeShort(registryLoader.nameToIdMapping.size());
             //WHAT THE SERIOUSLY FUCK, for some reason the entrySet() returns a set of objects. When it's used in RegistryLoader it returns a set of Map.Entry<String, Integer> :S
             for (Object o : registryLoader.nameToIdMapping.entrySet()) {
                 Map.Entry<String, Integer> entry = (Map.Entry<String, Integer>)o;
 
                 System.out.println("Sending registry data from server. (K = " + entry.getKey() + ", V = " + entry.getValue() + ")");
-                ds.writeUTF(entry.getKey());
-                ds.writeShort(entry.getValue());
+                dw.writeString(entry.getKey());
+                dw.writeShort(entry.getValue());
             }
         }
     }
 
-    public static void onPacket(ByteArrayDataInput reader) {
+    public static void onPacket(DataReader reader) {
         for (RegistryLoader registryLoader : RegistryLoader.registryLoaderList) {
             registryLoader.clearLoadedRegistryData();
 
             registryLoader.nextId = reader.readShort();
             int count = reader.readShort();
             for (int i = 0; i < count; i++) {
-                String name = reader.readUTF();
+                String name = reader.readString();
                 int id = reader.readShort();
 
                 System.out.println("Receiving registry data at client. (K = " + name + ", V = " + id + ")");

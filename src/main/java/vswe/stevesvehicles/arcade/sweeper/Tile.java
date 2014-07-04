@@ -1,6 +1,6 @@
 package vswe.stevesvehicles.arcade.sweeper;
 
-import vswe.stevesvehicles.client.interfaces.GuiVehicle;
+import vswe.stevesvehicles.client.gui.GuiVehicle;
 
 public class Tile {
 

@@ -2,7 +2,7 @@ package vswe.stevesvehicles.arcade.monopoly;
 
 import java.util.ArrayList;
 
-import vswe.stevesvehicles.client.interfaces.GuiVehicle;
+import vswe.stevesvehicles.client.gui.GuiVehicle;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 
 public class Note {

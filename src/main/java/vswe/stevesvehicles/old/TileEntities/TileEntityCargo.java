@@ -15,7 +15,7 @@ import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.old.Containers.ContainerCargo;
 import vswe.stevesvehicles.old.Containers.ContainerManager;
-import vswe.stevesvehicles.client.interfaces.GuiBase;
+import vswe.stevesvehicles.client.gui.GuiBase;
 import vswe.stevesvehicles.old.Interfaces.GuiCargo;
 import vswe.stevesvehicles.container.slots.ISlotExplosions;
 import vswe.stevesvehicles.container.slots.SlotArrow;

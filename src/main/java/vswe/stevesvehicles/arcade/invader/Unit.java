@@ -1,6 +1,6 @@
 package vswe.stevesvehicles.arcade.invader;
 
-import vswe.stevesvehicles.client.interfaces.GuiVehicle;
+import vswe.stevesvehicles.client.gui.GuiVehicle;
 
 public abstract class Unit {
 

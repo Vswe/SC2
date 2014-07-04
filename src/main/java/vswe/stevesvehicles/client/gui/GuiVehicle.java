@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.client.interfaces;
+package vswe.stevesvehicles.client.gui;
 import java.util.ArrayList;
 
 import net.minecraft.entity.player.InventoryPlayer;

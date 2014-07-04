@@ -1,7 +1,7 @@
 package vswe.stevesvehicles.network;
 
 
-public enum PacketType {
+public enum PacketType{
     VEHICLE,
     BLOCK,
     REGISTRY

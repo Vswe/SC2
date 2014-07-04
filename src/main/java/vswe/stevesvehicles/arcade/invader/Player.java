@@ -1,6 +1,6 @@
 package vswe.stevesvehicles.arcade.invader;
 
-import vswe.stevesvehicles.client.interfaces.GuiVehicle;
+import vswe.stevesvehicles.client.gui.GuiVehicle;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 
 public class Player extends Unit {

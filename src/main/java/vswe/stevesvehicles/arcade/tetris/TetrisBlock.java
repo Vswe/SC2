@@ -1,8 +1,7 @@
 package vswe.stevesvehicles.arcade.tetris;
 
-import vswe.stevesvehicles.arcade.tetris.ArcadeTetris;
-import vswe.stevesvehicles.client.interfaces.GuiBase.RENDER_ROTATION;
-import vswe.stevesvehicles.client.interfaces.GuiVehicle;
+import vswe.stevesvehicles.client.gui.GuiBase.RENDER_ROTATION;
+import vswe.stevesvehicles.client.gui.GuiVehicle;
 
 public class TetrisBlock {
 

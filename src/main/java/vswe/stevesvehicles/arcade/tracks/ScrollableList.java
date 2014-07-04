@@ -2,7 +2,7 @@ package vswe.stevesvehicles.arcade.tracks;
 
 import java.util.ArrayList;
 
-import vswe.stevesvehicles.client.interfaces.GuiVehicle;
+import vswe.stevesvehicles.client.gui.GuiVehicle;
 
 public class ScrollableList {
 	

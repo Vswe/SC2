@@ -6,7 +6,7 @@ import java.util.EnumSet;
 import org.lwjgl.opengl.GL11;
 
 import vswe.stevesvehicles.arcade.ArcadeGame;
-import vswe.stevesvehicles.client.interfaces.GuiVehicle;
+import vswe.stevesvehicles.client.gui.GuiVehicle;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
