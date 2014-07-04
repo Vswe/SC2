@@ -892,16 +892,16 @@ public class VehicleBase {
     public void handleActivator(ActivatorOption option, boolean isOrange) {
         for (ModuleBase module : modules) {
             if (module instanceof IActivatorModule && option.getModule().isAssignableFrom(module.getClass())) {
-                IActivatorModule iactivator = (IActivatorModule)module;
+                IActivatorModule activator = (IActivatorModule)module;
                 if (option.shouldActivate(isOrange)) {
-                    iactivator.doActivate(option.getId());
+                    activator.doActivate(option.getId());
                 }else if(option.shouldDeactivate(isOrange)) {
-                    iactivator.doDeActivate(option.getId());
+                    activator.doDeActivate(option.getId());
                 }else if(option.shouldToggle()) {
-                    if (iactivator.isActive(option.getId())) {
-                        iactivator.doDeActivate(option.getId());
+                    if (activator.isActive(option.getId())) {
+                        activator.doDeActivate(option.getId());
                     }else{
-                        iactivator.doActivate(option.getId());
+                        activator.doActivate(option.getId());
                     }
                 }
 
@@ -933,6 +933,7 @@ public class VehicleBase {
     public void addItemToChest(ItemStack iStack){
         TransferHandler.TransferItem(iStack, vehicleEntity, getCon(null), Slot.class, null, -1);
     }
+
     /**
      * Add an item to the cart's inventory
      * @param iStack The item to put in the cart
@@ -942,6 +943,7 @@ public class VehicleBase {
     public void addItemToChest(ItemStack iStack, int start, int end){
         TransferHandler.TransferItem(iStack, vehicleEntity, start, end, getCon(null), Slot.class,null, -1);
     }
+
     /**
      * Add an item to the cart's inventory
      * @param iStack The item to put in the cart
@@ -951,7 +953,6 @@ public class VehicleBase {
     public void addItemToChest(ItemStack iStack, java.lang.Class validSlot, java.lang.Class invalidSlot){
         TransferHandler.TransferItem(iStack, vehicleEntity, getCon(null), validSlot, invalidSlot, -1);
     }
-
 
 
     /**
@@ -1050,7 +1051,7 @@ public class VehicleBase {
 
     public String getVehicleName() {
         if (name == null || name.length() == 0) {
-            return "Modular Cart";
+            return "Modular Cart"; //TODO
         }else{
             return name;
         }

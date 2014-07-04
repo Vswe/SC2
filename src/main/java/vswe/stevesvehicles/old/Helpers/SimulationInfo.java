@@ -20,6 +20,8 @@ import vswe.stevesvehicles.module.cart.tool.ModuleDrill;
 import vswe.stevesvehicles.module.cart.tool.ModuleFarmer;
 import vswe.stevesvehicles.module.cart.tool.ModuleWoodcutter;
 
+//TODO make this expandable through some registry
+
 public class SimulationInfo {
 
 	private ArrayList<DropDownMenuItem> items;
