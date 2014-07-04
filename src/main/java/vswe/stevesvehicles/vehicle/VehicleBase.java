@@ -30,9 +30,9 @@ import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.old.Helpers.ActivatorOption;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.client.rendering.models.ModelVehicle;
+import vswe.stevesvehicles.old.Helpers.ComparatorWorkModule;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicle.version.VehicleVersion;
-import vswe.stevesvehicles.old.Helpers.CompWorkModule;
 import vswe.stevesvehicles.old.Helpers.DataWatcherLockable;
 import vswe.stevesvehicles.old.Helpers.GuiAllocationHelper;
 import vswe.stevesvehicles.old.Helpers.ModuleCountPair;
@@ -56,9 +56,8 @@ import java.util.Random;
 public class VehicleBase {
     private ForgeChunkManager.Ticket cartTicket;
     private ModuleWorker workingComponent;
-    public TileEntityCartAssembler placeholderAsssembler;
+    public TileEntityCartAssembler placeholderAssembler;
     public boolean isPlaceholder;
-    public int keepAlive;
     protected int modularSpaceHeight;
     public boolean canScrollModules;
     private ArrayList<ModuleCountPair> moduleCounts;
@@ -117,13 +116,6 @@ public class VehicleBase {
                 break;
             }
         }
-    }
-
-    public VehicleBase(IVehicleEntity entity, TileEntityCartAssembler assembler, int[] data) {
-        this(entity);
-        setPlaceholder(assembler);
-
-        loadPlaceholderModules(data);
     }
 
     public VehicleBase(IVehicleEntity entity,NBTTagCompound info, String name) {
@@ -189,7 +181,7 @@ public class VehicleBase {
      * old modules that are no longer present be removed.
      * @param data The byte array representing the modules.
      */
-    private void loadPlaceholderModules(int[] data) {
+    public void loadPlaceholderModules(int[] data) {
         if (modules == null) {
             modules = new ArrayList<ModuleBase>();
             doLoadModules(data);
@@ -207,10 +199,10 @@ public class VehicleBase {
             }
 
 
-            for (int i = 0; i < data.length; i++) {
+            for (int id : data) {
                 boolean found = false;
                 for (int j = 0; j < oldModules.size(); j++) {
-                    if (data[i] == oldModules.get(j)) {
+                    if (id == oldModules.get(j)) {
                         //Rule 3
                         found = true;
                         oldModules.remove(j);
@@ -219,7 +211,7 @@ public class VehicleBase {
                 }
                 if (!found) {
                     //Rule 2
-                    modulesToAdd.add(data[i]);
+                    modulesToAdd.add(id);
                 }
             }
 
@@ -284,17 +276,6 @@ public class VehicleBase {
         }
     }
 
-    /**
-     * Updates the PlaceHolder cart by giving it the current setup of modules.
-     * @param ids The array representing the modules.
-     */
-    public void updateSimulationModules(int[] ids) {
-        if (!isPlaceholder) {
-            System.out.println("You're stupid! This is not a placeholder cart.");
-        }else {
-            loadPlaceholderModules(ids);
-        }
-    }
 
     /**
      * Create and initiate the cart with the given modules.
@@ -375,11 +356,9 @@ public class VehicleBase {
         engineModules = new ArrayList<ModuleEngine>();
         tankModules = new ArrayList<ModuleTank>();
 
-        int x = 0;
-        int y = 0;
-        int maxH = 0;
-        int guidata = 0;
-        int datawatcher = 0;
+
+        int guiData = 0;
+        int dataWatcher = 0;
         int packets = 0;
 
         //generate all the models this cart should use
@@ -401,7 +380,7 @@ public class VehicleBase {
         }
 
 
-        CompWorkModule sorter = new CompWorkModule();
+        ComparatorWorkModule sorter = new ComparatorWorkModule();
         Collections.sort(workModules, sorter);
 
         //gives all their modules a place to render their graphics on
@@ -435,8 +414,8 @@ public class VehicleBase {
                     }
 
                     //initiate the gui data IDs
-                    module.setGuiDataStart(guidata);
-                    guidata += module.numberOfGuiData();
+                    module.setGuiDataStart(guiData);
+                    guiData += module.numberOfGuiData();
 
                     //initiate the slots
                     if (module.hasSlots()) {
@@ -446,8 +425,8 @@ public class VehicleBase {
                 }
 
                 //initiate the data watchers and give the modules the correct IDs
-                module.setDataWatcherStart(datawatcher);
-                datawatcher += module.numberOfDataWatchers();
+                module.setDataWatcherStart(dataWatcher);
+                dataWatcher += module.numberOfDataWatchers();
                 if (module.numberOfDataWatchers() > 0) {
                     module.initDw();
                 }
@@ -502,7 +481,6 @@ public class VehicleBase {
      * Get the engine's state, if it's on or off.
      * This should not be used to determine if a module
      * that requires power should run or not.
-     * @return
      */
     public boolean isEngineBurning() {
         return isCartFlag(0);
@@ -512,8 +490,7 @@ public class VehicleBase {
      * Set the engine's state, if it's on or off.
      * @param on The state of the engine
      */
-    public void setEngineBurning(boolean on)
-    {
+    public void setEngineBurning(boolean on) {
         setCartFlag(0, on);
     }
 
@@ -552,12 +529,11 @@ public class VehicleBase {
         //if the cart needs power we need to consume it
         if (consumption > 0) {
 
-            //get a engine to draib power from, if any
+            //get a engine to drain power from, if any
             ModuleEngine engine = getCurrentEngine();
             if (engine != null) {
                 //consume
                 engine.consumeFuel(consumption);
-
 
                 //let the engine emit smoke
                 if (!isPlaceholder && getWorld().isRemote && hasFuel() && !isDisabled()) {
@@ -565,7 +541,6 @@ public class VehicleBase {
                 }
             }
         }
-
 
         //set the current state of the engine
         setEngineBurning(hasFuel() && !isDisabled());
@@ -643,7 +618,6 @@ public class VehicleBase {
 
     /**
      * Whether a cart should drop its items when killed
-     * @return
      */
     public boolean dropOnDeath() {
         if (isPlaceholder) {
@@ -710,13 +684,6 @@ public class VehicleBase {
 
             work();
         }
-
-        if (isPlaceholder) {
-            if (keepAlive++ > 20) {
-                entity.setDead();
-                placeholderAsssembler.resetPlaceholder();
-            }
-        }
     }
 
 
@@ -724,8 +691,7 @@ public class VehicleBase {
      * Return if this cart has enough fuel to work
      * @return If it has enough fuel
      */
-    public boolean hasFuel()
-    {
+    public boolean hasFuel() {
         if(isDisabled()) {
             return false;
         }
@@ -821,6 +787,7 @@ public class VehicleBase {
             loadChunks();
         }
     }
+
     /**
      * Stops loading chunks
      */
@@ -907,7 +874,6 @@ public class VehicleBase {
 
     /**
      * Allows the modules to render overlays on the screen
-     * @param minecraft
      */
     @SideOnly(Side.CLIENT)
     public void renderOverlay(Minecraft minecraft) {
@@ -994,7 +960,7 @@ public class VehicleBase {
      */
     public void setPlaceholder(TileEntityCartAssembler assembler) {
         isPlaceholder = true;
-        placeholderAsssembler = assembler;
+        placeholderAssembler = assembler;
     }
 
 
@@ -1180,8 +1146,6 @@ public class VehicleBase {
             for (ModuleBase module : modules) {
                 slotCount += module.getInventorySize();
             }
-        }else{
-            //slotCount = 100;
         }
         return slotCount;
     }
@@ -1431,8 +1395,8 @@ public class VehicleBase {
         int amount = 0;
         if (resource != null && resource.amount > 0) {
             FluidStack fluid = resource.copy();
-            for (int i = 0; i < tankModules.size(); i++) {
-                int tempAmount = tankModules.get(i).fill(fluid, doFill);
+            for (ModuleTank tankModule : tankModules) {
+                int tempAmount = tankModule.fill(fluid, doFill);
 
                 amount += tempAmount;
                 fluid.amount -= tempAmount;
@@ -1459,14 +1423,13 @@ public class VehicleBase {
             ret = ret.copy();
             ret.amount = 0;
         }
-        for (int i = 0; i < tankModules.size(); i++) {
-            FluidStack temp = null;
-            temp = tankModules.get(i).drain(maxDrain, doDrain);
+        for (ModuleTank tankModule : tankModules) {
+            FluidStack temp = tankModule.drain(maxDrain, doDrain);
 
             if (temp != null && (ret == null || ret.isFluidEqual(temp))) {
                 if (ret == null) {
                     ret = temp;
-                }else{
+                } else {
                     ret.amount += temp.amount;
                 }
 
@@ -1511,10 +1474,6 @@ public class VehicleBase {
         return true;
     }
 
-    /**
-     * @param direction tank side: UNKNOWN for default tank set
-     * @return Array of {@link net.minecraftforge.fluids.FluidTank}s contained in this ITankContainer for this direction
-     */
     public FluidTankInfo[] getTankInfo(ForgeDirection direction) {
         FluidTankInfo[] ret = new FluidTankInfo[tankModules.size()];
         for (int i = 0; i < ret.length; i++) {

@@ -5,13 +5,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.old.TileEntities.TileEntityCartAssembler;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 
-public class VehicleCart extends vswe.stevesvehicles.vehicle.VehicleBase {
+public class VehicleCart extends VehicleBase {
     public VehicleCart(EntityModularCart entity) {
         super(entity);
-    }
-
-    public VehicleCart(EntityModularCart entity, TileEntityCartAssembler assembler, int[] data) {
-        super(entity, assembler, data);
     }
 
     public VehicleCart(EntityModularCart entity, NBTTagCompound info, String name) {

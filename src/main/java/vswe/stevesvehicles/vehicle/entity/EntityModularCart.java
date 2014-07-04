@@ -28,7 +28,6 @@ import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.old.Helpers.DataWatcherLockable;
 import vswe.stevesvehicles.old.Helpers.DetectorType;
 import vswe.stevesvehicles.module.ModuleBase;
-import vswe.stevesvehicles.old.TileEntities.TileEntityCartAssembler;
 
 
 import cpw.mods.fml.relauncher.Side;
@@ -93,7 +92,7 @@ public class EntityModularCart extends EntityMinecart
     public EntityModularCart(World world, double x, double y, double z, NBTTagCompound info, String name) {
         super(world, x, y, z);
         this.vehicleBase = new VehicleCart(this, info, name);
-		overrideDatawatcher();
+		overrideDataWatcher();
     }
 	
 	
@@ -104,26 +103,15 @@ public class EntityModularCart extends EntityMinecart
     public EntityModularCart(World world) {
         super(world);
         this.vehicleBase = new VehicleCart(this);
-		overrideDatawatcher();
+		overrideDataWatcher();
     }
-	
-	/**
-	 * Creates a PlaceHolder cart, 
-	 * @param world The world this cart is created in
-	 * @param assembler The CartAssembler this placeholder cart belongs to
-	 * @param data The byte array containing the modules of this cart
-	 */
-    public EntityModularCart(World world, TileEntityCartAssembler assembler, int[] data) {
-        super(world);
-        this.vehicleBase = new VehicleCart(this, assembler, data);
-        overrideDatawatcher();
-    }	
+
 	
     /**
      * The normal datawatcher is overridden by a special one on the client side. This is to be able
      * to wait to process data in the beginning. Fixing the syncing at start up.
      */
-	private void overrideDatawatcher() {
+	private void overrideDataWatcher() {
 		if (worldObj.isRemote) {
 			this.dataWatcher = new DataWatcherLockable(this);
 

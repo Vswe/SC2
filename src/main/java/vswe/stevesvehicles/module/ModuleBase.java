@@ -130,7 +130,7 @@ public abstract class ModuleBase {
 	 * @return The Simulation Info object used to simulate the vehicle
 	 */
 	protected SimulationInfo getSimInfo() {
-		return getVehicle().placeholderAsssembler.getSimulationInfo();
+		return getVehicle().placeholderAssembler.getSimulationInfo();
 	}
 	
 	/**

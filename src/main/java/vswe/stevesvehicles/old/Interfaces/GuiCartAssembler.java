@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
@@ -29,20 +30,16 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class GuiCartAssembler extends GuiBase
-{
-    public GuiCartAssembler(InventoryPlayer invPlayer, TileEntityCartAssembler assembler)
-    {
+public class GuiCartAssembler extends GuiBase {
+    public GuiCartAssembler(InventoryPlayer invPlayer, TileEntityCartAssembler assembler) {
         super(new ContainerCartAssembler(invPlayer, assembler));
         this.assembler = assembler;
-        this.invPlayer = invPlayer;
         setXSize(512);
         setYSize(256);
     }
 
 	@Override
-    public void drawGuiForeground(int x, int y)
-    {
+    public void drawGuiForeground(int x, int y) {
         getFontRenderer().drawString(Localization.GUI.ASSEMBLER.TITLE.translate() , 8, 6, 0x404040);
 
 		if (assembler.isErrorListOutdated) {
@@ -79,13 +76,13 @@ public class GuiCartAssembler extends GuiBase
 			addText(lines, Localization.GUI.ASSEMBLER.ASSEMBLE_INSTRUCTION.translate());
 			hasErrors = true;
 		}else{
-			ModuleData hulldata = ModItems.modules.getModuleData(assembler.getStackInSlot(0));
-			if (hulldata == null || !(hulldata instanceof ModuleDataHull)) {
+			ModuleData hullData = ModItems.modules.getModuleData(assembler.getStackInSlot(0));
+			if (hullData == null || !(hullData instanceof ModuleDataHull)) {
 				addText(lines, Localization.GUI.ASSEMBLER.INVALID_HULL.translate() ,0x9E0B0E);
 				hasErrors = true;
 			}else{
 
-				ModuleDataHull hull = (ModuleDataHull)hulldata;
+				ModuleDataHull hull = (ModuleDataHull)hullData;
 
 				addText(lines, Localization.GUI.ASSEMBLER.HULL_CAPACITY.translate() + ": " + hull.getModularCapacity());
 				addText(lines, Localization.GUI.ASSEMBLER.COMPLEXITY_CAP.translate() + ": " + hull.getComplexityMax());
@@ -257,11 +254,11 @@ public class GuiCartAssembler extends GuiBase
 		
 		if (hasErrors) {
 			srcY += 22;
-		}else if (inRect(x-j,y-k, assembleRect)) {
+		}else if (inRect(x-j,y-k, ASSEMBLE_RECT)) {
 			srcY += 11;
 		}
 		
-		drawTexturedModalRect(j + assembleRect[0], k + assembleRect[1], srcX, srcY, assembleRect[2], assembleRect[3]);
+		drawTexturedModalRect(j + ASSEMBLE_RECT[0], k + ASSEMBLE_RECT[1], srcX, srcY, ASSEMBLE_RECT[2], ASSEMBLE_RECT[3]);
 
 		
 		int [] assemblingProgRect = new int[] {375, 180, 115,11};
@@ -298,13 +295,13 @@ public class GuiCartAssembler extends GuiBase
 		
 		
 		renderDropDownMenu(x,y);
-		render3DCart();
+		render3DVehicle();
 
 		if (!hasErrors) {
 			if (isDisassembling) {
-				drawProgressBarInfo(assembleRect, x, y, Localization.GUI.ASSEMBLER.MODIFY_CART.translate());
+				drawProgressBarInfo(ASSEMBLE_RECT, x, y, Localization.GUI.ASSEMBLER.MODIFY_CART.translate());
 			}else{
-				drawProgressBarInfo(assembleRect, x, y,  Localization.GUI.ASSEMBLER.ASSEMBLE_CART.translate());
+				drawProgressBarInfo(ASSEMBLE_RECT, x, y,  Localization.GUI.ASSEMBLER.ASSEMBLE_CART.translate());
 			}
 		}
 		drawProgressBarInfo(assemblingProgRect, x, y, assemblingInfo);
@@ -328,7 +325,7 @@ public class GuiCartAssembler extends GuiBase
 		return String.format("%02d:%02d:%02d", hours, minutes, seconds);
 	}
 	
-	private int [] assembleRect = new int[] {390, 160, 80,11};
+	private static final int [] ASSEMBLE_RECT = new int[] {390, 160, 80,11};
 
 	private void drawProgressBarInfo(int[] rect, int x, int y, String str) {		
 		if (inRect(x-getGuiLeft(),y-getGuiTop(),rect)) {
@@ -354,47 +351,45 @@ public class GuiCartAssembler extends GuiBase
 		}
 	}
 	
-	private void render3DCart() {
-		assembler.createPlaceholder();
-	
-		int left = this.guiLeft;
-		int top = this.guiTop;
-		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-		GL11.glEnable(GL11.GL_COLOR_MATERIAL);
-		GL11.glPushMatrix();
-		GL11.glTranslatef((float)(left + 512 / 2), (float)(top + (StevesVehicles.instance.renderSteve ? 50 : 100)), 100.0F);
-		float scale = 50.0F;
-		GL11.glScalef(-scale, scale, scale);
-		GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
-		GL11.glRotatef(135.0F, 0.0F, 1.0F, 0.0F);
-		RenderHelper.enableStandardItemLighting();
-		GL11.glRotatef(-135F, 0.0F, 1.0F, 0.0F);
-		
+	private void render3DVehicle() {
+		if (assembler.createPlaceholder()) {
+            int left = this.guiLeft;
+            int top = this.guiTop;
+            GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+            GL11.glEnable(GL11.GL_COLOR_MATERIAL);
+            GL11.glPushMatrix();
+            GL11.glTranslatef((float)(left + 512 / 2), (float)(top + (StevesVehicles.renderSteve ? 50 : 100)), 100.0F);
+            float scale = 50.0F;
+            GL11.glScalef(-scale, scale, scale);
+            GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
+            GL11.glRotatef(135.0F, 0.0F, 1.0F, 0.0F);
+            RenderHelper.enableStandardItemLighting();
+            GL11.glRotatef(-135F, 0.0F, 1.0F, 0.0F);
 
 
-		GL11.glRotatef(assembler.getRoll(), 1.0F, 0.0F, 0.0F);
-		GL11.glRotatef(assembler.getYaw(), 0.0F, 1.0F, 0.0F);
 
-					
-		RenderManager.instance.playerViewY = 180.0F;
-		
-		if (StevesVehicles.renderSteve) {
-			EntityPlayer player = (EntityPlayer)net.minecraft.client.Minecraft.getMinecraft().thePlayer;
-			ItemStack stack = player.getCurrentEquippedItem();
-			player.setCurrentItemOrArmor(0, assembler.getCartFromModules(true));	
-			float temp = player.rotationPitch;
-			player.rotationPitch = (float)Math.PI / 4;	
-			RenderManager.instance.renderEntityWithPosYaw(player, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F);
-			player.rotationPitch = temp;
-			player.setCurrentItemOrArmor(0, stack);			
-		}else{
-			RenderManager.instance.renderEntityWithPosYaw(assembler.getPlaceholder(), 0.0D, 0.0D, 0.0D, 0.0F, 1.0F);		
-		}
-		GL11.glPopMatrix();
-		RenderHelper.disableStandardItemLighting();
-		GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-		
-		assembler.getPlaceholder().getVehicle().keepAlive = 0;
+            GL11.glRotatef(assembler.getRoll(), 1.0F, 0.0F, 0.0F);
+            GL11.glRotatef(assembler.getYaw(), 0.0F, 1.0F, 0.0F);
+
+
+            RenderManager.instance.playerViewY = 180.0F;
+
+            if (StevesVehicles.renderSteve) {
+                EntityPlayer player = (EntityPlayer)net.minecraft.client.Minecraft.getMinecraft().thePlayer;
+                ItemStack stack = player.getCurrentEquippedItem();
+                player.setCurrentItemOrArmor(0, assembler.getCartFromModules(true));
+                float temp = player.rotationPitch;
+                player.rotationPitch = (float)Math.PI / 4;
+                RenderManager.instance.renderEntityWithPosYaw(player, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F);
+                player.rotationPitch = temp;
+                player.setCurrentItemOrArmor(0, stack);
+            }else{
+                RenderManager.instance.renderEntityWithPosYaw(assembler.getPlaceholder().getEntity(), 0.0D, 0.0D, 0.0D, 0.0F, 1.0F);
+            }
+            GL11.glPopMatrix();
+            RenderHelper.disableStandardItemLighting();
+            GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+        }
 	}	
 	
 	private void renderDropDownMenu(int x, int y) {
@@ -587,7 +582,7 @@ public class GuiCartAssembler extends GuiBase
 		int x = x0 - getGuiLeft();
 		int y = y0 - getGuiTop();
 		
-		if (inRect(x,y, assembleRect)) {
+		if (inRect(x,y, ASSEMBLE_RECT)) {
             System.out.println("ASSEMBLE! client");
             PacketHandler.sendPacket(0, new byte[0]);
 		}else if (inRect(x,y, blackBackground)) {
@@ -682,5 +677,5 @@ public class GuiCartAssembler extends GuiBase
     }
 
     private TileEntityCartAssembler assembler;
-    private InventoryPlayer invPlayer;
+
 }

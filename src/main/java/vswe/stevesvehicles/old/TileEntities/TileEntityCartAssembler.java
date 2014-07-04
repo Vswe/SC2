@@ -1,4 +1,5 @@
 package vswe.stevesvehicles.old.TileEntities;
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
 import vswe.stevesvehicles.module.data.ModuleType;
 import vswe.stevesvehicles.old.Blocks.BlockCartAssembler;
@@ -21,6 +23,9 @@ import vswe.stevesvehicles.old.Blocks.ModBlocks;
 import vswe.stevesvehicles.old.Helpers.*;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.old.StevesVehicles;
+import vswe.stevesvehicles.vehicle.VehicleBase;
+import vswe.stevesvehicles.vehicle.VehicleRegistry;
+import vswe.stevesvehicles.vehicle.VehicleType;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.old.Containers.ContainerCartAssembler;
@@ -46,6 +51,7 @@ import vswe.stevesvehicles.upgrade.effect.time.TimeFlatRemoved;
 import vswe.stevesvehicles.upgrade.effect.assembly.WorkEfficiency;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import vswe.stevesvehicles.vehicle.entity.IVehicleEntity;
 
 /**
  * The tile entity used by the Cart Assembler
@@ -53,8 +59,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  *
  */
 public class TileEntityCartAssembler extends TileEntityBase
-    implements IInventory, ISidedInventory
-{
+    implements IInventory, ISidedInventory {
 	
 	/**
 	 * ASSEMBLING VARIABLES
@@ -121,7 +126,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 	/**
 	 * The simulated cart, this cart will only exist on the client side
 	 */
-	private EntityModularCart placeholder; //TODO this shouldn't be a cart
+	private VehicleBase placeholder;
 	
 	/**
 	 * The current yaw (rotation) of the simulated cart
@@ -136,7 +141,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 	/**
 	 * Whether the simulated cart is current rolling up or down.
 	 */
-	private boolean rolldown = false;
+	private boolean rollDown = false;
 
 	
 	
@@ -168,7 +173,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 	/**
 	 * All the attachment slots this tile entity is using
 	 */
-	private ArrayList<SlotAssembler> funcSlots;	
+	private ArrayList<SlotAssembler> attachmentSlots;
 	
 	/**
 	 * The hull slot of this tile entity, this is where the user puts the hull to start designing the cart.
@@ -193,7 +198,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 	/**
 	 * All the slot indices that should be accessed from the top or the bottom of the Cart Assembler block
 	 */
-    private final int[] topbotSlots;
+    private final int[] topBotSlots;
     
     /**
      * All the slot indices that should be accessed from the sides of the Cart Assembler block
@@ -242,8 +247,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 	}
 	
 	
-    public TileEntityCartAssembler()
-    {
+    public TileEntityCartAssembler() {
     	//create all the lists for everything
 		upgrades = new ArrayList<TileEntityUpgrade>();
 		spareModules = new ArrayList<ItemStack>(); 		
@@ -252,7 +256,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 		engineSlots = new ArrayList<SlotAssembler>();
 		addonSlots = new ArrayList<SlotAssembler>();
 		chestSlots = new ArrayList<SlotAssembler>();
-		funcSlots = new ArrayList<SlotAssembler>();
+		attachmentSlots = new ArrayList<SlotAssembler>();
 		titleBoxes = new ArrayList<TitleBox>();
 		
 		int slotID = 0;
@@ -295,7 +299,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 			SlotAssembler slot = new SlotAssembler(this, slotID++, attachBox.getX() + 2 + 18*i,attachBox.getY(), ModuleType.ATTACHMENT, false,i);
 			slot.invalidate();
 			slots.add(slot);
-			funcSlots.add(slot);
+			attachmentSlots.add(slot);
 		}		
 		
 		//create the storage slots
@@ -317,7 +321,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 		//create the fuel and output slots
 		fuelSlot = new SlotAssemblerFuel(this, slotID++, 395,220);
 		slots.add(fuelSlot);
-		outputSlot = new SlotOutput(this, slotID++, 450,220);
+		outputSlot = new SlotOutput(this, slotID, 450,220);
 		slots.add(outputSlot);
 		
 		//create the simulation info
@@ -327,7 +331,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 		inventoryStacks = new ItemStack[slots.size()];
 		
 		//create the arrays used by ISidedInventory
-		topbotSlots = new int[] {getSizeInventory() - nonModularSlots()};
+		topBotSlots = new int[] {getSizeInventory() - nonModularSlots()};
 		sideSlots = new int[] {getSizeInventory() - nonModularSlots() + 1};
     }
 
@@ -458,8 +462,8 @@ public class TileEntityCartAssembler extends TileEntityBase
 	 * Get all the attachment slots used by this Cart Assembler
 	 * @return All the attachment slots this tile entity is using
 	 */	
-	public ArrayList<SlotAssembler> getFuncs() {
-		return funcSlots;
+	public ArrayList<SlotAssembler> getAttachments() {
+		return attachmentSlots;
 	}			
 	
 	/**
@@ -678,12 +682,12 @@ public class TileEntityCartAssembler extends TileEntityBase
 			if (item != null) {
 			
 				boolean validSize = true;
-				for (int j = 0; j < invalid.length; j++) {
-					if (invalid[j] == item.stackSize || (invalid[j] > 0 && item.stackSize > 0)) {
-						validSize = false;
-						break;
-					}
-				}			
+                for (int invalidItem : invalid) {
+                    if (invalidItem == item.stackSize || (invalidItem > 0 && item.stackSize > 0)) {
+                        validSize = false;
+                        break;
+                    }
+                }
 				
 				if (validSize) {
 					ModuleData module = ModItems.modules.getModuleData(item);
@@ -698,9 +702,9 @@ public class TileEntityCartAssembler extends TileEntityBase
 	
 	public ModuleDataHull getHullModule() {
 		if (getStackInSlot(0) != null) {
-			ModuleData hulldata = ModItems.modules.getModuleData(getStackInSlot(0));
-			if(hulldata instanceof ModuleDataHull) {
-				return (ModuleDataHull)hulldata;
+			ModuleData hullData = ModItems.modules.getModuleData(getStackInSlot(0));
+			if(hullData instanceof ModuleDataHull) {
+				return (ModuleDataHull)hullData;
 			}
 		}
 		return null;
@@ -717,8 +721,8 @@ public class TileEntityCartAssembler extends TileEntityBase
 		if (hullSlot.getStack() == null) {
 			errors.add(Localization.GUI.ASSEMBLER.HULL_ERROR.translate());
 		}else{
-			ModuleData hulldata = ModItems.modules.getModuleData(getStackInSlot(0));
-			if (hulldata == null || !(hulldata instanceof ModuleDataHull)) {
+			ModuleData hullData = ModItems.modules.getModuleData(getStackInSlot(0));
+			if (hullData == null || !(hullData instanceof ModuleDataHull)) {
 				errors.add(Localization.GUI.ASSEMBLER.INVALID_HULL_SHORT.translate());
 			}else{
 				if (isAssembling) {
@@ -740,7 +744,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 					}				
 				}
 				
-				String error = ModuleDataItemHandler.checkForErrors((ModuleDataHull)hulldata, modules);
+				String error = ModuleDataItemHandler.checkForErrors((ModuleDataHull)hullData, modules);
 				if (error != null) {
 					errors.add(error);
 				}
@@ -810,7 +814,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 				setAssemblingTime(0);
 			}
 		}else if(id == 5) {
-			setFuelLevel(getIntFromShort(true, getFuelLevel(), data));;
+			setFuelLevel(getIntFromShort(true, getFuelLevel(), data));
 		}else if(id == 6) {
 			setFuelLevel(getIntFromShort(false, getFuelLevel(), data));			
 		}
@@ -827,8 +831,8 @@ public class TileEntityCartAssembler extends TileEntityBase
 		for (int i = 0; i < getChests().size(); i++) {
 			getChests().get(i).invalidate();
 		}	
-		for (int i = 0; i < getFuncs().size(); i++) {
-			getFuncs().get(i).invalidate();
+		for (int i = 0; i < getAttachments().size(); i++) {
+			getAttachments().get(i).invalidate();
 		}			
 		getToolSlot().invalidate();		
 	}
@@ -871,8 +875,8 @@ public class TileEntityCartAssembler extends TileEntityBase
 			for (int i = 0; i < getChests().size(); i++) {
 				slots.add(getChests().get(i));
 			}	
-			for (int i = 0; i < getFuncs().size(); i++) {
-				slots.add(getFuncs().get(i));
+			for (int i = 0; i < getAttachments().size(); i++) {
+				slots.add(getAttachments().get(i));
 			}				
 			slots.add(getToolSlot());
 
@@ -1189,7 +1193,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 		placeholder = null;
 	}
 	
-	public EntityModularCart getPlaceholder() {
+	public VehicleBase getPlaceholder() {
 		return placeholder;
 	}
 	
@@ -1229,7 +1233,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 				if (shouldSpin) {
 					yaw += 2F;	
 					roll = roll % 360;
-					if (!rolldown) {
+					if (!rollDown) {
 						if (roll < minRoll - 3) {
 							roll += 5;
 						}else{
@@ -1237,7 +1241,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 						}
 							
 						if (roll > maxRoll) {
-							rolldown = true;
+							rollDown = true;
 						}
 					}else{
 						if (roll > maxRoll + 3) {
@@ -1247,34 +1251,62 @@ public class TileEntityCartAssembler extends TileEntityBase
 						}
 						
 						if (roll < minRoll) {
-							rolldown = false;
+							rollDown = false;
 						}
 					}
 				}
 			}
 			
-			placeholder.getVehicle().onUpdate();
+			placeholder.onUpdate();
 			if (placeholder == null) {
 				return;
 			}
-			placeholder.getVehicle().updateFuel();
+			placeholder.updateFuel();
 		}	
 	}
 	
-	public void createPlaceholder() {
-		if (placeholder == null) {						
-			placeholder = new EntityModularCart(worldObj, this, getModularInfoIds());
-			updateRenderMenu();
-			isErrorListOutdated = true;
-		}	
+	public boolean createPlaceholder() {
+		if (placeholder == null) {
+            ModuleDataHull hull = getHullModule();
+            if (hull != null && hull.getValidVehicles() != null && !hull.getValidVehicles().isEmpty()) {
+                try {
+                    Constructor<? extends IVehicleEntity> constructor = hull.getValidVehicles().get(0).getClazz().getConstructor(World.class);
+                    Object obj = constructor.newInstance(worldObj);
+                    placeholder = ((IVehicleEntity)obj).getVehicle();
+                }catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
+                if (placeholder != null) {
+                    placeholder.setPlaceholder(this);
+                    updatePlaceholder();
+                }
+            }
+		}
+
+        return placeholder != null;
 	}
 	
 	public void updatePlaceholder() {
+        if (placeholder != null) {
+            ModuleDataHull hull = getHullModule();
+            if (hull == null || hull.getValidVehicles() == null || hull.getValidVehicles().isEmpty()) {
+                resetPlaceholder();
+            }else{
+                Class<? extends IVehicleEntity> placeHolderClass = placeholder.getVehicleEntity().getClass();
+                Class<? extends IVehicleEntity> hullClass = hull.getValidVehicles().get(0).getClazz();
+
+                if (!placeHolderClass.equals(hullClass)) {
+                    resetPlaceholder();
+                }
+            }
+        }
+
 		if (placeholder != null) {
-			placeholder.getVehicle().updateSimulationModules(getModularInfoIds());
+			placeholder.loadPlaceholderModules(getModularInfoIds());
 			updateRenderMenu();
-			isErrorListOutdated = true;
 		}
+        isErrorListOutdated = true;
 	}
 	
 	
@@ -1325,14 +1357,8 @@ public class TileEntityCartAssembler extends TileEntityBase
 	}
 	
 	
-    public boolean isUseableByPlayer(EntityPlayer entityplayer)
-    {
-        if (worldObj.getTileEntity(xCoord, yCoord, zCoord) != this)
-        {
-            return false;
-        }
-
-        return entityplayer.getDistanceSq((double)xCoord + 0.5D, (double)yCoord + 0.5D, (double)zCoord + 0.5D) <= 64D;
+    public boolean isUseableByPlayer(EntityPlayer entityplayer) {
+        return worldObj.getTileEntity(xCoord, yCoord, zCoord) == this && entityplayer.getDistanceSq((double) xCoord + 0.5D, (double) yCoord + 0.5D, (double) zCoord + 0.5D) <= 64D;
     }
 	
 	ItemStack[] inventoryStacks;
@@ -1346,18 +1372,14 @@ public class TileEntityCartAssembler extends TileEntityBase
     }
 
 	@Override
-    public ItemStack getStackInSlot(int i)
-    {
+    public ItemStack getStackInSlot(int i) {
 		return inventoryStacks[i];
     }	
 	
 	@Override
-    public ItemStack decrStackSize(int i, int j)
-    {
-		if (inventoryStacks[i] != null)
-		{
-			if (inventoryStacks[i].stackSize <= j)
-			{
+    public ItemStack decrStackSize(int i, int j) {
+		if (inventoryStacks[i] != null) {
+			if (inventoryStacks[i].stackSize <= j) {
 				ItemStack itemstack = inventoryStacks[i];
 				inventoryStacks[i] = null;
 				markDirty();
@@ -1366,77 +1388,62 @@ public class TileEntityCartAssembler extends TileEntityBase
 
 			ItemStack itemstack1 = inventoryStacks[i].splitStack(j);
 
-			if (inventoryStacks[i].stackSize == 0)
-			{
+			if (inventoryStacks[i].stackSize == 0) {
 				inventoryStacks[i] = null;
 			}
 
 			markDirty();
 			return itemstack1;
-		}
-		else
-		{
+		}else {
 			return null;
 		}
 		
     }	
 	
 	@Override
-    public void setInventorySlotContents(int i, ItemStack itemstack)
-    {
-	
+    public void setInventorySlotContents(int i, ItemStack itemstack) {
 		inventoryStacks[i] = itemstack;
 
-		if (itemstack != null && itemstack.stackSize > getInventoryStackLimit())
-		{
+		if (itemstack != null && itemstack.stackSize > getInventoryStackLimit()) {
 			itemstack.stackSize = getInventoryStackLimit();
 		}
 
 		markDirty();
-		
     }
 
 	@Override
-    public String getInventoryName()
-    {
+    public String getInventoryName() {
         return "container.cartassembler";
     }	
 
 	@Override
-    public boolean hasCustomInventoryName()
-    {
+    public boolean hasCustomInventoryName() {
         return false;
     }	
 	
 	@Override
-    public int getInventoryStackLimit()
-    {
+    public int getInventoryStackLimit() {
         return 64;
     }	
 	
-		@Override
-    public void closeInventory()
-    {
+	@Override
+    public void closeInventory() {
     }
 	@Override
-    public void openInventory()
-    {
+    public void openInventory() {
     }
-	
-	 public ItemStack getStackInSlotOnClosing(int i)
-    {
+
+    @Override
+	public ItemStack getStackInSlotOnClosing(int i){
 		ItemStack item = getStackInSlot(i);
 	
-		if (item != null)
-		{
+		if (item != null) {
 			setInventorySlotContents(i, null);
 			if (item.stackSize == 0) {
 				return null;
 			}
 			return item;
-		}
-		else
-		{
+		}else{
 			return null;
 		}
 		
@@ -1445,30 +1452,27 @@ public class TileEntityCartAssembler extends TileEntityBase
     /**
      * Reads a tile entity from NBT.
      */
-    public void readFromNBT(NBTTagCompound tagCompound)
-    {
+    @Override
+    public void readFromNBT(NBTTagCompound tagCompound) {
 		super.readFromNBT(tagCompound);
 		
 		NBTTagList items = tagCompound.getTagList("Items", NBTHelper.COMPOUND.getId());
 
-		for (int i = 0; i < items.tagCount(); ++i)
-		{
-			NBTTagCompound item = (NBTTagCompound)items.getCompoundTagAt(i);
+		for (int i = 0; i < items.tagCount(); ++i) {
+			NBTTagCompound item = items.getCompoundTagAt(i);
 			int slot = item.getByte("Slot") & 255;
 
 			ItemStack iStack = ItemStack.loadItemStackFromNBT(item);
 			
-			if (slot >= 0 && slot < getSizeInventory())
-			{
+			if (slot >= 0 && slot < getSizeInventory()) {
 				setInventorySlotContents(slot, iStack);
 			}
 		}
 		
 		NBTTagList spares = tagCompound.getTagList("Spares", NBTHelper.COMPOUND.getId());
 		spareModules.clear();
-		for (int i = 0; i < spares.tagCount(); ++i)
-		{
-			NBTTagCompound item = (NBTTagCompound)spares.getCompoundTagAt(i);
+		for (int i = 0; i < spares.tagCount(); ++i) {
+			NBTTagCompound item = spares.getCompoundTagAt(i);
 			ItemStack iStack = ItemStack.loadItemStackFromNBT(item);
 			spareModules.add(iStack);
 		}		
@@ -1496,18 +1500,16 @@ public class TileEntityCartAssembler extends TileEntityBase
     /**
      * Writes a tile entity to NBT.
      */
-    public void writeToNBT(NBTTagCompound tagCompound)
-    {
+    @Override
+    public void writeToNBT(NBTTagCompound tagCompound) {
 		super.writeToNBT(tagCompound);
 		
 		NBTTagList items = new NBTTagList();
 
-		for (int i = 0; i < getSizeInventory(); ++i)
-		{
+		for (int i = 0; i < getSizeInventory(); ++i) {
 			ItemStack iStack = getStackInSlot(i);
 		
-			if (iStack != null)
-			{
+			if (iStack != null) {
 				NBTTagCompound item = new NBTTagCompound();
 				item.setByte("Slot", (byte)i);
 				iStack.writeToNBT(item);
@@ -1519,12 +1521,10 @@ public class TileEntityCartAssembler extends TileEntityBase
 		
 		
 		NBTTagList spares = new NBTTagList();
-		for (int i = 0; i < spareModules.size(); ++i)
-		{
+		for (int i = 0; i < spareModules.size(); ++i) {
 			ItemStack iStack = spareModules.get(i);
 		
-			if (iStack != null)
-			{
+			if (iStack != null) {
 				NBTTagCompound item = new NBTTagCompound();
 				//item.setByte("Slot", (byte)i);
 				iStack.writeToNBT(item);
@@ -1534,8 +1534,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 		
 		tagCompound.setTag("Spares", spares);
 		
-		if (outputItem != null)
-		{	
+		if (outputItem != null) {
 			NBTTagCompound outputTag = new NBTTagCompound();
 			outputItem.writeToNBT(outputTag);
 			tagCompound.setTag("Output", outputTag);						
@@ -1587,33 +1586,25 @@ public class TileEntityCartAssembler extends TileEntityBase
 
 	@Override
     public boolean isItemValidForSlot(int slotId, ItemStack item) {
-		if (slotId >= 0 && slotId < slots.size()) {
-			return slots.get(slotId).isItemValid(item);
-		}else{
-			return false;
-		}
+        return slotId >= 0 && slotId < slots.size() && slots.get(slotId).isItemValid(item);
 	}	
-	
 	
 
     //slots
 	@Override
-    public int[] getAccessibleSlotsFromSide(int side)
-    {
-        return (side == 0 || side == 1) ? topbotSlots : sideSlots;
+    public int[] getAccessibleSlotsFromSide(int side) {
+        return (side == 0 || side == 1) ? topBotSlots : sideSlots;
     }
 
     //in
 	@Override
-    public boolean canInsertItem(int slot, ItemStack item, int side)
-    {
+    public boolean canInsertItem(int slot, ItemStack item, int side) {
         return (side == 0 || side == 1) && this.isItemValidForSlot(slot, item);
     }
 
     //out
 	@Override
-    public boolean canExtractItem(int slot, ItemStack item, int side)
-    {
+    public boolean canExtractItem(int slot, ItemStack item, int side) {
         return true;
     }
 
