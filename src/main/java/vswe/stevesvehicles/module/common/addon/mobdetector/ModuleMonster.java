@@ -7,6 +7,7 @@ import net.minecraft.entity.monster.EntityGhast;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.passive.EntityWolf;
+import vswe.stevesvehicles.localization.entry.gui.module.LocalizationShooter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 
@@ -16,7 +17,7 @@ public class ModuleMonster extends ModuleEntityDetector {
 	}
 
 	public String getName() {
-		return Localization.MODULES.ADDONS.DETECTOR_MONSTERS.translate();
+		return LocalizationShooter.MONSTER_TITLE.translate();
 	}
 	public boolean isValidTarget(Entity target) {
 		return

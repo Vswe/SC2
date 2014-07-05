@@ -1,6 +1,7 @@
 package vswe.stevesvehicles.module.common.engine;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.gui.module.LocalizationEngine;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
@@ -92,11 +93,11 @@ public abstract class ModuleSolarBase extends ModuleEngine {
 
 	@Override
 	public void drawForeground(GuiVehicle gui) {
-	    drawString(gui, Localization.MODULES.ENGINES.SOLAR.translate(), 8, 6, 0x404040);
-        String str = Localization.MODULES.ENGINES.NO_POWER.translate();
+	    drawString(gui, LocalizationEngine.SOLAR_TITLE.translate(), 8, 6, 0x404040);
+        String str = LocalizationEngine.SOLAR_NO_POWER.translate();
 
         if (getFuelLevel() > 0) {
-            str = Localization.MODULES.ENGINES.POWER.translate(String.valueOf(getFuelLevel()));
+            str = LocalizationEngine.SOLAR_POWER.translate(String.valueOf(getFuelLevel()));
         }
 
         drawString(gui,str, 8, 42, 0x404040);

@@ -16,6 +16,7 @@ import net.minecraftforge.fluids.IFluidTank;
 import vswe.stevesvehicles.client.gui.GuiBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import vswe.stevesvehicles.localization.entry.gui.module.LocalizationTank;
 
 public class Tank implements IFluidTank {
 
@@ -182,7 +183,7 @@ public class Tank implements IFluidTank {
 
 	
 	public String getMouseOver() {
-		String name = Localization.MODULES.TANKS.EMPTY.translate();
+		String name = LocalizationTank.EMPTY.translate();
 		int amount = 0;
 		if (fluid != null) {
 			//different mods store the name in different ways apparently
@@ -194,7 +195,7 @@ public class Tank implements IFluidTank {
 			if (name != null && !name.equals("")) {
 				name = Character.toUpperCase(name.charAt(0)) + name.substring(1);
 			}else{
-				name = Localization.MODULES.TANKS.INVALID.translate();
+				name = LocalizationTank.INVALID_FLUID.translate();
 			}
 			amount = fluid.amount;
 		}

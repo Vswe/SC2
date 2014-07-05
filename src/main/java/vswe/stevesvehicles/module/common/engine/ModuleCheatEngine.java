@@ -1,5 +1,6 @@
 package vswe.stevesvehicles.module.common.engine;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.gui.module.LocalizationEngine;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 
@@ -31,7 +32,7 @@ public class ModuleCheatEngine extends ModuleEngine {
         if (split.length > 1) {
 		    drawString(gui,split[1], 8, 16, 0x404040);
         }
-        drawString(gui, Localization.MODULES.ENGINES.OVER_9000.translate(String.valueOf(getFuelLevel())), 8, 42, 0x404040);
+        drawString(gui, LocalizationEngine.CREATIVE_POWER.translate(String.valueOf(getFuelLevel())), 8, 42, 0x404040);
 	}	
 	
 	@Override

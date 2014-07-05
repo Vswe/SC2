@@ -3,6 +3,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.gui.module.LocalizationIndependence;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
@@ -136,7 +137,7 @@ public class ModuleShield extends ModuleAddon implements IActivatorModule {
 
 
 	private String getStateName() {
-        return Localization.MODULES.ADDONS.SHIELD.translate(getShieldStatus() ? "1" : "0");
+        return LocalizationIndependence.SHIELD_TOGGLE.translate(getShieldStatus() ? "1" : "0");
 	}
 
 	@Override

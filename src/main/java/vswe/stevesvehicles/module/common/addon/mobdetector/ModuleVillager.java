@@ -2,6 +2,7 @@ package vswe.stevesvehicles.module.common.addon.mobdetector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityGolem;
 import net.minecraft.entity.passive.EntityVillager;
+import vswe.stevesvehicles.localization.entry.gui.module.LocalizationShooter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 
@@ -11,7 +12,7 @@ public class ModuleVillager extends ModuleEntityDetector {
 	}
 
 	public String getName() {
-		return Localization.MODULES.ADDONS.DETECTOR_VILLAGERS.translate();
+		return LocalizationShooter.VILLAGER_TITLE.translate();
 	}
 	public boolean isValidTarget(Entity target) {
 		return

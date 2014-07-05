@@ -4,6 +4,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.gui.module.LocalizationUtility;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
@@ -44,7 +45,7 @@ public class ModulePowerObserver extends ModuleAddon {
 	    for (int i = 0; i < 4; i++) {
 	    	int[] rect = getPowerRect(i);
 	    	
-	    	drawString(gui, powerLevel[i] + Localization.MODULES.ADDONS.K.translate(), rect, 0x404040);
+	    	drawString(gui, powerLevel[i] + LocalizationUtility.THOUSAND_SUFFIX.translate(), rect, 0x404040);
 	    }
 	}
 	
@@ -142,7 +143,7 @@ public class ModulePowerObserver extends ModuleAddon {
 			if (!removeOnPickup() || currentEngine != i) {
 				ModuleEngine engine = getVehicle().getEngines().get(i);
 
-				drawStringOnMouseOver(gui, engine.getModuleData().getName() + "\n" + Localization.MODULES.ADDONS.OBSERVER_INSTRUCTION.translate(), x, y, getEngineRect(i));
+				drawStringOnMouseOver(gui, engine.getModuleData().getName() + "\n" + LocalizationUtility.OBSERVER_INSTRUCTION.translate(), x, y, getEngineRect(i));
 			}
 		}
 		
@@ -152,15 +153,15 @@ public class ModulePowerObserver extends ModuleAddon {
 				if ((areaData[i] & (1 << j)) != 0) {
 					ModuleEngine engine = getVehicle().getEngines().get(j);
 
-					drawStringOnMouseOver(gui, engine.getModuleData().getName() + "\n" + Localization.MODULES.ADDONS.OBSERVER_REMOVE.translate(), x, y, getEngineRectInArea(i, count));
+					drawStringOnMouseOver(gui, engine.getModuleData().getName() + "\n" + LocalizationUtility.OBSERVER_REMOVE_INSTRUCTION.translate(), x, y, getEngineRectInArea(i, count));
 					count++;
 				}
 			}	
 		
 			if (currentEngine != -1) {
-				drawStringOnMouseOver(gui, Localization.MODULES.ADDONS.OBSERVER_DROP.translate(), x, y, getAreaRect(i));
+				drawStringOnMouseOver(gui, LocalizationUtility.OBSERVER_DROP_INSTRUCTION.translate(), x, y, getAreaRect(i));
 			}
-			drawStringOnMouseOver(gui, Localization.MODULES.ADDONS.OBSERVER_CHANGE.translate() + "\n" + Localization.MODULES.ADDONS.OBSERVER_CHANGE_10.translate(), x, y, getPowerRect(i));
+			drawStringOnMouseOver(gui, LocalizationUtility.OBSERVER_CHANGE_INSTRUCTION.translate() + "\n" + LocalizationUtility.OBSERVER_CHANGE_INSTRUCTION_TEN.translate(), x, y, getPowerRect(i));
 		}
 	}	
 	

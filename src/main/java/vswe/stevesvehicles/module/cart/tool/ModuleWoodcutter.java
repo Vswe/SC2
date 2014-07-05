@@ -8,6 +8,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Vec3;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.gui.module.cart.LocalizationCartTool;
 import vswe.stevesvehicles.old.Helpers.BlockCoordinate;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
@@ -35,7 +36,7 @@ public abstract class ModuleWoodcutter extends ModuleTool implements ISuppliesMo
 
 	@Override
 	public void drawForeground(GuiVehicle gui) {
-	    drawString(gui, Localization.MODULES.TOOLS.CUTTER.translate(), 8, 6, 0x404040);
+	    drawString(gui, LocalizationCartTool.CUTTER.translate(), 8, 6, 0x404040);
 	}
 
 	@Override

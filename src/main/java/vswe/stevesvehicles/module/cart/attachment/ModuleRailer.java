@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Vec3;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.gui.module.cart.LocalizationCartRails;
 import vswe.stevesvehicles.module.cart.ModuleWorker;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
@@ -32,7 +33,7 @@ public class ModuleRailer extends ModuleWorker implements ISuppliesModule {
 	}
 	@Override
 	public void drawForeground(GuiVehicle gui) {
-	    drawString(gui, Localization.MODULES.ATTACHMENTS.RAILER.translate(), 8, 6, 0x404040);
+	    drawString(gui, LocalizationCartRails.TITLE.translate(), 8, 6, 0x404040);
 	}
 
 	//lower numbers are prioritized

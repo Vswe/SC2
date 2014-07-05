@@ -2,6 +2,7 @@ package vswe.stevesvehicles.module.common.engine;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.gui.module.LocalizationEngine;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.ModuleBase;
@@ -115,9 +116,9 @@ public abstract class ModuleEngine extends ModuleBase {
 
 	private String getPriorityText() {
         if (isDisabled()) {
-            return Localization.MODULES.ENGINES.ENGINE_DISABLED.translate();
+            return LocalizationEngine.DISABLED.translate();
         }else{
-            return Localization.MODULES.ENGINES.ENGINE_PRIORITY.translate(String.valueOf(getPriority()));
+            return LocalizationEngine.PRIORITY.translate(String.valueOf(getPriority()));
         }
 	}
 

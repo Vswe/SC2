@@ -14,6 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.gui.module.cart.LocalizationCartTool;
 import vswe.stevesvehicles.old.Blocks.ModBlocks;
 import vswe.stevesvehicles.old.Helpers.BlockCoordinate;
 import vswe.stevesvehicles.old.Helpers.Localization;
@@ -547,7 +548,7 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
 
 	@Override
 	public void drawForeground(GuiVehicle gui) {
-	    drawString(gui, Localization.MODULES.TOOLS.DRILL.translate(), 8, 6, 0x404040);
+	    drawString(gui, LocalizationCartTool.DRILL.translate(), 8, 6, 0x404040);
 	}
 
 
@@ -580,7 +581,7 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
 	}	
 	
 	private String getStateName() {
-        return Localization.MODULES.TOOLS.TOGGLE.translate(isDrillEnabled() ? "1" : "0");
+        return LocalizationCartTool.DRILL_TOGGLE.translate(isDrillEnabled() ? "1" : "0");
 	}	
 	
 	@Override

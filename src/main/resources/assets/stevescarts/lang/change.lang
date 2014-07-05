@@ -260,12 +260,12 @@ item.SC2:incinerator.name=steves_vehicles:cart.drill_utility:incinerator.name
 item.SC2:creative_incinerator.name=steves_vehicles:cart.drill_utility:creative_incinerator.name
 item.SC2:drill_intelligence.name=steves_vehicles:cart.drill_utility:drill_intelligence.name
 item.SC2:ore_extractor.name=steves_vehicles:cart.drill_utility:ore_extractor.name
-item.SC2:railer.name=steves_vehicles:vehicle.rails:railer.name
-item.SC2:large_railer.name=steves_vehicles:vehicle.rails:large_railer.name
-item.SC2:torch_placer.name=steves_vehicles:vehicle.rails:torch_placer.name
-item.SC2:bridge_builder.name=steves_vehicles:vehicle.rails:bridge_builder.name
-item.SC2:track_remover.name=steves_vehicles:vehicle.rails:track_remover.name
-item.SC2:height_controller.name=steves_vehicles:vehicle.rails:height_controller.name
+item.SC2:railer.name=steves_vehicles:cart.rails:railer.name
+item.SC2:large_railer.name=steves_vehicles:cart.rails:large_railer.name
+item.SC2:torch_placer.name=steves_vehicles:cart.rails:torch_placer.name
+item.SC2:bridge_builder.name=steves_vehicles:cart.rails:bridge_builder.name
+item.SC2:track_remover.name=steves_vehicles:cart.rails:track_remover.name
+item.SC2:height_controller.name=steves_vehicles:cart.rails:height_controller.name
 item.SC2:crop_nether_wart.name=steves_vehicles:cart.cultivation:crop_nether_wart.name
 item.SC2:hydrator.name=steves_vehicles:cart.cultivation:hydrator.name
 item.SC2:fertilizer.name=steves_vehicles:cart.cultivation:fertilizer.name
@@ -537,144 +537,140 @@ info.SC2:effectEfficiency=steves_vehicles:gui.info.upgrade:efficiency
 # ======================================
 
 # Addons
-modules.addons.SC2:detectorAnimals=Animals
-modules.addons.SC2:detectorBats=Bats
-modules.addons.SC2:detectorMonsters=Monsters
-modules.addons.SC2:detectorPlayers=Players
-modules.addons.SC2:detectorVillagers=Villagers
-modules.addons.SC2:planterRangeExtenderTitle=Planter Range
-modules.addons.SC2:saplingPlantAmount=Current sapling amount
-modules.addons.SC2:controlLeverTitle=Control lever
-modules.addons.SC2:leverStartCart=Start the cart
-modules.addons.SC2:leverStopCart=Stop the cart
-modules.addons.SC2:leverTurnAroundCart=Turn cart around
-modules.addons.SC2:colorizerRgbRed=Red
-modules.addons.SC2:colorizerRgbGreen=Green
-modules.addons.SC2:colorizerRgbBlue=Blue
-modules.addons.SC2:intelligenceLockedBlock=The drill will always remove this block
-modules.addons.SC2:intelligenceChange=Change drill intelligence
-modules.addons.SC2:intelligenceCurrent=Currently: [%1->Enabled|Disabled]
-modules.addons.SC2:enchanterInstruction=Add an Enchanted Book in the slot to the left.
-modules.addons.SC2:invisibilityToggle=[%1->Activate|Deactivate] invisibility core
-modules.addons.SC2:informationProviderLabelName=Name
-modules.addons.SC2:informationProviderLabelDistance=Distance
-modules.addons.SC2:informationProviderMessageDistance=Distance: [%1]m
-modules.addons.SC2:informationProviderLabelPosition=Position
-modules.addons.SC2:informationProviderMessagePosition=X: [%1] Y: [%2] Z: [%3]
-modules.addons.SC2:informationProviderLabelFuel=Fuel left
-modules.addons.SC2:informationProviderMessageFuel=Fuel time left
-modules.addons.SC2:informationProviderMessageNoConsumption=No consumption
-modules.addons.SC2:informationProviderLabelStorage=Used Storage
-modules.addons.SC2:informationProviderLabelDurability=Durability
-modules.addons.SC2:informationProviderMessageToolBroken=Tool is broken
-modules.addons.SC2:informationProviderMessageToolNotBroken=Tool isn't damaged. Remove the material
-modules.addons.SC2:informationProviderMessageRepair=Tool is being repaired
-modules.addons.SC2:informationProviderMessageUnbreakable=Tool is unbreakable
-modules.addons.SC2:informationProviderLabels=Labels
-modules.addons.SC2:powerThousandSuffix=K
-modules.addons.SC2:powerObserverInstruction=Click and drag to place in desired area.
-modules.addons.SC2:powerObserverRemoveInstruction=Right click to remove.
-modules.addons.SC2:powerObserverDropInstruction=Drop the engine here.
-modules.addons.SC2:powerObserverChangeInstruction=Click to change power limit
-modules.addons.SC2:powerObserverChangeInstruction10=Shift click to change by 10K
-modules.addons.SC2:recipeOutput=Change the output location
-modules.addons.SC2:recipeCurrentSelection=Currently
-modules.addons.SC2:recipeInvalidOutput=Unknown
-modules.addons.SC2:recipeChangeMode=Change current mode
-modules.addons.SC2:recipeNoLimit=No upper limit
-modules.addons.SC2:recipeLimit=Limit stocked items
-modules.addons.SC2:recipeDisabled=Don't produce anything
-modules.addons.SC2:recipeChangeLimit=[%1->Increase|Decrease] items to keep stocked.
-modules.addons.SC2:recipeChangeLimit10=Shift click to change by 10.
-modules.addons.SC2:recipeChangeLimit64=Ctrl click to change by 64.
-modules.addons.SC2:shieldToggle=[%1->Activate|Deactivate] shield
-modules.addons.SC2:buttonRandomize=Randomize Color
+modules.addons.SC2:detectorAnimals=steves_vehicles:gui.common.shooters:entity_detector_animal.title
+modules.addons.SC2:detectorBats=steves_vehicles:gui.common.shooters:entity_detector_bat.title
+modules.addons.SC2:detectorMonsters=steves_vehicles:gui.common.shooters:entity_detector_monster.title
+modules.addons.SC2:detectorPlayers=steves_vehicles:gui.common.shooters:entity_detector_player.title
+modules.addons.SC2:detectorVillagers=steves_vehicles:gui.common.shooters:entity_detector_villager.title
+modules.addons.SC2:planterRangeExtenderTitle=steves_vehicles:gui.cart.cultivation:planter_range_extender.title
+modules.addons.SC2:saplingPlantAmount=steves_vehicles:gui.cart.cultivation:planter_range_extender.size
+modules.addons.SC2:controlLeverTitle=steves_vehicles:gui.cart.travel:brake_handle.title
+modules.addons.SC2:leverStartCart=steves_vehicles:gui.cart.travel:brake_handle.start
+modules.addons.SC2:leverStopCart=steves_vehicles:gui.cart.travel:brake_handle.stop
+modules.addons.SC2:leverTurnAroundCart=steves_vehicles:gui.cart.travel:brake_handle.turn_back
+modules.addons.SC2:colorizerRgbRed=steves_vehicles:gui.common.visual:colorizer.red
+modules.addons.SC2:colorizerRgbGreen=steves_vehicles:gui.common.visual:colorizer.green
+modules.addons.SC2:colorizerRgbBlue=steves_vehicles:gui.common.visual:colorizer.blue
+modules.addons.SC2:intelligenceLockedBlock=steves_vehicles:gui.cart.drill_utility:drill_intelligence.locked
+modules.addons.SC2:intelligenceChange=steves_vehicles:gui.cart.drill_utility:drill_intelligence.change
+modules.addons.SC2:intelligenceCurrent=steves_vehicles:gui.cart.drill_utility:drill_intelligence.current
+modules.addons.SC2:enchanterInstruction=steves_vehicles:gui.common.util:enchanter.instruction
+modules.addons.SC2:invisibilityToggle=steves_vehicles:gui.common.visual:invisibility_core.toggle
+modules.addons.SC2:informationProviderLabelName=steves_vehicles:gui.common.visual:information_provider.name_label
+modules.addons.SC2:informationProviderLabelDistance=steves_vehicles:gui.common.visual:information_provider.distance_label
+modules.addons.SC2:informationProviderMessageDistance=steves_vehicles:gui.common.visual:information_provider.distance_message
+modules.addons.SC2:informationProviderLabelPosition=steves_vehicles:gui.common.visual:information_provider.position_label
+modules.addons.SC2:informationProviderMessagePosition=steves_vehicles:gui.common.visual:information_provider.position_message
+modules.addons.SC2:informationProviderLabelFuel=steves_vehicles:gui.common.visual:information_provider.fuel_label
+modules.addons.SC2:informationProviderMessageFuel=steves_vehicles:gui.common.visual:information_provider.fuel_message
+modules.addons.SC2:informationProviderMessageNoConsumption=steves_vehicles:gui.common.visual:information_provider.fuel_message_no_consumption
+modules.addons.SC2:informationProviderLabelStorage=steves_vehicles:gui.common.visual:information_provider.storage_label
+--modules.addons.SC2:informationProviderLabelDurability
+--modules.addons.SC2:informationProviderMessageToolBroken
+--modules.addons.SC2:informationProviderMessageToolNotBroken
+--modules.addons.SC2:informationProviderMessageRepair
+--modules.addons.SC2:informationProviderMessageUnbreakable
+modules.addons.SC2:informationProviderLabels=steves_vehicles:gui.common.visual:information_provider.labels
+modules.addons.SC2:powerThousandSuffix=steves_vehicles:gui.common.util:power_observer.thousand_suffix
+modules.addons.SC2:powerObserverInstruction=steves_vehicles:gui.common.util:power_observer.instruction
+modules.addons.SC2:powerObserverRemoveInstruction=steves_vehicles:gui.common.util:power_observer.remove_instruction
+modules.addons.SC2:powerObserverDropInstruction=steves_vehicles:gui.common.util:power_observer.drop_instruction
+modules.addons.SC2:powerObserverChangeInstruction=steves_vehicles:gui.common.util:power_observer.change_instruction
+modules.addons.SC2:powerObserverChangeInstruction10=steves_vehicles:gui.common.util:power_observer.change_instruction_ten
+modules.addons.SC2:recipeOutput=steves_vehicles:gui.common.production:common.output
+modules.addons.SC2:recipeCurrentSelection=steves_vehicles:gui.common.production:common.selection
+modules.addons.SC2:recipeInvalidOutput=steves_vehicles:gui.common.production:common.invalid
+modules.addons.SC2:recipeChangeMode=steves_vehicles:gui.common.production:common.change_mode
+modules.addons.SC2:recipeNoLimit=steves_vehicles:gui.common.production:common.no_limit
+modules.addons.SC2:recipeLimit=steves_vehicles:gui.common.production:common.limit
+modules.addons.SC2:recipeDisabled=steves_vehicles:gui.common.production:common.disabled
+modules.addons.SC2:recipeChangeLimit=steves_vehicles:gui.common.production:common.change_limit
+modules.addons.SC2:recipeChangeLimit10=steves_vehicles:gui.common.production:common.change_limit_ten
+modules.addons.SC2:recipeChangeLimit64=steves_vehicles:gui.common.production:common.change_limit_stack
+modules.addons.SC2:shieldToggle=steves_vehicles:gui.common.independence:divine_shield.toggle
+modules.addons.SC2:buttonRandomize=steves_vehicles:gui.common.visual:color_randomizer.randomize
 
 # Engines
-modules.engines.SC2:creativePowerLevel=Power Level: [%1]
-modules.engines.SC2:coalEngineTitle=Coal Engine
-modules.engines.SC2:outOfFuel=Out of fuel
-modules.engines.SC2:fuelLevel=Fuel: [%1]
-modules.engines.SC2:solarEngineTitle=Solar Engine
-modules.engines.SC2:outOfPower=Out of power
-modules.engines.SC2:powerLevel=Power: [%1]
-modules.engines.SC2:thermalEngineTitle=Thermal Engine
-modules.engines.SC2:thermalPowered=Powered
-modules.engines.SC2:outOfWater=Out of Water
-modules.engines.SC2:outOfLava=Out of Lava
-# need beta 3 for these ones to show up (remove this note)
-modules.engines.SC2:engineDisabledMessage=Disabled
-modules.engines.SC2:enginePriorityMessage=[%1->High|Medium|Low] priority
-# end of beta 3 requirement (remove this note)
+modules.engines.SC2:creativePowerLevel=steves_vehicles:gui.common.engines:creative_engine.power
+modules.engines.SC2:coalEngineTitle=steves_vehicles:gui.common.engines:coal_engine.title
+modules.engines.SC2:outOfFuel=steves_vehicles:gui.common.engines:coal_engine.no_power
+modules.engines.SC2:fuelLevel=steves_vehicles:gui.common.engines:coal_engine.power
+modules.engines.SC2:solarEngineTitle=steves_vehicles:gui.common.engines:solar_engine.title
+modules.engines.SC2:outOfPower=steves_vehicles:gui.common.engines:solar_engine.no_power
+modules.engines.SC2:powerLevel=steves_vehicles:gui.common.engines:solar_engine.power
+modules.engines.SC2:thermalEngineTitle=steves_vehicles:gui.common.engines:thermal_engine.title
+modules.engines.SC2:thermalPowered=steves_vehicles:gui.common.engines:thermal_engine.powered
+modules.engines.SC2:outOfWater=steves_vehicles:gui.common.engines:thermal_engine.no_water
+modules.engines.SC2:outOfLava=steves_vehicles:gui.common.engines:thermal_engine.no_lava
+modules.engines.SC2:engineDisabledMessage=steves_vehicles:gui.common.engines:common.disabled
+modules.engines.SC2:enginePriorityMessage=steves_vehicles:gui.common.engines:common.priority
+
 
 # Tanks
-modules.tanks.SC2:creativeTankMode=Current creative mode: [%1][%2->Normal|Always full|Always empty|Always half]
-modules.tanks.SC2:creativeTankChangeMode=Right-click to change
-modules.tanks.SC2:creativeTankResetMode=Shift and right-click to go back to normal
-modules.tanks.SC2:tankLocked=Locked to this fluid
-modules.tanks.SC2:tankLock=Click to lock to this fluid
-modules.tanks.SC2:tankUnlock=Click to unlock
-modules.tanks.SC2:tankEmpty=Empty
-modules.tanks.SC2:tankInvalidFluid=Unknown
+modules.tanks.SC2:creativeTankMode=steves_vehicles:gui.common.tank:creative_tank.mode
+modules.tanks.SC2:creativeTankChangeMode=steves_vehicles:gui.common.tank:creative_tank.change_mode
+modules.tanks.SC2:creativeTankResetMode=steves_vehicles:gui.common.tank:creative_tank.reset_mode
+modules.tanks.SC2:tankLocked=steves_vehicles:gui.common.tank:common.locked
+modules.tanks.SC2:tankLock=steves_vehicles:gui.common.tank:common.lock
+modules.tanks.SC2:tankUnlock=steves_vehicles:gui.common.tank:common.unlock
+modules.tanks.SC2:tankEmpty=steves_vehicles:gui.common.tank:common.empty
+modules.tanks.SC2:tankInvalidFluid=steves_vehicles:gui.common.tank:common.invalid_fluid
 
 # Tools
-modules.tools.SC2:toolDurability=Durability
-modules.tools.SC2:toolBroken=Broken
-modules.tools.SC2:toolRepairing=Currently repairing tool
-modules.tools.SC2:toolDecent=Remove the repair materials, this tool is still pretty decent.
-modules.tools.SC2:toolRepairInstruction=Repair this tool with [%1]
-modules.tools.SC2:toolUnbreakable=This tool will never break.
-modules.tools.SC2:toolUnbreakableRepairError=Remove the repair materials.
-modules.tools.SC2:drillTitle=Drill
-modules.tools.SC2:drillToggle=[%1->Enable|Disable] drill
-modules.tools.SC2:repairDiamonds=Diamonds
-modules.tools.SC2:repairIron=Iron Ingots
-modules.tools.SC2:farmerTitle=Farmer
-modules.tools.SC2:cutterTitle=Wood cutter
+--modules.tools.SC2:toolDurability
+--modules.tools.SC2:toolBroken
+--modules.tools.SC2:toolRepairing
+--modules.tools.SC2:toolDecent
+--modules.tools.SC2:toolRepairInstruction
+--modules.tools.SC2:toolUnbreakable
+--modules.tools.SC2:toolUnbreakableRepairError
+modules.tools.SC2:drillTitle=steves_vehicles:gui.cart.tools:drill.title
+modules.tools.SC2:drillToggle=steves_vehicles:gui.cart.tools:drill.toggle
+--modules.tools.SC2:repairDiamonds
+--modules.tools.SC2:repairIron
+modules.tools.SC2:farmerTitle=steves_vehicles:gui.cart.tools:farmer.title
+modules.tools.SC2:cutterTitle=steves_vehicles:gui.cart.tools:wood_cutter.title
 
 # Attachments
-modules.attachments.SC2:fertilizers=Fertilizers
-modules.attachments.SC2:railerTitle=Railer
-modules.attachments.SC2:controlSystemTitle=Adv Control Sys
-modules.attachments.SC2:controlSystemDistanceUnits=[%1->|k|M|G|T|P]m
-modules.attachments.SC2:controlSystemOdoMeter=ODO
-modules.attachments.SC2:controlSystemTripMeter=TRIP
-modules.attachments.SC2:cageAutoPickUp=[%1->Activate|Deactivate] auto pick up
-modules.attachments.SC2:cagePickUp=[%1->Grab nearby|Release caged] creature
-modules.attachments.SC2:cakeServerTitle=Cake Server
-modules.attachments.SC2:cakesLabel=Cakes: [%1] / [%2]
-modules.attachments.SC2:slicesLabel=Slices: [%1] / [%2]
-modules.attachments.SC2:explosivesTitle=Explosives
-modules.attachments.SC2:experienceTitle=Experience
-modules.attachments.SC2:experienceLevel=Experience level: [%1] / [%2]
-modules.attachments.SC2:experienceExtract=Click to extract 50xp
-modules.attachments.SC2:experiencePlayerLevel=Your current level is [%1]
-modules.attachments.SC2:shooterTitle=Shooter
-modules.attachments.SC2:shooterFrequency=#/s
-modules.attachments.SC2:shooterSeconds=s
-modules.attachments.SC2:shooterDelay=Delay
-modules.attachments.SC2:notePiano=Piano
-modules.attachments.SC2:noteBassDrum=Bass Drum
-modules.attachments.SC2:noteSnareDrum=Snare Drum
-modules.attachments.SC2:noteSticks=Sticks
-modules.attachments.SC2:noteBassGuitar=Bass Guitar
-modules.attachments.SC2:noteCreateTrack=Create new track
-modules.attachments.SC2:noteRemoveTrack=Remove bottom track
-modules.attachments.SC2:noteActivateInstrument=Activate [%1]
-modules.attachments.SC2:noteDeactivateInstrument=Remove NoteBlock setting
-modules.attachments.SC2:noteDelay=Change delay. Current Delay: [%1]
-modules.attachments.SC2:noteAdd=Add note to track #[%1]
-modules.attachments.SC2:noteRemove=Remove rightmost note from track #[%1]
-modules.attachments.SC2:noteVolume=Track volume: [%1->Muted|Low|Medium|High]
-# need beta 3 for these ones to show up (remove this note)
-modules.attachments.SC2:seatStateMessage=[%1->This cart is occupied|Mount cart|Dismount cart]
-modules.attachments.SC2:controlSystemReset=Reset trip-meter
-# end of beta 3 requirement (remove this note)
+modules.attachments.SC2:fertilizers=steves_vehicles:gui.cart.cultivation:fertilizer.title
+modules.attachments.SC2:railerTitle=steves_vehicles:gui.cart.rails:railer.title
+modules.attachments.SC2:controlSystemTitle=steves_vehicles:gui.cart.travel:advanced_control_system.title
+modules.attachments.SC2:controlSystemDistanceUnits=steves_vehicles:gui.cart.travel:advanced_control_system.units
+modules.attachments.SC2:controlSystemOdoMeter=steves_vehicles:gui.cart.travel:advanced_control_system.odo
+modules.attachments.SC2:controlSystemTripMeter=steves_vehicles:gui.cart.travel:advanced_control_system.trip
+modules.attachments.SC2:cageAutoPickUp=steves_vehicles:gui.common.travel:cage.auto_message
+modules.attachments.SC2:cagePickUp=steves_vehicles:gui.common.travel:cage.message
+modules.attachments.SC2:cakeServerTitle=steves_vehicles:gui.common.cake:common.title
+modules.attachments.SC2:cakesLabel=steves_vehicles:gui.common.cake:common.cakes_label
+modules.attachments.SC2:slicesLabel=steves_vehicles:gui.common.cake:common.slices_label
+modules.attachments.SC2:explosivesTitle=steves_vehicles:gui.common.independence:dynamite_carrier.title
+modules.attachments.SC2:experienceTitle=steves_vehicles:gui.cart.cleaning:experience_bank.title
+modules.attachments.SC2:experienceLevel=steves_vehicles:gui.cart.cleaning:experience_bank.level
+modules.attachments.SC2:experienceExtract=steves_vehicles:gui.cart.cleaning:experience_bank.extract
+modules.attachments.SC2:experiencePlayerLevel=steves_vehicles:gui.cart.cleaning:experience_bank.player_level
+modules.attachments.SC2:shooterTitle=steves_vehicles:gui.common.shooters:shooter.title
+modules.attachments.SC2:shooterFrequency=steves_vehicles:gui.common.shooters:shooter.frequency
+modules.attachments.SC2:shooterSeconds=steves_vehicles:gui.common.shooters:shooter.seconds
+modules.attachments.SC2:shooterDelay=steves_vehicles:gui.common.shooters:shooter.delay
+modules.attachments.SC2:notePiano=steves_vehicles:gui.common.visual:note_sequencer.piano
+modules.attachments.SC2:noteBassDrum=steves_vehicles:gui.common.visual:note_sequencer.bass_drum
+modules.attachments.SC2:noteSnareDrum=steves_vehicles:gui.common.visual:note_sequencer.snare_drum
+modules.attachments.SC2:noteSticks=steves_vehicles:gui.common.visual:note_sequencer.sticks
+modules.attachments.SC2:noteBassGuitar=steves_vehicles:gui.common.visual:note_sequencer.bass_guitar
+modules.attachments.SC2:noteCreateTrack=steves_vehicles:gui.common.visual:note_sequencer.create_track
+modules.attachments.SC2:noteRemoveTrack=steves_vehicles:gui.common.visual:note_sequencer.remove_track
+modules.attachments.SC2:noteActivateInstrument=steves_vehicles:gui.common.visual:note_sequencer.activate_instrument
+modules.attachments.SC2:noteDeactivateInstrument=steves_vehicles:gui.common.visual:note_sequencer.deactivate_instrument
+modules.attachments.SC2:noteDelay=steves_vehicles:gui.common.visual:note_sequencer.delay
+modules.attachments.SC2:noteAdd=steves_vehicles:gui.common.visual:note_sequencer.add_note
+modules.attachments.SC2:noteRemove=steves_vehicles:gui.common.visual:note_sequencer.remove_note
+modules.attachments.SC2:noteVolume=steves_vehicles:gui.common.visual:note_sequencer.volume
+modules.attachments.SC2:seatStateMessage=steves_vehicles:gui.common.travel:seat.message
+modules.attachments.SC2:controlSystemReset=steves_vehicles:gui.cart.travel:advanced_control_system.reset_trip
 
 # ======================================
 #				Steve's Arcade
 # ======================================
-# need beta 3 for these ones to show up (remove this note)
 # Ghast Invaders
 arcade.SC2:ghastInvaders=Ghast Invaders
 arcade.SC2:ghastLives=Extra lives

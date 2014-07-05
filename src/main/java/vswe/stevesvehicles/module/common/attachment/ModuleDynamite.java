@@ -2,6 +2,7 @@ package vswe.stevesvehicles.module.common.attachment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.gui.module.LocalizationIndependence;
 import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
 import vswe.stevesvehicles.old.Helpers.ComponentTypes;
 import vswe.stevesvehicles.old.Helpers.Localization;
@@ -17,7 +18,7 @@ public class ModuleDynamite extends ModuleAttachment {
 
 	@Override
 	public void drawForeground(GuiVehicle gui) {
-	    drawString(gui, Localization.MODULES.ATTACHMENTS.EXPLOSIVES.translate(), 8, 6, 0x404040);
+	    drawString(gui, LocalizationIndependence.EXPLOSIVES_TITLE.translate(), 8, 6, 0x404040);
 	}
 
 	@Override

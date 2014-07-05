@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.gui.module.LocalizationUtility;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.EnchantmentData;
 import vswe.stevesvehicles.old.Helpers.EnchantmentInfo;
@@ -204,7 +205,7 @@ public class ModuleEnchants extends ModuleAddon  {
 			if (data != null) {
 				str = data.getInfoText();
 			}else{
-				str = Localization.MODULES.ADDONS.ENCHANT_INSTRUCTION.translate();
+				str = LocalizationUtility.ENCHANTER_INSTRUCTION.translate();
 			}
 			
 			

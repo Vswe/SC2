@@ -2,6 +2,7 @@ package vswe.stevesvehicles.module.common.attachment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.gui.module.LocalizationTravel;
 import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
@@ -80,7 +81,7 @@ public class ModuleSeat extends ModuleAttachment {
 	}
 
 	private String getStateName() {
-        return Localization.MODULES.ATTACHMENTS.SEAT_MESSAGE.translate(String.valueOf(getState()));
+        return LocalizationTravel.SEAT_MESSAGE.translate(String.valueOf(getState()));
 	}
 
 	@Override

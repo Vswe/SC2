@@ -1,6 +1,7 @@
 package vswe.stevesvehicles.module.common.storage.tank;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevesvehicles.localization.entry.gui.module.LocalizationTank;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ColorHelper;
 import vswe.stevesvehicles.old.Helpers.Localization;
@@ -18,9 +19,9 @@ public class ModuleCheatTank extends ModuleTank{
 	@Override
 	protected String getTankInfo() {
 		String str = super.getTankInfo();
-		str += "\n\n" + Localization.MODULES.TANKS.CREATIVE_MODE.translate(colors[mode].toString(), String.valueOf(mode)) + "\n" + Localization.MODULES.TANKS.CHANGE_MODE.translate();
+		str += "\n\n" + LocalizationTank.CREATIVE_MODE.translate(colors[mode].toString(), String.valueOf(mode)) + "\n" + LocalizationTank.CREATIVE_CHANGE_MODE.translate();
 		if (mode != 0) {
-			str += "\n" + Localization.MODULES.TANKS.RESET_MODE.translate();
+			str += "\n" + LocalizationTank.CREATIVE_RESET_MODE.translate();
 		}
 		return str;
 	}

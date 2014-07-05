@@ -7,6 +7,7 @@ import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.gui.module.cart.LocalizationCartCleaning;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
@@ -47,7 +48,7 @@ public class ModuleExperience extends ModuleAttachment {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawMouseOver(GuiVehicle gui, int x, int y) {
-		drawStringOnMouseOver(gui, Localization.MODULES.ATTACHMENTS.EXPERIENCE_LEVEL.translate(String.valueOf(experienceAmount), String.valueOf(MAX_EXPERIENCE_AMOUNT))  + "\n" + Localization.MODULES.ATTACHMENTS.EXPERIENCE_EXTRACT.translate() + "\n" + Localization.MODULES.ATTACHMENTS.EXPERIENCE_PLAYER_LEVEL.translate(String.valueOf(getClientPlayer().experienceLevel)), x, y, CONTAINER_RECT);
+		drawStringOnMouseOver(gui, LocalizationCartCleaning.LEVEL.translate(String.valueOf(experienceAmount), String.valueOf(MAX_EXPERIENCE_AMOUNT))  + "\n" + LocalizationCartCleaning.EXTRACT.translate() + "\n" + LocalizationCartCleaning.PLAYER_LEVEL.translate(String.valueOf(getClientPlayer().experienceLevel)), x, y, CONTAINER_RECT);
 	}
 	
 	@Override
@@ -71,7 +72,7 @@ public class ModuleExperience extends ModuleAttachment {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawForeground(GuiVehicle gui) {
-		drawString(gui, Localization.MODULES.ATTACHMENTS.EXPERIENCE.translate(), 8, 6, 0x404040);
+		drawString(gui, LocalizationCartCleaning.TITLE.translate(), 8, 6, 0x404040);
 	}
 
     private static final int[] CONTAINER_RECT = new int[] {10, 15, 26, 65};

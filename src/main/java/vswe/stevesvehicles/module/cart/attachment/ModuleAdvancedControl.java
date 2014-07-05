@@ -10,6 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import org.lwjgl.opengl.GL11;
 
 import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.gui.module.cart.LocalizationCartTravel;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.network.PacketHandler;
 import vswe.stevesvehicles.vehicle.VehicleBase;
@@ -97,9 +98,9 @@ public class ModuleAdvancedControl extends ModuleAttachment implements ILeverMod
 		
 		
 		
-	    minecraft.fontRenderer.drawString(Localization.MODULES.ATTACHMENTS.ODO.translate(), 5 + 2, enginesEndAt +52 + 2, 0x404040);
+	    minecraft.fontRenderer.drawString(LocalizationCartTravel.CONTROL_ODO.translate(), 5 + 2, enginesEndAt +52 + 2, 0x404040);
         minecraft.fontRenderer.drawString(distToString(odo), 5 + 2, enginesEndAt +52 + 11, 0x404040);		
-        minecraft.fontRenderer.drawString(Localization.MODULES.ATTACHMENTS.TRIP.translate(), 5 + 2, enginesEndAt +52 + 22, 0x404040);
+        minecraft.fontRenderer.drawString(LocalizationCartTravel.CONTROL_TRIP.translate(), 5 + 2, enginesEndAt +52 + 22, 0x404040);
         minecraft.fontRenderer.drawString(distToString(trip), 5 + 2, enginesEndAt +52 + 31, 0x404040);
 		
 		RenderItem itemRenderer = new RenderItem();
@@ -142,7 +143,7 @@ public class ModuleAdvancedControl extends ModuleAttachment implements ILeverMod
             }
         }
 
-        s += Localization.MODULES.ATTACHMENTS.DISTANCES.translate(String.valueOf(i));
+        s += LocalizationCartTravel.CONTROL_UNITS.translate(String.valueOf(i));
 
         return s;
     }	
@@ -479,7 +480,7 @@ public class ModuleAdvancedControl extends ModuleAttachment implements ILeverMod
 
 	@Override
 	public void drawMouseOver(GuiVehicle gui, int x, int y) {
-		drawStringOnMouseOver(gui, Localization.MODULES.ATTACHMENTS.CONTROL_RESET.translate(), x,y, BUTTON_RECT);
+		drawStringOnMouseOver(gui, LocalizationCartTravel.CONTROL_RESET_TRIP.translate(), x,y, BUTTON_RECT);
 	}
 
 	@Override
@@ -493,7 +494,7 @@ public class ModuleAdvancedControl extends ModuleAttachment implements ILeverMod
 	
 	@Override
 	public void drawForeground(GuiVehicle gui) {
-	    drawString(gui, Localization.MODULES.ATTACHMENTS.CONTROL_SYSTEM.translate(), 8, 6, 0x404040);
+	    drawString(gui, LocalizationCartTravel.CONTROL_TITLE.translate(), 8, 6, 0x404040);
 	}
 	
 	

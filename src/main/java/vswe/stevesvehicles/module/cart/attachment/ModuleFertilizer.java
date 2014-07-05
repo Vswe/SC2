@@ -7,6 +7,7 @@ import net.minecraft.init.Items;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Vec3;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.gui.module.cart.LocalizationCartCultivationUtil;
 import vswe.stevesvehicles.module.cart.ModuleWorker;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
@@ -66,7 +67,7 @@ public class ModuleFertilizer extends ModuleWorker implements ISuppliesModule {
 
 	@Override
 	public void drawMouseOver(GuiVehicle gui, int x, int y) {
-		drawStringOnMouseOver(gui, Localization.MODULES.ATTACHMENTS.FERTILIZERS.translate() + ": " + fertilizerStorage + " / " + getMaxFertilizerStorage(), x,y, tankPosX, tankPosY, 18, 27);
+		drawStringOnMouseOver(gui, LocalizationCartCultivationUtil.FERTILIZER_TITLE.translate() + ": " + fertilizerStorage + " / " + getMaxFertilizerStorage(), x,y, tankPosX, tankPosY, 18, 27);
 	}
 
 	@Override

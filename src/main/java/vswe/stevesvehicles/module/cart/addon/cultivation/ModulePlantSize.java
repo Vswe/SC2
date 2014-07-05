@@ -3,6 +3,7 @@ package vswe.stevesvehicles.module.cart.addon.cultivation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.gui.module.cart.LocalizationCartCultivationUtil;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
@@ -44,7 +45,7 @@ public class ModulePlantSize extends ModuleAddon {
 
 	@Override
 	public void drawForeground(GuiVehicle gui) {
-	    drawString(gui, Localization.MODULES.ADDONS.PLANTER_RANGE.translate(), 8, 6, 0x404040);
+	    drawString(gui, LocalizationCartCultivationUtil.PLANTER_RANGE_TITLE.translate(), 8, 6, 0x404040);
 	}	
 		
 	
@@ -67,7 +68,7 @@ public class ModulePlantSize extends ModuleAddon {
 	
 	@Override
 	public void drawMouseOver(GuiVehicle gui, int x, int y) {
-		drawStringOnMouseOver(gui, Localization.MODULES.ADDONS.SAPLING_AMOUNT.translate() + ": " + size + "x" + size, x,y, box);
+		drawStringOnMouseOver(gui, LocalizationCartCultivationUtil.PLANTER_RANGE_SIZE.translate() + ": " + size + "x" + size, x,y, box);
 	}
 	
 	@Override

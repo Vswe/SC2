@@ -8,6 +8,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.gui.module.LocalizationProduction;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
@@ -113,9 +114,9 @@ public abstract class ModuleRecipe extends ModuleAddon {
 	@SideOnly(Side.CLIENT)
 	public void drawMouseOver(GuiVehicle gui, int x, int y) {
 		if (canUseAdvancedFeatures()) {
-			String str = Localization.MODULES.ADDONS.RECIPE_OUTPUT.translate() + "\n" + Localization.MODULES.ADDONS.CURRENT.translate() + ": ";
+			String str = LocalizationProduction.OUTPUT.translate() + "\n" + LocalizationProduction.SELECTION.translate() + ": ";
 			if (isTargetInvalid()) {
-				str += Localization.MODULES.ADDONS.INVALID_OUTPUT.translate();
+				str += LocalizationProduction.INVALID.translate();
 			}else{
 				str += TileEntityCargo.itemSelections.get(target).getName();
 			}
@@ -125,21 +126,21 @@ public abstract class ModuleRecipe extends ModuleAddon {
 				
 				
 				if (i == 1) {
-					str = Localization.MODULES.ADDONS.RECIPE_MODE.translate() + "\n" + Localization.MODULES.ADDONS.CURRENT.translate() + ": ";
+					str = LocalizationProduction.CHANGE_MODE.translate() + "\n" + LocalizationProduction.SELECTION.translate() + ": ";
 					switch (mode) {
 						case 0:
-							str += Localization.MODULES.ADDONS.RECIPE_NO_LIMIT.translate();
+							str += LocalizationProduction.NO_LIMIT.translate();
 							break;
 						case 1:
-							str += Localization.MODULES.ADDONS.RECIPE_LIMIT.translate();
+							str += LocalizationProduction.LIMIT.translate();
 							break;
 						default:
-							str += Localization.MODULES.ADDONS.RECIPE_DISABLED.translate();
+							str += LocalizationProduction.DISABLED.translate();
 					}
 				}else if (mode != 1){
 					str = null;
 				}else{
-					str = Localization.MODULES.ADDONS.RECIPE_CHANGE_AMOUNT.translate(i == 0 ? "0" : "1") + "\n" + Localization.MODULES.ADDONS.RECIPE_CHANGE_AMOUNT_10.translate() + "\n" + Localization.MODULES.ADDONS.RECIPE_CHANGE_AMOUNT_64.translate();
+					str = LocalizationProduction.CHANGE_LIMIT.translate(i == 0 ? "0" : "1") + "\n" + LocalizationProduction.CHANGE_LIMIT_TEN.translate() + "\n" + LocalizationProduction.CHANGE_LIMIT_STACK.translate();
 				}
 				
 				if (str != null) {

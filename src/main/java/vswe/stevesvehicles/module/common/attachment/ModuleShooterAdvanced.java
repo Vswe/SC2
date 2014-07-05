@@ -10,6 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.gui.module.LocalizationShooter;
 import vswe.stevesvehicles.module.common.addon.mobdetector.ModuleEntityDetector;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
@@ -60,7 +61,7 @@ public class ModuleShooterAdvanced extends ModuleShooter {
 	
 	@Override
 	public void drawForeground(GuiVehicle gui) {
-	    drawString(gui, Localization.MODULES.ATTACHMENTS.SHOOTER.translate(), 8, 6, 0x404040);
+	    drawString(gui, LocalizationShooter.SHOOTER_TITLE.translate(), 8, 6, 0x404040);
 
 		for (int i = 0; i < detectors.size(); i++) {
 			int[] box = getSelectionBox(i);

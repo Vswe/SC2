@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import org.lwjgl.opengl.GL11;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.gui.module.LocalizationVisual;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
@@ -62,7 +63,7 @@ public class ModuleColorRandomizer extends ModuleAddon {
 	@Override
 	public void drawMouseOver(GuiVehicle gui, int x, int y) {
 		if (inRect(x, y, BUTTON)) {
-			String randomizeString = Localization.MODULES.ADDONS.BUTTON_RANDOMIZE.translate();
+			String randomizeString = LocalizationVisual.RANDOMIZE.translate();
 			drawStringOnMouseOver(gui, randomizeString, x, y, BUTTON);
 		}
 	}

@@ -2,6 +2,7 @@ package vswe.stevesvehicles.module.common.addon;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.gui.module.LocalizationVisual;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
@@ -82,7 +83,7 @@ public class ModuleInvisible extends ModuleAddon implements IActivatorModule {
 	}
 
 	private String getStateName() {
-        return Localization.MODULES.ADDONS.INVISIBILITY.translate(isVisible() ? "0" : "1");
+        return LocalizationVisual.INVISIBILITY_TOGGLE.translate(isVisible() ? "0" : "1");
 	}
 
 	@Override

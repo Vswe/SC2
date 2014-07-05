@@ -8,6 +8,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidTank;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.gui.module.LocalizationTank;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.*;
 import vswe.stevesvehicles.client.gui.GuiBase;
@@ -152,9 +153,9 @@ public abstract class ModuleTank extends ModuleStorage implements IFluidTank, IT
 	protected String getTankInfo() {
 		String str = tank.getMouseOver();
 		if (tank.isLocked()) {
-			str += "\n\n" + ColorHelper.GREEN + Localization.MODULES.TANKS.LOCKED.translate() + "\n" + Localization.MODULES.TANKS.UNLOCK.translate();
+			str += "\n\n" + ColorHelper.GREEN + LocalizationTank.LOCKED.translate() + "\n" + LocalizationTank.UNLOCK.translate();
 		}else if (tank.getFluid() != null){
-			str += "\n\n" + Localization.MODULES.TANKS.LOCK.translate();
+			str += "\n\n" + LocalizationTank.LOCK.translate();
 		}
 		return str;
 	}

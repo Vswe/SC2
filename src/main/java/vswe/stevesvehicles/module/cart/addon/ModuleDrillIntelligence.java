@@ -3,6 +3,7 @@ package vswe.stevesvehicles.module.cart.addon;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.gui.module.cart.LocalizationCartDrillUtility;
 import vswe.stevesvehicles.module.common.addon.ModuleAddon;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
@@ -175,7 +176,7 @@ public class ModuleDrillIntelligence extends ModuleAddon {
 			for (int j = 0; j < h; j++) {
 				int[] rect = getSettingRect(i, j);
 				
-				String str = isLocked(j*w+i) ? Localization.MODULES.ADDONS.LOCKED.translate() : Localization.MODULES.ADDONS.CHANGE_INTELLIGENCE.translate() + "\n" + Localization.MODULES.ADDONS.CURRENT_INTELLIGENCE.translate((isActive(j*w+i) ? "0" : "1"));
+				String str = isLocked(j*w+i) ? LocalizationCartDrillUtility.DRILL_INTELLIGENCE_LOCKED.translate() : LocalizationCartDrillUtility.DRILL_INTELLIGENCE_CHANGE.translate() + "\n" + LocalizationCartDrillUtility.DRILL_INTELLIGENCE_CURRENT.translate((isActive(j*w+i) ? "0" : "1"));
 				
 				drawStringOnMouseOver(gui, str, x, y, rect);
 			}

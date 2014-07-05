@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.gui.module.LocalizationShooter;
 import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
 import vswe.stevesvehicles.old.Helpers.EnchantmentInfo;
 import vswe.stevesvehicles.vehicle.VehicleBase;
@@ -72,16 +73,16 @@ public class ModuleShooter extends ModuleAttachment implements ISuppliesModule {
 
 	@Override
 	public void drawForeground(GuiVehicle gui) {
-	    drawString(gui, Localization.MODULES.ATTACHMENTS.SHOOTER.translate(), 8, 6, 0x404040);
+	    drawString(gui, LocalizationShooter.SHOOTER_TITLE.translate(), 8, 6, 0x404040);
 
 		int delay = AInterval[arrowInterval];
         double freq = 20D / (delay+1);
 
         String s = String.valueOf((((int)(freq * 1000)) / 1000D));
-        drawString(gui, Localization.MODULES.ATTACHMENTS.FREQUENCY.translate() + ":", intervalDragArea[0] + intervalDragArea[2] + 5, 15, 0x404040);
+        drawString(gui, LocalizationShooter.SHOOTER_FREQUENCY.translate() + ":", intervalDragArea[0] + intervalDragArea[2] + 5, 15, 0x404040);
 		drawString(gui,s, intervalDragArea[0] + intervalDragArea[2] + 5, 23, 0x404040);
-        s =  String.valueOf((delay / 20D) + Localization.MODULES.ATTACHMENTS.SECONDS.translate());
-        drawString(gui, Localization.MODULES.ATTACHMENTS.DELAY.translate() + ":", intervalDragArea[0] + intervalDragArea[2] + 5, 35, 0x404040);
+        s =  String.valueOf((delay / 20D) +LocalizationShooter.SHOOTER_SECONDS.translate());
+        drawString(gui, LocalizationShooter.SHOOTER_DELAY.translate() + ":", intervalDragArea[0] + intervalDragArea[2] + 5, 35, 0x404040);
 		drawString(gui,s, intervalDragArea[0] + intervalDragArea[2] + 5, 43, 0x404040);
 	}
 

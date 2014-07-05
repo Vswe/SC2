@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.gui.module.LocalizationVisual;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.LabelInformation;
 import vswe.stevesvehicles.old.Helpers.Localization;
@@ -27,46 +28,46 @@ public class ModuleLabel extends ModuleAddon {
 		
 		labels = new ArrayList<LabelInformation>();
 		
-		labels.add(new LabelInformation(Localization.MODULES.ADDONS.NAME) {
+		labels.add(new LabelInformation(LocalizationVisual.NAME_LABEL) {
 			@Override
 			public String getLabel() {
 				return getVehicle().getVehicleName();
 			}			
 		});
 			
-		labels.add(new LabelInformation(Localization.MODULES.ADDONS.DISTANCE) {
+		labels.add(new LabelInformation(LocalizationVisual.DISTANCE_LABEL) {
 			@Override
 			public String getLabel() {
-				return Localization.MODULES.ADDONS.DISTANCE_LONG.translate(String.valueOf((int)getVehicle().getEntity().getDistanceToEntity(getClientPlayer())));
+				return LocalizationVisual.DISTANCE_MESSAGE.translate(String.valueOf((int)getVehicle().getEntity().getDistanceToEntity(getClientPlayer())));
 			}			
 		});		
 		
-		labels.add(new LabelInformation(Localization.MODULES.ADDONS.POSITION) {
+		labels.add(new LabelInformation(LocalizationVisual.POSITION_LABEL) {
 			@Override
 			public String getLabel() {
-				return Localization.MODULES.ADDONS.POSITION_LONG.translate(String.valueOf(getVehicle().x()), String.valueOf(getVehicle().y()), String.valueOf(getVehicle().z()));
+				return LocalizationVisual.POSITION_MESSAGE.translate(String.valueOf(getVehicle().x()), String.valueOf(getVehicle().y()), String.valueOf(getVehicle().z()));
 			}			
 		});	
 		
-		labels.add(new LabelInformation(Localization.MODULES.ADDONS.FUEL) {
+		labels.add(new LabelInformation(LocalizationVisual.FUEL_LABEL) {
 			@Override
 			public String getLabel() {
 				int seconds =  getIntDw(1);
 				
 				if (seconds == -1) {
-					return Localization.MODULES.ADDONS.FUEL_NO_CONSUMPTION.translate();
+					return LocalizationVisual.FUEL_MESSAGE_NO_CONSUMPTION.translate();
 				}else{
 					int minutes = seconds / 60;
 					seconds -= minutes * 60;
 					int hours = minutes / 60;
 					minutes -= hours * 60;
 
-					return String.format(Localization.MODULES.ADDONS.FUEL_LONG.translate() + ": %02d:%02d:%02d", hours, minutes, seconds);
+					return String.format(LocalizationVisual.FUEL_MESSAGE.translate() + ": %02d:%02d:%02d", hours, minutes, seconds);
 				}
 			}			
 		});		
 		
-		labels.add(new LabelInformation(Localization.MODULES.ADDONS.STORAGE) {
+		labels.add(new LabelInformation(LocalizationVisual.STORAGE_LABEL) {
 			@Override
 			public String getLabel() {
 				int used = getDw(2);
@@ -74,7 +75,7 @@ public class ModuleLabel extends ModuleAddon {
 					used += 256;
 				}
 				
-				return storageSlots == null ? "" : Localization.MODULES.ADDONS.STORAGE.translate() + ": " + used + "/" + storageSlots.size() + (storageSlots.size() == 0 ? "" : "[" + (int)(100F * used / storageSlots.size()) + "%]");
+				return storageSlots == null ? "" : LocalizationVisual.STORAGE_LABEL.translate() + ": " + used + "/" + storageSlots.size() + (storageSlots.size() == 0 ? "" : "[" + (int)(100F * used / storageSlots.size()) + "%]");
 			}			
 		});			
 	}
@@ -222,7 +223,7 @@ public class ModuleLabel extends ModuleAddon {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawForeground(GuiVehicle gui) {
-		drawString(gui, Localization.MODULES.ADDONS.LABELS.translate(), 8, 6, 0x404040);
+		drawString(gui, LocalizationVisual.LABELS.translate(), 8, 6, 0x404040);
 		
 		for (int i = 0; i < labels.size(); i++) {
 			int[] rect = getBoxArea(i);

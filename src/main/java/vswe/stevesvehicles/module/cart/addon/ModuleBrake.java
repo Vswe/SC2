@@ -2,6 +2,7 @@ package vswe.stevesvehicles.module.cart.addon;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.gui.module.cart.LocalizationCartTravel;
 import vswe.stevesvehicles.module.common.addon.ModuleAddon;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
@@ -37,7 +38,7 @@ public class ModuleBrake extends ModuleAddon implements ILeverModule {
 
 	@Override
 	public void drawForeground(GuiVehicle gui) {
-	    drawString(gui, Localization.MODULES.ADDONS.CONTROL_LEVER.translate(), 8, 6, 0x404040);
+	    drawString(gui, LocalizationCartTravel.LEVER_TITLE.translate(), 8, 6, 0x404040);
 	}
 
 
@@ -84,8 +85,8 @@ public class ModuleBrake extends ModuleAddon implements ILeverModule {
 
 	@Override
 	public void drawMouseOver(GuiVehicle gui, int x, int y) {
-		drawStringOnMouseOver(gui, isForceStopping() ? Localization.MODULES.ADDONS.LEVER_START.translate() : Localization.MODULES.ADDONS.LEVER_STOP.translate(), x,y, START_STOP_RECT);
-		drawStringOnMouseOver(gui, Localization.MODULES.ADDONS.LEVER_TURN.translate(), x,y, TURN_BACK_RECT);
+		drawStringOnMouseOver(gui, isForceStopping() ? LocalizationCartTravel.LEVER_START.translate() : LocalizationCartTravel.LEVER_STOP.translate(), x,y, START_STOP_RECT);
+		drawStringOnMouseOver(gui, LocalizationCartTravel.LEVER_TURN_BACK.translate(), x,y, TURN_BACK_RECT);
 	}
 
 	@Override

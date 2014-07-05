@@ -21,6 +21,7 @@ import net.minecraft.entity.passive.EntityWaterMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.gui.module.LocalizationTravel;
 import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
@@ -86,8 +87,8 @@ public class ModuleCage extends ModuleAttachment implements IActivatorModule {
 
 	@Override
 	public void drawMouseOver(GuiVehicle gui, int x, int y) {
-		drawStringOnMouseOver(gui, Localization.MODULES.ATTACHMENTS.CAGE_AUTO.translate(disablePickup ? "0" : "1"), x, y, AUTO_RECT);
-		drawStringOnMouseOver(gui, Localization.MODULES.ATTACHMENTS.CAGE.translate(isCageEmpty() ? "0" : "1"), x, y, MANUAL_RECT);
+		drawStringOnMouseOver(gui, LocalizationTravel.CAGE_AUTO_MESSAGE.translate(disablePickup ? "0" : "1"), x, y, AUTO_RECT);
+		drawStringOnMouseOver(gui, LocalizationTravel.CAGE_MESSAGE.translate(isCageEmpty() ? "0" : "1"), x, y, MANUAL_RECT);
 	}
 
 	private boolean isCageEmpty() {		

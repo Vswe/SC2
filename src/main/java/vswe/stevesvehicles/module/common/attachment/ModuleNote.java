@@ -8,6 +8,7 @@ import org.lwjgl.opengl.GL11;
 
 import vswe.stevesvehicles.client.gui.GuiVehicle;
 import vswe.stevesvehicles.localization.ILocalizedText;
+import vswe.stevesvehicles.localization.entry.gui.module.LocalizationVisual;
 import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
@@ -23,7 +24,7 @@ public class ModuleNote extends ModuleAttachment {
 
 	private int[] instrumentColors = new int[] {0x404040, 0xFF0000, 0x00FF00, 0x0000FF, 0xFFFF00, 0x00FFFF};
 	private String[] pitchNames = new String[] {"F#", "G", "G#", "A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#"};
-	private ILocalizedText[] instrumentNames = new ILocalizedText[] {Localization.MODULES.ATTACHMENTS.PIANO, Localization.MODULES.ATTACHMENTS.BASS_DRUM, Localization.MODULES.ATTACHMENTS.SNARE_DRUM, Localization.MODULES.ATTACHMENTS.STICKS, Localization.MODULES.ATTACHMENTS.BASS_GUITAR};
+	private ILocalizedText[] instrumentNames = new ILocalizedText[] {LocalizationVisual.PIANO, LocalizationVisual.BASS_DRUM, LocalizationVisual.SNARE_DRUM, LocalizationVisual.STICKS, LocalizationVisual.BASS_GUITAR};
 
 	
 	private ArrayList<Track> tracks;
@@ -73,10 +74,10 @@ public class ModuleNote extends ModuleAttachment {
 		if (getVehicle().getWorld().isRemote) {
 			buttons = new ArrayList<Button>();
 			createTrack = new Button(NOTE_MAP_X -60, NOTE_MAP_Y - 20);
-			createTrack.text = Localization.MODULES.ATTACHMENTS.CREATE_TRACK.translate();
+			createTrack.text = LocalizationVisual.CREATE_TRACK.translate();
 			createTrack.imageID = 0;
 			removeTrack = new Button(NOTE_MAP_X -40, NOTE_MAP_Y - 20);
-			removeTrack.text = Localization.MODULES.ATTACHMENTS.REMOVE_TRACK.translate();
+			removeTrack.text = LocalizationVisual.REMOVE_TRACK.translate();
 			removeTrack.imageID = 1;
 			speedButton = new Button(NOTE_MAP_X -20, NOTE_MAP_Y - 20);
 			updateSpeedButton();
@@ -85,9 +86,9 @@ public class ModuleNote extends ModuleAttachment {
 				Button tempButton = new Button(NOTE_MAP_X -20 + (i+1)*20, NOTE_MAP_Y - 20);
 				instrumentButtons.add(tempButton);
 				if (i > 0) {
-					tempButton.text = Localization.MODULES.ATTACHMENTS.ACTIVATE_INSTRUMENT.translate(instrumentNames[i-1].translate());
+					tempButton.text = LocalizationVisual.ACTIVATE_INSTRUMENT.translate(instrumentNames[i-1].translate());
 				}else{
-					tempButton.text = Localization.MODULES.ATTACHMENTS.DEACTIVATE_INSTRUMENT.translate();
+					tempButton.text = LocalizationVisual.DEACTIVATE_INSTRUMENT.translate();
 				}
 				tempButton.color = instrumentColors[i];
 			}
@@ -97,7 +98,7 @@ public class ModuleNote extends ModuleAttachment {
 	private void updateSpeedButton() {
 		if (getVehicle().getWorld().isRemote) {
 			speedButton.imageID = 14 - speedSetting;
-			speedButton.text = Localization.MODULES.ATTACHMENTS.NOTE_DELAY.translate(String.valueOf(getTickDelay()));
+			speedButton.text = LocalizationVisual.DELAY.translate(String.valueOf(getTickDelay()));
 		}
 	}
 	
@@ -513,10 +514,10 @@ public class ModuleNote extends ModuleAttachment {
 			if (getVehicle().getWorld().isRemote) {
 				int ID = (tracks.size() + 1);
 				addButton = new TrackButton(NOTE_MAP_X - 60, ID - 1);
-				addButton.text = Localization.MODULES.ATTACHMENTS.ADD_NOTE.translate(String.valueOf(ID));
+				addButton.text = LocalizationVisual.ADD_NOTE.translate(String.valueOf(ID));
 				addButton.imageID = 2;
 				removeButton = new TrackButton(NOTE_MAP_X - 40, ID - 1);
-				removeButton.text = Localization.MODULES.ATTACHMENTS.REMOVE_NOTE.translate(String.valueOf(ID));
+				removeButton.text = LocalizationVisual.REMOVE_NOTE.translate(String.valueOf(ID));
 				removeButton.imageID = 3;
 				volumeButton = new TrackButton(NOTE_MAP_X - 20, ID - 1);
 				volumeButton.text = getVolumeText();
@@ -527,7 +528,7 @@ public class ModuleNote extends ModuleAttachment {
 
 		
 		private String getVolumeText() {
-            return Localization.MODULES.ATTACHMENTS.VOLUME.translate(String.valueOf(volume));
+            return LocalizationVisual.VOLUME.translate(String.valueOf(volume));
 		}
 		
 		public void unload() {

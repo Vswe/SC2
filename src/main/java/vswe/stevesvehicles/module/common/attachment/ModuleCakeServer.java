@@ -5,6 +5,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.gui.module.LocalizationCake;
 import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
@@ -96,7 +97,7 @@ public class ModuleCakeServer extends ModuleAttachment implements ISuppliesModul
 	
 	@Override
 	public void drawForeground(GuiVehicle gui) {
-	    drawString(gui, Localization.MODULES.ATTACHMENTS.CAKE_SERVER.translate(), 8, 6, 0x404040);
+	    drawString(gui, LocalizationCake.TITLE.translate(), 8, 6, 0x404040);
 	}	
 	
 	@Override
@@ -112,7 +113,7 @@ public class ModuleCakeServer extends ModuleAttachment implements ISuppliesModul
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawMouseOver(GuiVehicle gui, int x, int y) {
-		drawStringOnMouseOver(gui, Localization.MODULES.ATTACHMENTS.CAKES.translate(String.valueOf(getCakes()), String.valueOf(MAX_CAKES)) + "\n" + Localization.MODULES.ATTACHMENTS.SLICES.translate(String.valueOf(getSlices()), String.valueOf(SLICES_PER_CAKE)), x, y, RECT);
+		drawStringOnMouseOver(gui, LocalizationCake.CAKES_LABEL.translate(String.valueOf(getCakes()), String.valueOf(MAX_CAKES)) + "\n" + LocalizationCake.SLICES_LABEL.translate(String.valueOf(getSlices()), String.valueOf(SLICES_PER_CAKE)), x, y, RECT);
 	}
 	
 	private int getCakes() {

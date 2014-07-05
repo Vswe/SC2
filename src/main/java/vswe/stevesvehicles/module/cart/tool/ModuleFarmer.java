@@ -11,6 +11,7 @@ import net.minecraft.util.Vec3;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.common.IPlantable;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.gui.module.cart.LocalizationCartTool;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.module.cart.ICropModule;
@@ -57,7 +58,7 @@ public abstract class ModuleFarmer extends ModuleTool implements ISuppliesModule
 
 	@Override
 	public void drawForeground(GuiVehicle gui) {
-	    drawString(gui, Localization.MODULES.TOOLS.FARMER.translate(), 8, 6, 0x404040);
+	    drawString(gui, LocalizationCartTool.FARMER.translate(), 8, 6, 0x404040);
 	}
 
 

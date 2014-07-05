@@ -5,6 +5,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import org.lwjgl.opengl.GL11;
 
 import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.gui.module.LocalizationVisual;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
@@ -67,7 +68,7 @@ public class ModuleColorizer extends ModuleAddon {
 	
 	@Override
 	public void drawMouseOver(GuiVehicle gui, int x, int y) {
-		String[] colorNames = new String[] {Localization.MODULES.ADDONS.COLOR_RED.translate(),Localization.MODULES.ADDONS.COLOR_GREEN.translate(), Localization.MODULES.ADDONS.COLOR_BLUE.translate()};
+		String[] colorNames = new String[] {LocalizationVisual.RED.translate(), LocalizationVisual.GREEN.translate(), LocalizationVisual.BLUE.translate()};
 		for (int i = 0; i < 3; i++) {
 			drawStringOnMouseOver(gui, colorNames[i] + ": " + getColorVal(i), x,y, getArea(i));
 		}
