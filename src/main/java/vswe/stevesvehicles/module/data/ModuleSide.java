@@ -1,17 +1,17 @@
 package vswe.stevesvehicles.module.data;
 
 import vswe.stevesvehicles.localization.ILocalizedText;
+import vswe.stevesvehicles.localization.entry.gui.info.LocalizationLabel;
 import vswe.stevesvehicles.old.Helpers.Localization;
 
 public enum ModuleSide {
-    NONE(Localization.MODULE_INFO.SIDE_NONE),
-    TOP(Localization.MODULE_INFO.SIDE_TOP),
-    CENTER(Localization.MODULE_INFO.SIDE_CENTER),
-    BOTTOM(Localization.MODULE_INFO.SIDE_BOTTOM),
-    BACK(Localization.MODULE_INFO.SIDE_BACK),
-    LEFT(Localization.MODULE_INFO.SIDE_LEFT),
-    RIGHT(Localization.MODULE_INFO.SIDE_RIGHT),
-    FRONT(Localization.MODULE_INFO.SIDE_FRONT);
+    TOP(LocalizationLabel.TOP),
+    CENTER(LocalizationLabel.CENTER),
+    BOTTOM(LocalizationLabel.BOTTOM),
+    BACK(LocalizationLabel.BACK),
+    LEFT(LocalizationLabel.LEFT),
+    RIGHT(LocalizationLabel.RIGHT),
+    FRONT(LocalizationLabel.FRONT);
 
     private ILocalizedText name;
     private ModuleSide(ILocalizedText name) {

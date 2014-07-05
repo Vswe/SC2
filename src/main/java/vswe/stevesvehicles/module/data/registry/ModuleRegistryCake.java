@@ -4,6 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.init.Items;
 import vswe.stevesvehicles.client.rendering.models.ModelCake;
+import vswe.stevesvehicles.localization.entry.gui.info.LocalizationMessage;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleSide;
 import vswe.stevesvehicles.old.Helpers.Localization;
@@ -33,7 +34,7 @@ public class ModuleRegistryCake extends ModuleRegistry {
 
         cake.addVehicles(VehicleRegistry.CART, VehicleRegistry.BOAT);
         cake.addSides(ModuleSide.TOP);
-        cake.addMessage(Localization.MODULE_INFO.ALPHA_MESSAGE);
+        cake.addMessage(LocalizationMessage.YEAR);
         register(cake);
 
 

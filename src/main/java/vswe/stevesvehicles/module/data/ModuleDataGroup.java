@@ -1,5 +1,6 @@
 package vswe.stevesvehicles.module.data;
 import vswe.stevesvehicles.localization.ILocalizedText;
+import vswe.stevesvehicles.localization.entry.gui.info.LocalizationLabel;
 import vswe.stevesvehicles.old.Helpers.Localization;
 
 import java.util.ArrayList;
@@ -73,11 +74,11 @@ public class ModuleDataGroup {
     public String getCountName() {
 		switch (count) {
 			case 1:
-				return Localization.MODULE_INFO.MODULE_COUNT_1.translate();
+				return LocalizationLabel.COUNT_ONE.translate();
 			case 2:
-				return Localization.MODULE_INFO.MODULE_COUNT_2.translate();
+				return  LocalizationLabel.COUNT_TWO.translate();
 			case 3:
-				return Localization.MODULE_INFO.MODULE_COUNT_3.translate();
+				return  LocalizationLabel.COUNT_THREE.translate();
 			default:
 				return "???";
 		}

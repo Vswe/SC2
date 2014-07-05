@@ -9,6 +9,7 @@ import vswe.stevesvehicles.client.rendering.models.ModelEngineFrame;
 import vswe.stevesvehicles.client.rendering.models.ModelEngineInside;
 import vswe.stevesvehicles.client.rendering.models.ModelSolarPanelBase;
 import vswe.stevesvehicles.client.rendering.models.ModelSolarPanelHeads;
+import vswe.stevesvehicles.localization.entry.gui.info.LocalizationGroup;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataGroup;
 import vswe.stevesvehicles.module.data.ModuleSide;
@@ -149,7 +150,7 @@ public class ModuleRegistryEngines extends ModuleRegistry {
     }
 
     public static final String ENGINE_KEY = "Engines";
-    private ModuleDataGroup engines = ModuleDataGroup.createGroup(ENGINE_KEY, Localization.MODULE_INFO.ENGINE_GROUP);
+    private ModuleDataGroup engines = ModuleDataGroup.createGroup(ENGINE_KEY, LocalizationGroup.ENGINE);
     @Override
     public void register(ModuleData moduleData) {
         super.register(moduleData);

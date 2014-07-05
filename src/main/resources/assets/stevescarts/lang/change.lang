@@ -444,71 +444,69 @@ item.SC2:BlockDetector4.name=Detector Redstone Unit
 # ======================================
 
 # Categories
-info.SC2:moduleCategoryHull=Hull
-info.SC2:moduleCategoryEngine=Engine
-info.SC2:moduleCategoryTool=Tool
-info.SC2:moduleCategoryStorage=Storage
-info.SC2:moduleCategoryAddon=Addon
-info.SC2:moduleCategoryAttachment=Attachment
-info.SC2:moduleCategoryInvalid=Invalid
+info.SC2:moduleCategoryHull=steves_vehicles:gui.info.category.hull
+info.SC2:moduleCategoryEngine=steves_vehicles:gui.info.category.engine
+info.SC2:moduleCategoryTool=steves_vehicles:gui.info.category.tool
+info.SC2:moduleCategoryStorage=steves_vehicles:gui.info.category.storage
+info.SC2:moduleCategoryAddon=steves_vehicles:gui.info.category.addon
+info.SC2:moduleCategoryAttachment=steves_vehicles:gui.info.category.attachment
+info.SC2:moduleCategoryInvalid=steves_vehicles:gui.info.category.invalid
 
 # Groups
-info.SC2:moduleGroupEngine=[%1:Engine|Engines]
-info.SC2:moduleGroupDrill=[%1:Drill|Drills]
-info.SC2:moduleGroupFarmer=[%1:Farmer|Farmers]
-info.SC2:moduleGroupCutter=[%1:Wood Cutter|Wood Cutters]
-info.SC2:moduleGroupTank=[%1:Tank|Tanks]
-info.SC2:moduleGroupEntity=[%1:Entity Detector|Entity Detectors]
-info.SC2:moduleGroupShooter=[%1:Shooter|Shooters]
-info.SC2:moduleGroupTool=[%1:Tool|Tools]
-info.SC2:moduleGroupToolShooter=[%1:Tool|Tools] or [%1:Shooter|Shooters]
+info.SC2:moduleGroupEngine=steves_vehicles:gui.info.group.engine
+info.SC2:moduleGroupDrill=steves_vehicles:gui.info.group.drill
+info.SC2:moduleGroupFarmer=steves_vehicles:gui.info.group.farmer
+info.SC2:moduleGroupCutter=steves_vehicles:gui.info.group.cutter
+info.SC2:moduleGroupTank=steves_vehicles:gui.info.group.tank
+info.SC2:moduleGroupEntity=steves_vehicles:gui.info.group.entity
+info.SC2:moduleGroupShooter=steves_vehicles:gui.info.group.shooter
+info.SC2:moduleGroupTool=steves_vehicles:gui.info.group.tool
+info.SC2:moduleGroupToolShooter=steves_vehicles:gui.info.group.tool_shooter
 
 # Messages
-info.SC2:pigExtraMessage=In memory of Vswe's Thunderpig arena victory. Thanks everyone who donated during the 2013 Minecraft Marathon
-info.SC2:oceanExtraMessage=Room for an average sized ocean
-info.SC2:alphaExtraMessage=1 year in alpha
-info.SC2:storageEmpty=Empty
-info.SC2:storageFull=Full
-info.SC2:giftStorageFull=Might contain a surprise
-info.SC2:eggStorageFull=Full of Eggs
+info.SC2:pigExtraMessage=steves_vehicles:gui.info.message.thunder_pig
+info.SC2:oceanExtraMessage=steves_vehicles:gui.info.message.ocean
+info.SC2:alphaExtraMessage=steves_vehicles:gui.info.message.year
+info.SC2:storageEmpty=steves_vehicles:gui.info.message.empty_storage
+info.SC2:storageFull=steves_vehicles:gui.info.message.full_storage
+info.SC2:giftStorageFull=steves_vehicles:gui.info.message.gift
+info.SC2:eggStorageFull=steves_vehicles:gui.info.message.egg
 
 # Labels
-info.SC2:modularCost=Modular cost
-info.SC2:cartSideTop=Top
-info.SC2:cartSideCenter=Center
-info.SC2:cartSideBottom=Bottom
-info.SC2:cartSideBack=Back
-info.SC2:cartSideLeft=Left
-info.SC2:cartSideRight=Right
-info.SC2:cartSideFront=Front
-info.SC2:occupiedSides=Will occupy the [%1] [%2:side|sides]
-info.SC2:vehicleTypes=Will work on [%1]
-info.SC2:sidesAnd=and
-info.SC2:noSides=Won't occupy any sides
-info.SC2:moduleConflictHowever=Will however conflict with
-info.SC2:moduleConflictAlso=Will also conflict with
-info.SC2:moduleRequirement=Requires
-info.SC2:moduleCount1=one
-info.SC2:moduleCount2=two
-info.SC2:moduleCount3=three
-info.SC2:allowDuplicates=Duplicates are allowed
-info.SC2:moduleType=Type
-info.SC2:capacityOverloadError=Your cost is greater than the capacity of the hull.
-info.SC2:impossibleCombinationError=The combination of module types of the modules given are not valid. This shouldn't be possible.
-info.SC2:complexityOverloadError=[%1] is too complex for this hull.
-info.SC2:missingParentError=[%1] requires [%2] to work!
-info.SC2:presentNemesisError=[%1] won't work with [%2]
-info.SC2:presentDuplicateError=[%1] is not allowed to be added twice.
-info.SC2:sideClashError=[%1] and [%2] will clash at the [%3]
-info.SC2:noVehicleError=This module isn't valid for any vehicle type. This is an error.
-# need beta 3 for these ones to show up (remove this note)
-info.SC2:toolUnbreakable=Unbreakable
-info.SC2:toolDurability=Durability: [%1]%
-info.SC2:modularCapacity=Modular capacity: [%1]
-info.SC2:complexityCap=Module complexity cap: [%1]
-info.SC2:maxEngineCount=Max engines count: [%1]
-info.SC2:maxAddonCount=Max Addon count: [%1]
-# end of beta 3 requirement (remove this note)
+info.SC2:modularCost=steves_vehicles:gui.info.label.modular_cost
+info.SC2:cartSideTop=steves_vehicles:gui.info.label.top
+info.SC2:cartSideCenter=steves_vehicles:gui.info.label.center
+info.SC2:cartSideBottom=steves_vehicles:gui.info.label.bottom
+info.SC2:cartSideBack=steves_vehicles:gui.info.label.back
+info.SC2:cartSideLeft=steves_vehicles:gui.info.label.left
+info.SC2:cartSideRight=steves_vehicles:gui.info.label.right
+info.SC2:cartSideFront=steves_vehicles:gui.info.label.front
+info.SC2:occupiedSides=steves_vehicles:gui.info.label.sides
+info.SC2:vehicleTypes=steves_vehicles:gui.info.label.vehicle_types
+info.SC2:sidesAnd=steves_vehicles:gui.info.label.and
+info.SC2:noSides=steves_vehicles:gui.info.label.no_sides
+info.SC2:moduleConflictHowever=steves_vehicles:gui.info.label.module_conflict_however
+info.SC2:moduleConflictAlso=steves_vehicles:gui.info.label.module_conflict_also
+info.SC2:moduleRequirement=steves_vehicles:gui.info.label.requires
+info.SC2:moduleCount1=steves_vehicles:gui.info.label.count_one
+info.SC2:moduleCount2=steves_vehicles:gui.info.label.count_two
+info.SC2:moduleCount3=steves_vehicles:gui.info.label.count_three
+info.SC2:allowDuplicates=steves_vehicles:gui.info.label.duplicates
+info.SC2:moduleType=steves_vehicles:gui.info.label.type
+info.SC2:capacityOverloadError=steves_vehicles:gui.info.label.capacity_error
+info.SC2:impossibleCombinationError=steves_vehicles:gui.info.label.combination_error
+info.SC2:complexityOverloadError=steves_vehicles:gui.info.label.complexity_error
+info.SC2:missingParentError=steves_vehicles:gui.info.label.parent_error
+info.SC2:presentNemesisError=steves_vehicles:gui.info.label.nemesis_error
+info.SC2:presentDuplicateError=steves_vehicles:gui.info.label.duplicate_error
+info.SC2:sideClashError=steves_vehicles:gui.info.label.clash_error
+info.SC2:noVehicleError=steves_vehicles:gui.info.label.missing_vehicle_error
+--info.SC2:toolUnbreakable
+--info.SC2:toolDurability
+info.SC2:modularCapacity=steves_vehicles:gui.info.label.capacity
+info.SC2:complexityCap=steves_vehicles:gui.info.label.complexity_cap
+info.SC2:maxEngineCount=steves_vehicles:gui.info.label.max_engines
+info.SC2:maxAddonCount=steves_vehicles:gui.info.label.max_addons
 
 # ======================================
 #				UPGRADES

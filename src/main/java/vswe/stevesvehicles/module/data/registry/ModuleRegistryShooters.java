@@ -8,6 +8,7 @@ import vswe.stevesvehicles.client.rendering.models.ModelGun;
 import vswe.stevesvehicles.client.rendering.models.ModelMobDetector;
 import vswe.stevesvehicles.client.rendering.models.ModelShootingRig;
 import vswe.stevesvehicles.client.rendering.models.ModelSniperRifle;
+import vswe.stevesvehicles.localization.entry.gui.info.LocalizationGroup;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataGroup;
 import vswe.stevesvehicles.module.data.ModuleSide;
@@ -46,7 +47,7 @@ public class ModuleRegistryShooters extends ModuleRegistry {
 
 
     private void loadShooters() {
-        ModuleDataGroup shooters = ModuleDataGroup.createGroup(SHOOTER_KEY, Localization.MODULE_INFO.SHOOTER_GROUP);
+        ModuleDataGroup shooters = ModuleDataGroup.createGroup(SHOOTER_KEY, LocalizationGroup.SHOOTER);
         ModuleDataGroup detectors = ModuleDataGroup.getGroup(DETECTOR_KEY);
 
         ModuleData shooter = new ModuleData("shooter", ModuleShooter.class, 15) {
@@ -102,7 +103,7 @@ public class ModuleRegistryShooters extends ModuleRegistry {
     }
 
     private void loadDetectors() {
-        ModuleDataGroup detectors = ModuleDataGroup.createGroup(DETECTOR_KEY, Localization.MODULE_INFO.ENTITY_GROUP);
+        ModuleDataGroup detectors = ModuleDataGroup.createGroup(DETECTOR_KEY, LocalizationGroup.ENTITY);
 
         ModuleData animal = new ModuleData("entity_detector_animal", ModuleAnimal.class, 1);
         animal.addShapedRecipeWithSize(1, 2,

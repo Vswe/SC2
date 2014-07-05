@@ -12,6 +12,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import vswe.stevesvehicles.localization.ILocalizedText;
+import vswe.stevesvehicles.localization.entry.gui.info.LocalizationLabel;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.old.Helpers.ColorHelper;
@@ -31,6 +32,7 @@ import java.util.List;
 public class ModuleData implements IRecipeOutput {
     private final Class<? extends ModuleBase> moduleClass;
     private final String unlocalizedName;
+    private String fullUnlocalizedName;
     private final int modularCost;
     private final ModuleType moduleType;
     private ArrayList<ModuleSide> sides;
@@ -86,8 +88,10 @@ public class ModuleData implements IRecipeOutput {
     }
 
     public final String getFullRawUnlocalizedName() {
-        return unlocalizedName;
-    } //TODO make it take into account what registry registered it
+        return fullUnlocalizedName;
+    }
+
+    public final void setFullRawUnlocalizedName(String val) {fullUnlocalizedName = val;}
 
     public final int getCost() {
         return modularCost;
@@ -312,7 +316,7 @@ public class ModuleData implements IRecipeOutput {
 
 
     public void addSpecificInformation(List<String> list) {
-        list.add(ColorHelper.LIGHT_GRAY + Localization.MODULE_INFO.MODULAR_COST.translate() + ": " + modularCost);
+        list.add(ColorHelper.LIGHT_GRAY + LocalizationLabel.MODULAR_COST.translate() + ": " + modularCost);
     }
 
     public static final String NBT_MODULE_EXTRA_DATA = "ExtraData";
@@ -332,7 +336,7 @@ public class ModuleData implements IRecipeOutput {
         if (GuiScreen.isShiftKeyDown()) {
 
             if (sides == null || sides.size() == 0) {
-                list.add(ColorHelper.CYAN + Localization.MODULE_INFO.NO_SIDES.translate());
+                list.add(ColorHelper.CYAN + LocalizationLabel.NO_SIDES.translate());
             }else{
                 String sidesText = "";
                 for (int i = 0; i < sides.size(); i++) {
@@ -341,21 +345,21 @@ public class ModuleData implements IRecipeOutput {
                     if(i == 0) {
                         sidesText += side.toString();
                     }else if (i == sides.size() - 1) {
-                        sidesText += " " + Localization.MODULE_INFO.AND.translate() + " " + side.toString();
+                        sidesText += " " + LocalizationLabel.AND.translate() + " " + side.toString();
                     }else{
                         sidesText += ", " + side.toString();
                     }
                 }
 
 
-                list.add(ColorHelper.CYAN + Localization.MODULE_INFO.OCCUPIED_SIDES.translate(sidesText, String.valueOf(sides.size())));
+                list.add(ColorHelper.CYAN + LocalizationLabel.SIDES.translate(sidesText, String.valueOf(sides.size())));
             }
 
             if (getNemesis() != null && getNemesis().size() != 0) {
                 if (sides == null || sides.size() == 0) {
-                    list.add(ColorHelper.RED + Localization.MODULE_INFO.CONFLICT_HOWEVER.translate() + ":");
+                    list.add(ColorHelper.RED + LocalizationLabel.MODULE_CONFLICT_HOWEVER.translate() + ":");
                 }else{
-                    list.add(ColorHelper.RED + Localization.MODULE_INFO.CONFLICT_ALSO.translate() + ":");
+                    list.add(ColorHelper.RED + LocalizationLabel.MODULE_CONFLICT_ALSO.translate() + ":");
                 }
                 for (ModuleData module : getNemesis()) {
                     list.add(ColorHelper.RED + module.getName());
@@ -363,21 +367,21 @@ public class ModuleData implements IRecipeOutput {
             }
 
             if (parent != null) {
-                list.add(ColorHelper.YELLOW + Localization.MODULE_INFO.REQUIREMENT.translate() + " " + parent.getName());
+                list.add(ColorHelper.YELLOW + LocalizationLabel.REQUIRES.translate() + " " + parent.getName());
             }
 
             if (getRequirement() != null && getRequirement().size() != 0) {
                 for (ModuleDataGroup group : getRequirement()) {
-                    list.add(ColorHelper.YELLOW + Localization.MODULE_INFO.REQUIREMENT.translate() + " " + group.getCountName() + " " + group.getName());
+                    list.add(ColorHelper.YELLOW + LocalizationLabel.REQUIRES.translate() + " " + group.getCountName() + " " + group.getName());
                 }
             }
 
             if (getAllowDuplicate()) {
-                list.add(ColorHelper.LIME + Localization.MODULE_INFO.DUPLICATES.translate());
+                list.add(ColorHelper.LIME + LocalizationLabel.DUPLICATES.translate());
             }
 
             if (validVehicles == null || validVehicles.isEmpty()) {
-                list.add(ColorHelper.RED + Localization.MODULE_INFO.NO_VEHICLE_ERROR.translate());
+                list.add(ColorHelper.RED + LocalizationLabel.MISSING_VEHICLE_ERROR.translate());
             }else{
                 String vehicleText = "";
                 for (int i = 0; i < validVehicles.size(); i++) {
@@ -386,18 +390,18 @@ public class ModuleData implements IRecipeOutput {
                     if(i == 0) {
                         vehicleText += vehicle.getName();
                     }else if (i == validVehicles.size() - 1) {
-                        vehicleText += " " + Localization.MODULE_INFO.AND.translate() + " " + vehicle.getName();
+                        vehicleText += " " + LocalizationLabel.AND.translate() + " " + vehicle.getName();
                     }else{
                         vehicleText += ", " + vehicle.getName();
                     }
                 }
 
 
-                list.add(ColorHelper.MAGENTA + Localization.MODULE_INFO.VEHICLE_TYPES.translate(vehicleText, String.valueOf(validVehicles.size())));
+                list.add(ColorHelper.MAGENTA + LocalizationLabel.VEHICLE_TYPES.translate(vehicleText, String.valueOf(validVehicles.size())));
             }
         }
 
-        list.add(ColorHelper.LIGHT_BLUE + Localization.MODULE_INFO.TYPE.translate() + ": " + moduleType.getName());
+        list.add(ColorHelper.LIGHT_BLUE + LocalizationLabel.TYPE.translate() + ": " + moduleType.getName());
         addExtraMessage(list);
     }
 

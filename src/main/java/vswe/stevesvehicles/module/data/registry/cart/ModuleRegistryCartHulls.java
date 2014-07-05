@@ -5,6 +5,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import vswe.stevesvehicles.localization.entry.gui.info.LocalizationMessage;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataHull;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
@@ -137,7 +138,7 @@ public class ModuleRegistryCartHulls extends ModuleRegistry {
         };
 
         pig.addSides(ModuleSide.FRONT);
-        pig.addMessage(Localization.MODULE_INFO.PIG_MESSAGE);
+        pig.addMessage(LocalizationMessage.THUNDER_PIG);
 
         pig.addShapedRecipe(    Items.porkchop,     null,               Items.porkchop,
                                 Items.porkchop,     Items.porkchop,     Items.porkchop,

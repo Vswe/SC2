@@ -6,6 +6,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import vswe.stevesvehicles.client.rendering.models.ModelCage;
 import vswe.stevesvehicles.client.rendering.models.ModelSeat;
+import vswe.stevesvehicles.localization.entry.gui.info.LocalizationGroup;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataGroup;
 import vswe.stevesvehicles.module.data.ModuleSide;
@@ -23,8 +24,8 @@ public class ModuleRegistryTravel extends ModuleRegistry {
     public ModuleRegistryTravel() {
         super("steves_vehicle_travel");
 
-        ModuleDataGroup seats = ModuleDataGroup.createGroup(SEAT_KEY, Localization.MODULE_INFO.AND); //TODO give proper localzied name
-        ModuleDataGroup cages = ModuleDataGroup.createGroup(CAGE_KEY, Localization.MODULE_INFO.AND); //TODO give proper localzied name
+        ModuleDataGroup seats = ModuleDataGroup.createGroup(SEAT_KEY, LocalizationGroup.SEAT);
+        ModuleDataGroup cages = ModuleDataGroup.createGroup(CAGE_KEY, LocalizationGroup.CAGE);
 
         ModuleData seat = new ModuleData("seat", ModuleSeat.class, 3) {
             @Override

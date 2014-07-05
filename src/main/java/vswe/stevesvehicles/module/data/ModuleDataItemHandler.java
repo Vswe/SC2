@@ -4,6 +4,7 @@ package vswe.stevesvehicles.module.data;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import vswe.stevesvehicles.localization.entry.gui.info.LocalizationLabel;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.old.Helpers.Localization;
@@ -43,7 +44,7 @@ public final class ModuleDataItemHandler {
     public static String checkForErrors(VehicleType vehicle, ModuleDataHull hull, List<ModuleData> modules) {
         //Normal errors here
         if (getTotalCost(modules) > hull.getModularCapacity()) {
-            return Localization.MODULE_INFO.CAPACITY_ERROR.translate();
+            return LocalizationLabel.CAPACITY_ERROR.translate();
         }
 
 
@@ -55,15 +56,15 @@ public final class ModuleDataItemHandler {
             }
 
             if (mod1.getCost() > hull.getComplexityMax()) {
-                return Localization.MODULE_INFO.COMPLEXITY_ERROR.translate(mod1.getName());
+                return LocalizationLabel.COMPLEXITY_ERROR.translate(mod1.getName());
             }
             if (mod1.getParent() != null && !modules.contains(mod1.getParent())) {
-                return Localization.MODULE_INFO.PARENT_ERROR.translate(mod1.getName(), mod1.getParent().getName());
+                return LocalizationLabel.PARENT_ERROR.translate(mod1.getName(), mod1.getParent().getName());
             }
             if (mod1.getNemesis() != null) {
                 for (ModuleData nemesis : mod1.getNemesis()) {
                     if (modules.contains(nemesis)) {
-                        return Localization.MODULE_INFO.NEMESIS_ERROR.translate(mod1.getName(), nemesis.getName());
+                        return LocalizationLabel.NEMESIS_ERROR.translate(mod1.getName(), nemesis.getName());
                     }
                 }
             }
@@ -78,7 +79,7 @@ public final class ModuleDataItemHandler {
                         }
                     }
                     if (count < group.getCount()) {
-                        return Localization.MODULE_INFO.PARENT_ERROR.translate(mod1.getName(), group.getCountName() + " " + group.getName());
+                        return LocalizationLabel.PARENT_ERROR.translate(mod1.getName(), group.getCountName() + " " + group.getName());
                     }
                 }
             }
@@ -88,10 +89,10 @@ public final class ModuleDataItemHandler {
 
                 if (mod1 == mod2) {
                     if (!mod1.getAllowDuplicate()) {
-                        return Localization.MODULE_INFO.DUPLICATE_ERROR.translate(mod1.getName());
+                        return LocalizationLabel.DUPLICATE_ERROR.translate(mod1.getName());
                     }
                 }else if (mod1.getSides() != null && mod2.getSides() != null) {
-                    ModuleSide clash = ModuleSide.NONE;
+                    ModuleSide clash = null;
                     for (ModuleSide side1 : mod1.getSides()) {
                         for (ModuleSide side2 : mod2.getSides()) {
                             if (side1 == side2) {
@@ -99,12 +100,12 @@ public final class ModuleDataItemHandler {
                                 break;
                             }
                         }
-                        if (clash != ModuleSide.NONE) {
+                        if (clash != null) {
                             break;
                         }
                     }
-                    if (clash != ModuleSide.NONE) {
-                        return Localization.MODULE_INFO.CLASH_ERROR.translate(mod1.getName(), mod2.getName(), clash.toString());
+                    if (clash != null) {
+                        return LocalizationLabel.CLASH_ERROR.translate(mod1.getName(), mod2.getName(), clash.toString());
                     }
                 }
             }

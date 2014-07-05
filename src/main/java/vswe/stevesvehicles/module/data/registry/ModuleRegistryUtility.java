@@ -2,6 +2,7 @@ package vswe.stevesvehicles.module.data.registry;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import vswe.stevesvehicles.localization.entry.gui.info.LocalizationGroup;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataGroup;
 import vswe.stevesvehicles.module.data.registry.cart.ModuleRegistryCartTools;
@@ -36,7 +37,7 @@ public class ModuleRegistryUtility extends ModuleRegistry {
                                     Items.redstone,     ADVANCED_PCB,                   Items.redstone);
 
         enchanter.addVehicles(VehicleRegistry.CART, VehicleRegistry.BOAT);
-        enchanter.addRequirement(ModuleDataGroup.getCombinedGroup(ENCHANTABLE_KEY, Localization.MODULE_INFO.TOOL_OR_SHOOTER_GROUP,
+        enchanter.addRequirement(ModuleDataGroup.getCombinedGroup(ENCHANTABLE_KEY, LocalizationGroup.TOOL_SHOOTER,
                 ModuleDataGroup.getGroup(ModuleRegistryCartTools.TOOL_KEY),
                 ModuleDataGroup.getGroup(ModuleRegistryShooters.SHOOTER_KEY)
         ));

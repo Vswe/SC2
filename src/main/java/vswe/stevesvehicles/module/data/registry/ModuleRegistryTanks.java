@@ -6,6 +6,7 @@ import vswe.stevesvehicles.client.rendering.models.ModelAdvancedTank;
 import vswe.stevesvehicles.client.rendering.models.ModelFrontTank;
 import vswe.stevesvehicles.client.rendering.models.ModelSideTanks;
 import vswe.stevesvehicles.client.rendering.models.ModelTopTank;
+import vswe.stevesvehicles.localization.entry.gui.info.LocalizationGroup;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataGroup;
 import vswe.stevesvehicles.module.data.ModuleSide;
@@ -143,7 +144,7 @@ public class ModuleRegistryTanks extends ModuleRegistry {
 
 
     public static final String TANK_KEY = "Tanks";
-    private ModuleDataGroup tanks = ModuleDataGroup.createGroup(TANK_KEY, Localization.MODULE_INFO.TANK_GROUP);
+    private ModuleDataGroup tanks = ModuleDataGroup.createGroup(TANK_KEY, LocalizationGroup.TANK);
     @Override
     public void register(ModuleData moduleData) {
         super.register(moduleData);

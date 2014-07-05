@@ -8,6 +8,7 @@ import vswe.stevesvehicles.client.rendering.models.ModelDrill;
 import vswe.stevesvehicles.client.rendering.models.ModelFarmer;
 import vswe.stevesvehicles.client.rendering.models.ModelToolPlate;
 import vswe.stevesvehicles.client.rendering.models.ModelWoodCutter;
+import vswe.stevesvehicles.localization.entry.gui.info.LocalizationGroup;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataGroup;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
@@ -40,7 +41,7 @@ public class ModuleRegistryCartTools extends ModuleRegistry {
         //Create a combined group for all the tool groups. The order groups are being accessed is irrelevant.
         //The combined group is created before the individual groups to prove this.
         //(The order independence is more important when multiple registries/mods are involved)
-        ModuleDataGroup.getCombinedGroup(TOOL_KEY, Localization.MODULE_INFO.TOOL_GROUP,
+        ModuleDataGroup.getCombinedGroup(TOOL_KEY, LocalizationGroup.TOOL,
                 ModuleDataGroup.getGroup(DRILL_KEY) ,
                 ModuleDataGroup.getGroup(WOOD_KEY),
                 ModuleDataGroup.getGroup(FARM_KEY)
@@ -52,7 +53,7 @@ public class ModuleRegistryCartTools extends ModuleRegistry {
     }
 
     private void loadDrills() {
-        ModuleDataGroup drills = ModuleDataGroup.createGroup(DRILL_KEY, Localization.MODULE_INFO.DRILL_GROUP);
+        ModuleDataGroup drills = ModuleDataGroup.createGroup(DRILL_KEY, LocalizationGroup.DRILL);
 
         ModuleData iron = new ModuleData("iron_drill", ModuleDrillIron.class, 3) {
             @Override
@@ -134,7 +135,7 @@ public class ModuleRegistryCartTools extends ModuleRegistry {
     }
 
     private void loadWoodCutters() {
-        ModuleDataGroup cutters = ModuleDataGroup.createGroup(WOOD_KEY, Localization.MODULE_INFO.CUTTER_GROUP);
+        ModuleDataGroup cutters = ModuleDataGroup.createGroup(WOOD_KEY, LocalizationGroup.CUTTER);
 
         ModuleData basic = new ModuleData("basic_wood_cutter", ModuleWoodcutterDiamond.class, 34) {
             @Override
@@ -203,7 +204,7 @@ public class ModuleRegistryCartTools extends ModuleRegistry {
 
 
     private void loadFarmers() {
-        ModuleDataGroup farmers = ModuleDataGroup.createGroup(FARM_KEY, Localization.MODULE_INFO.FARMER_GROUP);
+        ModuleDataGroup farmers = ModuleDataGroup.createGroup(FARM_KEY, LocalizationGroup.FARMER);
 
         ModuleData basic = new ModuleData("basic_farmer", ModuleFarmerDiamond.class, 36) {
             @Override

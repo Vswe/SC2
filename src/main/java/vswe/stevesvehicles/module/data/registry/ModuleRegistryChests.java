@@ -12,6 +12,7 @@ import vswe.stevesvehicles.client.rendering.models.ModelGiftStorage;
 import vswe.stevesvehicles.client.rendering.models.ModelSideChests;
 import vswe.stevesvehicles.client.rendering.models.ModelTopChest;
 import vswe.stevesvehicles.localization.ILocalizedText;
+import vswe.stevesvehicles.localization.entry.gui.info.LocalizationMessage;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleSide;
@@ -124,7 +125,7 @@ public class ModuleRegistryChests extends ModuleRegistry {
 
 
 
-        ModuleData basket = new ModuleDataTreatStorage("egg_basket", ModuleEggBasket.class, 14, Localization.MODULE_INFO.EGG_STORAGE_FULL) {
+        ModuleData basket = new ModuleDataTreatStorage("egg_basket", ModuleEggBasket.class, 14, LocalizationMessage.EGG) {
             @Override
             @SideOnly(Side.CLIENT)
             public void loadModels() {
@@ -154,7 +155,7 @@ public class ModuleRegistryChests extends ModuleRegistry {
         }
 
 
-        ModuleData gift = new ModuleDataTreatStorage("gift_storage", ModuleGiftStorage.class, 12, Localization.MODULE_INFO.GIFT_STORAGE_FULL) {
+        ModuleData gift = new ModuleDataTreatStorage("gift_storage", ModuleGiftStorage.class, 12, LocalizationMessage.GIFT) {
             @Override
             @SideOnly(Side.CLIENT)
             public void loadModels() {
@@ -215,16 +216,16 @@ public class ModuleRegistryChests extends ModuleRegistry {
         @Override
         public String getCartInfoText(String name, NBTTagCompound compound) {
             if (compound.getBoolean(STORAGE_OPENED)) {
-                return Localization.MODULE_INFO.STORAGE_EMPTY.translate() + " " + name;
+                return LocalizationMessage.EMPTY_STORAGE.translate() + " " + name;
             }else{
-                return Localization.MODULE_INFO.STORAGE_FULL.translate() + " " + name;
+                return LocalizationMessage.FULL_STORAGE.translate() + " " + name;
             }
         }
 
         @Override
         public String getModuleInfoText(NBTTagCompound compound) {
             if (compound.getBoolean(STORAGE_OPENED)) {
-                return Localization.MODULE_INFO.STORAGE_EMPTY.translate();
+                return LocalizationMessage.EMPTY_STORAGE.translate();
             }else{
                 return fullText.translate();
             }

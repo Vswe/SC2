@@ -1,5 +1,6 @@
 package vswe.stevesvehicles.module.data;
 
+import vswe.stevesvehicles.localization.entry.gui.info.LocalizationLabel;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.old.Helpers.ColorHelper;
 import vswe.stevesvehicles.old.Helpers.Localization;
@@ -37,10 +38,10 @@ public class ModuleDataHull extends ModuleData {
 
     @Override
     public void addSpecificInformation(List<String> list) {
-        list.add(ColorHelper.YELLOW + Localization.MODULE_INFO.MODULAR_CAPACITY.translate(String.valueOf(modularCapacity)));
-        list.add(ColorHelper.PURPLE + Localization.MODULE_INFO.COMPLEXITY_CAP.translate(String.valueOf(complexityMax)));
-        list.add(ColorHelper.ORANGE + Localization.MODULE_INFO.MAX_ENGINES.translate(String.valueOf(engineMaxCount)));
-        list.add(ColorHelper.GREEN + Localization.MODULE_INFO.MAX_ADDONS.translate(String.valueOf(addonMaxCount)));
+        list.add(ColorHelper.YELLOW + LocalizationLabel.CAPACITY.translate(String.valueOf(modularCapacity)));
+        list.add(ColorHelper.PURPLE + LocalizationLabel.COMPLEXITY_CAP.translate(String.valueOf(complexityMax)));
+        list.add(ColorHelper.ORANGE + LocalizationLabel.MAX_ENGINES.translate(String.valueOf(engineMaxCount)));
+        list.add(ColorHelper.GREEN + LocalizationLabel.MAX_ADDONS.translate(String.valueOf(addonMaxCount)));
     }
 
 }

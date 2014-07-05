@@ -84,6 +84,7 @@ public class ModuleRegistry implements IRegistry<ModuleData> {
         }else{
             modules.put(moduleData.getRawUnlocalizedName(), moduleData);
             allModules.add(moduleData);
+            moduleData.setFullRawUnlocalizedName(getFullCode(moduleData));
         }
     }
 
