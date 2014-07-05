@@ -1,10 +1,9 @@
 package vswe.stevesvehicles.module.common.storage.tank;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import vswe.stevesvehicles.localization.entry.gui.module.LocalizationTank;
+import vswe.stevesvehicles.localization.entry.module.LocalizationTank;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ColorHelper;
-import vswe.stevesvehicles.old.Helpers.Localization;
 
 
 public class ModuleCheatTank extends ModuleTank{

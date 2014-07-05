@@ -6,7 +6,6 @@ import vswe.stevesvehicles.registry.IRegistry;
 import vswe.stevesvehicles.registry.RegistryLoader;
 import vswe.stevesvehicles.upgrade.EffectNameLoader;
 import vswe.stevesvehicles.upgrade.Upgrade;
-import vswe.stevesvehicles.upgrade.effect.BaseEffect;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -60,17 +59,18 @@ public class UpgradeRegistry implements IRegistry<Upgrade> {
             preInit();
         }
 
-        if (upgrades.containsKey(upgrade.getUnlocalizedName())) {
-            System.err.println("An upgrade with this raw name has already been registered in this registry. Failed to register a second upgrade with the raw name " + upgrade.getUnlocalizedName() + " in registry with code " + getCode());
+        if (upgrades.containsKey(upgrade.getRawUnlocalizedName())) {
+            System.err.println("An upgrade with this raw name has already been registered in this registry. Failed to register a second upgrade with the raw name " + upgrade.getRawUnlocalizedName() + " in registry with code " + getCode());
         }else{
-            upgrades.put(upgrade.getUnlocalizedName(), upgrade);
+            upgrades.put(upgrade.getRawUnlocalizedName(), upgrade);
             allUpgrades.add(upgrade);
+            upgrade.setFullRawUnlocalizedName(getFullCode(upgrade));
         }
     }
 
     @Override
-    public String getFullCode(Upgrade moduleData) {
-        return getCode() + ":" + moduleData.getUnlocalizedName();
+    public String getFullCode(Upgrade upgrade) {
+        return getCode() + ":" + upgrade.getRawUnlocalizedName();
     }
 
     @Override

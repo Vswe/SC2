@@ -4,11 +4,10 @@ import java.util.ArrayList;
 
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
-import vswe.stevesvehicles.localization.entry.gui.module.LocalizationUtility;
+import vswe.stevesvehicles.localization.entry.module.LocalizationUtility;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.EnchantmentData;
 import vswe.stevesvehicles.old.Helpers.EnchantmentInfo;
-import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.container.slots.SlotBase;
 import vswe.stevesvehicles.container.slots.SlotEnchantment;

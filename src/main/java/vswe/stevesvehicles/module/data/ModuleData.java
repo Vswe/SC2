@@ -12,7 +12,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import vswe.stevesvehicles.localization.ILocalizedText;
-import vswe.stevesvehicles.localization.entry.gui.info.LocalizationLabel;
+import vswe.stevesvehicles.localization.entry.info.LocalizationLabel;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.old.Helpers.ColorHelper;

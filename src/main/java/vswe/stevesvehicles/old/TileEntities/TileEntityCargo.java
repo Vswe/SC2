@@ -10,7 +10,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import vswe.stevesvehicles.localization.entry.gui.block.LocalizationCargo;
+import vswe.stevesvehicles.localization.entry.block.LocalizationCargo;
 import vswe.stevesvehicles.old.Helpers.*;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.container.ContainerBase;

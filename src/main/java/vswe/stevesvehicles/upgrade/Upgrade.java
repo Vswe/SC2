@@ -70,11 +70,17 @@ public class Upgrade implements IRecipeOutput {
 			}	
 		}
 	}
-	
-	
+
+
+    private String fullUnlocalizedName;
+    public final String getFullRawUnlocalizedName() {
+        return fullUnlocalizedName;
+    }
+
+    public final void setFullRawUnlocalizedName(String val) {fullUnlocalizedName = val;}
 
 	private int sideTexture;
-	private String unlocalizedName;
+	private final String unlocalizedName;
 	private ArrayList<EffectType> effects;
 	public Upgrade(String unlocalizedName) {
 		this(unlocalizedName, 0);
@@ -86,9 +92,12 @@ public class Upgrade implements IRecipeOutput {
 		effects = new ArrayList<EffectType>();
 	}	
 
-	
+	public String getUnlocalizedName() {
+        return "steves_vehicles:tile." + getFullRawUnlocalizedName() + ".name";
+    }
+
 	public String getName() {
-		return StatCollector.translateToLocal("item." + StevesVehicles.localStart + getUnlocalizedName() + ".name");
+		return StatCollector.translateToLocal(getUnlocalizedName());
 	}
 	
 	public Upgrade addEffect(Class <? extends BaseEffect> effect, Object ... params) {
@@ -138,7 +147,7 @@ public class Upgrade implements IRecipeOutput {
         return effects;
     }
 
-    public String getUnlocalizedName() {
+    public String getRawUnlocalizedName() {
 		return unlocalizedName;
 	}
 	
@@ -146,7 +155,7 @@ public class Upgrade implements IRecipeOutput {
 	
 	@SideOnly(Side.CLIENT)
 	public void createIcon(IIconRegister register) {
-		icon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + getUnlocalizedName().replace("_upgrade", "") + "_icon");
+		icon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + getRawUnlocalizedName().replace("_upgrade", "") + "_icon");
 	}
 	
 	@SideOnly(Side.CLIENT)

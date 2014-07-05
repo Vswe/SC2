@@ -16,7 +16,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import vswe.stevesvehicles.localization.entry.gui.block.LocalizationAssembler;
+import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
 import vswe.stevesvehicles.module.data.ModuleType;
 import vswe.stevesvehicles.old.Blocks.BlockCartAssembler;

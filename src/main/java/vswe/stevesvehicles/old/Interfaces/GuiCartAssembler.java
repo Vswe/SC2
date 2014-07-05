@@ -13,7 +13,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import vswe.stevesvehicles.client.gui.GuiBase;
-import vswe.stevesvehicles.localization.entry.gui.block.LocalizationAssembler;
+import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.network.PacketHandler;
 import vswe.stevesvehicles.old.StevesVehicles;

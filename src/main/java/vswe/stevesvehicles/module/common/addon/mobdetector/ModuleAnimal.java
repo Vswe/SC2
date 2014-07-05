@@ -2,9 +2,8 @@ package vswe.stevesvehicles.module.common.addon.mobdetector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityTameable;
-import vswe.stevesvehicles.localization.entry.gui.module.LocalizationShooter;
+import vswe.stevesvehicles.localization.entry.module.LocalizationShooter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.Localization;
 
 public class ModuleAnimal extends ModuleEntityDetector {
 	public ModuleAnimal(VehicleBase vehicleBase) {

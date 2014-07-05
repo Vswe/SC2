@@ -7,11 +7,10 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import vswe.stevesvehicles.client.gui.GuiBase;
-import vswe.stevesvehicles.localization.entry.gui.block.LocalizationDistributor;
+import vswe.stevesvehicles.localization.entry.block.LocalizationDistributor;
 import vswe.stevesvehicles.old.Containers.ContainerDistributor;
 import vswe.stevesvehicles.old.Helpers.DistributorSetting;
 import vswe.stevesvehicles.old.Helpers.DistributorSide;
-import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.old.TileEntities.TileEntityDistributor;
 import vswe.stevesvehicles.old.TileEntities.TileEntityManager;

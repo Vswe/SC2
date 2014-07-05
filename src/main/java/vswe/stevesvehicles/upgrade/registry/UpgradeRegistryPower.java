@@ -15,7 +15,7 @@ import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
 
 public class UpgradeRegistryPower extends UpgradeRegistry {
     public UpgradeRegistryPower() {
-        super("steves_vehicles_power");
+        super("power");
 
 
         Upgrade battery = new Upgrade("batteries");

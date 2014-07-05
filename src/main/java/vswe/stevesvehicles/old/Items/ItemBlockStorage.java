@@ -21,9 +21,9 @@ public class ItemBlockStorage extends ItemBlock
 	
 	public static void init() {
 		blocks = new StorageBlock[] {
-			new StorageBlock("Reinforced Metal Block", ComponentTypes.REINFORCED_METAL.getItemStack()),
-			new StorageBlock("Galgadorian Block", ComponentTypes.GALGADORIAN_METAL.getItemStack()),
-			new StorageBlock("Enhanced Galgadorian Block", ComponentTypes.ENHANCED_GALGADORIAN_METAL.getItemStack()),
+			new StorageBlock("reinforced_metal", ComponentTypes.REINFORCED_METAL.getItemStack()),
+			new StorageBlock("galgadorian", ComponentTypes.GALGADORIAN_METAL.getItemStack()),
+			new StorageBlock("enhanced_galgadorian", ComponentTypes.ENHANCED_GALGADORIAN_METAL.getItemStack()),
 		};		
 	}
 	
@@ -77,8 +77,9 @@ public class ItemBlockStorage extends ItemBlock
     public String getUnlocalizedName(ItemStack item)
     {
 
-		if (item != null) {
-			return "item." + StevesVehicles.instance.localStart + "BlockStorage" + item.getItemDamage();
+		if (item != null && item.getItemDamage() >= 0 && item.getItemDamage() < blocks.length) {
+            StorageBlock block = blocks[item.getItemDamage()];
+            return "steves_vehicles:tile.metal_storage:" + block.getName();
 		}	
 	
         return "item.unknown";

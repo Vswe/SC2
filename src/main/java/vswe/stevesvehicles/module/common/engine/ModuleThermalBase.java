@@ -2,9 +2,8 @@ package vswe.stevesvehicles.module.common.engine;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidRegistry;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
-import vswe.stevesvehicles.localization.entry.gui.module.LocalizationEngine;
+import vswe.stevesvehicles.localization.entry.module.LocalizationEngine;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.Localization;
 
 public abstract class ModuleThermalBase extends ModuleEngine {
 	public ModuleThermalBase(VehicleBase vehicleBase) {

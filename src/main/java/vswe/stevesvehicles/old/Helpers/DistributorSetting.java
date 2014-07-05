@@ -2,7 +2,7 @@ package vswe.stevesvehicles.old.Helpers;
 import java.util.ArrayList;
 
 import vswe.stevesvehicles.localization.ILocalizedText;
-import vswe.stevesvehicles.localization.entry.gui.block.LocalizationDistributor;
+import vswe.stevesvehicles.localization.entry.block.LocalizationDistributor;
 import vswe.stevesvehicles.old.TileEntities.TileEntityDistributor;
 import vswe.stevesvehicles.old.TileEntities.TileEntityManager;
 	

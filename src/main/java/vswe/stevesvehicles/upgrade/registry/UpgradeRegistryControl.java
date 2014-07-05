@@ -17,7 +17,7 @@ import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
 
 public class UpgradeRegistryControl extends UpgradeRegistry {
     public UpgradeRegistryControl() {
-        super("steves_vehicle_control");
+        super("control");
 
         Upgrade input = new Upgrade("module_input", 1);
         input.addEffect(InputChest.class, 7, 3);

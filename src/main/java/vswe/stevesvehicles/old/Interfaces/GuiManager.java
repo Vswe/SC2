@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 
 import vswe.stevesvehicles.client.gui.GuiBase;
-import vswe.stevesvehicles.localization.entry.gui.block.LocalizationManager;
+import vswe.stevesvehicles.localization.entry.block.LocalizationManager;
 import vswe.stevesvehicles.old.Containers.ContainerManager;
 import vswe.stevesvehicles.old.TileEntities.TileEntityManager;
 import net.minecraft.block.Block;

@@ -396,47 +396,47 @@ item.SC2:blade_arm.name=steves_vehicles:item.component:blade_arm.name
 #				BLOCKS
 # ======================================
 
-tile.SC2:BlockCargoManager.name=Cargo Manager
-tile.SC2:BlockJunction.name=Junction Rail
-tile.SC2:BlockAdvDetector.name=Advanced Detector Rail
-tile.SC2:BlockCartAssembler.name=Cart Assembler
-tile.SC2:BlockActivator.name=Module Toggler
-tile.SC2:BlockDistributor.name=External Distributor
-tile.SC2:BlockLiquidManager.name=Liquid Manager
+tile.SC2:BlockCargoManager.name=steves_vehicles:tile.common:cargo_manager.name
+tile.SC2:BlockJunction.name=steves_vehicles:tile.common:junction_rail.name
+tile.SC2:BlockAdvDetector.name=steves_vehicles:tile.common:advanced_detector_rail.name
+tile.SC2:BlockCartAssembler.name=steves_vehicles:tile.common:vehicle_assembler.name
+tile.SC2:BlockActivator.name=steves_vehicles:tile.common:module_toggler.name
+tile.SC2:BlockDistributor.name=steves_vehicles:tile.common:external_distributor.name
+tile.SC2:BlockLiquidManager.name=steves_vehicles:tile.common:liquid_manager.name
 
 # Storage
-item.SC2:BlockStorage0.name=Reinforced Metal Block
-item.SC2:BlockStorage1.name=Galgadorian Block
-item.SC2:BlockStorage2.name=Enhanced Galgadorian Block
+item.SC2:BlockStorage0.name=steves_vehicles:tile.metal_storage:reinforced_metal
+item.SC2:BlockStorage1.name=steves_vehicles:tile.metal_storage:galgadorian
+item.SC2:BlockStorage2.name=steves_vehicles:tile.metal_storage:enhanced_galgadorian
 
 # Upgrades
-item.SC2:batteries.name=Upgrade: Batteries
-item.SC2:power_crystal.name=Upgrade: Power Crystal
-item.SC2:module_knowledge.name=Upgrade: Module knowledge
-item.SC2:industrial_espionage.name=Upgrade: Industrial espionage
-item.SC2:experienced_assembler.name=Upgrade: Experienced assembler
-item.SC2:new_era.name=Upgrade: New Era
-item.SC2:co2_friendly.name=Upgrade: CO2 friendly
-item.SC2:generic_engine.name=Upgrade: Generic engine
-item.SC2:module_input.name=Upgrade: Module input
-item.SC2:production_line.name=Upgrade: Production line
-item.SC2:cart_deployer.name=Upgrade: Cart Deployer
-item.SC2:cart_modifier.name=Upgrade: Cart Modifier
-item.SC2:cart_crane.name=Upgrade: Cart Crane
-item.SC2:redstone_control.name=Upgrade: Redstone Control
-item.SC2:creative_mode.name=Upgrade: Creative Mode
-item.SC2:quick_demolisher.name=Upgrade: Quick Demolisher
-item.SC2:manager_bridge.name=Upgrade: Manager Bridge
-item.SC2:entropy.name=Upgrade: Entropy
-item.SC2:solar_panel.name=Upgrade: Solar Panel
-item.SC2:thermal_engine_upgrade.name=Upgrade: Thermal Engine
+item.SC2:batteries=steves_vehicles:tile.power:batteries.name
+item.SC2:power_crystal=steves_vehicles:tile.power:power_crystal.name
+item.SC2:co2_friendly=steves_vehicles:tile.power:co2_friendly.name
+item.SC2:generic_engine=steves_vehicles:tile.power:generic_engine.name
+item.SC2:thermal_engine_upgrade=steves_vehicles:tile.power:thermal_engine_upgrade.name
+item.SC2:solar_panel=steves_vehicles:tile.power:solar_panel.name
+item.SC2:module_knowledge=steves_vehicles:tile.production:module_knowledge.name
+item.SC2:industrial_espionage=steves_vehicles:tile.production:industrial_espionage.name
+item.SC2:experienced_assembler=steves_vehicles:tile.production:experienced_assembler.name
+item.SC2:new_era=steves_vehicles:tile.production:new_era.name
+item.SC2:quick_demolisher=steves_vehicles:tile.production:quick_demolisher.name
+item.SC2:entropy=steves_vehicles:tile.production:entropy.name
+item.SC2:creative_mode=steves_vehicles:tile.production:creative_mode.name
+item.SC2:module_input=steves_vehicles:tile.control:module_input.name
+item.SC2:production_line=steves_vehicles:tile.control:production_line.name
+item.SC2:cart_deployer=steves_vehicles:tile.control:cart_deployer.name
+item.SC2:cart_modifier=steves_vehicles:tile.control:cart_modifier.name
+item.SC2:cart_crane=steves_vehicles:tile.control:cart_crane.name
+item.SC2:redstone_control=steves_vehicles:tile.control:redstone_control.name
+item.SC2:manager_bridge=steves_vehicles:tile.control:manager_bridge.name
 
 # Detector Units
-item.SC2:BlockDetector0.name=Detector Manager
-item.SC2:BlockDetector1.name=Detector Unit
-item.SC2:BlockDetector2.name=Detector Station
-item.SC2:BlockDetector3.name=Detector Junction
-item.SC2:BlockDetector4.name=Detector Redstone Unit
+item.SC2:BlockDetector0.name=steves_vehicles:tile.detector_unit:normal.name
+item.SC2:BlockDetector1.name=steves_vehicles:tile.detector_unit:unit.name
+item.SC2:BlockDetector2.name=steves_vehicles:tile.detector_unit:stop.name
+item.SC2:BlockDetector3.name=steves_vehicles:tile.detector_unit:junction.name
+item.SC2:BlockDetector4.name=steves_vehicles:tile.detector_unit:redstone.name
 
 
 

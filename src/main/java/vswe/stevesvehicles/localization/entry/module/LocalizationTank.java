@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.localization.entry.gui.module;
+package vswe.stevesvehicles.localization.entry.module;
 
 import vswe.stevesvehicles.localization.ILocalizedText;
 import vswe.stevesvehicles.localization.LocalizedTextAdvanced;

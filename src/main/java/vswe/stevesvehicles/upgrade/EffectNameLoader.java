@@ -1,9 +1,7 @@
 package vswe.stevesvehicles.upgrade;
 
 
-import net.minecraft.util.MathHelper;
-import vswe.stevesvehicles.localization.entry.gui.info.LocalizationUpgrade;
-import vswe.stevesvehicles.old.Helpers.Localization;
+import vswe.stevesvehicles.localization.entry.info.LocalizationUpgrade;
 import vswe.stevesvehicles.upgrade.effect.assembly.Blueprint;
 import vswe.stevesvehicles.upgrade.effect.assembly.Disassemble;
 import vswe.stevesvehicles.upgrade.effect.assembly.InputChest;

@@ -7,7 +7,6 @@ import net.minecraft.util.IIcon;
 
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.upgrade.Upgrade;
-import vswe.stevesvehicles.upgrade.effect.BaseEffect;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -63,7 +62,7 @@ public class ItemUpgrade extends ItemBlock {
     public String getUnlocalizedName(ItemStack item) {
 		Upgrade upgrade = UpgradeRegistry.getUpgradeFromId(item.getItemDamage());
 		if (upgrade != null) {
-			return "item." + StevesVehicles.localStart + upgrade.getUnlocalizedName();
+			return "steves_vehicles:tile.upgrade:" + upgrade.getRawUnlocalizedName();
 		}	
 	
         return "item.unknown";

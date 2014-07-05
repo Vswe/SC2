@@ -10,8 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import org.lwjgl.opengl.GL11;
 
 import vswe.stevesvehicles.client.gui.GuiVehicle;
-import vswe.stevesvehicles.localization.entry.gui.module.cart.LocalizationCartTravel;
-import vswe.stevesvehicles.old.Helpers.Localization;
+import vswe.stevesvehicles.localization.entry.module.cart.LocalizationCartTravel;
 import vswe.stevesvehicles.network.PacketHandler;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;

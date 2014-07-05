@@ -4,7 +4,7 @@ package vswe.stevesvehicles.module.data;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import vswe.stevesvehicles.localization.entry.gui.info.LocalizationLabel;
+import vswe.stevesvehicles.localization.entry.info.LocalizationLabel;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.old.Helpers.NBTHelper;

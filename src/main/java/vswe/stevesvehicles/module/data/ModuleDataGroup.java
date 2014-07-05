@@ -1,7 +1,6 @@
 package vswe.stevesvehicles.module.data;
 import vswe.stevesvehicles.localization.ILocalizedText;
-import vswe.stevesvehicles.localization.entry.gui.info.LocalizationLabel;
-import vswe.stevesvehicles.old.Helpers.Localization;
+import vswe.stevesvehicles.localization.entry.info.LocalizationLabel;
 
 import java.util.ArrayList;
 import java.util.HashMap;

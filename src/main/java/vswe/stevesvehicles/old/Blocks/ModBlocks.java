@@ -20,20 +20,20 @@ import vswe.stevesvehicles.old.TileEntities.*;
 import java.lang.reflect.Constructor;
 
 public enum ModBlocks {
-    CARGO_MANAGER("BlockCargoManager", BlockCargoManager.class, TileEntityCargo.class, "cargo"),
-    JUNCTION("BlockJunction", BlockRailJunction.class),
-    ADVANCED_DETECTOR("BlockAdvDetector", BlockRailAdvDetector.class),
-    CART_ASSEMBLER("BlockCartAssembler", BlockCartAssembler.class, TileEntityCartAssembler.class, "assembler"),
-    MODULE_TOGGLER("BlockActivator", BlockActivator.class, TileEntityActivator.class, "activator"),
-    EXTERNAL_DISTRIBUTOR("BlockDistributor", BlockDistributor.class, TileEntityDistributor.class, "distributor"),
-    DETECTOR_UNIT("BlockDetector", BlockDetector.class, TileEntityDetector.class, "detector", ItemBlockDetector.class),
+    CARGO_MANAGER("cargo_manager", BlockCargoManager.class, TileEntityCargo.class, "cargo"),
+    JUNCTION("junction_rail", BlockRailJunction.class),
+    ADVANCED_DETECTOR("advanced_detector_rail", BlockRailAdvDetector.class),
+    CART_ASSEMBLER("vehicle_assembler", BlockCartAssembler.class, TileEntityCartAssembler.class, "assembler"),
+    MODULE_TOGGLER("module_toggler", BlockActivator.class, TileEntityActivator.class, "toggler"),
+    EXTERNAL_DISTRIBUTOR("external_distributor", BlockDistributor.class, TileEntityDistributor.class, "distributor"),
+    DETECTOR_UNIT("detector_unit", BlockDetector.class, TileEntityDetector.class, "detector", ItemBlockDetector.class),
     UPGRADE("upgrade", BlockUpgrade.class, TileEntityUpgrade.class, "upgrade", ItemUpgrade.class),
-    LIQUID_MANAGER("BlockLiquidManager", BlockLiquidManager.class, TileEntityLiquid.class, "liquid"),
-    STORAGE("BlockMetalStorage", BlockMetalStorage.class, ItemBlockStorage.class);
+    LIQUID_MANAGER("liquid_manager", BlockLiquidManager.class, TileEntityLiquid.class, "liquid"),
+    STORAGE("metal_storage", BlockMetalStorage.class, ItemBlockStorage.class);
 
 
 
-    private final String name;
+    private final String unlocalizedName;
     private final Class<? extends IBlockBase> clazz;
     private final Class<? extends TileEntity> tileEntityClazz;
     private final String tileEntityName;
@@ -41,20 +41,20 @@ public enum ModBlocks {
 
     private Block block;
 
-    ModBlocks(String name, Class<? extends IBlockBase> clazz) {
-        this(name, clazz, null, null);
+    ModBlocks(String unlocalizedName, Class<? extends IBlockBase> clazz) {
+        this(unlocalizedName, clazz, null, null);
     }
 
-    ModBlocks(String name, Class<? extends IBlockBase> clazz, Class<? extends TileEntity> tileEntityClazz, String tileEntityName) {
-        this(name, clazz, tileEntityClazz, tileEntityName, ItemBlock.class);
+    ModBlocks(String unlocalizedName, Class<? extends IBlockBase> clazz, Class<? extends TileEntity> tileEntityClazz, String tileEntityName) {
+        this(unlocalizedName, clazz, tileEntityClazz, tileEntityName, ItemBlock.class);
     }
 
-    ModBlocks(String name, Class<? extends IBlockBase> clazz, Class<? extends ItemBlock> itemClazz) {
-        this(name, clazz, null, null, itemClazz);
+    ModBlocks(String unlocalizedName, Class<? extends IBlockBase> clazz, Class<? extends ItemBlock> itemClazz) {
+        this(unlocalizedName, clazz, null, null, itemClazz);
     }
 
-    ModBlocks(String name, Class<? extends IBlockBase> clazz, Class<? extends TileEntity> tileEntityClazz, String tileEntityName, Class<? extends ItemBlock> itemClazz) {
-        this.name = name;
+    ModBlocks(String unlocalizedName, Class<? extends IBlockBase> clazz, Class<? extends TileEntity> tileEntityClazz, String tileEntityName, Class<? extends ItemBlock> itemClazz) {
+        this.unlocalizedName = unlocalizedName;
         this.clazz = clazz;
         this.tileEntityClazz = tileEntityClazz;
         this.tileEntityName = tileEntityName;
@@ -72,8 +72,8 @@ public enum ModBlocks {
                     IBlockBase blockBase = (IBlockBase)blockInstance;
                     Block block = (Block)blockInstance;
                     block.setHardness(2F).setStepSound(Block.soundTypeMetal);
-                    GameRegistry.registerBlock(block, blockInfo.itemClazz, blockInfo.name);
-                    blockBase.setUnlocalizedName("tile." + StevesVehicles.localStart + blockInfo.name);
+                    GameRegistry.registerBlock(block, blockInfo.itemClazz, blockInfo.unlocalizedName);
+                    blockBase.setUnlocalizedName("steves_vehicles:tile.common:" + blockInfo.unlocalizedName) ;
 
                     blockInfo.block = block;
 
@@ -81,10 +81,10 @@ public enum ModBlocks {
                         GameRegistry.registerTileEntity(blockInfo.tileEntityClazz, blockInfo.tileEntityName);
                     }
                 }else{
-                    System.out.println("This is not a block (" + blockInfo.name + ")");
+                    System.out.println("This is not a block (" + blockInfo.unlocalizedName + ")");
                 }
             }catch(Exception e) {
-                System.out.println("Failed to create block (" + blockInfo.name + ")");
+                System.out.println("Failed to create block (" + blockInfo.unlocalizedName + ")");
 
                 e.printStackTrace();
             }

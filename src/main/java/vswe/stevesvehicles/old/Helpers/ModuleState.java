@@ -29,7 +29,7 @@ import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
 import vswe.stevesvehicles.localization.ILocalizedText;
-import vswe.stevesvehicles.localization.entry.gui.block.LocalizationDetector;
+import vswe.stevesvehicles.localization.entry.block.LocalizationDetector;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.module.IActivatorModule;
 import vswe.stevesvehicles.module.ISuppliesModule;

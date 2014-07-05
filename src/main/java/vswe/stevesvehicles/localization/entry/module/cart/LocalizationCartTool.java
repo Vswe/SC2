@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.localization.entry.gui.module.cart;
+package vswe.stevesvehicles.localization.entry.module.cart;
 
 
 import vswe.stevesvehicles.localization.ILocalizedText;

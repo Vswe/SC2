@@ -1,6 +1,6 @@
 package vswe.stevesvehicles.old.Helpers;
 import vswe.stevesvehicles.localization.ILocalizedText;
-import vswe.stevesvehicles.localization.entry.gui.block.LocalizationToggler;
+import vswe.stevesvehicles.localization.entry.block.LocalizationToggler;
 import vswe.stevesvehicles.module.ModuleBase;
 	
 public class ActivatorOption {

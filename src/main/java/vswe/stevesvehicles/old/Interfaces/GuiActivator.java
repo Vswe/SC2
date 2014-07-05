@@ -5,8 +5,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import vswe.stevesvehicles.client.gui.GuiBase;
-import vswe.stevesvehicles.localization.entry.gui.block.LocalizationToggler;
-import vswe.stevesvehicles.old.Helpers.Localization;
+import vswe.stevesvehicles.localization.entry.block.LocalizationToggler;
 import vswe.stevesvehicles.network.PacketHandler;
 import vswe.stevesvehicles.old.Containers.ContainerActivator;
 import vswe.stevesvehicles.old.Helpers.ActivatorOption;

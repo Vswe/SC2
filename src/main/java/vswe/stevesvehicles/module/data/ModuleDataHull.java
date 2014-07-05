@@ -1,9 +1,8 @@
 package vswe.stevesvehicles.module.data;
 
-import vswe.stevesvehicles.localization.entry.gui.info.LocalizationLabel;
+import vswe.stevesvehicles.localization.entry.info.LocalizationLabel;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.old.Helpers.ColorHelper;
-import vswe.stevesvehicles.old.Helpers.Localization;
 
 import java.util.List;
 

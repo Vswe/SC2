@@ -1,8 +1,7 @@
 package vswe.stevesvehicles.module.data;
 
 import vswe.stevesvehicles.localization.ILocalizedText;
-import vswe.stevesvehicles.localization.entry.gui.info.LocalizationLabel;
-import vswe.stevesvehicles.old.Helpers.Localization;
+import vswe.stevesvehicles.localization.entry.info.LocalizationLabel;
 
 public enum ModuleSide {
     TOP(LocalizationLabel.TOP),

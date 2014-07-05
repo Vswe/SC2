@@ -9,7 +9,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.nbt.NBTTagCompound;
-import vswe.stevesvehicles.localization.entry.gui.block.LocalizationToggler;
+import vswe.stevesvehicles.localization.entry.block.LocalizationToggler;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Containers.ContainerActivator;
 import vswe.stevesvehicles.container.ContainerBase;

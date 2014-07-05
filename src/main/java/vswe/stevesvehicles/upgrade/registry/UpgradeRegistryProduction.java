@@ -18,7 +18,7 @@ import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
 
 public class UpgradeRegistryProduction extends UpgradeRegistry {
     public UpgradeRegistryProduction() {
-        super("steves_vehicle_production");
+        super("production");
 
         Upgrade knowledge = new Upgrade("module_knowledge");
         knowledge.addEffect(TimeFlat.class, -750);

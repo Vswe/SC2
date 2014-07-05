@@ -4,9 +4,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import org.lwjgl.opengl.GL11;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
-import vswe.stevesvehicles.localization.entry.gui.module.LocalizationVisual;
+import vswe.stevesvehicles.localization.entry.module.LocalizationVisual;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 
 

@@ -8,7 +8,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidTank;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
-import vswe.stevesvehicles.localization.entry.gui.module.LocalizationTank;
+import vswe.stevesvehicles.localization.entry.module.LocalizationTank;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.*;
 import vswe.stevesvehicles.client.gui.GuiBase;

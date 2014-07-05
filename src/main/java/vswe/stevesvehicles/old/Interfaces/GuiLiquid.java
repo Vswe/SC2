@@ -2,7 +2,7 @@ package vswe.stevesvehicles.old.Interfaces;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
-import vswe.stevesvehicles.localization.entry.gui.block.LocalizationLiquid;
+import vswe.stevesvehicles.localization.entry.block.LocalizationLiquid;
 import vswe.stevesvehicles.old.Blocks.ModBlocks;
 import vswe.stevesvehicles.old.Containers.ContainerLiquid;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;

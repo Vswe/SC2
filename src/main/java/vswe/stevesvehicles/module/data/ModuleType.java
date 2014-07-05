@@ -2,10 +2,9 @@ package vswe.stevesvehicles.module.data;
 
 
 import vswe.stevesvehicles.localization.ILocalizedText;
-import vswe.stevesvehicles.localization.entry.gui.info.LocalizationCategory;
+import vswe.stevesvehicles.localization.entry.info.LocalizationCategory;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.common.engine.ModuleEngine;
-import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.module.common.addon.ModuleAddon;
 import vswe.stevesvehicles.module.cart.hull.ModuleHull;
 import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;

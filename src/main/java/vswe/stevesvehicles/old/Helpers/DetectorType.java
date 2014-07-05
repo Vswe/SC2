@@ -5,7 +5,7 @@ import java.util.HashMap;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
-import vswe.stevesvehicles.localization.entry.gui.block.LocalizationDetector;
+import vswe.stevesvehicles.localization.entry.block.LocalizationDetector;
 import vswe.stevesvehicles.old.Blocks.BlockRailAdvDetector;
 import vswe.stevesvehicles.old.Blocks.ModBlocks;
 import vswe.stevesvehicles.old.StevesVehicles;
@@ -119,9 +119,12 @@ public enum DetectorType {
 	}
 
 	public String getName() {
-		return StatCollector.translateToLocal("item." + StevesVehicles.localStart + "BlockDetector" + meta + ".name");
+		return StatCollector.translateToLocal(getUnlocalizedName());
 	}
 
+    public String getUnlocalizedName() {
+        return "steves_vehicles:tile.detector_unit:" + toString().toLowerCase() + ".name"  ;
+    }
 
 
 	public void registerIcons(IIconRegister register) {

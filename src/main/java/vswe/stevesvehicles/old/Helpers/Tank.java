@@ -16,7 +16,7 @@ import net.minecraftforge.fluids.IFluidTank;
 import vswe.stevesvehicles.client.gui.GuiBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import vswe.stevesvehicles.localization.entry.gui.module.LocalizationTank;
+import vswe.stevesvehicles.localization.entry.module.LocalizationTank;
 
 public class Tank implements IFluidTank {
 
