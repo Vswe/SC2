@@ -15,11 +15,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraft.client.Minecraft;
 import vswe.stevesvehicles.localization.ILocalizedText;
-import vswe.stevesvehicles.old.Helpers.Localization;
+import vswe.stevesvehicles.localization.entry.arcade.LocalizationTrack;
 
 public class TrackLevel {
 
-	public static final TrackLevel editor =  new TrackLevel(Localization.STORIES.THE_BEGINNING.MAP_EDITOR, 0, 0, TrackOrientation.Direction.RIGHT, 26, 9);
+	public static final TrackLevel editor =  new TrackLevel(LocalizationTrack.EDITOR_TITLE, 0, 0, TrackOrientation.Direction.RIGHT, 26, 9);
 
 	
 	//length of name [1 byte]
@@ -260,7 +260,7 @@ public class TrackLevel {
 	private ArrayList<LevelMessage> messages;
 
 	
-	public TrackLevel(Localization.STORIES.THE_BEGINNING name, int playerX, int playerY, TrackOrientation.Direction playerDir, int itemX, int itemY) {
+	public TrackLevel(ILocalizedText name, int playerX, int playerY, TrackOrientation.Direction playerDir, int itemX, int itemY) {
 		this.name = name;
 		this.playerX = playerX;
 		this.playerY = playerY;

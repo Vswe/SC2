@@ -5,7 +5,7 @@ import vswe.stevesvehicles.localization.ILocalizedText;
 import vswe.stevesvehicles.localization.LocalizedTextAdvanced;
 import vswe.stevesvehicles.localization.LocalizedTextSimple;
 
-public class LocalizationUpgrade {
+public final class LocalizationUpgrade {
     public static final ILocalizedText BLUEPRINT = createSimple("blueprint");
     public static final ILocalizedText COMBUSTION = createSimple("combustion");
     public static final ILocalizedText DEPLOYER = createSimple("deployer");

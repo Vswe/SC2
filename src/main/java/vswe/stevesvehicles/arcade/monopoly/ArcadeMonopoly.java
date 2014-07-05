@@ -7,8 +7,8 @@ import org.lwjgl.opengl.GL11;
 
 import vswe.stevesvehicles.arcade.ArcadeGame;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.localization.PlainText;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.common.attachment.ModuleArcade;
 import cpw.mods.fml.relauncher.Side;
@@ -66,7 +66,7 @@ public class ArcadeMonopoly extends ArcadeGame {
 	public static final float SCALE = 0.17F;
 	
 	public ArcadeMonopoly(ModuleArcade module) {
-		super(module, Localization.ARCADE.MADNESS);
+		super(module, new PlainText("Forgecraft Madness"));
 		
 		pieces = new ArrayList<Piece>();
 		pieces.add(new Piece(this, 0, Piece.ControlledBy.PLAYER));

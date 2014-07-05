@@ -6,8 +6,8 @@ import vswe.stevesvehicles.arcade.ArcadeGame;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
 import vswe.stevesvehicles.arcade.sweeper.Tile.TILE_STATE;
 import vswe.stevesvehicles.arcade.tracks.TrackStory;
+import vswe.stevesvehicles.localization.entry.arcade.LocalizationSweeper;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.common.attachment.ModuleArcade;
 import cpw.mods.fml.relauncher.Side;
@@ -16,7 +16,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ArcadeSweeper extends ArcadeGame {
 
 	public ArcadeSweeper(ModuleArcade module) {
-		super(module, Localization.ARCADE.CREEPER);
+		super(module, LocalizationSweeper.TITLE);
 		highscore = new int[] {999,999,999};
 		newGame(currentGameType);
 	}
@@ -249,20 +249,20 @@ public class ArcadeSweeper extends ArcadeGame {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawForeground(GuiVehicle gui) {
-		String[] mapNames = new String[] {Localization.ARCADE.MAP_1.translate(), Localization.ARCADE.MAP_2.translate(), Localization.ARCADE.MAP_3.translate()};
+		String[] mapNames = new String[] {LocalizationSweeper.MAP_TINY.translate(), LocalizationSweeper.MAP_MEDIUM.translate(), LocalizationSweeper.MAP_LARGE.translate()};
 		
-		getModule().drawString(gui, Localization.ARCADE.LEFT.translate(String.valueOf(creepersLeft)), 10, 180, 0x404040);
-		getModule().drawString(gui, Localization.ARCADE.TIME.translate(String.valueOf(ticks / 20)), 10, 190, 0x404040);
+		getModule().drawString(gui, LocalizationSweeper.REMAINING.translate(String.valueOf(creepersLeft)), 10, 180, 0x404040);
+		getModule().drawString(gui, LocalizationSweeper.TIME.translate(String.valueOf(ticks / 20)), 10, 190, 0x404040);
 		
-		getModule().drawString(gui, "R - " + Localization.ARCADE.INSTRUCTION_RESTART.translate(), 10, 210, 0x404040);
+		getModule().drawString(gui, "R - " + LocalizationSweeper.RESTART.translate(), 10, 210, 0x404040);
 		
-		getModule().drawString(gui, "T - " + Localization.ARCADE.INSTRUCTION_CHANGE_MAP.translate(), 10, 230, 0x404040);
-		getModule().drawString(gui, Localization.ARCADE.MAP.translate(mapNames[currentGameType]), 10, 240, 0x404040);
+		getModule().drawString(gui, "T - " + LocalizationSweeper.CHANGE_MAP.translate(), 10, 230, 0x404040);
+		getModule().drawString(gui, LocalizationSweeper.CURRENT_MAP.translate(mapNames[currentGameType]), 10, 240, 0x404040);
 		
 		
-		getModule().drawString(gui, Localization.ARCADE.HIGH_SCORES.translate(), 330, 180, 0x404040);
+		getModule().drawString(gui, LocalizationSweeper.HIGH_SCORE_TITLE.translate(), 330, 180, 0x404040);
 		for (int i = 0; i < 3; i++) {
-			getModule().drawString(gui, Localization.ARCADE.HIGH_SCORE_ENTRY.translate(mapNames[i], String.valueOf(highscore[i])), 330, 190 + i * 10, 0x404040);
+			getModule().drawString(gui, LocalizationSweeper.HIGH_SCORE_ENTRY.translate(mapNames[i], String.valueOf(highscore[i])), 330, 190 + i * 10, 0x404040);
 		}
 
 	}

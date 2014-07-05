@@ -5,8 +5,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.arcade.ArcadeGame;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
 import vswe.stevesvehicles.arcade.tracks.TrackStory;
+import vswe.stevesvehicles.localization.entry.arcade.LocalizationStacker;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.common.attachment.ModuleArcade;
 import cpw.mods.fml.relauncher.Side;
@@ -16,7 +16,7 @@ public class ArcadeTetris extends ArcadeGame {
 
 	
 	public ArcadeTetris(ModuleArcade module) {
-		super(module, Localization.ARCADE.STACKER);
+		super(module, LocalizationStacker.TITLE);
 		
 		newGame();
 	}
@@ -196,21 +196,21 @@ public class ArcadeTetris extends ArcadeGame {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawForeground(GuiVehicle gui) {
-		getModule().drawString(gui, Localization.ARCADE.HIGH_SCORE.translate(String.valueOf(highscore)), 10, 20, 0x404040);
-		getModule().drawString(gui, Localization.ARCADE.SCORE.translate(String.valueOf(score)), 10, 40, 0x404040);
-		getModule().drawString(gui, Localization.ARCADE.REMOVED_LINES.translate(String.valueOf(removed)), 10, 60, 0x404040);
+		getModule().drawString(gui, LocalizationStacker.HIGH_SCORE.translate(String.valueOf(highscore)), 10, 20, 0x404040);
+		getModule().drawString(gui, LocalizationStacker.SCORE.translate(String.valueOf(score)), 10, 40, 0x404040);
+		getModule().drawString(gui, LocalizationStacker.REMOVED.translate(String.valueOf(removed)), 10, 60, 0x404040);
 
         for (int i = 0; i < 4; i++) {
-            getModule().drawString(gui, Localization.ARCADE.REMOVED_LINES_COMBO.translate(String.valueOf(i), String.valueOf(removedByAmount[i])), 10, 80 + i * 10, 0x404040);
+            getModule().drawString(gui, LocalizationStacker.REMOVED_COMBO.translate(String.valueOf(i), String.valueOf(removedByAmount[i])), 10, 80 + i * 10, 0x404040);
         }
 
 		
-		getModule().drawString(gui, "W - " + Localization.ARCADE.INSTRUCTION_ROTATE.translate(), 340, 20, 0x404040);
-		getModule().drawString(gui, "A - " + Localization.ARCADE.INSTRUCTION_LEFT.translate(), 340, 30, 0x404040);
-		getModule().drawString(gui, "S - " + Localization.ARCADE.INSTRUCTION_DROP.translate(), 340, 40, 0x404040);
-		getModule().drawString(gui, "D - " + Localization.ARCADE.INSTRUCTION_RIGHT.translate(),  340, 50, 0x404040);
+		getModule().drawString(gui, "W - " + LocalizationStacker.ROTATE.translate(), 340, 20, 0x404040);
+		getModule().drawString(gui, "A - " + LocalizationStacker.LEFT.translate(), 340, 30, 0x404040);
+		getModule().drawString(gui, "S - " + LocalizationStacker.DROP.translate(), 340, 40, 0x404040);
+		getModule().drawString(gui, "D - " + LocalizationStacker.RIGHT.translate(),  340, 50, 0x404040);
 		
-		getModule().drawString(gui, "R - " + Localization.ARCADE.INSTRUCTION_RESTART.translate(), 340, 70, 0x404040);
+		getModule().drawString(gui, "R - " + LocalizationStacker.RESET.translate(), 340, 70, 0x404040);
 
 	}
 	

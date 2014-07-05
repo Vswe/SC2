@@ -6,7 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.arcade.ArcadeGame;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
-import vswe.stevesvehicles.old.Helpers.Localization;
+import vswe.stevesvehicles.localization.entry.arcade.LocalizationTrack;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
@@ -17,7 +17,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ArcadeTracks extends ArcadeGame {
 
 	public ArcadeTracks(ModuleArcade module) {
-		super(module, Localization.ARCADE.OPERATOR);
+		super(module, LocalizationTrack.TITLE);
 		
 		carts = new ArrayList<Cart>();
 		
@@ -252,9 +252,9 @@ public class ArcadeTracks extends ArcadeGame {
 		if (isSaveMenuOpen) {
 			int[] menu = getSaveMenuArea();
 			if (failedToSave) {
-				getModule().drawString(gui, Localization.ARCADE.SAVE_ERROR.translate(), menu[0] + 3, menu[1] + 3, 0xFF0000);
+				getModule().drawString(gui, LocalizationTrack.SAVE_ERROR.translate(), menu[0] + 3, menu[1] + 3, 0xFF0000);
 			}else{
-				getModule().drawString(gui, Localization.ARCADE.SAVE.translate(), menu[0] + 3, menu[1] + 3, 0x404040);
+				getModule().drawString(gui, LocalizationTrack.SAVE_MESSAGE.translate(), menu[0] + 3, menu[1] + 3, 0x404040);
 			}
 			getModule().drawString(gui, saveName + (saveName.length() < 15 && getModule().getVehicle().getWorld().getWorldTime() % 20 < 10 ? "|" : ""), menu[0] + 5, menu[1] + 16, 0xFFFFFF);
 			
@@ -268,17 +268,17 @@ public class ArcadeTracks extends ArcadeGame {
 				
 				String str;
 				if (currentMenuTab == 1) {
-					str = Localization.ARCADE.USER_MAPS.translate();
+					str = LocalizationTrack.USER_MAPS.translate();
 				}else if (storySelected) {
 					str = TrackStory.stories.get(storyList.getSelectedIndex()).getName();
 				}else{
-					str = Localization.ARCADE.STORIES.translate();
+					str = LocalizationTrack.STORIES.translate();
 				}
 				getModule().drawString(gui, str, menu[0] + 5, menu[1] + 32, 0x404040);
 			}else{
 				int[] menu = getMenuArea();
 
-				getModule().drawSplitString(gui, Localization.ARCADE.HELP.translate(), menu[0] + 10, menu[1] + 20, menu[2] - 20, 0x404040);
+				getModule().drawSplitString(gui, LocalizationTrack.HELP.translate(), menu[0] + 10, menu[1] + 20, menu[2] - 20, 0x404040);
 			}
 		}else{
 			for(LevelMessage message : currentMap.getMessages()) {
@@ -288,18 +288,18 @@ public class ArcadeTracks extends ArcadeGame {
 			}
 			
 			if (isUsingEditor()) {
-				getModule().drawString(gui, "1-5 - " + Localization.ARCADE.INSTRUCTION_SHAPE.translate(), 10, 180, 0x404040);
-				getModule().drawString(gui, "R - " + Localization.ARCADE.INSTRUCTION_ROTATE_TRACK.translate(), 10, 190, 0x404040);
-				getModule().drawString(gui, "F - " + Localization.ARCADE.INSTRUCTION_FLIP_TRACK.translate(), 10, 200, 0x404040);
-				getModule().drawString(gui, "A - " + Localization.ARCADE.INSTRUCTION_DEFAULT_DIRECTION.translate(), 10, 210, 0x404040);
-				getModule().drawString(gui, "T - " + Localization.ARCADE.INSTRUCTION_TRACK_TYPE.translate(), 10, 220, 0x404040);
-				getModule().drawString(gui, "D - " + Localization.ARCADE.INSTRUCTION_DELETE_TRACK.translate(), 10, 230, 0x404040);
-				getModule().drawString(gui, "C - " + Localization.ARCADE.INSTRUCTION_COPY_TRACK.translate(), 10, 240, 0x404040);
+				getModule().drawString(gui, "1-5 - " + LocalizationTrack.TRACK_SHAPE.translate(), 10, 180, 0x404040);
+				getModule().drawString(gui, "R - " + LocalizationTrack.TRACK_ROTATE.translate(), 10, 190, 0x404040);
+				getModule().drawString(gui, "F - " + LocalizationTrack.TRACK_FLIP.translate(), 10, 200, 0x404040);
+				getModule().drawString(gui, "A - " + LocalizationTrack.TRACK_DIRECTION.translate(), 10, 210, 0x404040);
+				getModule().drawString(gui, "T - " + LocalizationTrack.TRACK_TYPE.translate(), 10, 220, 0x404040);
+				getModule().drawString(gui, "D - " + LocalizationTrack.TRACK_DELETE.translate(), 10, 230, 0x404040);
+				getModule().drawString(gui, "C - " + LocalizationTrack.TRACK_COPY.translate(), 10, 240, 0x404040);
 				
-				getModule().drawString(gui, "S - " + Localization.ARCADE.INSTRUCTION_STEVE.translate(), 330, 180, 0x404040);
-				getModule().drawString(gui, "X - " + Localization.ARCADE.INSTRUCTION_MAP.translate(), 330, 190, 0x404040);
-				getModule().drawString(gui, Localization.ARCADE.LEFT_MOUSE.translate() + " - " + Localization.ARCADE.INSTRUCTION_PLACE_TRACK.translate(), 330, 200, 0x404040);
-				getModule().drawString(gui, Localization.ARCADE.RIGHT_MOUSE.translate() + " - " + Localization.ARCADE.INSTRUCTION_DESELECT_TRACK.translate(), 330, 210, 0x404040);
+				getModule().drawString(gui, "S - " + LocalizationTrack.MOVE_STEVE.translate(), 330, 180, 0x404040);
+				getModule().drawString(gui, "X - " + LocalizationTrack.MOVE_MAP.translate(), 330, 190, 0x404040);
+				getModule().drawString(gui, LocalizationTrack.LEFT_MOUSE.translate() + " - " + LocalizationTrack.PLACE_TRACK.translate(), 330, 200, 0x404040);
+				getModule().drawString(gui, LocalizationTrack.RIGHT_MOUSE.translate() + " - " + LocalizationTrack.DESELECT_TRACK.translate(), 330, 210, 0x404040);
 			}
 		}
 	}	
@@ -687,33 +687,33 @@ public class ArcadeTracks extends ArcadeGame {
 	private String getButtonText(int id) {
 		switch (id) {
 			case 0:
-				return Localization.ARCADE.BUTTON_START.translate();
+				return LocalizationTrack.START.translate();
 			case 1:
-				return Localization.ARCADE.BUTTON_MENU.translate();
+				return LocalizationTrack.MENU.translate();
 			case 2:
-				return Localization.ARCADE.BUTTON_STOP.translate();
+				return LocalizationTrack.STOP.translate();
 			case 3:
-				return Localization.ARCADE.BUTTON_NEXT.translate();
+				return LocalizationTrack.NEXT_LEVEL.translate();
 			case 4:
-				return storySelected ? Localization.ARCADE.BUTTON_START_LEVEL.translate() : Localization.ARCADE.BUTTON_SELECT_STORY.translate();
+				return storySelected ? LocalizationTrack.START_LEVEL.translate() : LocalizationTrack.SELECT_STORY.translate();
 			case 5:
-				return Localization.ARCADE.BUTTON_SELECT_OTHER_STORY.translate();
+				return LocalizationTrack.SELECT_OTHER_STORY.translate();
 			case 6:
-				return Localization.ARCADE.BUTTON_START_LEVEL.translate();
+				return LocalizationTrack.START_LEVEL.translate();
 			case 7:
-				return Localization.ARCADE.BUTTON_CREATE_LEVEL.translate();
+				return LocalizationTrack.CREATE_LEVEL.translate();
 			case 8:
-				return Localization.ARCADE.BUTTON_EDIT_LEVEL.translate();
+				return LocalizationTrack.EDIT_LEVEL.translate();
 			case 9:
-				return Localization.ARCADE.BUTTON_REFRESH.translate();
+				return LocalizationTrack.REFRESH_LIST.translate();
 			case 10:
-				return Localization.ARCADE.BUTTON_START.translate();
+				return LocalizationTrack.START.translate();
 			case 11:
-				return Localization.ARCADE.BUTTON_SAVE_AS.translate();
+				return LocalizationTrack.SAVE_AS.translate();
 			case 12:
-				return Localization.ARCADE.BUTTON_CANCEL.translate();
+				return LocalizationTrack.CANCEL.translate();
 			case 13:
-				return Localization.ARCADE.BUTTON_SAVE.translate();
+				return LocalizationTrack.SAVE.translate();
 			default:
 				return "Hello, I'm a button";
 		}

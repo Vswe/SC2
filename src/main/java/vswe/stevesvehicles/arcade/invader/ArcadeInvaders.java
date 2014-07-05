@@ -10,8 +10,8 @@ import org.lwjgl.input.Keyboard;
 import vswe.stevesvehicles.arcade.ArcadeGame;
 import vswe.stevesvehicles.client.gui.GuiVehicle;
 import vswe.stevesvehicles.arcade.tracks.TrackStory;
+import vswe.stevesvehicles.localization.entry.arcade.LocalizationInvaders;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.common.attachment.ModuleArcade;
 import cpw.mods.fml.relauncher.Side;
@@ -20,7 +20,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ArcadeInvaders extends ArcadeGame {
 
 	public ArcadeInvaders(ModuleArcade module) {
-		super(module, Localization.ARCADE.GHAST);
+		super(module, LocalizationInvaders.TITLE);
 		
 		invaders = new ArrayList<Unit>();
 		buildings = new ArrayList<Unit>();
@@ -246,14 +246,14 @@ public class ArcadeInvaders extends ArcadeGame {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawForeground(GuiVehicle gui) {
-		getModule().drawString(gui, Localization.ARCADE.EXTRA_LIVES.translate() + ":", 10, 180, 0x404040);
-		getModule().drawString(gui, Localization.ARCADE.HIGH_SCORE.translate(String.valueOf(highscore)), 10, 210, 0x404040);
-		getModule().drawString(gui, Localization.ARCADE.SCORE.translate(String.valueOf(score)), 10, 220, 0x404040);
+		getModule().drawString(gui, LocalizationInvaders.LIVES.translate() + ":", 10, 180, 0x404040);
+		getModule().drawString(gui, LocalizationInvaders.HIGH_SCORE.translate(String.valueOf(highscore)), 10, 210, 0x404040);
+		getModule().drawString(gui, LocalizationInvaders.SCORE.translate(String.valueOf(score)), 10, 220, 0x404040);
 		
-		getModule().drawString(gui, "W - " + Localization.ARCADE.INSTRUCTION_SHOOT.translate(), 330, 180, 0x404040);
-		getModule().drawString(gui, "A - " + Localization.ARCADE.INSTRUCTION_LEFT.translate(), 330, 190, 0x404040);
-		getModule().drawString(gui, "D - " + Localization.ARCADE.INSTRUCTION_RIGHT.translate(), 330, 200, 0x404040);
-		getModule().drawString(gui, "R - " + Localization.ARCADE.INSTRUCTION_RESTART.translate(), 330, 220, 0x404040);
+		getModule().drawString(gui, "W - " + LocalizationInvaders.SHOOT.translate(), 330, 180, 0x404040);
+		getModule().drawString(gui, "A - " + LocalizationInvaders.LEFT.translate(), 330, 190, 0x404040);
+		getModule().drawString(gui, "D - " + LocalizationInvaders.RIGHT.translate(), 330, 200, 0x404040);
+		getModule().drawString(gui, "R - " + LocalizationInvaders.RESTART.translate(), 330, 220, 0x404040);
 	}
 	
 	@Override
