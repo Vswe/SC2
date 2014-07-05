@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 
 import vswe.stevesvehicles.client.gui.GuiBase;
-import vswe.stevesvehicles.old.Helpers.Localization;
+import vswe.stevesvehicles.localization.entry.gui.block.LocalizationManager;
 import vswe.stevesvehicles.old.Containers.ContainerManager;
 import vswe.stevesvehicles.old.TileEntities.TileEntityManager;
 import net.minecraft.block.Block;
@@ -32,7 +32,7 @@ public abstract class GuiManager extends GuiBase
 	
 		int[] coords = getMiddleCoords();
         getFontRenderer().drawString(getManagerName(), coords[0] - 34, 65, 0x404040);
-        getFontRenderer().drawString(Localization.GUI.MANAGER.TITLE.translate(), coords[0] + coords[2], 65, 0x404040);
+        getFontRenderer().drawString(LocalizationManager.TITLE.translate(), coords[0] + coords[2], 65, 0x404040);
 
         for (int i = 0; i < 4; i++)
         {
@@ -47,13 +47,13 @@ public abstract class GuiManager extends GuiBase
         {
 			drawExtraOverlay(i, x, y);
 
-			drawMouseOver(Localization.GUI.MANAGER.CHANGE_TRANSFER_DIRECTION.translate() + "\n" + Localization.GUI.MANAGER.CURRENT_SETTING.translate() + ": " + (manager.toCart[i] ? Localization.GUI.MANAGER.DIRECTION_TO_CART.translate() : Localization.GUI.MANAGER.DIRECTION_FROM_CART.translate()),x,y,getArrowCoords(i));
-			drawMouseOver(Localization.GUI.MANAGER.CHANGE_TURN_BACK_SETTING.translate() + "\n" + Localization.GUI.MANAGER.CURRENT_SETTING.translate() + ": " + (manager.color[i] == 5 ? Localization.GUI.MANAGER.TURN_BACK_NOT_SELECTED.translate() : ( manager.doReturn[manager.color[i]-1] ? Localization.GUI.MANAGER.TURN_BACK_DO.translate() : Localization.GUI.MANAGER.TURN_BACK_DO_NOT.translate())),x,y,getReturnCoords(i));
-			drawMouseOver(Localization.GUI.MANAGER.CHANGE_TRANSFER_SIZE.translate() + "\n" + Localization.GUI.MANAGER.CURRENT_SETTING.translate() + ": " + getMaxSizeOverlay(i),x,y,getTextCoords(i));
-			drawMouseOver(Localization.GUI.MANAGER.CHANGE_SIDE.translate() + "\n" + Localization.GUI.MANAGER.CURRENT_SIDE.translate() + ": " + (new String[] {Localization.GUI.MANAGER.SIDE_RED.translate(), Localization.GUI.MANAGER.SIDE_BLUE.translate(), Localization.GUI.MANAGER.SIDE_YELLOW.translate(), Localization.GUI.MANAGER.SIDE_GREEN.translate(), Localization.GUI.MANAGER.SIDE_DISABLED.translate()})[manager.color[i]-1],x,y,getColorpickerCoords(i));
+			drawMouseOver(LocalizationManager.CHANGE_TRANSFER_DIRECTION.translate() + "\n" + LocalizationManager.CURRENT_SETTING.translate() + ": " + (manager.toCart[i] ? LocalizationManager.TO_VEHICLE.translate() : LocalizationManager.FROM_VEHICLE.translate()),x,y,getArrowCoords(i));
+			drawMouseOver(LocalizationManager.CHANGE_TURN_BACK.translate() + "\n" + LocalizationManager.CURRENT_SETTING.translate() + ": " + (manager.color[i] == 5 ? LocalizationManager.TURN_BACK_DISABLED.translate() : ( manager.doReturn[manager.color[i]-1] ? LocalizationManager.TURN_BACK.translate() : LocalizationManager.CONTINUE_FORWARD.translate())), x, y, getReturnCoords(i));
+			drawMouseOver(LocalizationManager.CHANGE_TRANSFER_SIZE.translate() + "\n" + LocalizationManager.CURRENT_SETTING.translate() + ": " + getMaxSizeOverlay(i),x,y,getTextCoords(i));
+			drawMouseOver(LocalizationManager.CHANGE_SIDE.translate() + "\n" + LocalizationManager.CURRENT_SIDE.translate() + ": " + (new String[] {LocalizationManager.RED_SIDE.translate(), LocalizationManager.BLUE_SIDE.translate(), LocalizationManager.YELLOW_SIDE.translate(), LocalizationManager.GREEN_SIDE.translate(), LocalizationManager.DISABLED_SIDE.translate()})[manager.color[i]-1], x, y, getColorpickerCoords(i));
 			
 		}		
-		drawMouseOver(getLayoutString() + "\n" + Localization.GUI.MANAGER.CURRENT_SETTING.translate() + ": " +  getLayoutOption(manager.layoutType) ,x,y, getMiddleCoords());
+		drawMouseOver(getLayoutString() + "\n" + LocalizationManager.CURRENT_SETTING.translate() + ": " +  getLayoutOption(manager.layoutType) ,x,y, getMiddleCoords());
 		GL11.glEnable(GL11.GL_LIGHTING);
     }
 	

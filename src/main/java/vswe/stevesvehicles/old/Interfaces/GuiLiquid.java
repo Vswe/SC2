@@ -2,8 +2,8 @@ package vswe.stevesvehicles.old.Interfaces;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+import vswe.stevesvehicles.localization.entry.gui.block.LocalizationLiquid;
 import vswe.stevesvehicles.old.Blocks.ModBlocks;
-import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Containers.ContainerLiquid;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.old.TileEntities.TileEntityLiquid;
@@ -26,9 +26,9 @@ public class GuiLiquid extends GuiManager
 		int amount = getLiquid().getMaxAmount(id);
 	
 		if (!getLiquid().hasMaxAmount(id)) {
-			return Localization.GUI.LIQUID.TRANSFER_ALL.translate();
+			return LocalizationLiquid.TRANSFER_ALL.translate();
 		}else{
-			return Localization.GUI.LIQUID.TRANSFER_BUCKETS.translate(getMaxSizeText(id));
+			return LocalizationLiquid.TRANSFER_BUCKETS.translate(getMaxSizeText(id));
 		}
 	}
 	
@@ -37,7 +37,7 @@ public class GuiLiquid extends GuiManager
 
 
 		if (!getLiquid().hasMaxAmount(id)){
-			return Localization.GUI.LIQUID.TRANSFER_ALL_SHORT.translate();
+			return LocalizationLiquid.TRANSFER_ALL_SHORT.translate();
 		}else{
 			String B = String.valueOf(getLiquid().getMaxAmount(id) / 1000F);
 	
@@ -47,7 +47,7 @@ public class GuiLiquid extends GuiManager
 				B = B.substring(1);
 			}
 			
-			return B + Localization.GUI.LIQUID.TRANSFER_BUCKET_SHORT.translate();
+			return B + LocalizationLiquid.TRANSFER_BUCKETS_SHORT.translate();
 		}
 	}	
 	
@@ -130,7 +130,7 @@ public class GuiLiquid extends GuiManager
 
 	@Override
 	protected String getManagerName() {
-		return Localization.GUI.LIQUID.TITLE.translate();
+		return LocalizationLiquid.TITLE.translate();
 	}
 	
     private int[] getTankCoords(int id) {
@@ -148,7 +148,7 @@ public class GuiLiquid extends GuiManager
 	
 	@Override
 	protected String getLayoutString() {
-		return Localization.GUI.LIQUID.CHANGE_LAYOUT.translate();
+		return LocalizationLiquid.CHANGE_LAYOUT.translate();
 	}
 	
 	@Override
@@ -156,11 +156,11 @@ public class GuiLiquid extends GuiManager
 		switch (id) {
             default:
 			case 0:
-				return Localization.GUI.LIQUID.LAYOUT_ALL.translate();
+				return LocalizationLiquid.SHARED_LAYOUT.translate();
 			case 1:
-				return Localization.GUI.LIQUID.LAYOUT_SIDE.translate();
+				return LocalizationLiquid.SIDE_LAYOUT.translate();
 			case 2:
-				return Localization.GUI.LIQUID.LAYOUT_COLOR.translate();
+				return LocalizationLiquid.COLOR_LAYOUT.translate();
 		}
 	}	
 }

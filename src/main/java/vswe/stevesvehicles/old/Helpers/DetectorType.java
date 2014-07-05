@@ -5,6 +5,7 @@ import java.util.HashMap;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
+import vswe.stevesvehicles.localization.entry.gui.block.LocalizationDetector;
 import vswe.stevesvehicles.old.Blocks.BlockRailAdvDetector;
 import vswe.stevesvehicles.old.Blocks.ModBlocks;
 import vswe.stevesvehicles.old.StevesVehicles;
@@ -83,13 +84,13 @@ public enum DetectorType {
 			public void initOperators(HashMap<Byte, OperatorObject> operators) {
 				super.initOperators(operators);
 				
-				new OperatorObject.OperatorObjectRedstone(operators, 11, Localization.GUI.DETECTOR.REDSTONE, 0, 0, 0);
-				new OperatorObject.OperatorObjectRedstone(operators, 12, Localization.GUI.DETECTOR.REDSTONE_TOP, 0, 1, 0);
-				new OperatorObject.OperatorObjectRedstone(operators, 13, Localization.GUI.DETECTOR.REDSTONE_BOT, 0, -1, 0);
-				new OperatorObject.OperatorObjectRedstone(operators, 14, Localization.GUI.DETECTOR.REDSTONE_NORTH, 0, 0, -1);
-				new OperatorObject.OperatorObjectRedstone(operators, 15, Localization.GUI.DETECTOR.REDSTONE_WEST, -1, 0, 0);
-				new OperatorObject.OperatorObjectRedstone(operators, 16, Localization.GUI.DETECTOR.REDSTONE_SOUTH, 0, 0, 1);
-				new OperatorObject.OperatorObjectRedstone(operators, 17, Localization.GUI.DETECTOR.REDSTONE_EAST, 1, 0, 0);
+				new OperatorObject.OperatorObjectRedstone(operators, 11, LocalizationDetector.REDSTONE, 0, 0, 0);
+				new OperatorObject.OperatorObjectRedstone(operators, 12, LocalizationDetector.TOP_REDSTONE, 0, 1, 0);
+				new OperatorObject.OperatorObjectRedstone(operators, 13, LocalizationDetector.BOTTOM_REDSTONE, 0, -1, 0);
+				new OperatorObject.OperatorObjectRedstone(operators, 14, LocalizationDetector.NORTH_REDSTONE, 0, 0, -1);
+				new OperatorObject.OperatorObjectRedstone(operators, 15, LocalizationDetector.WEST_REDSTONE, -1, 0, 0);
+				new OperatorObject.OperatorObjectRedstone(operators, 16, LocalizationDetector.SOUTH_REDSTONE, 0, 0, 1);
+				new OperatorObject.OperatorObjectRedstone(operators, 17, LocalizationDetector.EAST_REDSTONE, 1, 0, 0);
 			}	
 			
 		};	
@@ -118,7 +119,7 @@ public enum DetectorType {
 	}
 
 	public String getName() {
-		return StatCollector.translateToLocal("item." + StevesVehicles.instance.localStart + "BlockDetector" + meta + ".name");
+		return StatCollector.translateToLocal("item." + StevesVehicles.localStart + "BlockDetector" + meta + ".name");
 	}
 
 

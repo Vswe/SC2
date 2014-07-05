@@ -1,5 +1,6 @@
 package vswe.stevesvehicles.old.Helpers;
 import vswe.stevesvehicles.localization.ILocalizedText;
+import vswe.stevesvehicles.localization.entry.gui.block.LocalizationToggler;
 import vswe.stevesvehicles.module.ModuleBase;
 	
 public class ActivatorOption {
@@ -67,10 +68,11 @@ public class ActivatorOption {
 
 	public String getInfo() {
 		if (isDisabled()) {
-			return Localization.GUI.TOGGLER.SETTING_DISABLED.translate();
+			return LocalizationToggler.DISABLED_SETTING.translate();
 		}else{
-			return "\u00a76" + Localization.GUI.TOGGLER.SETTING_ORANGE.translate() + ": " + (shouldActivate(true) ? "\u00a72" + Localization.GUI.TOGGLER.STATE_ACTIVATE.translate() : shouldDeactivate(true) ? "\u00a74" + Localization.GUI.TOGGLER.STATE_DEACTIVATE.translate() : "\u00a7E" + Localization.GUI.TOGGLER.STATE_TOGGLE.translate()) + "\n" +
-				   "\u00a71" + Localization.GUI.TOGGLER.SETTING_BLUE.translate() + ": " + (shouldActivate(false) ? "\u00a72" + Localization.GUI.TOGGLER.STATE_ACTIVATE.translate() : shouldDeactivate(false) ? "\u00a74" + Localization.GUI.TOGGLER.STATE_DEACTIVATE.translate() : "\u00a7E" + Localization.GUI.TOGGLER.STATE_TOGGLE.translate());
+			return "\u00a76" + LocalizationToggler.ORANGE_SETTING.translate() + ": " + (shouldActivate(true) ? "\u00a72" + LocalizationToggler.ACTIVATE_STATE.translate() : shouldDeactivate(true) ? "\u00a74" + LocalizationToggler.DEACTIVATE_STATE.translate() : "\u00a7E" + LocalizationToggler.TOGGLE_STATE.translate()) + "\n" +
+				   "\u00a71" + LocalizationToggler.BLUE_SETTING.translate() + ": " + (shouldActivate(false) ? "\u00a72" + LocalizationToggler.ACTIVATE_STATE.translate() : shouldDeactivate(false) ? "\u00a74" + LocalizationToggler.DEACTIVATE_STATE.translate() : "\u00a7E" + LocalizationToggler.TOGGLE_STATE.translate());
+
 		}
 	}
 }

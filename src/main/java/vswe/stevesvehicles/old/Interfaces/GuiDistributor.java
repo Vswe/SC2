@@ -7,6 +7,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import vswe.stevesvehicles.client.gui.GuiBase;
+import vswe.stevesvehicles.localization.entry.gui.block.LocalizationDistributor;
 import vswe.stevesvehicles.old.Containers.ContainerDistributor;
 import vswe.stevesvehicles.old.Helpers.DistributorSetting;
 import vswe.stevesvehicles.old.Helpers.DistributorSide;
@@ -35,12 +36,12 @@ public class GuiDistributor extends GuiBase
     {
 		GL11.glDisable(GL11.GL_LIGHTING);
 	
-        getFontRenderer().drawString(Localization.GUI.DISTRIBUTOR.TITLE.translate(), 8, 6, 0x404040);
+        getFontRenderer().drawString(LocalizationDistributor.TITLE.translate(), 8, 6, 0x404040);
 		
 		TileEntityManager[] invs = distributor.getInventories();
 		 
 		if (invs.length == 0) {
-			getFontRenderer().drawString(Localization.GUI.DISTRIBUTOR.NOT_CONNECTED.translate(), 30, 40, 0xFF4040);
+			getFontRenderer().drawString(LocalizationDistributor.NOT_CONNECTED.translate(), 30, 40, 0xFF4040);
 		}
 			
 
@@ -91,7 +92,7 @@ public class GuiDistributor extends GuiBase
 				drawTexturedModalRect(j + box[0], k + box[1], srcX, ySize, box[2], box[3]);
 				drawTexturedModalRect(j + box[0]+2, k + box[1]+2, box[2]*2 + (box[2]-4)*side.getId(), ySize, box[2]-4, box[3]-4);
 				
-				drawMouseMover(Localization.GUI.DISTRIBUTOR.SIDE.translate(side.getName()) + (activeId != -1 ? "\n["+ Localization.GUI.DISTRIBUTOR.DROP_INSTRUCTION.translate() + "]" : ""), x, y, box);
+				drawMouseMover(LocalizationDistributor.SIDE_NAME.translate(side.getName()) + (activeId != -1 ? "\n["+ LocalizationDistributor.DROP_INSTRUCTION.translate() + "]" : ""), x, y, box);
 				
 				int settingCount = 0;
 				for (DistributorSetting setting : DistributorSetting.settings) { 
@@ -101,7 +102,7 @@ public class GuiDistributor extends GuiBase
 							
 							drawSetting(setting, settingbox, inRect(x,y, settingbox));
 								
-							drawMouseMover(setting.getName(invs) + "\n[" + Localization.GUI.DISTRIBUTOR.REMOVE_INSTRUCTION.translate() + "]", x, y, settingbox);
+							drawMouseMover(setting.getName(invs) + "\n[" + LocalizationDistributor.REMOVE_INSTRUCTION.translate() + "]", x, y, settingbox);
 						}
 					}
 				}	

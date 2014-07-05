@@ -2,6 +2,7 @@ package vswe.stevesvehicles.old.Helpers;
 import java.util.ArrayList;
 
 import vswe.stevesvehicles.localization.ILocalizedText;
+import vswe.stevesvehicles.localization.entry.gui.block.LocalizationDistributor;
 import vswe.stevesvehicles.old.TileEntities.TileEntityDistributor;
 import vswe.stevesvehicles.old.TileEntities.TileEntityManager;
 	
@@ -11,31 +12,31 @@ public class DistributorSetting {
 	
 	static {
 		settings = new ArrayList<DistributorSetting>();
-		settings.add(new DistributorSetting(0, true, Localization.GUI.DISTRIBUTOR.SETTING_ALL));
-		settings.add(new DistributorSetting(1, false, Localization.GUI.DISTRIBUTOR.SETTING_ALL));
+		settings.add(new DistributorSetting(0, true, LocalizationDistributor.ALL));
+		settings.add(new DistributorSetting(1, false, LocalizationDistributor.ALL));
 		
-		settings.add(new distributorSettingColor(2, true, Localization.GUI.DISTRIBUTOR.SETTING_RED, 1));
-		settings.add(new distributorSettingColor(3, false, Localization.GUI.DISTRIBUTOR.SETTING_RED, 1));
-		settings.add(new distributorSettingColor(4, true, Localization.GUI.DISTRIBUTOR.SETTING_BLUE, 2));
-		settings.add(new distributorSettingColor(5, false, Localization.GUI.DISTRIBUTOR.SETTING_BLUE, 2));
-		settings.add(new distributorSettingColor(6, true, Localization.GUI.DISTRIBUTOR.SETTING_YELLOW, 3));
-		settings.add(new distributorSettingColor(7, false, Localization.GUI.DISTRIBUTOR.SETTING_YELLOW, 3));
-		settings.add(new distributorSettingColor(8, true, Localization.GUI.DISTRIBUTOR.SETTING_GREEN, 4));
-		settings.add(new distributorSettingColor(9, false, Localization.GUI.DISTRIBUTOR.SETTING_GREEN, 4));
+		settings.add(new distributorSettingColor(2, true, LocalizationDistributor.RED, 1));
+		settings.add(new distributorSettingColor(3, false, LocalizationDistributor.RED, 1));
+		settings.add(new distributorSettingColor(4, true, LocalizationDistributor.BLUE, 2));
+		settings.add(new distributorSettingColor(5, false, LocalizationDistributor.BLUE, 2));
+		settings.add(new distributorSettingColor(6, true, LocalizationDistributor.YELLOW, 3));
+		settings.add(new distributorSettingColor(7, false, LocalizationDistributor.YELLOW, 3));
+		settings.add(new distributorSettingColor(8, true, LocalizationDistributor.GREEN, 4));
+		settings.add(new distributorSettingColor(9, false, LocalizationDistributor.GREEN, 4));
 		
-		settings.add(new distributorSettingChunk(10, true, Localization.GUI.DISTRIBUTOR.SETTING_TOP_LEFT, 0));
-		settings.add(new distributorSettingChunk(11, false, Localization.GUI.DISTRIBUTOR.SETTING_TOP_LEFT, 0));
-		settings.add(new distributorSettingChunk(12, true, Localization.GUI.DISTRIBUTOR.SETTING_TOP_RIGHT, 1));
-		settings.add(new distributorSettingChunk(13, false, Localization.GUI.DISTRIBUTOR.SETTING_TOP_RIGHT, 1));
-		settings.add(new distributorSettingChunk(14, true, Localization.GUI.DISTRIBUTOR.SETTING_BOTTOM_LEFT, 2));
-		settings.add(new distributorSettingChunk(15, false, Localization.GUI.DISTRIBUTOR.SETTING_BOTTOM_LEFT, 2));
-		settings.add(new distributorSettingChunk(16, true, Localization.GUI.DISTRIBUTOR.SETTING_BOTTOM_RIGHT, 3));
-		settings.add(new distributorSettingChunk(17, false, Localization.GUI.DISTRIBUTOR.SETTING_BOTTOM_RIGHT, 3));
+		settings.add(new distributorSettingChunk(10, true, LocalizationDistributor.TOP_LEFT, 0));
+		settings.add(new distributorSettingChunk(11, false, LocalizationDistributor.TOP_LEFT, 0));
+		settings.add(new distributorSettingChunk(12, true, LocalizationDistributor.TOP_RIGHT, 1));
+		settings.add(new distributorSettingChunk(13, false, LocalizationDistributor.TOP_RIGHT, 1));
+		settings.add(new distributorSettingChunk(14, true, LocalizationDistributor.BOTTOM_LEFT, 2));
+		settings.add(new distributorSettingChunk(15, false, LocalizationDistributor.BOTTOM_LEFT, 2));
+		settings.add(new distributorSettingChunk(16, true, LocalizationDistributor.BOTTOM_RIGHT, 3));
+		settings.add(new distributorSettingChunk(17, false, LocalizationDistributor.BOTTOM_RIGHT, 3));
 
-		settings.add(new distributorSettingDirection(18, true, Localization.GUI.DISTRIBUTOR.SETTING_TO_CART, true));
-		settings.add(new distributorSettingDirection(19, false, Localization.GUI.DISTRIBUTOR.SETTING_TO_CART, true));
-		settings.add(new distributorSettingDirection(20, true, Localization.GUI.DISTRIBUTOR.SETTING_FROM_CART, false));
-		settings.add(new distributorSettingDirection(21, false, Localization.GUI.DISTRIBUTOR.SETTING_FROM_CART, false));
+		settings.add(new distributorSettingDirection(18, true, LocalizationDistributor.TO_VEHICLE, true));
+		settings.add(new distributorSettingDirection(19, false, LocalizationDistributor.TO_VEHICLE, true));
+		settings.add(new distributorSettingDirection(20, true, LocalizationDistributor.FROM_VEHICLE, false));
+		settings.add(new distributorSettingDirection(21, false, LocalizationDistributor.FROM_VEHICLE, false));
 		
 	}
 
@@ -66,7 +67,7 @@ public class DistributorSetting {
 	
 	public String getName(TileEntityManager[] manager) {
 		if (manager != null && manager.length > 1) {
-			return name.translate() + " (" + (getIsTop() ? Localization.GUI.DISTRIBUTOR.MANAGER_TOP.translate() : Localization.GUI.DISTRIBUTOR.MANAGER_BOT.translate()) + ")";
+			return name.translate() + " (" + (getIsTop() ? LocalizationDistributor.TOP_MANAGER.translate() : LocalizationDistributor.BOTTOM_MANAGER.translate()) + ")";
 		}else{
 			return name.translate();
 		}	

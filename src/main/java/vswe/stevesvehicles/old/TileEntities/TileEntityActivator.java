@@ -9,7 +9,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.nbt.NBTTagCompound;
-import vswe.stevesvehicles.old.Helpers.Localization;
+import vswe.stevesvehicles.localization.entry.gui.block.LocalizationToggler;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Containers.ContainerActivator;
 import vswe.stevesvehicles.container.ContainerBase;
@@ -56,12 +56,12 @@ public class TileEntityActivator extends TileEntityBase
      */
 	private void loadOptions() {
 		options = new ArrayList<ActivatorOption>();
-		options.add(new ActivatorOption(Localization.GUI.TOGGLER.OPTION_DRILL, ModuleDrill.class));
-		options.add(new ActivatorOption(Localization.GUI.TOGGLER.OPTION_SHIELD, ModuleShield.class));
-		options.add(new ActivatorOption(Localization.GUI.TOGGLER.OPTION_INVISIBILITY, ModuleInvisible.class));
-		options.add(new ActivatorOption(Localization.GUI.TOGGLER.OPTION_CHUNK, ModuleChunkLoader.class));
-		options.add(new ActivatorOption(Localization.GUI.TOGGLER.OPTION_CAGE_AUTO, ModuleCage.class, 0));
-		options.add(new ActivatorOption(Localization.GUI.TOGGLER.OPTION_CAGE, ModuleCage.class, 1));
+		options.add(new ActivatorOption(LocalizationToggler.DRILL_OPTION, ModuleDrill.class));
+		options.add(new ActivatorOption(LocalizationToggler.SHIELD_OPTION, ModuleShield.class));
+		options.add(new ActivatorOption(LocalizationToggler.INVISIBILITY_OPTION, ModuleInvisible.class));
+		options.add(new ActivatorOption(LocalizationToggler.CHUNK_OPTION, ModuleChunkLoader.class));
+		options.add(new ActivatorOption(LocalizationToggler.AUTO_CAGE_OPTION, ModuleCage.class, 0));
+		options.add(new ActivatorOption(LocalizationToggler.CAGE_OPTION, ModuleCage.class, 1));
 	}
 	
 	/**

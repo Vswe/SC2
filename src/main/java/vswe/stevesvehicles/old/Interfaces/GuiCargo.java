@@ -8,10 +8,11 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
+import vswe.stevesvehicles.localization.entry.gui.block.LocalizationCargo;
+import vswe.stevesvehicles.localization.entry.gui.block.LocalizationManager;
 import vswe.stevesvehicles.old.Blocks.ModBlocks;
 import vswe.stevesvehicles.old.Containers.ContainerCargo;
 import vswe.stevesvehicles.old.Helpers.CargoItemSelection;
-import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.old.TileEntities.TileEntityCargo;
 import cpw.mods.fml.relauncher.Side;
@@ -33,11 +34,11 @@ public class GuiCargo extends GuiManager
 		int type = getCargo().getAmountType(id);
 	
 		if (type == 0) {
-			return Localization.GUI.CARGO.TRANSFER_ALL.translate();
+			return LocalizationCargo.TRANSFER_ALL.translate();
 		}else if (type == 1) {
-			return Localization.GUI.CARGO.TRANSFER_ITEMS.translate(String.valueOf(amount), String.valueOf(amount));
+			return LocalizationCargo.TRANSFER_ITEMS.translate(String.valueOf(amount), String.valueOf(amount));
 		}else{
-			return Localization.GUI.CARGO.TRANSFER_STACKS.translate(String.valueOf(amount), String.valueOf(amount));
+			return LocalizationCargo.TRANSFER_STACKS.translate(String.valueOf(amount), String.valueOf(amount));
 		}
 	}
 	
@@ -47,15 +48,15 @@ public class GuiCargo extends GuiManager
 		int type = getCargo().getAmountType(id);
 
 		if (type == 0){
-			s = Localization.GUI.CARGO.TRANSFER_ALL_SHORT.translate();
+			s = LocalizationCargo.TRANSFER_ALL_SHORT.translate();
 		}else{
 			int amount = getCargo().getAmount(id);
 			s = String.valueOf(amount);
 
 			if (type == 1){
-				s += " " + Localization.GUI.CARGO.TRANSFER_ITEMS_SHORT.translate();
+				s += " " + LocalizationCargo.TRANSFER_ITEMS_SHORT.translate();
 			}else{
-				s += " " + Localization.GUI.CARGO.TRANSFER_STACKS_SHORT.translate();
+				s += " " + LocalizationCargo.TRANSFER_STACKS_SHORT.translate();
 			}
 		}
 		return s;
@@ -148,12 +149,12 @@ public class GuiCargo extends GuiManager
 		if (getCargo().target[id] >= 0 && getCargo().target[id] < getCargo().itemSelections.size()) {
 			CargoItemSelection item = getCargo().itemSelections.get(getCargo().target[id]);
 			if (item.getName() != null) {
-				drawMouseOver(Localization.GUI.CARGO.CHANGE_STORAGE_AREA.translate() + "\n" + Localization.GUI.MANAGER.CURRENT_SETTING.translate() + ": " + item.getName(),x,y,getBoxCoords(id));
+				drawMouseOver(LocalizationCargo.CHANGE_VEHICLE_PART.translate() + "\n" + LocalizationManager.CURRENT_SETTING.translate() + ": " + item.getName(),x,y,getBoxCoords(id));
 			}else{
-				drawMouseOver(Localization.GUI.CARGO.CHANGE_STORAGE_AREA.translate() + "\n" + Localization.GUI.MANAGER.CURRENT_SETTING.translate() + ": " + Localization.GUI.CARGO.UNKNOWN_AREA.translate(),x,y,getBoxCoords(id));
+				drawMouseOver(LocalizationCargo.CHANGE_VEHICLE_PART.translate() + "\n" + LocalizationManager.CURRENT_SETTING.translate() + ": " + LocalizationCargo.SLOT_INVALID.translate(),x,y,getBoxCoords(id));
 			}
 		}else{
-			drawMouseOver(Localization.GUI.CARGO.CHANGE_STORAGE_AREA.translate() + "\n" + Localization.GUI.MANAGER.CURRENT_SETTING.translate() + ": " + Localization.GUI.CARGO.UNKNOWN_AREA.translate(),x,y,getBoxCoords(id));
+			drawMouseOver(LocalizationCargo.CHANGE_VEHICLE_PART.translate() + "\n" + LocalizationManager.CURRENT_SETTING.translate() + ": " + LocalizationCargo.SLOT_INVALID.translate(),x,y,getBoxCoords(id));
 		}
 	}
 	
@@ -164,7 +165,7 @@ public class GuiCargo extends GuiManager
 
 	@Override
 	protected String getManagerName() {
-		return Localization.GUI.CARGO.TITLE.translate();
+		return LocalizationCargo.TITLE.translate();
 	}
 	
     private int[] getInvCoords(int id) {
@@ -181,7 +182,7 @@ public class GuiCargo extends GuiManager
 	
 	@Override
 	protected String getLayoutString() {
-		return Localization.GUI.CARGO.CHANGE_SLOT_LAYOUT.translate();
+		return LocalizationCargo.CHANGE_LAYOUT.translate();
 	}
 	
 	@Override
@@ -189,11 +190,11 @@ public class GuiCargo extends GuiManager
 		switch (id) {
             default:
 			case 0:
-				return Localization.GUI.CARGO.LAYOUT_SHARED.translate();
+				return LocalizationCargo.SHARED_LAYOUT.translate();
 			case 1:
-				return Localization.GUI.CARGO.LAYOUT_SIDE.translate();
+				return LocalizationCargo.SIDE_LAYOUT.translate();
 			case 2:
-				return Localization.GUI.CARGO.LAYOUT_COLOR.translate();
+				return LocalizationCargo.COLOR_LAYOUT.translate();
 		}
 	}
 }

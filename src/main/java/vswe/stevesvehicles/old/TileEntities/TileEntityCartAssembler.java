@@ -16,6 +16,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import vswe.stevesvehicles.localization.entry.gui.block.LocalizationAssembler;
 import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
 import vswe.stevesvehicles.module.data.ModuleType;
 import vswe.stevesvehicles.old.Blocks.BlockCartAssembler;
@@ -717,16 +718,16 @@ public class TileEntityCartAssembler extends TileEntityBase
 		ArrayList<String> errors = new ArrayList<String>();
 		
 		if (hullSlot.getStack() == null) {
-			errors.add(Localization.GUI.ASSEMBLER.HULL_ERROR.translate());
+			errors.add(LocalizationAssembler.NO_HULL.translate());
 		}else{
 			ModuleData hullData = ModItems.modules.getModuleData(getStackInSlot(0));
 			if (hullData == null || !(hullData instanceof ModuleDataHull)) {
-				errors.add(Localization.GUI.ASSEMBLER.INVALID_HULL_SHORT.translate());
+				errors.add(LocalizationAssembler.INVALID_HULL_SHORT.translate());
 			}else{
 				if (isAssembling) {
-					errors.add(Localization.GUI.ASSEMBLER.BUSY.translate());
+					errors.add(LocalizationAssembler.BUSY_ASSEMBLER.translate());
 				}else if (outputSlot != null && outputSlot.getStack() != null) {
-					errors.add(Localization.GUI.ASSEMBLER.DEPARTURE_BAY.translate());
+					errors.add(LocalizationAssembler.OCCUPIED_DEPARTURE_BAY.translate());
 				}
 			
 			

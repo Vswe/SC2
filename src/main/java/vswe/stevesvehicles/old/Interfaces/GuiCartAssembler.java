@@ -13,7 +13,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import vswe.stevesvehicles.client.gui.GuiBase;
-import vswe.stevesvehicles.old.Helpers.Localization;
+import vswe.stevesvehicles.localization.entry.gui.block.LocalizationAssembler;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.network.PacketHandler;
 import vswe.stevesvehicles.old.StevesVehicles;
@@ -39,7 +39,7 @@ public class GuiCartAssembler extends GuiBase {
 
 	@Override
     public void drawGuiForeground(int x, int y) {
-        getFontRenderer().drawString(Localization.GUI.ASSEMBLER.TITLE.translate() , 8, 6, 0x404040);
+        getFontRenderer().drawString(LocalizationAssembler.TITLE.translate() , 8, 6, 0x404040);
 
 		if (assembler.isErrorListOutdated) {
 			updateErrorList();
@@ -72,27 +72,27 @@ public class GuiCartAssembler extends GuiBase {
 	private void updateErrorList() {
 		ArrayList<TextWithColor> lines = new ArrayList<TextWithColor>();
 		if (assembler.getStackInSlot(0) == null) {
-			addText(lines, Localization.GUI.ASSEMBLER.ASSEMBLE_INSTRUCTION.translate());
+			addText(lines, LocalizationAssembler.BASIC_INSTRUCTION.translate());
 			hasErrors = true;
 		}else{
 			ModuleData hullData = ModItems.modules.getModuleData(assembler.getStackInSlot(0));
 			if (hullData == null || !(hullData instanceof ModuleDataHull)) {
-				addText(lines, Localization.GUI.ASSEMBLER.INVALID_HULL.translate() ,0x9E0B0E);
+				addText(lines, LocalizationAssembler.INVALID_HULL.translate() ,0x9E0B0E);
 				hasErrors = true;
 			}else{
 
 				ModuleDataHull hull = (ModuleDataHull)hullData;
 
-				addText(lines, Localization.GUI.ASSEMBLER.HULL_CAPACITY.translate() + ": " + hull.getModularCapacity());
-				addText(lines, Localization.GUI.ASSEMBLER.COMPLEXITY_CAP.translate() + ": " + hull.getComplexityMax());
-				addText(lines, Localization.GUI.ASSEMBLER.TOTAL_COST.translate() + ": " + assembler.getTotalCost());
-				addText(lines, Localization.GUI.ASSEMBLER.TOTAl_TIME.translate() + ": " + formatTime((int)(assembler.generateAssemblingTime() / assembler.getEfficiency())));
+				addText(lines, LocalizationAssembler.HULL_CAPACITY.translate() + ": " + hull.getModularCapacity());
+				addText(lines, LocalizationAssembler.COMPLEXITY_CAP.translate() + ": " + hull.getComplexityMax());
+				addText(lines, LocalizationAssembler.TOTAL_COST.translate() + ": " + assembler.getTotalCost());
+				addText(lines, LocalizationAssembler.TOTAL_TIME.translate() + ": " + formatTime((int)(assembler.generateAssemblingTime() / assembler.getEfficiency())));
 				addNewLine(lines);
 				
 				ArrayList<String> errors = assembler.getErrors();
 				hasErrors = errors.size() > 0;
 				if (errors.size() == 0) {
-					addText(lines, Localization.GUI.ASSEMBLER.NO_ERROR.translate(), 0x005826);
+					addText(lines, LocalizationAssembler.READY_MESSAGE.translate(), 0x005826);
 				}else {
 					for (String error : errors) {
 						addText(lines,error, 0x9E0B0E);
@@ -266,8 +266,8 @@ public class GuiCartAssembler extends GuiBase {
 		String assemblingInfo;
 		if (assembler.getIsAssembling()) {	
 			assemblingProgress = assembler.getAssemblingTime() / (float)assembler.getMaxAssemblingTime();
-			assemblingInfo = Localization.GUI.ASSEMBLER.ASSEMBLE_PROGRESS.translate() + ": " + formatProgress(assemblingProgress);
-			assemblingInfo += "\n" + Localization.GUI.ASSEMBLER.TIME_LEFT.translate() +": " + formatTime((int)((assembler.getMaxAssemblingTime() - assembler.getAssemblingTime()) / assembler.getEfficiency()));
+			assemblingInfo = LocalizationAssembler.PROGRESS.translate() + ": " + formatProgress(assemblingProgress);
+			assemblingInfo += "\n" + LocalizationAssembler.TIME_LEFT.translate() +": " + formatTime((int)((assembler.getMaxAssemblingTime() - assembler.getAssemblingTime()) / assembler.getEfficiency()));
 			
 			//won't work, the client won't know about this
 			/*assemblingInfo += "\n\nModules:\n";
@@ -286,7 +286,7 @@ public class GuiCartAssembler extends GuiBase {
 						
 			}*/
 		}else{
-			assemblingInfo = Localization.GUI.ASSEMBLER.IDLE_MESSAGE.translate();
+			assemblingInfo = LocalizationAssembler.IDLE_MESSAGE.translate();
 		}
 		drawProgressBar(assemblingProgRect, assemblingProgress,22,x,y);
 		
@@ -298,13 +298,13 @@ public class GuiCartAssembler extends GuiBase {
 
 		if (!hasErrors) {
 			if (isDisassembling) {
-				drawProgressBarInfo(ASSEMBLE_RECT, x, y, Localization.GUI.ASSEMBLER.MODIFY_CART.translate());
+				drawProgressBarInfo(ASSEMBLE_RECT, x, y, LocalizationAssembler.MODIFY_VEHICLE.translate());
 			}else{
-				drawProgressBarInfo(ASSEMBLE_RECT, x, y,  Localization.GUI.ASSEMBLER.ASSEMBLE_CART.translate());
+				drawProgressBarInfo(ASSEMBLE_RECT, x, y,  LocalizationAssembler.ASSEMBLE_VEHICLE.translate());
 			}
 		}
 		drawProgressBarInfo(assemblingProgRect, x, y, assemblingInfo);
-		drawProgressBarInfo(fuelProgRect, x, y, Localization.GUI.ASSEMBLER.FUEL_LEVEL.translate() + ": " + assembler.getFuelLevel() + "/" + assembler.getMaxFuelLevel());
+		drawProgressBarInfo(fuelProgRect, x, y, LocalizationAssembler.FUEL_LEVEL.translate() + ": " + assembler.getFuelLevel() + "/" + assembler.getMaxFuelLevel());
     }
 
 	private String formatProgress(float progress) {

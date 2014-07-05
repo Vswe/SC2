@@ -1,6 +1,7 @@
 package vswe.stevesvehicles.old.Helpers;
 import net.minecraftforge.common.util.ForgeDirection;
 import vswe.stevesvehicles.localization.ILocalizedText;
+import vswe.stevesvehicles.localization.entry.gui.block.LocalizationDistributor;
 import vswe.stevesvehicles.old.TileEntities.TileEntityDistributor;
 	
 public class DistributorSide {
@@ -105,6 +106,6 @@ public class DistributorSide {
 	
 	
 	public String getInfo() {
-        return Localization.GUI.DISTRIBUTOR.SIDE_TOOL_TIP.translate(getName());
+        return LocalizationDistributor.SIDE_TOOLTIP.translate(getName());
 	}
 }

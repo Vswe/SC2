@@ -5,6 +5,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import vswe.stevesvehicles.client.gui.GuiBase;
+import vswe.stevesvehicles.localization.entry.gui.block.LocalizationToggler;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.network.PacketHandler;
 import vswe.stevesvehicles.old.Containers.ContainerActivator;
@@ -30,7 +31,7 @@ public class GuiActivator extends GuiBase
     {
 		GL11.glDisable(GL11.GL_LIGHTING);
 	
-        getFontRenderer().drawString(Localization.GUI.TOGGLER.TITLE.translate(), 8, 6, 0x404040);
+        getFontRenderer().drawString(LocalizationToggler.TITLE.translate(), 8, 6, 0x404040);
 		
 		for (int i = 0; i < activator.getOptions().size(); i++) {
 			ActivatorOption option = activator.getOptions().get(i);

@@ -10,6 +10,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevesvehicles.localization.entry.gui.block.LocalizationCargo;
 import vswe.stevesvehicles.old.Helpers.*;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.container.ContainerBase;
@@ -53,24 +54,25 @@ public class TileEntityCargo extends TileEntityManager
 
 	public static ArrayList<CargoItemSelection> itemSelections;
 
-	
+
+    //TODO maybe make this registration a bit nice, this would work fine actually but maybe clean it up
 	public static void loadSelectionSettings() {
 		itemSelections = new ArrayList<CargoItemSelection>();
-		itemSelections.add(new CargoItemSelection(Localization.GUI.CARGO.AREA_ALL, Slot.class, new ItemStack(ModItems.carts, 1, 0)));
-		itemSelections.add(new CargoItemSelection(Localization.GUI.CARGO.AREA_ENGINE, SlotFuel.class, new ItemStack(ModItems.modules, 1, 0)));
-		itemSelections.add(new CargoItemSelection(Localization.GUI.CARGO.AREA_RAILER, SlotBuilder.class, new ItemStack(ModItems.modules, 1, 10)));
-		itemSelections.add(new CargoItemSelection(Localization.GUI.CARGO.AREA_STORAGE, SlotChest.class, new ItemStack(Blocks.chest, 1)));
-		itemSelections.add(new CargoItemSelection(Localization.GUI.CARGO.AREA_TORCHES, SlotTorch.class, new ItemStack(Blocks.torch, 1)));
-		itemSelections.add(new CargoItemSelection(Localization.GUI.CARGO.AREA_EXPLOSIVES, ISlotExplosions.class, ComponentTypes.DYNAMITE.getItemStack()));
-		itemSelections.add(new CargoItemSelection(Localization.GUI.CARGO.AREA_ARROWS, SlotArrow.class, new ItemStack(Items.arrow, 1)));
-		itemSelections.add(new CargoItemSelection(Localization.GUI.CARGO.AREA_BRIDGE, SlotBridge.class, new ItemStack(Blocks.brick_block, 1)));
-		itemSelections.add(new CargoItemSelection(Localization.GUI.CARGO.AREA_SEEDS, SlotSeed.class, new ItemStack(Items.wheat_seeds, 1)));
-		itemSelections.add(new CargoItemSelection(Localization.GUI.CARGO.AREA_FERTILIZER, SlotFertilizer.class, new ItemStack(Items.dye, 1, 15)));
+		itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_ALL, Slot.class, new ItemStack(ModItems.carts, 1, 0)));
+		itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_ENGINE, SlotFuel.class, new ItemStack(ModItems.modules, 1, 0)));       //TODO don't use static ids for modules
+		itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_RAILER, SlotBuilder.class, new ItemStack(ModItems.modules, 1, 10))); //TODO don't use static ids for modules
+		itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_STORAGE, SlotChest.class, new ItemStack(Blocks.chest, 1)));
+		itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_TORCH, SlotTorch.class, new ItemStack(Blocks.torch, 1)));
+		itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_EXPLOSIVE, ISlotExplosions.class, ComponentTypes.DYNAMITE.getItemStack()));
+		itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_ARROW, SlotArrow.class, new ItemStack(Items.arrow, 1)));
+		itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_BRIDGE, SlotBridge.class, new ItemStack(Blocks.brick_block, 1)));
+		itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_SEED, SlotSeed.class, new ItemStack(Items.wheat_seeds, 1)));
+		itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_FERTILIZER, SlotFertilizer.class, new ItemStack(Items.dye, 1, 15)));
 		itemSelections.add(new CargoItemSelection(null, null, null));
-		itemSelections.add(new CargoItemSelection(Localization.GUI.CARGO.AREA_SAPLINGS, SlotSapling.class, new ItemStack(Blocks.sapling, 1)));
-		itemSelections.add(new CargoItemSelection(Localization.GUI.CARGO.AREA_FIREWORK, SlotFirework.class, new ItemStack(Items.fireworks, 1)));
-		itemSelections.add(new CargoItemSelection(Localization.GUI.CARGO.AREA_BUCKETS, SlotMilker.class, new ItemStack(Items.bucket, 1)));
-		itemSelections.add(new CargoItemSelection(Localization.GUI.CARGO.AREA_CAKES, SlotCake.class, new ItemStack(Items.cake, 1)));
+		itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_SAPLING, SlotSapling.class, new ItemStack(Blocks.sapling, 1)));
+		itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_FIREWORK, SlotFirework.class, new ItemStack(Items.fireworks, 1)));
+		itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_BUCKET, SlotMilker.class, new ItemStack(Items.bucket, 1)));
+		itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_CAKE, SlotCake.class, new ItemStack(Items.cake, 1)));
 	}
 	
 	

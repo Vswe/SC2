@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import net.minecraft.tileentity.TileEntity;
 import vswe.stevesvehicles.localization.ILocalizedText;
+import vswe.stevesvehicles.localization.entry.gui.block.LocalizationDetector;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.TileEntities.TileEntityDetector;
 
@@ -16,7 +17,7 @@ public class OperatorObject {
 		allOperators = new HashMap<Byte, OperatorObject>();
 		HashMap<Byte, OperatorObject> operators = new HashMap<Byte, OperatorObject>();
 		
-		new OperatorObject(operators, 0, Localization.GUI.DETECTOR.OUTPUT, 1) {
+		new OperatorObject(operators, 0, LocalizationDetector.OUTPUT, 1) {
 			public boolean inTab() {
 				return false;
 			}
@@ -26,18 +27,18 @@ public class OperatorObject {
 			}			
 		};
 		
-		new OperatorObject(operators, 1, Localization.GUI.DETECTOR.AND, 2) {
+		new OperatorObject(operators, 1, LocalizationDetector.AND, 2) {
 			public boolean evaluate(TileEntityDetector detector, EntityModularCart cart, int depth,  LogicObject A, LogicObject B) {
 				return A.evaluateLogicTree(detector, cart, depth) && B.evaluateLogicTree(detector, cart, depth); 
 			}			
 		};
 		
-		new OperatorObject(operators, 2, Localization.GUI.DETECTOR.OR, 2) {
+		new OperatorObject(operators, 2, LocalizationDetector.OR, 2) {
 			public boolean evaluate(TileEntityDetector detector, EntityModularCart cart, int depth,  LogicObject A, LogicObject B) {
 				return A.evaluateLogicTree(detector, cart, depth) || B.evaluateLogicTree(detector, cart, depth); 
 			}	
 		};
-		new OperatorObject(operators, 3, Localization.GUI.DETECTOR.NOT, 1) {
+		new OperatorObject(operators, 3, LocalizationDetector.NOT, 1) {
 			public boolean isChildValid(OperatorObject child) {
 				return getID() != child.ID;
 			}
@@ -47,17 +48,17 @@ public class OperatorObject {
 			}		
 		};
 		
-		new OperatorObject(operators, 4, Localization.GUI.DETECTOR.XOR, 2) {
+		new OperatorObject(operators, 4, LocalizationDetector.XOR, 2) {
 			public boolean evaluate(TileEntityDetector detector, EntityModularCart cart, int depth,  LogicObject A, LogicObject B) {
 				return A.evaluateLogicTree(detector, cart, depth) != B.evaluateLogicTree(detector, cart, depth); 
 			}		
 		};
-		new OperatorObjectRedirector(operators, 5, Localization.GUI.DETECTOR.TOP, 0, 1, 0);
-		new OperatorObjectRedirector(operators, 6, Localization.GUI.DETECTOR.BOT, 0, -1, 0);
-		new OperatorObjectRedirector(operators, 7, Localization.GUI.DETECTOR.NORTH, 0, 0, -1);
-		new OperatorObjectRedirector(operators, 8, Localization.GUI.DETECTOR.WEST, -1, 0, 0);
-		new OperatorObjectRedirector(operators, 9, Localization.GUI.DETECTOR.SOUTH, 0, 0, 1);
-		new OperatorObjectRedirector(operators, 10, Localization.GUI.DETECTOR.EAST, 1, 0, 0);
+		new OperatorObjectRedirector(operators, 5, LocalizationDetector.TOP_UNIT, 0, 1, 0);
+		new OperatorObjectRedirector(operators, 6, LocalizationDetector.BOTTOM_UNIT, 0, -1, 0);
+		new OperatorObjectRedirector(operators, 7, LocalizationDetector.NORTH_UNIT, 0, 0, -1);
+		new OperatorObjectRedirector(operators, 8, LocalizationDetector.WEST_UNIT, -1, 0, 0);
+		new OperatorObjectRedirector(operators, 9, LocalizationDetector.SOUTH_UNIT, 0, 0, 1);
+		new OperatorObjectRedirector(operators, 10, LocalizationDetector.EAST_UNIT, 1, 0, 0);
 
 		//Note that IDs are also used by the specific types, the next ID here shouldn't be 11, that one is already in use.
 		
