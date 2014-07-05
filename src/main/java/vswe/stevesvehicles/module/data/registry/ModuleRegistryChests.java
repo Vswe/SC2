@@ -35,7 +35,7 @@ import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
 
 public class ModuleRegistryChests extends ModuleRegistry {
     public ModuleRegistryChests() {
-        super("steves_vehicles_chests");
+        super("common.chests");
 
         ModuleData side = new ModuleData("side_chests", ModuleSideChests.class, 3) {
             @Override

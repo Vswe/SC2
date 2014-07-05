@@ -13,7 +13,7 @@ public final class LocalizationMessage {
     public static final ILocalizedText GIFT = createSimple("gift");
     public static final ILocalizedText EGG = createSimple("egg");
 
-    private static final String HEADER = "steves_vehicles:gui.info.message.";
+    private static final String HEADER = "steves_vehicles:gui.info.message:";
     private static ILocalizedText createSimple(String code) {
         return new LocalizedTextSimple(HEADER + code);
     }

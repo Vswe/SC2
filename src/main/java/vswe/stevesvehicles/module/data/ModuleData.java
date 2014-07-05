@@ -16,7 +16,6 @@ import vswe.stevesvehicles.localization.entry.gui.info.LocalizationLabel;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.old.Helpers.ColorHelper;
-import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.client.rendering.models.ModelVehicle;
 import vswe.stevesvehicles.old.StevesVehicles;
@@ -291,12 +290,10 @@ public class ModuleData implements IRecipeOutput {
     }
 
     public String getUnlocalizedName() {
-        return getUnlocalizedNameForItem() + ".name";
+        return "steves_vehicles:item." + getFullRawUnlocalizedName() + ".name";
     }
 
-    public String getUnlocalizedNameForItem() {
-        return "item." + StevesVehicles.localStart + unlocalizedName ;
-    }
+
 
     public ModuleData getParent() {
         return parent;
@@ -388,11 +385,11 @@ public class ModuleData implements IRecipeOutput {
                     VehicleType vehicle = validVehicles.get(i);
 
                     if(i == 0) {
-                        vehicleText += vehicle.getName();
+                        vehicleText += vehicle.getUnlocalizedName();
                     }else if (i == validVehicles.size() - 1) {
-                        vehicleText += " " + LocalizationLabel.AND.translate() + " " + vehicle.getName();
+                        vehicleText += " " + LocalizationLabel.AND.translate() + " " + vehicle.getUnlocalizedName();
                     }else{
-                        vehicleText += ", " + vehicle.getName();
+                        vehicleText += ", " + vehicle.getUnlocalizedName();
                     }
                 }
 
@@ -487,7 +484,7 @@ public class ModuleData implements IRecipeOutput {
 
         for (VehicleType type : types) {
             if (validVehicles.size() > 0 && moduleType == ModuleType.HULL) {
-                System.err.println("You can't add more than one vehicle type to a hull module. Failed to add type " + type.getName() + " to " + getRawUnlocalizedName()); //TODO localization
+                System.err.println("You can't add more than one vehicle type to a hull module. Failed to add type " + type.getUnlocalizedName() + " to " + getRawUnlocalizedName());
                 break;
             }
             validVehicles.add(type);

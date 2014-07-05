@@ -18,7 +18,7 @@ import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
 public class ModuleRegistryUtility extends ModuleRegistry {
     public static final String ENCHANTABLE_KEY = "Enchantable";
     public ModuleRegistryUtility() {
-        super("steves_vehicle_util");
+        super("common.util");
 
         ModuleData observer = new ModuleData("power_observer", ModulePowerObserver.class, 12);
         observer.addShapedRecipe(   null,               Blocks.piston,      null,

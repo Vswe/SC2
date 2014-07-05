@@ -36,7 +36,7 @@ public final class LocalizationCargo {
 
 
 
-    private static final String HEADER = "steves_vehicles:gui.cargo.";
+    private static final String HEADER = "steves_vehicles:gui.cargo:";
     private static ILocalizedText createSimple(String code) {
         return new LocalizedTextSimple(HEADER + code);
     }

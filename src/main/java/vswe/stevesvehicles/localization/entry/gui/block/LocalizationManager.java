@@ -25,7 +25,7 @@ public final class LocalizationManager {
 
 
 
-    private static final String HEADER = "steves_vehicles:gui.manager.";
+    private static final String HEADER = "steves_vehicles:gui.manager:";
     private static ILocalizedText createSimple(String code) {
         return new LocalizedTextSimple(HEADER + code);
     }

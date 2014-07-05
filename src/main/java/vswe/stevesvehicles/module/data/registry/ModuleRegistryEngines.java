@@ -29,7 +29,7 @@ import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
 
 public class ModuleRegistryEngines extends ModuleRegistry {
     public ModuleRegistryEngines() {
-        super("steves_vehicles_engines");
+        super("common.engines");
 
         ModuleData coalSmall = new ModuleData("tiny_coal_engine", ModuleCoalTiny.class, 2) {
             @Override

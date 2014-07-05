@@ -25,7 +25,7 @@ public final class LocalizationAssembler {
     public static final ILocalizedText OCCUPIED_DEPARTURE_BAY = createSimple("occupied_departure_bay");
 
 
-    private static final String HEADER = "steves_vehicles:gui.assembler.";
+    private static final String HEADER = "steves_vehicles:gui.assembler:";
     private static ILocalizedText createSimple(String code) {
         return new LocalizedTextSimple(HEADER + code);
     }

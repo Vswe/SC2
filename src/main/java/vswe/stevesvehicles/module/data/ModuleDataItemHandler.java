@@ -7,7 +7,6 @@ import net.minecraft.nbt.NBTTagList;
 import vswe.stevesvehicles.localization.entry.gui.info.LocalizationLabel;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
-import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.Helpers.NBTHelper;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.util.Tuple;
@@ -52,7 +51,7 @@ public final class ModuleDataItemHandler {
             ModuleData mod1 = modules.get(i);
 
             if (!mod1.getValidVehicles().contains(vehicle)) {
-                return mod1.getName() + " can't be placed as a part of a " + vehicle.getName(); //TODO localization
+                return mod1.getName() + " can't be placed as a part of a " + vehicle.getUnlocalizedName(); //TODO localization
             }
 
             if (mod1.getCost() > hull.getComplexityMax()) {

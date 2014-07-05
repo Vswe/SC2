@@ -30,7 +30,7 @@ import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
 
 public class ModuleRegistryCartHulls extends ModuleRegistry {
     public ModuleRegistryCartHulls() {
-        super("steves_carts_hulls");
+        super("cart.hulls");
 
         ModuleData wood = new ModuleDataHull("wooden_hull", HullWood.class, 50, 1, 0, 15) {
             @Override

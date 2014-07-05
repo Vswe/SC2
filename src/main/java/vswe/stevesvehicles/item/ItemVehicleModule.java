@@ -34,7 +34,7 @@ public class ItemVehicleModule extends Item {
 
     @Override
     public String getUnlocalizedName() {
-        return "item." + StevesVehicles.localStart + "unknown_module";
+        return "steves_vehicles:item.common:unknown_module.name";
     }
 
     IIcon unknownIcon;
@@ -53,7 +53,7 @@ public class ItemVehicleModule extends Item {
     public String getUnlocalizedName(ItemStack item){
         ModuleData data = getModuleData(item);
         if (data != null) {
-            return data.getUnlocalizedNameForItem();
+            return data.getUnlocalizedName();
         }
         return getUnlocalizedName();
     }

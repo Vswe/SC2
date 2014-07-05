@@ -18,7 +18,7 @@ public class LocalizationGroup {
     public static final ILocalizedText SEAT = createAdvanced("seat"); //TODO add to lang file
     public static final ILocalizedText CAGE = createAdvanced("cage"); //TODO add to lang file
 
-    private static final String HEADER = "steves_vehicles:gui.info.group.";
+    private static final String HEADER = "steves_vehicles:gui.info.group:";
     private static ILocalizedText createAdvanced(String code) {
         return new LocalizedTextAdvanced(HEADER + code);
     }

@@ -14,7 +14,7 @@ import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
 
 public class ModuleRegistryTemperature extends ModuleRegistry {
     public ModuleRegistryTemperature() {
-        super("steves_vehicles_temperature");
+        super("common.temperature");
 
         ModuleData melter = new ModuleData("melter", ModuleMelter.class, 10);
 

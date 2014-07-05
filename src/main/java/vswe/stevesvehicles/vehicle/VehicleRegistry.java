@@ -10,8 +10,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VehicleRegistry implements IRegistry<VehicleType> {
-    public static final VehicleType CART = new VehicleType(EntityModularCart.class, "Carts"); //TODO these strings will be the unlocalized name of the vehicles
-    public static final VehicleType BOAT = new VehicleType(EntityModularCart.class, "Boats");
+    public static final VehicleType CART = new VehicleType(EntityModularCart.class, "cart");
+    public static final VehicleType BOAT = new VehicleType(EntityModularCart.class, "boat");
 
     public static void init() {
         loader = new RegistryLoader<VehicleRegistry, VehicleType>();
@@ -41,16 +41,16 @@ public class VehicleRegistry implements IRegistry<VehicleType> {
     }
 
     public void register(VehicleType vehicleType) {
-        if (vehicles.containsKey(vehicleType.getName())) {
-            System.err.println("A vehicle with this raw name has already been registered. Failed to register a second module with the raw name " + vehicleType.getName() + ".");
+        if (vehicles.containsKey(vehicleType.getUnlocalizedName())) {
+            System.err.println("A vehicle with this raw name has already been registered. Failed to register a second module with the raw name " + vehicleType.getUnlocalizedName() + ".");
         }else{
-            vehicles.put(vehicleType.getName(), vehicleType);
+            vehicles.put(vehicleType.getUnlocalizedName(), vehicleType);
         }
     }
 
     @Override
     public String getFullCode(VehicleType obj) {
-        return obj.getName();
+        return obj.getUnlocalizedName();
     }
 
     @Override

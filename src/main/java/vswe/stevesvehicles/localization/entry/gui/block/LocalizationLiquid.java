@@ -17,7 +17,7 @@ public final class LocalizationLiquid {
     public static final ILocalizedText TRANSFER_BUCKETS_SHORT = createSimple("transfer_buckets_short");
 
 
-    private static final String HEADER = "steves_vehicles:gui.liquid.";
+    private static final String HEADER = "steves_vehicles:gui.liquid:";
     private static ILocalizedText createSimple(String code) {
         return new LocalizedTextSimple(HEADER + code);
     }

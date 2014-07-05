@@ -40,7 +40,7 @@ public final class LocalizationLabel {
     public static final ILocalizedText MAX_ADDONS = createAdvanced("max_addons");
 
 
-    private static final String HEADER = "steves_vehicles:gui.info.label.";
+    private static final String HEADER = "steves_vehicles:gui.info.label:";
     private static ILocalizedText createSimple(String code) {
         return new LocalizedTextSimple(HEADER + code);
     }

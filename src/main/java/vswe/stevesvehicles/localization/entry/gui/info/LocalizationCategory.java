@@ -14,7 +14,7 @@ public final class LocalizationCategory {
     public static final ILocalizedText INVALID = createSimple("invalid");
 
 
-    private static final String HEADER = "steves_vehicles:gui.info.category.";
+    private static final String HEADER = "steves_vehicles:gui.info.category:";
     private static ILocalizedText createSimple(String code) {
         return new LocalizedTextSimple(HEADER + code);
     }

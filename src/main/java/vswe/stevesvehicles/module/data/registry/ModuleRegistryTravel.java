@@ -22,7 +22,7 @@ public class ModuleRegistryTravel extends ModuleRegistry {
     public static final String SEAT_KEY = "Seats";
     public static final String CAGE_KEY = "Cages";
     public ModuleRegistryTravel() {
-        super("steves_vehicle_travel");
+        super("common.travel");
 
         ModuleDataGroup seats = ModuleDataGroup.createGroup(SEAT_KEY, LocalizationGroup.SEAT);
         ModuleDataGroup cages = ModuleDataGroup.createGroup(CAGE_KEY, LocalizationGroup.CAGE);

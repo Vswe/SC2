@@ -25,7 +25,7 @@ import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
 public class ModuleRegistryTanks extends ModuleRegistry {
 
     public ModuleRegistryTanks() {
-        super("steves_vehicles_tanks");
+        super("common.tanks");
 
         ModuleData side = new ModuleData("side_tanks", ModuleSideTanks.class, 10) {
             @Override

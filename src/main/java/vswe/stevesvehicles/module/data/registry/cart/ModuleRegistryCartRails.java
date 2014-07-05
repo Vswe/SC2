@@ -24,7 +24,7 @@ import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
 
 public class ModuleRegistryCartRails extends ModuleRegistry {
     public ModuleRegistryCartRails() {
-        super("steves_vehicle_rails");
+        super("vehicle.rails");
 
         ModuleData railer = new ModuleData("railer", ModuleRailer.class, 3) {
             @Override

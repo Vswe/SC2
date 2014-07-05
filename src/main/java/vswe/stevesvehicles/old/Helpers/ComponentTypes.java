@@ -6,101 +6,110 @@ import net.minecraft.util.StatCollector;
 import vswe.stevesvehicles.old.Items.ModItems;
 
 public enum ComponentTypes {
-    WOODEN_WHEELS(0, "Wooden Wheels"),
-    IRON_WHEELS(1, "Iron Wheels"),
-    RED_PIGMENT(2, "Red Pigment"),
-    GREEN_PIGMENT(3, "Green Pigment"),
-    BLUE_PIGMENT(4, "Blue Pigment"),
-    GLASS_O_MAGIC(5, "Glass o'Magic"),
-    DYNAMITE(6, "Dynamite"),
-    REMOVED_1(7, null),
-    REMOVED_2(8, null),
-    SIMPLE_PCB(9, "Simple PCB"),
-    GRAPHICAL_INTERFACE(10, "Graphical Interface"),
-    RAW_HANDLE(11, "Raw Handle"),
-    REFINED_HANDLE(12, "Refined Handle"),
-    SPEED_HANDLE(13, "Speed Handle"),
-    WHEEL(14, "Wheel"),
-    SAW_BLADE(15, "Saw Blade"),
-    ADVANCED_PCB(16,"Advanced PCB"),
-    WOOD_CUTTING_CORE(17, "Wood Cutting Core"),
-    RAW_HARDENER(18, "Raw Hardener"),
-    REFINED_HARDENER(19, "Refined Hardener"),
-    HARDENED_MESH(20, "Hardened Mesh"),
-    STABILIZED_METAL(21, "Stabilized Metal"),
-    REINFORCED_METAL(22, "Reinforced Metal"),
-    REINFORCED_WHEELS(23, "Reinforced Wheels"),
-    PIPE(24, "Pipe"),
-    SHOOTING_STATION(25, "Shooting Station"),
-    ENTITY_SCANNER(26, "Entity Scanner"),
-    ENTITY_ANALYZER(27, "Entity Analyzer"),
-    EMPTY_DISK(28, "Empty Disk"),
-    TRI_TORCH(29, "Tri-torch"),
-    CHEST_PANE(30, "Chest Pane"),
-    LARGE_CHEST_PANE(31, "Large Chest Pane"),
-    HUGE_CHEST_PANE(32, "Huge Chest Pane"),
-    CHEST_LOCK(33, "Chest Lock"),
-    IRON_PANE(34, "Iron Pane"),
-    LARGE_IRON_PANE(35, "Large Iron Pane"),
-    HUGE_IRON_PANE(36, "Huge Iron Pane"),
-    DYNAMIC_PANE(37, "Dynamic Pane"),
-    LARGE_DYNAMIC_PANE(38, "Large Dynamic Pane"),
-    HUGE_DYNAMIC_PANE(39, "Huge Dynamic Pane"),
-    CLEANING_FAN(40, "Cleaning Fan"),
-    CLEANING_CORE(41, "Cleaning Core"),
-    CLEANING_TUBE(42, "Cleaning Tube"),
-    FUSE(43, "Fuse"),
-    SOLAR_PANEL(44, "Solar Panel"),
-    EYE_OF_GALGADOR(45, "Eye of Galgador"),
-    LUMP_OF_GALGADOR(46, "Lump of Galgador"),
-    GALGADORIAN_METAL(47, "Galgadorian Metal"),
-    LARGE_LUMP_OF_GALGADOR(48, "Large Lump of Galgador"),
-    ENHANCED_GALGADORIAN_METAL(49, "Enhanced Galgadorian Metal"),
-    STOLEN_PRESENT(50, "Stolen Present"),
-    GREEN_WRAPPING_PAPER(51, "Green Wrapping Paper"),
-    RED_WRAPPING_PAPER(52, "Red Wrapping Paper"),
-    WARM_HAT(53, "Warm hat"),
-    RED_GIFT_RIBBON(54, "Red Gift Ribbon"),
-    YELLOW_GIFT_RIBBON(55, "Yellow Gift Ribbon"),
-    SOCK(56, "Sock"),
-    STUFFED_SOCK(57, "Stuffed Sock"),
-    ADVANCED_SOLAR_PANEL(58, "Advanced Solar Panel"),
-    BLANK_UPGRADE(59, "Blank Upgrade"),
-    TANK_VALVE(60, "Tank Valve"),
-    TANK_PANE(61, "Tank Pane"),
-    LARGE_TANK_PANE(62, "Large Tank Pane"),
-    HUGE_TANK_PANE(63, "Huge Tank Pane"),
-    LIQUID_CLEANING_CORE(64, "Liquid Cleaning Core"),
-    LIQUID_CLEANING_TUBE(65, "Liquid Cleaning Tube"),
-    EXPLOSIVE_EASTER_EGG(66, "Explosive Easter Egg"),
-    BURNING_EASTER_EGG(67, "Burning Easter Egg"),
-    GLISTERING_EASTER_EGG(68, "Glistering Easter Egg"),
-    CHOCOLATE_EASTER_EGG(69, "Chocolate Easter Egg"),
-    PAINTED_EASTER_EGG(70, "Painted Easter Egg"),
-    BASKET(71, "Basket"),
-    OAK_LOG(72, "Oak Log"),
-    OAK_TWIG(73, "Oak Twig"),
-    SPRUCE_LOG(74, "Spruce Log"),
-    SPRUCE_TWIG(75, "Spruce Twig"),
-    BIRCH_LOG(76, "Birch Log"),
-    BIRCH_TWIG(77, "Birch Twig"),
-    JUNGLE_LOG(78, "Jungle Log"),
-    JUNGLE_TWIG(79, "Jungle Twig"),
-    HARDENED_SAW_BLADE(80, "Hardened Saw Blade"),
-    GALGADORIAN_SAW_BLADE(81, "Galgadorian Saw Blade"),
-    GALGADORIAN_WHEELS(82, "Galgadorian Wheels"),
-    IRON_BLADE(83, "Iron Blade"),
-    BLADE_ARM(84, "Blade Arm");
+    WOODEN_WHEELS,
+    IRON_WHEELS,
+    RED_PIGMENT,
+    GREEN_PIGMENT,
+    BLUE_PIGMENT,
+    GLASS_O_MAGIC,
+    DYNAMITE,
+    REMOVED_1(true),
+    REMOVED_2(true),
+    SIMPLE_PCB,
+    GRAPHICAL_INTERFACE,
+    RAW_HANDLE,
+    REFINED_HANDLE,
+    SPEED_HANDLE,
+    WHEEL,
+    SAW_BLADE,
+    ADVANCED_PCB,
+    WOOD_CUTTING_CORE,
+    RAW_HARDENER,
+    REFINED_HARDENER,
+    HARDENED_MESH,
+    STABILIZED_METAL,
+    REINFORCED_METAL,
+    REINFORCED_WHEELS,
+    PIPE,
+    SHOOTING_STATION,
+    ENTITY_SCANNER,
+    ENTITY_ANALYZER,
+    EMPTY_DISK,
+    TRI_TORCH,
+    CHEST_PANE,
+    LARGE_CHEST_PANE,
+    HUGE_CHEST_PANE,
+    CHEST_LOCK,
+    IRON_PANE,
+    LARGE_IRON_PANE,
+    HUGE_IRON_PANE,
+    DYNAMIC_PANE,
+    LARGE_DYNAMIC_PANE,
+    HUGE_DYNAMIC_PANE,
+    CLEANING_FAN,
+    CLEANING_CORE,
+    CLEANING_TUBE,
+    FUSE,
+    SOLAR_PANEL,
+    EYE_OF_GALGADOR,
+    LUMP_OF_GALGADOR,
+    GALGADORIAN_METAL,
+    LARGE_LUMP_OF_GALGADOR,
+    ENHANCED_GALGADORIAN_METAL,
+    STOLEN_PRESENT,
+    GREEN_WRAPPING_PAPER,
+    RED_WRAPPING_PAPER,
+    WARM_HAT,
+    RED_GIFT_RIBBON,
+    YELLOW_GIFT_RIBBON,
+    SOCK,
+    STUFFED_SOCK,
+    ADVANCED_SOLAR_PANEL,
+    BLANK_UPGRADE,
+    TANK_VALVE,
+    TANK_PANE,
+    LARGE_TANK_PANE,
+    HUGE_TANK_PANE,
+    LIQUID_CLEANING_CORE,
+    LIQUID_CLEANING_TUBE,
+    EXPLOSIVE_EASTER_EGG,
+    BURNING_EASTER_EGG,
+    GLISTERING_EASTER_EGG,
+    CHOCOLATE_EASTER_EGG,
+    PAINTED_EASTER_EGG,
+    BASKET,
+    OAK_LOG,
+    OAK_TWIG,
+    SPRUCE_LOG,
+    SPRUCE_TWIG,
+    BIRCH_LOG,
+    BIRCH_TWIG,
+    JUNGLE_LOG,
+    JUNGLE_TWIG,
+    HARDENED_SAW_BLADE,
+    GALGADORIAN_SAW_BLADE,
+    GALGADORIAN_WHEELS,
+    IRON_BLADE,
+    BLADE_ARM;
 
     private int id;
-    private String name;
-    ComponentTypes(int id, String name) {
-       this.id = id;
-       this.name = name;
+    private String unlocalizedName;
+    ComponentTypes(boolean invalid) {
+        if (invalid) {
+            id = 0;
+            unlocalizedName = null;
+        }else{
+            this.id = ordinal();
+            this.unlocalizedName = toString().toLowerCase();
+        }
     }
 
-    public String getName() {
-        return name;
+    ComponentTypes() {
+        this(false);
+    }
+
+    public String getUnlocalizedName() {
+        return unlocalizedName;
     }
 
     public ItemStack getItemStack(int count) {
@@ -119,7 +128,4 @@ public enum ComponentTypes {
         return itemstack != null && itemstack.getItem() == ModItems.component && itemstack.getItemDamage() == id;
     }
 
-    public String getLocalizedName() {
-        return StatCollector.translateToLocal(ModItems.component.getUnlocalizedName(getItemStack()) + ".name");
-    }
 }

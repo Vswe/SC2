@@ -18,7 +18,7 @@ import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
 
 public class ModuleRegistryIndependence extends ModuleRegistry {
     public ModuleRegistryIndependence() {
-        super("steves_vehicles_independence");
+        super("common.independence");
 
         ModuleData dynamite = new ModuleData("dynamite_carrier", ModuleDynamite.class, 3) {
             @Override

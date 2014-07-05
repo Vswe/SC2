@@ -26,7 +26,7 @@ import static vswe.stevesvehicles.old.Helpers.ComponentTypes.EMPTY_DISK;
 
 public class ModuleRegistryCartCultivationUtil extends ModuleRegistry {
     public ModuleRegistryCartCultivationUtil() {
-        super("steves_carts_cultivation");
+        super("cart.cultivation");
 
         loadFarmingUtil();
         loadWoodCuttingUtil();

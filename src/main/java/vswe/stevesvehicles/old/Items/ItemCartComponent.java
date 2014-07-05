@@ -35,17 +35,9 @@ public class ItemCartComponent extends Item
     }
 
 	private String getName(int dmg) {
-		return ComponentTypes.values()[dmg].getName();
+		return ComponentTypes.values()[dmg].getUnlocalizedName();
 	}
-	
-	public String getName(ItemStack par1ItemStack)
-    {
-		if (par1ItemStack == null || par1ItemStack.getItemDamage() < 0 || par1ItemStack.getItemDamage() >= size() || getName(par1ItemStack.getItemDamage()) == null) {
-			return "Unknown SC2 Component";
-		}else{
-			return getName(par1ItemStack.getItemDamage());
-		}
-    }
+
 
 	@Override
     @SideOnly(Side.CLIENT)
@@ -57,10 +49,6 @@ public class ItemCartComponent extends Item
 			return icons[dmg];
 		}
     }	
-	
-	private String getRawName(int i) {
-		return getName(i).replace(":","").replace(" ","_").toLowerCase();
-	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -69,7 +57,7 @@ public class ItemCartComponent extends Item
 		icons = new IIcon[size()];
 		for (int i = 0; i < icons.length; i++) {
 			if (getName(i) != null) {
-				icons[i] = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + getRawName(i) + "_icon");
+				icons[i] = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + getName(i) + "_icon");
 			}
 		}
 		unknownIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "unknown_icon");
@@ -81,14 +69,13 @@ public class ItemCartComponent extends Item
 		if (item == null || item.getItemDamage() < 0 || item.getItemDamage() >= size() || getName(item.getItemDamage()) == null) {
 			return getUnlocalizedName();
 		}else{
-			return "item." + StevesVehicles.localStart + getRawName(item.getItemDamage());
+			return "steves_vehicles:item.component:" + getName(item.getItemDamage()) + ".name";
 		}
     }
 	
 	@Override
     public String getUnlocalizedName() {
-	
-		return "item." + StevesVehicles.localStart + "unknowncomponent";
+        return "steves_vehicles:item.component:unknown_component.name";
 	}
 
     @SideOnly(Side.CLIENT)
@@ -97,9 +84,9 @@ public class ItemCartComponent extends Item
 	
 		if (par1ItemStack == null || par1ItemStack.getItemDamage() < 0 || par1ItemStack.getItemDamage() >= size() || getName(par1ItemStack.getItemDamage()) == null) {
 			if (par1ItemStack != null && par1ItemStack.getItem() instanceof ItemCartComponent){
-				par3List.add("Component id " + par1ItemStack.getItemDamage());
+				par3List.add("Component id " + par1ItemStack.getItemDamage()); //TODO localize
 			}else{
-				par3List.add("Unknown component id");
+				par3List.add("Unknown component id"); //TODO localize
 			}
 		}
 	}		

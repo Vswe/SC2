@@ -38,7 +38,7 @@ public class ModuleRegistryShooters extends ModuleRegistry {
     public static final String DETECTOR_KEY = "EntityDetectors";
     private ModuleData advanced;
     public ModuleRegistryShooters() {
-        super("steves_vehicles_shooters");
+        super("common.shooters");
 
         loadShooters();
         loadDetectors();

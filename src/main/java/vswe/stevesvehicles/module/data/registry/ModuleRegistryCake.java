@@ -18,7 +18,7 @@ import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
 
 public class ModuleRegistryCake extends ModuleRegistry {
     public ModuleRegistryCake() {
-        super("steves_vehicle_cake");
+        super("common.cake");
 
         ModuleData cake = new ModuleData("cake_server", ModuleCakeServer.class, 10) {
             @Override

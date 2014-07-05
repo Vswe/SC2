@@ -19,7 +19,7 @@ public final class LocalizationToggler {
     public static final ILocalizedText DEACTIVATE_STATE = createSimple("deactivate_state");
     public static final ILocalizedText TOGGLE_STATE = createSimple("toggle_state");
 
-    private static final String HEADER = "steves_vehicles:gui.toggler.";
+    private static final String HEADER = "steves_vehicles:gui.toggler:";
     private static ILocalizedText createSimple(String code) {
         return new LocalizedTextSimple(HEADER + code);
     }

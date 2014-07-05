@@ -36,7 +36,7 @@ public class ModuleRegistryCartTools extends ModuleRegistry {
     public static final String FARM_KEY = "Farmers";
 
     public ModuleRegistryCartTools() {
-        super("steves_carts_tools");
+        super("cart.tools");
 
         //Create a combined group for all the tool groups. The order groups are being accessed is irrelevant.
         //The combined group is created before the individual groups to prove this.

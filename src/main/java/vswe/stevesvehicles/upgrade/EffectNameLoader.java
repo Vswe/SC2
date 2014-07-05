@@ -2,6 +2,7 @@ package vswe.stevesvehicles.upgrade;
 
 
 import net.minecraft.util.MathHelper;
+import vswe.stevesvehicles.localization.entry.gui.info.LocalizationUpgrade;
 import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.upgrade.effect.assembly.Blueprint;
 import vswe.stevesvehicles.upgrade.effect.assembly.Disassemble;
@@ -27,21 +28,21 @@ public final class EffectNameLoader {
         Upgrade.registerInfo(Blueprint.class, new IEffectInfo() {
             @Override
             public String getName(Object... params) {
-                return Localization.UPGRADES.BLUEPRINT.translate();
+                return LocalizationUpgrade.BLUEPRINT.translate();
             }
         });
 
         Upgrade.registerInfo(Disassemble.class, new IEffectInfo() {
             @Override
             public String getName(Object... params) {
-                return Localization.UPGRADES.DISASSEMBLE.translate();
+                return LocalizationUpgrade.DISASSEMBLE.translate();
             }
         });
 
         Upgrade.registerInfo(InputChest.class, new IEffectInfo() {
             @Override
             public String getName(Object... params) {
-                return Localization.UPGRADES.INPUT_CHEST.translate(String.valueOf((Integer)params[0] * (Integer)params[1]));
+                return LocalizationUpgrade.INPUT_CHEST.translate(String.valueOf((Integer)params[0] * (Integer)params[1]));
             }
         });
 
@@ -49,42 +50,42 @@ public final class EffectNameLoader {
             @Override
             public String getName(Object... params) {
                 int percentage = (int)((Float)params[0] * 100);
-                return Localization.UPGRADES.EFFICIENCY.translate((percentage >= 0 ? "+" : "") + percentage);
+                return LocalizationUpgrade.EFFICIENCY.translate((percentage >= 0 ? "+" : "") + percentage);
             }
         });
 
         Upgrade.registerInfo(Deployer.class, new IEffectInfo() {
             @Override
             public String getName(Object... params) {
-                return  Localization.UPGRADES.DEPLOYER.translate();
+                return  LocalizationUpgrade.DEPLOYER.translate();
             }
         });
 
         Upgrade.registerInfo(Manager.class, new IEffectInfo() {
             @Override
             public String getName(Object... params) {
-                return Localization.UPGRADES.BRIDGE.translate();
+                return LocalizationUpgrade.MANAGER.translate();
             }
         });
 
         Upgrade.registerInfo(Redstone.class, new IEffectInfo() {
             @Override
             public String getName(Object... params) {
-                return Localization.UPGRADES.REDSTONE.translate();
+                return LocalizationUpgrade.REDSTONE.translate();
             }
         });
 
         Upgrade.registerInfo(Transposer.class, new IEffectInfo() {
             @Override
             public String getName(Object... params) {
-                return Localization.UPGRADES.TRANSPOSER.translate();
+                return LocalizationUpgrade.TRANSPOSER.translate();
             }
         });
 
         Upgrade.registerInfo(CombustionFuel.class, new IEffectInfo() {
             @Override
             public String getName(Object... params) {
-                return Localization.UPGRADES.COMBUSTION.translate();
+                return LocalizationUpgrade.COMBUSTION.translate();
             }
         });
 
@@ -92,7 +93,7 @@ public final class EffectNameLoader {
             @Override
             public String getName(Object... params) {
                 int capacity = (Integer)params[0];
-                return Localization.UPGRADES.FUEL_CAPACITY.translate((capacity >= 0 ? "+" : "") + capacity);
+                return LocalizationUpgrade.FUEL_CAPACITY.translate((capacity >= 0 ? "+" : "") + capacity);
             }
         });
 
@@ -101,14 +102,14 @@ public final class EffectNameLoader {
             public String getName(Object... params) {
                 float p = (((Float)params[0]) - 1) * 100;
                 int percentage = Math.round(p * 10) / 10;
-                return Localization.UPGRADES.FUEL_COST.translate((percentage >= 0 ? "+" : "") + percentage);
+                return LocalizationUpgrade.FUEL_COST.translate((percentage >= 0 ? "+" : "") + percentage);
             }
         });
 
         Upgrade.registerInfo(FuelCostFree.class, new IEffectInfo() {
             @Override
             public String getName(Object... params) {
-                return Localization.UPGRADES.FUEL_COST.translate("0"); //TODO add localization for this one
+                return LocalizationUpgrade.FUEL_COST.translate("0"); //TODO add localization for this one
             }
         });
 
@@ -116,21 +117,21 @@ public final class EffectNameLoader {
             @Override
             public String getName(Object... params) {
                 int amount = (Integer)params[0];
-                return Localization.UPGRADES.GENERATOR.translate(String.valueOf(amount), String.valueOf(amount));
+                return LocalizationUpgrade.GENERATOR.translate(String.valueOf(amount), String.valueOf(amount));
             }
         });
 
         Upgrade.registerInfo(Solar.class, new IEffectInfo() {
             @Override
             public String getName(Object... params) {
-                return Localization.UPGRADES.SOLAR.translate();
+                return LocalizationUpgrade.SOLAR.translate();
             }
         });
 
         Upgrade.registerInfo(ThermalFuel.class, new IEffectInfo() {
             @Override
             public String getName(Object... params) {
-                return Localization.UPGRADES.THERMAL.translate();
+                return LocalizationUpgrade.THERMAL.translate();
             }
         });
 
@@ -138,7 +139,7 @@ public final class EffectNameLoader {
             @Override
             public String getName(Object... params) {
                 int seconds = (Integer)params[0] / 20;
-                return Localization.UPGRADES.FLAT.translate((seconds >= 0 ? "+" : "") + seconds, String.valueOf(seconds));
+                return LocalizationUpgrade.TIME_FLAT.translate((seconds >= 0 ? "+" : "") + seconds, String.valueOf(seconds));
             }
         });
 
@@ -146,7 +147,7 @@ public final class EffectNameLoader {
             @Override
             public String getName(Object... params) {
                 int seconds = (Integer) params[0] / 20;
-                return Localization.UPGRADES.CART_FLAT.translate((seconds >= 0 ? "+" : "") + seconds, String.valueOf(seconds));
+                return LocalizationUpgrade.TIME_FLAT_CART.translate((seconds >= 0 ? "+" : "") + seconds, String.valueOf(seconds));
             }
         });
 
@@ -154,7 +155,7 @@ public final class EffectNameLoader {
             @Override
             public String getName(Object... params) {
                 int seconds = (Integer) params[0] / 20;
-                return Localization.UPGRADES.FLAT_REMOVED.translate((seconds >= 0 ? "+" : "") + seconds, String.valueOf(seconds));
+                return LocalizationUpgrade.TIME_FLAT_REMOVE.translate((seconds >= 0 ? "+" : "") + seconds, String.valueOf(seconds));
             }
         });
     }

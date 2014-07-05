@@ -22,7 +22,7 @@ import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
 
 public class ModuleRegistryCartCleaning extends ModuleRegistry {
     public ModuleRegistryCartCleaning() {
-        super("steves_carts_cleaning");
+        super("cart.cleaning");
 
         ModuleData cleaner = new ModuleData("cleaning_machine", ModuleCleaner.class, 23) {
             @Override

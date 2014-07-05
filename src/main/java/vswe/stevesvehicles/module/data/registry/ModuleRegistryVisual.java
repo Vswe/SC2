@@ -20,7 +20,7 @@ import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
 
 public class ModuleRegistryVisual extends ModuleRegistry {
     public ModuleRegistryVisual() {
-        super("steves_vehicles_visual");
+        super("common.visual");
 
 
         ModuleData colorizer = new ModuleData("colorizer", ModuleColorizer.class, 15);

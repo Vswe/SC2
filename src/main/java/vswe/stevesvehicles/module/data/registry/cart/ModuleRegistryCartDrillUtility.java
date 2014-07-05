@@ -21,7 +21,7 @@ import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
 
 public class ModuleRegistryCartDrillUtility extends ModuleRegistry{
     public ModuleRegistryCartDrillUtility() {
-        super("steves_carts_drill_utility");
+        super("cart.drill_utility");
 
         ModuleData liquidSensors = new ModuleData("liquid_sensors", ModuleLiquidSensors.class, 27) {
             @Override

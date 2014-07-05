@@ -10,36 +10,6 @@ public final class Localization {
     private Localization() {}
 
 
-    public static enum UPGRADES implements ILocalizedText {
-        BLUEPRINT("effectBlueprint"),
-        COMBUSTION("effectCombustionFuel"),
-        DEPLOYER("effectDeployer"),
-        DISASSEMBLE("effectDisassemble"),
-        FUEL_CAPACITY("effectFuelCapacity"),
-        FUEL_COST("effectFuelCost"),
-        INPUT_CHEST("effectInputChest"),
-        BRIDGE("effectManagerBridge"),
-        GENERATOR("effectGenerator"),
-        REDSTONE("effectRedstone"),
-        SOLAR("effectSolar"),
-        THERMAL("effectThermal"),
-        FLAT("effectTimeFlat"),
-        CART_FLAT("effectTimeFlatCart"),
-        FLAT_REMOVED("effectTimeFlatRemove"),
-        TRANSPOSER("effectTransposer"),
-        EFFICIENCY("effectEfficiency");
-
-
-
-        private String name;
-        UPGRADES(String name) {
-            this.name = name;
-        }
-
-        public String translate(String ... vars) {
-            return doTranslate("info.SC2:" + name, vars);
-        }
-    }
 
     public static class MODULES {
 

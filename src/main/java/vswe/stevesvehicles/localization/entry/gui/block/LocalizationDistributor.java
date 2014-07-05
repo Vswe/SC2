@@ -29,7 +29,7 @@ public final class LocalizationDistributor {
     public static final ILocalizedText SIDE_TOOLTIP = createAdvanced("side_tooltip");
 
 
-    private static final String HEADER = "steves_vehicles:gui.distributor.";
+    private static final String HEADER = "steves_vehicles:gui.distributor:";
     private static ILocalizedText createSimple(String code) {
         return new LocalizedTextSimple(HEADER + code);
     }

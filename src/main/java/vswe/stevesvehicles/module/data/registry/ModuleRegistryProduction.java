@@ -17,7 +17,7 @@ import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
 public class ModuleRegistryProduction extends ModuleRegistry {
 
     public ModuleRegistryProduction() {
-        super("steves_vehicles_production");
+        super("common.production");
 
         ModuleData crafter = new ModuleData("crafter", ModuleCrafter.class, 22);
         crafter.addShapelessRecipe(SIMPLE_PCB, Blocks.crafting_table);

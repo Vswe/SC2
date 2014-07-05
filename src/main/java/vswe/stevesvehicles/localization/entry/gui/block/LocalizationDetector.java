@@ -73,7 +73,7 @@ public final class LocalizationDetector {
     public static final ILocalizedText TANKS_EMPTY = createSimple("tanks_empty");
     public static final ILocalizedText TANKS_SPARE = createSimple("tanks_spare");
 
-    private static final String HEADER = "steves_vehicles:gui.detector.";
+    private static final String HEADER = "steves_vehicles:gui.detector:";
     private static ILocalizedText createSimple(String code) {
         return new LocalizedTextSimple(HEADER + code);
     }

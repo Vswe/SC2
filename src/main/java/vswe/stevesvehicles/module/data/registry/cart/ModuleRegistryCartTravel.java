@@ -19,7 +19,7 @@ import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
 
 public class ModuleRegistryCartTravel extends ModuleRegistry {
     public ModuleRegistryCartTravel() {
-        super("steves_carts_travel");
+        super("cart.travel");
 
         ModuleDataGroup seats = ModuleDataGroup.getGroup(ModuleRegistryTravel.SEAT_KEY);
 
