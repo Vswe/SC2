@@ -1,5 +1,12 @@
 # ======================================
-				BLOCK GUI
+#				CREATIVE TAB
+# ======================================
+steves_vehicles:gui.tab:base=Steve's Vehicles - [%1]
+steves_vehicles:gui.tab:items=Components
+steves_vehicles:gui.tab:blocks=Blocks
+
+# ======================================
+#				BLOCK GUI
 # ======================================
 
 # Cart assembler gui localization

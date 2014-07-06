@@ -10,6 +10,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
 import vswe.stevesvehicles.old.StevesVehicles;
+import vswe.stevesvehicles.tab.CreativeTabLoader;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.DetectorType;
 import vswe.stevesvehicles.old.TileEntities.TileEntityActivator;
@@ -31,7 +32,7 @@ public class BlockRailAdvDetector extends BlockSpecialRailBase
     public BlockRailAdvDetector()
     {
         super(false);
-        setCreativeTab(StevesVehicles.tabsSC2Blocks);
+        setCreativeTab(CreativeTabLoader.blocks);
     }
 	
 	@Override

@@ -10,6 +10,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.util.IIcon;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import vswe.stevesvehicles.tab.CreativeTabLoader;
+
 public class BlockDistributor extends BlockContainerBase
 {
 
@@ -17,7 +19,7 @@ public class BlockDistributor extends BlockContainerBase
     public BlockDistributor()
     {
         super(Material.rock);
-        setCreativeTab(StevesVehicles.tabsSC2Blocks);
+        setCreativeTab(CreativeTabLoader.blocks);
     }
 
 

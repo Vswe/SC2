@@ -7,15 +7,15 @@ import net.minecraftforge.oredict.RecipeSorter;
 import org.apache.logging.log4j.Logger;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.network.PacketHandler;
+import vswe.stevesvehicles.tab.CreativeTabCustom;
 import vswe.stevesvehicles.recipe.ModuleRecipeShaped;
 import vswe.stevesvehicles.recipe.ModuleRecipeShapeless;
 import vswe.stevesvehicles.registry.RegistrySynchronizer;
-import vswe.stevesvehicles.upgrade.Upgrade;
+import vswe.stevesvehicles.tab.CreativeTabLoader;
 import vswe.stevesvehicles.upgrade.registry.UpgradeRegistry;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.CraftingHandler;
-import vswe.stevesvehicles.old.Helpers.CreativeTabSC2;
 import vswe.stevesvehicles.old.Helpers.EntityCake;
 import vswe.stevesvehicles.old.Helpers.EntityEasterEgg;
 import vswe.stevesvehicles.old.Helpers.GeneratedInfo;
@@ -63,9 +63,7 @@ public class StevesVehicles {
 	@Instance("StevesVehicles")
 	public static StevesVehicles instance;
 
-	public static CreativeTabSC2 tabsSC2 = new CreativeTabSC2("SC2Modules");
-	public static CreativeTabSC2 tabsSC2Components = new CreativeTabSC2("SC2Items");
-	public static CreativeTabSC2 tabsSC2Blocks = new CreativeTabSC2("SC2Blocks");
+
 	
 	public ISimpleBlockRenderingHandler blockRenderer;
 
@@ -79,12 +77,14 @@ public class StevesVehicles {
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+        //TODO make sure everything here is called in the correct order and still allow other mods to hook into it and still maintaining the correct sequence
         packetHandler = NetworkRegistry.INSTANCE.newEventDrivenChannel(CHANNEL);
 
         VehicleRegistry.init();
         ModuleRegistry.init();
         UpgradeRegistry.init();
 
+        CreativeTabLoader.init();
 		logger = event.getModLog();
 
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
@@ -113,13 +113,12 @@ public class StevesVehicles {
 
     @EventHandler
 	public void load(FMLInitializationEvent evt) {
+        CreativeTabLoader.postInit();
         RecipeSorter.register("steves_vehicles:shaped", ModuleRecipeShaped.class, RecipeSorter.Category.SHAPED, "before:minecraft:shaped before:steves_vehicles:shapeless");
         RecipeSorter.register("steves_vehicles:shapeless", ModuleRecipeShapeless.class, RecipeSorter.Category.SHAPELESS, "after:steves_vehicles:shaped");
 
         packetHandler.register(new PacketHandler());
-		LanguageRegistry.instance().addStringLocalization("itemGroup.SC2Modules", "en_US", "Steve's Carts 2 Modules");
-		LanguageRegistry.instance().addStringLocalization("itemGroup.SC2Items", "en_US", "Steve's Carts 2 Components");
-		LanguageRegistry.instance().addStringLocalization("itemGroup.SC2Blocks", "en_US", "Steve's Carts 2 Blocks");
+
 	
 		new OverlayRenderer();
 		new TicketListener();
@@ -138,11 +137,6 @@ public class StevesVehicles {
 
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
 		proxy.renderInit();
-
-		tabsSC2Blocks.setIcon(new ItemStack(vswe.stevesvehicles.old.Blocks.ModBlocks.CART_ASSEMBLER.getBlock(), 1));
-
-        tabsSC2.setIcon(new ItemStack(vswe.stevesvehicles.old.Blocks.ModBlocks.CART_ASSEMBLER.getBlock(), 1)); //TODO just temporary to have something
-        tabsSC2Components.setIcon(new ItemStack(vswe.stevesvehicles.old.Blocks.ModBlocks.CART_ASSEMBLER.getBlock(), 1)); //TODO just temporary to have something
 
 		TileEntityCargo.loadSelectionSettings();
 

@@ -51,7 +51,7 @@ public final class ModuleDataItemHandler {
             ModuleData mod1 = modules.get(i);
 
             if (!mod1.getValidVehicles().contains(vehicle)) {
-                return mod1.getName() + " can't be placed as a part of a " + vehicle.getUnlocalizedName(); //TODO localization
+                return mod1.getName() + " can't be placed as a part of a " + vehicle.getName(); //TODO localization
             }
 
             if (mod1.getCost() > hull.getComplexityMax()) {

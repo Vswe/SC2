@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 
 import vswe.stevesvehicles.old.StevesVehicles;
+import vswe.stevesvehicles.tab.CreativeTabLoader;
 import vswe.stevesvehicles.upgrade.Upgrade;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -26,7 +27,7 @@ public class ItemUpgrade extends ItemBlock {
         super(block);
         setHasSubtypes(true);
         setMaxDamage(0);
-        setCreativeTab(StevesVehicles.tabsSC2Blocks);
+        setCreativeTab(CreativeTabLoader.blocks);
     }
 
 	@Override

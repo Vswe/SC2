@@ -14,6 +14,8 @@ import vswe.stevesvehicles.old.TileEntities.TileEntityLiquid;
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import vswe.stevesvehicles.tab.CreativeTabLoader;
+
 public class BlockLiquidManager extends BlockContainerBase
 {
 
@@ -21,7 +23,7 @@ public class BlockLiquidManager extends BlockContainerBase
     public BlockLiquidManager()
     {
         super(Material.rock);
-		setCreativeTab(StevesVehicles.tabsSC2Blocks);
+		setCreativeTab(CreativeTabLoader.blocks);
     }
 
 	

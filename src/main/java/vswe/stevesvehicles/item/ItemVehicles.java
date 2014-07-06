@@ -12,6 +12,8 @@ import net.minecraft.world.World;
 import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.util.Tuple;
+import vswe.stevesvehicles.vehicle.VehicleRegistry;
+import vswe.stevesvehicles.vehicle.VehicleType;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.vehicle.version.VehicleVersion;
 import vswe.stevesvehicles.old.Helpers.ColorHelper;
@@ -155,4 +157,14 @@ public class ItemVehicles extends Item {
 		return true;
 	}
 
+    @Override
+    public String getUnlocalizedName(ItemStack item) {
+        int dmg = item.getItemDamage();
+        VehicleType type = VehicleRegistry.getInstance().getTypeFromId(dmg);
+        if (type != null) {
+            return type.getUnlocalizedNameForItem();
+        }else{
+            return "item.unknown";
+        }
+    }
 }

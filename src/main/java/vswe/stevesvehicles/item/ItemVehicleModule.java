@@ -11,14 +11,22 @@ import net.minecraft.util.IIcon;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.old.StevesVehicles;
+import vswe.stevesvehicles.tab.CreativeTabLoader;
+import vswe.stevesvehicles.tab.CreativeTabVehicle;
 
 import java.util.List;
 
 
 public class ItemVehicleModule extends Item {
     public ItemVehicleModule() {
-        setCreativeTab(StevesVehicles.tabsSC2);
+        setCreativeTab(CreativeTabs.tabTransport);
         setHasSubtypes(true);
+    }
+
+
+    @Override
+    public CreativeTabs[] getCreativeTabs() {
+        return CreativeTabLoader.getAllVehicleTabs();
     }
 
     @Override
@@ -53,7 +61,7 @@ public class ItemVehicleModule extends Item {
     public String getUnlocalizedName(ItemStack item){
         ModuleData data = getModuleData(item);
         if (data != null) {
-            return data.getUnlocalizedName();
+            return data.getUnlocalizedNameForItem();
         }
         return getUnlocalizedName();
     }
@@ -63,7 +71,14 @@ public class ItemVehicleModule extends Item {
     public void getSubItems(Item item, CreativeTabs tab, List lst) {
         for (ModuleData module : ModuleRegistry.getAllModules()) {
             if (module.getIsValid()) {
-                lst.add(module.getItemStack());
+                if (tab instanceof CreativeTabVehicle) {
+                    CreativeTabVehicle vehicleTab = (CreativeTabVehicle)tab;
+                    if (module.getValidVehicles() != null && module.getValidVehicles().contains(vehicleTab.getVehicleType())) {
+                        lst.add(module.getItemStack());
+                    }
+                }else{
+                    lst.add(module.getItemStack());
+                }
             }
         }
     }

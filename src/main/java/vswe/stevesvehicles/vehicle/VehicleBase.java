@@ -1051,7 +1051,7 @@ public class VehicleBase {
 
     public String getVehicleName() {
         if (name == null || name.length() == 0) {
-            return "Modular Cart"; //TODO
+            return getVehicleType().getName();
         }else{
             return name;
         }

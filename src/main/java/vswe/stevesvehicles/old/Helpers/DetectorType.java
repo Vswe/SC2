@@ -119,11 +119,11 @@ public enum DetectorType {
 	}
 
 	public String getName() {
-		return StatCollector.translateToLocal(getUnlocalizedName());
+		return StatCollector.translateToLocal(getUnlocalizedName() + ".name");
 	}
 
     public String getUnlocalizedName() {
-        return "steves_vehicles:tile.detector_unit:" + toString().toLowerCase() + ".name"  ;
+        return "steves_vehicles:tile.detector_unit:" + toString().toLowerCase();
     }
 
 

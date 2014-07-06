@@ -10,7 +10,7 @@ import vswe.stevesvehicles.old.TileEntities.TileEntityActivator;
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
+import vswe.stevesvehicles.tab.CreativeTabLoader;
 
 
 public class BlockActivator extends BlockContainerBase
@@ -20,7 +20,7 @@ public class BlockActivator extends BlockContainerBase
     public BlockActivator()
     {
         super(Material.rock);
-        setCreativeTab(StevesVehicles.tabsSC2Blocks);
+        setCreativeTab(CreativeTabLoader.blocks);
     }
 
 

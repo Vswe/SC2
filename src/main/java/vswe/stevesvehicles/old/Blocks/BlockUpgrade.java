@@ -19,15 +19,15 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import vswe.stevesvehicles.tab.CreativeTabLoader;
 import vswe.stevesvehicles.upgrade.Upgrade;
 
-public class BlockUpgrade extends BlockContainerBase
-{
+public class BlockUpgrade extends BlockContainerBase {
 
     public BlockUpgrade()
     {
         super(Material.rock);
-        setCreativeTab(StevesVehicles.tabsSC2Blocks);
+        setCreativeTab(CreativeTabLoader.blocks);
     }
 
 

@@ -147,7 +147,7 @@ public class Upgrade implements IRecipeOutput {
         return effects;
     }
 
-    public String getRawUnlocalizedName() {
+    public final String getRawUnlocalizedName() {
 		return unlocalizedName;
 	}
 	

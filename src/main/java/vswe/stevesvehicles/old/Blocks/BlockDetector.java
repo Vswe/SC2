@@ -17,6 +17,7 @@ import vswe.stevesvehicles.old.TileEntities.TileEntityDetector;
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import vswe.stevesvehicles.tab.CreativeTabLoader;
 
 public class BlockDetector extends BlockContainerBase
 {
@@ -24,7 +25,7 @@ public class BlockDetector extends BlockContainerBase
     public BlockDetector()
     {
         super(Material.circuits);
-        setCreativeTab(StevesVehicles.tabsSC2Blocks);
+        setCreativeTab(CreativeTabLoader.blocks);
     }
 
 

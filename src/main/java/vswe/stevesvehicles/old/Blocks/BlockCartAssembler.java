@@ -18,7 +18,7 @@ import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import vswe.stevesvehicles.network.PacketHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
+import vswe.stevesvehicles.tab.CreativeTabLoader;
 
 
 public class BlockCartAssembler extends BlockContainerBase
@@ -28,7 +28,7 @@ public class BlockCartAssembler extends BlockContainerBase
     public BlockCartAssembler()
     {
         super(Material.rock);
-        setCreativeTab(StevesVehicles.tabsSC2Blocks);
+        setCreativeTab(CreativeTabLoader.blocks);
     }
 
 

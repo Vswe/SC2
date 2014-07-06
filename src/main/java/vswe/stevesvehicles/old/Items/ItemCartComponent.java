@@ -16,6 +16,7 @@ import net.minecraft.world.World;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import vswe.stevesvehicles.old.Helpers.EntityEasterEgg;
+import vswe.stevesvehicles.tab.CreativeTabLoader;
 
 public class ItemCartComponent extends Item
 {
@@ -31,7 +32,7 @@ public class ItemCartComponent extends Item
         super();
         setHasSubtypes(true);
         setMaxDamage(0);
-        setCreativeTab(StevesVehicles.tabsSC2Components);
+        setCreativeTab(CreativeTabLoader.components);
     }
 
 	private String getName(int dmg) {
@@ -69,7 +70,7 @@ public class ItemCartComponent extends Item
 		if (item == null || item.getItemDamage() < 0 || item.getItemDamage() >= size() || getName(item.getItemDamage()) == null) {
 			return getUnlocalizedName();
 		}else{
-			return "steves_vehicles:item.component:" + getName(item.getItemDamage()) + ".name";
+			return "steves_vehicles:item.component:" + getName(item.getItemDamage());
 		}
     }
 	

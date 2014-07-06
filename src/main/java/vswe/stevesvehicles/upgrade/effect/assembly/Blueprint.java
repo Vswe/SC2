@@ -1,7 +1,6 @@
 package vswe.stevesvehicles.upgrade.effect.assembly;
 
 import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
-import vswe.stevesvehicles.old.Helpers.Localization;
 import vswe.stevesvehicles.old.TileEntities.TileEntityUpgrade;
 import net.minecraft.item.ItemStack;
 import vswe.stevesvehicles.module.data.ModuleData;
@@ -10,8 +9,6 @@ import java.util.List;
 
 import net.minecraft.inventory.Slot;
 import vswe.stevesvehicles.container.slots.SlotCart;
-import vswe.stevesvehicles.upgrade.IEffectInfo;
-import vswe.stevesvehicles.upgrade.Upgrade;
 import vswe.stevesvehicles.upgrade.effect.util.SimpleInventoryEffect;
 
 public class Blueprint extends SimpleInventoryEffect {

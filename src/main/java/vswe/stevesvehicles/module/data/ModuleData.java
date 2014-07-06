@@ -290,10 +290,12 @@ public class ModuleData implements IRecipeOutput {
     }
 
     public String getUnlocalizedName() {
-        return "steves_vehicles:item." + getFullRawUnlocalizedName() + ".name";
+        return getUnlocalizedNameForItem() + ".name";
     }
 
-
+    public String getUnlocalizedNameForItem() {
+        return "steves_vehicles:item." + getFullRawUnlocalizedName();
+    }
 
     public ModuleData getParent() {
         return parent;
@@ -385,11 +387,11 @@ public class ModuleData implements IRecipeOutput {
                     VehicleType vehicle = validVehicles.get(i);
 
                     if(i == 0) {
-                        vehicleText += vehicle.getUnlocalizedName();
+                        vehicleText += vehicle.getName();
                     }else if (i == validVehicles.size() - 1) {
-                        vehicleText += " " + LocalizationLabel.AND.translate() + " " + vehicle.getUnlocalizedName();
+                        vehicleText += " " + LocalizationLabel.AND.translate() + " " + vehicle.getName();
                     }else{
-                        vehicleText += ", " + vehicle.getUnlocalizedName();
+                        vehicleText += ", " + vehicle.getName();
                     }
                 }
 

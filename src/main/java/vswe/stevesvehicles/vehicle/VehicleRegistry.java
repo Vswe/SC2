@@ -5,8 +5,10 @@ import vswe.stevesvehicles.registry.IRegistry;
 import vswe.stevesvehicles.registry.RegistryLoader;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class VehicleRegistry implements IRegistry<VehicleType> {
@@ -30,9 +32,11 @@ public class VehicleRegistry implements IRegistry<VehicleType> {
     }
 
     private Map<String, VehicleType> vehicles;
+    private List<VehicleType> allVehicles;
 
     private VehicleRegistry() {
         vehicles = new HashMap<String, VehicleType>();
+        allVehicles = new ArrayList<VehicleType>();
     }
 
     @Override
@@ -45,6 +49,7 @@ public class VehicleRegistry implements IRegistry<VehicleType> {
             System.err.println("A vehicle with this raw name has already been registered. Failed to register a second module with the raw name " + vehicleType.getUnlocalizedName() + ".");
         }else{
             vehicles.put(vehicleType.getUnlocalizedName(), vehicleType);
+            allVehicles.add(vehicleType);
         }
     }
 
@@ -68,5 +73,9 @@ public class VehicleRegistry implements IRegistry<VehicleType> {
 
     public int getIdFromType(VehicleType vehicle) {
         return loader.getIdFromObject(vehicle);
+    }
+
+    public List<VehicleType> getAllVehicles() {
+        return allVehicles;
     }
 }
