@@ -1,13 +1,16 @@
-package vswe.stevesvehicles.old.Helpers;
+package vswe.stevesvehicles.detector;
 import java.util.ArrayList;
 
 import org.lwjgl.opengl.GL11;
 
+import vswe.stevesvehicles.client.gui.detector.DropDownMenuFlow;
 import vswe.stevesvehicles.detector.modulestate.ModuleState;
 import vswe.stevesvehicles.detector.modulestate.registry.ModuleStateRegistry;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.network.PacketHandler;
-import vswe.stevesvehicles.old.Interfaces.GuiDetector;
+import vswe.stevesvehicles.old.Helpers.OperatorObject;
+import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.gui.screen.GuiDetector;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.old.TileEntities.TileEntityDetector;
@@ -19,13 +22,12 @@ public class LogicObject {
 	private byte id;
 	private LogicObject parent;
 	private byte type;
-	private ArrayList<LogicObject> childs;
+	private ArrayList<LogicObject> children;
 	
 	private int x;
 	private int y;
 	private int level;
-	
-	//if module then the data will be its id, otherwise the logical operator's id
+
 	private byte data; //TODO shouldn't work with bytes anymore
 	
 	
@@ -33,7 +35,7 @@ public class LogicObject {
 		this.id = id;
 		this.type = type;
 		this.data = data;
-		childs = new ArrayList<LogicObject>();
+		children = new ArrayList<LogicObject>();
 	}	
 	
 	public LogicObject( byte type, byte data) {
@@ -43,7 +45,7 @@ public class LogicObject {
 	public void setParent(TileEntityDetector detector, LogicObject parent) {
 		if (parent != null) {
 			PacketHandler.sendPacket(0, new byte[] {parent.id, getExtra(), data});
-			for (LogicObject child : childs) {
+			for (LogicObject child : children) {
 				child.setParent(detector, this);
 			}			
 		}else{
@@ -55,17 +57,17 @@ public class LogicObject {
 	
 	public void setParent( LogicObject parent) {
 		if (this.parent != null) {
-			this.parent.childs.remove(this);
+			this.parent.children.remove(this);
 		}
 	
 		this.parent = parent;
 		if (this.parent != null && this.parent.hasRoomForChild()) {
-			this.parent.childs.add(this);
+			this.parent.children.add(this);
 		}
 	}	
 
-	public ArrayList<LogicObject> getChilds() {
-		return childs;
+	public ArrayList<LogicObject> getChildren() {
+		return children;
 	}
 	
 	public LogicObject getParent() {
@@ -109,7 +111,7 @@ public class LogicObject {
 	@SideOnly(Side.CLIENT)
 	public void draw(GuiDetector gui, int mouseX, int mouseY) {
 		if (!isOperator()) {
-			ResourceHelper.bindResource(GuiDetector.texture);
+			ResourceHelper.bindResource(GuiDetector.TEXTURE);
 			
 			int xIndex = 0;
 			if (gui.inRect(mouseX, mouseY, getRect())) {
@@ -119,22 +121,25 @@ public class LogicObject {
 			gui.drawTexturedModalRect(gui.getGuiLeft()+ x, gui.getGuiTop() + y , 1 + xIndex * 17, 203, 16, 16);
 			
 			if (isModule()) {
-				ResourceHelper.bindResource(GuiDetector.moduleTexture);
-				
 				ModuleData module = ModuleRegistry.getModuleFromId(data);
+
 				if (module != null) {
-					gui.drawIcon(module.getIcon(), gui.getGuiLeft()+x, gui.getGuiTop() + y, 1F, 1F, 0F, 0F);
+                    ResourceHelper.bindResource(GuiDetector.MODULE_TEXTURE);
+					gui.drawIcon(module.getIcon(), gui.getGuiLeft() + x, gui.getGuiTop() + y, 1F, 1F, 0F, 0F);
 				}
 			}else{
-				int[] src = gui.getModuleTexture(data);
+				ModuleState state = ModuleStateRegistry.getStateFromId(data);
 
-				gui.drawTexturedModalRect(gui.getGuiLeft()+x, gui.getGuiTop() + y , src[0], src[1], 16, 16);				
+                if (state != null) {
+                    ResourceHelper.bindResource(state.getTexture());
+				    gui.drawRectWithTextureSize(gui.getGuiLeft() + x, gui.getGuiTop() + y, 0, 0, 16, 16, 16);
+                }
 			}
 			
 		}else{
-			ResourceHelper.bindResource(GuiDetector.texture);
+			ResourceHelper.bindResource(GuiDetector.TEXTURE);
 			
-			int[] src = gui.getOperatorTexture(data);
+			int[] src = DropDownMenuFlow.getSource(gui, data);
 
 			gui.drawTexturedModalRect(gui.getGuiLeft()+x, gui.getGuiTop() + y, src[0], src[1], 20, 11);	
 
@@ -177,14 +182,14 @@ public class LogicObject {
 			}
 			
 			if (!tooClose) {
-				gui.drawRect(px1, py2, px2, py2 + 1, 0xFF404040);
-				gui.drawRect(px1, py1, px1 + 1, py2, 0xFF404040);
+				GuiDetector.drawRect(px1, py2, px2, py2 + 1, 0xFF404040);
+                GuiDetector.drawRect(px1, py1, px1 + 1, py2, 0xFF404040);
 				GL11.glColor4f(1F, 1F, 1F, 1F);
 			}
 		}
 		
 		
-		for (LogicObject child : childs) {
+		for (LogicObject child : children) {
 			child.draw(gui, mouseX, mouseY);
 		}		
 	}
@@ -195,8 +200,8 @@ public class LogicObject {
 		this.level = level;
 		
 		int max = maxChilds();
-		for (int i = 0; i < childs.size(); i++) {
-			childs.get(i).generatePosition(x + (w/max) * i , y+(!childs.get(i).isOperator() ? 16 : 11), w/max, level + (childs.get(i).maxChilds() > 1 ? 1 : 0));
+		for (int i = 0; i < children.size(); i++) {
+			children.get(i).generatePosition(x + (w/max) * i , y+(!children.get(i).isOperator() ? 16 : 11), w/max, level + (children.get(i).maxChilds() > 1 ? 1 : 0));
 		}	
 	}
 	
@@ -236,7 +241,7 @@ public class LogicObject {
 			}
 			return false;
 		}else{
-			if (getChilds().size() != maxChilds()) {
+			if (getChildren().size() != maxChilds()) {
 				return false;
 			}
 			
@@ -245,9 +250,9 @@ public class LogicObject {
 
 				
 				if (operator.getChildCount() == 2) {
-					return operator.evaluate(detector, vehicle, depth + 1, getChilds().get(0),getChilds().get(1));
+					return operator.evaluate(detector, vehicle, depth + 1, getChildren().get(0), getChildren().get(1));
 				}else if(operator.getChildCount() == 1) {
-					return operator.evaluate(detector, vehicle, depth + 1, getChilds().get(0) , null);
+					return operator.evaluate(detector, vehicle, depth + 1, getChildren().get(0) , null);
 				}else{
 					return operator.evaluate(detector, vehicle, depth + 1, null, null);
 				}
@@ -301,7 +306,7 @@ public class LogicObject {
 	}
 	
 	public boolean hasRoomForChild() {
-		return childs.size() < maxChilds();
+		return children.size() < maxChilds();
 	}
 	
 	public int[] getRect() {
@@ -353,7 +358,7 @@ public class LogicObject {
 				name = operator.getName();
 			}			
 				
-			return name + "\nChild nodes: " + getChilds().size() + "/" + maxChilds(); 
+			return name + "\nChild nodes: " + getChildren().size() + "/" + maxChilds();
 		}
 	}
 	

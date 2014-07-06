@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import net.minecraft.tileentity.TileEntity;
 import vswe.stevesvehicles.detector.DetectorType;
+import vswe.stevesvehicles.detector.LogicObject;
 import vswe.stevesvehicles.localization.ILocalizedText;
 import vswe.stevesvehicles.localization.entry.block.LocalizationDetector;
 import vswe.stevesvehicles.old.TileEntities.TileEntityDetector;

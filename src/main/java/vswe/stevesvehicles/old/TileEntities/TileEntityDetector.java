@@ -5,13 +5,12 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.old.Containers.ContainerDetector;
 import vswe.stevesvehicles.detector.DetectorType;
-import vswe.stevesvehicles.old.Helpers.LogicObject;
+import vswe.stevesvehicles.detector.LogicObject;
 import vswe.stevesvehicles.client.gui.screen.GuiBase;
-import vswe.stevesvehicles.old.Interfaces.GuiDetector;
+import vswe.stevesvehicles.client.gui.screen.GuiDetector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -60,7 +59,7 @@ public class TileEntityDetector extends TileEntityBase
 			nbttagcompound.setInteger("LogicObject" + id++, saveLogicObjectToInteger(obj));
 		}
 		
-		for (LogicObject child : obj.getChilds()) {
+		for (LogicObject child : obj.getChildren()) {
 			id = saveLogicObject(nbttagcompound, child, id, true);
 		}
 		
@@ -140,7 +139,7 @@ public class TileEntityDetector extends TileEntityBase
 			return object;
 		}
 		
-		for (LogicObject child : object.getChilds()) {
+		for (LogicObject child : object.getChildren()) {
 			LogicObject result = getObjectFromId(child, id);
 			if (result != null) {
 				return result;
@@ -156,7 +155,7 @@ public class TileEntityDetector extends TileEntityBase
 			return true;
 		}
 		
-		for (LogicObject child : object.getChilds()) {
+		for (LogicObject child : object.getChildren()) {
 			if (removeObject(child, idToRemove)) {
 				return true;
 			}
@@ -170,7 +169,7 @@ public class TileEntityDetector extends TileEntityBase
 			return true;
 		}
 		
-		for (LogicObject child : object.getChilds()) {
+		for (LogicObject child : object.getChildren()) {
 			if (isIdOccupied(child, id)) {
 				return true;
 			}
@@ -201,28 +200,28 @@ public class TileEntityDetector extends TileEntityBase
 		}
 
 			
-		while (real.getChilds().size() > cache.getChilds().size()) {
-			int i = cache.getChilds().size();
-			LogicObject clone = real.getChilds().get(i).copy(cache);
+		while (real.getChildren().size() > cache.getChildren().size()) {
+			int i = cache.getChildren().size();
+			LogicObject clone = real.getChildren().get(i).copy(cache);
 			sendLogicObject(con, crafting, clone);		
 		}
 		
-		while (real.getChilds().size() < cache.getChilds().size()) {
-			int i = real.getChilds().size();
-			LogicObject toBeRemoved = cache.getChilds().get(i);
+		while (real.getChildren().size() < cache.getChildren().size()) {
+			int i = real.getChildren().size();
+			LogicObject toBeRemoved = cache.getChildren().get(i);
 			toBeRemoved.setParent(null);
 			removeLogicObject(con, crafting, toBeRemoved);				
 		}		
 		
-		for (int i = 0; i < real.getChilds().size(); i++) {
-			sendUpdatedLogicObjects(con, crafting, real.getChilds().get(i), cache.getChilds().get(i));
+		for (int i = 0; i < real.getChildren().size(); i++) {
+			sendUpdatedLogicObjects(con, crafting, real.getChildren().get(i), cache.getChildren().get(i));
 		}
 	}
 	
 	private void sendAllLogicObjects(Container con, ICrafting crafting, LogicObject obj) {
 		sendLogicObject(con, crafting, obj);
 		
-		for (LogicObject child : obj.getChilds()) {
+		for (LogicObject child : obj.getChildren()) {
 			sendAllLogicObjects(con, crafting, child);
 		}
 	}
