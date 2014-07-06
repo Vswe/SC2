@@ -109,48 +109,46 @@ public class LogicObject {
 	@SideOnly(Side.CLIENT)
 	public void draw(GuiDetector gui, int mouseX, int mouseY) {
 		if (!isOperator()) {
-			ResourceHelper.bindResource(gui.texture);
+			ResourceHelper.bindResource(GuiDetector.texture);
 			
-			int yIndex = 0;
+			int xIndex = 0;
 			if (gui.inRect(mouseX, mouseY, getRect())) {
-				yIndex = 1;
+				xIndex = 1;
 			}
 			
-			gui.drawTexturedModalRect(gui.getGuiLeft()+x, gui.getGuiTop() + y , 0, 202 + yIndex*16, 16, 16);
+			gui.drawTexturedModalRect(gui.getGuiLeft()+ x, gui.getGuiTop() + y , 1 + xIndex * 17, 203, 16, 16);
 			
 			if (isModule()) {
-				ResourceHelper.bindResource(gui.moduleTexture);
+				ResourceHelper.bindResource(GuiDetector.moduleTexture);
 				
 				ModuleData module = ModuleRegistry.getModuleFromId(data);
 				if (module != null) {
 					gui.drawIcon(module.getIcon(), gui.getGuiLeft()+x, gui.getGuiTop() + y, 1F, 1F, 0F, 0F);
 				}
 			}else{
-				ResourceHelper.bindResource(gui.stateTexture);
-
 				int[] src = gui.getModuleTexture(data);
 
 				gui.drawTexturedModalRect(gui.getGuiLeft()+x, gui.getGuiTop() + y , src[0], src[1], 16, 16);				
 			}
 			
 		}else{
-			ResourceHelper.bindResource(gui.texture);
+			ResourceHelper.bindResource(GuiDetector.texture);
 			
 			int[] src = gui.getOperatorTexture(data);
 
 			gui.drawTexturedModalRect(gui.getGuiLeft()+x, gui.getGuiTop() + y, src[0], src[1], 20, 11);	
 
 			if (gui.inRect(mouseX, mouseY, getRect())) {
-				int yIndex;
+				int xIndex;
 				if (gui.currentObject == null) {
-					yIndex = 2;
+					xIndex = 2;
 				}else if(hasRoomForChild() && isChildValid(gui.currentObject)) {
-					yIndex = 0;
+					xIndex = 0;
 				}else{
-					yIndex = 1;
+					xIndex = 1;
 				}
 			
-				gui.drawTexturedModalRect(gui.getGuiLeft()+x, gui.getGuiTop() + y , 16, 202 + yIndex * 11, 20, 11);
+				gui.drawTexturedModalRect(gui.getGuiLeft() + x, gui.getGuiTop() + y , 35 + xIndex * 21, 203, 20, 11);
 			}			
 		}
 		

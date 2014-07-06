@@ -12,11 +12,10 @@ public class DropDownMenu {
 	public static final int SCROLL_HEIGHT = 170;
 	public static final int SCROLL_HEADER_HEIGHT = 14;	
 	public static final int SCROLL_TOP_MARGIN = 20;
-	public static final int TAB_COUNT = 3;
+    public static final int TAB_WIDTH = 76;
+    public static final int TAB_SPACING = 2;
 
-	
-	
-	private int moduleScroll;
+    private int moduleScroll;
 	private int index;
 	public DropDownMenu(int index) {
 		this.index = index;
@@ -70,20 +69,28 @@ public class DropDownMenu {
 	}
 
 	public void drawMain(GuiDetector gui, int x, int y) {
-		ResourceHelper.bindResource(gui.dropdownTexture);
+		ResourceHelper.bindResource(GuiDetector.dropdownTexture);
 	
 		int [] rect = getMainRect();
 		gui.drawTexturedModalRect(gui.getGuiLeft()+rect[0], gui.getGuiTop() + rect[1], 0, SCROLL_HEIGHT-SCROLL_HEADER_HEIGHT-moduleScroll, rect[2], rect[3]);		
 	}
 	
 	public void drawHeader(GuiDetector gui) {
-		ResourceHelper.bindResource(gui.dropdownTexture);
+		ResourceHelper.bindResource(GuiDetector.dropdownTexture);
 	
 		int [] rect = getHeaderRect();
-		gui.drawTexturedModalRect(gui.getGuiLeft()+rect[0], gui.getGuiTop() + rect[1], (232/TAB_COUNT) * index, SCROLL_HEIGHT-SCROLL_HEADER_HEIGHT, rect[2], rect[3]);
-	}	
-	
-	public void drawContent(GuiDetector gui, int index, int srcX, int srcY) {
+		gui.drawTexturedModalRect(gui.getGuiLeft()+rect[0], gui.getGuiTop() + rect[1], (TAB_WIDTH + TAB_SPACING) * index, SCROLL_HEIGHT-SCROLL_HEADER_HEIGHT + 1, rect[2], rect[3]);
+	}
+
+    public void drawContent(GuiDetector gui, int index) {
+        drawContent(gui, index, 0, 0, 16);
+    }
+
+    public void drawContent(GuiDetector gui, int index, int srcX, int srcY) {
+        drawContent(gui, index, srcX, srcY, 256);
+    }
+
+	public void drawContent(GuiDetector gui, int index, int srcX, int srcY, int textureSize) {
 		int[] rect = getContentRect(index);
 		if (rect == null) {
 			return;
@@ -95,7 +102,7 @@ public class DropDownMenu {
 			int height = Math.min(rect[3], gap);
 			int offset = rect[3] - height;
 
-			gui.drawRectWithTextureSize(gui.getGuiLeft()+rect[0],  gui.getGuiTop() + rect[1]+offset, srcX, srcY+offset, rect[2], height, 16);
+			gui.drawRectWithTextureSize(gui.getGuiLeft()+rect[0],  gui.getGuiTop() + rect[1]+offset, srcX, srcY+offset, rect[2], height, textureSize);
 		}
 	}
 	
@@ -152,7 +159,7 @@ public class DropDownMenu {
 	}
 	
 	public int [] getHeaderRect() {
-		return new int[] {11 + (232/ TAB_COUNT) * index, SCROLL_TOP_MARGIN + moduleScroll,(int) Math.ceil(232F / TAB_COUNT), SCROLL_HEADER_HEIGHT};		
+		return new int[] {11 + (TAB_WIDTH + TAB_SPACING) * index, SCROLL_TOP_MARGIN + moduleScroll, TAB_WIDTH, SCROLL_HEADER_HEIGHT};
 	}
 	
 	

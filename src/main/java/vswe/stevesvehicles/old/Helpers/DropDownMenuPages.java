@@ -26,11 +26,11 @@ public class DropDownMenuPages extends DropDownMenu {
 		super.drawMain(gui, x, y);
 
 
-		drawObject(gui, x, y, new int[] {30, 20, 23, 7}, 0, 170, 0, 0);
-		drawObject(gui, x, y, new int[] {60, 20, 5, 7}, 24 + 6 * page, 170, 0, 0);
+		drawObject(gui, x, y, new int[] {30, 20, 23, 7}, 1, 172, 0, 0);
+		drawObject(gui, x, y, new int[] {60, 20, 5, 7}, 25 + 6 * page, 172, 0, 0);
 	
-		drawObject(gui, x, y,  leftArrow, 0, 177, 5, 0);
-		drawObject(gui, x, y, rightArrow, 0, 184, 5, 0);
+		drawObject(gui, x, y,  leftArrow, 1, 180, 6, 0);
+		drawObject(gui, x, y, rightArrow, 1, 188, 6, 0);
 	}
 	
 	private void drawObject(GuiDetector gui, int x, int y, int[] rect, int srcX, int srcY, int hoverDifX, int hoverDifY) {

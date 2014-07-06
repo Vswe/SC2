@@ -131,7 +131,6 @@ public class GuiDetector extends GuiBase
 
 	public static ResourceLocation texture = ResourceHelper.getResource("/gui/detector.png");
 	public static ResourceLocation moduleTexture = ResourceHelper.getResourceFromPath("/atlas/items.png");
-	public static ResourceLocation stateTexture = ResourceHelper.getResource("/gui/states.png");
 	public static ResourceLocation dropdownTexture = ResourceHelper.getResource("/gui/detector2.png");
     public void drawGuiBackground(float f, int x, int y)
     {
@@ -167,14 +166,13 @@ public class GuiDetector extends GuiBase
 		
 		statesMenu.drawMain(this, x, y);
 		
-        ResourceHelper.bindResource(stateTexture);
+
 		int statePosId = 0;
 		for (ModuleState state : ModuleStateRegistry.getAllStates()) {
             if (state.getTexture() != null) {
                 ResourceHelper.bindResource(state.getTexture());
-                int[] src = getModuleTexture((byte)0);
 
-                statesMenu.drawContent(this, statePosId, src[0], src[1]);
+                statesMenu.drawContent(this, statePosId);
             }
 
             statePosId++;
@@ -212,7 +210,7 @@ public class GuiDetector extends GuiBase
 		int x = operatorId % 11;
 		int y = operatorId / 11;
 	
-		return new int[] {36 + x * 20, ySize + y * 11};
+		return new int[] {1 + x * 21, ySize + 18 + y * 12};
 	}	
 
 	public int[] getModuleTexture(byte moduleId) {
@@ -293,7 +291,8 @@ public class GuiDetector extends GuiBase
 
 
     }
-	
+
+    @Override
 	public void mouseMoved(int x, int y, int button)
     {
         super.mouseMoved(x, y, button);		
