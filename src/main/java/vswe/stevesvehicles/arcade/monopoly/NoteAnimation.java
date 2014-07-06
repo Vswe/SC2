@@ -1,6 +1,6 @@
 package vswe.stevesvehicles.arcade.monopoly;
 
-import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 
 public class NoteAnimation {
 

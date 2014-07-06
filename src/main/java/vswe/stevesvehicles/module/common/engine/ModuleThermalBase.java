@@ -1,7 +1,7 @@
 package vswe.stevesvehicles.module.common.engine;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidRegistry;
-import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.module.LocalizationEngine;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 

@@ -1,13 +1,12 @@
 package vswe.stevesvehicles.old;
 
 import cpw.mods.fml.common.network.FMLEventChannel;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.oredict.RecipeSorter;
 import org.apache.logging.log4j.Logger;
+import vswe.stevesvehicles.detector.modulestate.registry.ModuleStateRegistry;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.network.PacketHandler;
-import vswe.stevesvehicles.tab.CreativeTabCustom;
 import vswe.stevesvehicles.recipe.ModuleRecipeShaped;
 import vswe.stevesvehicles.recipe.ModuleRecipeShapeless;
 import vswe.stevesvehicles.registry.RegistrySynchronizer;
@@ -39,7 +38,6 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid = "StevesVehicles", name = "Steve's Vehicles", version = GeneratedInfo.version)
 public class StevesVehicles {
@@ -83,6 +81,7 @@ public class StevesVehicles {
         VehicleRegistry.init();
         ModuleRegistry.init();
         UpgradeRegistry.init();
+        ModuleStateRegistry.init();
 
         CreativeTabLoader.init();
 		logger = event.getModLog();

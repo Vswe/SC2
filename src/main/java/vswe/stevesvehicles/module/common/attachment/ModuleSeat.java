@@ -1,7 +1,7 @@
 package vswe.stevesvehicles.module.common.attachment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.module.LocalizationTravel;
 import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
 import vswe.stevesvehicles.vehicle.VehicleBase;

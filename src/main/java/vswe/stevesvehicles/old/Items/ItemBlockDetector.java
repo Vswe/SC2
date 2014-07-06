@@ -4,8 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-import vswe.stevesvehicles.old.Helpers.DetectorType;
-import vswe.stevesvehicles.old.StevesVehicles;
+import vswe.stevesvehicles.detector.DetectorType;
 import vswe.stevesvehicles.tab.CreativeTabLoader;
 
 public class ItemBlockDetector extends ItemBlock {

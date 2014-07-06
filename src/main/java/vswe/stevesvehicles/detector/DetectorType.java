@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.Helpers;
+package vswe.stevesvehicles.detector;
 
 import java.util.HashMap;
 
@@ -8,7 +8,9 @@ import net.minecraft.util.StatCollector;
 import vswe.stevesvehicles.localization.entry.block.LocalizationDetector;
 import vswe.stevesvehicles.old.Blocks.BlockRailAdvDetector;
 import vswe.stevesvehicles.old.Blocks.ModBlocks;
+import vswe.stevesvehicles.old.Helpers.OperatorObject;
 import vswe.stevesvehicles.old.StevesVehicles;
+import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.TileEntities.TileEntityDetector;
 
@@ -40,8 +42,8 @@ public enum DetectorType {
 		"detector_station_red") {
 
 		@Override
-		public void activate(TileEntityDetector detector, EntityModularCart cart) {
-			cart.releaseCart();			
+		public void activate(TileEntityDetector detector, VehicleBase vehicle) {
+            ((EntityModularCart)vehicle.getEntity()).releaseCart();		 //TODO
 		}
 		
 	},
@@ -56,7 +58,7 @@ public enum DetectorType {
 		
 		
 		@Override
-		public void activate(TileEntityDetector detector, EntityModularCart cart) {
+		public void activate(TileEntityDetector detector, VehicleBase vehicle) {
 			update(detector, true);	
 		}					
 
@@ -151,7 +153,7 @@ public enum DetectorType {
 		return emitRedstone;
 	}
 	
-	public void activate(TileEntityDetector detector, EntityModularCart cart) {
+	public void activate(TileEntityDetector detector, VehicleBase vehicle) {
 		
 	}
 	

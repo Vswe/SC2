@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.client.gui;
+package vswe.stevesvehicles.client.gui.screen;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -334,22 +334,21 @@ public abstract class GuiBase extends GuiNEIKiller {
         tessellator.addVertexWithUV(targetX + 16 * sizeX, 	targetY + 0, 			this.getZLevel(), 	x + width, 		y + 0);
         tessellator.addVertexWithUV(targetX + 0, 			targetY + 0, 			this.getZLevel(), 	x + 0, 			y + 0);
         tessellator.draw();	
-	}	
-	
-	
-	
-	
-    /**
-     * Draws a textured rectangle at the stored z-value. Args: x, y, u, v, width, height
-     */
-    public void drawTexturedModalRect(int x, int y, int u, int v, int w, int h, RENDER_ROTATION rotation) {
-        float fw = 0.00390625F;
-        float fy = 0.00390625F;
-        
-        double a = (double)((float)(u + 0) * fw);
-        double b = (double)((float)(u + w) * fw);
-        double c = (double)((float)(v + h) * fy);
-        double d = (double)((float)(v + 0) * fy);
+	}
+
+    public void drawRect(int x, int y, int u, int v, int w, int h, RENDER_ROTATION rotation) {
+        drawRect(x, y, u, v, w, h, rotation, 0.00390625F);
+    }
+
+    public void drawRectWithTextureSize(int x, int y, int u, int v, int w, int h, int textureSize) {
+        drawRect(x, y, u, v, w, h, RENDER_ROTATION.NORMAL, 1F / textureSize);
+    }
+
+    private void drawRect(int x, int y, int u, int v, int w, int h, RENDER_ROTATION rotation, float multiplier) {
+        double a = (double)((float)(u + 0) * multiplier);
+        double b = (double)((float)(u + w) * multiplier);
+        double c = (double)((float)(v + h) * multiplier);
+        double d = (double)((float)(v + 0) * multiplier);
            
         double [] ptA = new double[] {a, c};
         double [] ptB = new double[] {b, c};

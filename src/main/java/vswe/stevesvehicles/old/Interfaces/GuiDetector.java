@@ -6,14 +6,15 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import vswe.stevesvehicles.client.gui.GuiBase;
+import vswe.stevesvehicles.client.gui.screen.GuiBase;
+import vswe.stevesvehicles.detector.modulestate.registry.ModuleStateRegistry;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.old.Containers.ContainerDetector;
-import vswe.stevesvehicles.old.Helpers.DetectorType;
+import vswe.stevesvehicles.detector.DetectorType;
 import vswe.stevesvehicles.old.Helpers.DropDownMenu;
 import vswe.stevesvehicles.old.Helpers.DropDownMenuPages;
 import vswe.stevesvehicles.old.Helpers.LogicObject;
-import vswe.stevesvehicles.old.Helpers.ModuleState;
+import vswe.stevesvehicles.detector.modulestate.ModuleState;
 import vswe.stevesvehicles.old.Helpers.OperatorObject;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.data.ModuleData;
@@ -71,7 +72,7 @@ public class GuiDetector extends GuiBase
 			}	
 		}else if (statesMenu.getScroll() != 0) {
 			int statesPosId = 0;
-			for (ModuleState state : ModuleState.getStateList()) {
+			for (ModuleState state : ModuleStateRegistry.getAllStates()) {
 				int[] target = statesMenu.getContentRect(statesPosId);			
 				if (drawMouseOver(state.getName(), x, y, target)) {					
 					break;
@@ -168,12 +169,15 @@ public class GuiDetector extends GuiBase
 		
         ResourceHelper.bindResource(stateTexture);
 		int statePosId = 0;
-		for (ModuleState state : ModuleState.getStateList()) {
-			int[] src = getModuleTexture(state.getID());
-					
-			statesMenu.drawContent(this, statePosId, src[0], src[1]);
-			
-			statePosId++;
+		for (ModuleState state : ModuleStateRegistry.getAllStates()) {
+            if (state.getTexture() != null) {
+                ResourceHelper.bindResource(state.getTexture());
+                int[] src = getModuleTexture((byte)0);
+
+                statesMenu.drawContent(this, statePosId, src[0], src[1]);
+            }
+
+            statePosId++;
 		}		
 		
 		modulesMenu.drawMain(this, x, y);
@@ -200,7 +204,8 @@ public class GuiDetector extends GuiBase
 		}	
 
     }
-	
+
+
 
 	
 	public int[] getOperatorTexture(byte operatorId) {
@@ -216,16 +221,10 @@ public class GuiDetector extends GuiBase
 		
 		return new int[] {srcX, srcY};
 	}
-	
-	private int[] getOperatorRect(int posId) {
-		return new int[] {20 + posId * 30, 20, 20, 11};
-	}
-	
 
 
-
-    public void mouseClick(int x, int y, int button)
-    {
+    @Override
+    public void mouseClick(int x, int y, int button) {
         super.mouseClick(x, y, button);
 		x-= getGuiLeft();
 		y-= getGuiTop();
@@ -254,10 +253,10 @@ public class GuiDetector extends GuiBase
 				}
 				
 				int statePosId = 0;
-				for (ModuleState state : ModuleState.getStateList()) {			
+				for (ModuleState state : ModuleStateRegistry.getAllStates()) {
 					int[] target = statesMenu.getContentRect(statePosId);			
 					if (inRect(x,y, target)) {
-						currentObject = new LogicObject((byte)2, state.getID());
+						currentObject = new LogicObject((byte)2, (byte)ModuleStateRegistry.getIdFromState(state));
 					
 						return;
 					}

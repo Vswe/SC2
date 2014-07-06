@@ -8,7 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import org.lwjgl.input.Keyboard;
 
 import vswe.stevesvehicles.arcade.ArcadeGame;
-import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.arcade.tracks.TrackStory;
 import vswe.stevesvehicles.localization.entry.arcade.LocalizationInvaders;
 import vswe.stevesvehicles.vehicle.VehicleBase;

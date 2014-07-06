@@ -4,7 +4,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import vswe.stevesvehicles.client.gui.GuiBase;
+import vswe.stevesvehicles.client.gui.screen.GuiBase;
 import vswe.stevesvehicles.old.Containers.ContainerUpgrade;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.old.TileEntities.TileEntityUpgrade;

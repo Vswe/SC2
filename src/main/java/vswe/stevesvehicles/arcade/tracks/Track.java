@@ -3,8 +3,8 @@ package vswe.stevesvehicles.arcade.tracks;
 import java.util.ArrayList;
 
 import vswe.stevesvehicles.arcade.ArcadeGame;
-import vswe.stevesvehicles.client.gui.GuiVehicle;
-import vswe.stevesvehicles.client.gui.GuiBase.RENDER_ROTATION;
+import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
+import vswe.stevesvehicles.client.gui.screen.GuiBase.RENDER_ROTATION;
 import vswe.stevesvehicles.module.common.attachment.ModuleArcade;
 
 public class Track  {

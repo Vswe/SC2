@@ -24,12 +24,11 @@ import vswe.stevesvehicles.old.Blocks.ModBlocks;
 import vswe.stevesvehicles.old.Helpers.*;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.old.StevesVehicles;
-import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.old.Containers.ContainerCartAssembler;
 import vswe.stevesvehicles.old.Containers.ContainerUpgrade;
-import vswe.stevesvehicles.client.gui.GuiBase;
+import vswe.stevesvehicles.client.gui.screen.GuiBase;
 import vswe.stevesvehicles.old.Interfaces.GuiCartAssembler;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataHull;
@@ -125,7 +124,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 	/**
 	 * The simulated cart, this cart will only exist on the client side
 	 */
-	private VehicleBase placeholder;
+	private vswe.stevesvehicles.vehicle.VehicleBase placeholder;
 	
 	/**
 	 * The current yaw (rotation) of the simulated cart
@@ -1192,7 +1191,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 		placeholder = null;
 	}
 	
-	public VehicleBase getPlaceholder() {
+	public vswe.stevesvehicles.vehicle.VehicleBase getPlaceholder() {
 		return placeholder;
 	}
 	

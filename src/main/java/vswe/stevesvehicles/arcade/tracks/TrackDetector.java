@@ -2,7 +2,7 @@ package vswe.stevesvehicles.arcade.tracks;
 
 import java.util.ArrayList;
 
-import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.module.common.attachment.ModuleArcade;
 
 

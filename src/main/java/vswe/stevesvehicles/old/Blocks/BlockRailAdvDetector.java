@@ -12,7 +12,7 @@ import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.tab.CreativeTabLoader;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
-import vswe.stevesvehicles.old.Helpers.DetectorType;
+import vswe.stevesvehicles.detector.DetectorType;
 import vswe.stevesvehicles.old.TileEntities.TileEntityActivator;
 import vswe.stevesvehicles.old.TileEntities.TileEntityDetector;
 import vswe.stevesvehicles.old.TileEntities.TileEntityManager;
@@ -78,7 +78,7 @@ public class BlockRailAdvDetector extends BlockSpecialRailBase
 			if (tileentity != null && tileentity instanceof TileEntityDetector) {
 				TileEntityDetector detector = (TileEntityDetector)tileentity;
 
-				detector.handleCart(cart);
+				detector.handleCart(cart.getVehicle());
 			}
 			return;				
 		}

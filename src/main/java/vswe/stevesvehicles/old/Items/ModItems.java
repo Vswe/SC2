@@ -12,7 +12,7 @@ import vswe.stevesvehicles.item.ItemVehicleModule;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.old.Blocks.ModBlocks;
 import vswe.stevesvehicles.old.Helpers.ComponentTypes;
-import vswe.stevesvehicles.old.Helpers.DetectorType;
+import vswe.stevesvehicles.detector.DetectorType;
 import vswe.stevesvehicles.old.Helpers.RecipeHelper;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.old.StevesVehicles;

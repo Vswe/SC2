@@ -4,10 +4,11 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import net.minecraft.tileentity.TileEntity;
+import vswe.stevesvehicles.detector.DetectorType;
 import vswe.stevesvehicles.localization.ILocalizedText;
 import vswe.stevesvehicles.localization.entry.block.LocalizationDetector;
-import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.TileEntities.TileEntityDetector;
+import vswe.stevesvehicles.vehicle.VehicleBase;
 
 public class OperatorObject {
 
@@ -22,20 +23,20 @@ public class OperatorObject {
 				return false;
 			}
 			
-			public boolean evaluate(TileEntityDetector detector, EntityModularCart cart, int depth,  LogicObject A, LogicObject B) {
-				return A.evaluateLogicTree(detector, cart, depth); 
+			public boolean evaluate(TileEntityDetector detector, VehicleBase vehicle, int depth,  LogicObject A, LogicObject B) {
+				return A.evaluateLogicTree(detector, vehicle, depth);
 			}			
 		};
 		
 		new OperatorObject(operators, 1, LocalizationDetector.AND, 2) {
-			public boolean evaluate(TileEntityDetector detector, EntityModularCart cart, int depth,  LogicObject A, LogicObject B) {
-				return A.evaluateLogicTree(detector, cart, depth) && B.evaluateLogicTree(detector, cart, depth); 
+			public boolean evaluate(TileEntityDetector detector, VehicleBase vehicle, int depth,  LogicObject A, LogicObject B) {
+				return A.evaluateLogicTree(detector, vehicle, depth) && B.evaluateLogicTree(detector, vehicle, depth);
 			}			
 		};
 		
 		new OperatorObject(operators, 2, LocalizationDetector.OR, 2) {
-			public boolean evaluate(TileEntityDetector detector, EntityModularCart cart, int depth,  LogicObject A, LogicObject B) {
-				return A.evaluateLogicTree(detector, cart, depth) || B.evaluateLogicTree(detector, cart, depth); 
+			public boolean evaluate(TileEntityDetector detector, VehicleBase vehicle, int depth,  LogicObject A, LogicObject B) {
+				return A.evaluateLogicTree(detector, vehicle, depth) || B.evaluateLogicTree(detector, vehicle, depth);
 			}	
 		};
 		new OperatorObject(operators, 3, LocalizationDetector.NOT, 1) {
@@ -43,14 +44,14 @@ public class OperatorObject {
 				return getID() != child.ID;
 			}
 			
-			public boolean evaluate(TileEntityDetector detector, EntityModularCart cart, int depth,  LogicObject A, LogicObject B) {
-				return !A.evaluateLogicTree(detector, cart, depth); 
+			public boolean evaluate(TileEntityDetector detector, VehicleBase vehicle, int depth,  LogicObject A, LogicObject B) {
+				return !A.evaluateLogicTree(detector, vehicle, depth);
 			}		
 		};
 		
 		new OperatorObject(operators, 4, LocalizationDetector.XOR, 2) {
-			public boolean evaluate(TileEntityDetector detector, EntityModularCart cart, int depth,  LogicObject A, LogicObject B) {
-				return A.evaluateLogicTree(detector, cart, depth) != B.evaluateLogicTree(detector, cart, depth); 
+			public boolean evaluate(TileEntityDetector detector, VehicleBase vehicle, int depth,  LogicObject A, LogicObject B) {
+				return A.evaluateLogicTree(detector, vehicle, depth) != B.evaluateLogicTree(detector, vehicle, depth);
 			}		
 		};
 		new OperatorObjectRedirector(operators, 5, LocalizationDetector.TOP_UNIT, 0, 1, 0);
@@ -89,14 +90,14 @@ public class OperatorObject {
 		}
 		
 		@Override
-		public boolean evaluate(TileEntityDetector detector, EntityModularCart cart, int depth, LogicObject A, LogicObject B) {
+		public boolean evaluate(TileEntityDetector detector, VehicleBase vehicle, int depth, LogicObject A, LogicObject B) {
 			int x = this.x + detector.xCoord;
 			int y = this.y + detector.yCoord;
 			int z = this.z + detector.zCoord;
 			
 			TileEntity tileentity = detector.getWorldObj().getTileEntity(x, y, z);
 			if (tileentity != null && tileentity instanceof TileEntityDetector) {
-				return ((TileEntityDetector)tileentity).evaluate(cart, depth);
+				return ((TileEntityDetector)tileentity).evaluate(vehicle, depth);
 			}else{
 				return false;
 			}
@@ -116,7 +117,7 @@ public class OperatorObject {
 		}
 		
 		@Override
-		public boolean evaluate(TileEntityDetector detector, EntityModularCart cart, int depth, LogicObject A, LogicObject B) {
+		public boolean evaluate(TileEntityDetector detector, VehicleBase vehicle, int depth, LogicObject A, LogicObject B) {
 			int x = this.x + detector.xCoord;
 			int y = this.y + detector.yCoord;
 			int z = this.z + detector.zCoord;
@@ -147,13 +148,13 @@ public class OperatorObject {
 	
 	private byte ID;
 	private ILocalizedText name;
-	private int childs;
+	private int children;
 	
 	
-	public OperatorObject(HashMap<Byte, OperatorObject> operators, int ID, ILocalizedText name, int childs) {
+	public OperatorObject(HashMap<Byte, OperatorObject> operators, int ID, ILocalizedText name, int children) {
 		this.ID = (byte)ID;
 		this.name = name;
-		this.childs = childs;
+		this.children = children;
 		
 		operators.put(this.ID, this);
 		allOperators.put(this.ID, this);
@@ -168,7 +169,7 @@ public class OperatorObject {
 	}
 	
 	public int getChildCount() {
-		return childs;
+		return children;
 	}
 	
 	public boolean inTab() {
@@ -179,7 +180,7 @@ public class OperatorObject {
 		return true;
 	}
 	
-	public boolean evaluate(TileEntityDetector detector, EntityModularCart cart, int depth, LogicObject A, LogicObject B) {
+	public boolean evaluate(TileEntityDetector detector, VehicleBase vehicle, int depth, LogicObject A, LogicObject B) {
 		return false;
 	}
 

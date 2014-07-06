@@ -1,5 +1,5 @@
 package vswe.stevesvehicles.module.common.engine;
-import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.module.LocalizationEngine;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 

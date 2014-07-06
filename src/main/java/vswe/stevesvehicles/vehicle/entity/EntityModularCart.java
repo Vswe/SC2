@@ -26,7 +26,7 @@ import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
 import vswe.stevesvehicles.old.Blocks.ModBlocks;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.old.Helpers.DataWatcherLockable;
-import vswe.stevesvehicles.old.Helpers.DetectorType;
+import vswe.stevesvehicles.detector.DetectorType;
 import vswe.stevesvehicles.module.ModuleBase;
 
 
@@ -45,7 +45,7 @@ public class EntityModularCart extends EntityMinecart
     implements IVehicleEntity
 {
 
-	private VehicleBase vehicleBase;
+	private vswe.stevesvehicles.vehicle.VehicleBase vehicleBase;
     public int disabledX;
     public int disabledY;
     public int disabledZ;
@@ -75,7 +75,7 @@ public class EntityModularCart extends EntityMinecart
 
 
     @Override
-    public VehicleBase getVehicle() {
+    public vswe.stevesvehicles.vehicle.VehicleBase getVehicle() {
         return vehicleBase;
     }
 

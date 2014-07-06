@@ -11,6 +11,7 @@ import vswe.stevesvehicles.old.Items.ModItems;
 
 import java.util.ArrayList;
 
+//TODO remove this in favor of the new recipe handling
 public final class RecipeHelper {
     public static void addRecipe(ItemStack item, Object[][] recipe) {
         if (recipe != null && item != null) {

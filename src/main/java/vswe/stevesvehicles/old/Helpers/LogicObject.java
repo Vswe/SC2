@@ -3,15 +3,17 @@ import java.util.ArrayList;
 
 import org.lwjgl.opengl.GL11;
 
+import vswe.stevesvehicles.detector.modulestate.ModuleState;
+import vswe.stevesvehicles.detector.modulestate.registry.ModuleStateRegistry;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.network.PacketHandler;
-import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Interfaces.GuiDetector;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.old.TileEntities.TileEntityDetector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import vswe.stevesvehicles.vehicle.VehicleBase;
 
 public class LogicObject {
 	private byte id;
@@ -220,19 +222,16 @@ public class LogicObject {
 		}
 	}	
 			
-	public boolean evaluateLogicTree(TileEntityDetector detector, EntityModularCart cart, int depth) {
+	public boolean evaluateLogicTree(TileEntityDetector detector, VehicleBase vehicle, int depth) {
 		if (depth >= 1000) {
 			return false;
 		}
 		
 		if (isState()) {
-			ModuleState state = ModuleState.getStates().get(getData());
-			if (state != null) {				
-				return state.evaluate(cart);		
-			}
-			return false;	
-		}else if (isModule()) {
-			for (ModuleBase module : cart.getVehicle().getModules()) {
+			ModuleState state = ModuleStateRegistry.getStateFromId(getData());
+            return state != null && state.isValid(vehicle);
+        }else if (isModule()) {
+			for (ModuleBase module : vehicle.getModules()) {
 				if (getData() == module.getModuleId()) {
 					return true;
 				}
@@ -248,11 +247,11 @@ public class LogicObject {
 
 				
 				if (operator.getChildCount() == 2) {
-					return operator.evaluate(detector, cart, depth + 1, getChilds().get(0),getChilds().get(1));
+					return operator.evaluate(detector, vehicle, depth + 1, getChilds().get(0),getChilds().get(1));
 				}else if(operator.getChildCount() == 1) {
-					return operator.evaluate(detector, cart, depth + 1, getChilds().get(0) , null);
+					return operator.evaluate(detector, vehicle, depth + 1, getChilds().get(0) , null);
 				}else{
-					return operator.evaluate(detector, cart, depth + 1, null, null); 
+					return operator.evaluate(detector, vehicle, depth + 1, null, null);
 				}
 				
 				
@@ -335,7 +334,7 @@ public class LogicObject {
 	
 	public String getName() {
 		if (isState()) {
-			ModuleState state = ModuleState.getStates().get(getData());
+			ModuleState state = ModuleStateRegistry.getStateFromId(getData());
 			if (state == null) {
 				return "Undefined";
 			}else{

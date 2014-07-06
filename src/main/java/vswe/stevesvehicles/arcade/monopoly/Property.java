@@ -2,7 +2,7 @@ package vswe.stevesvehicles.arcade.monopoly;
 
 import java.util.EnumSet;
 
-import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 
 public abstract class Property extends Place {
 

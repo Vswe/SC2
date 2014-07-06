@@ -94,7 +94,8 @@ public class DropDownMenu {
 		if (gap > 0) {
 			int height = Math.min(rect[3], gap);
 			int offset = rect[3] - height;
-			gui.drawTexturedModalRect(gui.getGuiLeft()+rect[0],  gui.getGuiTop() + rect[1]+offset, srcX, srcY+offset, rect[2], height);
+
+			gui.drawRectWithTextureSize(gui.getGuiLeft()+rect[0],  gui.getGuiTop() + rect[1]+offset, srcX, srcY+offset, rect[2], height, 16);
 		}
 	}
 	

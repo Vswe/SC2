@@ -1,5 +1,5 @@
 package vswe.stevesvehicles.module.common.storage.chest;
-import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.module.common.storage.ModuleStorage;
 import vswe.stevesvehicles.container.slots.SlotBase;

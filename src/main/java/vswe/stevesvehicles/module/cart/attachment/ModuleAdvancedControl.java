@@ -9,10 +9,9 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import org.lwjgl.opengl.GL11;
 
-import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.module.cart.LocalizationCartTravel;
 import vswe.stevesvehicles.network.PacketHandler;
-import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.cart.ILeverModule;
 import vswe.stevesvehicles.module.common.engine.ModuleEngine;
@@ -22,7 +21,7 @@ import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 
 
 public class ModuleAdvancedControl extends ModuleAttachment implements ILeverModule {
-	public ModuleAdvancedControl(VehicleBase vehicleBase) {
+	public ModuleAdvancedControl(vswe.stevesvehicles.vehicle.VehicleBase vehicleBase) {
 		super(vehicleBase);
 	}
 

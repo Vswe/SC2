@@ -3,6 +3,7 @@ package vswe.stevesvehicles.old.Helpers;
 import java.util.HashMap;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.ResourceLocation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -51,5 +52,6 @@ public class ResourceHelper {
 		}
 		
 	}
+
 	
 }

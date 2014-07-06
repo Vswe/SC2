@@ -4,12 +4,13 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.old.Containers.ContainerDetector;
-import vswe.stevesvehicles.old.Helpers.DetectorType;
+import vswe.stevesvehicles.detector.DetectorType;
 import vswe.stevesvehicles.old.Helpers.LogicObject;
-import vswe.stevesvehicles.client.gui.GuiBase;
+import vswe.stevesvehicles.client.gui.screen.GuiBase;
 import vswe.stevesvehicles.old.Interfaces.GuiDetector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -272,19 +273,19 @@ public class TileEntityDetector extends TileEntityBase
 		mainObj.generatePosition(5,60,245,0);
 	}
 	
-	public boolean evaluate(EntityModularCart cart , int depth) {
-		return mainObj.evaluateLogicTree(this, cart, depth);
+	public boolean evaluate(VehicleBase vehicle , int depth) {
+		return mainObj.evaluateLogicTree(this, vehicle, depth);
 	}
 	
-	public void handleCart(EntityModularCart cart) {
-		boolean truthValue = evaluate(cart, 0);
+	public void handleCart(VehicleBase vehicle) {
+		boolean truthValue = evaluate(vehicle, 0);
 
 		int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
 		boolean isOn = (meta & 8) != 0;
 		
 		if (truthValue != isOn) {
 			if (truthValue) {
-				DetectorType.getTypeFromMeta(meta).activate(this, cart);
+				DetectorType.getTypeFromMeta(meta).activate(this, vehicle);
 				meta |= 8;				
 			}else{
 				DetectorType.getTypeFromMeta(meta).deactivate(this);

@@ -25,18 +25,17 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
-import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.container.ContainerVehicle;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.old.Helpers.NBTHelper;
 import vswe.stevesvehicles.network.PacketHandler;
 import vswe.stevesvehicles.old.Buttons.ButtonBase;
 import vswe.stevesvehicles.client.rendering.models.ModelVehicle;
-import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.CompButtons;
 import vswe.stevesvehicles.old.Helpers.SimulationInfo;
-import vswe.stevesvehicles.client.gui.GuiBase.RENDER_ROTATION;
+import vswe.stevesvehicles.client.gui.screen.GuiBase.RENDER_ROTATION;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.container.slots.SlotBase;
 import cpw.mods.fml.relauncher.Side;
@@ -50,7 +49,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 public abstract class ModuleBase {
 	//the vehicle this module is part of
-	private VehicleBase vehicle;
+	private vswe.stevesvehicles.vehicle.VehicleBase vehicle;
 	
 	//the inventory this module is using, could be an empty array. getInventorySize is controlling the size of this  
 	private	ItemStack[] cargo;
@@ -82,7 +81,7 @@ public abstract class ModuleBase {
 	 * Creates a new instance of this module, the module will be created at the given vehicle.
 	 * @param vehicle The vehicle this module is created on
 	 */
-	public ModuleBase(VehicleBase vehicle) {
+	public ModuleBase(vswe.stevesvehicles.vehicle.VehicleBase vehicle) {
 		//save the vehicle
 		this.vehicle = vehicle;
 		
@@ -582,7 +581,7 @@ public abstract class ModuleBase {
 		
 			//if there's still something to draw(that it's not scrolled outside the screen)
 			if (rect[3] > 0) {
-				gui.drawTexturedModalRect(gui.getGuiLeft() + rect[0] + getX(), gui.getGuiTop() + rect[1] + getY(), srcX, srcY, rect[2], rect[3], rotation);
+				gui.drawRect(gui.getGuiLeft() + rect[0] + getX(), gui.getGuiTop() + rect[1] + getY(), srcX, srcY, rect[2], rect[3], rotation);
 			}
 		}
 	}

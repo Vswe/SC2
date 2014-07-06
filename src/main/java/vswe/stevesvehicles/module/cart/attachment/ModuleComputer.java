@@ -2,7 +2,7 @@ package vswe.stevesvehicles.module.cart.attachment;
 import java.util.ArrayList;
 
 import net.minecraft.entity.player.EntityPlayer;
-import vswe.stevesvehicles.client.gui.GuiVehicle;
+import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.module.cart.ModuleWorker;
 import vswe.stevesvehicles.old.Buttons.ButtonBase;
 import vswe.stevesvehicles.old.Buttons.ButtonTask;
