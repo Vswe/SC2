@@ -7,32 +7,30 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelCage extends ModelVehicle
-{
+public class ModelCage extends ModelVehicle {
 	
-	private static ResourceLocation texture = ResourceHelper.getResource("/models/cageModel.png");
+	private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/models/cageModel.png");
 	
 	@Override
 	public ResourceLocation getResource(ModuleBase module) {
-		return texture;
+		return TEXTURE;
 	}
 	
-
+    @Override
 	protected int getTextureWidth() {
 		return 32;
 	}
+    @Override
 	protected int getTextureHeight() {
 		return 32;
 	}
 
-	private int cageHeight = 26;
-    public ModelCage(boolean isPlaceholder)
-    {
+    private static final int CAGE_HEIGHT_TALL = 26;
+    private static final int CAGE_HEIGHT_SHORT = 14;
+	private final int cageHeight;
+    public ModelCage(boolean isPlaceholder) {
+		cageHeight = isPlaceholder ? CAGE_HEIGHT_SHORT : CAGE_HEIGHT_TALL;
 
-		if (isPlaceholder) {
-			cageHeight = 14;
-		}
-		
 		for (float x = -9; x <= 9; x+=9*2 / 3F) {			
 			if (Math.abs(x) != 9) {
 				createBar(x,7);
@@ -40,6 +38,7 @@ public class ModelCage extends ModelVehicle
 			}
 			createTopBarShort(x);
 		}
+
 		for (float z = -7; z <= 7; z+=7*2/ 3F) {
 			createBar(9,z);
 			createBar(-9,z);
@@ -51,21 +50,21 @@ public class ModelCage extends ModelVehicle
 	private void createBar(float offsetX, float offsetZ) {
 
 		ModelRenderer bar = new ModelRenderer(this, 0, 0);
-		AddRenderer(bar);
+		addRenderer(bar);
 
 		bar.addBox(
-			-0.5F, 	//X
+			-0.5F, 	            //X
 			-cageHeight / 2F, 	//Y
-			-0.5F,	 	//Z
+			-0.5F,	 	        //Z
 			1,					//Size X
-			cageHeight,					//Size Y
+			cageHeight,			//Size Y
 			1,			     	//Size Z
-			0.0F			 	//Size Increasement
+			0.0F
 		);
 		bar.setRotationPoint(
-			offsetX, 		//X
+			offsetX, 		        //X
 			-cageHeight / 2F - 4,	//Y
-			offsetZ			//Z
+			offsetZ			        //Z
 		);
 		
 	}
@@ -73,21 +72,21 @@ public class ModelCage extends ModelVehicle
 	private void createTopBarLong(float offsetZ) {
 
 		ModelRenderer bar = new ModelRenderer(this, 0, 0);
-		AddRenderer(bar);
+		addRenderer(bar);
 
 		bar.addBox(
-			-0.5F, 	//X
-			-9.5F, 	//Y
-			-0.5F,	 	//Z
+			-0.5F, 	            //X
+			-9.5F, 	            //Y
+			-0.5F,	 	        //Z
 			1,					//Size X
 			19,					//Size Y
 			1,			     	//Size Z
-			0.0F			 	//Size Increasement
+			0.0F
 		);
 		bar.setRotationPoint(
-			0.005F, 		//X
-			-cageHeight -4.005F,			//Y
-			offsetZ + 0.005F			//Z
+			0.005F, 		        //X
+			-cageHeight -4.005F,	//Y
+			offsetZ + 0.005F		//Z
 		);
 		
 		bar.rotateAngleZ = (float)(Math.PI / 2);
@@ -96,16 +95,16 @@ public class ModelCage extends ModelVehicle
 	private void createTopBarShort(float offsetX) {
 
 		ModelRenderer bar = new ModelRenderer(this, 0, 0);
-		AddRenderer(bar);
+		addRenderer(bar);
 
 		bar.addBox(
-			-0.5F, 	//X
-			-7.5F, 	//Y
-			-0.5F,	 	//Z
+			-0.5F, 	            //X
+			-7.5F, 	            //Y
+			-0.5F,	 	        //Z
 			1,					//Size X
 			15,					//Size Y
 			1,			     	//Size Z
-			0.0F			 	//Size Increasement
+			0.0F
 		);
 		bar.setRotationPoint(
 			offsetX - 0.005F, 		//X

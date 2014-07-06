@@ -8,36 +8,31 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelWheel extends ModelVehicle
-{
-
-
-	
-	private static ResourceLocation texture = ResourceHelper.getResource("/models/wheelModel.png");
+public class ModelWheel extends ModelVehicle {
+	private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/models/wheelModel.png");
 	
 	@Override
 	public ResourceLocation getResource(ModuleBase module) {
-		return texture;
+		return TEXTURE;
 	}		
-	
+	@Override
 	protected int getTextureWidth() {
 		return 32;
 	}
+    @Override
 	protected int getTextureHeight() {
 		return 32;
 	}
 
-	public float extraMult() {
+    @Override
+	public float extraMultiplier() {
 		return 0.65F;
 	}
 	
-	private ModelRenderer anchor;
-    public ModelWheel()
-    {
-
-
+	private final ModelRenderer anchor;
+    public ModelWheel() {
 		anchor = new ModelRenderer(this);
-		AddRenderer(anchor);
+		addRenderer(anchor);
 		
 		anchor.setRotationPoint(
 			-10, 		//X	
@@ -46,73 +41,71 @@ public class ModelWheel extends ModelVehicle
 		);	
 
 
-		
-		
 		ModelRenderer top = new ModelRenderer(this, 0, 0);
 		anchor.addChild(top);
 		fixSize(top);
 
 		
 		top.addBox(
-			-4.5F, 	//X
-			-1F, 	//Y
+			-4.5F, 	    //X
+			-1F, 	    //Y
 			-1F,	 	//Z
-			9,					//Size X
-			2,					//Size Y
-			2,			     	//Size Z
-			0.0F			 	//Size Increasement
+			9,			//Size X
+			2,			//Size Y
+			2,			//Size Z
+			0.0F
 		);
 		top.setRotationPoint(
-			0, 		//X	
+			0, 		    //X
 			-6,			//Y
 			0			//Z
 		);	
 		top.rotateAngleY = (float)-Math.PI / 2;
 		
 		
-		ModelRenderer topleft = new ModelRenderer(this, 0, 4);
-		anchor.addChild(topleft);
-		fixSize(topleft);
+		ModelRenderer topLeft = new ModelRenderer(this, 0, 4);
+		anchor.addChild(topLeft);
+		fixSize(topLeft);
 
 		
-		topleft.addBox(
-			-1F, 	//X
-			-1F, 	//Y
-			-1F,	 	//Z
-			2,					//Size X
-			2,					//Size Y
-			2,			     	//Size Z
-			0.0F			 	//Size Increasement
-		);
-		topleft.setRotationPoint(
-			0, 		//X	
-			-4F,			//Y
-			-5.5F			//Z
-		);	
-		topleft.rotateAngleY = (float)-Math.PI / 2;
+		topLeft.addBox(
+            -1F,        //X
+            -1F,        //Y
+            -1F,        //Z
+            2,          //Size X
+            2,          //Size Y
+            2,          //Size Z
+            0.0F
+        );
+		topLeft.setRotationPoint(
+            0,          //X
+            -4F,        //Y
+            -5.5F       //Z
+        );
+		topLeft.rotateAngleY = (float)-Math.PI / 2;
 
 
 		
-		ModelRenderer topright = new ModelRenderer(this, 0, 4);
-		anchor.addChild(topright);
-		fixSize(topright);
+		ModelRenderer topRight = new ModelRenderer(this, 0, 4);
+		anchor.addChild(topRight);
+		fixSize(topRight);
 
 		
-		topright.addBox(
-			-1F, 	//X
-			-1F, 	//Y
-			-1F,	 	//Z
-			2,					//Size X
-			2,					//Size Y
-			2,			     	//Size Z
-			0.0F			 	//Size Increasement
-		);
-		topright.setRotationPoint(
-			0, 		//X	
-			-4F,			//Y
-			5.5F			//Z
-		);	
-		topright.rotateAngleY = (float)-Math.PI / 2;
+		topRight.addBox(
+            -1F,        //X
+            -1F,        //Y
+            -1F,        //Z
+            2,          //Size X
+            2,          //Size Y
+            2,          //Size Z
+            0.0F
+        );
+		topRight.setRotationPoint(
+            0,              //X
+            -4F,            //Y
+            5.5F            //Z
+        );
+		topRight.rotateAngleY = (float)-Math.PI / 2;
 		
 
 		ModelRenderer left = new ModelRenderer(this, 0, 12);
@@ -121,18 +114,18 @@ public class ModelWheel extends ModelVehicle
 
 		
 		left.addBox(
-			-1F, 	//X
-			-2.5F, 	//Y
+			-1F, 	    //X
+			-2.5F, 	    //Y
 			-1F,	 	//Z
-			2,					//Size X
-			5,					//Size Y
-			2,			     	//Size Z
-			0.0F			 	//Size Increasement
+			2,			//Size X
+			5,			//Size Y
+			2,			//Size Z
+			0.0F
 		);
 		left.setRotationPoint(
-			0, 		//X	
-			-0.5F,			//Y
-			-7.5F			//Z
+			0, 		    //X
+			-0.5F,		//Y
+			-7.5F		//Z
 		);		
 		left.rotateAngleY = (float)-Math.PI / 2;
 
@@ -143,107 +136,107 @@ public class ModelWheel extends ModelVehicle
 
 		
 		right.addBox(
-			-1F, 	//X
-			-2.5F, 	//Y
+			-1F, 	    //X
+			-2.5F, 	    //Y
 			-1F,	 	//Z
-			2,					//Size X
-			5,					//Size Y
-			2,			     	//Size Z
-			0.0F			 	//Size Increasement
+			2,			//Size X
+			5,			//Size Y
+			2,			//Size Z
+			0.0F
 		);
 		right.setRotationPoint(
-			0, 		//X	
-			-0.5F,			//Y
-			7.5F			//Z
+			0, 		    //X
+			-0.5F,		//Y
+			7.5F		//Z
 		);
 		right.rotateAngleY = (float)-Math.PI / 2;
 
 		
-		ModelRenderer bottomleft = new ModelRenderer(this, 0, 4);
-		anchor.addChild(bottomleft);
-		fixSize(bottomleft);
+		ModelRenderer bottomLeft = new ModelRenderer(this, 0, 4);
+		anchor.addChild(bottomLeft);
+		fixSize(bottomLeft);
 
 		
-		bottomleft.addBox(
-			-1F, 	//X
-			-1F, 	//Y
-			-1F,	 	//Z
-			2,					//Size X
-			2,					//Size Y
-			2,			     	//Size Z
-			0.0F			 	//Size Increasement
-		);
-		bottomleft.setRotationPoint(
-			0, 		//X	
-			3,			//Y
-			-5.5F			//Z
-		);
-		bottomleft.rotateAngleY = (float)-Math.PI / 2;
+		bottomLeft.addBox(
+                -1F,        //X
+                -1F,        //Y
+                -1F,        //Z
+                2,          //Size X
+                2,          //Size Y
+                2,          //Size Z
+                0.0F
+        );
+		bottomLeft.setRotationPoint(
+                0,          //X
+                3,          //Y
+                -5.5F       //Z
+        );
+		bottomLeft.rotateAngleY = (float)-Math.PI / 2;
 
 		
-		ModelRenderer bottomright = new ModelRenderer(this, 0, 4);
-		anchor.addChild(bottomright);
-		fixSize(bottomright);
+		ModelRenderer bottomRight = new ModelRenderer(this, 0, 4);
+		anchor.addChild(bottomRight);
+		fixSize(bottomRight);
 
 		
-		bottomright.addBox(
-			-1F, 	//X
-			-1F, 	//Y
-			-1F,	 	//Z
-			2,					//Size X
-			2,					//Size Y
-			2,			     	//Size Z
-			0.0F			 	//Size Increasement
-		);
-		bottomright.setRotationPoint(
-			0, 		//X	
-			3,			//Y
-			5.5F			//Z
-		);
-		bottomright.rotateAngleY = (float)-Math.PI / 2;
+		bottomRight.addBox(
+            -1F,        //X
+            -1F,        //Y
+            -1F,        //Z
+            2,          //Size X
+            2,          //Size Y
+            2,          //Size Z
+            0.0F
+        );
+		bottomRight.setRotationPoint(
+            0,      //X
+            3,      //Y
+            5.5F    //Z
+        );
+		bottomRight.rotateAngleY = (float)-Math.PI / 2;
 		
 		
-		ModelRenderer bottominnerleft = new ModelRenderer(this, 0, 4);
-		anchor.addChild(bottominnerleft);
-		fixSize(bottominnerleft);
+		ModelRenderer bottomInnerLeft = new ModelRenderer(this, 0, 4);
+		anchor.addChild(bottomInnerLeft);
+		fixSize(bottomInnerLeft);
 
 		
-		bottominnerleft.addBox(
-			-1F, 	//X
-			-1F, 	//Y
-			-1F,	 	//Z
-			2,					//Size X
-			2,					//Size Y
-			2,			     	//Size Z
-			0.0F			 	//Size Increasement
-		);
-		bottominnerleft.setRotationPoint(
-			0, 		//X	
-			5,			//Y
-			-3.5F			//Z
-		);		
-		bottominnerleft.rotateAngleY = (float)-Math.PI / 2;
+		bottomInnerLeft.addBox(
+            -1F,        //X
+            -1F,        //Y
+            -1F,        //Z
+            2,          //Size X
+            2,          //Size Y
+            2,          //Size Z
+            0.0F
+        );
+		bottomInnerLeft.setRotationPoint(
+            0,              //X
+            5,              //Y
+            -3.5F           //Z
+        );
+		bottomInnerLeft.rotateAngleY = (float)-Math.PI / 2;
 		
-		ModelRenderer bottominnerright = new ModelRenderer(this, 0, 4);
-		anchor.addChild(bottominnerright);
-		fixSize(bottominnerright);
+		ModelRenderer bottomInnerRight = new ModelRenderer(this, 0, 4);
+		anchor.addChild(bottomInnerRight);
+		fixSize(bottomInnerRight);
 
 		
-		bottominnerright.addBox(
-			-1F, 	//X
-			-1F, 	//Y
-			-1F,	 	//Z
-			2,					//Size X
-			2,					//Size Y
-			2,			     	//Size Z
-			0.0F			 	//Size Increasement
-		);
-		bottominnerright.setRotationPoint(
-			0, 		//X	
-			5,			//Y
-			3.5F			//Z
-		);	
-		bottominnerright.rotateAngleY = (float)-Math.PI / 2;
+		bottomInnerRight.addBox(
+            -1F,        //X
+            -1F,        //Y
+            -1F,        //Z
+            2,          //Size X
+            2,          //Size Y
+            2,          //Size Z
+            0.0F
+        );
+		bottomInnerRight.setRotationPoint(
+            0,        //X
+            5,        //Y
+            3.5F      //Z
+        );
+		bottomInnerRight.rotateAngleY = (float)-Math.PI / 2;
 		
 		ModelRenderer bottom = new ModelRenderer(this, 0, 8);
 		anchor.addChild(bottom);
@@ -251,16 +244,16 @@ public class ModelWheel extends ModelVehicle
 
 		
 		bottom.addBox(
-			-2.5F, 	//X
-			-1F, 	//Y
-			-1F,	 	//Z
-			5,					//Size X
-			2,					//Size Y
-			2,			     	//Size Z
-			0.0F			 	//Size Increasement
+			-2.5F, 	        //X
+			-1F, 	        //Y
+			-1F,	 	    //Z
+			5,				//Size X
+			2,				//Size Y
+			2,			    //Size Z
+			0.0F
 		);
 		bottom.setRotationPoint(
-			0, 		//X	
+			0, 		    //X
 			7,			//Y
 			0			//Z
 		);	
@@ -268,26 +261,26 @@ public class ModelWheel extends ModelVehicle
 		
 
 
-		ModelRenderer middlebottom = new ModelRenderer(this, 0, 19);
-		anchor.addChild(middlebottom);
-		fixSize(middlebottom);
+		ModelRenderer middleBottom = new ModelRenderer(this, 0, 19);
+		anchor.addChild(middleBottom);
+		fixSize(middleBottom);
 
 		
-		middlebottom.addBox(
-			-0.5F, 	//X
-			-2.5F, 	//Y
-			-0.5F,	 	//Z
-			1,					//Size X
-			5,					//Size Y
-			1,			     	//Size Z
-			0.0F			 	//Size Increasement
-		);
-		middlebottom.setRotationPoint(
-			0.5F, 		//X	
-			3.5F,			//Y
-			0F			//Z
-		);	
-		middlebottom.rotateAngleY = (float)-Math.PI / 2;	
+		middleBottom.addBox(
+            -0.5F,      //X
+            -2.5F,      //Y
+            -0.5F,      //Z
+            1,          //Size X
+            5,          //Size Y
+            1,          //Size Z
+            0.0F
+        );
+		middleBottom.setRotationPoint(
+            0.5F,        //X
+            3.5F,        //Y
+            0F           //Z
+        );
+		middleBottom.rotateAngleY = (float)-Math.PI / 2;
 
 		ModelRenderer middle = new ModelRenderer(this, 0, 25);
 		anchor.addChild(middle);
@@ -295,13 +288,13 @@ public class ModelWheel extends ModelVehicle
 
 		
 		middle.addBox(
-			-1.5F, 	//X
-			-1F, 	//Y
+			-1.5F, 	    //X
+			-1F, 	    //Y
 			-0.5F,	 	//Z
-			3,					//Size X
-			2,					//Size Y
-			1,			     	//Size Z
-			0.0F			 	//Size Increasement
+			3,			//Size X
+			2,			//Size Y
+			1,			//Size Z
+			0.0F
 		);
 		middle.setRotationPoint(
 			0.5F, 		//X	
@@ -310,96 +303,97 @@ public class ModelWheel extends ModelVehicle
 		);	
 		middle.rotateAngleY = (float)-Math.PI / 2;		
 		
-		ModelRenderer middleleft = new ModelRenderer(this, 0, 25);
-		anchor.addChild(middleleft);
-		fixSize(middleleft);
+		ModelRenderer middleLeft = new ModelRenderer(this, 0, 25);
+		anchor.addChild(middleLeft);
+		fixSize(middleLeft);
 
 		
-		middleleft.addBox(
-			-1.5F, 	//X
-			-1F, 	//Y
-			-0.5F,	 	//Z
-			3,					//Size X
-			2,					//Size Y
-			1,			     	//Size Z
-			0.0F			 	//Size Increasement
-		);
-		middleleft.setRotationPoint(
-			0.5F, 		//X	
-			-1F,			//Y
-			-3F			//Z
-		);	
-		middleleft.rotateAngleY = (float)-Math.PI / 2;	
+		middleLeft.addBox(
+            -1.5F,          //X
+            -1F,            //Y
+            -0.5F,          //Z
+            3,              //Size X
+            2,              //Size Y
+            1,              //Size Z
+            0.0F
+        );
+		middleLeft.setRotationPoint(
+            0.5F,        //X
+            -1F,         //Y
+            -3F          //Z
+        );
+		middleLeft.rotateAngleY = (float)-Math.PI / 2;
 		
-		ModelRenderer middleright = new ModelRenderer(this, 0, 25);
-		anchor.addChild(middleright);
-		fixSize(middleright);
+		ModelRenderer middleRight = new ModelRenderer(this, 0, 25);
+		anchor.addChild(middleRight);
+		fixSize(middleRight);
 
 		
-		middleright.addBox(
-			-1.5F, 	//X
-			-1F, 	//Y
-			-0.5F,	 	//Z
-			3,					//Size X
-			2,					//Size Y
-			1,			     	//Size Z
-			0.0F			 	//Size Increasement
-		);
-		middleright.setRotationPoint(
-			0.5F, 		//X	
-			-1F,			//Y
-			3F			//Z
-		);	
-		middleright.rotateAngleY = (float)-Math.PI / 2;		
+		middleRight.addBox(
+            -1.5F,      //X
+            -1F,        //Y
+            -0.5F,      //Z
+            3,          //Size X
+            2,          //Size Y
+            1,          //Size Z
+            0.0F
+        );
+		middleRight.setRotationPoint(
+            0.5F,           //X
+            -1F,            //Y
+            3F              //Z
+        );
+		middleRight.rotateAngleY = (float)-Math.PI / 2;
 		
 		
-		ModelRenderer innerleft = new ModelRenderer(this, 0, 28);
-		anchor.addChild(innerleft);
-		fixSize(innerleft);
+		ModelRenderer innerLeft = new ModelRenderer(this, 0, 28);
+		anchor.addChild(innerLeft);
+		fixSize(innerLeft);
 
 		
-		innerleft.addBox(
-			-1.5F, 	//X
-			-0.5F, 	//Y
-			-0.5F,	 	//Z
-			2,					//Size X
-			1,					//Size Y
-			1,			     	//Size Z
-			0.0F			 	//Size Increasement
-		);
-		innerleft.setRotationPoint(
-			0.5F, 		//X	
-			-1.5F,			//Y
-			-5F			//Z
-		);	
-		innerleft.rotateAngleY = (float)-Math.PI / 2;	
+		innerLeft.addBox(
+            -1.5F,          //X
+            -0.5F,          //Y
+            -0.5F,          //Z
+            2,              //Size X
+            1,              //Size Y
+            1,              //Size Z
+            0.0F
+        );
+		innerLeft.setRotationPoint(
+            0.5F,           //X
+            -1.5F,          //Y
+            -5F            //Z
+        );
+		innerLeft.rotateAngleY = (float)-Math.PI / 2;
 
-		ModelRenderer innerright = new ModelRenderer(this, 0, 28);
-		anchor.addChild(innerright);
-		fixSize(innerright);
+		ModelRenderer innerRight = new ModelRenderer(this, 0, 28);
+		anchor.addChild(innerRight);
+		fixSize(innerRight);
 
 		
-		innerright.addBox(
-			-1.5F, 	//X
-			-0.5F, 	//Y
-			-0.5F,	 	//Z
-			2,					//Size X
-			1,					//Size Y
-			1,			     	//Size Z
-			0.0F			 	//Size Increasement
-		);
-		innerright.setRotationPoint(
-			0.5F, 		//X	
-			-1.5F,			//Y
-			6F			//Z
-		);	
-		innerright.rotateAngleY = (float)-Math.PI / 2;			
+		innerRight.addBox(
+            -1.5F,      //X
+            -0.5F,      //Y
+            -0.5F,      //Z
+            2,          //Size X
+            1,          //Size Y
+            1,          //Size Z
+            0.0F
+        );
+		innerRight.setRotationPoint(
+            0.5F,        //X
+            -1.5F,       //Y
+            6F           //Z
+        );
+		innerRight.rotateAngleY = (float)-Math.PI / 2;
     }
-	
+
+    @Override
 	public void applyEffects(ModuleBase module,  float yaw, float pitch, float roll) {
 		anchor.rotateAngleX = module == null ? 0 : ((ModuleAdvancedControl)module).getWheelAngle();
 	}
-	
+
 	
 }
 				

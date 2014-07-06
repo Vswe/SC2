@@ -7,33 +7,31 @@ import vswe.stevesvehicles.module.common.storage.chest.ModuleChest;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
-public class ModelGiftStorage extends ModelVehicle
-{
+public class ModelGiftStorage extends ModelVehicle {
 
-	private static ResourceLocation texture = ResourceHelper.getResource("/models/giftStorageModel.png");
+	private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/models/giftStorageModel.png");
 	
 	@Override
 	public ResourceLocation getResource(ModuleBase module) {
-		return texture;
+		return TEXTURE;
 	}		
 
+    @Override
 	protected int getTextureHeight() {
 		return 64;
 	}
 
-	ModelRenderer lid1;
-	ModelRenderer lid2;
+	private ModelRenderer lid1;
+	private ModelRenderer lid2;
 
-    public ModelGiftStorage()
-    {
-
-		lid1 = AddChest(false);
-		lid2 = AddChest(true);
+    public ModelGiftStorage() {
+		lid1 = addChest(false);
+		lid2 = addChest(true);
     }
 
-	private ModelRenderer AddChest(boolean opposite) {
+	private ModelRenderer addChest(boolean opposite) {
 		ModelRenderer chestAnchor = new ModelRenderer(this);
-		AddRenderer(chestAnchor);
+		addRenderer(chestAnchor);
 
 		int offsetY = 0;
 		if (opposite) {
@@ -46,13 +44,13 @@ public class ModelGiftStorage extends ModelVehicle
 		chestAnchor.addChild(base);
 
 		base.addBox(
-			8, 	//X
-			3, 	//Y
-			2F,	 	//Z
-			16,					//Size X
-			6,					//Size Y
-			4,			     	//Size Z
-			0.0F			 	//Size Increasement
+			8, 	        //X
+			3, 	        //Y
+			2F,	 	    //Z
+			16,			//Size X
+			6,			//Size Y
+			4,			//Size Z
+			0.0F
 		);
 		base.setRotationPoint(
 			-16.0F, 		//X
@@ -65,46 +63,45 @@ public class ModelGiftStorage extends ModelVehicle
 		chestAnchor.addChild(lid);
 
 		lid.addBox(
-			8, 	//X
+			8, 	    //X
 			-3, 	//Y
-			-4F,	 	//Z
-			16,					//Size X
-			3,					//Size Y
-			4,			     	//Size Z
-			0.0F			 	//Size Increasement
+			-4F,	//Z
+			16,		//Size X
+			3,		//Size Y
+			4,		//Size Z
+			0.0F
 		);
 		lid.setRotationPoint(
-			-16.0F, 		//X
-			-1.5F,			//Y
+			-16.0F, 	//X
+			-1.5F,		//Y
 			-8F			//Z
 		);
 
-		ModelRenderer lock = new ModelRenderer(this, 0, 17+offsetY);
+		ModelRenderer lock = new ModelRenderer(this, 0, 17 + offsetY);
 		fixSize(lock);
 		lid.addChild(lock);
 
 		lock.addBox(
-			1F, 	//X
-			1.5F, 	//Y
+			1F, 	    //X
+			1.5F, 	    //Y
 			0.5F,	 	//Z
-			2,					//Size X
-			3,					//Size Y
-			1,			     	//Size Z
-			0.0F			 	//Size Increasement
+			2,			//Size X
+			3,			//Size Y
+			1,			//Size Z
+			0.0F
 		);
 		lock.setRotationPoint(
-			14.0F, 		//X
-			-3F,			//Y
-			-5.5F			//Z
-		);
+                14.0F,            //X
+                -3F,            //Y
+                -5.5F            //Z
+        );
 
 		return lid;
 	}
 
+    @Override
 	public void applyEffects(ModuleBase module,  float yaw, float pitch, float roll) {
-
 		lid1.rotateAngleX = module == null ? 0 : -((ModuleChest)module).getChestAngle();
 		lid2.rotateAngleX = module == null ? 0 : -((ModuleChest)module).getChestAngle();
-		
 	}
 }

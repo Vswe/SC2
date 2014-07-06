@@ -10,39 +10,35 @@ import vswe.stevesvehicles.module.ModuleBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
-public class ModelPigTail extends ModelVehicle
-{
-	
-	private static ResourceLocation texture = ResourceHelper.getResource("/models/pigtailModel.png");
+public class ModelPigTail extends ModelVehicle {
+
+	private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/models/pigtailModel.png");
 	
 	@Override
 	public ResourceLocation getResource(ModuleBase module) {
-		return texture;
+		return TEXTURE;
 	}	
 	
-	
+	@Override
 	protected int getTextureHeight() {
 		return 32;
 	}
 
 
-    public ModelPigTail()
-    {
-		super();
-
-		ModelRenderer tailanchor = new ModelRenderer(this);
-		AddRenderer(tailanchor);
+    public ModelPigTail() {
+		ModelRenderer tailAnchor = new ModelRenderer(this);
+		addRenderer(tailAnchor);
 		
-        tailanchor.setRotationPoint(
-			10.0F, 
-			-4, 
-			0F
-		);			
-		tailanchor.rotateAngleY = (float)Math.PI / 2;
+        tailAnchor.setRotationPoint(
+            10.0F,
+            -4,
+            0F
+        );
+		tailAnchor.rotateAngleY = (float)Math.PI / 2;
 		
 		ModelRenderer tail1 = new ModelRenderer(this, 0, 0);
 		fixSize(tail1);
-		tailanchor.addChild(tail1);
+		tailAnchor.addChild(tail1);
 		
         tail1.addBox(
 			-1.5F, 
@@ -64,7 +60,7 @@ public class ModelPigTail extends ModelVehicle
 
 		ModelRenderer tail2 = new ModelRenderer(this, 0, 0);
 		fixSize(tail2);
-		tailanchor.addChild(tail2);
+		tailAnchor.addChild(tail2);
 		
         tail2.addBox(
 			-0.5F, 
@@ -85,7 +81,7 @@ public class ModelPigTail extends ModelVehicle
 		
 		ModelRenderer tail3 = new ModelRenderer(this, 0, 0);
 		fixSize(tail3);
-		tailanchor.addChild(tail3);
+		tailAnchor.addChild(tail3);
 		
         tail3.addBox(
 			-1.0F, 
@@ -106,7 +102,7 @@ public class ModelPigTail extends ModelVehicle
 
 		ModelRenderer tail4 = new ModelRenderer(this, 0, 0);
 		fixSize(tail4);
-		tailanchor.addChild(tail4);
+		tailAnchor.addChild(tail4);
 		
         tail4.addBox(
 			-0.5F, 
@@ -127,7 +123,7 @@ public class ModelPigTail extends ModelVehicle
 
 		ModelRenderer tail5 = new ModelRenderer(this, 0, 0);
 		fixSize(tail5);
-		tailanchor.addChild(tail5);
+		tailAnchor.addChild(tail5);
 		
         tail5.addBox(
 			-0.5F, 
@@ -147,13 +143,13 @@ public class ModelPigTail extends ModelVehicle
 		);		
     }
 
-	public void render(Render render,ModuleBase module, float yaw, float pitch, float roll, float mult, float partialtime)
-    {
+    @Override
+	public void render(Render render,ModuleBase module, float yaw, float pitch, float roll, float multiplier, float partialTime) {
 		if (module != null) {
 			float[] color = module.getVehicle().getColor();
 			GL11.glColor4f(color[0], color[1], color[2], 1.0F);
 		}
-		super.render(render,module,yaw,pitch,roll, mult, partialtime);
+		super.render(render,module,yaw,pitch,roll, multiplier, partialTime);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
     }		
 

@@ -23,7 +23,7 @@ public class ModelTrackRemover extends ModelVehicle
 		super();
 
 		ModelRenderer base = new ModelRenderer(this, 0, 0);
-		AddRenderer(base);
+		addRenderer(base);
 
 		base.addBox(
 			-5, 	//X
@@ -43,7 +43,7 @@ public class ModelTrackRemover extends ModelVehicle
 		base.rotateAngleX = (float)Math.PI / 2;
 
 		ModelRenderer pipe = new ModelRenderer(this, 0, 11);
-		AddRenderer(pipe);
+		addRenderer(pipe);
 
 		pipe.addBox(
 			-2.5F, 	//X

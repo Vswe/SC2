@@ -7,40 +7,38 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelEngineFrame extends ModelEngineBase
-{
+public class ModelEngineFrame extends ModelEngineBase {
 	
 	
-	private static ResourceLocation texture = ResourceHelper.getResource("/models/engineModelFrame.png");
+	private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/models/engineModelFrame.png");
 	
 	@Override
 	public ResourceLocation getResource(ModuleBase module) {
-		return texture;
+		return TEXTURE;
 	}		
 	
-
+    @Override
 	protected int getTextureWidth() {
 		return 8;
 	}
+    @Override
 	protected int getTextureHeight() {
 		return 8;
 	}
 
-    public ModelEngineFrame()
-    {
-
+    public ModelEngineFrame(){
 		ModelRenderer left = new ModelRenderer(this, 0, 0);
 		anchor.addChild(left);
 		fixSize(left);
 
 		left.addBox(
-			-0.5F, 	//X
-			-2.5F, 	//Y
+			-0.5F, 	    //X
+			-2.5F, 	    //Y
 			-0.5F,	 	//Z
-			1,					//Size X
-			5,					//Size Y
-			1,			     	//Size Z
-			0.0F			 	//Size Increasement
+			1,			//Size X
+			5,			//Size Y
+			1,          //Size Z
+			0.0F
 		);
 		left.setRotationPoint(
 			-4F, 		//X
@@ -53,13 +51,13 @@ public class ModelEngineFrame extends ModelEngineBase
 		fixSize(right);
 
 		right.addBox(
-			-0.5F, 	//X
-			-2.5F, 	//Y
+			-0.5F, 	    //X
+			-2.5F, 	    //Y
 			-0.5F,	 	//Z
-			1,					//Size X
-			5,					//Size Y
-			1,			     	//Size Z
-			0.0F			 	//Size Increasement
+			1,			//Size X
+			5,			//Size Y
+			1,			//Size Z
+			0.0F
 		);
 		right.setRotationPoint(
 			4F, 		//X
@@ -72,17 +70,17 @@ public class ModelEngineFrame extends ModelEngineBase
 		fixSize(top);
 
 		top.addBox(
-			-0.5F, 	//X
-			-3.5F, 	//Y
-			-0.5F,	 	//Z
-			1,					//Size X
-			7,					//Size Y
-			1,			     	//Size Z
-			0.0F			 	//Size Increasement
+			-0.5F, 	        //X
+			-3.5F, 	        //Y
+			-0.5F,	 	    //Z
+			1,				//Size X
+			7,				//Size Y
+			1,			    //Size Z
+			0.0F
 		);
 		top.setRotationPoint(
-			0, 		//X
-			-3F,			//Y
+			0, 		    //X
+			-3F,		//Y
 			0			//Z
 		);	
 
@@ -93,23 +91,22 @@ public class ModelEngineFrame extends ModelEngineBase
 		fixSize(bot);
 
 		bot.addBox(
-			-0.5F, 	//X
-			-3.5F, 	//Y
+			-0.5F, 	    //X
+			-3.5F, 	    //Y
 			-0.5F,	 	//Z
-			1,					//Size X
-			7,					//Size Y
-			1,			     	//Size Z
-			0.0F			 	//Size Increasement
+			1,			//Size X
+			7,			//Size Y
+			1,			//Size Z
+			0.0F
 		);
 		bot.setRotationPoint(
-			0, 		//X
+			0, 		    //X
 			2F,			//Y
 			0			//Z
 		);	
 
 		bot.rotateAngleZ = (float)Math.PI / 2;	
-	
-		
+
 	}
 
 }

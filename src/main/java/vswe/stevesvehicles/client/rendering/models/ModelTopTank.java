@@ -11,88 +11,86 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelTopTank extends ModelVehicle
-{
+public class ModelTopTank extends ModelVehicle {
+	private static final ResourceLocation TEXTURE_STANDARD = ResourceHelper.getResource("/models/tankModelTop.png");
+	private static final ResourceLocation TEXTURE_OPEN = ResourceHelper.getResource("/models/tankModelTopOpen.png");
 
-	
-	private static ResourceLocation texture = ResourceHelper.getResource("/models/tankModelTop.png");
-	private static ResourceLocation textureOpen = ResourceHelper.getResource("/models/tankModelTopOpen.png");
 	@Override
 	public ResourceLocation getResource(ModuleBase module) {
-		return open ? textureOpen : texture;
+		return open ? TEXTURE_OPEN : TEXTURE_STANDARD;
 	}			
 
+    @Override
 	protected int getTextureHeight() {
 		return 32;
 	}
 	
-	private boolean open;
-    public ModelTopTank(boolean open)
-    {
+	private final boolean open;
+    public ModelTopTank(boolean open) {
 		this.open = open;
 
 		for (int i = 0; i < 2; i++) {
-			ModelRenderer tankside = new ModelRenderer(this, 0, 13);
-			AddRenderer(tankside);
+			ModelRenderer tankSide = new ModelRenderer(this, 0, 13);
+			addRenderer(tankSide);
 
-			tankside.addBox(
-				-8, 	//X
-				-2.5F, 	//Y
-				-0.5F,	 	//Z
-				16,					//Size X
-				5,					//Size Y
-				1,			     	//Size Z
-				0.0F			 	//Size Increasement
-			);
-			tankside.setRotationPoint(
-				0F, 		//X
-				-8.5F,			//Y
-				-5.5F + i*11			//Z
-			);
+			tankSide.addBox(
+                -8,         //X
+                -2.5F,      //Y
+                -0.5F,      //Z
+                16,         //Size X
+                5,          //Size Y
+                1,          //Size Z
+                0.0F
+            );
+			tankSide.setRotationPoint(
+                0F,                 //X
+                -8.5F,              //Y
+                -5.5F + i * 11      //Z
+            );
 
 			if (!open || i == 0) {
-				ModelRenderer tanktopbot = new ModelRenderer(this, 0, 0);
-				AddRenderer(tanktopbot);
+				ModelRenderer tankTopBot = new ModelRenderer(this, 0, 0);
+				addRenderer(tankTopBot);
 
-				tanktopbot.addBox(
-					-8, 	//X
-					-6, 	//Y
-					-0.5F,	 	//Z
-					16,					//Size X
-					12,					//Size Y
-					1,			     	//Size Z
-					0.0F			 	//Size Increasement
-				);
-				tanktopbot.setRotationPoint(
-					0, 		//X
-					- 5.5F - i*6,		//Y
-					0			//Z
-				);
+				tankTopBot.addBox(
+                    -8,             //X
+                    -6,             //Y
+                    -0.5F,          //Z
+                    16,             //Size X
+                    12,             //Size Y
+                    1,              //Size Z
+                    0.0F
+                );
+				tankTopBot.setRotationPoint(
+                    0,                  //X
+                    -5.5F - i * 6,      //Y
+                    0                   //Z
+                );
 				
-				tanktopbot.rotateAngleX = (float)Math.PI / 2;
+				tankTopBot.rotateAngleX = (float)Math.PI / 2;
 			}
 
 			
 			
-			ModelRenderer tankfrontback = new ModelRenderer(this, 0, 19);
-			AddRenderer(tankfrontback);
+			ModelRenderer tankFrontBack = new ModelRenderer(this, 0, 19);
+			addRenderer(tankFrontBack);
 
-			tankfrontback.addBox(
-				-5, 	//X
-				-2.5F, 	//Y
-				-0.5F,	 	//Z
-				10,					//Size X
-				5,					//Size Y
-				1,			     	//Size Z
-				0.0F			 	//Size Increasement
-			);
-			tankfrontback.setRotationPoint(
-				-7.5F + i*15, 		//X
-				-8.5F,		//Y
-				0 			//Z
-			);
+			tankFrontBack.addBox(
+                -5,             //X
+                -2.5F,          //Y
+                -0.5F,          //Z
+                10,             //Size X
+                5,              //Size Y
+                1,              //Size Z
+                0.0F
+            );
+			tankFrontBack.setRotationPoint(
+                -7.5F + i * 15,         //X
+                -8.5F,                  //Y
+                0                       //Z
+            );
 
-			tankfrontback.rotateAngleY = (float)Math.PI / 2;			
+			tankFrontBack.rotateAngleY = (float)Math.PI / 2;
 		}
 
 
@@ -101,15 +99,12 @@ public class ModelTopTank extends ModelVehicle
 
 
 	@Override
-	public void render(Render render,ModuleBase module, float yaw, float pitch, float roll, float mult, float partialtime)
-    {
-
-
-		super.render(render,module,yaw,pitch,roll, mult, partialtime);
+	public void render(Render render,ModuleBase module, float yaw, float pitch, float roll, float multiplier, float partialTime) {
+		super.render(render,module,yaw,pitch,roll, multiplier, partialTime);
 		if (render != null && module != null) {
 			FluidStack liquid = ((ModuleTank)module).getFluid();
 			if (liquid != null) {
-				((RendererVehicle)render).renderLiquidCuboid(liquid,  ((ModuleTank)module).getCapacity(), 0, open ? -7.25F : -8.5F, 0, 14, open ? 2.5F : 5, 10, mult);
+				((RendererVehicle)render).renderLiquidCuboid(liquid,  ((ModuleTank)module).getCapacity(), 0, open ? -7.25F : -8.5F, 0, 14, open ? 2.5F : 5, 10, multiplier);
 			}
 		}
     }

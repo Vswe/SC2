@@ -6,18 +6,18 @@ import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.common.attachment.ModuleShooterAdvanced;
 
 @SideOnly(Side.CLIENT)
-public class ModelSniperRifle extends ModelGun
-{
-	ModelRenderer anchor;
-	ModelRenderer gun;
-    public ModelSniperRifle()
-	{
+public class ModelSniperRifle extends ModelGun {
+	private ModelRenderer anchor;
+	private ModelRenderer gun;
+
+    public ModelSniperRifle() {
 		anchor = new ModelRenderer(this);
-		AddRenderer(anchor);
+		addRenderer(anchor);
 
 		gun = createGun(anchor);
 	}
 
+    @Override
 	public void applyEffects(ModuleBase module,  float yaw, float pitch, float roll) {	
 		gun.rotateAngleZ = module == null ? 0 : ((ModuleShooterAdvanced)module).getPipeRotation(0);
 		anchor.rotateAngleY = module == null ? 0 : (float)Math.PI + ((ModuleShooterAdvanced)module).getRifleDirection() + yaw;

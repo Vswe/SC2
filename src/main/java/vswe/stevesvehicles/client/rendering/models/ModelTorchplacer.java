@@ -7,36 +7,33 @@ import vswe.stevesvehicles.module.cart.attachment.ModuleTorch;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
-public class ModelTorchplacer extends ModelVehicle
-{
-
-	
-	private static ResourceLocation texture = ResourceHelper.getResource("/models/torchModel.png");
+public class ModelTorchPlacer extends ModelVehicle {
+	private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/models/torchModel.png");
 	
 	@Override
 	public ResourceLocation getResource(ModuleBase module) {
-		return texture;
+		return TEXTURE;
 	}		
 	
-
+    @Override
 	protected int getTextureWidth() {
 		return 32;
 	}
+    @Override
 	protected int getTextureHeight() {
 		return 32;
 	}
 
-	ModelRenderer[] torches1;
-	ModelRenderer[] torches2;
-    public ModelTorchplacer()
-    {
+	private final ModelRenderer[] torches1;
+	private final ModelRenderer[] torches2;
+    public ModelTorchPlacer() {
 		torches1 = createSide(false);
 		torches2 = createSide(true);
     }
 
 	private ModelRenderer[] createSide(boolean opposite) {
 		ModelRenderer anchor = new ModelRenderer(this, 0, 0);
-		AddRenderer(anchor);
+		addRenderer(anchor);
 
 		if (opposite) {
 			anchor.rotateAngleY = (float)Math.PI;
@@ -47,18 +44,18 @@ public class ModelTorchplacer extends ModelVehicle
 		fixSize(base);
 
 		base.addBox(
-			-7, 	//X
-			-2F, 	//Y
-			-1,	 	//Z
-			14,					//Size X
-			4,					//Size Y
-			2,			     	//Size Z
-			0.0F			 	//Size Increasement
+			-7, 	        //X
+			-2F, 	        //Y
+			-1,	 	        //Z
+			14,				//Size X
+			4,				//Size Y
+			2,			    //Size Z
+			0.0F
 		);
 		base.setRotationPoint(
-			0, 		//X
+			0, 		        //X
 			-2F,			//Y
-			-9F			//Z
+			-9F			    //Z
 		);
 
 		ModelRenderer[] torches = new ModelRenderer[3];
@@ -68,17 +65,17 @@ public class ModelTorchplacer extends ModelVehicle
 			fixSize(torchHolder);
 
 			torchHolder.addBox(
-				-1, 	//X
-				-1F, 	//Y
-				-0.5F,	 	//Z
-				2,					//Size X
-				2,					//Size Y
-				1,			     	//Size Z
-				0.0F			 	//Size Increasement
+				-1, 	        //X
+				-1F, 	        //Y
+				-0.5F,	 	    //Z
+				2,				//Size X
+				2,				//Size Y
+				1,			    //Size Z
+				0.0F
 			);
 			torchHolder.setRotationPoint(
-				i * 4, 		//X
-				0F,			//Y
+				i * 4, 		    //X
+				0F,			    //Y
 				-1.5F			//Z
 			);
 
@@ -88,32 +85,30 @@ public class ModelTorchplacer extends ModelVehicle
 			fixSize(torch);
 
 			torch.addBox(
-				-1, 	//X
-				-5F, 	//Y
-				-1F,	 	//Z
-				2,					//Size X
-				10,					//Size Y
-				2,			     	//Size Z
-				0.0F			 	//Size Increasement
+				-1, 	        //X
+				-5F, 	        //Y
+				-1F,	 	    //Z
+				2,				//Size X
+				10,				//Size Y
+				2,			    //Size Z
+				0.0F
 			);
 			torch.setRotationPoint(
-				0, 		//X
-				0F,			//Y
+				0, 		        //X
+				0F,			    //Y
 				-1.5F			//Z
 			);
 		}
 		return torches;
 	}
 
+    @Override
 	public void applyEffects(ModuleBase module,  float yaw, float pitch, float roll) {
-
-		
 		int torches = module == null ? 7 : ((ModuleTorch)module).getTorches();
-		for (int i = 0; i < 3; i++)
-		{
+		for (int i = 0; i < 3; i++) {
 			boolean isTorch = (torches & (1 << i)) != 0;
 			torches1[i].isHidden = !isTorch;
-			torches2[2-i].isHidden = !isTorch;
+			torches2[2 - i].isHidden = !isTorch;
 		}
 	}
 }

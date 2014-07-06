@@ -10,54 +10,48 @@ import vswe.stevesvehicles.module.cart.hull.HullPig;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
-public class ModelPigHelmet extends ModelVehicle
-{
+public class ModelPigHelmet extends ModelVehicle {
 
 	@Override
 	public ResourceLocation getResource(ModuleBase module) {
 		HullPig pig = (HullPig)module;
-		
 
 		return pig.getHelmetResource(isOverlay);	
 	}
 	
 	
-
+    @Override
 	protected int getTextureHeight() {
 		return 32;
 	}
 
-	private boolean isOverlay;
-
-    public ModelPigHelmet(boolean isOverlay)
-    {
+	private final boolean isOverlay;
+    public ModelPigHelmet(boolean isOverlay) {
 		this.isOverlay = isOverlay;
 		
-        ModelRenderer Headwear = new ModelRenderer(this, 0, 0);
-		AddRenderer(Headwear);
+        ModelRenderer helmet = new ModelRenderer(this, 0, 0);
+		addRenderer(helmet);
 		
-        Headwear.addBox(
-			-4.0F, 
-			-4.0F, 
-			-4.0F, 
-			8, 
-			8, 
-			8, 
-			0.0F
-		);
+        helmet.addBox(
+                -4.0F,
+                -4.0F,
+                -4.0F,
+                8,
+                8,
+                8,
+                0.0F
+        );
 		
-        Headwear.setRotationPoint(
-			-12.2F + (isOverlay ? 0.2F : 0F), 
-			-5.4F,
-			0.0F
-		);	
-		Headwear.rotateAngleY = (float)Math.PI / 2;
+        helmet.setRotationPoint(
+                -12.2F + (isOverlay ? 0.2F : 0F),
+                -5.4F,
+                0.0F
+        );
+		helmet.rotateAngleY = (float)Math.PI / 2;
     }
 
 	@Override
-	public void render(Render render,ModuleBase module, float yaw, float pitch, float roll, float mult, float partialtime)
-    {
-
+	public void render(Render render,ModuleBase module, float yaw, float pitch, float roll, float multiplier, float partialTime) {
         if (render == null || module == null) {
 			return;
 		}
@@ -69,8 +63,8 @@ public class ModelPigHelmet extends ModelVehicle
 			return;
 		}
 
-		final float sizemult = 1F + 1F / 16F + 1F / 32F + (isOverlay ? 1F / 48F : 0);
-		GL11.glScalef(sizemult, sizemult, sizemult);
+		final float sizeMultiplier = 1F + 1F / 16F + 1F / 32F + (isOverlay ? 1F / 48F : 0);
+		GL11.glScalef(sizeMultiplier, sizeMultiplier, sizeMultiplier);
 		
 		if (pig.hasHelmetColor(isOverlay)) {
 			int color = pig.getHelmetColor(isOverlay);
@@ -80,9 +74,9 @@ public class ModelPigHelmet extends ModelVehicle
 			GL11.glColor3f(red, green, blue);		
 		}
 		
-		super.render(render,module,yaw,pitch,roll, mult, partialtime);
+		super.render(render,module,yaw,pitch,roll, multiplier, partialTime);
 		GL11.glColor3f(1.0F, 1.0F, 1.0F);
-		GL11.glScalef(1 / sizemult, 1 / sizemult, 1 / sizemult);
+		GL11.glScalef(1 / sizeMultiplier, 1 / sizeMultiplier, 1 / sizeMultiplier);
     }	
 
 }

@@ -6,53 +6,47 @@ import vswe.stevesvehicles.module.ModuleBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
-public class ModelNote extends ModelVehicle
-{
+public class ModelNote extends ModelVehicle {
 
 	
-	private static ResourceLocation texture = ResourceHelper.getResource("/models/noteModel.png");
+	private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/models/noteModel.png");
 	
 	@Override
 	public ResourceLocation getResource(ModuleBase module) {
-		return texture;
+		return TEXTURE;
 	}			
 
+    @Override
 	protected int getTextureHeight() {
 		return 32;
 	}
 
 
-    public ModelNote()
-    {
-
-		AddSpeaker(false);
-		AddSpeaker(true);
+    public ModelNote() {
+		addSpeaker(false);
+		addSpeaker(true);
     }
 
-	private void AddSpeaker(boolean opposite) {
+	private void addSpeaker(boolean opposite) {
 		ModelRenderer noteAnchor = new ModelRenderer(this);
-		AddRenderer(noteAnchor);
-
-		/*if (opposite) {
-			noteAnchor.rotateAngleY = (float)Math.PI;
-		}*/
+		addRenderer(noteAnchor);
 
 		ModelRenderer base = new ModelRenderer(this, 0, 0);
 		fixSize(base);
 		noteAnchor.addChild(base);
 
 		base.addBox(
-			8, 	//X
-			6, 	//Y
-			6F,	 	//Z
-			16,					//Size X
-			12,					//Size Y
-			12,			     	//Size Z
-			0.0F			 	//Size Increasement
+			8, 	        //X
+			6, 	        //Y
+			6F,	 	    //Z
+			16,			//Size X
+			12,			//Size Y
+			12,			//Size Z
+			0.0F
 		);
 		base.setRotationPoint(
-			-16.0F, 		//X
-			-13.5F,			//Y
+			-16.0F, 		                        //X
+			-13.5F,			                        //Y
 			-12 + 14.0F * (opposite ? 1 : -1)		//Z
 		);
 

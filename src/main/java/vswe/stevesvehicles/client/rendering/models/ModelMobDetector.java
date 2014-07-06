@@ -8,38 +8,35 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelMobDetector extends ModelVehicle
-{
-
-
-	private static ResourceLocation texture = ResourceHelper.getResource("/models/mobDetectorModel.png");
+public class ModelMobDetector extends ModelVehicle {
+	private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/models/mobDetectorModel.png");
 	
 	@Override
 	public ResourceLocation getResource(ModuleBase module) {
-		return texture;
+		return TEXTURE;
 	}		
-	
+
+    @Override
 	protected int getTextureHeight() {
 		return 16;
 	}
 
-	ModelRenderer base;
-    public ModelMobDetector()
-    {
+	private ModelRenderer base;
+    public ModelMobDetector() {
 		base = new ModelRenderer(this, 0, 0);
-		AddRenderer(base);
+		addRenderer(base);
 
 		base.addBox(
-			-1, 	//X
-			-2F, 	//Y
-			-1,	 	//Z
-			2,					//Size X
-			4,					//Size Y
-			2,			     	//Size Z
-			0.0F			 	//Size Increasement
+			-1, 	        //X
+			-2F, 	        //Y
+			-1,	 	        //Z
+			2,				//Size X
+			4,				//Size Y
+			2,			    //Size Z
+			0.0F
 		);
 		base.setRotationPoint(
-			0.0F, 		//X
+			0.0F, 		    //X
 			-14F,			//Y
 			-0.0F			//Z
 		);
@@ -49,19 +46,19 @@ public class ModelMobDetector extends ModelVehicle
 		fixSize(body);
 
 		body.addBox(
-			-2.5F, 	//X
-			-1.5F, 	//Y
-			-0.5F,	 	//Z
-			5,					//Size X
-			3,					//Size Y
-			1,			     	//Size Z
-			0.0F			 	//Size Increasement
+			-2.5F, 	        //X
+			-1.5F, 	        //Y
+			-0.5F,	 	    //Z
+			5,				//Size X
+			3,				//Size Y
+			1,			    //Size Z
+			0.0F
 		);
 		body.setRotationPoint(
-			0.0F, 		//X
-			-1.5F,			//Y
-			-1.5F			//Z
-		);
+                0.0F,            //X
+                -1.5F,            //Y
+                -1.5F            //Z
+        );
 
 		for (int i = 0; i < 2; i++) {
 			ModelRenderer side = new ModelRenderer(this, 0, 13);
@@ -69,18 +66,18 @@ public class ModelMobDetector extends ModelVehicle
 			fixSize(side);
 
 			side.addBox(
-				-2.5F, 	//X
-				-0.5F, 	//Y
-				-0.5F,	 	//Z
-				5,					//Size X
-				1,					//Size Y
-				1,			     	//Size Z
-				0.0F			 	//Size Increasement
+				-2.5F, 	        //X
+				-0.5F, 	        //Y
+				-0.5F,	 	    //Z
+				5,				//Size X
+				1,				//Size Y
+				1,			    //Size Z
+				0.0F
 			);
 			side.setRotationPoint(
-				0.0F, 		//X
-				2F * (i * 2 - 1),			//Y
-				-1F			//Z
+				0.0F, 		        //X
+				2F * (i * 2 - 1),	//Y
+				-1F			        //Z
 			);
 		}
 
@@ -90,18 +87,18 @@ public class ModelMobDetector extends ModelVehicle
 			fixSize(side);
 
 			side.addBox(
-				-1.5F, 	//X
-				-0.5F, 	//Y
-				-0.5F,	 	//Z
-				3,					//Size X
-				1,					//Size Y
-				1,			     	//Size Z
-				0.0F			 	//Size Increasement
+				-1.5F, 	        //X
+				-0.5F, 	        //Y
+				-0.5F,	 	    //Z
+				3,				//Size X
+				1,				//Size Y
+				1,			    //Size Z
+				0.0F
 			);
 			side.setRotationPoint(
 				3F * (i * 2 - 1), 		//X
-				0,			//Y
-				-1F			//Z
+				0,			            //Y
+				-1F			            //Z
 			);
 
 			side.rotateAngleZ = (float)(Math.PI / 2);
@@ -112,16 +109,16 @@ public class ModelMobDetector extends ModelVehicle
 		fixSize(receiver);
 
 		receiver.addBox(
-			-0.5F, 	//X
-			-0.5F, 	//Y
-			-0.5F,	 	//Z
-			1,					//Size X
-			1,					//Size Y
-			1,			     	//Size Z
-			0.0F			 	//Size Increasement
+			-0.5F, 	        //X
+			-0.5F, 	        //Y
+			-0.5F,	 	    //Z
+			1,				//Size X
+			1,				//Size Y
+			1,			    //Size Z
+			0.0F
 		);
 		receiver.setRotationPoint(
-			0, 		//X
+			0, 		    //X
 			0,			//Y
 			-1F			//Z
 		);
@@ -133,21 +130,22 @@ public class ModelMobDetector extends ModelVehicle
 		fixSize(dot);
 
 		dot.addBox(
-			-0.5F, 	//X
-			-0.5F, 	//Y
-			-0.5F,	 	//Z
-			1,					//Size X
-			1,					//Size Y
-			1,			     	//Size Z
-			0.0F			 	//Size Increasement
+			-0.5F, 	        //X
+			-0.5F, 	        //Y
+			-0.5F,	 	    //Z
+			1,				//Size X
+			1,				//Size Y
+			1,			    //Size Z
+			0.0F
 		);
 		dot.setRotationPoint(
-			0, 		//X
-			0,			//Y
-			-2F			//Z
+			0, 		        //X
+			0,			    //Y
+			-2F			    //Z
 		);
     }
 
+    @Override
 	public void applyEffects(ModuleBase module,  float yaw, float pitch, float roll) {
 		base.rotateAngleY = module == null ? 0 : ((ModuleShooterAdvanced)module).getDetectorAngle() + yaw;
 	}

@@ -9,30 +9,30 @@ import vswe.stevesvehicles.module.common.engine.ModuleSolarTop;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
-public class ModelSolarPanelHeads extends ModelSolarPanel
-{
-	private static ResourceLocation texture = ResourceHelper.getResource("/models/panelModelActive.png");
-	private static ResourceLocation texture2 = ResourceHelper.getResource("/models/panelModelIdle.png");
+public class ModelSolarPanelHeads extends ModelSolarPanel {
+	private static final ResourceLocation TEXTURE_ACTIVE = ResourceHelper.getResource("/models/panelModelActive.png");
+	private static final ResourceLocation TEXTURE_IDLE = ResourceHelper.getResource("/models/panelModelIdle.png");
 	
 	@Override
 	public ResourceLocation getResource(ModuleBase module) {
 		if (module != null && ((ModuleSolarTop)module).getLight() == 15) {
-			return texture;
+			return TEXTURE_ACTIVE;
 		}else{
-			return texture2;
+			return TEXTURE_IDLE;
 		}
 	}		
 
+    @Override
 	protected int getTextureWidth() {
 		return 32;
 	}
 
+    @Override
 	protected int getTextureHeight() {
 		return 16;
 	}
 
-    public ModelSolarPanelHeads(int panelCount)
-    {
+    public ModelSolarPanelHeads(int panelCount) {
 		panels = new ArrayList<ModelRenderer>();
 
 		ModelRenderer moving = createMovingHolder(0,0);
@@ -75,19 +75,19 @@ public class ModelSolarPanelHeads extends ModelSolarPanel
 		base.addChild(panel);
 
 		panel.addBox(
-			-6F, 	//X
-			0, 	//Y
-			-2,	 	//Z
-			12,					//Size X
-			13,					//Size Y
-			2,			     	//Size Z
-			0.0F			 	//Size Increasement
+			-6F, 	        //X
+			0, 	            //Y
+			-2,	 	        //Z
+			12,				//Size X
+			13,				//Size Y
+			2,			    //Size Z
+			0.0F
 		);
 
 		panel.setRotationPoint(
 			(float)Math.sin(rotation) * f, 		//X
-			-5F,			//Y
-			(float)Math.cos(rotation) * f			//Z
+			-5F,			                    //Y
+			(float)Math.cos(rotation) * f		//Z
 		);
 
 		panel.rotateAngleY = rotation;
@@ -95,7 +95,8 @@ public class ModelSolarPanelHeads extends ModelSolarPanel
 		panels.add(panel);
 	}
 
-	ArrayList<ModelRenderer> panels;
+	private ArrayList<ModelRenderer> panels;
+    @Override
 	public void applyEffects(ModuleBase module,  float yaw, float pitch, float roll) {
 		super.applyEffects(module,yaw,pitch,roll);
 
@@ -103,6 +104,5 @@ public class ModelSolarPanelHeads extends ModelSolarPanel
 		for (ModelRenderer panel : panels) {
 			panel.rotateAngleX = module == null ? 0F : -((ModuleSolarTop)module).getInnerRotation();
 		}
-		
 	}
 }

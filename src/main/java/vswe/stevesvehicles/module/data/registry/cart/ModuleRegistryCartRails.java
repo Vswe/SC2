@@ -7,7 +7,7 @@ import net.minecraft.init.Items;
 import vswe.stevesvehicles.client.rendering.models.ModelBridge;
 import vswe.stevesvehicles.client.rendering.models.ModelRailer;
 import vswe.stevesvehicles.client.rendering.models.ModelToolPlate;
-import vswe.stevesvehicles.client.rendering.models.ModelTorchplacer;
+import vswe.stevesvehicles.client.rendering.models.ModelTorchPlacer;
 import vswe.stevesvehicles.client.rendering.models.ModelTrackRemover;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
@@ -65,7 +65,7 @@ public class ModuleRegistryCartRails extends ModuleRegistry {
             @Override
             @SideOnly(Side.CLIENT)
             public void loadModels() {
-                addModel("Torch", new ModelTorchplacer());
+                addModel("Torch", new ModelTorchPlacer());
             }
         };
 

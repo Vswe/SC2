@@ -7,27 +7,23 @@ import vswe.stevesvehicles.module.common.storage.chest.ModuleChest;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
-public class ModelTopChest extends ModelVehicle
-{
-
-
-	private static ResourceLocation texture = ResourceHelper.getResource("/models/topChestModel.png");
+public class ModelTopChest extends ModelVehicle {
+	private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/models/topChestModel.png");
 	
 	@Override
 	public ResourceLocation getResource(ModuleBase module) {
-		return texture;
+		return TEXTURE;
 	}		
 	
-	ModelRenderer lid;
+	 private final ModelRenderer lid;
 
-    public ModelTopChest()
-    {
-		lid = AddChest();
+    public ModelTopChest() {
+		lid = addChest();
     }
 
-	private ModelRenderer AddChest() {
+	private ModelRenderer addChest() {
 		ModelRenderer chestAnchor = new ModelRenderer(this);
-		AddRenderer(chestAnchor);
+		addRenderer(chestAnchor);
 
 		chestAnchor.rotateAngleY = (float)Math.PI * 3F / 2;
 		chestAnchor.setRotationPoint(
@@ -41,13 +37,13 @@ public class ModelTopChest extends ModelVehicle
 		chestAnchor.addChild(base);
 
 		base.addBox(
-			6, 	//X
-			2, 	//Y
-			8F,	 	//Z
-			12,					//Size X
-			4,					//Size Y
-			16,			     	//Size Z
-			0.0F			 	//Size Increasement
+			6, 	        //X
+			2, 	        //Y
+			8F,	 	    //Z
+			12,			//Size X
+			4,			//Size Y
+			16,			//Size Z
+			0.0F
 		);
 		base.setRotationPoint(
 			-14.0F, 		//X
@@ -60,13 +56,13 @@ public class ModelTopChest extends ModelVehicle
 		chestAnchor.addChild(lid);
 
 		lid.addBox(
-			6, 	//X
-			-3, 	//Y
-			-16F,	 	//Z
-			12,					//Size X
-			3,					//Size Y
-			16,			     	//Size Z
-			0.0F			 	//Size Increasement
+			6, 	            //X
+			-3, 	        //Y
+			-16F,	 	    //Z
+			12,				//Size X
+			3,				//Size Y
+			16,			    //Size Z
+			0.0F
 		);
 		lid.setRotationPoint(
 			-14.0F, 		//X
@@ -79,16 +75,16 @@ public class ModelTopChest extends ModelVehicle
 		lid.addChild(lock);
 
 		lock.addBox(
-			1F, 	//X
-			1.5F, 	//Y
-			0.5F,	 	//Z
-			2,					//Size X
-			3,					//Size Y
-			1,			     	//Size Z
-			0.0F			 	//Size Increasement
+			1F, 	        //X
+			1.5F, 	        //Y
+			0.5F,	 	    //Z
+			2,				//Size X
+			3,				//Size Y
+			1,			    //Size Z
+			0.0F
 		);
 		lock.setRotationPoint(
-			10.0F, 		//X
+			10.0F, 		    //X
 			-3F,			//Y
 			-17.5F			//Z
 		);
@@ -96,6 +92,7 @@ public class ModelTopChest extends ModelVehicle
 		return lid;
 	}
 
+    @Override
 	public void applyEffects(ModuleBase module,  float yaw, float pitch, float roll) {
 		lid.rotateAngleX = module == null ? 0 : -((ModuleChest)module).getChestAngle();
 	}

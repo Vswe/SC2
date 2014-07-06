@@ -7,26 +7,21 @@ import vswe.stevesvehicles.module.common.storage.chest.ModuleExtractingChests;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
-public class ModelExtractingChests extends ModelVehicle
-{
+public class ModelExtractingChests extends ModelVehicle {
 	
-	private static ResourceLocation texture = ResourceHelper.getResource("/models/codeSideChestsModel.png");
+	private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/models/codeSideChestsModel.png");
 	
 	@Override
 	public ResourceLocation getResource(ModuleBase module) {
-		return texture;
+		return TEXTURE;
 	}		
-	
-	
 
-	ModelRenderer lid1;
-	ModelRenderer lid2;
-	ModelRenderer base1;
-	ModelRenderer base2;
+	private ModelRenderer lid1;
+    private ModelRenderer lid2;
+    private ModelRenderer base1;
+    private ModelRenderer base2;
 
-    public ModelExtractingChests()
-    {
-
+    public ModelExtractingChests() {
 		ModelRenderer[] temp = AddChest(false);
 		base1 = temp[0];
 		lid1 = temp[1];
@@ -37,7 +32,7 @@ public class ModelExtractingChests extends ModelVehicle
 
 	private ModelRenderer[] AddChest(boolean opposite) {
 		ModelRenderer chestAnchor = new ModelRenderer(this);
-		AddRenderer(chestAnchor);
+		addRenderer(chestAnchor);
 
 		if (opposite) {
 			chestAnchor.rotateAngleY = (float)Math.PI;
@@ -48,13 +43,13 @@ public class ModelExtractingChests extends ModelVehicle
 		chestAnchor.addChild(base);
 
 		base.addBox(
-			8, 	//X
-			3, 	//Y
-			2F,	 	//Z
-			16,					//Size X
-			6,					//Size Y
-			14,			     	//Size Z
-			0.0F			 	//Size Increasement
+			8, 	        //X
+			3, 	        //Y
+			2F,	 	    //Z
+			16,			//Size X
+			6,			//Size Y
+			14,			//Size Z
+			0.0F
 		);
 		base.setRotationPoint(
 			-16.0F, 		//X
@@ -67,17 +62,17 @@ public class ModelExtractingChests extends ModelVehicle
 		chestAnchor.addChild(lid);
 
 		lid.addBox(
-			8, 	//X
-			-3, 	//Y
+			8, 	        //X
+			-3, 	    //Y
 			-14F,	 	//Z
-			16,					//Size X
-			3,					//Size Y
-			14,			     	//Size Z
-			0.0F			 	//Size Increasement
+			16,			//Size X
+			3,			//Size Y
+			14,			//Size Z
+			0.0F
 		);
 		lid.setRotationPoint(
-			-16.0F, 		//X
-			-1.5F,			//Y
+			-16.0F, 	//X
+			-1.5F,		//Y
 			2F			//Z
 		);
 
@@ -86,23 +81,24 @@ public class ModelExtractingChests extends ModelVehicle
 		lid.addChild(lock);
 
 		lock.addBox(
-			1F, 	//X
-			1.5F, 	//Y
+			1F, 	    //X
+			1.5F, 	    //Y
 			0.5F,	 	//Z
-			2,					//Size X
-			3,					//Size Y
-			1,			     	//Size Z
-			0.0F			 	//Size Increasement
+			2,			//Size X
+			3,			//Size Y
+			1,			//Size Z
+			0.0F
 		);
 		lock.setRotationPoint(
 			14.0F, 		//X
-			-3F,			//Y
-			-15.5F			//Z
+			-3F,		//Y
+			-15.5F		//Z
 		);
 
-		return new ModelRenderer[] {base,lid};
+		return new ModelRenderer[] {base, lid};
 	}
 
+    @Override
 	public void applyEffects(ModuleBase module,  float yaw, float pitch, float roll) {
 		if (module == null) {
 			lid1.rotateAngleX = 0;
@@ -112,7 +108,6 @@ public class ModelExtractingChests extends ModelVehicle
 			base1.rotationPointZ = -14;
 			base2.rotationPointZ = -14;			
 		}else{
-		
 			ModuleExtractingChests chest = (ModuleExtractingChests)module;
 
 			lid1.rotateAngleX = -chest.getChestAngle();

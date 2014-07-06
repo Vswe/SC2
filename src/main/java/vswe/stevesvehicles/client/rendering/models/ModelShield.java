@@ -8,67 +8,65 @@ import vswe.stevesvehicles.module.common.addon.ModuleShield;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
-public class ModelShield extends ModelVehicle
-{
+public class ModelShield extends ModelVehicle {
 
-	private static ResourceLocation texture = ResourceHelper.getResource("/models/shieldModel.png");
+	private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/models/shieldModel.png");
 	
 	@Override
 	public ResourceLocation getResource(ModuleBase module) {
-		return texture;
+		return TEXTURE;
 	}		
 
-
+    @Override
 	protected int getTextureWidth() {
 		return 8;
 	}
+    @Override
 	protected int getTextureHeight() {
 		return 4;
 	}
 
-	private ModelRenderer[][] shieldAnchors;
-	private ModelRenderer[][] shields;
+	private final ModelRenderer[][] shieldAnchors;
+	private final ModelRenderer[][] shields;
 
-    public ModelShield()
-    {
-
+    public ModelShield() {
 		shields = new ModelRenderer[4][5];
 		shieldAnchors = new ModelRenderer[shields.length][shields[0].length];
 		for (int i = 0; i < shields.length; i++) {
 			for (int j = 0; j < shields[i].length; j++) {
 				shieldAnchors[i][j] = new ModelRenderer(this);
-				AddRenderer(shieldAnchors[i][j]);
+				addRenderer(shieldAnchors[i][j]);
 
 				shields[i][j] = new ModelRenderer(this, 0, 0);
 				fixSize(shields[i][j]);
 				shieldAnchors[i][j].addChild(shields[i][j] );
 
 				shields[i][j].addBox(
-					-1F, //X
-					-1F,	 //Y
-					-1F, 			 //Z
-					2,		 //Size X
-					2,		 //Size Y
-					2,			     //Size Z
-					0.0F			 //Size Increasement
+					-1F,        //X
+					-1F,	    //Y
+					-1F, 		//Z
+					2,		    //Size X
+					2,		    //Size Y
+					2,			//Size Z
+					0.0F
 				);
 				shields[i][j].setRotationPoint(
-					0.0F, 			//X
-					0,	//Y
-					0.0F			//Z
+					0, 			//X
+					0,	        //Y
+					0			//Z
 				);
 			}
 		}
     }
 
-    public void render(Render render,ModuleBase module, float yaw, float pitch, float roll, float mult, float partialtime)
-    {
-
+    @Override
+    public void render(Render render,ModuleBase module, float yaw, float pitch, float roll, float multiplier, float partialTime) {
 		if (render == null || module == null || ((ModuleShield)module).hasShield()) {
-			super.render(render,module,yaw,pitch,roll,mult, partialtime);
+			super.render(render,module,yaw,pitch,roll, multiplier, partialTime);
 		}
     }
 
+    @Override
 	public void applyEffects(ModuleBase module,  float yaw, float pitch, float roll) {
 		float shieldAngle = module == null ? 0 : ((ModuleShield)module).getShieldAngle();
 		float shieldDistance = module == null ? 18 : ((ModuleShield)module).getShieldDistance();

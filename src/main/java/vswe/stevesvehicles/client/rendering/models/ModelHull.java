@@ -9,23 +9,21 @@ import vswe.stevesvehicles.module.ModuleBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
-public class ModelHull extends ModelVehicle
-{
+public class ModelHull extends ModelVehicle {
 	@Override
 	public ResourceLocation getResource(ModuleBase module) {
 		return resource;
 	}
-	
+
+    @Override
 	protected int getTextureHeight() {
 		return 32;
 	}
 
-	private ResourceLocation resource;
+	private final ResourceLocation resource;
 	
 	
-    public ModelHull(ResourceLocation resource)
-    {
-		super();
+    public ModelHull(ResourceLocation resource) {
 		this.resource = resource;
 
         ModelRenderer bot = new ModelRenderer(this, 0, 0);
@@ -34,26 +32,25 @@ public class ModelHull extends ModelVehicle
         ModelRenderer right = new ModelRenderer(this, 0, 18);		
         ModelRenderer back = new ModelRenderer(this, 0, 18);
 
-		
-		AddRenderer(bot);
-		AddRenderer(front);
-		AddRenderer(left);
-		AddRenderer(right);
-		AddRenderer(back);
+		addRenderer(bot);
+		addRenderer(front);
+		addRenderer(left);
+		addRenderer(right);
+		addRenderer(back);
 		
         bot.addBox(
-			-cartLength / 2, //X
-			-cartWidth / 2,	 //Y
-			-1.0F, 			 //Z
-			cartLength,		 //Size X
-			cartWidth,		 //Size Y
-			2,			     //Size Z
-			0.0F			 //Size Increasement
+			-cartLength / 2,    //X
+			-cartWidth / 2,	    //Y
+			-1.0F, 			    //Z
+			cartLength,		    //Size X
+			cartWidth,		    //Size Y
+			2,			        //Size Z
+			0.0F
 		);
         bot.setRotationPoint(
-			0.0F, 			//X
-			cartOnGround,	//Y
-			0.0F			//Z
+			0.0F, 			    //X
+			cartOnGround,	    //Y
+			0.0F			    //Z
 		);
 
         front.addBox(
@@ -63,7 +60,7 @@ public class ModelHull extends ModelVehicle
 			cartWidth, 				//Size X
 			cartHeight,				//Size Y
 			2,						//Size Z
-			0.0F					//Size Increasement
+			0.0F
 		);
         front.setRotationPoint(
 			-cartLength / 2 + 1,	//X
@@ -78,7 +75,7 @@ public class ModelHull extends ModelVehicle
 			cartLength - 4,			//Size X
 			cartHeight,				//Size Y
 			2,						//Size Z
-			0.0F					//Size Increasement
+			0.0F
 		);
         left.setRotationPoint(
 			0.0F,					//X
@@ -93,7 +90,7 @@ public class ModelHull extends ModelVehicle
 			cartLength - 4,			//Size X
 			cartHeight,				//Size Y
 			2,						//Size Z
-			0.0F					//Size Increasement
+			0.0F
 		);
         right.setRotationPoint(
 			0.0F, 					//X
@@ -108,7 +105,7 @@ public class ModelHull extends ModelVehicle
 			cartWidth , 			//Size X
 			cartHeight,				//Size Y
 			2,						//Size Z
-			0.0F					//Size Increasement
+			0.0F
 		);
         back.setRotationPoint(
 			cartLength / 2 - 1, 	//X
@@ -121,20 +118,15 @@ public class ModelHull extends ModelVehicle
         left.rotateAngleY = (float)Math.PI;
 		back.rotateAngleY = ((float)Math.PI / 2F);	
 
-
-
-
-	
-		
     }
-	
-	public void render(Render render, ModuleBase module, float yaw, float pitch, float roll, float mult, float partialtime)
-    {
+
+    @Override
+	public void render(Render render, ModuleBase module, float yaw, float pitch, float roll, float multiplier, float partialTime) {
 		if (module != null) {
 			float[] color = module.getVehicle().getColor();
 			GL11.glColor4f(color[0], color[1], color[2], 1.0F);
 		}
-		super.render(render, module,yaw,pitch,roll, mult, partialtime);
+		super.render(render, module,yaw,pitch,roll, multiplier, partialTime);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
     }	
 }

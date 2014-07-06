@@ -11,8 +11,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public abstract class ModelVehicle extends ModelBase
-{
+public abstract class ModelVehicle extends ModelBase {
 	//Compared to the center of the cart(before the object has been rotated)
 	//X > 0 Back
 	//X < 0 Forward
@@ -23,7 +22,6 @@ public abstract class ModelVehicle extends ModelBase
 
 	//{0,0,0} is in the middle of the floor of the cart
 	//positive size means that the opposing corner of the object has a higher x/y/z value
-
 
 
 	protected final byte cartLength = 20;
@@ -38,39 +36,34 @@ public abstract class ModelVehicle extends ModelBase
 	
 	private ArrayList<ModelRenderer> renderers;
 	
-    public ModelVehicle()
-    {
+    public ModelVehicle() {
 		renderers = new ArrayList<ModelRenderer>();
 	}
 
 
 
 
-    public void render(Render render, ModuleBase module, float yaw, float pitch, float roll, float mult, float partialtime)
-    {
+    public void render(Render render, ModuleBase module, float yaw, float pitch, float roll, float multiplier, float partialTime) {
 		
 		ResourceLocation resource = getResource(module);
 		if (resource == null) {
 			return;
 		}
-		
-		//render.loadTexture(StevesCarts.instance.texturePath + "/" + modelTexture(engine));
-		//net.minecraftforge.client.ForgeHooksClient.engine().func_98187_b(texture);
-		//net.minecraft.client.Minecraft.getMinecraft().renderEngine.bindTexture(texture);
+
 		ResourceHelper.bindResource(resource);
 		
-		applyEffects( module, yaw,pitch,roll, partialtime);
-		do_render(mult);
+		applyEffects( module, yaw,pitch,roll, partialTime);
+		do_render(multiplier);
     }
 	
 	
-    public void applyEffects(ModuleBase module,  float yaw, float pitch, float roll, float partialtime) {
+    public void applyEffects(ModuleBase module,  float yaw, float pitch, float roll, float partialTime) {
     	applyEffects(module, yaw, pitch, roll);
     }
 	public void applyEffects(ModuleBase module,  float yaw, float pitch, float roll) {}
 	
 	//has to be called before anything is added to the renderer
-	protected void AddRenderer(ModelRenderer renderer) {
+	protected void addRenderer(ModelRenderer renderer) {
 		renderers.add(fixSize(renderer));
 	}
 
@@ -87,13 +80,13 @@ public abstract class ModelVehicle extends ModelBase
 		return 64;
 	}
 
-	public float extraMult() {
+	public float extraMultiplier() {
 		return 1F;
 	}
 	
-	protected void do_render(float mult) {
+	protected void do_render(float multiplier) {
 		for (ModelRenderer renderer : renderers) {
-			renderer.render(mult*extraMult());
+			renderer.render(multiplier * extraMultiplier());
 		}
 	}
 }

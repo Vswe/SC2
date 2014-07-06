@@ -7,31 +7,32 @@ import vswe.stevesvehicles.module.cart.attachment.ModuleRailer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
-public class ModelRailer extends ModelVehicle
-{
+public class ModelRailer extends ModelVehicle {
 	
-	private static ResourceLocation texture = ResourceHelper.getResource("/models/builderModel.png");
+	private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/models/builderModel.png");
 	
 	@Override
 	public ResourceLocation getResource(ModuleBase module) {
-		return texture;
+		return TEXTURE;
 	}	
 
+    @Override
 	protected int getTextureWidth() {
 		return 32;
 	}
+    @Override
 	protected int getTextureHeight() {
 		return 32;
 	}
 
-	private ModelRenderer[] rails;
+	private final ModelRenderer[] rails;
 
-    public ModelRailer(int railCount)
-    {
+    public ModelRailer(int railCount) {
 		rails = new ModelRenderer[railCount];
+
 		for (int r = 0; r < rails.length; r++) {
 			ModelRenderer railAnchor = new ModelRenderer(this);
-			AddRenderer(railAnchor);
+			addRenderer(railAnchor);
 			rails[r] = railAnchor;
 
 			railAnchor.setRotationPoint(
@@ -47,17 +48,17 @@ public class ModelRailer extends ModelVehicle
 			railAnchor.addChild(rail1);
 
 			rail1.addBox(
-				1F, 	//X
-				8, 	//Y
+				1F, 	    //X
+				8, 	        //Y
 				0.5F,	 	//Z
-				2,					//Size X
-				16,					//Size Y
-				1,			     	//Size Z
-				0.0F			 	//Size Increasement
+				2,			//Size X
+				16,			//Size Y
+				1,			//Size Z
+				0.0F
 			);
 			rail1.setRotationPoint(
-				-16.0F, 			//X
-				-6.5F,	//Y
+				-16.0F, 		//X
+				-6.5F,	        //Y
 				-7.0F			//Z
 			);
 
@@ -69,17 +70,17 @@ public class ModelRailer extends ModelVehicle
 			railAnchor.addChild(rail2);
 
 			rail2.addBox(
-				1F, 	//X
-				8, 	//Y
+				1F, 	    //X
+				8, 	        //Y
 				0.5F,	 	//Z
-				2,					//Size X
-				16,					//Size Y
-				1,			     	//Size Z
-				0.0F			 	//Size Increasement
+				2,			//Size X
+				16,			//Size Y
+				1,			//Size Z
+				0.0F
 			);
 			rail2.setRotationPoint(
-				-16.0F, 			//X
-				-6.5F,	//Y
+				-16.0F, 		//X
+				-6.5F,	        //Y
 				3.0F			//Z
 			);
 
@@ -87,78 +88,78 @@ public class ModelRailer extends ModelVehicle
 			rail2.rotateAngleY = ((float)Math.PI * 3F / 2F);
 
 			for (int i = 0; i < 4; i++) {
-				ModelRenderer railbedMiddle = new ModelRenderer(this, 0, 0);
-				fixSize(railbedMiddle);
-				railAnchor.addChild(railbedMiddle);
+				ModelRenderer railBedMiddle = new ModelRenderer(this, 0, 0);
+				fixSize(railBedMiddle);
+				railAnchor.addChild(railBedMiddle);
 
-				railbedMiddle.addBox(
-					4F, 	//X
-					1, 	//Y
-					0.5F,	 	//Z
-					8,					//Size X
-					2,					//Size Y
-					1,			     	//Size Z
-					0.0F			 	//Size Increasement
-				);
-				railbedMiddle.setRotationPoint(
-					-8.0F+i*4, 			//X
-					-6.5F,	//Y
-					-8.0F			//Z
-				);
+				railBedMiddle.addBox(
+                    4F,         //X
+                    1,          //Y
+                    0.5F,       //Z
+                    8,          //Size X
+                    2,          //Size Y
+                    1,          //Size Z
+                    0.0F
+                );
+				railBedMiddle.setRotationPoint(
+                    -8.0F + i * 4,      //X
+                    -6.5F,              //Y
+                    -8.0F               //Z
+                );
 
-				railbedMiddle.rotateAngleZ = ((float)Math.PI * 3F / 2F);
-				railbedMiddle.rotateAngleY = ((float)Math.PI * 3F / 2F);
+				railBedMiddle.rotateAngleZ = ((float)Math.PI * 3F / 2F);
+				railBedMiddle.rotateAngleY = ((float)Math.PI * 3F / 2F);
 
-				ModelRenderer railbedSide1 = new ModelRenderer(this, 0, 3);
-				fixSize(railbedSide1);
-				railAnchor.addChild(railbedSide1);
+				ModelRenderer railBedSide1 = new ModelRenderer(this, 0, 3);
+				fixSize(railBedSide1);
+				railAnchor.addChild(railBedSide1);
 
-				railbedSide1.addBox(
-					0.5F, 	//X
-					1, 	//Y
-					0.5F,	 	//Z
-					1,					//Size X
-					2,					//Size Y
-					1,			     	//Size Z
-					0.0F			 	//Size Increasement
-				);
-				railbedSide1.setRotationPoint(
-					-8.0F+i*4, 			//X
-					-6.5F,	//Y
-					-7.5F			//Z
-				);
+				railBedSide1.addBox(
+                    0.5F,           //X
+                    1,              //Y
+                    0.5F,           //Z
+                    1,              //Size X
+                    2,              //Size Y
+                    1,              //Size Z
+                    0.0F
+                );
+				railBedSide1.setRotationPoint(
+                    -8.0F + i * 4,      //X
+                    -6.5F,              //Y
+                    -7.5F               //Z
+                );
 
-				railbedSide1.rotateAngleZ = ((float)Math.PI * 3F / 2F);
-				railbedSide1.rotateAngleY = ((float)Math.PI * 3F / 2F);
+				railBedSide1.rotateAngleZ = ((float)Math.PI * 3F / 2F);
+				railBedSide1.rotateAngleY = ((float)Math.PI * 3F / 2F);
 
-				ModelRenderer railbedSide2 = new ModelRenderer(this, 0, 3);
-				fixSize(railbedSide2);
-				railAnchor.addChild(railbedSide2);
+				ModelRenderer railBedSide2 = new ModelRenderer(this, 0, 3);
+				fixSize(railBedSide2);
+				railAnchor.addChild(railBedSide2);
 
-				railbedSide2.addBox(
-					0.5F, 	//X
-					1, 	//Y
-					0.5F,	 	//Z
-					1,					//Size X
-					2,					//Size Y
-					1,			     	//Size Z
-					0.0F			 	//Size Increasement
-				);
-				railbedSide2.setRotationPoint(
-					-8.0F+i*4, 			//X
-					-6.5F,	//Y
-					5.5F			//Z
-				);
+				railBedSide2.addBox(
+                    0.5F,           //X
+                    1,              //Y
+                    0.5F,           //Z
+                    1,              //Size X
+                    2,              //Size Y
+                    1,              //Size Z
+                    0.0F
+                );
+				railBedSide2.setRotationPoint(
+                    -8.0F + i * 4,      //X
+                    -6.5F,              //Y
+                    5.5F                //Z
+                );
 
-				railbedSide2.rotateAngleZ = ((float)Math.PI * 3F / 2F);
-				railbedSide2.rotateAngleY = ((float)Math.PI * 3F / 2F);
+				railBedSide2.rotateAngleZ = ((float)Math.PI * 3F / 2F);
+				railBedSide2.rotateAngleY = ((float)Math.PI * 3F / 2F);
 			}
 		}
     }
 
+    @Override
 	public void applyEffects(ModuleBase module,  float yaw, float pitch, float roll) {
 		int valid = module == null ? 1 : ((ModuleRailer)module).getRails();
-	
 
 		for (int i = 0; i < rails.length; i++) {
 			rails[i].rotateAngleY = module == null ? 0 : ((ModuleRailer)module).getRailAngle(i);

@@ -8,16 +8,15 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelEngineInside extends ModelEngineBase
-{
+public class ModelEngineInside extends ModelEngineBase {
 	
 	
-	private static ResourceLocation[] textures;
+	private static final ResourceLocation[] TEXTURES;
 	static {
-		textures = new ResourceLocation[5];
-		textures[0] = ResourceHelper.getResource("/models/engineModelBack.png");
-		for (int i = 1; i < textures.length; i++) {
-			textures[i] = ResourceHelper.getResource("/models/engineModelFire" + i + ".png");	
+		TEXTURES = new ResourceLocation[5];
+		TEXTURES[0] = ResourceHelper.getResource("/models/engineModelBack.png");
+		for (int i = 1; i < TEXTURES.length; i++) {
+			TEXTURES[i] = ResourceHelper.getResource("/models/engineModelFire" + i + ".png");
 		}
 	}
 	
@@ -25,36 +24,35 @@ public class ModelEngineInside extends ModelEngineBase
 	@Override
 	public ResourceLocation getResource(ModuleBase module) {
 		int index = module == null ? 0 : ((ModuleCoalBase)module).getFireIndex();
-		return textures[index];
+		return TEXTURES[index];
 	}
 	
 	
-
+    @Override
 	protected int getTextureWidth() {
 		return 8;
 	}
+    @Override
 	protected int getTextureHeight() {
 		return 4;
 	}
 
-    public ModelEngineInside()
-    {
-
+    public ModelEngineInside() {
 		ModelRenderer back = new ModelRenderer(this, 0, 0);
 		anchor.addChild(back);
 		fixSize(back);
 
 		back.addBox(
-			-3.5F, 	//X
-			-2F, 	//Y
-			0.0F,	 	//Z
-			7,					//Size X
-			4,					//Size Y
-			0,			     	//Size Z
-			0.0F			 	//Size Increasement
+			-3.5F, 	        //X
+			-2F, 	        //Y
+			0.0F,	 	    //Z
+			7,				//Size X
+			4,				//Size Y
+			0,			    //Size Z
+			0.0F
 		);
 		back.setRotationPoint(
-			0, 		//X
+			0, 		        //X
 			-0.5F,			//Y
 			0.3F			//Z
 		);	

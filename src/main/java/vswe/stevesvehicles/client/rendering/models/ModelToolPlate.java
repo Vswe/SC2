@@ -6,30 +6,26 @@ import vswe.stevesvehicles.module.ModuleBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
-public class ModelToolPlate extends ModelVehicle
-{
+public class ModelToolPlate extends ModelVehicle {
+	private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/models/toolPlateModel.png");
 
-
-	private static ResourceLocation texture = ResourceHelper.getResource("/models/toolPlateModel.png");
-	
 	@Override
 	public ResourceLocation getResource(ModuleBase module) {
-		return texture;
+		return TEXTURE;
 	}		
-	
+
+    @Override
 	protected int getTextureWidth() {
 		return 32;
 	}
+    @Override
 	protected int getTextureHeight() {
 		return 8;
 	}
 
-    public ModelToolPlate()
-    {
-		super();
-
+    public ModelToolPlate() {
 		ModelRenderer drillBase = new ModelRenderer(this, 0, 0);
-		AddRenderer(drillBase);
+		addRenderer(drillBase);
 
         drillBase.addBox(
 			-cartWidth / 2 + 3,		//X
@@ -38,7 +34,7 @@ public class ModelToolPlate extends ModelVehicle
 			10, 					//Size X
 			6,						//Size Y
 			1,						//Size Z
-			0.0F					//Size Increasement
+			0.0F
 		);
         drillBase.setRotationPoint(
 			-cartLength / 2 + 1,	//X

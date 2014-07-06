@@ -11,86 +11,85 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelFrontTank extends ModelVehicle
-{
+public class ModelFrontTank extends ModelVehicle {
 	
-	private static ResourceLocation texture = ResourceHelper.getResource("/models/tankModelFront.png");
+	private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/models/tankModelFront.png");
 	
 	@Override
 	public ResourceLocation getResource(ModuleBase module) {
-		return texture;
+		return TEXTURE;
 	}		
 	
-
+    @Override
 	protected int getTextureWidth() {
 		return 32;
 	}	
-	
+
+    @Override
 	protected int getTextureHeight() {
 		return 32;
 	}
 	
-    public ModelFrontTank()
-    {
+    public ModelFrontTank() {
 
 		for (int i = 0; i < 2; i++) {
-			ModelRenderer tankside = new ModelRenderer(this, 0, 15);
-			AddRenderer(tankside);
+			ModelRenderer tankSide = new ModelRenderer(this, 0, 15);
+			addRenderer(tankSide);
 
-			tankside.addBox(
-				-4, 	//X
-				-3F, 	//Y
-				-0.5F,	 	//Z
-				8,					//Size X
-				6,					//Size Y
-				1,			     	//Size Z
-				0.0F			 	//Size Increasement
-			);
-			tankside.setRotationPoint(
-				- 14, 		//X
-				0,			//Y
-				-6.5F + i*13			//Z
-			);
+			tankSide.addBox(
+                -4,             //X
+                -3F,            //Y
+                -0.5F,          //Z
+                8,              //Size X
+                6,              //Size Y
+                1,              //Size Z
+                0.0F
+            );
+			tankSide.setRotationPoint(
+                -14,                //X
+                0,                  //Y
+                -6.5F + i * 13      //Z
+            );
 
-			ModelRenderer tanktopbot = new ModelRenderer(this, 0, 0);
-			AddRenderer(tanktopbot);
+			ModelRenderer tankTopBot = new ModelRenderer(this, 0, 0);
+			addRenderer(tankTopBot);
 
-			tanktopbot.addBox(
-				-4, 	//X
-				-7, 	//Y
-				-0.5F,	 	//Z
-				8,					//Size X
-				14,					//Size Y
-				1,			     	//Size Z
-				0.0F			 	//Size Increasement
-			);
-			tanktopbot.setRotationPoint(
-				- 14, 		//X
-				3.5F - i*7,		//Y
-				0			//Z
-			);
+			tankTopBot.addBox(
+                -4,         //X
+                -7,         //Y
+                -0.5F,      //Z
+                8,          //Size X
+                14,         //Size Y
+                1,          //Size Z
+                0.0F
+            );
+			tankTopBot.setRotationPoint(
+                -14,                //X
+                3.5F - i * 7,        //Y
+                0                   //Z
+            );
 
-			tanktopbot.rotateAngleX = (float)Math.PI / 2;
+			tankTopBot.rotateAngleX = (float)Math.PI / 2;
 			
-			ModelRenderer tankfrontback = new ModelRenderer(this, 0, 22);
-			AddRenderer(tankfrontback);
+			ModelRenderer tankFrontBack = new ModelRenderer(this, 0, 22);
+			addRenderer(tankFrontBack);
 
-			tankfrontback.addBox(
-				-6, 	//X
-				-3F, 	//Y
-				-0.5F,	 	//Z
-				12,					//Size X
-				6,					//Size Y
-				1,			     	//Size Z
-				0.0F			 	//Size Increasement
-			);
-			tankfrontback.setRotationPoint(
-				-17.5F + i*7, 		//X
-				0,		//Y
-				0 			//Z
-			);
+			tankFrontBack.addBox(
+                -6,         //X
+                -3F,        //Y
+                -0.5F,      //Z
+                12,         //Size X
+                6,          //Size Y
+                1,          //Size Z
+                0.0F
+            );
+			tankFrontBack.setRotationPoint(
+                -17.5F + i * 7,     //X
+                0,                  //Y
+                0                   //Z
+            );
 
-			tankfrontback.rotateAngleY = (float)Math.PI / 2;			
+			tankFrontBack.rotateAngleY = (float)Math.PI / 2;
 		}
 
 
@@ -99,15 +98,12 @@ public class ModelFrontTank extends ModelVehicle
 
 
 	@Override
-	public void render(Render render, ModuleBase module, float yaw, float pitch, float roll, float mult, float partialtime)
-    {
-
-
-		super.render(render,module,yaw,pitch,roll, mult, partialtime);
+	public void render(Render render, ModuleBase module, float yaw, float pitch, float roll, float multiplier, float partialTime) {
+		super.render(render,module,yaw,pitch,roll, multiplier, partialTime);
 		if (render != null && module != null) {
 			FluidStack liquid = ((ModuleTank)module).getFluid();
 			if (liquid != null) {
-				((RendererVehicle)render).renderLiquidCuboid(liquid,  ((ModuleTank)module).getCapacity(), -14, 0, 0, 6, 6, 12, mult);
+				((RendererVehicle)render).renderLiquidCuboid(liquid,  ((ModuleTank)module).getCapacity(), -14, 0, 0, 6, 6, 12, multiplier);
 			}
 		}
     }

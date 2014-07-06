@@ -9,34 +9,34 @@ import vswe.stevesvehicles.module.cart.attachment.ModuleFlowerRemover;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
-public class ModelLawnMower extends ModelVehicle
-{
+public class ModelLawnMower extends ModelVehicle {
 	
-	private static ResourceLocation texture = ResourceHelper.getResource("/models/lawnmowerModel.png");
+	private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/models/lawnmowerModel.png");
 	
 	@Override
 	public ResourceLocation getResource(ModuleBase module) {
-		return texture;
+		return TEXTURE;
 	}		
 
+    @Override
 	protected int getTextureWidth() {
 		return 64;
 	}
+    @Override
 	protected int getTextureHeight() {
 		return 32;
 	}
 
-	private ArrayList<ModelRenderer> bladepins;
-    public ModelLawnMower()
-    {
-    	bladepins = new ArrayList<ModelRenderer>();
+	private final ArrayList<ModelRenderer> bladePins;
+    public ModelLawnMower() {
+    	bladePins = new ArrayList<ModelRenderer>();
     	createSide(false);
     	createSide(true);
     }
 
 	private void createSide(boolean opposite) {
 		ModelRenderer anchor = new ModelRenderer(this, 0, 0);
-		AddRenderer(anchor);
+		addRenderer(anchor);
 
 		if (opposite) {
 			anchor.rotateAngleY = (float)Math.PI;
@@ -47,17 +47,17 @@ public class ModelLawnMower extends ModelVehicle
 		fixSize(base);
 
 		base.addBox(
-			-11.5F, 	//X
-			-3F, 	//Y
-			-1,	 	//Z
-			23,					//Size X
-			6,					//Size Y
-			2,			     	//Size Z
-			0.0F			 	//Size Increasement
+			-11.5F, 	    //X
+			-3F, 	        //Y
+			-1,	 	        //Z
+			23,				//Size X
+			6,				//Size Y
+			2,			    //Size Z
+			0.0F
 		);
 		base.setRotationPoint(
-			0, 		//X
-			-1.5F,			//Y
+			0, 		    //X
+			-1.5F,		//Y
 			-9F			//Z
 		);
 		
@@ -68,18 +68,18 @@ public class ModelLawnMower extends ModelVehicle
 			fixSize(arm);
 			
 			arm.addBox(
-					-8F, 	//X
-					-1.5F, 	//Y
-					-1.5F,	 	//Z
-					16,					//Size X
-					3,					//Size Y
-					3,			     	//Size Z
-					0.0F			 	//Size Increasement
-				);
+                -8F, 	    //X
+                -1.5F, 	    //Y
+                -1.5F,	 	//Z
+                16,			//Size X
+                3,			//Size Y
+                3,			//Size Z
+                0.0F
+			);
 			arm.setRotationPoint(
-				-8.25F + i * 16.5F, 		//X
-				0F,			//Y
-				-8			//Z
+				-8.25F + i * 16.5F, 	//X
+				0F,			            //Y
+				-8			            //Z
 			);	
 			
 			arm.rotateAngleY = (float)Math.PI / 2;
@@ -89,13 +89,13 @@ public class ModelLawnMower extends ModelVehicle
 			fixSize(arm2);
 			
 			arm2.addBox(
-					-1.5F, 	//X
-					-1.5F, 	//Y
-					-1.5F,	 	//Z
-					3,					//Size X
-					3,					//Size Y
-					3,			     	//Size Z
-					0.0F			 	//Size Increasement
+					-1.5F, 	        //X
+					-1.5F, 	        //Y
+					-1.5F,	 	    //Z
+					3,				//Size X
+					3,				//Size Y
+					3,			    //Size Z
+					0.0F
 				);
 			arm2.setRotationPoint(
 				6.5F, 		//X
@@ -105,93 +105,89 @@ public class ModelLawnMower extends ModelVehicle
 			
 			arm2.rotateAngleZ = (float)Math.PI / 2;		
 			
-			ModelRenderer bladepin = new ModelRenderer(this, 0, 20);
-			arm2.addChild(bladepin);
-			fixSize(bladepin);
+			ModelRenderer bladePin = new ModelRenderer(this, 0, 20);
+			arm2.addChild(bladePin);
+			fixSize(bladePin);
 			
-			bladepin.addBox(
-					-1F, 	//X
-					-0.5F, 	//Y
-					-0.5F,	 	//Z
-					2,					//Size X
-					1,					//Size Y
-					1,			     	//Size Z
-					0.0F			 	//Size Increasement
-				);
-			bladepin.setRotationPoint(
-				2.5F, 		//X
-				0,			//Y
-				0			//Z
-			);
+			bladePin.addBox(
+                -1F,        //X
+                -0.5F,      //Y
+                -0.5F,      //Z
+                2,          //Size X
+                1,          //Size Y
+                1,          //Size Z
+                0.0F
+            );
+			bladePin.setRotationPoint(
+                2.5F,           //X
+                0,              //Y
+                0               //Z
+            );
 			
-			ModelRenderer bladeanchor = new ModelRenderer(this, 0, 0);
-			bladepin.addChild(bladeanchor);		
-			bladeanchor.rotateAngleY = (float)Math.PI / 2;
+			ModelRenderer bladeAnchor = new ModelRenderer(this, 0, 0);
+			bladePin.addChild(bladeAnchor);
+			bladeAnchor.rotateAngleY = (float)Math.PI / 2;
 			
 			for (int j = 0; j < 4; j++) {
 				ModelRenderer blade = new ModelRenderer(this, 0, 22);
-				bladeanchor.addChild(blade);
+				bladeAnchor.addChild(blade);
 				fixSize(blade);
 				
 				blade.addBox(
-						-1.5F, 	//X
-						-1.5F, 	//Y
-						-0.5F,	 	//Z
-						8,					//Size X
-						3,					//Size Y
-						1,			     	//Size Z
-						0.0F			 	//Size Increasement
-					);
+                    -1.5F, 	        //X
+                    -1.5F, 	        //Y
+                    -0.5F,	 	    //Z
+                    8,				//Size X
+                    3,				//Size Y
+                    1,			    //Size Z
+                    0.0F
+                );
 				blade.setRotationPoint(
-					0, 		//X
+					0, 		    //X
 					0,			//Y
-					j * 0.01F			//Z
+					j * 0.01F	//Z
 				);				
 					
 				blade.rotateAngleZ = ((float)Math.PI / 2) * (j + i * 0.5F);	
 				
 				
-				ModelRenderer bladetip = new ModelRenderer(this, 0, 26);
-				blade.addChild(bladetip);
-				fixSize(bladetip);
+				ModelRenderer bladeTip = new ModelRenderer(this, 0, 26);
+				blade.addChild(bladeTip);
+				fixSize(bladeTip);
 				
-				bladetip.addBox(
-						6.5F, 	//X
-						-1.0F, 	//Y
-						-0.5F,	 	//Z
-						6,					//Size X
-						2,					//Size Y
-						1,			     	//Size Z
-						0.0F			 	//Size Increasement
-					);
-				bladetip.setRotationPoint(
-					0, 		//X
-					0,			//Y
-					0.005F			//Z
-				);								
+				bladeTip.addBox(
+                    6.5F,           //X
+                    -1.0F,          //Y
+                    -0.5F,          //Z
+                    6,              //Size X
+                    2,              //Size Y
+                    1,              //Size Z
+                    0.0F
+                );
+				bladeTip.setRotationPoint(
+                    0,          //X
+                    0,          //Y
+                    0.005F      //Z
+                );
 			}
-			bladepins.add(bladepin);
+			bladePins.add(bladePin);
 		}
 	
 		
 	}
 
-	public void applyEffects(ModuleBase module,  float yaw, float pitch, float roll, float partialtime) {
+    @Override
+	public void applyEffects(ModuleBase module,  float yaw, float pitch, float roll, float partialTime) {
+		float angle = module == null ? 0F : (((ModuleFlowerRemover)module).getBladeAngle() + partialTime * ((ModuleFlowerRemover)module).getBladeSpindSpeed());
 
-		
-
-		float angle = module == null ? 0F : (((ModuleFlowerRemover)module).getBladeAngle() + partialtime * ((ModuleFlowerRemover)module).getBladeSpindSpeed());
-		
-		
-		for (int i = 0; i < bladepins.size(); i++) {
-			ModelRenderer bladepin = bladepins.get(i);
+		for (int i = 0; i < bladePins.size(); i++) {
+			ModelRenderer bladePin = bladePins.get(i);
 			if (i % 2 == 0) {
-				bladepin.rotateAngleX = angle;	
+				bladePin.rotateAngleX = angle;
 			}else{
-				bladepin.rotateAngleX = -angle;	
+				bladePin.rotateAngleX = -angle;
 			}
 		}
-		
-		
+
 	}
 }

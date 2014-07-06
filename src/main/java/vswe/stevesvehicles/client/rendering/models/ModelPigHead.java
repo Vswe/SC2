@@ -10,28 +10,25 @@ import vswe.stevesvehicles.module.ModuleBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
-public class ModelPigHead extends ModelVehicle
-{
+public class ModelPigHead extends ModelVehicle {
 
 	
-	private static ResourceLocation texture = ResourceHelper.getResourceFromPath("/entity/pig/pig.png");
+	private static final ResourceLocation TEXTURE = ResourceHelper.getResourceFromPath("/entity/pig/pig.png");
 	
 	@Override
 	public ResourceLocation getResource(ModuleBase module) {
-		return texture;
+		return TEXTURE;
 	}		
 
+    @Override
 	protected int getTextureHeight() {
 		return 32;
 	}
 
 
-    public ModelPigHead()
-    {
-		super();
-
+    public ModelPigHead() {
 		ModelRenderer head = new ModelRenderer(this, 0, 0);
-		AddRenderer(head);
+		addRenderer(head);
 		
         head.addBox(
 			-4.0F, 
@@ -54,13 +51,13 @@ public class ModelPigHead extends ModelVehicle
 		head.setTextureOffset(16, 16).addBox(-2.0F, 0.0F, -9.0F, 4, 3, 1, 0);
     }
 
-	public void render(Render render,ModuleBase module, float yaw, float pitch, float roll, float mult, float partialtime)
-    {
+    @Override
+	public void render(Render render,ModuleBase module, float yaw, float pitch, float roll, float multiplier, float partialTime) {
 		if (module != null) {
 			float[] color = module.getVehicle().getColor();
 			GL11.glColor4f(color[0], color[1], color[2], 1.0F);
 		}
-		super.render(render,module,yaw,pitch,roll, mult, partialtime);
+		super.render(render,module,yaw,pitch,roll, multiplier, partialTime);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
     }		
 
