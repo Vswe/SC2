@@ -25,6 +25,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
+import vswe.stevesvehicles.client.gui.screen.GuiBase;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.container.ContainerVehicle;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
@@ -35,7 +36,6 @@ import vswe.stevesvehicles.client.rendering.models.ModelVehicle;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.CompButtons;
 import vswe.stevesvehicles.old.Helpers.SimulationInfo;
-import vswe.stevesvehicles.client.gui.screen.GuiBase.RENDER_ROTATION;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.container.slots.SlotBase;
 import cpw.mods.fml.relauncher.Side;
@@ -527,7 +527,7 @@ public abstract class ModuleBase {
 	 */
 	 @SideOnly(Side.CLIENT) 
 	public void drawImage(GuiVehicle gui, int targetX, int targetY, int srcX, int srcY, int sizeX, int sizeY) {
-		drawImage(gui, targetX, targetY, srcX, srcY, sizeX, sizeY, RENDER_ROTATION.NORMAL);
+		drawImage(gui, targetX, targetY, srcX, srcY, sizeX, sizeY, GuiBase.RenderRotation.NORMAL);
 	}
 	 
 	/**
@@ -542,7 +542,7 @@ public abstract class ModuleBase {
 	 * @param rotation The rotation this will be drawn with
 	 */
 	 @SideOnly(Side.CLIENT)
-	public void drawImage(GuiVehicle gui, int targetX, int targetY, int srcX, int srcY, int sizeX, int sizeY, RENDER_ROTATION rotation) {
+	public void drawImage(GuiVehicle gui, int targetX, int targetY, int srcX, int srcY, int sizeX, int sizeY, GuiBase.RenderRotation rotation) {
 		//create a rectangle and call the other drawImage function to do the job
 		drawImage(gui, new int[] {targetX,targetY,sizeX,sizeY}, srcX,srcY, rotation);
 	}
@@ -556,7 +556,7 @@ public abstract class ModuleBase {
 	 */
 	 @SideOnly(Side.CLIENT)
 	public void drawImage(GuiVehicle gui, int[] rect, int srcX, int srcY) {
-		 drawImage(gui, rect, srcX, srcY, RENDER_ROTATION.NORMAL);
+		 drawImage(gui, rect, srcX, srcY, GuiBase.RenderRotation.NORMAL);
 	}
 	
 	/**
@@ -568,7 +568,7 @@ public abstract class ModuleBase {
 	 * @param rotation The rotation this will be drawn with
 	 */
 	 @SideOnly(Side.CLIENT)
-	public void drawImage(GuiVehicle gui, int[] rect, int srcX, int srcY, RENDER_ROTATION rotation) {
+	public void drawImage(GuiVehicle gui, int[] rect, int srcX, int srcY, GuiBase.RenderRotation rotation) {
 		//the rectangle need to be valid
 		if (rect.length < 4) {
 			return;

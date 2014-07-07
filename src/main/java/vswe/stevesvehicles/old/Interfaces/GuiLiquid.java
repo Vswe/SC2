@@ -11,11 +11,9 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class GuiLiquid extends GuiManager
-{
-    public GuiLiquid(InventoryPlayer invPlayer, TileEntityLiquid liquid)
-    {
-        super(invPlayer, liquid, new ContainerLiquid(invPlayer, liquid));
+public class GuiLiquid extends GuiManager {
+    public GuiLiquid(InventoryPlayer invPlayer, TileEntityLiquid liquid) {
+        super(liquid, new ContainerLiquid(invPlayer, liquid));
         setXSize(230);
         setYSize(222);
     }
@@ -23,8 +21,6 @@ public class GuiLiquid extends GuiManager
 
 	@Override
 	protected String getMaxSizeOverlay(int id) {
-		int amount = getLiquid().getMaxAmount(id);
-	
 		if (!getLiquid().hasMaxAmount(id)) {
 			return LocalizationLiquid.TRANSFER_ALL.translate();
 		}else{
@@ -34,8 +30,6 @@ public class GuiLiquid extends GuiManager
 	
 	@Override
 	protected String getMaxSizeText(int id) {
-
-
 		if (!getLiquid().hasMaxAmount(id)){
 			return LocalizationLiquid.TRANSFER_ALL_SHORT.translate();
 		}else{
@@ -51,21 +45,21 @@ public class GuiLiquid extends GuiManager
 		}
 	}	
 	
-	private static ResourceLocation texture = ResourceHelper.getResource("/gui/liquidmanager.png");
-	private static ResourceLocation textureExtra = ResourceHelper.getResource("/gui/liquidmanagerExtra.png");
+	private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/liquidmanager.png");
+	private static final ResourceLocation TEXTURE_EXTRA = ResourceHelper.getResource("/gui/liquidmanagerExtra.png");
 	@Override
 	protected void drawBackground(int left, int top) {
-        ResourceHelper.bindResource(texture);
+        ResourceHelper.bindResource(TEXTURE);
         drawTexturedModalRect(left, top, 0, 0, xSize, ySize);
 		
 		if (getLiquid().getTanks() != null) {
 			for (int i = 0; i < 4; i++) {
-				int [] coords = getTankCoords(i);
-				getLiquid().getTanks()[i].drawFluid(this, coords[0], coords[1]);
+				int [] coordinate = getTankCoordinate(i);
+				getLiquid().getTanks()[i].drawFluid(this, coordinate[0], coordinate[1]);
 			}
 		}
 		
-		ResourceHelper.bindResource(textureExtra);
+		ResourceHelper.bindResource(TEXTURE_EXTRA);
 		
 		int version;
         if (getManager().layoutType == 0) {
@@ -79,9 +73,9 @@ public class GuiLiquid extends GuiManager
 		}
 		
 		for (int i = 0; i < 4; i++) {
-			int [] coords = getTankCoords(i);
+			int [] coordinate = getTankCoordinate(i);
 			int type = i % 2;
-			drawTexturedModalRect(left + coords[0], top + coords[1], 0, 51 * type, 36, 51);	
+			drawTexturedModalRect(left + coordinate[0], top + coordinate[1], 0, 51 * type, 36, 51);
 		}
 	}
 	
@@ -106,8 +100,8 @@ public class GuiLiquid extends GuiManager
 		super.drawColors(id, color, left, top);
 
 		if (getManager().layoutType == 2) {
-			int [] coords = getTankCoords(id);
-			drawTexturedModalRect(left + coords[0], top + coords[1], 36, 51 * color, 36, 51);
+			int [] coordinate = getTankCoordinate(id);
+			drawTexturedModalRect(left + coordinate[0], top + coordinate[1], 36, 51 * color, 36, 51);
 		}
 		
 	}	
@@ -120,7 +114,7 @@ public class GuiLiquid extends GuiManager
 	
 	@Override
 	protected void drawExtraOverlay(int id, int x, int y) {
-		drawMouseOver(getLiquid().getTanks()[id].getMouseOver() ,x,y,getTankCoords(id));				
+		drawMouseOver(getLiquid().getTanks()[id].getMouseOver() ,x,y, getTankCoordinate(id));
 	}
 	
 	@Override
@@ -133,12 +127,12 @@ public class GuiLiquid extends GuiManager
 		return LocalizationLiquid.TITLE.translate();
 	}
 	
-    private int[] getTankCoords(int id) {
+    private int[] getTankCoordinate(int id) {
         int x = id % 2;
         int y = id / 2;
-        int xCoord = 25 + x * 144;
-        int yCoord = 12 + y * 63;
-        return new int[] {xCoord, yCoord, 36, 51};
+        int targetX = 25 + x * 144;
+        int targetY = 12 + y * 63;
+        return new int[] {targetX, targetY, 36, 51};
     }	
 	
 

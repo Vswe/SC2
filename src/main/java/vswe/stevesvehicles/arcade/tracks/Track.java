@@ -3,15 +3,15 @@ package vswe.stevesvehicles.arcade.tracks;
 import java.util.ArrayList;
 
 import vswe.stevesvehicles.arcade.ArcadeGame;
+import vswe.stevesvehicles.client.gui.screen.GuiBase;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
-import vswe.stevesvehicles.client.gui.screen.GuiBase.RENDER_ROTATION;
 import vswe.stevesvehicles.module.common.attachment.ModuleArcade;
 
 public class Track  {
 	private int x;
 	private int y;
 	private int v;
-	private RENDER_ROTATION rotation;
+	private GuiBase.RenderRotation rotation;
 	private TrackOrientation orientation;
 	private TrackOrientation orientationBackup;
 
@@ -29,7 +29,7 @@ public class Track  {
 		this.v = v;
 	}	
 	
-	private void setRotation(RENDER_ROTATION rotation) {
+	private void setRotation(GuiBase.RenderRotation rotation) {
 		this.rotation = rotation;
 	}
 	
@@ -58,7 +58,7 @@ public class Track  {
 		return v;
 	}
 	
-	public RENDER_ROTATION getRotation() {
+	public GuiBase.RenderRotation getRotation() {
 		return rotation;
 	}
 

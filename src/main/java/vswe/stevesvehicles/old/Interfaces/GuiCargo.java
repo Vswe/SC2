@@ -19,11 +19,9 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class GuiCargo extends GuiManager
-{
-    public GuiCargo(InventoryPlayer invPlayer, TileEntityCargo cargo)
-    {
-        super(invPlayer, cargo, new ContainerCargo(invPlayer, cargo));
+public class GuiCargo extends GuiManager {
+    public GuiCargo(InventoryPlayer invPlayer, TileEntityCargo cargo) {
+        super(cargo, new ContainerCargo(invPlayer, cargo));
         setXSize(305);
         setYSize(222);
     }
@@ -62,24 +60,73 @@ public class GuiCargo extends GuiManager
 		return s;
 	}
 
-	private static ResourceLocation[] texturesLeft = {ResourceHelper.getResource("/gui/cargoVersion0Part1.png"), ResourceHelper.getResource("/gui/cargoVersion1Part1.png")};
-	private static ResourceLocation[] texturesRight = {ResourceHelper.getResource("/gui/cargoVersion0Part2.png"), ResourceHelper.getResource("/gui/cargoVersion1Part2.png")};
-	
+    private static final ResourceLocation CARGO_TEXTURE = ResourceHelper.getResource("/gui/cargo.png");
+
+    private static final int TEXTURE_WIDTH = 256;
+    private static final int TOP_HEIGHT = 10;
+    private static final int MIDDLE_HEIGHT = 50;
+    private static final int MIDDLE_UNITS = 2;
+    private static final int BOT_HEIGHT = 24;
+    private static final int TEXTURE_SPACING = 1;
+
+    private static final int PLAYER_INVENTORY_X = 65;
+    private static final int PLAYER_INVENTORY_WIDTH = 176;
+    private static final int PLAYER_INVENTORY_HEIGHT = 88;
+
+    private static final int TOP_Y = 0;
+    private static final int MIDDLE_Y = TOP_Y + TOP_HEIGHT;
+    private static final int BOT_Y = MIDDLE_Y + MIDDLE_HEIGHT * MIDDLE_UNITS;
+    private static final int PLAYER_INVENTORY_Y = BOT_Y + BOT_HEIGHT;
+
+    private static final int TOP_SRC_Y = 0;
+    private static final int MIDDLE_SRC_Y = TOP_SRC_Y + TOP_HEIGHT + TEXTURE_SPACING;
+    private static final int BOT_SRC_Y = MIDDLE_SRC_Y + MIDDLE_HEIGHT + TEXTURE_SPACING;
+    private static final int PLAYER_INVENTORY_SRC_Y = BOT_SRC_Y + BOT_HEIGHT + TEXTURE_SPACING;
+
+
+    private static final int EXTRA_WIDTH = 49;
+    private static final int EXTRA_HEIGHT = TOP_HEIGHT + MIDDLE_HEIGHT * MIDDLE_UNITS + BOT_HEIGHT;
+    private static final int EXTRA_SRC_Y = PLAYER_INVENTORY_SRC_Y;
+
+    private static final int INVENTORY_SRC_X = 143;
+    private static final int INVENTORY_SRC_Y = 177;
+    private static final int INVENTORY_WIDTH = 90;
+    private static final int INVENTORY_HEIGHT = 54;
+
+    private static final int INVENTORY_BORDER_SRC_X = 50;
+    private static final int INVENTORY_BORDER_SRC_Y = 176;
+    private static final int INVENTORY_BORDER_WIDTH = 92;
+    private static final int INVENTORY_BORDER_HEIGHT = 56;
+    private static final int INVENTORY_BORDER_OFFSET_X = (INVENTORY_BORDER_WIDTH - INVENTORY_WIDTH) / 2;
+    private static final int INVENTORY_BORDER_OFFSET_Y = (INVENTORY_BORDER_HEIGHT - INVENTORY_HEIGHT) / 2;
+
 	@Override
 	protected void drawBackground(int left, int top) {
-		int version;
+        ResourceHelper.bindResource(CARGO_TEXTURE);
 
-        if (getManager().layoutType == 0) {
-            version = 0;
-        }else{
-            version = 1;
-        }	
-	
-        ResourceHelper.bindResource(texturesLeft[version]);
-        drawTexturedModalRect(left, top, 0, 0, 256, ySize);
-        ResourceHelper.bindResource(texturesRight[version]);
-        drawTexturedModalRect(left + 256, top, 0, 0, xSize - 256, ySize);
-	}
+        drawTexturedModalRect(left, top + TOP_Y, 0, TOP_SRC_Y, TEXTURE_WIDTH, TOP_HEIGHT);
+        for (int i = 0; i < MIDDLE_UNITS; i++) {
+            drawTexturedModalRect(left, top + MIDDLE_Y + MIDDLE_HEIGHT * i, 0, MIDDLE_SRC_Y, TEXTURE_WIDTH, MIDDLE_HEIGHT);
+        }
+        drawTexturedModalRect(left, top + BOT_Y, 0, BOT_SRC_Y, TEXTURE_WIDTH, BOT_HEIGHT);
+        drawTexturedModalRect(left + PLAYER_INVENTORY_X, top + PLAYER_INVENTORY_Y, PLAYER_INVENTORY_X, PLAYER_INVENTORY_SRC_Y, PLAYER_INVENTORY_WIDTH, PLAYER_INVENTORY_HEIGHT);
+        drawTexturedModalRect(left + TEXTURE_WIDTH, top, 0, EXTRA_SRC_Y, EXTRA_WIDTH, EXTRA_HEIGHT);
+
+
+        for (int i = 0; i < 4; i++) {
+            int [] coordinate = getInventoryCoordinate(i);
+            drawTexturedModalRect(left + coordinate[0], top + coordinate[1], INVENTORY_SRC_X, INVENTORY_SRC_Y, INVENTORY_WIDTH, INVENTORY_HEIGHT);
+            if (hasSeparatedInventory()) {
+                if (getManager().layoutType == 1) {
+                    setColor(ColorEffect.BLACK);
+                }else{
+                    setColor(i);
+                }
+                drawTexturedModalRect(left + coordinate[0] - INVENTORY_BORDER_OFFSET_X, top + coordinate[1] - INVENTORY_BORDER_OFFSET_Y, INVENTORY_BORDER_SRC_X, INVENTORY_BORDER_SRC_Y, INVENTORY_BORDER_WIDTH, INVENTORY_BORDER_HEIGHT);
+                setColor(ColorEffect.CLEAR);
+            }
+        }
+    }
 	
 	
 	@Override
@@ -98,30 +145,19 @@ public class GuiCargo extends GuiManager
 	}
 
 	@Override
-	protected void drawColors(int id, int color, int left, int top) {
-		super.drawColors(id, color, left, top);
-
-		if (getManager().layoutType == 2) {
-			int [] coords = getInvCoords(id);
-			drawTexturedModalRect(left + coords[0] - 2, top + coords[1] - 2, 125, 56 * color, 92, 56);
-		}
-		
-	}	
-	
-	@Override
 	protected void drawItems(int id, RenderItem renderitem, int left, int top) {
 		ItemStack cartIcon;
 	
-		if (getCargo().target[id] < 0 || getCargo().target[id] >= getCargo().itemSelections.size() ||  getCargo().itemSelections.get(getCargo().target[id]).getIcon() == null) {
+		if (getCargo().target[id] < 0 || getCargo().target[id] >= TileEntityCargo.itemSelections.size() ||  TileEntityCargo.itemSelections.get(getCargo().target[id]).getIcon() == null) {
 			cartIcon = new ItemStack(Items.minecart, 1);
 		}else{
 			cartIcon = TileEntityCargo.itemSelections.get(getCargo().target[id]).getIcon();
 		}
 	
 
-		int[] coords = getBoxCoords(id);
+		int[] coordinate = getBoxCoordinate(id);
 		GL11.glDisable(GL11.GL_LIGHTING);
-		renderitem.renderItemIntoGUI(mc.fontRenderer, mc.renderEngine, cartIcon, left + coords[0], top + coords[1]);
+		renderitem.renderItemIntoGUI(mc.fontRenderer, mc.renderEngine, cartIcon, left + coordinate[0], top + coordinate[1]);
 		GL11.glEnable(GL11.GL_LIGHTING);	
 	}
 	
@@ -136,7 +172,7 @@ public class GuiCargo extends GuiManager
 	
 	@Override
 	protected boolean sendOnClick(int id, int x, int y, byte data) {
-		if (inRect(x, y, getBoxCoords(id))) {
+		if (inRect(x, y, getBoxCoordinate(id))) {
 			getManager().sendPacket(1, data);
 			return true;
 		}else{
@@ -146,15 +182,15 @@ public class GuiCargo extends GuiManager
 	
 	@Override
 	protected void drawExtraOverlay(int id, int x, int y) {
-		if (getCargo().target[id] >= 0 && getCargo().target[id] < getCargo().itemSelections.size()) {
-			CargoItemSelection item = getCargo().itemSelections.get(getCargo().target[id]);
+		if (getCargo().target[id] >= 0 && getCargo().target[id] < TileEntityCargo.itemSelections.size()) {
+			CargoItemSelection item = TileEntityCargo.itemSelections.get(getCargo().target[id]);
 			if (item.getName() != null) {
-				drawMouseOver(LocalizationCargo.CHANGE_VEHICLE_PART.translate() + "\n" + LocalizationManager.CURRENT_SETTING.translate() + ": " + item.getName(),x,y,getBoxCoords(id));
+				drawMouseOver(LocalizationCargo.CHANGE_VEHICLE_PART.translate() + "\n" + LocalizationManager.CURRENT_SETTING.translate() + ": " + item.getName(),x,y, getBoxCoordinate(id));
 			}else{
-				drawMouseOver(LocalizationCargo.CHANGE_VEHICLE_PART.translate() + "\n" + LocalizationManager.CURRENT_SETTING.translate() + ": " + LocalizationCargo.SLOT_INVALID.translate(),x,y,getBoxCoords(id));
+				drawMouseOver(LocalizationCargo.CHANGE_VEHICLE_PART.translate() + "\n" + LocalizationManager.CURRENT_SETTING.translate() + ": " + LocalizationCargo.SLOT_INVALID.translate(),x,y, getBoxCoordinate(id));
 			}
 		}else{
-			drawMouseOver(LocalizationCargo.CHANGE_VEHICLE_PART.translate() + "\n" + LocalizationManager.CURRENT_SETTING.translate() + ": " + LocalizationCargo.SLOT_INVALID.translate(),x,y,getBoxCoords(id));
+			drawMouseOver(LocalizationCargo.CHANGE_VEHICLE_PART.translate() + "\n" + LocalizationManager.CURRENT_SETTING.translate() + ": " + LocalizationCargo.SLOT_INVALID.translate(),x,y, getBoxCoordinate(id));
 		}
 	}
 	
@@ -168,14 +204,19 @@ public class GuiCargo extends GuiManager
 		return LocalizationCargo.TITLE.translate();
 	}
 	
-    private int[] getInvCoords(int id) {
+    private int[] getInventoryCoordinate(int id) {
         int x = id % 2;
         int y = id / 2;
-        int xCoord = 8 + x * 198;
-        int yCoord = 11 + y * 64;
-        return new int[] {xCoord, yCoord};
+        int offset = hasSeparatedInventory() ? 5 : 0;
+        int targetX = 7 + x * 198;
+        int targetY = 15 - offset + y * (54 + offset * 2) ;
+        return new int[] {targetX, targetY};
     }	
-	
+
+    private boolean hasSeparatedInventory() {
+        return getManager().layoutType != 0;
+    }
+
 	private TileEntityCargo getCargo() {
 		return (TileEntityCargo)getManager();
 	}

@@ -1,13 +1,14 @@
 package vswe.stevesvehicles.old.Interfaces;
 import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import vswe.stevesvehicles.client.gui.screen.GuiBase;
 import vswe.stevesvehicles.localization.entry.block.LocalizationManager;
 import vswe.stevesvehicles.old.Containers.ContainerManager;
+import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.old.TileEntities.TileEntityManager;
 import net.minecraft.block.Block;
 
@@ -16,44 +17,38 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public abstract class GuiManager extends GuiBase
-{
-    public GuiManager(InventoryPlayer invPlayer, TileEntityManager manager, ContainerManager container)
-    {
+public abstract class GuiManager extends GuiBase {
+    public GuiManager(TileEntityManager manager, ContainerManager container) {
         super(container);
         this.manager = manager;
-        this.invPlayer = invPlayer;
     }
 	
 	@Override
-    public void drawGuiForeground(int x, int y)
-    {
+    public void drawGuiForeground(int x, int y) {
 		GL11.glDisable(GL11.GL_LIGHTING);
 	
-		int[] coords = getMiddleCoords();
-        getFontRenderer().drawString(getManagerName(), coords[0] - 34, 65, 0x404040);
-        getFontRenderer().drawString(LocalizationManager.TITLE.translate(), coords[0] + coords[2], 65, 0x404040);
+		int[] coordinate = getCenterCoordinate();
+        getFontRenderer().drawString(getManagerName(), coordinate[0] - 34, 65, 0x404040);
+        getFontRenderer().drawString(LocalizationManager.TITLE.translate(), coordinate[0] + coordinate[2], 65, 0x404040);
 
-        for (int i = 0; i < 4; i++)
-        {
-            coords = getTextCoords(i);
+        for (int i = 0; i < 4; i++) {
+            coordinate = getTextCoordinate(i);
             String str = getMaxSizeText(i);
 
-            getFontRenderer().drawString(str, coords[0], coords[1], 0x404040);
+            getFontRenderer().drawString(str, coordinate[0], coordinate[1], 0x404040);
         }
 		
 		
-        for (int i = 0; i < 4; i++)
-        {
+        for (int i = 0; i < 4; i++) {
 			drawExtraOverlay(i, x, y);
 
-			drawMouseOver(LocalizationManager.CHANGE_TRANSFER_DIRECTION.translate() + "\n" + LocalizationManager.CURRENT_SETTING.translate() + ": " + (manager.toCart[i] ? LocalizationManager.TO_VEHICLE.translate() : LocalizationManager.FROM_VEHICLE.translate()),x,y,getArrowCoords(i));
-			drawMouseOver(LocalizationManager.CHANGE_TURN_BACK.translate() + "\n" + LocalizationManager.CURRENT_SETTING.translate() + ": " + (manager.color[i] == 5 ? LocalizationManager.TURN_BACK_DISABLED.translate() : ( manager.doReturn[manager.color[i]-1] ? LocalizationManager.TURN_BACK.translate() : LocalizationManager.CONTINUE_FORWARD.translate())), x, y, getReturnCoords(i));
-			drawMouseOver(LocalizationManager.CHANGE_TRANSFER_SIZE.translate() + "\n" + LocalizationManager.CURRENT_SETTING.translate() + ": " + getMaxSizeOverlay(i),x,y,getTextCoords(i));
-			drawMouseOver(LocalizationManager.CHANGE_SIDE.translate() + "\n" + LocalizationManager.CURRENT_SIDE.translate() + ": " + (new String[] {LocalizationManager.RED_SIDE.translate(), LocalizationManager.BLUE_SIDE.translate(), LocalizationManager.YELLOW_SIDE.translate(), LocalizationManager.GREEN_SIDE.translate(), LocalizationManager.DISABLED_SIDE.translate()})[manager.color[i]-1], x, y, getColorpickerCoords(i));
-			
-		}		
-		drawMouseOver(getLayoutString() + "\n" + LocalizationManager.CURRENT_SETTING.translate() + ": " +  getLayoutOption(manager.layoutType) ,x,y, getMiddleCoords());
+			drawMouseOver(LocalizationManager.CHANGE_TRANSFER_DIRECTION.translate() + "\n" + LocalizationManager.CURRENT_SETTING.translate() + ": " + (manager.toCart[i] ? LocalizationManager.TO_VEHICLE.translate() : LocalizationManager.FROM_VEHICLE.translate()),x,y, getArrowCoordinate(i));
+			drawMouseOver(LocalizationManager.CHANGE_TURN_BACK.translate() + "\n" + LocalizationManager.CURRENT_SETTING.translate() + ": " + (manager.color[i] == 5 ? LocalizationManager.TURN_BACK_DISABLED.translate() : ( manager.doReturn[manager.color[i]-1] ? LocalizationManager.TURN_BACK.translate() : LocalizationManager.CONTINUE_FORWARD.translate())), x, y, getReturnCoordinate(i));
+			drawMouseOver(LocalizationManager.CHANGE_TRANSFER_SIZE.translate() + "\n" + LocalizationManager.CURRENT_SETTING.translate() + ": " + getMaxSizeOverlay(i),x,y, getTextCoordinate(i));
+			drawMouseOver(LocalizationManager.CHANGE_SIDE.translate() + "\n" + LocalizationManager.CURRENT_SIDE.translate() + ": " + (new String[] {LocalizationManager.RED_SIDE.translate(), LocalizationManager.BLUE_SIDE.translate(), LocalizationManager.YELLOW_SIDE.translate(), LocalizationManager.GREEN_SIDE.translate(), LocalizationManager.DISABLED_SIDE.translate()})[manager.color[i]-1], x, y, getColorSelectorCoordinate(i));
+		}
+
+		drawMouseOver(getLayoutString() + "\n" + LocalizationManager.CURRENT_SETTING.translate() + ": " +  getLayoutOption(manager.layoutType), x, y, getCenterCoordinate());
 		GL11.glEnable(GL11.GL_LIGHTING);
     }
 	
@@ -63,28 +58,34 @@ public abstract class GuiManager extends GuiBase
 		}	
 	}
 
+    private static final ResourceLocation MANAGER_TEXTURE = ResourceHelper.getResource("/gui/manager.png");
+
 	@Override
-    public void drawGuiBackground(float f, int x, int y)
-    {
+    public void drawGuiBackground(float f, int x, int y) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		
         int left = getGuiLeft();
         int top = getGuiTop();
 
-		drawBackground(left, top);
-		
+	    drawBackground(left, top);
+
+        ResourceHelper.bindResource(MANAGER_TEXTURE);
+
+        setColor(ColorEffect.BLACK);
+        int[] center = getCenterCoordinate();
+        drawTexturedModalRect(left + center[0] - 2, top + center[1] - 2, BOX_SRC_X, BOX_SRC_Y, center[2], center[3]);
+
+        setColor(ColorEffect.CLEAR);
         for (int i = 0; i < 4; i ++) {
 			drawArrow(i, left, top);
 
 			int color = manager.color[i] - 1;
-			if (color != 4) {
-				drawColors(i, color, left, top);
-			}
+			drawColors(i, color, left, top);
         }
 
 		RenderItem renderitem = new RenderItem();
-		int[] coords = getMiddleCoords();
-        renderitem.renderItemIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(getBlock(), 1), left + coords[0], top + coords[1]);
+		int[] coordinate = getCenterCoordinate();
+        renderitem.renderItemIntoGUI(mc.fontRenderer, mc.renderEngine, new ItemStack(getBlock(), 1), left + coordinate[0], top + coordinate[1]);
 		for (int i = 0; i < 4; i ++) {
 			drawItems(i, renderitem, left, top);
 		}
@@ -92,204 +93,194 @@ public abstract class GuiManager extends GuiBase
 
 		GL11.glColor4f(1F, 1F, 1F, 1F);
     }
-	
+
+    private static final int ARROW_SOURCE_X = 1;
+    private static final int ARROW_SOURCE_Y = 22;
+    private static final int ARROW_SIZE = 28;
+    private static final int TEXTURE_SPACING = 1;
+    private static final RenderRotation[] ARROW_ROTATIONS = {RenderRotation.NORMAL, RenderRotation.FLIP_HORIZONTAL, RenderRotation.FLIP_VERTICAL, RenderRotation.ROTATE_180};
+
+    private static final int ARROW_BASE_OFFSET = 18;
+    private static final int ARROW_BASE_SIZE = 19;
+    private static final int ARROW_HEAD_SIZE = 22;
+    private static final int ARROW_FULL_SIZE = 42;
+
 	private void drawArrow(int id, int left, int top) {
 		//the start position in the source image
-		int sourceX = getArrowSourceX();
-		int sourceY = 28;
-		//correct the y value depending on which box the arrow is connected to
-		sourceY += 56 * id;
+		int sourceX = ARROW_SOURCE_X;
+		int sourceY = ARROW_SOURCE_Y + ARROW_SIZE + TEXTURE_SPACING;
+        RenderRotation rotation = ARROW_ROTATIONS[id];
 
-		//correct the x value depning on which direction the arrow is pointing
+		//flip the arrow if it goes in the other direction
 		if (!manager.toCart[id]){
-			sourceX += 28;
+            rotation = id / 2 == id % 2 ? rotation.getNextRotation() : rotation.getPreviousRotation();
+            rotation = rotation.getFlippedRotation();
 		}
 
-		int targetX = getArrowCoords(id)[0];
-		int targetY = getArrowCoords(id)[1];
-		int sizeX = 28;
-		int sizeY = 28;
+        int[] target = getArrowCoordinate(id);
+		int targetX = target[0];
+		int targetY = target[1];
+		int sizeX = ARROW_SIZE;
+		int sizeY = ARROW_SIZE;
+
 		//draw the empty arrow
-		drawTexturedModalRect(left + targetX, top + targetY, sourceX, sourceY, sizeX, sizeY);
+		drawRect(left + targetX, top + targetY, sourceX, sourceY, sizeX, sizeY, rotation);
 
-		//if this is the active side it should hava a white arrow too
+		//if this is the active side it should have a white arrow too
+		if (id == manager.getLastSetting() && manager.color[id] != 5) {
+			sourceY -= ARROW_SIZE + TEXTURE_SPACING;
+			int scaledProgress = manager.moveProgressScaled(ARROW_FULL_SIZE);
+			int offsetX;
+			int offsetY;
 
-		if (/*manager.color[id] - 1 == manager.side*/id == manager.getLastSetting() && manager.color[id] != 5) {
-			//decrease the source Y to reach the white arrows
-			sourceY -= 28;
-			int scaledProgress = manager.moveProgressScaled(42);
-			//draw the first part of the white arrow
-			int offsetX = 0;
-			int offsetY = 0;
+            offsetX = ARROW_BASE_OFFSET;
+            sizeX = ARROW_SIZE - offsetX;
 
-			if (manager.toCart[id]) {
-				//only draw half of it, this is to avoid getting any part of the arrow head
-				sizeX = 14;
 
-				//this is which half that should pe painted
-				if (id % 2 == 0) {
-					offsetX = 14;
-				}
+            sizeY = scaledProgress;
+            if (sizeY > ARROW_BASE_SIZE) {
+                sizeY = ARROW_BASE_SIZE;
+            }
+            offsetY = ARROW_SIZE - sizeY;
 
-				//let it grow depending on the progress
-				sizeY = scaledProgress;
 
-				if (sizeY > 19) {
-					sizeY = 19;
-				}
+            drawRectWithSourceOffset(left + targetX, top + targetY, sourceX, sourceY, sizeX, sizeY, rotation, offsetX, offsetY, ARROW_SIZE, ARROW_SIZE);
 
-				//some arrows should be painted from bottom to top
-				if (id < 2) {
-					offsetY = 28 - sizeY;
-				}
-			}else{
-				//only draw half of it, this is to avoid getting any part of the arrow head
-				sizeY = 14;
-
-				//this is which half that should pe painted
-				if (id >= 2) {
-					offsetY = 14;
-				}
-
-				//let it grow depending on the progress
-				sizeX = scaledProgress;
-
-				if (sizeX > 19) {
-					sizeX = 19;
-				}
-
-				//some arrows should be painted from bottom to top
-				if (id % 2 == 1) {
-					offsetX = 28 - sizeX;
-				}
-			}
-
-			drawTexturedModalRect(left + targetX + offsetX, top + targetY + offsetY, sourceX + offsetX, sourceY + offsetY, sizeX, sizeY);
-			//reset the values for next drawing
-			offsetX = offsetY = 0;
-			sizeX = sizeY = 28;
 
 			//draw the second part(with the head) of the white arrow
-			if (scaledProgress > 19) {
-				//remove the first part from the total progress
-				scaledProgress -= 19;
+			if (scaledProgress > ARROW_BASE_SIZE) {
+				scaledProgress -= ARROW_BASE_SIZE;
 
-				if (manager.toCart[id]) {
-					//let it grow depending on the progress
-					sizeX = scaledProgress;
+                sizeX = scaledProgress;
+                if (sizeX > ARROW_HEAD_SIZE) {
+                    sizeX = ARROW_HEAD_SIZE;
+                }
+                offsetX = ARROW_HEAD_SIZE - sizeX;
 
-					if (sizeX > 23) {
-						sizeX = 23;
-					}
+                offsetY = 0;
+                sizeY = ARROW_SIZE;
 
-					//some arrows should be painted from bottom to top
-					if (id % 2 == 0) {
-						offsetX = 22 - sizeX;
-					}else{
-						offsetX = 6;
-					}
-				}else{
-					//let it grow depending on the progress
-					sizeY = scaledProgress;
-
-					if (sizeY > 23) {
-						sizeY = 23;
-					}
-
-					//some arrows should be painted from bottom to top
-					if (id >= 2){
-						offsetY = 22 - sizeY;
-					}else{
-						offsetY = 6;
-					}
-				}
-
-				drawTexturedModalRect(left + targetX + offsetX, top + targetY + offsetY, sourceX + offsetX, sourceY + offsetY, sizeX, sizeY);
+                drawRectWithSourceOffset(left + targetX, top + targetY, sourceX, sourceY, sizeX, sizeY, rotation, offsetX, offsetY, ARROW_SIZE, ARROW_SIZE);
 			}
 		}	
 	}
-	
+
+    private static final int BOX_SRC_X = 1;
+    private static final int BOX_SRC_Y = 1;
+    private static final int RETURN_SRC_X = 22;
+    private static final int RETURN_SRC_X_OFFSET = 9;
+    private static final int RETURN_SRC_Y = 1;
+
+    private static final int COLOR_SELECTOR_UNIT_SIZE = 4;
+    private static final int COLOR_SELECTOR_UNIT_SRC_X = 49;
+    private static final int COLOR_SELECTOR_UNIT_SRC_Y = 1;
+
+
 	protected void drawColors(int id, int color, int left, int top) {
-		int[] coords = getReturnCoords(id);
-		drawTexturedModalRect(left + coords[0], top + coords[1], getColorSourceX() + (manager.doReturn[manager.color[id]-1] ? 8 : 0), 80 + 8 * color, 8, 8);
+        setColor(color);
 
-		coords = getBoxCoords(id);
-		drawTexturedModalRect(left + coords[0] - 2, top + coords[1] - 2, getColorSourceX(), 20 * color, 20, 20);
-	}
-
-    protected int[] getMiddleCoords() {
-        return new int[] {getCenterTargetX() + 45, 61,20,20};
-    }
-
-    protected int[] getBoxCoords(int id) {
-        int x = id % 2;
-        int y = id / 2;
-        int xCoord = getCenterTargetX() + 4 + x * 82;
-        int yCoord = 17 + y * 88;
-
-		yCoord += offsetObjectY(manager.layoutType, x, y);
-		
-        return new int[] {xCoord, yCoord,20,20};
-    }
-
-    protected int[] getArrowCoords(int id) {
-        int x = id % 2;
-        int y = id / 2;
-        int xCoord = getCenterTargetX() + 25 + x * 28;
-        int yCoord = 17 + y * 76;
-
-		yCoord += offsetObjectY(manager.layoutType, x, y);
-
-        return new int[] {xCoord, yCoord, 28, 28};
-    }
-
-    protected int[] getTextCoords(int id){
-        int[] coords = getBoxCoords(id);
-        int xCoord = coords[0];
-        int yCoord = coords[1];
-
-        if (id >= 2) {
-            yCoord -= 12;
+        int texture;
+        if (color == 4) {
+            texture = 2;
         }else{
-            yCoord += 20;
+            texture = manager.doReturn[manager.color[id] - 1] ? 1 : 0;
         }
 
-        return new int[] {xCoord, yCoord, 20, 10};
+		int[] coordinate = getReturnCoordinate(id);
+        drawTexturedModalRect(left + coordinate[0], top + coordinate[1], RETURN_SRC_X + RETURN_SRC_X_OFFSET * texture, RETURN_SRC_Y, coordinate[2], coordinate[3]);
+
+		coordinate = getBoxCoordinate(id);
+		drawTexturedModalRect(left + coordinate[0] - 2, top + coordinate[1] - 2, BOX_SRC_X, BOX_SRC_Y, coordinate[2], coordinate[3]);
+
+
+
+        coordinate = getColorSelectorCoordinate(id);
+        drawTexturedModalRect(left + coordinate[0], top + coordinate[1], RETURN_SRC_X + RETURN_SRC_X_OFFSET * 2, RETURN_SRC_Y, coordinate[2], coordinate[3]);
+        for (int i = 0; i < 4; i++) {
+            int unitColor = (color + i + 1) % 5;
+            setColor(unitColor);
+
+            int x = i % 2;
+            int y = i / 2;
+            drawTexturedModalRect(left + coordinate[0] + x * COLOR_SELECTOR_UNIT_SIZE, top + coordinate[1] + y * COLOR_SELECTOR_UNIT_SIZE, COLOR_SELECTOR_UNIT_SRC_X, COLOR_SELECTOR_UNIT_SRC_Y, COLOR_SELECTOR_UNIT_SIZE, COLOR_SELECTOR_UNIT_SIZE);
+        }
+        setColor(color);
+        drawTexturedModalRect(left + coordinate[0] + COLOR_SELECTOR_UNIT_SIZE / 2, top + coordinate[1] + COLOR_SELECTOR_UNIT_SIZE / 2, COLOR_SELECTOR_UNIT_SRC_X, COLOR_SELECTOR_UNIT_SRC_Y, COLOR_SELECTOR_UNIT_SIZE, COLOR_SELECTOR_UNIT_SIZE);
+
+        setColor(ColorEffect.CLEAR);
+	}
+
+    protected int[] getCenterCoordinate() {
+        return new int[] {getCenterTargetX() + 45, 61, 20, 20};
     }
 
-    protected int[] getColorpickerCoords(int id) {
+    protected int[] getBoxCoordinate(int id) {
         int x = id % 2;
         int y = id / 2;
-        int xCoord = getCenterTargetX() + 3 + x * 92;
-        int yCoord = 49 + y * 32;
+        int targetX = getCenterTargetX() + 4 + x * 82;
+        int targetY = 17 + y * 88;
 
-		yCoord += offsetObjectY(manager.layoutType, x, y);
-
-        return new int[] {xCoord, yCoord, 8, 8};
+		targetY += offsetObjectY(manager.layoutType, x, y);
+		
+        return new int[] {targetX, targetY, 20, 20};
     }
 
-	protected int[] getReturnCoords(int id) {
+    protected int[] getArrowCoordinate(int id) {
         int x = id % 2;
         int y = id / 2;
-        int xCoord = getCenterTargetX() + 14 + x * 70;
-        int yCoord = 49 + y * 32;
+        int targetX = getCenterTargetX() + 25 + x * 28;
+        int targetY = 17 + y * 76;
 
-		yCoord += offsetObjectY(manager.layoutType, x, y);
+		targetY += offsetObjectY(manager.layoutType, x, y);
 
-        return new int[] {xCoord, yCoord, 8, 8};
+        return new int[] {targetX, targetY, 28, 28};
+    }
+
+    protected int[] getTextCoordinate(int id){
+        int[] coordinate = getBoxCoordinate(id);
+        int targetX = coordinate[0];
+        int targetY = coordinate[1];
+
+        if (id >= 2) {
+            targetY -= 12;
+        }else{
+            targetY += 20;
+        }
+
+        return new int[] {targetX, targetY, 20, 10};
+    }
+
+    protected int[] getColorSelectorCoordinate(int id) {
+        int x = id % 2;
+        int y = id / 2;
+        int targetX = getCenterTargetX() + 3 + x * 92;
+        int targetY = 49 + y * 32;
+
+		targetY += offsetObjectY(manager.layoutType, x, y);
+
+        return new int[] {targetX, targetY, 8, 8};
+    }
+
+	protected int[] getReturnCoordinate(int id) {
+        int x = id % 2;
+        int y = id / 2;
+        int targetX = getCenterTargetX() + 14 + x * 70;
+        int targetY = 49 + y * 32;
+
+		targetY += offsetObjectY(manager.layoutType, x, y);
+
+        return new int[] {targetX, targetY, 8, 8};
     }
 
 	@Override
     public void mouseClick(int x, int y, int button) {
         super.mouseClick(x, y, button);
 
-        if (button == 0 || button == 1)
-        {
-
+        if (button == 0 || button == 1) {
             x -= getGuiLeft();
             y -= getGuiTop();
 
-            if (inRect(x, y, getMiddleCoords())) {
+            if (inRect(x, y, getCenterCoordinate())) {
                 manager.sendPacket(5, (byte)(button == 0 ? 1 : -1));
             }else{
 
@@ -297,16 +288,16 @@ public abstract class GuiManager extends GuiBase
 					byte data = (byte)i;
 					data |= (button << 2);
 
-					if (inRect(x, y, getArrowCoords(i))) {
+					if (inRect(x, y, getArrowCoordinate(i))) {
 						manager.sendPacket(0, (byte)i);
 						break;
-					}else if (inRect(x, y, getTextCoords(i))) {
+					}else if (inRect(x, y, getTextCoordinate(i))) {
 						manager.sendPacket(2, data);
 						break;
-					}else if (inRect(x, y, getColorpickerCoords(i))) {
+					}else if (inRect(x, y, getColorSelectorCoordinate(i))) {
 						manager.sendPacket(3, data);
 						break;
-					}else if (inRect(x, y, getReturnCoords(i))) {
+					}else if (inRect(x, y, getReturnCoordinate(i))) {
 						manager.sendPacket(4, (byte)i);
 						break;
 					}else if (sendOnClick(i, x, y, data)) {
@@ -317,11 +308,35 @@ public abstract class GuiManager extends GuiBase
 			
         }
     }
-	
-	
+
+    protected void setColor(int color) {
+        setColor(ColorEffect.values()[color]);
+    }
+    protected void setColor(ColorEffect color) {
+        GL11.glColor4f(color.red, color.green, color.blue, 1F);
+    }
+
+    protected enum ColorEffect {
+        RED(237, 28, 36),
+        BLUE(0, 114, 188),
+        YELLOW(255, 242, 0),
+        GREEN(57, 181, 74),
+        BLACK(48, 48, 48),
+        CLEAR(255, 255, 255);
+
+        private float red;
+        private float green;
+        private float blue;
+
+        ColorEffect(int red, int green, int blue) {
+            this.red = red / 255F;
+            this.green = green / 255F;
+            this.blue = blue / 255F;
+        }
+    }
+
 
     private TileEntityManager manager;
-    private InventoryPlayer invPlayer;
 	
 	protected void drawExtraOverlay(int id, int x, int y) {}
 	protected boolean sendOnClick(int id, int x, int y, byte data) {return false;}

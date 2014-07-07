@@ -71,7 +71,6 @@ public class TileEntityDetector extends TileEntityBase
 	}
 	
 	private void loadLogicObjectFromInteger(int val) {
-        System.out.println(val + ": " + Integer.toBinaryString(val));
         short info = (short)((val >> 16) & 65535);
         short data = (short)(val & 65535);
 

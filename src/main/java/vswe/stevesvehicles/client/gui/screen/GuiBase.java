@@ -336,15 +336,67 @@ public abstract class GuiBase extends GuiNEIKiller {
         tessellator.draw();	
 	}
 
-    public void drawRect(int x, int y, int u, int v, int w, int h, RENDER_ROTATION rotation) {
+
+    //TODO
+    @SuppressWarnings("SuspiciousNameCombination")
+    public void drawRectWithSourceOffset(int x, int y, int u, int v, int w, int h, RenderRotation rotation, int offsetX, int offsetY, int fullWidth, int fullHeight) {
+        switch (rotation) {
+            case NORMAL:
+                x += offsetX;
+                y += offsetY;
+                u += offsetX;
+                v += offsetY;
+                break;
+            default:
+            case ROTATE_90:
+                offsetX = 0;
+                offsetY = 0;
+                //TODO
+                x += fullWidth - (offsetX + w);
+                y += offsetY;
+                u += offsetX;
+                v += offsetY;
+                int temp = w;
+                w = h;
+                h = temp;
+
+                break;
+            case ROTATE_180:
+                x += fullWidth - (offsetX + w);
+                y += fullHeight - (offsetY + h);
+                u += offsetX;
+                v += offsetY;
+                break;
+
+
+            case FLIP_HORIZONTAL:
+                x += fullWidth - (offsetX + w);
+                y += offsetY;
+                u += offsetX;
+                v += offsetY;
+                break;
+
+            case FLIP_VERTICAL:
+                x += offsetX;
+                y += fullHeight - (offsetY + h);
+                u += offsetX;
+                v += offsetY;
+                break;
+
+        }
+
+        drawRect(x, y, u, v, w, h, rotation);
+    }
+
+    public void drawRect(int x, int y, int u, int v, int w, int h, RenderRotation rotation) {
         drawRect(x, y, u, v, w, h, rotation, 0.00390625F);
     }
 
     public void drawRectWithTextureSize(int x, int y, int u, int v, int w, int h, int textureSize) {
-        drawRect(x, y, u, v, w, h, RENDER_ROTATION.NORMAL, 1F / textureSize);
+        drawRect(x, y, u, v, w, h, RenderRotation.NORMAL, 1F / textureSize);
     }
 
-    private void drawRect(int x, int y, int u, int v, int w, int h, RENDER_ROTATION rotation, float multiplier) {
+    private void drawRect(int x, int y, int u, int v, int w, int h, RenderRotation rotation, float multiplier) {
         double a = (double)((float)(u + 0) * multiplier);
         double b = (double)((float)(u + w) * multiplier);
         double c = (double)((float)(v + h) * multiplier);
@@ -420,7 +472,7 @@ public abstract class GuiBase extends GuiNEIKiller {
         tessellator.draw();
     }	
 	
-	public static enum RENDER_ROTATION{
+	public static enum RenderRotation {
 		NORMAL,
 		ROTATE_90,
 		ROTATE_180,
@@ -431,7 +483,7 @@ public abstract class GuiBase extends GuiNEIKiller {
 		FLIP_VERTICAL,
 		ROTATE_270_FLIP;
 		
-		public RENDER_ROTATION getNextRotation() {
+		public RenderRotation getNextRotation() {
 			switch(this) {
 				default:
 				case NORMAL:
@@ -453,8 +505,12 @@ public abstract class GuiBase extends GuiNEIKiller {
 					return FLIP_HORIZONTAL;				
 			}
 		}
+
+        public RenderRotation getPreviousRotation() {
+            return getNextRotation().getNextRotation().getNextRotation();
+        }
 		
-		public RENDER_ROTATION getFlippedRotation() {
+		public RenderRotation getFlippedRotation() {
 			switch(this) {
 				default:
 				case NORMAL:

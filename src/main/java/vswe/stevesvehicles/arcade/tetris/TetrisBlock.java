@@ -1,19 +1,19 @@
 package vswe.stevesvehicles.arcade.tetris;
 
-import vswe.stevesvehicles.client.gui.screen.GuiBase.RENDER_ROTATION;
+import vswe.stevesvehicles.client.gui.screen.GuiBase;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 
 public class TetrisBlock {
 
 	private int u;
 	private int v;
-	private RENDER_ROTATION r;
+	private GuiBase.RenderRotation r;
 	
 	
 	public TetrisBlock(int u, int v) {
 		this.u = u;
 		this.v = v;
-		this.r = RENDER_ROTATION.NORMAL;
+		this.r = GuiBase.RenderRotation.NORMAL;
 	}
 	
 	
