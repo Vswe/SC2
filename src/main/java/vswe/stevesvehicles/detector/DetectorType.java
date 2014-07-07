@@ -8,7 +8,6 @@ import net.minecraft.util.StatCollector;
 import vswe.stevesvehicles.localization.entry.block.LocalizationDetector;
 import vswe.stevesvehicles.old.Blocks.BlockRailAdvDetector;
 import vswe.stevesvehicles.old.Blocks.ModBlocks;
-import vswe.stevesvehicles.old.Helpers.OperatorObject;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;

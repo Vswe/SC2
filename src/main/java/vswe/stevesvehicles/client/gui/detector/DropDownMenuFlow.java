@@ -2,8 +2,8 @@ package vswe.stevesvehicles.client.gui.detector;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import vswe.stevesvehicles.detector.LogicObject;
-import vswe.stevesvehicles.old.Helpers.OperatorObject;
+import vswe.stevesvehicles.detector.LogicObjectOperator;
+import vswe.stevesvehicles.detector.OperatorObject;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.client.gui.screen.GuiDetector;
 
@@ -22,7 +22,7 @@ public class DropDownMenuFlow extends DropDownMenu {
         int flowPosId = 0;
         for (OperatorObject operator : OperatorObject.getOperatorList(gui.getDetector().getBlockMetadata())) {
             if (operator.inTab()) {
-                drawContent(gui, flowPosId, operator.getID());
+                drawContent(gui, flowPosId, operator.getId());
                 flowPosId++;
             }
         }
@@ -55,7 +55,7 @@ public class DropDownMenuFlow extends DropDownMenu {
                     int[] target =  getContentRect(flowPosId);
 
                     if (gui.inRect(x, y, target)) {
-                        gui.currentObject = new LogicObject((byte)1, operator.getID());
+                        gui.currentObject = new LogicObjectOperator((byte)0, operator);
 
                         return;
                     }

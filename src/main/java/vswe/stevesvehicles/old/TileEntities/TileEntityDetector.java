@@ -4,6 +4,8 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevesvehicles.detector.LogicObjectOperator;
+import vswe.stevesvehicles.detector.OperatorObject;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.old.Containers.ContainerDetector;
@@ -30,15 +32,13 @@ public class TileEntityDetector extends TileEntityBase
 	
 	public LogicObject mainObj;
 
-    public TileEntityDetector()
-    {
-		mainObj = new LogicObject((byte)1, (byte)0);
+    public TileEntityDetector() {
+		mainObj = new LogicObjectOperator((byte)0, OperatorObject.MAIN);
     }
 
 
 	@Override
-    public void readFromNBT(NBTTagCompound nbttagcompound)
-    {
+    public void readFromNBT(NBTTagCompound nbttagcompound) {
         super.readFromNBT(nbttagcompound);
 		byte count = nbttagcompound.getByte("LogicObjectCount");
 		for (int i = 0; i < count; i++) {
@@ -47,8 +47,7 @@ public class TileEntityDetector extends TileEntityBase
     }
 
 	@Override
-    public void writeToNBT(NBTTagCompound nbttagcompound)
-    {
+    public void writeToNBT(NBTTagCompound nbttagcompound) {
         super.writeToNBT(nbttagcompound);
 		int count = saveLogicObject(nbttagcompound, mainObj, 0, false);
 		nbttagcompound.setByte("LogicObjectCount", (byte)count);
@@ -68,21 +67,15 @@ public class TileEntityDetector extends TileEntityBase
 	}
 	
 	private int saveLogicObjectToInteger(LogicObject obj) {
-		int returnVal = 0;
-		returnVal |= obj.getId() << (8 * 3);
-		returnVal |= obj.getParent().getId() << (8 * 2);
-		returnVal |= obj.getExtra() << (8 * 1);	
-		returnVal |= obj.getData() << (8 * 0);
-		return returnVal;
+        return (obj.getInfoShort() << 16) | obj.getData();
 	}
 	
-	private void loadLogicObjectFromInteger(int val) {	
-		byte id = (byte)((val >> (8*3)) & 255);
-		byte parent = (byte)((val >> (8*2)) & 255);
-		byte extra = (byte)((val >> (8*1)) & 255);
-		byte data = (byte)((val >> (8*0)) & 255);
-		
-		createObject(id, parent, extra, data);		
+	private void loadLogicObjectFromInteger(int val) {
+        System.out.println(val + ": " + Integer.toBinaryString(val));
+        short info = (short)((val >> 16) & 65535);
+        short data = (short)(val & 65535);
+
+		LogicObject.createObject(this, info, data);
 	}
 
 
@@ -116,25 +109,16 @@ public class TileEntityDetector extends TileEntityBase
 			if (lowestId == -1) {
 				return;
 			}
-			
 
-			createObject(lowestId, data[0], data[1], data[2]);
+            LogicObject.createObject(this, lowestId, data);
 		//remove object
 		}else if(id == 1) {
 			removeObject(mainObj, data[0]);
 		}
 	}
+
 	
-	private void createObject(byte id, byte parentId, byte extra, byte data) {
-		LogicObject newObject = new LogicObject(id, extra, data);
-		
-		LogicObject parent = getObjectFromId(mainObj,parentId);
-		if (parent != null) {
-			newObject.setParent(parent);
-		}	
-	}
-	
-	private LogicObject getObjectFromId(LogicObject object, int id) {
+	public LogicObject getObjectFromId(LogicObject object, int id) {
 		if(object.getId() == id) {	
 			return object;
 		}
@@ -189,7 +173,6 @@ public class TileEntityDetector extends TileEntityBase
 	}
 	
 	private void sendUpdatedLogicObjects(Container con, ICrafting crafting, LogicObject real, LogicObject cache) {
-
 		if (!real.equals(cache)) {
 			LogicObject parent = cache.getParent();
 			cache.setParent(null);
@@ -217,25 +200,14 @@ public class TileEntityDetector extends TileEntityBase
 			sendUpdatedLogicObjects(con, crafting, real.getChildren().get(i), cache.getChildren().get(i));
 		}
 	}
-	
-	private void sendAllLogicObjects(Container con, ICrafting crafting, LogicObject obj) {
-		sendLogicObject(con, crafting, obj);
-		
-		for (LogicObject child : obj.getChildren()) {
-			sendAllLogicObjects(con, crafting, child);
-		}
-	}
-	
+
 	private void sendLogicObject(Container con, ICrafting crafting, LogicObject obj) {
 		if (obj.getParent() == null) {
 			return;
 		}
-		short data = (short)((obj.getId() << 8) | obj.getParent().getId());
-		short data2 = (short)((obj.getExtra() << 8) | obj.getData());
-	
-	
-		updateGuiData(con, crafting, 0, data);
-		updateGuiData(con, crafting, 1, data2);				
+
+		updateGuiData(con, crafting, 0, obj.getInfoShort());
+		updateGuiData(con, crafting, 1, obj.getData());
 	}
 	
 	private void removeLogicObject(Container con, ICrafting crafting, LogicObject obj) {
@@ -254,12 +226,8 @@ public class TileEntityDetector extends TileEntityBase
 				System.out.println("Doesn't have the other part of the data");
 				return;
 			}
-			byte logicid = (byte)((oldData & (255 << 8)) >> 8);
-			byte parent = (byte)(oldData & 255);
-			byte extra = (byte)((data & (255 << 8)) >> 8);
-			byte logicdata = (byte)(data & 255);
-				
-			createObject(logicid, parent, extra, logicdata);	
+
+			LogicObject.createObject(this, oldData, data);
 			recalculateTree();	
 			hasOldData = false;
 		}else if(id == 2) {
@@ -269,7 +237,7 @@ public class TileEntityDetector extends TileEntityBase
 	}
 	
 	public void recalculateTree() {
-		mainObj.generatePosition(5,60,245,0);
+		mainObj.generatePosition(5, 60, 245, 0);
 	}
 	
 	public boolean evaluate(VehicleBase vehicle , int depth) {
@@ -292,26 +260,16 @@ public class TileEntityDetector extends TileEntityBase
 			}
 			
 			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta, 3);
-			//worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, StevesCarts.instance.detectorUnit.blockID);
-			
-
 		}
 		
 		if (truthValue) {
 			activeTimer = 20;
-		}		
-
+		}
 	}
 
-
-    public boolean isUseableByPlayer(EntityPlayer entityplayer)
-    {
-        if (worldObj.getTileEntity(xCoord, yCoord, zCoord) != this)
-        {
-            return false;
-        }
-
-        return entityplayer.getDistanceSq((double)xCoord + 0.5D, (double)yCoord + 0.5D, (double)zCoord + 0.5D) <= 64D;
+    @Override
+    public boolean isUseableByPlayer(EntityPlayer entityplayer) {
+        return worldObj.getTileEntity(xCoord, yCoord, zCoord) == this && entityplayer.getDistanceSq((double) xCoord + 0.5D, (double) yCoord + 0.5D, (double) zCoord + 0.5D) <= 64D;
     }
 
  

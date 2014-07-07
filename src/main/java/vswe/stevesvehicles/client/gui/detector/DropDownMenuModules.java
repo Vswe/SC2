@@ -3,6 +3,7 @@ package vswe.stevesvehicles.client.gui.detector;
 
 import net.minecraft.util.IIcon;
 import vswe.stevesvehicles.detector.LogicObject;
+import vswe.stevesvehicles.detector.LogicObjectModule;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
@@ -55,7 +56,7 @@ public class DropDownMenuModules extends DropDownMenuPages {
 
                     int[] target = getContentRect(modulePosId);
                     if (gui.inRect(x,y, target)) {
-                        gui.currentObject = new LogicObject((byte)0, (byte)ModuleRegistry.getIdFromModule(module));
+                        gui.currentObject = new LogicObjectModule((byte)0, module);
 
                         return;
                     }

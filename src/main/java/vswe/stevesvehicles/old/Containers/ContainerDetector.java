@@ -1,5 +1,7 @@
 package vswe.stevesvehicles.old.Containers;
 import vswe.stevesvehicles.container.ContainerBase;
+import vswe.stevesvehicles.detector.LogicObjectOperator;
+import vswe.stevesvehicles.detector.OperatorObject;
 import vswe.stevesvehicles.old.TileEntities.TileEntityBase;
 import net.minecraft.inventory.IInventory;
 import vswe.stevesvehicles.detector.LogicObject;
@@ -24,7 +26,7 @@ public class ContainerDetector extends ContainerBase
         this.detector = detector;
 
 		
-		mainObj = new LogicObject((byte)1, (byte)0);
+		mainObj = new LogicObjectOperator((byte)0, OperatorObject.MAIN);
     }
 
 

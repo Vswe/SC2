@@ -1,11 +1,9 @@
-package vswe.stevesvehicles.old.Helpers;
+package vswe.stevesvehicles.detector;
 
 import java.util.Collection;
 import java.util.HashMap;
 
 import net.minecraft.tileentity.TileEntity;
-import vswe.stevesvehicles.detector.DetectorType;
-import vswe.stevesvehicles.detector.LogicObject;
 import vswe.stevesvehicles.localization.ILocalizedText;
 import vswe.stevesvehicles.localization.entry.block.LocalizationDetector;
 import vswe.stevesvehicles.old.TileEntities.TileEntityDetector;
@@ -14,12 +12,13 @@ import vswe.stevesvehicles.vehicle.VehicleBase;
 public class OperatorObject {
 
 	private static HashMap<Byte, OperatorObject> allOperators;
-		
+	public static final OperatorObject MAIN;
+
 	static {
 		allOperators = new HashMap<Byte, OperatorObject>();
 		HashMap<Byte, OperatorObject> operators = new HashMap<Byte, OperatorObject>();
-		
-		new OperatorObject(operators, 0, LocalizationDetector.OUTPUT, 1) {
+
+        MAIN = new OperatorObject(operators, 0, LocalizationDetector.OUTPUT, 1) {
 			public boolean inTab() {
 				return false;
 			}
@@ -41,8 +40,9 @@ public class OperatorObject {
 			}	
 		};
 		new OperatorObject(operators, 3, LocalizationDetector.NOT, 1) {
+            @Override
 			public boolean isChildValid(OperatorObject child) {
-				return getID() != child.ID;
+				return getId() != child.id;
 			}
 			
 			public boolean evaluate(TileEntityDetector detector, VehicleBase vehicle, int depth,  LogicObject A, LogicObject B) {
@@ -55,12 +55,12 @@ public class OperatorObject {
 				return A.evaluateLogicTree(detector, vehicle, depth) != B.evaluateLogicTree(detector, vehicle, depth);
 			}		
 		};
-		new OperatorObjectRedirector(operators, 5, LocalizationDetector.TOP_UNIT, 0, 1, 0);
-		new OperatorObjectRedirector(operators, 6, LocalizationDetector.BOTTOM_UNIT, 0, -1, 0);
-		new OperatorObjectRedirector(operators, 7, LocalizationDetector.NORTH_UNIT, 0, 0, -1);
-		new OperatorObjectRedirector(operators, 8, LocalizationDetector.WEST_UNIT, -1, 0, 0);
-		new OperatorObjectRedirector(operators, 9, LocalizationDetector.SOUTH_UNIT, 0, 0, 1);
-		new OperatorObjectRedirector(operators, 10, LocalizationDetector.EAST_UNIT, 1, 0, 0);
+		new OperatorObjectRedirection(operators, 5, LocalizationDetector.TOP_UNIT, 0, 1, 0);
+		new OperatorObjectRedirection(operators, 6, LocalizationDetector.BOTTOM_UNIT, 0, -1, 0);
+		new OperatorObjectRedirection(operators, 7, LocalizationDetector.NORTH_UNIT, 0, 0, -1);
+		new OperatorObjectRedirection(operators, 8, LocalizationDetector.WEST_UNIT, -1, 0, 0);
+		new OperatorObjectRedirection(operators, 9, LocalizationDetector.SOUTH_UNIT, 0, 0, 1);
+		new OperatorObjectRedirection(operators, 10, LocalizationDetector.EAST_UNIT, 1, 0, 0);
 
 		//Note that IDs are also used by the specific types, the next ID here shouldn't be 11, that one is already in use.
 		
@@ -78,11 +78,11 @@ public class OperatorObject {
 		return allOperators;
 	}	
 	
-	public static class OperatorObjectRedirector extends OperatorObject {
+	public static class OperatorObjectRedirection extends OperatorObject {
 		private int x;
 		private int y;
 		private int z;
-		public OperatorObjectRedirector(HashMap<Byte, OperatorObject> operators, int ID, ILocalizedText name, int x, int y, int z) {
+		public OperatorObjectRedirection(HashMap<Byte, OperatorObject> operators, int ID, ILocalizedText name, int x, int y, int z) {
 			super(operators, ID, name, 0);
 			
 			this.x = x;
@@ -97,11 +97,7 @@ public class OperatorObject {
 			int z = this.z + detector.zCoord;
 			
 			TileEntity tileentity = detector.getWorldObj().getTileEntity(x, y, z);
-			if (tileentity != null && tileentity instanceof TileEntityDetector) {
-				return ((TileEntityDetector)tileentity).evaluate(vehicle, depth);
-			}else{
-				return false;
-			}
+            return tileentity != null && tileentity instanceof TileEntityDetector && ((TileEntityDetector) tileentity).evaluate(vehicle, depth);
 		}
 	}
 	
@@ -147,22 +143,22 @@ public class OperatorObject {
 		}
 	}	
 	
-	private byte ID;
+	private byte id;
 	private ILocalizedText name;
 	private int children;
 	
 	
-	public OperatorObject(HashMap<Byte, OperatorObject> operators, int ID, ILocalizedText name, int children) {
-		this.ID = (byte)ID;
+	public OperatorObject(HashMap<Byte, OperatorObject> operators, int id, ILocalizedText name, int children) {
+		this.id = (byte)id;
 		this.name = name;
 		this.children = children;
 		
-		operators.put(this.ID, this);
-		allOperators.put(this.ID, this);
+		operators.put(this.id, this);
+		allOperators.put(this.id, this);
 	}
 	
-	public byte getID() {
-		return ID;
+	public byte getId() {
+		return id;
 	}
 	
 	public String getName() {
@@ -176,11 +172,11 @@ public class OperatorObject {
 	public boolean inTab() {
 		return true;
 	}
-	
-	public boolean isChildValid(OperatorObject child) {
-		return true;
-	}
-	
+
+    public boolean isChildValid(OperatorObject child) {
+        return true;
+    }
+
 	public boolean evaluate(TileEntityDetector detector, VehicleBase vehicle, int depth, LogicObject A, LogicObject B) {
 		return false;
 	}

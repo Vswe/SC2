@@ -9,7 +9,6 @@ import org.lwjgl.opengl.GL11;
 import vswe.stevesvehicles.client.gui.detector.DropDownMenuFlow;
 import vswe.stevesvehicles.client.gui.detector.DropDownMenuModules;
 import vswe.stevesvehicles.client.gui.detector.DropDownMenuStates;
-import vswe.stevesvehicles.client.gui.screen.GuiBase;
 import vswe.stevesvehicles.old.Containers.ContainerDetector;
 import vswe.stevesvehicles.detector.DetectorType;
 import vswe.stevesvehicles.client.gui.detector.DropDownMenu;
@@ -184,7 +183,7 @@ public class GuiDetector extends GuiBase {
 	
 	private boolean removeObject(int x, int y, LogicObject object) {
 		if (inRect(x,y, object.getRect()) && object.canBeRemoved()) {
-			object.setParent(detector, null);
+			object.setParentAndUpdate(null);
 		
 			return true;
 		}	
@@ -201,7 +200,7 @@ public class GuiDetector extends GuiBase {
 	private boolean pickupObject(int x, int y, LogicObject object) {
 		if (inRect(x,y, object.getRect()) && object.canBeRemoved()) {
 			currentObject = object;
-			object.setParent(detector, null);
+			object.setParentAndUpdate(null);
 		
 			return true;
 		}	
@@ -220,13 +219,13 @@ public class GuiDetector extends GuiBase {
 			/*if (isShiftKeyDown() && drop.hasRoomForChild() && drop.isChildValid(object)) {
 				if (object.getParent() != null && object.getParent().isChildValid(drop)) {
 					LogicObject parent = object.getParent();
-					object.setParent(detector, null);
-					drop.setParent(detector, parent);
-					object.setParent(detector, drop);
+					object.setParentAndUpdate(detector, null);
+					drop.setParentAndUpdate(detector, parent);
+					object.setParentAndUpdate(detector, drop);
 				
 			}else{}*/
 				if (object.hasRoomForChild() && object.isChildValid(drop)) {
-					drop.setParent(detector, object);
+					drop.setParentAndUpdate(object);
 				}
 			//}
 

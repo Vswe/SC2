@@ -3,59 +3,48 @@ import java.util.ArrayList;
 
 import org.lwjgl.opengl.GL11;
 
-import vswe.stevesvehicles.client.gui.detector.DropDownMenuFlow;
 import vswe.stevesvehicles.detector.modulestate.ModuleState;
 import vswe.stevesvehicles.detector.modulestate.registry.ModuleStateRegistry;
+import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.network.PacketHandler;
-import vswe.stevesvehicles.old.Helpers.OperatorObject;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.client.gui.screen.GuiDetector;
-import vswe.stevesvehicles.module.data.ModuleData;
-import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.old.TileEntities.TileEntityDetector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 
-public class LogicObject {
-	private byte id;
-	private LogicObject parent;
-	private byte type;
-	private ArrayList<LogicObject> children;
-	
-	private int x;
-	private int y;
-	private int level;
+public abstract class LogicObject {
 
-	private byte data; //TODO shouldn't work with bytes anymore
-	
-	
-	public LogicObject(byte id, byte type, byte data) {
+	private ArrayList<LogicObject> children;
+
+    protected byte id;
+    protected LogicObject parent;
+	protected int x;
+    protected int y;
+    protected int level;
+    protected short data;
+
+	public LogicObject(byte id, short data) {
 		this.id = id;
-		this.type = type;
 		this.data = data;
 		children = new ArrayList<LogicObject>();
 	}	
 	
-	public LogicObject( byte type, byte data) {
-		this((byte)0, type, data);
-	}
-	
-	public void setParent(TileEntityDetector detector, LogicObject parent) {
+
+	public void setParentAndUpdate(LogicObject parent) {
 		if (parent != null) {
-			PacketHandler.sendPacket(0, new byte[] {parent.id, getExtra(), data});
+			PacketHandler.sendPacket(0, new byte[] {parent.id, (byte)getType(), (byte)((data >> 8) & 255), (byte)(data & 255)});
 			for (LogicObject child : children) {
-				child.setParent(detector, this);
+				child.setParentAndUpdate(this);
 			}			
 		}else{
 			PacketHandler.sendPacket(1,new byte[] {id});
 		}
 	}
 	
-	
-	
-	public void setParent( LogicObject parent) {
+
+	public void setParent(LogicObject parent) {
 		if (this.parent != null) {
 			this.parent.children.remove(this);
 		}
@@ -77,14 +66,7 @@ public class LogicObject {
 	public byte getId() {
 		return id;
 	}
-	
-	public byte getExtra() {
-		return type;
-	}
 
-	public byte getData() {
-		return data;
-	}	
 	
 	public void setX(int val) {
 		this.x = val;
@@ -95,69 +77,23 @@ public class LogicObject {
 	}	
 	
 	public void setXCenter(int val) {
-		setX(val +(!isOperator() ? -8 : -10));
+		setX(val - getWidth() / 2);
 	}
 	
 	public void setYCenter(int val) {
-		setY(val +(!isOperator() ? -8 : -5));
+		setY(val - getHeight() / 2);
 	}		
 	
 	@SideOnly(Side.CLIENT)
 	public void draw(GuiDetector gui, int mouseX, int mouseY, int x, int y) {
-		generatePosition(x - 100/2 ,y, 100,0);		
+		generatePosition(x - 100/2 , y, 100,0);
 		draw(gui, mouseX, mouseY);
 	}
 	
 	@SideOnly(Side.CLIENT)
 	public void draw(GuiDetector gui, int mouseX, int mouseY) {
-		if (!isOperator()) {
-			ResourceHelper.bindResource(GuiDetector.TEXTURE);
-			
-			int xIndex = 0;
-			if (gui.inRect(mouseX, mouseY, getRect())) {
-				xIndex = 1;
-			}
-			
-			gui.drawTexturedModalRect(gui.getGuiLeft()+ x, gui.getGuiTop() + y , 1 + xIndex * 17, 203, 16, 16);
-			
-			if (isModule()) {
-				ModuleData module = ModuleRegistry.getModuleFromId(data);
 
-				if (module != null) {
-                    ResourceHelper.bindResource(GuiDetector.MODULE_TEXTURE);
-					gui.drawIcon(module.getIcon(), gui.getGuiLeft() + x, gui.getGuiTop() + y, 1F, 1F, 0F, 0F);
-				}
-			}else{
-				ModuleState state = ModuleStateRegistry.getStateFromId(data);
-
-                if (state != null) {
-                    ResourceHelper.bindResource(state.getTexture());
-				    gui.drawRectWithTextureSize(gui.getGuiLeft() + x, gui.getGuiTop() + y, 0, 0, 16, 16, 16);
-                }
-			}
-			
-		}else{
-			ResourceHelper.bindResource(GuiDetector.TEXTURE);
-			
-			int[] src = DropDownMenuFlow.getSource(gui, data);
-
-			gui.drawTexturedModalRect(gui.getGuiLeft()+x, gui.getGuiTop() + y, src[0], src[1], 20, 11);	
-
-			if (gui.inRect(mouseX, mouseY, getRect())) {
-				int xIndex;
-				if (gui.currentObject == null) {
-					xIndex = 2;
-				}else if(hasRoomForChild() && isChildValid(gui.currentObject)) {
-					xIndex = 0;
-				}else{
-					xIndex = 1;
-				}
-			
-				gui.drawTexturedModalRect(gui.getGuiLeft() + x, gui.getGuiTop() + y , 35 + xIndex * 21, 203, 20, 11);
-			}			
-		}
-		
-		if (parent != null && parent.maxChilds() > 1) {
+		if (parent != null && parent.getMaxChildCount() > 1) {
 			int px1 = gui.getGuiLeft() + x;
 			int py1 = gui.getGuiTop() + y;
 			int px2 = gui.getGuiLeft() + parent.x;
@@ -167,7 +103,7 @@ public class LogicObject {
 			py2 += 5;
 
 			//the middle of the child
-			px1 += (!isOperator() ? 8 : 10);
+			px1 += getWidth() / 2;
 			
 			boolean tooClose = false;
 			
@@ -199,168 +135,128 @@ public class LogicObject {
 		setYCenter(y);
 		this.level = level;
 		
-		int max = maxChilds();
+		int max = getMaxChildCount();
 		for (int i = 0; i < children.size(); i++) {
-			children.get(i).generatePosition(x + (w/max) * i , y+(!children.get(i).isOperator() ? 16 : 11), w/max, level + (children.get(i).maxChilds() > 1 ? 1 : 0));
+			children.get(i).generatePosition(x + (w/max) * i , y+(children.get(i).getHeight()), w/max, level + (children.get(i).getMaxChildCount() > 1 ? 1 : 0));
 		}	
 	}
-	
-	private boolean isModule() {
-		return type == 0;
-	}
-	
-	private boolean isOperator() {
-		return type == 1;
-	}	
-	
-	private boolean isState() {
-		return type == 2;
-	}	
-	
-	private OperatorObject getOperator() {
-		if (isOperator()) {
-			return OperatorObject.getAllOperators().get(data);
-		}else{
-			return null;
-		}
-	}	
-			
+
 	public boolean evaluateLogicTree(TileEntityDetector detector, VehicleBase vehicle, int depth) {
-		if (depth >= 1000) {
-			return false;
-		}
-		
-		if (isState()) {
-			ModuleState state = ModuleStateRegistry.getStateFromId(getData());
-            return state != null && state.isValid(vehicle);
-        }else if (isModule()) {
-			for (ModuleBase module : vehicle.getModules()) {
-				if (getData() == module.getModuleId()) {
-					return true;
-				}
-			}
-			return false;
-		}else{
-			if (getChildren().size() != maxChilds()) {
-				return false;
-			}
-			
-			OperatorObject operator = getOperator();
-			if (operator != null) {
-
-				
-				if (operator.getChildCount() == 2) {
-					return operator.evaluate(detector, vehicle, depth + 1, getChildren().get(0), getChildren().get(1));
-				}else if(operator.getChildCount() == 1) {
-					return operator.evaluate(detector, vehicle, depth + 1, getChildren().get(0) , null);
-				}else{
-					return operator.evaluate(detector, vehicle, depth + 1, null, null);
-				}
-				
-				
-				
-			}else{
-				return false;
-			}
-			
-		}
-	}		
-		
+        return depth < 1000;
+    }
 
 	
-	
-	private int maxChilds() {
-		OperatorObject operator = getOperator();
-		if (operator != null) {
-			return operator.getChildCount();
-		}else{
-			return 0;
-		}
+	protected int getMaxChildCount() {
+	    return 0;
 	}
 
 	public boolean isChildValid(LogicObject child) {
-		if (level >= 4 && child.isOperator()) {
-			return false;
-		}else if(level >= 5) {
-			return false;
-		}
-	
-
-		OperatorObject operator = getOperator();
-		OperatorObject operatorchild = child.getOperator();
-		if (operator != null && operatorchild != null) {
-			return operator.isChildValid(operatorchild);
-		}else{
-			return true;
-		}		
-
+        return false;
 	}
-	
-	public boolean canBeRemoved() {
-		OperatorObject operator = getOperator();
-		if (operator != null) {
-			return operator.inTab();
-		}else{
-			return true;
-		}		
-	}
+
+    public boolean isValidAsChild(LogicObjectOperator parent) {
+        return true;
+    }
+
 	
 	public boolean hasRoomForChild() {
-		return children.size() < maxChilds();
+		return children.size() < getMaxChildCount();
 	}
 	
 	public int[] getRect() {
-		if (!isOperator()) {
-			return new int[] {x, y, 16, 16};
-		}else{
-			return new int[] {x, y, 20, 11};		
-		}
+	    return new int[] {x, y, getWidth(), getHeight()};
 	}
-	
+
+    @Override
 	public boolean equals(Object obj) {
 		if (obj instanceof LogicObject) {
 			LogicObject logic = (LogicObject)obj;
 			return logic.id == id && 
 					((logic.parent == null && parent == null) || (logic.parent != null && parent != null && logic.parent.id == parent.id)) &&
-					logic.getExtra() == getExtra() &&
-					logic.getData() == getData();
+					logic.getClass() == getClass() &&
+					logic.data == data;
 		}else{
 			return false;
 		}
 	}
-	
-	public LogicObject copy(LogicObject parent) {
-		LogicObject obj = new LogicObject(id, getExtra(), getData());
-		obj.setParent(parent);
-		return obj;
-	}
-	
-	public String getName() {
-		if (isState()) {
-			ModuleState state = ModuleStateRegistry.getStateFromId(getData());
-			if (state == null) {
-				return "Undefined";
-			}else{
-				return state.getName();
-			}
-		}else if (isModule()) {
-			ModuleData module = ModuleRegistry.getModuleFromId(getData());
-			if (module == null) {
-				return "Undefined";
-			}else{
-				return module.getName();
-			}
-		}else {
-			String name = "Undefined";
-			
-			OperatorObject operator = getOperator();
-			if (operator != null) {
-				name = operator.getName();
-			}			
-				
-			return name + "\nChild nodes: " + getChildren().size() + "/" + maxChilds();
-		}
-	}
-	
-	
+
+
+    public boolean canBeRemoved() {
+        return true;
+    }
+
+    protected int getWidth() {
+        return 16;
+    }
+
+    protected int getHeight() {
+        return 16;
+    }
+
+
+
+	public abstract LogicObject copy(LogicObject parent);
+    public abstract String getName();
+    public abstract int getType();
+
+    public static void createObject(TileEntityDetector detector, byte id, byte[] data) {
+        byte parentId = data[0];
+        byte type = data[1];
+        int part1 = data[2] < 0 ? 256 + data[2] : data[2];
+        int part2 = data[3] < 0 ? 256 + data[3] : data[3];
+        int dataId = part1 << 8 | part2;
+
+        createObject(detector, id, parentId, type, (short)dataId);
+    }
+
+
+    private static void createObject(TileEntityDetector detector, byte id, byte parentId, byte type, short dataId) {
+        LogicObject newObject = null;
+
+        switch (type) {
+            case 0:
+                ModuleData moduleData = ModuleRegistry.getModuleFromId(dataId);
+                if (moduleData != null) {
+                    newObject = new LogicObjectModule(id, moduleData);
+                }
+                break;
+            case 1:
+                OperatorObject operatorObject = OperatorObject.getAllOperators().get((byte)dataId);
+                if (operatorObject != null) {
+                    newObject = new LogicObjectOperator(id, operatorObject);
+                }
+                break;
+            case 2:
+                ModuleState moduleState = ModuleStateRegistry.getStateFromId(dataId);
+                if (moduleState != null) {
+                    newObject = new LogicObjectState(id, moduleState);
+                }
+                break;
+        }
+
+        if (newObject != null) {
+            LogicObject parent = detector.getObjectFromId(detector.mainObj, parentId);
+            if (parent != null) {
+                newObject.setParent(parent);
+            }
+        }
+    }
+
+
+    public static void createObject(TileEntityDetector detector, short info, short data) {
+        byte type = (byte)(info & 3);
+        byte id = (byte)((info >> 2) & 127);
+        byte parentId = (byte)((info >> 9) & 127);
+        createObject(detector, id, parentId, type, data);
+    }
+
+    public short getInfoShort() {
+        return (short)((getType() & 3) | ((id & 127) << 2) | ((parent.getId() & 127) << 9));
+    }
+
+    public short getData() {
+        return data;
+    }
+
+
 }

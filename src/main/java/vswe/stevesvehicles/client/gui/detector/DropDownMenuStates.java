@@ -2,6 +2,7 @@ package vswe.stevesvehicles.client.gui.detector;
 
 
 import vswe.stevesvehicles.detector.LogicObject;
+import vswe.stevesvehicles.detector.LogicObjectState;
 import vswe.stevesvehicles.detector.modulestate.ModuleState;
 import vswe.stevesvehicles.detector.modulestate.registry.ModuleStateRegistry;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
@@ -47,7 +48,7 @@ public class DropDownMenuStates extends DropDownMenuPages {
             for (ModuleState state : ModuleStateRegistry.getAllStates()) {
                 int[] target = getContentRect(statePosId);
                 if (gui.inRect(x, y, target)) {
-                    gui.currentObject = new LogicObject((byte)2, (byte)ModuleStateRegistry.getIdFromState(state));
+                    gui.currentObject = new LogicObjectState((byte)0, state);
 
                     return;
                 }
