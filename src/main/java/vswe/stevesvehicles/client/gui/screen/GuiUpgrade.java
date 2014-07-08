@@ -44,14 +44,14 @@ public class GuiUpgrade extends GuiBase {
     private static final int SLOT_SRC_Y = 191;
     private static final int SLOT_SIZE = 18;
 
-    private static ResourceLocation texture = ResourceHelper.getResource("/gui/upgrade.png");
+    private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/upgrade.png");
     @Override
     public void drawGuiBackground(float f, int x, int y) {
         GL11.glColor4f(1F, 1F, 1F, 1F);
 
         int left = getGuiLeft();
         int top = getGuiTop();
-		ResourceHelper.bindResource(texture);
+		ResourceHelper.bindResource(TEXTURE);
         drawTexturedModalRect(left, top, 0, 0, xSize, ySize);
 
 		if (upgrade.getUpgrade() != null) {

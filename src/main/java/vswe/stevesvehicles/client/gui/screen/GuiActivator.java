@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.Interfaces;
+package vswe.stevesvehicles.client.gui.screen;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
@@ -15,19 +15,16 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class GuiActivator extends GuiBase
-{
-    public GuiActivator(InventoryPlayer invPlayer, TileEntityActivator activator)
-    {
+public class GuiActivator extends GuiBase {
+    public GuiActivator(InventoryPlayer invPlayer, TileEntityActivator activator) {
         super(new ContainerActivator(invPlayer, activator));
-        this.invPlayer = invPlayer;
         setXSize(255);
         setYSize(222);
 		this.activator = activator;
     }
 
-    public void drawGuiForeground(int x, int y)
-    {
+    @Override
+    public void drawGuiForeground(int x, int y) {
 		GL11.glDisable(GL11.GL_LIGHTING);
 	
         getFontRenderer().drawString(LocalizationToggler.TITLE.translate(), 8, 6, 0x404040);
@@ -52,24 +49,31 @@ public class GuiActivator extends GuiBase
     }
 	
 	private void drawMouseMover(String str, int x, int y, int[] rect) {
-		if (inRect(x-getGuiLeft(),y-getGuiTop(),rect)) {
-			drawMouseOver(str, x-getGuiLeft(), y-getGuiTop());
+		if (inRect(x - getGuiLeft(),y - getGuiTop(), rect)) {
+			drawMouseOver(str, x - getGuiLeft(), y - getGuiTop());
 		}	
 	}
 
-	private static ResourceLocation texture = ResourceHelper.getResource("/gui/activator.png");
-    public void drawGuiBackground(float f, int x, int y)
-    {
+    private static final int TEXTURE_SPACING = 1;
+    private static final int BORDER_SRC_X = 1;
+    private static final int BORDER_SRC_Y = 223;
+    private static final int MODE_SRC_X = 1;
+    private static final int MODE_SRC_Y = 240;
+    private static final int MODE_SIZE = 14;
+
+	private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/activator.png");
+    @Override
+    public void drawGuiBackground(float f, int x, int y) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
 
-        int j = getGuiLeft();
-        int k = getGuiTop();
-        ResourceHelper.bindResource(texture);
-        drawTexturedModalRect(j , k, 0, 0, xSize, ySize);
+        int left = getGuiLeft();
+        int top = getGuiTop();
+        ResourceHelper.bindResource(TEXTURE);
+        drawTexturedModalRect(left , top, 0, 0, xSize, ySize);
 
-		x-= getGuiLeft();
-		y-= getGuiTop();		
+		x -= left;
+		y -= top;
 		
 		for (int i = 0; i < activator.getOptions().size(); i++) {
 			ActivatorOption option = activator.getOptions().get(i);
@@ -78,23 +82,23 @@ public class GuiActivator extends GuiBase
 			int srcX = 0;
 			
 			if (inRect(x,y, box)) {
-				srcX = 16;
+				srcX = box[2] + TEXTURE_SPACING;
 			}
 			
-			drawTexturedModalRect(j + box[0], k + box[1], srcX, ySize, box[2], box[3]);
-			drawTexturedModalRect(j + box[0]+1, k + box[1]+1, (box[2]-2) * option.getOption(), ySize + box[3], box[2]-2, box[3]-2);
+			drawTexturedModalRect(left + box[0], top + box[1], BORDER_SRC_X + srcX, BORDER_SRC_Y, box[2], box[3]);
+			drawTexturedModalRect(left + box[0] + 1, top + box[1] + 1, MODE_SRC_X + (MODE_SIZE + TEXTURE_SPACING) * option.getOption(), MODE_SRC_Y, MODE_SIZE, MODE_SIZE);
 		}
 	
 
     }
 	
 	private int[] getBoxRect(int i) {
-		return new int[] {20, 22 + i * 20, 16,16};
+		return new int[] {20, 22 + i * 20, 16, 16};
 	}
 
- 
-    public void mouseClick(int x, int y, int button)
-    {
+
+    @Override
+    public void mouseClick(int x, int y, int button) {
         super.mouseClick(x, y, button);
 		x-= getGuiLeft();
 		y-= getGuiTop();
@@ -111,5 +115,4 @@ public class GuiActivator extends GuiBase
     }
 	
 	TileEntityActivator activator;
-	InventoryPlayer invPlayer;
 }

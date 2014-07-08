@@ -60,7 +60,7 @@ public class GuiDistributor extends GuiBase {
     private static final int SIDE_SRC_Y = 187;
     private static final int SIDE_SIZE = 18;
 
-	private static ResourceLocation texture = ResourceHelper.getResource("/gui/distributor.png");
+	private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/distributor.png");
     @Override
     public void drawGuiBackground(float f, int x, int y) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -68,7 +68,7 @@ public class GuiDistributor extends GuiBase {
 
         int left = getGuiLeft();
         int top = getGuiTop();
-        ResourceHelper.bindResource(texture);
+        ResourceHelper.bindResource(TEXTURE);
         drawTexturedModalRect(left , top, 0, 0, xSize, ySize);
 
 		x-= getGuiLeft();
