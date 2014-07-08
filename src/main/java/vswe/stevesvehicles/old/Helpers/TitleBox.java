@@ -1,22 +1,24 @@
 package vswe.stevesvehicles.old.Helpers;
-	
+
+import vswe.stevesvehicles.localization.ILocalizedText;
+
 public class TitleBox {
-	private int id;
+	private ILocalizedText name;
 	private int x;
 	private int y;
 	private int color;
-	public TitleBox(int id, int y, int color) {
-		this(id, 16, y, color);
+	public TitleBox(ILocalizedText name, int y, int color) {
+		this(name, 16, y, color);
 	}
-	public TitleBox(int id, int x, int y, int color) {
-		this.id = id;
+	public TitleBox(ILocalizedText name, int x, int y, int color) {
+		this.name = name;
 		this.x = x;
 		this.y = y;
 		this.color = color;
 	}
 	
-	public int getID() {
-		return id;
+	public ILocalizedText getName() {
+		return name;
 	}
 	public int getColor() {
 		return color;

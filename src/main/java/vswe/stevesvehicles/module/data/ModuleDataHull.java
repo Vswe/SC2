@@ -12,12 +12,15 @@ public class ModuleDataHull extends ModuleData {
     private int modularCapacity;
     private int engineMaxCount;
     private int addonMaxCount;
+    private int storageMaxCount;
     private int complexityMax;
 
-    public ModuleDataHull(String unlocalizedName, Class<? extends ModuleBase> moduleClass, int modularCapacity, int engineMaxCount, int addonMaxCount, int complexityMax) {
+
+    public ModuleDataHull(String unlocalizedName, Class<? extends ModuleBase> moduleClass, int modularCapacity, int engineMaxCount, int storageMaxCount, int addonMaxCount, int complexityMax) {
         super(unlocalizedName, moduleClass, 0);
         this.modularCapacity = modularCapacity;
         this.engineMaxCount = engineMaxCount;
+        this.storageMaxCount = storageMaxCount;
         this.addonMaxCount = addonMaxCount;
         this.complexityMax = complexityMax;
     }
@@ -28,6 +31,7 @@ public class ModuleDataHull extends ModuleData {
     public int getEngineMaxCount() {
         return engineMaxCount;
     }
+    public int getStorageMaxCount() {return storageMaxCount;}
     public int getAddonMaxCount() {
         return addonMaxCount;
     }
@@ -35,12 +39,15 @@ public class ModuleDataHull extends ModuleData {
         return complexityMax;
     }
 
+
     @Override
     public void addSpecificInformation(List<String> list) {
         list.add(ColorHelper.YELLOW + LocalizationLabel.CAPACITY.translate(String.valueOf(modularCapacity)));
         list.add(ColorHelper.PURPLE + LocalizationLabel.COMPLEXITY_CAP.translate(String.valueOf(complexityMax)));
         list.add(ColorHelper.ORANGE + LocalizationLabel.MAX_ENGINES.translate(String.valueOf(engineMaxCount)));
+        list.add(ColorHelper.PINK + LocalizationLabel.MAX_STORAGE.translate(String.valueOf(storageMaxCount)));
         list.add(ColorHelper.GREEN + LocalizationLabel.MAX_ADDONS.translate(String.valueOf(addonMaxCount)));
     }
+
 
 }

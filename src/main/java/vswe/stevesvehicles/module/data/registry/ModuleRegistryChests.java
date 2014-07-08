@@ -94,7 +94,7 @@ public class ModuleRegistryChests extends ModuleRegistry {
         register(front);
 
 
-        ModuleData internal = new ModuleData("internal_storage", ModuleFrontChest.class, 5);
+        ModuleData internal = new ModuleData("internal_storage", ModuleFrontChest.class, 25);
         internal.addShapedRecipe(   CHEST_PANE,       CHEST_PANE,       CHEST_PANE,
                                     CHEST_PANE,       CHEST_LOCK,       CHEST_PANE,
                                     CHEST_PANE,       CHEST_PANE,       CHEST_PANE);

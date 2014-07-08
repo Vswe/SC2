@@ -16,6 +16,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import vswe.stevesvehicles.localization.PlainText;
 import vswe.stevesvehicles.old.Helpers.DropDownMenuItem;
 import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
@@ -30,7 +31,7 @@ import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.old.Containers.ContainerCartAssembler;
 import vswe.stevesvehicles.old.Containers.ContainerUpgrade;
 import vswe.stevesvehicles.client.gui.screen.GuiBase;
-import vswe.stevesvehicles.old.Interfaces.GuiCartAssembler;
+import vswe.stevesvehicles.client.gui.screen.GuiCartAssembler;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataHull;
 import vswe.stevesvehicles.container.slots.SlotAssembler;
@@ -264,14 +265,15 @@ public class TileEntityCartAssembler extends TileEntityBase
 		hullSlot = new SlotHull(this, slotID++, 18,25);
 		slots.add(hullSlot);
 
-		
+
+        //TODO localize these
 		//create the title boxes at certain positions with certain colors
-		TitleBox engineBox = new TitleBox(0, 65, 0xF7941D);
-		TitleBox toolBox = new TitleBox(1, 100, 0x662D91);
-		TitleBox attachBox = new TitleBox(2, 135, 0x005B7F);
-		TitleBox storageBox = new TitleBox(3, 170, 0x9E0B0E);	
-		TitleBox addonBox = new TitleBox(4, 205, 0x005826);	
-		TitleBox infoBox = new TitleBox(5, 375, 30, 0xCCBE00);
+		TitleBox engineBox = new TitleBox(new PlainText("Engines"), 65, 0xF7941D);
+		TitleBox toolBox = new TitleBox(new PlainText("Tool"), 100, 0x662D91);
+		TitleBox attachBox = new TitleBox(new PlainText("Attachments"), 135, 0x005B7F);
+		TitleBox storageBox = new TitleBox(new PlainText("Storage"), 170, 0x9E0B0E);
+		TitleBox addonBox = new TitleBox(new PlainText("Addons"), 205, 0x005826);
+		TitleBox infoBox = new TitleBox(new PlainText("Information"), 375, 30, 0xCCBE00);
 		titleBoxes.add(engineBox);
 		titleBoxes.add(toolBox);
 		titleBoxes.add(attachBox);
@@ -302,7 +304,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 		}		
 		
 		//create the storage slots
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 6; i++) {
 			SlotAssembler slot = new SlotAssembler(this, slotID++, storageBox.getX() + 2 + 18*i,storageBox.getY(), ModuleType.STORAGE, false,i);
 			slot.invalidate();
 			slots.add(slot);
@@ -311,7 +313,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 		
 		//create the addon slots
 		for (int i = 0; i < 12; i++) {
-			SlotAssembler slot = new SlotAssembler(this, slotID++, addonBox.getX() + 2 + 18*(i%6),addonBox.getY()+18*(i/6), ModuleType.ADDON, false,i);
+			SlotAssembler slot = new SlotAssembler(this, slotID++, addonBox.getX() + 2 + 18*(i%6), addonBox.getY() + 18 * (i/6), ModuleType.ADDON, false, i);
 			slot.invalidate();
 			slots.add(slot);
 			addonSlots.add(slot);
@@ -871,7 +873,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 			for (int i = 0; i < hull.getAddonMaxCount(); i++) {
 				slots.add(getAddons().get(i));
 			}	
-			for (int i = 0; i < getChests().size(); i++) {
+			for (int i = 0; i < hull.getStorageMaxCount(); i++) {
 				slots.add(getChests().get(i));
 			}	
 			for (int i = 0; i < getAttachments().size(); i++) {

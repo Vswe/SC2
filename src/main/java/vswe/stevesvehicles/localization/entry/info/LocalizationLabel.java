@@ -37,6 +37,7 @@ public final class LocalizationLabel {
     public static final ILocalizedText CAPACITY = createAdvanced("capacity");
     public static final ILocalizedText COMPLEXITY_CAP = createAdvanced("complexity_cap");
     public static final ILocalizedText MAX_ENGINES = createAdvanced("max_engines");
+    public static final ILocalizedText MAX_STORAGE = createAdvanced("max_storage");
     public static final ILocalizedText MAX_ADDONS = createAdvanced("max_addons");
 
 

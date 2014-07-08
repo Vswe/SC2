@@ -31,7 +31,7 @@ public class ModuleRegistryCartHulls extends ModuleRegistry {
     public ModuleRegistryCartHulls() {
         super("cart.hulls");
 
-        ModuleData wood = new ModuleDataHull("wooden_hull", HullWood.class, 50, 1, 0, 15) {
+        ModuleData wood = new ModuleDataHull("wooden_hull", HullWood.class, 50, 1, 2, 0, 15) {
             @Override
             @SideOnly(Side.CLIENT)
             public void loadModels() {
@@ -49,7 +49,7 @@ public class ModuleRegistryCartHulls extends ModuleRegistry {
 
 
 
-        ModuleData standard = new ModuleDataHull("standard_hull", HullStandard.class, 200, 3, 6, 50) {
+        ModuleData standard = new ModuleDataHull("standard_hull", HullStandard.class, 200, 3, 4, 6, 50) {
             @Override
             @SideOnly(Side.CLIENT)
             public void loadModels() {
@@ -67,7 +67,7 @@ public class ModuleRegistryCartHulls extends ModuleRegistry {
 
 
 
-        ModuleData reinforced = new ModuleDataHull("reinforced_hull", HullReinforced.class, 500, 5, 12, 150) {
+        ModuleData reinforced = new ModuleDataHull("reinforced_hull", HullReinforced.class, 500, 5, 6, 12, 150) {
             @Override
             @SideOnly(Side.CLIENT)
             public void loadModels() {
@@ -85,7 +85,7 @@ public class ModuleRegistryCartHulls extends ModuleRegistry {
 
 
 
-        ModuleData galgadorian = new ModuleDataHull("galgadorian_hull", HullGalgadorian.class, 1000, 5, 12, 150) {
+        ModuleData galgadorian = new ModuleDataHull("galgadorian_hull", HullGalgadorian.class, 1000, 5,  6, 12, 150) {
             @Override
             @SideOnly(Side.CLIENT)
             public void loadModels() {
@@ -103,7 +103,7 @@ public class ModuleRegistryCartHulls extends ModuleRegistry {
 
 
 
-        ModuleData pumpkin = new ModuleDataHull("pumpkin_chariot", HullPumpkin.class, 40, 1, 0, 15) {
+        ModuleData pumpkin = new ModuleDataHull("pumpkin_chariot", HullPumpkin.class, 40, 1, 2, 0, 15) {
             @Override
             @SideOnly(Side.CLIENT)
             public void loadModels() {
@@ -123,7 +123,7 @@ public class ModuleRegistryCartHulls extends ModuleRegistry {
         pumpkin.addVehicles(VehicleRegistry.CART);
         register(pumpkin);
 
-        ModuleData pig = new ModuleDataHull("mechanical_pig", HullPig.class, 150, 2, 4, 50) {
+        ModuleData pig = new ModuleDataHull("mechanical_pig", HullPig.class, 150, 2, 4, 4, 50) {
             @Override
             @SideOnly(Side.CLIENT)
             public void loadModels() {
@@ -147,7 +147,7 @@ public class ModuleRegistryCartHulls extends ModuleRegistry {
         register(pig);
 
 
-        ModuleData creative = new ModuleDataHull("creative_hull", HullCreative.class, 10000, 5, 12, 150) {
+        ModuleData creative = new ModuleDataHull("creative_hull", HullCreative.class, 10000, 5, 6, 12, 150) {
             @Override
             @SideOnly(Side.CLIENT)
             public void loadModels() {
