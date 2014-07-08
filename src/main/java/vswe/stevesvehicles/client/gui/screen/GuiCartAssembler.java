@@ -175,9 +175,9 @@ public class GuiCartAssembler extends GuiBase {
     private static final int SLOT_SIZE = 18;
 
     private static final int SLOT_DOOR_WIDTH = 16;
-    private static final int SLOT_DOOR_HEIGHT = 8;
+    private static final int SLOT_DOOR_HEIGHT = 9;
     private static final int SLOT_DOOR_SRC_X = 1;
-    private static final int SLOT_TOP_DOOR_SRC_Y = 64;
+    private static final int SLOT_TOP_DOOR_SRC_Y = 63;
     private static final int SLOT_BOT_DOOR_SRC_Y = 73;
 
     private static final int ASSEMBLE_BUTTON_SRC_X = 26;
@@ -252,19 +252,20 @@ public class GuiCartAssembler extends GuiBase {
 					srcY = SLOT_SRC_Y;
 				}
 			}
-			
-			
-			
+
+
+
             drawTexturedModalRect(left+targetX, top+targetY, srcX, srcY, size, size);
 
             int animationTick = slot.getAnimationTick();
             if (animationTick < 0) {
                 animationTick = 0;
             }
+
             if (animationTick < SLOT_DOOR_HEIGHT && !slot.useLargeInterface()) {
                 int height = SLOT_DOOR_HEIGHT - animationTick;
-                drawTexturedModalRect(left + targetX + 1, top + targetY + 1, SLOT_DOOR_SRC_X, SLOT_TOP_DOOR_SRC_Y + animationTick, SLOT_DOOR_WIDTH, height);
-                drawTexturedModalRect(left + targetX + 1, top + targetY + 1 + SLOT_DOOR_HEIGHT + animationTick, SLOT_DOOR_SRC_X, SLOT_BOT_DOOR_SRC_Y, SLOT_DOOR_WIDTH, height);
+                drawTexturedModalRect(left + targetX + 1, top + targetY, SLOT_DOOR_SRC_X, SLOT_TOP_DOOR_SRC_Y + animationTick, SLOT_DOOR_WIDTH, height);
+                drawTexturedModalRect(left + targetX + 1, top + targetY + SLOT_DOOR_HEIGHT + animationTick, SLOT_DOOR_SRC_X, SLOT_BOT_DOOR_SRC_Y, SLOT_DOOR_WIDTH, height);
             }
 
 		}

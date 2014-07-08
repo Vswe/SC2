@@ -33,3 +33,5 @@ Changed features, from a player's perspective.
 * The interface of the Liquid Manager have received a small tweak, between the input and output slots there are now a small arrow indicating the movement from input to output. There's also a semi-transparent image of an internal tank in the filter slots. This is to make it easier to think what the arrow directions mean (like it is for the cargo manager).
 
 * The interface of the External Distributors have received some tiny tweaks. The missing icon for the "all" setting has been added and the icons for the manager part and transfer direction settings received some color tweaks.
+
+* The button text and the category titles in the Assembler's interface are now written without pre-made textures. This means that these can now be localized. This change also means their font changed making them look a bit different. The animation for the opening of the slots have been tweaked slightly.
