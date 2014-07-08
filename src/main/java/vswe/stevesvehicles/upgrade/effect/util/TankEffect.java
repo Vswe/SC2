@@ -13,7 +13,7 @@ import vswe.stevesvehicles.old.Helpers.ITankHolder;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.old.Helpers.Tank;
 import vswe.stevesvehicles.old.Helpers.TransferHandler;
-import vswe.stevesvehicles.old.Interfaces.GuiUpgrade;
+import vswe.stevesvehicles.client.gui.screen.GuiUpgrade;
 import vswe.stevesvehicles.container.slots.SlotLiquidOutput;
 import vswe.stevesvehicles.container.slots.SlotLiquidUpgradeInput;
 import vswe.stevesvehicles.old.TileEntities.TileEntityUpgrade;
