@@ -252,7 +252,7 @@ public class Tank implements IFluidTank {
 	}
 	
 	@SideOnly(Side.CLIENT)
-	public void drawFluid(GuiBase gui,int startX, int startY) {
+	public void drawFluid(GuiBase gui, int startX, int startY) {
 		if (fluid != null) {
 
  

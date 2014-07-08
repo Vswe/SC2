@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.Interfaces;
+package vswe.stevesvehicles.client.gui.screen;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -120,26 +120,16 @@ public class GuiCargo extends GuiManager {
                 if (getManager().layoutType == 1) {
                     setColor(ColorEffect.BLACK);
                 }else{
-                    setColor(i);
+                    setColor(getManager().color[i] - 1);
                 }
                 drawTexturedModalRect(left + coordinate[0] - INVENTORY_BORDER_OFFSET_X, top + coordinate[1] - INVENTORY_BORDER_OFFSET_Y, INVENTORY_BORDER_SRC_X, INVENTORY_BORDER_SRC_Y, INVENTORY_BORDER_WIDTH, INVENTORY_BORDER_HEIGHT);
                 setColor(ColorEffect.CLEAR);
             }
         }
     }
-	
-	
-	@Override
-	protected int getArrowSourceX() {
-		return 49;
-	}
 
-	@Override
-	protected int getColorSourceX() {
-		return 105;
-	}
-	
-	@Override
+
+    @Override
 	protected int getCenterTargetX() {
 		return 98;
 	}

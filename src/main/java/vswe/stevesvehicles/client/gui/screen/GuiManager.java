@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.Interfaces;
+package vswe.stevesvehicles.client.gui.screen;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
 
@@ -58,7 +58,7 @@ public abstract class GuiManager extends GuiBase {
 		}	
 	}
 
-    private static final ResourceLocation MANAGER_TEXTURE = ResourceHelper.getResource("/gui/manager.png");
+    protected static final ResourceLocation MANAGER_TEXTURE = ResourceHelper.getResource("/gui/manager.png");
 
 	@Override
     public void drawGuiBackground(float f, int x, int y) {
@@ -345,9 +345,7 @@ public abstract class GuiManager extends GuiBase {
 	protected abstract String getMaxSizeOverlay(int id);
 	protected abstract String getMaxSizeText(int id);
 	protected abstract void drawBackground(int left, int top);
-	protected abstract int getArrowSourceX();
-	protected abstract int getColorSourceX();
-	protected abstract int getCenterTargetX();
+    protected abstract int getCenterTargetX();
 	protected abstract Block getBlock();
 	protected abstract String getManagerName();
 	protected abstract String getLayoutOption(int id);
