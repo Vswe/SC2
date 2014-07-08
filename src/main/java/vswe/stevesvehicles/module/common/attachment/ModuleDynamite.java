@@ -37,7 +37,7 @@ public class ModuleDynamite extends ModuleAttachment {
 
 	@Override
 	public void activatedByRail(int x, int y, int z, boolean active) {
-		if (active && getFuse() == 0) {
+        if (active && getFuse() == 0) {
 			prime();
 		}
 	}
@@ -87,10 +87,10 @@ public class ModuleDynamite extends ModuleAttachment {
 	public void drawBackground(GuiVehicle gui, int x, int y) {
 		ResourceHelper.bindResource("/gui/explosions.png");
 
-		drawImage(gui, fuseStartX, fuseStartY + 3, 12, 0, 105 , 4);
-		drawImage(gui, fuseStartX + 105, fuseStartY - 4, 0, 10 , 16, 16);
-		drawImage(gui, fuseStartX + (int)(105 *  (1F - (getFuseLength()-getFuse()) / (float) MAX_FUSE_LENGTH)), fuseStartY,  (isPrimed() ? 8 : 4), 0, 4, 10);
-		drawImage(gui, getMovableMarker(), 0, 0);
+		drawImage(gui, fuseStartX, fuseStartY + 3, 16, 1, 105 , 4);
+		drawImage(gui, fuseStartX + 105, fuseStartY - 4, 1, 12 , 16, 16);
+		drawImage(gui, fuseStartX + (int)(105 *  (1F - (getFuseLength()-getFuse()) / (float) MAX_FUSE_LENGTH)), fuseStartY,  (isPrimed() ? 11 : 6), 1, 4, 10);
+		drawImage(gui, getMovableMarker(), 1, 1);
 	}
 
 	@Override

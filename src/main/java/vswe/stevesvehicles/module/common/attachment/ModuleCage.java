@@ -58,7 +58,8 @@ public class ModuleCage extends ModuleAttachment implements IActivatorModule {
 	public void drawForeground(GuiVehicle gui) {
 	    drawString(gui, getModuleName(), 8, 6, 0x404040);
 	}
-	
+
+    private static final int TEXTURE_SPACING = 1;
 	
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -69,14 +70,14 @@ public class ModuleCage extends ModuleAttachment implements IActivatorModule {
 		drawButton(gui, x, y, MANUAL_RECT, isCageEmpty() ? 0 : 1);
 	}
 
-	private void drawButton(GuiVehicle gui, int x, int y, int[] coordinates, int imageID) {
+	private void drawButton(GuiVehicle gui, int x, int y, int[] coordinates, int imageId) {
 		if (inRect(x,y, coordinates)) {
-			drawImage(gui,coordinates, 0, coordinates[3]);
+			drawImage(gui,coordinates, TEXTURE_SPACING, TEXTURE_SPACING * 2 + coordinates[3]);
 		}else{
-			drawImage(gui,coordinates, 0, 0);
+			drawImage(gui,coordinates, TEXTURE_SPACING, TEXTURE_SPACING);
 		}
 
-		int srcY = coordinates[3] * 2 + imageID * (coordinates[3] - 2);
+		int srcY = (TEXTURE_SPACING + coordinates[3]) * 2 + imageId * (TEXTURE_SPACING + coordinates[3] - 2);
 		drawImage(gui, coordinates[0] + 1, coordinates[1] + 1, 0, srcY, coordinates[2] - 2, coordinates[3] - 2);
 	}	
 	

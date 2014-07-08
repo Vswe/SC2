@@ -149,8 +149,8 @@ public final class ModuleDataItemHandler {
         List<ModuleData> modules = new ArrayList<ModuleData>();
         for (ItemStack moduleItem : moduleItems) {
             ModuleData moduleData = ModItems.modules.getModuleData(moduleItem);
-            modules.add(moduleData);
             if (moduleData != null) {
+                modules.add(moduleData);
                 if (moduleData.getModuleType() == ModuleType.HULL) {
                     if (moduleData.getValidVehicles() == null ||moduleData.getValidVehicles().isEmpty()) {
                         return null;
@@ -189,7 +189,7 @@ public final class ModuleDataItemHandler {
             ModuleBase module = modules != null ? modules.get(i) : null;
             NBTTagCompound moduleCompound = new NBTTagCompound();
             int id = ModuleRegistry.getIdFromModule(moduleData);
-            if (id > 0) {
+            if (id >= 0) {
                 moduleCompound.setShort(VehicleBase.NBT_ID, (short) id);
 
                 if (module != null) {

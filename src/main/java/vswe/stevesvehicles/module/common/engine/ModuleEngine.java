@@ -28,6 +28,7 @@ public abstract class ModuleEngine extends ModuleBase {
 	}
 
 	//returns if this cart supplies the cart with fuel
+    @Override
 	public boolean hasFuel(int consumption) {
 		return getFuelLevel() >= consumption && !isDisabled();
 	}
@@ -94,16 +95,16 @@ public abstract class ModuleEngine extends ModuleBase {
 		return 50;
 	}
 
-		
+	private static final int TEXTURE_SPACING = 1;
 	
 	@Override
 	public void drawBackground(GuiVehicle gui, int x, int y) {
 		ResourceHelper.bindResource("/gui/engine.png");
 
-		int sourceX = 16 * getPriority();
-		int sourceY = 0;
+		int sourceX = TEXTURE_SPACING + (16 + TEXTURE_SPACING) * getPriority();
+		int sourceY = TEXTURE_SPACING;
 		if (inRect(x,y, priorityButton)) {
-			sourceY = 16;
+			sourceY += 16 + TEXTURE_SPACING;
 		}
 		drawImage(gui, priorityButton, sourceX, sourceY);
 	}

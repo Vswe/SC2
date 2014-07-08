@@ -48,10 +48,9 @@ public class ModuleAdvancedControl extends ModuleAttachment implements ILeverMod
 	private byte [] engineInformation;
 
 
-	
-	//to allow modules to render graphical overlays on the screen
 	@SideOnly(Side.CLIENT)
-	public void renderOverlay( net.minecraft.client.Minecraft minecraft) {						
+    @Override
+	public void renderOverlay( net.minecraft.client.Minecraft minecraft) {
 		ResourceHelper.bindResource("/gui/drive.png");
 		
 		if (engineInformation != null) {
@@ -459,18 +458,18 @@ public class ModuleAdvancedControl extends ModuleAttachment implements ILeverMod
         }
     }	
 	
-	
 
-	
+    private static final int TEXTURE_SPACING = 1;
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawBackground(GuiVehicle gui, int x, int y) {
-		ResourceHelper.bindResource("/gui/advlever.png");
+		ResourceHelper.bindResource("/gui/advanced_lever.png");
 
 		if (inRect(x,y, BUTTON_RECT)) {
-			drawImage(gui, BUTTON_RECT, 0, BUTTON_RECT[3]);
+			drawImage(gui, BUTTON_RECT, TEXTURE_SPACING, TEXTURE_SPACING * 2 + BUTTON_RECT[3]);
 		}else{
-			drawImage(gui, BUTTON_RECT, 0, 0);
+			drawImage(gui, BUTTON_RECT, TEXTURE_SPACING, TEXTURE_SPACING);
 		}
 	}
 

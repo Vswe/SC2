@@ -218,7 +218,7 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
                 h = 0;
             }
 
-			//CrumbleBlocksHook.startCrumblingBlock(this, coordX, coordY, coordZ, workingTime);
+			//CrumbleBlocksHook.startCrumblingBlock(this, targetX, targetY, targetZ, workingTime);
             //return true;
         //}
 
@@ -241,7 +241,7 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
                 if (minedItem(item, next)){
                     ((IInventory)(storage)).setInventorySlotContents(i, null);
                 } else {
-                    /*turnback();
+                    /*turnBack();
 					stopWorking();
                     return false;*/
 					return false;
@@ -271,7 +271,7 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
                 if (minedItem(stack, next)) {
                     shouldRemove = true;
                 } else {
-                    /*turnback();
+                    /*turnBack();
 					stopWorking();
 					return false
 					*/
@@ -327,10 +327,10 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
 			if (hasChest) {
 				if (item.stackSize != size) {
 					//if only some items did fit in the chest we have no other choice than spitting out the rest
-					//but don't do it the normal way, that would only make the Miningcart w/ chest get stuck and
+					//but don't do it the normal way, that would only make the Mining cart w/ chest get stuck and
 					//the whole point with it is to avoid that, spit it out to its side instead
 					EntityItem entityitem = new EntityItem(getVehicle().getWorld(), getVehicle().getEntity().posX, getVehicle().getEntity().posY, getVehicle().getEntity().posZ , item);
-					//observe that the motion for X uses the Z coords and vice-versa
+					//observe that the motion for X uses the Z coordinate and vice-versa
 					entityitem.motionX = (float)(getVehicle().z() - coordinate.zCoord) / 10;
 					entityitem.motionY = 0.15F;
 					entityitem.motionZ = (float)(getVehicle().x() - coordinate.xCoord) / 10;
@@ -373,7 +373,6 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
         }else {
             //retrieve the needed values, block id and the like
             Block b = getVehicle().getWorld().getBlock(x, y, z);
-            int m = getVehicle().getWorld().getBlockMetadata(x, y, z);
 
             //there need to be a block to remove
             if (b == null){
@@ -412,11 +411,11 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
                 //for containers like chest a special rule apply, therefore test if this is a container
             }else if (b instanceof BlockContainer) {
 
-                //if so load its tileentity to check if it has an inventory or not
+                //if so load its tile entity to check if it has an inventory or not
                 TileEntity tileentity = getVehicle().getWorld().getTileEntity(x, y, z);
 
                 if (tileentity != null && IInventory.class.isInstance(tileentity)) {
-                    //depending on its position it's either invalid or we should return the tileentity to be able to remove its items
+                    //depending on its position it's either invalid or we should return the tile entity to be able to remove its items
                     if (i != 0 || j > 0) {
                         return null;
                     }else {
@@ -517,7 +516,7 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
 	@Override
 	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0) {
-			if (inRect(x,y, buttonRect)) {
+			if (inRect(x,y, BUTTON_RECT)) {
 				sendPacket(0);
 			}
 		}
@@ -551,7 +550,9 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
 	}
 
 
-	
+	private static final int TEXTURE_SPACING = 1;
+    private static final int[] BUTTON_RECT = new int[] {15,30, 24, 12};
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawBackground(GuiVehicle gui, int x, int y) {
@@ -561,22 +562,20 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
 
 		int imageID = isDrillEnabled() ? 1 : 0;
 		int borderID = 0;
-		if (inRect(x,y, buttonRect)) {
+		if (inRect(x,y, BUTTON_RECT)) {
 			borderID = 1;			
 		}
 
-		drawImage(gui,buttonRect, 0, buttonRect[3] * borderID);
+		drawImage(gui, BUTTON_RECT, TEXTURE_SPACING,  TEXTURE_SPACING + (TEXTURE_SPACING + BUTTON_RECT[3]) * borderID);
 
-		int srcY = buttonRect[3] * 2 + imageID * (buttonRect[3] - 2);
-		drawImage(gui, buttonRect[0] + 1, buttonRect[1] + 1, 0, srcY, buttonRect[2] - 2, buttonRect[3] - 2);
+		int srcY = TEXTURE_SPACING + (TEXTURE_SPACING + BUTTON_RECT[3]) * 2 + imageID * (TEXTURE_SPACING + BUTTON_RECT[3] - 2);
+		drawImage(gui, BUTTON_RECT[0] + 1, BUTTON_RECT[1] + 1, 0, srcY, BUTTON_RECT[2] - 2, BUTTON_RECT[3] - 2);
 	}
-
-	private int[] buttonRect = new int[] {15,30, 24, 12};
 
 	@Override
 	public void drawMouseOver(GuiVehicle gui, int x, int y) {
 		super.drawMouseOver(gui,x, y);
-		drawStringOnMouseOver(gui, getStateName(), x,y,buttonRect);
+		drawStringOnMouseOver(gui, getStateName(), x,y, BUTTON_RECT);
 	}	
 	
 	private String getStateName() {

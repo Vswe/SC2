@@ -127,6 +127,7 @@ public class ModuleCakeServer extends ModuleAttachment implements ISuppliesModul
 		return getCakeBuffer() % SLICES_PER_CAKE;
 	}
 
+    private static final int TEXTURE_SPACING = 1;
 	private static final int[] RECT = {40, 20, 13, 36};
 	
 	@Override
@@ -134,15 +135,15 @@ public class ModuleCakeServer extends ModuleAttachment implements ISuppliesModul
 	public void drawBackground(GuiVehicle gui, int x, int y) {
 		ResourceHelper.bindResource("/gui/cake.png");
 				
-		drawImage(gui, RECT, 0, inRect(x, y, RECT) ? RECT[3] : 0);
+		drawImage(gui, RECT, TEXTURE_SPACING, TEXTURE_SPACING + (inRect(x, y, RECT) ? RECT[3] + TEXTURE_SPACING : 0));
 		int maxHeight = RECT[3] - 2;
 		int height = (int)((getCakes() / (float)MAX_CAKES) * maxHeight);
 		if (height > 0) {
-			drawImage(gui, RECT[0] + 1, RECT[1] + 1 + maxHeight - height, RECT[2], maxHeight - height, 7, height);
+			drawImage(gui, RECT[0] + 1, RECT[1] + 1 + maxHeight - height, TEXTURE_SPACING * 2 + RECT[2], TEXTURE_SPACING + maxHeight - height, 7, height);
 		}
 		height = (int)((getSlices() / (float)SLICES_PER_CAKE) * maxHeight);
 		if (height > 0) {
-			drawImage(gui, RECT[0] + 9, RECT[1] + 1 + maxHeight - height, RECT[2] + 7, maxHeight - height, 3, height);
+			drawImage(gui, RECT[0] + 9, RECT[1] + 1 + maxHeight - height, TEXTURE_SPACING * 3 + RECT[2] + 7, TEXTURE_SPACING + maxHeight - height, 3, height);
 		}		
 	}
 	

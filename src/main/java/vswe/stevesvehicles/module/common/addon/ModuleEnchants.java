@@ -40,11 +40,7 @@ public class ModuleEnchants extends ModuleAddon  {
 	public boolean useSilkTouch() {
 		return false;
 	}
-	
-	public int getUnbreakingLevel() {
-		return getEnchantLevel(EnchantmentInfo.unbreaking);
-	}
-	
+
 	public int getEfficiencyLevel() {
 		return getEnchantLevel(EnchantmentInfo.efficiency);
 	}	
@@ -153,7 +149,17 @@ public class ModuleEnchants extends ModuleAddon  {
 	}
 	
 			
-	
+
+    private static final int BOX_SRC_Y = 1;
+    private static final int BOX_SRC_X = 1;
+    private static final int BOX_HOVER_SRC_X = 71;
+
+    private static final int MARKER_SRC_X = 63;
+    private static final int MARKER_SRC_Y = 2;
+
+    private static final int BAR_SRC_X = 1;
+    private static final int BAR_SRC_Y = 14;
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawBackground(GuiVehicle gui, int x, int y) {
@@ -163,9 +169,9 @@ public class ModuleEnchants extends ModuleAddon  {
 			int[] box = getBoxRect(i);
 			
 			if (inRect(x, y, box)) {
-				drawImage(gui, box, 65, 0);
+				drawImage(gui, box, BOX_HOVER_SRC_X, BOX_SRC_Y);
 			}else{
-				drawImage(gui, box, 0, 0);
+				drawImage(gui, box, BOX_SRC_X, BOX_SRC_Y);
 			}
 			
 			EnchantmentData data = enchants[i];
@@ -175,17 +181,17 @@ public class ModuleEnchants extends ModuleAddon  {
 				for (int j = 0; j < maxLevel; j++) {
 					int[] bar = getBarRect(i, j, maxLevel);
 					if (j != maxLevel - 1) {
-						drawImage(gui, bar[0] + bar[2], bar[1], 61 + j, 1, 1, bar[3]);
+						drawImage(gui, bar[0] + bar[2], bar[1], MARKER_SRC_X + j * 2, MARKER_SRC_Y, 1, bar[3]);
 					}
 					
 					int levelMaxValue = data.getEnchantment().getValue(j + 1);
 					if (value > 0) {
-						float mult = (float)value / levelMaxValue;
-						if (mult > 1) {
-							mult = 1;
+						float multiplier = (float)value / levelMaxValue;
+						if (multiplier > 1) {
+							multiplier = 1;
 						}
-						bar[2] *= mult;
-						drawImage(gui, bar, 1, 13 + 11 * j);	
+						bar[2] *= multiplier;
+						drawImage(gui, bar, BAR_SRC_X, BAR_SRC_Y + 11 * j);
 					}
 					value -= levelMaxValue;
 				}

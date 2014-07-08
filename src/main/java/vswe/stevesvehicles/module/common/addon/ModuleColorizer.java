@@ -50,7 +50,13 @@ public class ModuleColorizer extends ModuleAddon {
 	private int markerMoving = -1;
 	
 
-	
+    private static final int BOX_SRC_X = 6;
+    private static final int BOX_SRC_Y = 9;
+    private static final int BAR_SRC_X = 1;
+    private static final int BAR_SRC_Y = 1;
+    private static final int MARKER_SRC_X = 1;
+    private static final int MARKER_SRC_Y = 9;
+
 	@Override
 	public void drawBackground(GuiVehicle gui, int x, int y) {
 		ResourceHelper.bindResource("/gui/color.png");
@@ -61,7 +67,7 @@ public class ModuleColorizer extends ModuleAddon {
 
 		float[] color = getColor();
 		GL11.glColor4f(color[0], color[1], color[2], 1.0F);
-		drawImage(gui, SCROLL_WIDTH + 25, 29, 4, 7, 28, 28);
+		drawImage(gui, SCROLL_WIDTH + 25, 29, BOX_SRC_X, BOX_SRC_Y, 28, 28);
 		GL11.glColor4f(1F, 1F, 1F, 1.0F);
 	}
 	
@@ -72,7 +78,8 @@ public class ModuleColorizer extends ModuleAddon {
 			drawStringOnMouseOver(gui, colorNames[i] + ": " + getColorVal(i), x,y, getArea(i));
 		}
 	}
-	
+
+
 	private void drawMarker(GuiVehicle gui, int x, int y, int id) {
 		float[] colorArea = new float[3];
 		float[] colorMarker = new float[3];
@@ -86,9 +93,9 @@ public class ModuleColorizer extends ModuleAddon {
 			}
 		}
 		GL11.glColor4f(colorArea[0], colorArea[1], colorArea[2], 1.0F);
-		drawImage(gui, getArea(id), 0, 0);
+		drawImage(gui, getArea(id), BAR_SRC_X, BAR_SRC_Y);
 		GL11.glColor4f(colorMarker[0], colorMarker[1], colorMarker[2], 1.0F);
-		drawImage(gui, getMovableMarker(id), 0,7);
+		drawImage(gui, getMovableMarker(id), MARKER_SRC_X, MARKER_SRC_Y);
 		GL11.glColor4f(1F, 1F, 1F, 1.0F);
 	}
 	

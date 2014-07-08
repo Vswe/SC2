@@ -48,15 +48,15 @@ public class ModuleColorRandomizer extends ModuleAddon {
 
 		float[] color = getColor();
 		GL11.glColor4f(color[0], color[1], color[2], 1.0F);
-		drawImage(gui, 50, 20, 0, 16, 28, 28);
+		drawImage(gui, 50, 20, 1, 18, 28, 28);
 
 		GL11.glColor4f(1, 1, 1, 1);
 		if (inRect(x, y, BUTTON)) {
-			drawImage(gui, 10, 26, 32, 0, 16, 16);
+			drawImage(gui, 10, 26, 35, 1, 16, 16);
 		} else {
-			drawImage(gui, 10, 26, 16, 0, 16, 16);
+			drawImage(gui, 10, 26, 18, 1, 16, 16);
 		}
-		drawImage(gui, 10, 26, 0, 0 ,16, 16);
+		drawImage(gui, 10, 26, 1, 1 ,16, 16);
 	}
 
 	@Override

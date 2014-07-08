@@ -35,3 +35,5 @@ Changed features, from a player's perspective.
 * The interface of the External Distributors have received some tiny tweaks. The missing icon for the "all" setting has been added and the icons for the manager part and transfer direction settings received some color tweaks.
 
 * The button text and the category titles in the Assembler's interface are now written without pre-made textures. This means that these can now be localized. This change also means their font changed making them look a bit different. The animation for the opening of the slots have been tweaked slightly.
+
+* The amount of storage modules (chests and tanks) a cart can have now depends on the hull. Previously the max was always 4, now it's 2 for wooden hulls, 4 for standard hulls and 6 for reinforced hulls and  better.

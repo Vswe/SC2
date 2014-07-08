@@ -39,7 +39,7 @@ public class ModuleSeat extends ModuleAttachment {
 	    drawString(gui,getModuleName(), 8, 6, 0x404040);
 	}
 
-	
+	private static final int TEXTURE_SPACING = 1;
 	
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -56,10 +56,10 @@ public class ModuleSeat extends ModuleAttachment {
 			}
 		}
 
-		drawImage(gui, BUTTON_RECT, 0, BUTTON_RECT[3] * borderID);
+		drawImage(gui, BUTTON_RECT, TEXTURE_SPACING, TEXTURE_SPACING + (TEXTURE_SPACING + BUTTON_RECT[3]) * borderID);
 
-		int srcY = BUTTON_RECT[3] * 3 + imageID * (BUTTON_RECT[3] - 2);
-		drawImage(gui, BUTTON_RECT[0] + 1, BUTTON_RECT[1] + 1, 0, srcY, BUTTON_RECT[2] - 2, BUTTON_RECT[3] - 2);
+		int srcY = TEXTURE_SPACING + (TEXTURE_SPACING + BUTTON_RECT[3]) * 3 + imageID * (TEXTURE_SPACING + BUTTON_RECT[3] - 2);
+		drawImage(gui, BUTTON_RECT[0] + 1, BUTTON_RECT[1] + 1, TEXTURE_SPACING, srcY, BUTTON_RECT[2] - 2, BUTTON_RECT[3] - 2);
 	}
 
 	private static final int[] BUTTON_RECT = new int[] {20,20, 24, 12};

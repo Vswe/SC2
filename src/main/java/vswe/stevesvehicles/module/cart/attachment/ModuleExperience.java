@@ -30,7 +30,7 @@ public class ModuleExperience extends ModuleAttachment {
 			List list = getVehicle().getWorld().getEntitiesWithinAABBExcludingEntity(getVehicle().getEntity(), getVehicle().getEntity().boundingBox.expand(3D, 1D, 3D));
 
             for (Object obj : list) {
-                if (obj instanceof EntityXPOrb) {
+                if (obj instanceof EntityXPOrb && !((Entity) obj).isDead) {
                     experienceAmount += ((EntityXPOrb)obj).getXpValue();
                     if (experienceAmount > MAX_EXPERIENCE_AMOUNT) {
                         experienceAmount = MAX_EXPERIENCE_AMOUNT;
@@ -93,10 +93,15 @@ public class ModuleExperience extends ModuleAttachment {
 		}
 		
 		int [] content = getContentRect(part);
-		drawImage(gui, content, 4 + content[2] * (id + 1), content[4] - content[3]);
+		drawImage(gui, content, CONTENT_SRC_X + (content[2] + TEXTURE_SPACING) * id, CONTENT_SRC_Y + content[4] - content[3]);
 	}
 	
-		
+    private static final int BORDER_SRC_X = 1;
+    private static final int BORDER_HOVER_SRC_Y = 67;
+    private static final int BORDER_SRC_Y = 1;
+    private static final int TEXTURE_SPACING = 1;
+    private static final int CONTENT_SRC_X = 28;
+    private static final int CONTENT_SRC_Y = 1;
 
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -107,7 +112,7 @@ public class ModuleExperience extends ModuleAttachment {
 			drawContent(gui, i);
 		}
 		
-		drawImage(gui, CONTAINER_RECT, 0, inRect(x, y, CONTAINER_RECT) ? 65 : 0);
+		drawImage(gui, CONTAINER_RECT, BORDER_SRC_X, inRect(x, y, CONTAINER_RECT) ? BORDER_HOVER_SRC_Y : BORDER_SRC_Y);
 	}
 	
 	@Override

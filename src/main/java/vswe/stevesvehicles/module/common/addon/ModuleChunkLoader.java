@@ -39,8 +39,8 @@ public class ModuleChunkLoader extends ModuleAddon implements IActivatorModule{
 	    drawString(gui,"Chunk Loader", 8, 6, 0x404040);
 	}
 
-   public void update()
-    {
+    @Override
+   public void update() {
         super.update();
 
 		if (!rdyToInit) {
@@ -73,23 +73,24 @@ public class ModuleChunkLoader extends ModuleAddon implements IActivatorModule{
 	private boolean isLoadingChunk() {
         return !isPlaceholder() && getDw(0) != 0;
 	}
-	
+
+    private static final int TEXTURE_SPACING = 1;
 	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawBackground(GuiVehicle gui, int x, int y) {
 		ResourceHelper.bindResource("/gui/chunk.png");
 
-		int imageID = isLoadingChunk() ? 1 : 0;
+		int imageId = isLoadingChunk() ? 1 : 0;
 		int borderID = 0;
 		if (inRect(x,y, BUTTON_RECT)) {
 			borderID = 1;			
 		}
 
-		drawImage(gui, BUTTON_RECT, 0, BUTTON_RECT[3] * borderID);
+		drawImage(gui, BUTTON_RECT, TEXTURE_SPACING, TEXTURE_SPACING + (TEXTURE_SPACING + BUTTON_RECT[3]) * borderID);
 
-		int srcY = BUTTON_RECT[3] * 2 + imageID * (BUTTON_RECT[3] - 2);
-		drawImage(gui, BUTTON_RECT[0] + 1, BUTTON_RECT[1] + 1, 0, srcY, BUTTON_RECT[2] - 2, BUTTON_RECT[3] - 2);
+		int srcY = TEXTURE_SPACING + (TEXTURE_SPACING + BUTTON_RECT[3]) * 2 + imageId * (BUTTON_RECT[3] - 2 + TEXTURE_SPACING);
+		drawImage(gui, BUTTON_RECT[0] + 1, BUTTON_RECT[1] + 1, TEXTURE_SPACING, srcY, BUTTON_RECT[2] - 2, BUTTON_RECT[3] - 2);
 	}
 
 	private static final int[] BUTTON_RECT = new int[] {20, 20, 24, 12};

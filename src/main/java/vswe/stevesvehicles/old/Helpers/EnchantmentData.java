@@ -67,9 +67,9 @@ public class EnchantmentData {
 		for (level = 1; level <= type.getEnchantment().getMaxLevel(); level++) {
 			
 			if (value > 0) {
-				int levelvalue = getEnchantment().getValue(level);
-				percentage = (100 * value) / levelvalue;
-				value -= levelvalue;
+				int levelValue = getEnchantment().getValue(level);
+				percentage = (100 * value) / levelValue;
+				value -= levelValue;
 				if (value < 0) {
 					break;
 				}
@@ -78,7 +78,7 @@ public class EnchantmentData {
 		
 		
 
-		return "\u00a7E" + getEnchantment().getEnchantment().getTranslatedName(getLevel()) + "\n" + percentage + "% left of this tier";
+		return "\u00a7E" + getEnchantment().getEnchantment().getTranslatedName(getLevel()) + "\n" + percentage + "% left of this tier"; //TODO localize
 	}
 
 
