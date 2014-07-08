@@ -21,6 +21,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+//TODO this is just an exact copy of GuiContainer and is here to trick NEI to do be displayed (since if it is displayed it goes bananas due to special zoom code). The addition of this file should probably be a part of the build script rather than manually copied.
+
 public abstract class GuiNEIKiller extends GuiScreen {
 
     protected int xSize = 176;

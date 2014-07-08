@@ -25,7 +25,7 @@ import vswe.stevesvehicles.old.Helpers.DistributorSetting;
 import vswe.stevesvehicles.old.Helpers.DistributorSide;
 import vswe.stevesvehicles.old.Helpers.Tank;
 import vswe.stevesvehicles.client.gui.screen.GuiBase;
-import vswe.stevesvehicles.old.Interfaces.GuiDistributor;
+import vswe.stevesvehicles.client.gui.screen.GuiDistributor;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 public class TileEntityDistributor extends TileEntityBase

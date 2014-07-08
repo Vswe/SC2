@@ -4,7 +4,6 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import vswe.stevesvehicles.client.gui.screen.GuiBase;
 import vswe.stevesvehicles.old.Containers.ContainerUpgrade;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.old.TileEntities.TileEntityUpgrade;
@@ -50,16 +49,16 @@ public class GuiUpgrade extends GuiBase {
     public void drawGuiBackground(float f, int x, int y) {
         GL11.glColor4f(1F, 1F, 1F, 1F);
 
-        int j = getGuiLeft();
-        int k = getGuiTop();
+        int left = getGuiLeft();
+        int top = getGuiTop();
 		ResourceHelper.bindResource(texture);
-        drawTexturedModalRect(j, k, 0, 0, xSize, ySize);
+        drawTexturedModalRect(left, top, 0, 0, xSize, ySize);
 
 		if (upgrade.getUpgrade() != null) {
 			InventoryEffect inventory = upgrade.getInventoryEffect();
 			if (inventory != null) {
 				for (int i = 0; i < inventory.getInventorySize(); i++) {
-					drawTexturedModalRect(j + inventory.getSlotX(i) - 1, k + inventory.getSlotY(i) - 1, SLOT_SRC_X, SLOT_SRC_Y, SLOT_SIZE, SLOT_SIZE);
+					drawTexturedModalRect(left + inventory.getSlotX(i) - 1, top + inventory.getSlotY(i) - 1, SLOT_SRC_X, SLOT_SRC_Y, SLOT_SIZE, SLOT_SIZE);
 				}					
 			}	
 			

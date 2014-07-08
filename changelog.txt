@@ -25,3 +25,11 @@ Changed features, from a player's perspective.
 * The Entropy assembly time increase for modules have been decreased. This is to make it a more viable option for disassembling carts.
 
 * The negative effects of Module Knowledge and Industrial Espionage have been removed to make them work better with Experienced Assembler and New Era.
+
+* All interfaces' texture sheets have been updated. This is to fix an issue with the extra large interfaces' scaling that causes the rendering to grab a slim slice of colors from a nearby image (in the sheet) and therefore causing weird lines of colors to appear in the interfaces. The updated sheets make sure that there's always at least one pixel between two images in a sheet. Due to this update, any texture packs modifying the interfaces of Steve's Carts 2 won't work in Steve's Vehicles without updating them first.
+
+* The interfaces of the managers (Cargo Manager and Liquid Manager) are now rendered more dynamically, this means that arrows are being rotated on the fly and colors to be applied to the colorless versions in the texture sheet. This means that the colors of the red, blue, yellow, green and black boxes have changed slightly, it's barely noticeable though. Also the button to change the color, due to the more dynamic rendering, reflect which color is currently selected. The currently selected color is the one in the middle and the four colors in the back are those which aren't currently selected.
+
+* The interface of the Liquid Manager have received a small tweak, between the input and output slots there are now a small arrow indicating the movement from input to output. There's also a semi-transparent image of an internal tank in the filter slots. This is to make it easier to think what the arrow directions mean (like it is for the cargo manager).
+
+* The interface of the External Distributors have received some tiny tweaks. The missing icon for the "all" setting has been added and the icons for the manager part and transfer direction settings received some color tweaks.

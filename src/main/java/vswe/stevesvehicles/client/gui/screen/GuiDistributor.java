@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.Interfaces;
+package vswe.stevesvehicles.client.gui.screen;
 import java.util.ArrayList;
 
 import net.minecraft.entity.player.InventoryPlayer;
@@ -6,7 +6,6 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import vswe.stevesvehicles.client.gui.screen.GuiBase;
 import vswe.stevesvehicles.localization.entry.block.LocalizationDistributor;
 import vswe.stevesvehicles.old.Containers.ContainerDistributor;
 import vswe.stevesvehicles.old.Helpers.DistributorSetting;
@@ -18,34 +17,28 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class GuiDistributor extends GuiBase
-{
-    public GuiDistributor(InventoryPlayer invPlayer, TileEntityDistributor distributor)
-    {
+public class GuiDistributor extends GuiBase {
+    public GuiDistributor(InventoryPlayer invPlayer, TileEntityDistributor distributor) {
         super(new ContainerDistributor(invPlayer, distributor));
-        this.invPlayer = invPlayer;
         setXSize(255);
         setYSize(186);
 		this.distributor = distributor;
     }
 
 	
-	
-    public void drawGuiForeground(int x, int y)
-    {
+	@Override
+    public void drawGuiForeground(int x, int y) {
 		GL11.glDisable(GL11.GL_LIGHTING);
 	
         getFontRenderer().drawString(LocalizationDistributor.TITLE.translate(), 8, 6, 0x404040);
 		
-		TileEntityManager[] invs = distributor.getInventories();
+		TileEntityManager[] inventories = distributor.getInventories();
 		 
-		if (invs.length == 0) {
+		if (inventories.length == 0) {
 			getFontRenderer().drawString(LocalizationDistributor.NOT_CONNECTED.translate(), 30, 40, 0xFF4040);
 		}
-			
 
-		
-		if (mouseOverText != null && !mouseOverText.equals("")) {
+		if (mouseOverText != null && !mouseOverText.isEmpty()) {
 			drawMouseOver(mouseOverText, x- getGuiLeft(), y-getGuiTop());
 		}
 		mouseOverText = null;
@@ -60,21 +53,28 @@ public class GuiDistributor extends GuiBase
 		}	
 	}
 
+    private static final int TEXTURE_SPACING = 1;
+    private static final int SIDE_BORDER_SRC_X = 1;
+    private static final int SIDE_BORDER_SRC_Y = 187;
+    private static final int SIDE_SRC_X = 47;
+    private static final int SIDE_SRC_Y = 187;
+    private static final int SIDE_SIZE = 18;
+
 	private static ResourceLocation texture = ResourceHelper.getResource("/gui/distributor.png");
-    public void drawGuiBackground(float f, int x, int y)
-    {
+    @Override
+    public void drawGuiBackground(float f, int x, int y) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
 
-        int j = getGuiLeft();
-        int k = getGuiTop();
+        int left = getGuiLeft();
+        int top = getGuiTop();
         ResourceHelper.bindResource(texture);
-        drawTexturedModalRect(j , k, 0, 0, xSize, ySize);
+        drawTexturedModalRect(left , top, 0, 0, xSize, ySize);
 
 		x-= getGuiLeft();
 		y-= getGuiTop();
 
-		TileEntityManager[] invs = distributor.getInventories();
+		TileEntityManager[] inventories = distributor.getInventories();
 		ArrayList<DistributorSide> sides = distributor.getSides();
 		
 		int id = 0;
@@ -85,11 +85,11 @@ public class GuiDistributor extends GuiBase
 				int srcX = 0;
 				
 				if (inRect(x,y, box)) {
-					srcX = box[2];
+					srcX = box[2] + TEXTURE_SPACING;
 				}
 			
-				drawTexturedModalRect(j + box[0], k + box[1], srcX, ySize, box[2], box[3]);
-				drawTexturedModalRect(j + box[0]+2, k + box[1]+2, box[2]*2 + (box[2]-4)*side.getId(), ySize, box[2]-4, box[3]-4);
+				drawTexturedModalRect(left + box[0], top + box[1], SIDE_BORDER_SRC_X + srcX, SIDE_BORDER_SRC_Y, box[2], box[3]);
+				drawTexturedModalRect(left + box[0] + 2, top + box[1] + 2, SIDE_SRC_X + (SIDE_SIZE + TEXTURE_SPACING) * side.getId(), SIDE_SRC_Y, SIDE_SIZE, SIDE_SIZE);
 				
 				drawMouseMover(LocalizationDistributor.SIDE_NAME.translate(side.getName()) + (activeId != -1 ? "\n["+ LocalizationDistributor.DROP_INSTRUCTION.translate() + "]" : ""), x, y, box);
 				
@@ -97,11 +97,11 @@ public class GuiDistributor extends GuiBase
 				for (DistributorSetting setting : DistributorSetting.settings) { 
 					if (setting.isEnabled(distributor)) {
 						if (side.isSet(setting.getId())) {
-							int[] settingbox = getActiveSettingBoxRect(id, settingCount++);
+							int[] settingsBox = getActiveSettingBoxRect(id, settingCount++);
 							
-							drawSetting(setting, settingbox, inRect(x,y, settingbox));
+							drawSetting(setting, settingsBox, inRect(x,y, settingsBox));
 								
-							drawMouseMover(setting.getName(invs) + "\n[" + LocalizationDistributor.REMOVE_INSTRUCTION.translate() + "]", x, y, settingbox);
+							drawMouseMover(setting.getName(inventories) + "\n[" + LocalizationDistributor.REMOVE_INSTRUCTION.translate() + "]", x, y, settingsBox);
 						}
 					}
 				}	
@@ -115,9 +115,9 @@ public class GuiDistributor extends GuiBase
 			
 				int[] box = getSettingBoxRect(setting.getImageId(), setting.getIsTop());
 				
-				drawSetting(setting, box, inRect(x,y, box));
+				drawSetting(setting, box, inRect(x, y, box));
 					
-				drawMouseMover(setting.getName(invs), x, y, box);
+				drawMouseMover(setting.getName(inventories), x, y, box);
 			}
 		}
 		
@@ -128,22 +128,28 @@ public class GuiDistributor extends GuiBase
 		
 
     }
-	
+
+    private static final int SETTING_SRC_X = 1;
+    private static final int SETTING_SRC_Y = 210;
+    private static final int SIDE_TYPE_SIZE = 12;
+    private static final int SIDE_TYPE_SRC_X = 69;
+    private static final int SIDE_TYPE_SRC_Y = 210;
+
 	private void drawSetting(DistributorSetting setting, int[] box, boolean hover) {
         int j = getGuiLeft();
         int k = getGuiTop();	
 	
 		int srcX = 0;
 		if (!setting.getIsTop()) {
-			srcX += box[2]*2;
+			srcX += (box[2] + TEXTURE_SPACING) * 2;
 		}
 		
 		if (hover) {
-			srcX += box[2];
+			srcX += box[2] + TEXTURE_SPACING;
 		}			
 		
-		drawTexturedModalRect(j + box[0], k + box[1], srcX, ySize+getSideBoxRect(0)[3], box[2], box[3]);
-		drawTexturedModalRect(j + box[0]+1, k + box[1]+1, box[2]*4 + (box[2]-2)*setting.getImageId(), ySize+getSideBoxRect(0)[3], box[2]-2, box[3]-2);
+		drawTexturedModalRect(j + box[0], k + box[1], SETTING_SRC_X + srcX, SETTING_SRC_Y, box[2], box[3]);
+		drawTexturedModalRect(j + box[0] + 2, k + box[1] + 2, SIDE_TYPE_SRC_X + (SIDE_TYPE_SIZE + TEXTURE_SPACING) * setting.getImageId(), SIDE_TYPE_SRC_Y, SIDE_TYPE_SIZE, SIDE_TYPE_SIZE);
 	}
 	
 	private int[] getSideBoxRect(int i) {
@@ -153,14 +159,14 @@ public class GuiDistributor extends GuiBase
 		return new int[] {20 + i * 18, 143 + (topRow ? 0 : 18), 16,16};
 	}
 	private int[] getActiveSettingBoxRect(int side, int setting) {
-		int[] sideCoords = getSideBoxRect(side);
+		int[] coordinate = getSideBoxRect(side);
 	
-		return new int[] {sideCoords[0] + sideCoords[2] + 5 + setting * 18, sideCoords[1] + (sideCoords[3] - 16) / 2, 16,16};
+		return new int[] {coordinate[0] + coordinate[2] + 5 + setting * 18, coordinate[1] + (coordinate[3] - 16) / 2, 16,16};
 	}	
  
 	private int activeId = -1;
-    public void mouseClick(int x, int y, int button)
-    {
+    @Override
+    public void mouseClick(int x, int y, int button) {
         super.mouseClick(x, y, button);
 		x-= getGuiLeft();
 		y-= getGuiTop();
@@ -177,9 +183,9 @@ public class GuiDistributor extends GuiBase
 			}	
 		}
     }
-	
-	public void mouseMoved(int x, int y, int button)
-    {
+
+    @Override
+	public void mouseMoved(int x, int y, int button) {
         super.mouseMoved(x, y, button);		
 		x -= getGuiLeft();
 		y -= getGuiTop();	
@@ -206,9 +212,9 @@ public class GuiDistributor extends GuiBase
 					for (DistributorSetting setting : DistributorSetting.settings) { 
 						if (setting.isEnabled(distributor)) {
 							if (side.isSet(setting.getId())) {
-								int[] settingbox = getActiveSettingBoxRect(id, settingCount++);
+								int[] settingsBox = getActiveSettingBoxRect(id, settingCount++);
 								
-								if (inRect(x,y, settingbox)) {
+								if (inRect(x,y, settingsBox)) {
 									distributor.sendPacket(1, new byte[] {(byte)setting.getId(),(byte)side.getId()} );
 								}
 									
@@ -221,6 +227,5 @@ public class GuiDistributor extends GuiBase
 		}
 	}
 	
-	TileEntityDistributor distributor;
-	InventoryPlayer invPlayer;
+	private TileEntityDistributor distributor;
 }
