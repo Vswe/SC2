@@ -3,6 +3,8 @@ package vswe.stevesvehicles.module.data;
 import vswe.stevesvehicles.localization.entry.info.LocalizationLabel;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.old.Helpers.ColorHelper;
+import vswe.stevesvehicles.vehicle.VehicleBase;
+import vswe.stevesvehicles.vehicle.VehicleType;
 
 import java.util.List;
 
@@ -50,4 +52,7 @@ public class ModuleDataHull extends ModuleData {
     }
 
 
+    public VehicleType getVehicle() {
+        return getValidVehicles() == null || getValidVehicles().isEmpty() ? null : getValidVehicles().get(0);
+    }
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -16,6 +17,8 @@ import org.lwjgl.opengl.GL12;
 import vswe.stevesvehicles.localization.ILocalizedText;
 import vswe.stevesvehicles.localization.PlainText;
 import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
+import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
+import vswe.stevesvehicles.old.Helpers.ModuleSortMode;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.network.PacketHandler;
 import vswe.stevesvehicles.old.StevesVehicles;
@@ -29,6 +32,7 @@ import vswe.stevesvehicles.container.slots.SlotAssembler;
 import vswe.stevesvehicles.old.TileEntities.TileEntityCartAssembler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import vswe.stevesvehicles.vehicle.VehicleType;
 
 @SideOnly(Side.CLIENT)
 public class GuiCartAssembler extends GuiBase {
@@ -203,18 +207,42 @@ public class GuiCartAssembler extends GuiBase {
     private static final int BOOLEAN_CHECK_SRC_X = 1;
     private static final int BOOLEAN_CHECK_SRC_Y = 152;
 
+
+    private static final int TAB_COUNT = 2;
+    private static final int TAB_WIDTH = 20;
+    private static final int TAB_HEIGHT = 18;
+    private static final int TAB_SRC_X = 1;
+    private static final int TAB_SRC_Y = 213;
+    private static final int TAB_SPACING = 1;
+    private static final int TAB_X = 125;
+    private static final int TAB_Y = 13;
+
+    private static final int TAB_CONTENT_SRC_X = 1;
+    private static final int TAB_CONTENT_SRC_Y = 232;
+    private static final int TAB_CONTENT_WIDTH = 16;
+    private static final int TAB_CONTENT_HEIGHT = 14;
+
+    private boolean useTabs() {
+        return assembler.isInFreeMode();
+    }
+
     @Override
     public void drawGuiBackground(float f, int x, int y) {
 		if (firstLoad) {
 			updateErrorList();
 			firstLoad = false;
 		}
+
+        if (!useTabs()) {
+            assembler.selectedTab = 0;
+        }
 	
 		
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);      
 	    int left = getGuiLeft();
         int top = getGuiTop();
-		ResourceHelper.bindResource(BACKGROUNDS[assembler.getSimulationInfo().getBackground()]);
+        int background = useTabs() ? 1 : assembler.getSimulationInfo().getBackground();
+		ResourceHelper.bindResource(BACKGROUNDS[background]);
         drawTexturedModalRect(left + 143, top + 15, 0, 0, 220, 148);
 		
         ResourceHelper.bindResource(TEXTURE_LEFT);
@@ -281,7 +309,23 @@ public class GuiCartAssembler extends GuiBase {
             ResourceHelper.bindResource(TEXTURE_EXTRA);
 			GL11.glColor4f(1F, 1F, 1F, 1F);
 		}
-		
+
+
+        if (useTabs()) {
+            for (int i = 0; i < TAB_COUNT; i++) {
+                int targetY = TAB_Y + i * (TAB_HEIGHT + TAB_SPACING);
+
+                int tabVisualIndex = i == assembler.selectedTab ? 0 : 1;
+                int[] target = {left + TAB_X, top + targetY, TAB_WIDTH, TAB_HEIGHT};
+                if (inRect(x, y, target)) {
+                    tabVisualIndex = 2;
+                }
+
+                drawRect(target, TAB_SRC_X + (TEXTURE_SPACING + TAB_WIDTH) * tabVisualIndex, TAB_SRC_Y);
+                drawTexturedModalRect(target[0] + (TAB_WIDTH - TAB_CONTENT_WIDTH) / 2, target[1] + (TAB_HEIGHT - TAB_CONTENT_HEIGHT) / 2, TAB_CONTENT_SRC_X + (TEXTURE_SPACING + TAB_CONTENT_WIDTH) * i, TAB_CONTENT_SRC_Y, TAB_CONTENT_WIDTH, TAB_CONTENT_HEIGHT);
+            }
+        }
+
 		boolean isDisassembling = assembler.getIsDisassembling();
 		
 		int srcX = ASSEMBLE_BUTTON_SRC_X;
@@ -333,9 +377,6 @@ public class GuiCartAssembler extends GuiBase {
 		drawProgressBar(ASSEMBLING_PROGRESS_RECT, assemblingProgress, PROGRESS_BAR_PROGRESS_SRC_Y, x, y);
 		drawProgressBar(FUEL_PROGRESS_RECT, assembler.getFuelLevel() / (float)assembler.getMaxFuelLevel(), PROGRESS_BAR_FUEL_SRC_Y, x, y);
 		
-		
-		renderDropDownMenu(x,y);
-		render3DVehicle();
 
 		if (!hasErrors) {
 			if (isDisassembling) {
@@ -346,6 +387,138 @@ public class GuiCartAssembler extends GuiBase {
 		}
 		drawProgressBarInfo(ASSEMBLING_PROGRESS_RECT, x, y, assemblingInfo);
 		drawProgressBarInfo(FUEL_PROGRESS_RECT, x, y, LocalizationAssembler.FUEL_LEVEL.translate() + ": " + assembler.getFuelLevel() + "/" + assembler.getMaxFuelLevel());
+
+        ResourceHelper.bindResource(TEXTURE_EXTRA);
+        GL11.glColor4f(1, 1, 1, 1);
+        GL11.glDisable(GL11.GL_LIGHTING);
+
+        if (assembler.selectedTab == 0) {
+            renderDropDownMenu(x,y);
+            render3DVehicle();
+        }else if(assembler.selectedTab == 1) {
+            updateModules();
+            int start = currentModulePage * MODULES_PER_LINE * MODULE_LINES;
+            int end = Math.min(start + MODULES_PER_LINE * MODULE_LINES, validModules.size());
+            for (int i = start; i < end; i++) {
+                ModuleData moduleData = validModules.get(i);
+
+                int id = i - start;
+                int moduleX = id % MODULES_PER_LINE;
+                int moduleY = id / MODULES_PER_LINE;
+
+                int[] target = {left + MODULE_X + moduleX * MODULE_SPACING, top + MODULE_Y + moduleY * MODULE_SPACING, MODULE_SIZE, MODULE_SIZE};
+
+
+                boolean hover = inRect(x, y, target);
+                int backGroundIndex = hover ? 1 : 0;
+                drawRect(target, MODULE_BACKGROUND_SRC_X + (target[2] + TEXTURE_SPACING) * backGroundIndex, MODULE_BACKGROUND_SRC_Y);
+
+                ItemStack item = moduleData.getItemStack();
+                renderitem.renderItemIntoGUI(getFontRenderer(), mc.getTextureManager(), item, target[0] + 1, target[1] + 1);
+
+
+                if (hover) {
+                    List<String> info = new ArrayList<String>();
+                    item.getItem().addInformation(item, Minecraft.getMinecraft().thePlayer, info, Minecraft.getMinecraft().gameSettings.advancedItemTooltips);
+                    drawMouseOver(info, x, y);
+                }
+
+                ResourceHelper.bindResource(TEXTURE_EXTRA);
+                GL11.glColor4f(1, 1, 1, 1);
+                GL11.glDisable(GL11.GL_LIGHTING);
+            }
+
+            drawArrowSetting(left + MODULE_ARROW_MODE_X, top + MODULE_ARROW_SETTING_Y, assembler.sortMode.toString(), x, y);
+            if (modulePageCount > 1) {
+                drawArrowSetting(left + MODULE_ARROW_PAGE_X, top + MODULE_ARROW_SETTING_Y, "Page " + (currentModulePage + 1), x, y); //TODO localize
+            }
+
+        }
+    }
+
+    private int currentModulePage;
+    private int modulePageCount;
+    private List<ModuleData> validModules;
+    private void updateModules() {
+        if (validModules == null || assembler.isFreeModulesOutdated) {
+            if (validModules == null) {
+                validModules = new ArrayList<ModuleData>();
+            }else{
+                validModules.clear();
+            }
+
+            ModuleDataHull hull = assembler.getHullModule();
+            VehicleType vehicle = hull == null ? null : hull.getVehicle();
+            for (ModuleData moduleData : ModuleRegistry.getAllModules()) {
+                boolean valid = false;
+                if (moduleData.getIsValid()) {
+                    if (vehicle == null) {
+                        valid = moduleData instanceof ModuleDataHull;
+                    }else{
+                        valid = moduleData.getValidVehicles() != null && moduleData.getValidVehicles().contains(hull.getVehicle()) && assembler.sortMode.isValid(assembler, hull, moduleData);
+                    }
+                }
+
+                if (valid) {
+                    validModules.add(moduleData);
+                }
+            }
+
+            assembler.isFreeModulesOutdated = false;
+            modulePageCount = (int)Math.ceil((float)validModules.size() / (MODULES_PER_LINE * MODULE_LINES));
+            if (currentModulePage >= modulePageCount) {
+                currentModulePage = modulePageCount - 1;
+                if (currentModulePage < 0) {
+                    currentModulePage = 0;
+                }
+            }
+        }
+    }
+
+
+
+    private final RenderItem renderitem = new RenderItem();
+    private static final int MODULE_X = 156;
+    private static final int MODULE_Y = 25;
+    private static final int MODULE_SPACING = 20;
+    private static final int MODULES_PER_LINE = 10;
+    private static final int MODULE_LINES = 6;
+    private static final int MODULE_SIZE = 18;
+    private static final int MODULE_BACKGROUND_SRC_X = 65;
+    private static final int MODULE_BACKGROUND_SRC_Y = 213;
+    private static final int MODULE_ARROW_SRC_X = 102;
+    private static final int MODULE_ARROW_SRC_Y = 213;
+    private static final int MODULE_ARROW_WIDTH = 6;
+    private static final int MODULE_ARROW_HEIGHT = 12;
+    private static final int MODULE_ARROW_TEXT_SPACE = 70;
+    private static final int MODULE_ARROW_SETTING_Y = 148;
+    private static final int MODULE_ARROW_PAGE_X = 358 - MODULE_ARROW_WIDTH * 2 - MODULE_ARROW_TEXT_SPACE;
+    private static final int MODULE_ARROW_MODE_X = 150;
+
+    private void drawArrowSetting(int x, int y, String text, int mX, int mY) {
+        drawArrow(x, y, true, mX, mY);
+        drawArrow(x + MODULE_ARROW_WIDTH + MODULE_ARROW_TEXT_SPACE, y, false, mX, mY);
+
+        int width = getFontRenderer().getStringWidth(text);
+        getFontRenderer().drawString(text, x + MODULE_ARROW_WIDTH + (MODULE_ARROW_TEXT_SPACE - width) / 2, y + 3, 0xFFFFFF);
+        ResourceHelper.bindResource(TEXTURE_EXTRA);
+        GL11.glColor4f(1, 1, 1, 1);
+    }
+
+    private void drawArrow(int x, int y, boolean left, int mX, int mY) {
+        int[] target = {x, y, MODULE_ARROW_WIDTH, MODULE_ARROW_HEIGHT};
+
+        drawRect(target, MODULE_ARROW_SRC_X + (left ? 0 : MODULE_ARROW_WIDTH + TEXTURE_SPACING), MODULE_ARROW_SRC_Y + (inRect(mX, mY, target) ? MODULE_ARROW_HEIGHT + TEXTURE_SPACING : 0));
+    }
+
+    private int onArrowClick(int x, int y, int mX, int mY) {
+        if (inRect(mX, mY, new int[] {x, y, MODULE_ARROW_WIDTH, MODULE_ARROW_HEIGHT})) {
+            return -1;
+        }else if (inRect(mX, mY, new int[] {x + MODULE_ARROW_WIDTH + MODULE_ARROW_TEXT_SPACE, y, MODULE_ARROW_WIDTH, MODULE_ARROW_HEIGHT})) {
+            return 1;
+        }else{
+            return 0;
+        }
     }
 
 	private String formatProgress(float progress) {
@@ -551,45 +724,46 @@ public class GuiCartAssembler extends GuiBase {
 		int x = x0 - getGuiLeft();
 		int y = y0 - getGuiTop();		
 		
-		
-		if (dropdownX != -1 && dropdownY != -1) {
-			ArrayList<DropDownMenuItem> items = assembler.getDropDown();
-			for (int i = 0; i < items.size(); i++) {
-				DropDownMenuItem item = items.get(i);
-			
-				boolean insideSubRect = false;
-				if (item.hasSubmenu()) {	
-					insideSubRect = inRect(x,y, item.getSubRect(dropdownX, dropdownY,i ));
-					if (!insideSubRect && item.getIsSubMenuOpen()) {
-						item.setIsSubMenuOpen(false);
-					}else if (insideSubRect && !item.getIsSubMenuOpen()) {
-						item.setIsSubMenuOpen(true);
-					}	
-				}
-			
-				boolean insideRect = insideSubRect || inRect(x,y, item.getRect(dropdownX, dropdownY,i ));
-				if (!insideRect && item.getIsLarge()) {
-					item.setIsLarge(false);
-				}else if (insideRect && !item.getIsLarge()) {
-					item.setIsLarge(true);
-				}
-	
+		if (assembler.selectedTab == 0) {
+            if (dropdownX != -1 && dropdownY != -1) {
+                ArrayList<DropDownMenuItem> items = assembler.getDropDown();
+                for (int i = 0; i < items.size(); i++) {
+                    DropDownMenuItem item = items.get(i);
 
-	
-			}
-		}
-		
-		if (isScrolling) {
-			if (button != -1) {
-				isScrolling = false;
-				assembler.setSpinning(true);
-			}else{
-				assembler.setYaw(assembler.getYaw() + x - scrollingX);
-				assembler.setRoll(assembler.getRoll() + y - scrollingY);
-				scrollingX = x;
-				scrollingY = y;
-			}
-		}		
+                    boolean insideSubRect = false;
+                    if (item.hasSubmenu()) {
+                        insideSubRect = inRect(x,y, item.getSubRect(dropdownX, dropdownY,i ));
+                        if (!insideSubRect && item.getIsSubMenuOpen()) {
+                            item.setIsSubMenuOpen(false);
+                        }else if (insideSubRect && !item.getIsSubMenuOpen()) {
+                            item.setIsSubMenuOpen(true);
+                        }
+                    }
+
+                    boolean insideRect = insideSubRect || inRect(x,y, item.getRect(dropdownX, dropdownY,i ));
+                    if (!insideRect && item.getIsLarge()) {
+                        item.setIsLarge(false);
+                    }else if (insideRect && !item.getIsLarge()) {
+                        item.setIsLarge(true);
+                    }
+
+
+
+                }
+            }
+
+            if (isScrolling) {
+                if (button != -1) {
+                    isScrolling = false;
+                    assembler.setSpinning(true);
+                }else{
+                    assembler.setYaw(assembler.getYaw() + x - scrollingX);
+                    assembler.setRoll(assembler.getRoll() + y - scrollingY);
+                    scrollingX = x;
+                    scrollingY = y;
+                }
+            }
+        }
 	}
 	
 	
@@ -609,30 +783,86 @@ public class GuiCartAssembler extends GuiBase {
 		if (inRect(x,y, ASSEMBLE_RECT)) {
             PacketHandler.sendPacket(0, new byte[0]);
 		}else if (inRect(x,y, BLACK_BACKGROUND)) {
-			if (button == 0) {
-				if (!isScrolling) {
-					scrollingX = x;
-					scrollingY = y;
-					isScrolling = true;
-					assembler.setSpinning(false);
-				}
-			}else if (button == 1) {
-				dropdownX = x;
-				dropdownY = y;
-				if (dropdownY + assembler.getDropDown().size() * 20 > 164) {
-					dropdownY = 164 - assembler.getDropDown().size() * 20;
-				}
-			}
+            if (assembler.selectedTab == 0) {
+                if (button == 0) {
+                    if (!isScrolling) {
+                        scrollingX = x;
+                        scrollingY = y;
+                        isScrolling = true;
+                        assembler.setSpinning(false);
+                    }
+                }else if (button == 1) {
+                    dropdownX = x;
+                    dropdownY = y;
+                    if (dropdownY + assembler.getDropDown().size() * 20 > 164) {
+                        dropdownY = 164 - assembler.getDropDown().size() * 20;
+                    }
+                }
+            }else if(assembler.selectedTab == 1) {
+                updateModules();
+                int start = currentModulePage * MODULES_PER_LINE * MODULE_LINES;
+                int end = Math.min(start + MODULES_PER_LINE * MODULE_LINES, validModules.size());
+                for (int i = start; i < end; i++) {
+                    ModuleData moduleData = validModules.get(i);
+
+                    int id = i - start;
+                    int moduleX = id % MODULES_PER_LINE;
+                    int moduleY = id / MODULES_PER_LINE;
+
+                    int[] target = {MODULE_X + moduleX * MODULE_SPACING, MODULE_Y + moduleY * MODULE_SPACING, MODULE_SIZE, MODULE_SIZE};
+                    if (inRect(x, y, target)) {
+                        int moduleId = ModuleRegistry.getIdFromModule(moduleData);
+                        if (moduleId >= 0) {
+                            byte b1 = (byte)(moduleId & 255);
+                            byte b2 = (byte)((moduleId >>> 8) & 255);
+                            PacketHandler.sendPacket(2, new byte[] {b2, b1});
+                        }
+                    }
+                }
+
+                int modeResult = onArrowClick(MODULE_ARROW_MODE_X, MODULE_ARROW_SETTING_Y, x, y);
+                if (modeResult < 0) {
+                    int id = assembler.sortMode.ordinal() - 1;
+                    if (id < 0) {
+                        id = ModuleSortMode.values().length - 1;
+                    }
+                    assembler.sortMode = ModuleSortMode.values()[id];
+                    assembler.isFreeModulesOutdated = true;
+                }else if(modeResult > 0) {
+                    int id = assembler.sortMode.ordinal() + 1;
+                    if (id >= ModuleSortMode.values().length) {
+                        id = 0;
+                    }
+                    assembler.sortMode = ModuleSortMode.values()[id];
+                    assembler.isFreeModulesOutdated = true;
+                }else if (modulePageCount > 1) {
+                    int pageResult = onArrowClick(MODULE_ARROW_PAGE_X, MODULE_ARROW_SETTING_Y, x, y);
+                    if (pageResult < 0) {
+                        currentModulePage--;
+                        if (currentModulePage < 0) {
+                            currentModulePage = modulePageCount - 1;
+                            if (currentModulePage < 0) {
+                                currentModulePage = 0;
+                            }
+                        }
+                    }else if(pageResult > 0) {
+                        currentModulePage++;
+                        if (currentModulePage >= modulePageCount) {
+                            currentModulePage = 0;
+                        }
+                    }
+                }
+            }
 		}else{
 			ArrayList<SlotAssembler> slots = assembler.getSlots();
-			for (int i = 1; i < slots.size(); i++) {
+			for (int i = 0; i < slots.size(); i++) {
 				SlotAssembler slot = slots.get(i);
 				int targetX = slot.getX() - 1;
 				int targetY = slot.getY()  - 1;
 				int size = 18;	
 					
 				if (inRect(x,y, new int[] {targetX, targetY, size, size})) {
-					if (slot.getStack() != null && slot.getStack().stackSize <= 0) {
+					if (slot.getStack() != null && ((i != 0 && slot.getStack().stackSize <= 0) || assembler.isInFreeMode())) {
 						PacketHandler.sendPacket(1, new byte[] {(byte)i});
 					}
 				}
@@ -640,7 +870,7 @@ public class GuiCartAssembler extends GuiBase {
 			}
 		}
 		
-		if (button == 0) {
+		if (button == 0 && assembler.selectedTab == 0) {
 			if (dropdownX != -1 && dropdownY != -1) {
 				boolean anyLargeItem = false;
 				ArrayList<DropDownMenuItem> items = assembler.getDropDown();
@@ -697,6 +927,17 @@ public class GuiCartAssembler extends GuiBase {
 				}
 			}	
 		}
+
+        if (useTabs()) {
+            for (int i = 0; i < TAB_COUNT; i++) {
+                int targetY = TAB_Y + i * (TAB_HEIGHT + TAB_SPACING);
+                int[] target = {TAB_X, targetY, TAB_WIDTH, TAB_HEIGHT};
+                if (inRect(x, y, target)) {
+                    assembler.selectedTab = i;
+                    break;
+                }
+            }
+        }
     }
 
     private TileEntityCartAssembler assembler;

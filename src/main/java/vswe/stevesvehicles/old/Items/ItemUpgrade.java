@@ -85,6 +85,9 @@ public class ItemUpgrade extends ItemBlock {
 			if (tile != null && tile instanceof TileEntityUpgrade) {
 				TileEntityUpgrade upgrade = (TileEntityUpgrade)tile;
 				upgrade.setType(stack.getItemDamage());
+                if (upgrade.getMaster() != null) {
+                    upgrade.getMaster().onUpgradeUpdate();
+                }
 			}
 			
 			return true;

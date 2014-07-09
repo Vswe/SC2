@@ -7,6 +7,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import vswe.stevesvehicles.upgrade.Upgrade;
+import vswe.stevesvehicles.upgrade.effect.assembly.FreeModules;
 import vswe.stevesvehicles.upgrade.effect.assembly.WorkEfficiency;
 import vswe.stevesvehicles.upgrade.effect.fuel.FuelCost;
 import vswe.stevesvehicles.upgrade.effect.fuel.FuelCostFree;
@@ -96,5 +97,13 @@ public class UpgradeRegistryProduction extends UpgradeRegistry {
         cheat.addEffect(FuelCostFree.class);
 
         register(cheat);
+
+
+        Upgrade cheatDeluxe = new Upgrade("creative_mode_deluxe");
+        cheatDeluxe.addEffect(WorkEfficiency.class, 10000F);
+        cheatDeluxe.addEffect(FuelCostFree.class);
+        cheatDeluxe.addEffect(FreeModules.class);
+
+        register(cheatDeluxe);
     }
 }

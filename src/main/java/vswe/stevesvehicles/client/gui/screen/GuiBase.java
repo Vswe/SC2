@@ -40,9 +40,8 @@ public abstract class GuiBase extends GuiNEIKiller {
 	
 	public void drawMouseOver(List text, int x, int y) {
 		GL11.glDisable(GL11.GL_LIGHTING);
-		GL11.glDisable(GL11.GL_DEPTH_TEST);
-		
-	
+
+
 		int var5 = 0;
         Iterator var6 = text.iterator();
 
@@ -80,6 +79,7 @@ public abstract class GuiBase extends GuiNEIKiller {
         this.drawGradientRect(var15 + var5 + 2, var16 - 3 + 1, var15 + var5 + 3, var16 + var9 + 3 - 1, var11, var12);
         this.drawGradientRect(var15 - 3, var16 - 3, var15 + var5 + 3, var16 - 3 + 1, var11, var11);
         this.drawGradientRect(var15 - 3, var16 + var9 + 2, var15 + var5 + 3, var16 + var9 + 3, var12, var12);
+        GL11.glDisable(GL11.GL_DEPTH_TEST);
 
         for (int var13 = 0; var13 < text.size(); ++var13){
             String var14 = (String)text.get(var13);
@@ -93,7 +93,6 @@ public abstract class GuiBase extends GuiNEIKiller {
 
             var16 += 10;
         }
-
         this.zLevel = 0.0F;
         itemRender.zLevel = 0.0F;
 		
@@ -387,6 +386,11 @@ public abstract class GuiBase extends GuiNEIKiller {
         }
 
         drawRect(x, y, u, v, w, h, rotation);
+    }
+
+
+    public void drawRect(int[] target, int u, int v) {
+        drawRect(target[0], target[1], u, v, target[2], target[3], RenderRotation.NORMAL);
     }
 
     public void drawRect(int x, int y, int u, int v, int w, int h, RenderRotation rotation) {

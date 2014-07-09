@@ -125,6 +125,7 @@ public class BlockCartAssembler extends BlockContainerBase
 			}else{
 				for (TileEntityCartAssembler master : masters) {
 					master.removeUpgrade(upgrade);
+                    master.onUpgradeUpdate();
 				}
 				upgrade.setMaster(null);
 			}						

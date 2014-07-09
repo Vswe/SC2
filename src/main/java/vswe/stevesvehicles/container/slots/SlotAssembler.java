@@ -115,6 +115,7 @@ public class SlotAssembler extends Slot {
 
 		if (shouldUpdatePlaceholder()) {
 			assembler.updatePlaceholder();
+            assembler.isFreeModulesOutdated = true;
 		}else{
 			assembler.isErrorListOutdated = true;
 		}
@@ -127,7 +128,7 @@ public class SlotAssembler extends Slot {
 
 	@Override
     public boolean canTakeStack(EntityPlayer player) {
-        return this.getStack() != null && this.getStack().stackSize > 0;
+        return this.getStack() != null && this.getStack().stackSize > 0 && !assembler.isInFreeMode();
     }
 	
 

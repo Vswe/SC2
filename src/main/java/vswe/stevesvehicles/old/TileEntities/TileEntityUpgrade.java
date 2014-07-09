@@ -574,7 +574,7 @@ public class TileEntityUpgrade extends TileEntityBase
     }
 
     public void removed() {
-            if (effects != null) {
+        if (effects != null) {
             for (BaseEffect effect : effects) {
                 effect.removed();
             }

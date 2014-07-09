@@ -4,6 +4,7 @@ package vswe.stevesvehicles.upgrade;
 import vswe.stevesvehicles.localization.entry.info.LocalizationUpgrade;
 import vswe.stevesvehicles.upgrade.effect.assembly.Blueprint;
 import vswe.stevesvehicles.upgrade.effect.assembly.Disassemble;
+import vswe.stevesvehicles.upgrade.effect.assembly.FreeModules;
 import vswe.stevesvehicles.upgrade.effect.assembly.InputChest;
 import vswe.stevesvehicles.upgrade.effect.assembly.WorkEfficiency;
 import vswe.stevesvehicles.upgrade.effect.external.Deployer;
@@ -154,6 +155,13 @@ public final class EffectNameLoader {
             public String getName(Object... params) {
                 int seconds = (Integer) params[0] / 20;
                 return LocalizationUpgrade.TIME_FLAT_REMOVE.translate((seconds >= 0 ? "+" : "") + seconds, String.valueOf(seconds));
+            }
+        });
+
+        Upgrade.registerInfo(FreeModules.class, new IEffectInfo() {
+            @Override
+            public String getName(Object... params) {
+                return "Receive free modules from the assembler."; //TODO add localization for this one
             }
         });
     }

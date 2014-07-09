@@ -103,6 +103,10 @@ public class ModuleRegistry implements IRegistry<ModuleData> {
         return loader.getObjectFromId(id);
     }
 
+    public static ModuleData getModuleFromName(String name) {
+        return loader.getObjectFromName(name);
+    }
+
     public static List<ModuleData> getAllModules() {
         return allModules;
     }

@@ -17,6 +17,8 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import vswe.stevesvehicles.localization.PlainText;
+import vswe.stevesvehicles.module.cart.hull.ModuleHull;
+import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.old.Helpers.DropDownMenuItem;
 import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
@@ -26,6 +28,8 @@ import vswe.stevesvehicles.old.Blocks.ModBlocks;
 import vswe.stevesvehicles.old.Helpers.*;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.old.StevesVehicles;
+import vswe.stevesvehicles.upgrade.effect.assembly.FreeModules;
+import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.old.Containers.ContainerCartAssembler;
@@ -102,6 +106,8 @@ public class TileEntityCartAssembler extends TileEntityBase
 	 * Whether the cached error list needs to be recalculated or not
 	 */
 	public boolean isErrorListOutdated;
+
+    public boolean isFreeModulesOutdated;
 	
 	/**
 	 * The graphical boxes drawn as module headers
@@ -126,7 +132,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 	/**
 	 * The simulated cart, this cart will only exist on the client side
 	 */
-	private vswe.stevesvehicles.vehicle.VehicleBase placeholder;
+	private VehicleBase placeholder;
 	
 	/**
 	 * The current yaw (rotation) of the simulated cart
@@ -143,6 +149,12 @@ public class TileEntityCartAssembler extends TileEntityBase
 	 */
 	private boolean rollDown = false;
 
+    /**
+     * Which tab is selected in the interface (this is here to prevent reset on reopening the interface)
+     */
+    public int selectedTab;
+
+    public ModuleSortMode sortMode = ModuleSortMode.NORMAL;
 	
 	
 	/**
@@ -350,7 +362,8 @@ public class TileEntityCartAssembler extends TileEntityBase
 	 */
 	public void addUpgrade(TileEntityUpgrade upgrade) {
 		upgrades.add(upgrade);
-	}
+        System.out.println("Add " + worldObj.isRemote);
+    }
 	
 	/**
 	 * Remove an upgrade from the list of upgrades for this Cart Assembler
@@ -539,27 +552,83 @@ public class TileEntityCartAssembler extends TileEntityBase
 			//if a player clicked the assemble button, try to assemble the cart
 			doAssemble();
 		}else if(id == 1) {
-			//if a slot was clicked with a module of an already existing cart, mark it for removal or to keep it depending on what it already is
+
+			//if a slot was clicked with a module of an already existing cart, mark it for removal or to keep it depending on what it already is. This is also used to remove modules in free mode.
 			int slotId = data[0];
-			if (slotId >= 1 && slotId < getSlots().size()) {
-				SlotAssembler slot = getSlots().get(slotId);
-				if (slot.getStack() != null) {
-					if (slot.getStack().stackSize == getKeepSize()) {
-						slot.getStack().stackSize = getRemovedSize();
-					}else{
-						slot.getStack().stackSize = getKeepSize();
-					}
-				}				
+            if (slotId >= 0 && slotId < getSlots().size()) {
+                SlotAssembler slot = getSlots().get(slotId);
+                if (slot.getStack() != null) {
+                    if (slot.getStack().stackSize > 0) {
+                        boolean canRemove = freeMode;
+                        if (canRemove && slotId == 0) {
+                            for (int i = 1; i < getSlots().size() - nonModularSlots(); i++) {
+                                if (getSlots().get(i).getHasStack()) {
+                                    canRemove = false;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (canRemove) {
+                            slot.putStack(null);
+                        }
+                    }else if (slotId != 0) {
+                        if (slot.getStack().stackSize == getKeepSize()) {
+                            slot.getStack().stackSize = getRemovedSize();
+                        }else{
+                            slot.getStack().stackSize = getKeepSize();
+                        }
+                    }
+                }
 			}
-		}
+        }else if(id == 2) {
+            int b1 = data[1];
+            if (b1 < 0) {
+                b1 += 256;
+            }
+            int b2 = data[0];
+            if (b2 < 0) {
+                b2 += 256;
+            }
+
+            int val = (b2 << 8) | b1;
+            ModuleData moduleData = ModuleRegistry.getModuleFromId(val);
+            if (moduleData != null) {
+                if (moduleData instanceof ModuleDataHull && getHullModule() != null) {
+                    ItemStack item = moduleData.getItemStack();
+                    hullSlot.putStack(item);
+
+                    invalidateAll();
+                    validateAll();
+
+                    for (SlotAssembler slotAssembler : getSlots()) {
+                        if (!slotAssembler.isValid()) {
+                            slotAssembler.putStack(null);
+                        }
+                    }
+
+                    lastHull = item;
+                }else{
+                    ItemStack item = moduleData.getItemStack();
+                    for (SlotAssembler slot : slots) {
+                        if (!slot.getHasStack() && slot.isItemValid(item)) {
+                            slot.putStack(item);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
 	}
+
+
 
 	/**
 	 * Called when a upgrade is removed or added to this Cart Assembler
 	 */
 	public void onUpgradeUpdate() {
-		
-		//will also get modules that is just kept when modifying a cart, this is a huge problem (and the reason why this code isn't used)
+
+        //will also get modules that is just kept when modifying a cart, this is a huge problem (and the reason why this code isn't used)
 		/*
 		ArrayList<ModuleData> modules = ModuleData.getModulesFromItems(ModuleData.getModularItems(outputItem)); 
 		ArrayList<ModuleData> removed = new ArrayList<ModuleData>(); 
@@ -571,6 +640,14 @@ public class TileEntityCartAssembler extends TileEntityBase
 		}		
 		maxAssemblingTime = generateAssemblingTime(modules, removed);
 		*/
+
+        freeMode = false;
+        for (BaseEffect baseEffect : getEffects()) {
+            if (baseEffect instanceof FreeModules) {
+                freeMode = true;
+                break;
+            }
+        }
 	}
 	
 	/**
@@ -1615,5 +1692,9 @@ public class TileEntityCartAssembler extends TileEntityBase
 			fuelLevel = getMaxFuelLevel();
 		}
 	}    
-	
+
+    private boolean freeMode;
+    public boolean isInFreeMode() {
+        return freeMode;
+    }
 }
