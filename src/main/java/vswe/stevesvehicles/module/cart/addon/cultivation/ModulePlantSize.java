@@ -51,14 +51,14 @@ public class ModulePlantSize extends ModuleAddon {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawBackground(GuiVehicle gui, int x, int y) {
-		ResourceHelper.bindResource("/gui/plantsize.png");
+		ResourceHelper.bindResource("/gui/plant_size.png");
 
-		int srcX = ((size - 1) % 5) * 44;
-		int srcY = ((size - 1) / 5 + 1) * 44;
+		int srcX = 1 + ((size - 1) % 5) * 45;
+		int srcY = 1 + ((size - 1) / 5 + 1) * 45;
 		drawImage(gui, box, srcX, srcY);
 		
 		if (inRect(x,y, box)) {
-			drawImage(gui, box, 0, 0);
+			drawImage(gui, box, 1, 1);
 		}
 			
 	}

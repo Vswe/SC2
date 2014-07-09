@@ -15,16 +15,16 @@ public class HeightControlOre {
 	public static final ArrayList<HeightControlOre> ores = new ArrayList<HeightControlOre>();
 
 	static {
-		new HeightControlOre("Diamond", 0,15,12,5);
-		new HeightControlOre("Redstone",1,16,13,5);
-		new HeightControlOre("Gold",2,33,30,5);
-		new HeightControlOre("Lapis Lazuli",3,32,18,11);
-		new HeightControlOre("Iron",4,67,41,5);
-		new HeightControlOre("Coal",5,131,40,5);
-		new HeightControlOre("Emerald",6,32,29,5);
+		new HeightControlOre("Diamond", 0, 15, 12, 5);
+		new HeightControlOre("Redstone", 1, 16 ,13, 5);
+		new HeightControlOre("Gold", 2, 33, 30, 5);
+		new HeightControlOre("Lapis Lazuli", 3, 32, 18, 11);
+		new HeightControlOre("Iron", 4, 67, 41, 5);
+		new HeightControlOre("Coal", 5, 131, 40, 5);
+		new HeightControlOre("Emerald", 6, 32, 29, 5);
 	}
 
-	public HeightControlOre(String name, int textureid, int spanHighest, int bestHighest, int bestLowest) {
+	public HeightControlOre(String name, int textureId, int spanHighest, int bestHighest, int bestLowest) {
 		this.name = name;
 		this.useDefaultTexture = true;
 		this.specialTexture = "";
@@ -32,8 +32,8 @@ public class HeightControlOre {
 		this.spanLowest = 1;
 		this.bestHighest = bestHighest;
 		this.bestLowest = bestLowest;
-		this.srcX = 0;
-		this.srcY = (textureid * 2 + 1) * 4;
+		this.srcX = 1;
+		this.srcY = 1 + (textureId * 2 + 1) * 5;
 
 		ores.add(this);
 	}

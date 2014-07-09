@@ -46,7 +46,7 @@ public abstract class ModuleRecipe extends ModuleAddon {
 			
 			ResourceHelper.bindResource("/gui/recipe.png");
 			
-			drawImage(gui, area[0] - 2, area[1] - 2, 0, 0, 20, 20);
+			drawImage(gui, area[0] - 2, area[1] - 2, 1, 1, 20, 20);
 			
 			if (mode == 1) {
 				for (int i = 0; i < 3; i++) {
@@ -59,10 +59,10 @@ public abstract class ModuleRecipe extends ModuleAddon {
 	}
 	
 	private void drawControlRect(GuiVehicle gui, int x, int y, int i) {
-		int v = i * 11;
+		int v = 1 + i * 12;
 		int[] rect = getControlRect(i);
 		
-		drawImage(gui, rect, 20 + (inRect(x, y, rect) ? 22 : 0), v);		
+		drawImage(gui, rect, 20 + (inRect(x, y, rect) ? 25 : 2), v);
 	}
 	
 	private int[] getControlRect(int i) {

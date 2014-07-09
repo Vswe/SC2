@@ -123,21 +123,21 @@ public class ModuleTorch extends ModuleWorker implements ISuppliesModule  {
 		
 		
 		
-		int srcX = 0;
+		int srcX = 1;
 		if (inRect(x,y, boxRect)) {
-			srcX += boxRect[2];
+			srcX += boxRect[2] + 1;
 		}		
 
-		drawImage(gui, boxRect, srcX, 0);
-		drawImage(gui, 12+1, guiHeight()-10 + 1, 0, 9, barLength, 7);
-		drawImage(gui, 12 + 3 * lightLimit,guiHeight()-10,0, 16 , 1, 9);
+		drawImage(gui, boxRect, srcX, 1);
+		drawImage(gui, 12+1, guiHeight()-10 + 1, 1, 11, barLength, 7);
+		drawImage(gui, 12 + 3 * lightLimit,guiHeight() - 10, 1, 19, 1, 9);
 	}
 	
-	private int[] boxRect = new int[] {12, guiHeight()-10, 46, 9};
+	private final int[] boxRect = new int[] {12, guiHeight() - 10, 46, 9};
 
 	@Override
 	public void drawMouseOver(GuiVehicle gui, int x, int y) {
-		drawStringOnMouseOver(gui, "Threshold: " + lightLimit + " Current: " + light, x,y, boxRect);
+		drawStringOnMouseOver(gui, "Threshold: " + lightLimit + " Current: " + light, x,y, boxRect); //TODO localize
 	}	
 	
 	@Override

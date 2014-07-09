@@ -43,6 +43,7 @@ public class ModuleRegistryUtility extends ModuleRegistry {
         register(enchanter);
 
         ModuleData cheat = new ModuleData("creative_supplies", ModuleCreativeSupplies.class, 1);
+        cheat.addVehicles(VehicleRegistry.CART, VehicleRegistry.BOAT);
         register(cheat);
     }
 }

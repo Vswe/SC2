@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.IIcon;
@@ -533,6 +534,33 @@ public abstract class GuiBase extends GuiNEIKiller {
 			}
 		}		
 	}
-	
-	
+
+
+    protected void startScissor(int x, int y, int w, int h) {
+        ScaledResolution scaledresolution = new ScaledResolution(Minecraft.getMinecraft().gameSettings, Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
+
+        float scale = getScale();
+
+        double scaleX = Minecraft.getMinecraft().displayWidth / scaledresolution.getScaledWidth_double();
+        double scaleY = Minecraft.getMinecraft().displayHeight / scaledresolution.getScaledHeight_double();
+
+        int scissorW = (int)(w * scaleX * scale);
+        int scissorH = (int)(h * scaleY * scale);
+
+        double scissorX = x * scaleX * scale;
+        double scissorY = y * scaleY * scale;
+
+        scissorX += (((width - getXSize() * scale) / (2 * scale)) * scale) * scaleX;
+        scissorY += (((height - getYSize() * scale) / (2 * scale)) * scale) * scaleY;
+
+        scissorY =  Minecraft.getMinecraft().displayHeight - (scissorY + scissorH);
+
+        GL11.glScissor((int)scissorX, (int)scissorY, scissorW, scissorH);
+        GL11.glEnable(GL11.GL_SCISSOR_TEST);
+    }
+
+    protected void stopScissor() {
+        GL11.glDisable(GL11.GL_SCISSOR_TEST);
+    }
+
 }

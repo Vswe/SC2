@@ -41,24 +41,25 @@ public class ModuleBrake extends ModuleAddon implements ILeverModule {
 	}
 
 
-	
+	private static final int TEXTURE_SPACING = 1;
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawBackground(GuiVehicle gui, int x, int y) {
 		ResourceHelper.bindResource("/gui/lever.png");
 
-		drawButton(gui, x,y, START_STOP_RECT, isForceStopping() ? 2 : 1);
-		drawButton(gui, x,y, TURN_BACK_RECT, 0);
+		drawButton(gui, x, y, START_STOP_RECT, isForceStopping() ? 2 : 1);
+		drawButton(gui, x, y, TURN_BACK_RECT, 0);
 	}
 
-	private void drawButton(GuiVehicle gui, int x, int y, int[] coordinates, int imageID) {
+	private void drawButton(GuiVehicle gui, int x, int y, int[] coordinates, int imageId) {
 		if (inRect(x,y, coordinates)) {
-			drawImage(gui,coordinates, 0, coordinates[3]);
+			drawImage(gui ,coordinates, TEXTURE_SPACING, TEXTURE_SPACING * 2 + coordinates[3]);
 		}else{
-			drawImage(gui,coordinates, 0, 0);
+			drawImage(gui, coordinates, TEXTURE_SPACING, TEXTURE_SPACING);
 		}
 
-		int srcY = coordinates[3] * 2 + imageID * (coordinates[3] - 2);
+		int srcY = TEXTURE_SPACING + (TEXTURE_SPACING + coordinates[3]) * 2 + imageId * (TEXTURE_SPACING + coordinates[3] - 2);
 		drawImage(gui, coordinates[0] + 1, coordinates[1] + 1, 0, srcY, coordinates[2] - 2, coordinates[3] - 2);
 	}
 

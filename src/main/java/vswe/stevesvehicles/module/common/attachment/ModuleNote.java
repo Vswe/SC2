@@ -21,9 +21,9 @@ public class ModuleNote extends ModuleAttachment {
 	private static final int NOTES_IN_VIEW = 13;
 	private static final int TRACKS_IN_VIEW = 5;
 
-	private int[] instrumentColors = new int[] {0x404040, 0xFF0000, 0x00FF00, 0x0000FF, 0xFFFF00, 0x00FFFF};
-	private String[] pitchNames = new String[] {"F#", "G", "G#", "A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#"};
-	private ILocalizedText[] instrumentNames = new ILocalizedText[] {LocalizationVisual.PIANO, LocalizationVisual.BASS_DRUM, LocalizationVisual.SNARE_DRUM, LocalizationVisual.STICKS, LocalizationVisual.BASS_GUITAR};
+	private static final int[] INSTRUMENT_COLORS = new int[] {0x404040, 0xFF0000, 0x00FF00, 0x0000FF, 0xFFFF00, 0x00FFFF};
+	private static final String[] PITCH_NAMES = new String[] {"F#", "G", "G#", "A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#"};
+	private static final ILocalizedText[] INSTRUMENT_NAMES = new ILocalizedText[] {LocalizationVisual.PIANO, LocalizationVisual.BASS_DRUM, LocalizationVisual.SNARE_DRUM, LocalizationVisual.STICKS, LocalizationVisual.BASS_GUITAR};
 
 	
 	private ArrayList<Track> tracks;
@@ -85,11 +85,11 @@ public class ModuleNote extends ModuleAttachment {
 				Button tempButton = new Button(NOTE_MAP_X -20 + (i+1)*20, NOTE_MAP_Y - 20);
 				instrumentButtons.add(tempButton);
 				if (i > 0) {
-					tempButton.text = LocalizationVisual.ACTIVATE_INSTRUMENT.translate(instrumentNames[i-1].translate());
+					tempButton.text = LocalizationVisual.ACTIVATE_INSTRUMENT.translate(INSTRUMENT_NAMES[i - 1].translate());
 				}else{
 					tempButton.text = LocalizationVisual.DEACTIVATE_INSTRUMENT.translate();
 				}
-				tempButton.color = instrumentColors[i];
+				tempButton.color = INSTRUMENT_COLORS[i];
 			}
 		}
 	}
@@ -364,20 +364,21 @@ public class ModuleNote extends ModuleAttachment {
 		}
 		
 		public void draw(GuiVehicle gui, int x, int y) {
-			if (!inRect(x,y, getRect())) {
-				GL11.glColor4f((float)(color >> 16) / 255.0F, (float)(color >> 8 & 255) / 255.0F, (float)(color & 255) / 255.0F, 1F);
-			}
-			drawImage(gui, getRect(), 32, 0);
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			int srcX = 0;
-			int srcY = 16;
+			int srcX = 1;
+			int srcY = 18;
 			if (down) {
-				srcX += 16;
+				srcX += 17;
 			}
 			drawImage(gui, getRect(), srcX, srcY);
-			
+
+            if (!inRect(x, y, getRect())) {
+                GL11.glColor4f((float)(color >> 16) / 255.0F, (float)(color >> 8 & 255) / 255.0F, (float)(color & 255) / 255.0F, 1F);
+            }
+            drawImage(gui, getRect(), 35, 1);
+            GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+
 			if (imageID != -1) {
-				drawImage(gui, getRect(), imageID*16, 32);				
+				drawImage(gui, getRect()[0] + 1, getRect()[1] + 1, 2 + imageID * 16, 35, getRect()[2] - 2, getRect()[3] - 2);
 			}
 		}
 	
@@ -405,24 +406,24 @@ public class ModuleNote extends ModuleAttachment {
 			}
 		
 			
-			drawString(gui, str, rect[0] + 3, rect[1] +6, instrumentColors[instrumentId]);
+			drawString(gui, str, rect[0] + 3, rect[1] +6, INSTRUMENT_COLORS[instrumentId]);
 		}
 		
 		public void draw(GuiVehicle gui, int x, int y, int trackID, int noteID) {
-			int srcX = 0;
+			int srcX = 1;
 			if (instrumentId == 0) {
-				srcX += 16;
+				srcX += 17;
 			}
 			
 			int rect[] = getBounds(trackID, noteID);
 			if (instrumentId != 0 && playProgress == noteID + getScrollX() && isPlaying()) {
 				GL11.glColor4f(0.3F, 0.3F, 0.3F, 1.0F);
 			}
-			drawImage(gui, rect, srcX,0);	
+			drawImage(gui, rect, srcX, 1);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			
 			if (inRect(x,y, rect)) {
-				drawImage(gui, rect, 32,0);	
+				drawImage(gui, rect, 35, 1);
 			}			
 		}
 		
@@ -491,7 +492,7 @@ public class ModuleNote extends ModuleAttachment {
 			if (instrumentId == 0) {
 				return "Unknown instrument";
 			}else{
-				return instrumentNames[instrumentId-1].translate() + " " + pitchNames[pitch];
+				return INSTRUMENT_NAMES[instrumentId-1].translate() + " " + PITCH_NAMES[pitch];
 			}
 		}
 		
@@ -583,22 +584,22 @@ public class ModuleNote extends ModuleAttachment {
 		}
 		
 		if (tooLongTrack) {
-			drawImage(gui, SCROLL_X_RECT, 48, 0);
+			drawImage(gui, SCROLL_X_RECT, 52, 1);
 			int[] marker = getMarkerX();
-			drawImage(gui, marker, 148, 1);
+			drawImage(gui, marker, 153, 2);
 			if (veryLongTrack) {
 				marker = getMarkerXTune();
-				drawImage(gui, marker, 153, 1);			
+				drawImage(gui, marker, 159, 2);
 			}
 		}else{
-			drawImage(gui, SCROLL_X_RECT, 48, 16);
+			drawImage(gui, SCROLL_X_RECT, 52, 18);
 		}
 		if (tooTallModule) {
-			drawImage(gui, SCROLL_Y_RECT, 0, 48);
+			drawImage(gui, SCROLL_Y_RECT, 1, 50);
 			int[] marker = getMarkerY();
-			drawImage(gui, marker, 1, 148);
+			drawImage(gui, marker, 2, 151);
 		}else{
-			drawImage(gui, SCROLL_Y_RECT, 16, 48);
+			drawImage(gui, SCROLL_Y_RECT, 18, 50);
 		}		
 		
 	}

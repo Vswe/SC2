@@ -78,7 +78,7 @@ public abstract class TankEffect extends InventoryEffect implements ITankHolder 
 		
 		tank.drawFluid(gui, tankInterfaceX, tankInterfaceY);
 		ResourceHelper.bindResource(texture);	
-		gui.drawTexturedModalRect(gui.getGuiLeft() + tankInterfaceX, gui.getGuiTop() + tankInterfaceY, 0, 0, 36, 51);
+		gui.drawTexturedModalRect(gui.getGuiLeft() + tankInterfaceX, gui.getGuiTop() + tankInterfaceY, 1, 1, 36, 51);
 	}
 	
 	

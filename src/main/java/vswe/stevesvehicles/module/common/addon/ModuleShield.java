@@ -108,7 +108,7 @@ public class ModuleShield extends ModuleAddon implements IActivatorModule {
 		}
 	}
 	
-
+    private static final int TEXTURE_SPACING = 1;
 	
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -121,9 +121,9 @@ public class ModuleShield extends ModuleAddon implements IActivatorModule {
 			borderID = 1;			
 		}
 
-		drawImage(gui, BUTTON_RECT, 0, BUTTON_RECT[3] * borderID);
+		drawImage(gui, BUTTON_RECT, TEXTURE_SPACING, TEXTURE_SPACING + (TEXTURE_SPACING + BUTTON_RECT[3]) * borderID);
 
-		int srcY = BUTTON_RECT[3] * 2 + imageID * (BUTTON_RECT[3] - 2);
+		int srcY = TEXTURE_SPACING + (TEXTURE_SPACING + BUTTON_RECT[3]) * 2 + imageID * (TEXTURE_SPACING + BUTTON_RECT[3] - 2);
 		drawImage(gui, BUTTON_RECT[0] + 1, BUTTON_RECT[1] + 1, 0, srcY, BUTTON_RECT[2] - 2, BUTTON_RECT[3] - 2);
 	}
 

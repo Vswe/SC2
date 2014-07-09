@@ -37,3 +37,5 @@ Changed features, from a player's perspective.
 * The button text and the category titles in the Assembler's interface are now written without pre-made textures. This means that these can now be localized. This change also means their font changed making them look a bit different. The animation for the opening of the slots have been tweaked slightly.
 
 * The amount of storage modules (chests and tanks) a cart can have now depends on the hull. Previously the max was always 4, now it's 2 for wooden hulls, 4 for standard hulls and 6 for reinforced hulls and  better.
+
+* Slots in the vehicle interface are no longer grayed out and emptied when partially scrolled out of view. They are now rendered and their items are partially rendered to fit the edges properly.

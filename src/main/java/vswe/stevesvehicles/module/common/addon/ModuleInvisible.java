@@ -39,11 +39,13 @@ public class ModuleInvisible extends ModuleAddon implements IActivatorModule {
 	    drawString(gui, getModuleName(), 8, 6, 0x404040);
 	}
 
-	
+
+    private static final int TEXTURE_SPACING = 1;
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawBackground(GuiVehicle gui, int x, int y) {
-		ResourceHelper.bindResource("/gui/invis.png");
+		ResourceHelper.bindResource("/gui/invisible.png");
 
 		int imageID = isVisible() ? 1 : 0;
 		int borderID = 0;
@@ -51,10 +53,10 @@ public class ModuleInvisible extends ModuleAddon implements IActivatorModule {
 			borderID = 1;			
 		}
 
-		drawImage(gui, BUTTON_RECT, 0, BUTTON_RECT[3] * borderID);
+		drawImage(gui, BUTTON_RECT, TEXTURE_SPACING, TEXTURE_SPACING + (TEXTURE_SPACING + BUTTON_RECT[3]) * borderID);
 
-		int srcY = BUTTON_RECT[3] * 2 + imageID * (BUTTON_RECT[3] - 2);
-		drawImage(gui, BUTTON_RECT[0] + 1, BUTTON_RECT[1] + 1, 0, srcY, BUTTON_RECT[2] - 2, BUTTON_RECT[3] - 2);
+		int srcY = TEXTURE_SPACING + (TEXTURE_SPACING + BUTTON_RECT[3]) * 2 + imageID * (TEXTURE_SPACING + BUTTON_RECT[3] - 2);
+		drawImage(gui, BUTTON_RECT[0] + 1, BUTTON_RECT[1] + 1, TEXTURE_SPACING, srcY, BUTTON_RECT[2] - 2, BUTTON_RECT[3] - 2);
 	}
 
 	private static final int[] BUTTON_RECT = new int[] {20,20, 24, 12};

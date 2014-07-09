@@ -68,9 +68,9 @@ public class ModulePowerObserver extends ModuleAddon {
 		for (int i = 0; i < 4; i++) {
 			int[] rect = getAreaRect(i);
 			
-			drawImage(gui, rect, 18, 22 * i);
+			drawImage(gui, rect, 20, 1 + 23 * i);
 			if (inRect(x, y, rect)) {
-				drawImage(gui, rect, 18, 22 * (i + 4));
+				drawImage(gui, rect, 20, 1 + 23 * (i + 4));
 			}
 			
 						
@@ -86,13 +86,13 @@ public class ModulePowerObserver extends ModuleAddon {
 			
 			rect = getPowerRect(i);
 			if (isAreaActive(i)) {
-				drawImage(gui, rect, 122, 0);
+				drawImage(gui, rect, 125, 1);
 			}else{
-				drawImage(gui, rect, 122 + rect[2], 0);
+				drawImage(gui, rect, 125 + (rect[2] + 1), 1);
 			}
 			
 			if (inRect(x,y,rect)) {
-				drawImage(gui, rect, 122 + rect[2] * 2, 0);
+				drawImage(gui, rect, 125 + (rect[2] + 1) * 2, 1);
 			}
 		}
 		

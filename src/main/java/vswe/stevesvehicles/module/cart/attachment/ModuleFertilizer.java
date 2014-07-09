@@ -58,10 +58,11 @@ public class ModuleFertilizer extends ModuleWorker implements ISuppliesModule {
 	public void drawBackground(GuiVehicle gui, int x, int y) {
 		ResourceHelper.bindResource("/gui/fertilize.png");
 
-		drawImage(gui, tankPosX, tankPosY, 0, 0, 18 , 27);
 		float percentage = fertilizerStorage / (float) getMaxFertilizerStorage();
 		int size = (int)(percentage * 23);
-		drawImage(gui, tankPosX + 2, tankPosY + 2 + (23-size), 18, (23-size), 14, size);
+		drawImage(gui, tankPosX + 2, tankPosY + 2 + (23-size), 20, 1 + (23-size), 14, size);
+
+        drawImage(gui, tankPosX, tankPosY, 1, 1, 18 , 27);
 	}
 
 	@Override

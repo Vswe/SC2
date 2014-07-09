@@ -139,7 +139,7 @@ public abstract class ModuleTank extends ModuleStorage implements IFluidTank, IT
 		tank.drawFluid(gui, TANK_BOUNDS[0], TANK_BOUNDS[1]);
 
 		ResourceHelper.bindResource("/gui/tank.png");		
-		drawImage(gui, TANK_BOUNDS, 0, 0);
+		drawImage(gui, TANK_BOUNDS, 1, 1);
 	
 	}
 	

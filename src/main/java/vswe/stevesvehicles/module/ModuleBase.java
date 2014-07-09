@@ -920,6 +920,7 @@ public abstract class ModuleBase {
 	 @SideOnly(Side.CLIENT)
 	public void drawMouseOver(GuiVehicle gui, int x, int y) {}
 
+
 	/**
 	 * Detects if the given mouse coordinates are within the given rectangle
 	 * @param x The mouse x coordinate

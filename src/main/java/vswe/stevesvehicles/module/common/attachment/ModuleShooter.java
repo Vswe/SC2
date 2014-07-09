@@ -130,52 +130,50 @@ public class ModuleShooter extends ModuleAttachment implements ISuppliesModule {
 	public void drawBackground(GuiVehicle gui, int x, int y) {
 		ResourceHelper.bindResource("/gui/shooter.png");
 
-		drawImage(gui, pipeSelectionX + (26-8) / 2, pipeSelectionY + (26-8) / 2 - 1, 0, 104, 8, 9);
+		drawImage(gui, pipeSelectionX + (26-8) / 2, pipeSelectionY + (26-8) / 2 - 1, 1, 111, 8, 9);
 
-        for (int i = 0; i < pipes.size(); i++)
-        {
+        for (int i = 0; i < pipes.size(); i++) {
 			int pipe = pipes.get(i);
 			int pipeX = pipe % 3;
 			int pipeY = pipe / 3;
 
 			boolean active = isPipeActive(i);
-			boolean selected = inRect(x,y,getRectForPipe(pipe)) || (currentCooldownState == 0 && active);
+			boolean selected = inRect(x, y, getRectForPipe(pipe)) || (arrowTick == 0 && active);
 
-			int srcX = pipeX * 9;
+			int srcX = 1 + pipeX * 9;
 			if (!active) {
-				srcX += 26;
+				srcX += 27;
 			}
-			int srcY = pipeY * 9;
+			int srcY = 1 + pipeY * 9;
 			if (selected) {
-				srcY += 26;
+				srcY += 27;
 			}
 
 			drawImage(gui,getRectForPipe(pipe), srcX,srcY);
         }
 
-		drawImage(gui,intervalSelection, 42,52);
+		drawImage(gui, intervalSelection, 45, 55);
 
 		int size = (int)((arrowInterval / (float)AInterval.length) * 4);
 
 	    int targetX = intervalSelectionX + 7;
         int targetY = intervalSelectionY +  arrowInterval * 2;
-        int srcX = 0;
-        int srcY = 52 + size * 13;
+        int srcX = 1;
+        int srcY = 55 + size * 14;
 
         drawImage(gui,targetX,targetY, srcX, srcY, 25, 13);
 
-		srcX += 25;
+		srcX += 26;
 		targetX += 7;
 
+        int scaledTick = 41 * arrowTick / AInterval[arrowInterval];
         drawImage(gui,targetX, targetY + 1, srcX, srcY + 1, 1, 11);
         drawImage(gui,targetX + 1, targetY + 2, srcX + 1, srcY + 2, 1, 9);
-        drawImage(gui,targetX + 1, targetY + 1, srcX + 1, srcY + 1, Math.min(currentCooldownState, 15), 2);
-        drawImage(gui,targetX + 15, targetY + 1, srcX + 15, srcY + 1, 2, Math.max(Math.min(currentCooldownState, 25) - 15, 0));
-        int len = Math.max(Math.min(currentCooldownState, 41) - 25, 0);
+        drawImage(gui,targetX + 1, targetY + 1, srcX + 1, srcY + 1, Math.min(scaledTick, 15), 2);
+        drawImage(gui,targetX + 15, targetY + 1, srcX + 15, srcY + 1, 2, Math.max(Math.min(scaledTick, 25) - 15, 0));
+        int len = Math.max(Math.min(scaledTick, 41) - 25, 0);
         drawImage(gui,targetX + 1 + (16 - len), targetY + 10, srcX + 1 + (16 - len), srcY + 10, len, 2);
 	}
-
-	private int currentCooldownState;
 
 	private int[] getRectForPipe(int pipe) {
 		return new int[] {pipeSelectionX + (pipe % 3) * 9, pipeSelectionY + (pipe / 3) * 9,8,8};
@@ -249,13 +247,13 @@ public class ModuleShooter extends ModuleAttachment implements ISuppliesModule {
 
 	@Override
 	protected void checkGuiData(Object[] info) {
-		updateGuiData(info, 0, (short)currentCooldownState);
+		updateGuiData(info, 0, (short)arrowTick);
 		updateGuiData(info, 1, (short)arrowInterval);
 	}
 	@Override
 	public void receiveGuiData(int id, short data) {
 		if (id == 0) {
-			currentCooldownState = data;
+            arrowTick = data;
 		}else if (id == 1) {
 			arrowInterval = data;
 		}

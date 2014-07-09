@@ -1,6 +1,8 @@
 package vswe.stevesvehicles.client.gui.screen;
 import java.util.ArrayList;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
@@ -34,6 +36,7 @@ public class GuiVehicle extends GuiBase {
 
     @Override
     public void drawGuiForeground(int x, int y) {
+        //stopScissor();
 		GL11.glDisable(GL11.GL_LIGHTING);
 
 	
@@ -98,8 +101,18 @@ public class GuiVehicle extends GuiBase {
 			}
 		
 		}else if (vehicle.getModules() != null) {
-			drawTexturedModalRect(j + scrollBox[0], k + scrollBox[1], 222, 24, scrollBox[2], scrollBox[3]);
-			drawTexturedModalRect(j + scrollBox[0] + 2, k + scrollBox[1] + 2 + vehicle.getScrollY(), 222+18, 26 + (vehicle.canScrollModules ? 0 : 25), 14, 25);
+            int targetY = 0;
+
+            drawTexturedModalRect(j + scrollBox[0], k + scrollBox[1], 223, 37, scrollBox[2], 13);
+            targetY += 13;
+            for (int i = 0; i < 4; i++) {
+                drawTexturedModalRect(j + scrollBox[0], k + scrollBox[1] + targetY, 223, 51, scrollBox[2], 50);
+                targetY += 50;
+            }
+            drawTexturedModalRect(j + scrollBox[0], k + scrollBox[1] + targetY, 223, 102, scrollBox[2], 13);
+
+
+			drawTexturedModalRect(j + scrollBox[0] + 2, k + scrollBox[1] + 2 + vehicle.getScrollY(), 223, 116 + (vehicle.canScrollModules ? 0 : 26), 14, 25);
 			
 								
 			for (ModuleBase module : vehicle.getModules()) {
@@ -122,6 +135,7 @@ public class GuiVehicle extends GuiBase {
 		
 
 		GL11.glEnable(GL11.GL_LIGHTING);
+        //startScissor(5, 4, 438, 164);
     }
     
     public static ResourceLocation moduleTexture = ResourceHelper.getResourceFromPath("/atlas/items.png");
@@ -318,17 +332,17 @@ public class GuiVehicle extends GuiBase {
 				for (SlotBase slot : slotsList) {
 					int[] rect = new int[] {slot.getX() + 1, slot.getY() + 1, 16, 16};
 					module.handleScroll(rect);
-					boolean drawAll = rect[3] == 16;
-					if (drawAll) {
+					boolean visible = rect[3] > 0;
+					if (visible) {
 						slot.xDisplayPosition = slot.getX() + module.getX() + 1;
 						slot.yDisplayPosition = slot.getY() + module.getY() + 1 - vehicle.getRealScrollY();
 					}else{
 						resetSlot(slot);
 					}
 				
-					module.drawImage(this, slot.getX(), slot.getY(), xSize-256, 0, 18, 18);
-					if (!drawAll) {
-						module.drawImage(this, slot.getX()+1, slot.getY()+1, xSize-256+18, 1, 16, 16);
+					module.drawImage(this, slot.getX(), slot.getY(), 223, 1, 18, 18);
+					if (!visible) {
+						module.drawImage(this, slot.getX()+1, slot.getY()+1,223, 20, 16, 16);
 					}
 				}
 			}

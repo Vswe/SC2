@@ -119,8 +119,8 @@ public class ModuleLabel extends ModuleAddon {
 		
 		for (int i = 0; i < labels.size(); i++) {
 			int[] rect = getBoxArea(i);
-			drawImage(gui, rect, isActive(i) ? 8 : 0, 0);
-			drawImage(gui, rect, inRect(x, y, rect) ? 8 : 0, 8);
+			drawImage(gui, rect, isActive(i) ? 10 : 1, 1);
+			drawImage(gui, rect, inRect(x, y, rect) ? 10 : 1, 10);
 		}
 	}
 	

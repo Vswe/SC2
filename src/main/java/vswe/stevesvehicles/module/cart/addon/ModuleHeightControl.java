@@ -70,70 +70,58 @@ public class ModuleHeightControl extends ModuleAddon {
 	
 	@Override
 	public void drawBackground(GuiVehicle gui, int x, int y) {
-		ResourceHelper.bindResource("/gui/heightcontrol.png");
+		ResourceHelper.bindResource("/gui/height_control.png");
 
 		//draw the box for the numbers
-		drawImage(gui, LEVEL_NUMBER_BOX_X, LEVEL_NUMBER_BOX_Y, 4, 36, 21, 15);
+		drawImage(gui, LEVEL_NUMBER_BOX_X, LEVEL_NUMBER_BOX_Y, 6, 42, 21, 15);
 
 		//draw the controls
-		drawImage(gui, ARROW_UP, 4, 12);
-		drawImage(gui, ARROW_MIDDLE, 4, 21);
-		drawImage(gui, ARROW_DOWN, 4, 27);
+		drawImage(gui, ARROW_UP, 6, 15);
+		drawImage(gui, ARROW_MIDDLE, 6, 25);
+		drawImage(gui, ARROW_DOWN, 6, 32);
 
 		//draw the ores map
-		for (int i = 0; i < HeightControlOre.ores.size(); i++)
-        {
+		for (int i = 0; i < HeightControlOre.ores.size(); i++) {
 			HeightControlOre ore = HeightControlOre.ores.get(i);
 
-            for (int j = 0; j < 11; j++)
-            {
+            for (int j = 0; j < 11; j++) {
                 int altitude = getYTarget() - j + 5;
                 boolean empty = !(ore.spanLowest <= altitude && altitude <= ore.spanHighest);
                 boolean high = ore.bestLowest <= altitude && altitude <= ore.bestHighest;
                 int srcY;
 				int srcX;
 
-                if (empty)
-                {
-                    srcY = 0;
-					srcX = 0;
+                if (empty) {
+                    srcY = 1;
+					srcX = 1;
                 }else{
 					srcX = ore.srcX;
                     srcY = ore.srcY;
 
 					if (high) {
-						srcY += 4;
+						srcY += 5;
 					}
 
-					/*if (!ore.useDefaultTexture) {
-						loadTexture(gui, ore.specialTexture, true);
-					}*/
 				}
 
                 drawImage(gui, ORE_MAP_X + i * 4, ORE_MAP_Y + j * 4, srcX, srcY, 4, 4);
-
-				/*if (!ore.useDefaultTexture && !empty) {
-					loadTexture(gui,"heightcontrol.png");
-				}*/
             }
         }
 
 		//draw the markers
 		if (getYTarget() != getVehicle().y()) {
-			drawMarker(gui,5,false);
-			//drawTexturedModalRect(j + 110 - 1, k + 75 + 5 * 4 - 1, 180, 0, 26, 6);
+			drawMarker(gui, 5, false);
 		}
         int pos = getYTarget() + 5 - getVehicle().y();
 
         if (pos >= 0 && pos < 11){
-			drawMarker(gui,pos,true);
-            //drawTexturedModalRect(j + 110 - 1, k + 75 + pos * 4 - 1, 180, 6, 26, 6);
+			drawMarker(gui, pos, true);
         }
 	}
 
 	private void drawMarker(GuiVehicle gui, int pos, boolean isTargetLevel) {
-		int srcX = 4;
-		int srcY = isTargetLevel ? 6 : 0;
+		int srcX = 6;
+		int srcY = isTargetLevel ? 8 : 1;
 
 		drawImage(gui, ORE_MAP_X - 1, ORE_MAP_Y + pos * 4 - 1, srcX, srcY, 1, 6);
 		for (int i = 0; i < HeightControlOre.ores.size();i++) {

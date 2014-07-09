@@ -97,20 +97,20 @@ public class ModuleDrillIntelligence extends ModuleAddon {
 			for (int j = 0; j < h; j++) {
 				int[] rect = getSettingRect(i, j);
 				
-				int srcX = (!hasHeightController || j != 0 && j != h - 1) ? 0 : 8;
-				int srcY = 0;
+				int srcX = (!hasHeightController || j != 0 && j != h - 1) ? 1 : 10;
+				int srcY = 1;
 				
 				drawImage(gui, rect, srcX, srcY);
 				
 				if (isActive(j * w + i)) {
-					srcX = isLocked(j * w + i) ? 8 : 0;
-					srcY = 8;
+					srcX = isLocked(j * w + i) ? 10 : 1;
+					srcY = 10;
 					
 					drawImage(gui, rect, srcX, srcY);				
 				}				
 				
-				srcX = inRect(x, y, rect) ? 8 : 0;
-				srcY = 16;	
+				srcX = inRect(x, y, rect) ? 10 : 1;
+				srcY = 19;
 				drawImage(gui, rect, srcX, srcY);
 				
 

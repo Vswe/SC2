@@ -71,11 +71,11 @@ public class ModuleShooterAdvanced extends ModuleShooter {
 
 	@Override
 	public void drawBackground(GuiVehicle gui, int x, int y) {
-		ResourceHelper.bindResource("/gui/mobdetector.png");
+		ResourceHelper.bindResource("/gui/mob_detector.png");
 		
 		for (int i = 0; i < detectors.size(); i++) {
-			int srcX = isOptionActive(i) ? 0 : 8;
-			int srcY = inRect(x,y,getSelectionBox(i)) ? 8 : 0;
+			int srcX = isOptionActive(i) ? 1 : 10;
+			int srcY = inRect(x,y,getSelectionBox(i)) ? 10 : 1;
 			drawImage(gui, getSelectionBox(i), srcX, srcY);
 		}
 	}

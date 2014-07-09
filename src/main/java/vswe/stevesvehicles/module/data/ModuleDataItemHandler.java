@@ -50,7 +50,7 @@ public final class ModuleDataItemHandler {
         for (int i = 0; i < modules.size(); i++) {
             ModuleData mod1 = modules.get(i);
 
-            if (!mod1.getValidVehicles().contains(vehicle)) {
+            if (mod1.getValidVehicles() == null || !mod1.getValidVehicles().contains(vehicle)) {
                 return mod1.getName() + " can't be placed as a part of a " + vehicle.getName(); //TODO localization
             }
 

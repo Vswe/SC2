@@ -113,13 +113,12 @@ public abstract class ModuleSolarBase extends ModuleEngine {
 
 	    int lightWidth = light * 3;
 
-        if (light == 15)
-        {
+        if (light == 15) {
             lightWidth += 2;
         }
 
-		drawImage(gui, 9, 20, 0, 0, 54 , 18);
-        drawImage(gui, 9+6, 20+1, 0, 18, lightWidth , 16);
+		drawImage(gui, 9, 20, 1, 1, 54 , 18);
+        drawImage(gui, 9+6, 20 + 1, 1, 20, lightWidth , 16);
 	}
 
 	@Override
