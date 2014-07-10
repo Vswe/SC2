@@ -100,7 +100,8 @@ public abstract class ModuleRecipe extends ModuleAddon {
 			}else{
 				icon = TileEntityCargo.itemSelections.get(target).getIcon();
 			}
-			int [] area = getArea();		
+			int [] area = getArea();
+
 			drawItemInInterface(gui, icon, area[0], area[1]);
 		}	
 	}

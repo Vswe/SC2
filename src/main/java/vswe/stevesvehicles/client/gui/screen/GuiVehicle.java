@@ -1,9 +1,9 @@
 package vswe.stevesvehicles.client.gui.screen;
 import java.util.ArrayList;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
@@ -36,7 +36,6 @@ public class GuiVehicle extends GuiBase {
 
     @Override
     public void drawGuiForeground(int x, int y) {
-        //stopScissor();
 		GL11.glDisable(GL11.GL_LIGHTING);
 
 	
@@ -64,10 +63,12 @@ public class GuiVehicle extends GuiBase {
 		GL11.glEnable(GL11.GL_LIGHTING);	
     }
     
- 
 
-    private static ResourceLocation textureLeft = ResourceHelper.getResource("/gui/guiBase1.png");
-    private static ResourceLocation textureRight = ResourceHelper.getResource("/gui/guiBase2.png");
+
+
+
+    private static final ResourceLocation TEXTURE_LEFT = ResourceHelper.getResource("/gui/guiBase1.png");
+    private static final ResourceLocation TEXTURE_RIGHT = ResourceHelper.getResource("/gui/guiBase2.png");
     @Override
     public void drawGuiBackground(float f, int x, int y) {
 		GL11.glDisable(GL11.GL_LIGHTING);
@@ -76,10 +77,10 @@ public class GuiVehicle extends GuiBase {
         int j = getGuiLeft();
         int k = getGuiTop();
 
-		ResourceHelper.bindResource(textureLeft);
+		ResourceHelper.bindResource(TEXTURE_LEFT);
         drawTexturedModalRect(j, k, 0, 0, 256, ySize);
 
-        ResourceHelper.bindResource(textureRight);
+        ResourceHelper.bindResource(TEXTURE_RIGHT);
         drawTexturedModalRect(j+256, k, 0, 0, xSize-256, ySize);
         
 		ModuleBase thief = vehicle.getInterfaceThief();
@@ -135,7 +136,6 @@ public class GuiVehicle extends GuiBase {
 		
 
 		GL11.glEnable(GL11.GL_LIGHTING);
-        //startScissor(5, 4, 438, 164);
     }
     
     public static ResourceLocation moduleTexture = ResourceHelper.getResourceFromPath("/atlas/items.png");
@@ -392,9 +392,42 @@ public class GuiVehicle extends GuiBase {
     
     private void handleModuleKeyPress(ModuleBase module, char character, int extraInformation) {
     	module.keyPress(this, character, extraInformation);    	
-    }	
-	
-    
+    }
 
-    
+    private static final int[] SCROLLABLE_AREA = {5, 4, 438, 164};
+
+    @Override
+    protected void renderSlots(int x, int y) {
+        setupScissor(SCROLLABLE_AREA);
+        super.renderSlots(x, y);
+    }
+
+    private boolean shouldScissorSlot(Slot slot) {
+        return slot instanceof SlotBase;
+    }
+
+    @Override
+    protected void renderSlot(Slot slot, ItemStack slotItem, boolean shouldSlotBeRendered, boolean shouldSlotUnderlayBeRendered, boolean shouldSlotOverlayBeRendered, String info) {
+        if (shouldScissorSlot(slot)) {
+            startScissor();
+        }
+        super.renderSlot(slot, slotItem, shouldSlotBeRendered, shouldSlotUnderlayBeRendered, shouldSlotOverlayBeRendered, info);
+        if (shouldScissorSlot(slot)) {
+            stopScissor();
+        }
+    }
+
+    @Override
+    protected boolean isMouseOverSlot(Slot slot, int mX, int mY) {
+        return (!shouldScissorSlot(slot) || inRect(mX - guiLeft, mY - guiTop, SCROLLABLE_AREA)) && super.isMouseOverSlot(slot, mX, mY);
+    }
+
+    public void setupAndStartScissor() {
+        setupScissor(SCROLLABLE_AREA);
+        startScissor();
+    }
+    @Override
+    public void stopScissor() {
+        super.stopScissor();
+    }
 }

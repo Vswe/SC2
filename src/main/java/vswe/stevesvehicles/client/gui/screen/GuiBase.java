@@ -239,7 +239,7 @@ public abstract class GuiBase extends GuiContainerSpecial {
 	
 		super.mouseMovedOrUp(x,y,button);
 		this.mouseMoved(x,y,button);
-		this.mouseDraged(x, y, button);
+		this.mouseDragged(x, y, button);
 	}	
 	
 	private int myOwnEventButton = 0;
@@ -285,11 +285,11 @@ public abstract class GuiBase extends GuiContainerSpecial {
 	
 		super.mouseClickMove(x,y,button,timeSinceClick);
 		this.mouseMoved(x,y,-1);		
-		this.mouseDraged(x,y,button);
+		this.mouseDragged(x,y,button);
 	}
 	
 	public void mouseMoved(int x, int y, int button) {}
-	public void mouseDraged(int x, int y, int button) {}
+	public void mouseDragged(int x, int y, int button) {}
 	@Override
     protected void keyTyped(char character, int extraInformation)
     {
@@ -541,8 +541,10 @@ public abstract class GuiBase extends GuiContainerSpecial {
 		}		
 	}
 
-
-    protected void startScissor(int x, int y, int w, int h) {
+    protected void setupScissor(int[] target) {
+        setupScissor(target[0], target[1], target[2], target[3]);
+    }
+    protected void setupScissor(int x, int y, int w, int h) {
         ScaledResolution scaledresolution = new ScaledResolution(Minecraft.getMinecraft().gameSettings, Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
 
         float scale = getScale();
@@ -562,11 +564,14 @@ public abstract class GuiBase extends GuiContainerSpecial {
         scissorY =  Minecraft.getMinecraft().displayHeight - (scissorY + scissorH);
 
         GL11.glScissor((int)scissorX, (int)scissorY, scissorW, scissorH);
-        GL11.glEnable(GL11.GL_SCISSOR_TEST);
     }
 
     protected void stopScissor() {
         GL11.glDisable(GL11.GL_SCISSOR_TEST);
+    }
+
+    protected void startScissor() {
+        GL11.glEnable(GL11.GL_SCISSOR_TEST);
     }
 
 }

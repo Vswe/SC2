@@ -127,28 +127,7 @@ public abstract class GuiContainerSpecial extends GuiScreen {
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, BRIGHTNESS_X, BRIGHTNESS_Y);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-
-
-        for (int i = 0; i < container.inventorySlots.size(); i++) {
-            Slot slot = (Slot)container.inventorySlots.get(i);
-            renderSlot(slot);
-
-            if (isMouseOverSlot(slot, x, y) && slot.func_111238_b()) {
-                selectedSlot = slot;
-                GL11.glDisable(GL11.GL_LIGHTING);
-                GL11.glDisable(GL11.GL_DEPTH_TEST);
-
-                int slotX = slot.xDisplayPosition;
-                int slotY = slot.yDisplayPosition;
-
-                GL11.glColorMask(true, true, true, false);
-                drawGradientRect(slotX, slotY, slotX + SLOT_SIZE, slotY + SLOT_SIZE, SLOT_HOVER_COLOR, SLOT_HOVER_COLOR);
-                GL11.glColorMask(true, true, true, true);
-
-                GL11.glEnable(GL11.GL_LIGHTING);
-                GL11.glEnable(GL11.GL_DEPTH_TEST);
-            }
-        }
+        renderSlots(x, y);
 
         GL11.glDisable(GL11.GL_LIGHTING);
         drawGuiContainerForegroundLayer(x, y);
@@ -226,9 +205,10 @@ public abstract class GuiContainerSpecial extends GuiScreen {
     protected void drawGuiContainerForegroundLayer(int mX, int mY) {}
     protected abstract void drawGuiContainerBackgroundLayer(float f, int mX, int mY);
 
-    private void renderSlot(Slot slot) {
+    private void renderSlot(Slot slot, int x, int y) {
         ItemStack slotItem = slot.getStack();
-        boolean shouldSlotHoverBeRendered = false;
+        boolean shouldSlotUnderlayBeRendered = false;
+        boolean shouldSlotOverlayBeRendered = false;
         boolean shouldSlotBeRendered = slot != clickedSlot || touchscreenItem == null || isRightMouseClick;
         ItemStack movingItem = mc.thePlayer.inventory.getItemStack();
         String info = null;
@@ -244,7 +224,7 @@ public abstract class GuiContainerSpecial extends GuiScreen {
 
             if (Container.func_94527_a(slot, movingItem, true) && container.canDragIntoSlot(slot)) {
                 slotItem = movingItem.copy();
-                shouldSlotHoverBeRendered = true;
+                shouldSlotUnderlayBeRendered = true;
                 Container.func_94525_a(draggedItemSlots, lastValidDragMouseButton, slotItem, slot.getStack() == null ? 0 : slot.getStack().stackSize);
 
                 int maxStackSize = Math.min(slot.getSlotStackLimit(), slotItem.getMaxStackSize());
@@ -273,18 +253,40 @@ public abstract class GuiContainerSpecial extends GuiScreen {
             }
         }
 
+        if (isMouseOverSlot(slot, x, y) && slot.func_111238_b()) {
+            selectedSlot = slot;
+            shouldSlotOverlayBeRendered = true;
+        }
+
+        renderSlot(slot, slotItem, shouldSlotBeRendered, shouldSlotUnderlayBeRendered, shouldSlotOverlayBeRendered, info);
+
+        itemRender.zLevel = 0;
+        zLevel = 0;
+    }
+
+    protected void renderSlots(int x, int y) {
+        for (int i = 0; i < container.inventorySlots.size(); i++) {
+            Slot slot = (Slot)container.inventorySlots.get(i);
+            renderSlot(slot, x, y);
+        }
+    }
+
+    protected void renderSlot(Slot slot, ItemStack slotItem, boolean shouldSlotBeRendered, boolean shouldSlotUnderlayBeRendered, boolean shouldSlotOverlayBeRendered, String info) {
         if (shouldSlotBeRendered) {
-            if (shouldSlotHoverBeRendered) {
+            if (shouldSlotUnderlayBeRendered) {
                 drawRect(slot.xDisplayPosition, slot.yDisplayPosition, slot.xDisplayPosition + SLOT_SIZE, slot.yDisplayPosition + SLOT_SIZE, SLOT_HOVER_COLOR);
             }
 
             GL11.glEnable(GL11.GL_DEPTH_TEST);
             itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), slotItem, slot.xDisplayPosition, slot.yDisplayPosition);
             itemRender.renderItemOverlayIntoGUI(fontRendererObj, mc.getTextureManager(), slotItem, slot.xDisplayPosition, slot.yDisplayPosition, info);
-        }
 
-        itemRender.zLevel = 0;
-        zLevel = 0;
+            if (shouldSlotOverlayBeRendered) {
+                GL11.glDisable(GL11.GL_DEPTH_TEST);
+                drawRect(slot.xDisplayPosition, slot.yDisplayPosition, slot.xDisplayPosition + SLOT_SIZE, slot.yDisplayPosition + SLOT_SIZE, SLOT_HOVER_COLOR);
+                GL11.glEnable(GL11.GL_DEPTH_TEST);
+            }
+        }
     }
 
     private void updateDraggedItemDistribution() {
@@ -543,11 +545,11 @@ public abstract class GuiContainerSpecial extends GuiScreen {
         touchscreenDropTime = Minecraft.getSystemTime();
     }
 
-    private boolean isMouseOverSlot(Slot slot, int mX, int mY) {
+    protected boolean isMouseOverSlot(Slot slot, int mX, int mY) {
         return inSlotRect(slot.xDisplayPosition, slot.yDisplayPosition, SLOT_SIZE, SLOT_SIZE, mX, mY);
     }
 
-    protected boolean inSlotRect(int x, int y, int width, int height, int mX, int mY) {
+    private boolean inSlotRect(int x, int y, int width, int height, int mX, int mY) {
         mX -= guiLeft;
         mY -= guiTop;
         return mX >= x - 1 && mX < x + width + 1 && mY >= y - 1 && mY < y + height + 1;

@@ -507,11 +507,13 @@ public abstract class ModuleBase {
 	public void drawItemInInterface(GuiVehicle gui, ItemStack item, int x, int y) {
 		int[] rect = new int[] {x, y, 16, 16};
 		handleScroll(rect);
-		if (rect[3] == 16) {
+		if (rect[3] > 0) {
+            gui.setupAndStartScissor();
 			RenderItem renderitem = new RenderItem();
 			GL11.glDisable(GL11.GL_LIGHTING);
 			renderitem.renderItemIntoGUI(gui.getMinecraft().fontRenderer, gui.getMinecraft().renderEngine, item, gui.getGuiLeft() + rect[0] + getX(), gui.getGuiTop() + rect[1] + getY());
 			GL11.glEnable(GL11.GL_LIGHTING);
+            gui.stopScissor();
 		}
 	}	 
 	 

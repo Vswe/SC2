@@ -566,7 +566,8 @@ public class GuiCartAssembler extends GuiBase {
 	
 	private void render3DVehicle() {
 		if (assembler.createPlaceholder()) {
-            startScissor(145, 15, 281, 148);
+            setupScissor(145, 15, 281, 148);
+            startScissor();
             int left = this.guiLeft;
             int top = this.guiTop;
             GL11.glEnable(GL12.GL_RESCALE_NORMAL);
