@@ -16,10 +16,10 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import vswe.stevesvehicles.old.Interfaces.GuiNEIKiller;
+import vswe.stevesvehicles.old.Interfaces.GuiContainerSpecial;
 
 @SideOnly(Side.CLIENT)
-public abstract class GuiBase extends GuiNEIKiller {
+public abstract class GuiBase extends GuiContainerSpecial {
 
     public GuiBase(Container container) {
         super(container);
@@ -175,6 +175,8 @@ public abstract class GuiBase extends GuiNEIKiller {
 		//stop scale
 		stopScaling();
 	}
+
+
 		
 	
 	protected float getScale() {	
