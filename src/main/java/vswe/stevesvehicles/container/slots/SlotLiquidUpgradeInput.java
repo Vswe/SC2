@@ -1,6 +1,6 @@
 package vswe.stevesvehicles.container.slots;
 import vswe.stevesvehicles.old.Helpers.Tank;
-import vswe.stevesvehicles.old.TileEntities.TileEntityUpgrade;
+import vswe.stevesvehicles.tileentity.TileEntityUpgrade;
 public class SlotLiquidUpgradeInput extends SlotLiquidInput {
 
 	private TileEntityUpgrade upgrade;

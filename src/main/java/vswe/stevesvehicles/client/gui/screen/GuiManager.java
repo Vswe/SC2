@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL11;
 import vswe.stevesvehicles.localization.entry.block.LocalizationManager;
 import vswe.stevesvehicles.old.Containers.ContainerManager;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
-import vswe.stevesvehicles.old.TileEntities.TileEntityManager;
+import vswe.stevesvehicles.tileentity.TileEntityManager;
 import net.minecraft.block.Block;
 
 

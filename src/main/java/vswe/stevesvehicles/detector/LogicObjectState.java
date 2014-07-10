@@ -4,10 +4,8 @@ package vswe.stevesvehicles.detector;
 import vswe.stevesvehicles.client.gui.screen.GuiDetector;
 import vswe.stevesvehicles.detector.modulestate.ModuleState;
 import vswe.stevesvehicles.detector.modulestate.registry.ModuleStateRegistry;
-import vswe.stevesvehicles.module.data.ModuleData;
-import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
-import vswe.stevesvehicles.old.TileEntities.TileEntityDetector;
+import vswe.stevesvehicles.tileentity.TileEntityDetector;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 
 public class LogicObjectState extends LogicObject {

@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.TileEntities;
+package vswe.stevesvehicles.tileentity;
 
 
 import cpw.mods.fml.relauncher.Side;
@@ -76,17 +76,12 @@ public abstract class TileEntityBase extends TileEntity {
 	
 	/**
 	 * If this Tile Entity can be used by the given player
-	 * @param entityplayer The player that wants to interact
+	 * @param entityPlayer The player that wants to interact
 	 * @return If the player can use this tile entity
 	 */
-   public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-        if (worldObj.getTileEntity(xCoord, yCoord, zCoord) != this)
-        {
-            return false;
-        }
-
-        return entityplayer.getDistanceSq((double)xCoord + 0.5D, (double)yCoord + 0.5D, (double)zCoord + 0.5D) <= 64D;
-    }
+   public boolean isUseableByPlayer(EntityPlayer entityPlayer) {
+       return worldObj.getTileEntity(xCoord, yCoord, zCoord) == this && entityPlayer.getDistanceSq((double) xCoord + 0.5D, (double) yCoord + 0.5D, (double) zCoord + 0.5D) <= 64D;
+   }
 	
 	public short getShortFromInt(boolean first, int val) {
 		if (first) {

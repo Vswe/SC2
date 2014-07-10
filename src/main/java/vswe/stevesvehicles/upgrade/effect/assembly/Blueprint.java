@@ -1,7 +1,7 @@
 package vswe.stevesvehicles.upgrade.effect.assembly;
 
 import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
-import vswe.stevesvehicles.old.TileEntities.TileEntityUpgrade;
+import vswe.stevesvehicles.tileentity.TileEntityUpgrade;
 import net.minecraft.item.ItemStack;
 import vswe.stevesvehicles.module.data.ModuleData;
 import java.util.ArrayList;

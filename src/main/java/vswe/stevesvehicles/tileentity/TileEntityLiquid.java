@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.TileEntities;
+package vswe.stevesvehicles.tileentity;
 import java.util.ArrayList;
 
 import net.minecraft.entity.player.InventoryPlayer;
@@ -32,8 +32,7 @@ import vswe.stevesvehicles.container.slots.SlotLiquidOutput;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class TileEntityLiquid extends TileEntityManager  implements IFluidHandler, ITankHolder, ISidedInventory
-{
+public class TileEntityLiquid extends TileEntityManager  implements IFluidHandler, ITankHolder, ISidedInventory {
 	
 	@SideOnly(Side.CLIENT)
 	@Override
@@ -48,8 +47,7 @@ public class TileEntityLiquid extends TileEntityManager  implements IFluidHandle
 	
 	Tank[] tanks;
 
-    public TileEntityLiquid()
-    {
+    public TileEntityLiquid() {
 		super();
 		tanks = new Tank[4];
 		for (int i = 0; i < 4; i++) {
@@ -89,8 +87,7 @@ public class TileEntityLiquid extends TileEntityManager  implements IFluidHandle
      * @return Amount of resource that was filled into internal tanks.
      */
     public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-		
-		
+
 		int amount = 0;
 		if (resource != null && resource.amount > 0) {
 			FluidStack fluid = resource.copy();
@@ -124,16 +121,16 @@ public class TileEntityLiquid extends TileEntityManager  implements IFluidHandle
 
 	@Override
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
-		return drain(from, null, maxDrain, doDrain);
+		return drain((FluidStack)null, maxDrain, doDrain);
 	}
 	
 	
 	@Override
 	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
-		return drain(from, resource, resource == null ? 0 : resource.amount, doDrain);
+		return drain(resource, resource == null ? 0 : resource.amount, doDrain);
 	}
 	
-	private FluidStack drain(ForgeDirection from, FluidStack resource, int maxDrain, boolean doDrain) {
+	private FluidStack drain(FluidStack resource, int maxDrain, boolean doDrain) {
 	FluidStack ret = resource;
 		if (ret != null) {
 			ret = ret.copy();
@@ -165,8 +162,7 @@ public class TileEntityLiquid extends TileEntityManager  implements IFluidHandle
 
 	
 	@Override
-    public int getSizeInventory()
-    {
+    public int getSizeInventory() {
         return 12;
     }
 
@@ -174,36 +170,35 @@ public class TileEntityLiquid extends TileEntityManager  implements IFluidHandle
 	@Override
     public String getInventoryName()
     {
-        return "container.fluidmanager";
+        return "container.fluid_manager";
     }
 
 
 	@Override
-	public ItemStack getInputContainer(int tankid) {
-		return getStackInSlot(tankid * 3);
+	public ItemStack getInputContainer(int tankId) {
+		return getStackInSlot(tankId * 3);
 	}	
 	
 	@Override
-	public void clearInputContainer(int tankid) {
-		setInventorySlotContents(tankid * 3, null);	
+	public void clearInputContainer(int tankId) {
+		setInventorySlotContents(tankId * 3, null);
 	}
 	
 	@Override
-	public void addToOutputContainer(int tankid, ItemStack item) {
-		TransferHandler.TransferItem(item, this, tankid * 3 + 1, tankid * 3 + 1, new ContainerLiquid(null, this), Slot.class, null, -1);
+	public void addToOutputContainer(int tankId, ItemStack item) {
+		TransferHandler.TransferItem(item, this, tankId * 3 + 1, tankId * 3 + 1, new ContainerLiquid(null, this), Slot.class, null, -1);
 	}
-	
-	
+
 	
 	@Override
-	public void onFluidUpdated(int tankid) {
+	public void onFluidUpdated(int tankId) {
 		markDirty();
 	}
 	
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void drawImage(int tankid, GuiBase gui, IIcon icon, int targetX, int targetY, int srcX, int srcY, int sizeX, int sizeY) {
+	public void drawImage(int tankId, GuiBase gui, IIcon icon, int targetX, int targetY, int srcX, int srcY, int sizeX, int sizeY) {
 		gui.drawIcon(icon, gui.getGuiLeft() + targetX, gui.getGuiTop() + targetY, sizeX / 16F, sizeY / 16F, srcX / 16F, srcY / 16F);
 	}	
 	
@@ -217,14 +212,14 @@ public class TileEntityLiquid extends TileEntityManager  implements IFluidHandle
 	protected boolean doTransfer(ManagerTransfer transfer) {
 		int maximumToTransfer = hasMaxAmount(transfer.getSetting()) ? Math.min(getMaxAmount(transfer.getSetting()) - transfer.getWorkload(), FluidContainerRegistry.BUCKET_VOLUME) : FluidContainerRegistry.BUCKET_VOLUME;
 		
-		boolean sucess = false;
+		boolean success = false;
 	
 		if (toCart[transfer.getSetting()]) {
 			for (int i = 0; i < tanks.length; i++) {
 				int fill = fillTank(transfer.getCart(), i, transfer.getSetting(), maximumToTransfer, false);
 				if (fill > 0) {
 					fillTank(transfer.getCart(), i, transfer.getSetting(), fill, true);
-					sucess = true;
+					success = true;
 					if (hasMaxAmount(transfer.getSetting())) {
 						transfer.setWorkload(transfer.getWorkload() + fill);
 					}
@@ -237,7 +232,7 @@ public class TileEntityLiquid extends TileEntityManager  implements IFluidHandle
 				int drain = drainTank(cartTank, transfer.getSetting(), maximumToTransfer, false);
 				if (drain > 0) {
 					drainTank(cartTank, transfer.getSetting(), drain, true);
-					sucess = true;
+					success = true;
 					if (hasMaxAmount(transfer.getSetting())) {
 						transfer.setWorkload(transfer.getWorkload() + drain);
 					}
@@ -247,11 +242,11 @@ public class TileEntityLiquid extends TileEntityManager  implements IFluidHandle
 			}
 		}
 	
-		if (sucess && hasMaxAmount(transfer.getSetting()) && transfer.getWorkload() == getMaxAmount(transfer.getSetting())) {
-			transfer.setLowestSetting(transfer.getSetting() + 1); //this is not avalible anymore
+		if (success && hasMaxAmount(transfer.getSetting()) && transfer.getWorkload() == getMaxAmount(transfer.getSetting())) {
+			transfer.setLowestSetting(transfer.getSetting() + 1); //this is not available anymore
 		}
 	
-		return sucess;
+		return success;
 	}
 
 	private int fillTank(EntityModularCart cart, int tankId, int sideId, int fillAmount,  boolean doFill) {
@@ -394,7 +389,6 @@ public class TileEntityLiquid extends TileEntityManager  implements IFluidHandle
 			int id = 4 + i * 4;
 			int amount1 = 4 + i * 4 + 1;
 			int amount2 = 4 + i * 4 + 2;
-			int meta = 4 + i * 4 + 3;
 			if ((isNew || con.oldLiquids[i] != null) && tanks[i].getFluid() == null) {
 				updateGuiData(con, crafting, id, (short)-1);
 				changed = true;
@@ -435,19 +429,18 @@ public class TileEntityLiquid extends TileEntityManager  implements IFluidHandle
 	public void receiveGuiData(int id, short data) {
 		if(id > 3) {
 			id -= 4;
-			int tankid = id / 4;
-			int contentid = id % 4;
+			int tankId = id / 4;
+			int contentId = id % 4;
 			
-			if (contentid == 0) {
+			if (contentId == 0) {
 				if (data == -1) {
-					tanks[tankid].setFluid(null);
-				}else if (tanks[tankid].getFluid() == null){
-					tanks[tankid].setFluid(new FluidStack(data, 0));
+					tanks[tankId].setFluid(null);
+				}else if (tanks[tankId].getFluid() == null){
+					tanks[tankId].setFluid(new FluidStack(data, 0));
 				}
-			}else if(tanks[tankid].getFluid() != null) {
+			}else if(tanks[tankId].getFluid() != null) {
 
-				tanks[tankid].getFluid().amount = getIntFromShort(contentid == 1,tanks[tankid].getFluid().amount, data);
-				
+				tanks[tankId].getFluid().amount = getIntFromShort(contentId == 1, tanks[tankId].getFluid().amount, data);
 			}
 			
 		}else{
@@ -456,8 +449,6 @@ public class TileEntityLiquid extends TileEntityManager  implements IFluidHandle
 	}
 	
 
-	
-	
 	private boolean isInput(int id) {
 		return id % 3 == 0;
 	}
@@ -467,8 +458,7 @@ public class TileEntityLiquid extends TileEntityManager  implements IFluidHandle
 	}
 	
 	@Override
-    public boolean isItemValidForSlot(int slotId, ItemStack item)
-    {	
+    public boolean isItemValidForSlot(int slotId, ItemStack item) {
 		if (isInput(slotId)) {
 			return SlotLiquidManagerInput.isItemStackValid(item, this, -1);
 		}else if(isOutput(slotId)) {
@@ -479,34 +469,31 @@ public class TileEntityLiquid extends TileEntityManager  implements IFluidHandle
 		
 	}	
 	
-	private static final int[] topSlots = new int[] {0, 3, 6, 9};
-	private static final int[] botSlots = new int[] {1, 4, 7, 10};
-	private static final int[] sideSlots = new int[] {};
+	private static final int[] TOP_SLOTS = new int[] {0, 3, 6, 9};
+	private static final int[] BOT_SLOTS = new int[] {1, 4, 7, 10};
+	private static final int[] SIDE_SLOTS = new int[] {};
 	
     //slots
 	@Override
-    public int[] getAccessibleSlotsFromSide(int side)
-    {
+    public int[] getAccessibleSlotsFromSide(int side) {
         if (side == 1) {
-        	return topSlots;
+        	return TOP_SLOTS;
         }else if(side == 0) {
-        	return botSlots;
+        	return BOT_SLOTS;
         }else{
-        	return sideSlots;
+        	return SIDE_SLOTS;
         }
     }
 
     //in
 	@Override
-    public boolean canInsertItem(int slot, ItemStack item, int side)
-    {
+    public boolean canInsertItem(int slot, ItemStack item, int side) {
         return side == 1  &&  isInput(slot) && this.isItemValidForSlot(slot, item);
     }
 
     //out
 	@Override
-    public boolean canExtractItem(int slot, ItemStack item, int side)
-    {
+    public boolean canExtractItem(int slot, ItemStack item, int side) {
         return side == 0 && isOutput(slot);
     }
 

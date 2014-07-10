@@ -29,7 +29,7 @@ import vswe.stevesvehicles.old.Helpers.TitleBox;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataHull;
 import vswe.stevesvehicles.container.slots.SlotAssembler;
-import vswe.stevesvehicles.old.TileEntities.TileEntityCartAssembler;
+import vswe.stevesvehicles.tileentity.TileEntityCartAssembler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import vswe.stevesvehicles.vehicle.VehicleType;

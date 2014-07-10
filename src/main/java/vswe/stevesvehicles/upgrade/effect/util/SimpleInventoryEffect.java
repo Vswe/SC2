@@ -1,6 +1,6 @@
 package vswe.stevesvehicles.upgrade.effect.util;
 
-import vswe.stevesvehicles.old.TileEntities.TileEntityUpgrade;
+import vswe.stevesvehicles.tileentity.TileEntityUpgrade;
 
 public abstract class SimpleInventoryEffect extends InventoryEffect {
 

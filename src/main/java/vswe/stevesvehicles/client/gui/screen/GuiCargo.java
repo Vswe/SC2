@@ -14,7 +14,7 @@ import vswe.stevesvehicles.old.Blocks.ModBlocks;
 import vswe.stevesvehicles.old.Containers.ContainerCargo;
 import vswe.stevesvehicles.old.Helpers.CargoItemSelection;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
-import vswe.stevesvehicles.old.TileEntities.TileEntityCargo;
+import vswe.stevesvehicles.tileentity.TileEntityCargo;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

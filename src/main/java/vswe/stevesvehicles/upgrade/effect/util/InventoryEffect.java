@@ -2,7 +2,7 @@ package vswe.stevesvehicles.upgrade.effect.util;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
-import vswe.stevesvehicles.old.TileEntities.TileEntityUpgrade;
+import vswe.stevesvehicles.tileentity.TileEntityUpgrade;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;

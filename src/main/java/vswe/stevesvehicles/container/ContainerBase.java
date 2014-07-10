@@ -10,7 +10,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import vswe.stevesvehicles.old.Helpers.TransferHandler;
-import vswe.stevesvehicles.old.TileEntities.TileEntityBase;
+import vswe.stevesvehicles.tileentity.TileEntityBase;
 
 public abstract class ContainerBase extends Container {
 	/**

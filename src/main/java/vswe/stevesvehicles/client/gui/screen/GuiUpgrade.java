@@ -6,7 +6,7 @@ import org.lwjgl.opengl.GL11;
 
 import vswe.stevesvehicles.old.Containers.ContainerUpgrade;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
-import vswe.stevesvehicles.old.TileEntities.TileEntityUpgrade;
+import vswe.stevesvehicles.tileentity.TileEntityUpgrade;
 import vswe.stevesvehicles.upgrade.effect.util.InterfaceEffect;
 import vswe.stevesvehicles.upgrade.effect.util.InventoryEffect;
 import cpw.mods.fml.relauncher.Side;

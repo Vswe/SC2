@@ -1,7 +1,7 @@
 package vswe.stevesvehicles.upgrade.effect.fuel;
 
 
-import vswe.stevesvehicles.old.TileEntities.TileEntityUpgrade;
+import vswe.stevesvehicles.tileentity.TileEntityUpgrade;
 import vswe.stevesvehicles.upgrade.effect.BaseEffect;
 
 public class FuelCost extends BaseEffect {

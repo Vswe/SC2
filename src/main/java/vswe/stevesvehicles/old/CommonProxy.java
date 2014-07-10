@@ -6,7 +6,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import cpw.mods.fml.common.network.IGuiHandler;
-import vswe.stevesvehicles.old.TileEntities.TileEntityBase;
+import vswe.stevesvehicles.tileentity.TileEntityBase;
 import vswe.stevesvehicles.vehicle.entity.IVehicleEntity;
 
 public class CommonProxy implements IGuiHandler {

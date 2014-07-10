@@ -8,7 +8,7 @@ import vswe.stevesvehicles.module.data.ModuleDataGroup;
 import vswe.stevesvehicles.module.data.ModuleDataHull;
 import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
 import vswe.stevesvehicles.module.data.ModuleSide;
-import vswe.stevesvehicles.old.TileEntities.TileEntityCartAssembler;
+import vswe.stevesvehicles.tileentity.TileEntityCartAssembler;
 
 import java.util.ArrayList;
 import java.util.List;

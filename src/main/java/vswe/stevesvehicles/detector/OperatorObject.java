@@ -6,7 +6,7 @@ import java.util.HashMap;
 import net.minecraft.tileentity.TileEntity;
 import vswe.stevesvehicles.localization.ILocalizedText;
 import vswe.stevesvehicles.localization.entry.block.LocalizationDetector;
-import vswe.stevesvehicles.old.TileEntities.TileEntityDetector;
+import vswe.stevesvehicles.tileentity.TileEntityDetector;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 
 public class OperatorObject {

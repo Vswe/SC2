@@ -1,7 +1,7 @@
 package vswe.stevesvehicles.upgrade.effect;
 
 import net.minecraft.nbt.NBTTagCompound;
-import vswe.stevesvehicles.old.TileEntities.TileEntityUpgrade;
+import vswe.stevesvehicles.tileentity.TileEntityUpgrade;
 
 
 public abstract class BaseEffect {

@@ -9,7 +9,7 @@ import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.network.PacketHandler;
 import vswe.stevesvehicles.client.gui.screen.GuiDetector;
-import vswe.stevesvehicles.old.TileEntities.TileEntityDetector;
+import vswe.stevesvehicles.tileentity.TileEntityDetector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import vswe.stevesvehicles.vehicle.VehicleBase;

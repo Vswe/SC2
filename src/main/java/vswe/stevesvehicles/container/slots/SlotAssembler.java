@@ -4,7 +4,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
 import vswe.stevesvehicles.module.data.ModuleType;
-import vswe.stevesvehicles.old.TileEntities.TileEntityCartAssembler;
+import vswe.stevesvehicles.tileentity.TileEntityCartAssembler;
 import net.minecraft.entity.player.EntityPlayer;
 public class SlotAssembler extends Slot {
 	

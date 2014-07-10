@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.TileEntities;
+package vswe.stevesvehicles.tileentity;
 import java.util.ArrayList;
 
 import cpw.mods.fml.relauncher.Side;
@@ -27,8 +27,7 @@ import vswe.stevesvehicles.module.cart.tool.ModuleDrill;
  * @author Vswe
  *
  */
-public class TileEntityActivator extends TileEntityBase
-{
+public class TileEntityActivator extends TileEntityBase {
 
 	@SideOnly(Side.CLIENT)
 	@Override
@@ -46,11 +45,11 @@ public class TileEntityActivator extends TileEntityBase
 	 */
 	private ArrayList<ActivatorOption> options;
 
-    public TileEntityActivator()
-    {
+    public TileEntityActivator() {
 		loadOptions();
     }
 
+    //TODO let mods register these?
     /**
      * Load the different settings the player can toggle and change. For example the drill.
      */
@@ -73,8 +72,7 @@ public class TileEntityActivator extends TileEntityBase
 	}
 
 	@Override
-    public void readFromNBT(NBTTagCompound nbttagcompound)
-    {
+    public void readFromNBT(NBTTagCompound nbttagcompound) {
         super.readFromNBT(nbttagcompound);
         
         //load all the options
@@ -84,8 +82,7 @@ public class TileEntityActivator extends TileEntityBase
     }
 
 	@Override
-    public void writeToNBT(NBTTagCompound nbttagcompound)
-    {
+    public void writeToNBT(NBTTagCompound nbttagcompound) {
         super.writeToNBT(nbttagcompound);
         
         //save all the options
@@ -123,10 +120,10 @@ public class TileEntityActivator extends TileEntityBase
 	public void checkGuiData(Container con, ICrafting crafting) {
 		for (int i = 0; i < options.size(); i++) {
 			int option = options.get(i).getOption();
-			int lastoption = ((ContainerActivator)con).lastOptions.get(i);
+			int lastOption = ((ContainerActivator)con).lastOptions.get(i);
 			
 			//if an update has been made, send the new data
-			if (option != lastoption) {
+			if (option != lastOption) {
 				updateGuiData(con, crafting, i, (short)option);
 				((ContainerActivator)con).lastOptions.set(i, option);
 			}

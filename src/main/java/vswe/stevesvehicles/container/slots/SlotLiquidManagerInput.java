@@ -2,7 +2,7 @@ package vswe.stevesvehicles.container.slots;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import vswe.stevesvehicles.old.Helpers.Tank;
-import vswe.stevesvehicles.old.TileEntities.TileEntityLiquid;
+import vswe.stevesvehicles.tileentity.TileEntityLiquid;
 public class SlotLiquidManagerInput extends SlotBase
 {
 	private TileEntityLiquid manager;

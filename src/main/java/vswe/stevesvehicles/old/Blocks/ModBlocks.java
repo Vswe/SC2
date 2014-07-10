@@ -14,8 +14,13 @@ import vswe.stevesvehicles.old.Items.ItemBlockDetector;
 import vswe.stevesvehicles.old.Items.ItemBlockStorage;
 import vswe.stevesvehicles.old.Items.ItemUpgrade;
 import vswe.stevesvehicles.old.Items.ModItems;
-import vswe.stevesvehicles.old.StevesVehicles;
-import vswe.stevesvehicles.old.TileEntities.*;
+import vswe.stevesvehicles.tileentity.TileEntityActivator;
+import vswe.stevesvehicles.tileentity.TileEntityCargo;
+import vswe.stevesvehicles.tileentity.TileEntityCartAssembler;
+import vswe.stevesvehicles.tileentity.TileEntityDetector;
+import vswe.stevesvehicles.tileentity.TileEntityDistributor;
+import vswe.stevesvehicles.tileentity.TileEntityLiquid;
+import vswe.stevesvehicles.tileentity.TileEntityUpgrade;
 
 import java.lang.reflect.Constructor;
 

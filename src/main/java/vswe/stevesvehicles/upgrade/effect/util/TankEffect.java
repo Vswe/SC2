@@ -16,7 +16,7 @@ import vswe.stevesvehicles.old.Helpers.TransferHandler;
 import vswe.stevesvehicles.client.gui.screen.GuiUpgrade;
 import vswe.stevesvehicles.container.slots.SlotLiquidOutput;
 import vswe.stevesvehicles.container.slots.SlotLiquidUpgradeInput;
-import vswe.stevesvehicles.old.TileEntities.TileEntityUpgrade;
+import vswe.stevesvehicles.tileentity.TileEntityUpgrade;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

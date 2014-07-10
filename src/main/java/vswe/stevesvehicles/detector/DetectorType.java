@@ -11,7 +11,7 @@ import vswe.stevesvehicles.old.Blocks.ModBlocks;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
-import vswe.stevesvehicles.old.TileEntities.TileEntityDetector;
+import vswe.stevesvehicles.tileentity.TileEntityDetector;
 
 
 public enum DetectorType {

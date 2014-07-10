@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.TileEntities;
+package vswe.stevesvehicles.tileentity;
 import java.util.ArrayList;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,8 +29,7 @@ import vswe.stevesvehicles.client.gui.screen.GuiDistributor;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 public class TileEntityDistributor extends TileEntityBase
-    implements IInventory, ISidedInventory, IFluidHandler
-{
+    implements IInventory, ISidedInventory, IFluidHandler {
 
 	@SideOnly(Side.CLIENT)
 	@Override
@@ -83,12 +82,10 @@ public class TileEntityDistributor extends TileEntityBase
 
 
 	private boolean dirty = true;
-	private boolean dirty2 = true;
+
 	@Override
-    public void updateEntity()
-    {	
+    public void updateEntity() {
 		dirty = true;
-		dirty2 = true;
     }
 
 	protected void sendPacket(int id) {
@@ -126,24 +123,23 @@ public class TileEntityDistributor extends TileEntityBase
 	}
 	@Override
 	public void checkGuiData(Container con, ICrafting crafting) {
-		ContainerDistributor condist = (ContainerDistributor)con;	
+		ContainerDistributor distributor = (ContainerDistributor)con;
 		for (int i = 0; i < getSides().size(); i++) {
 			DistributorSide side  = getSides().get(i);
 			
-			if (side.getLowShortData() != condist.cachedValues.get(i*2)) {
-				updateGuiData(con, crafting, i*2, side.getLowShortData());
-				condist.cachedValues.set(i*2, side.getLowShortData());
+			if (side.getLowShortData() != distributor.cachedValues.get(i * 2)) {
+				updateGuiData(con, crafting, i * 2, side.getLowShortData());
+				distributor.cachedValues.set(i * 2, side.getLowShortData());
 			}
-			if (side.getHighShortData() != condist.cachedValues.get(i*2+1)) {			
-				updateGuiData(con, crafting, i*2+1, side.getHighShortData());
-				condist.cachedValues.set(i*2+1, side.getHighShortData());
+			if (side.getHighShortData() != distributor.cachedValues.get(i * 2 + 1)) {
+				updateGuiData(con, crafting, i * 2 + 1, side.getHighShortData());
+				distributor.cachedValues.set(i * 2 + 1, side.getHighShortData());
 			}			
 		}
 	}
 	@Override
 	public void receiveGuiData(int id, short data) {	
 
-	
 		int sideId = id / 2;
 		boolean isHigh = id % 2 == 1;
 		
@@ -202,14 +198,8 @@ public class TileEntityDistributor extends TileEntityBase
 	
   
 	@Override
-    public boolean isUseableByPlayer(EntityPlayer entityplayer)
-    {
-        if (worldObj.getTileEntity(xCoord, yCoord, zCoord) != this)
-        {
-            return false;
-        }
-
-        return entityplayer.getDistanceSq((double)xCoord + 0.5D, (double)yCoord + 0.5D, (double)zCoord + 0.5D) <= 64D;
+    public boolean isUseableByPlayer(EntityPlayer entityPlayer) {
+        return worldObj.getTileEntity(xCoord, yCoord, zCoord) == this && entityPlayer.getDistanceSq((double) xCoord + 0.5D, (double) yCoord + 0.5D, (double) zCoord + 0.5D) <= 64D;
     }
 
 	
@@ -218,29 +208,27 @@ public class TileEntityDistributor extends TileEntityBase
 	}
 	
 	private TileEntityManager getManagerFromSlotId(int slot) {
-		TileEntityManager[] invs = getInventories();
+		TileEntityManager[] inventories = getInventories();
 		int id = slot / 60;
 		
 		if (!hasTop || !hasBot) {
 			id = 0;
 		}
 		
-		if (id < 0 || id >= invs.length) {
+		if (id < 0 || id >= inventories.length) {
 			return null;			
 		}else{
-			return invs[id];
+			return inventories[id];
 		}
 	}
  
  	@Override
-    public int getSizeInventory()
-    {
+    public int getSizeInventory() {
  		return 120;
     }
 
 	@Override
-    public ItemStack getStackInSlot(int slot)
-    {
+    public ItemStack getStackInSlot(int slot) {
 		TileEntityManager manager = getManagerFromSlotId(slot);
 		if (manager != null) {	
 			return manager.getStackInSlot(translateSlotId(slot));
@@ -250,8 +238,7 @@ public class TileEntityDistributor extends TileEntityBase
     }	
 	
 	@Override
-    public ItemStack decrStackSize(int slot, int count)
-    {
+    public ItemStack decrStackSize(int slot, int count) {
 		TileEntityManager manager = getManagerFromSlotId(slot);
 		if (manager != null) {	
 			return manager.decrStackSize(translateSlotId(slot), count);
@@ -261,8 +248,7 @@ public class TileEntityDistributor extends TileEntityBase
     }	
 	
 	@Override
-    public void setInventorySlotContents(int slot, ItemStack itemstack)
-    {
+    public void setInventorySlotContents(int slot, ItemStack itemstack) {
 		TileEntityManager manager = getManagerFromSlotId(slot);
 		if (manager != null) {	
 			manager.setInventorySlotContents(translateSlotId(slot), itemstack);
@@ -270,35 +256,30 @@ public class TileEntityDistributor extends TileEntityBase
     }
 
 	@Override
-    public String getInventoryName()
-    {
-        return "container.cargodistributor";
+    public String getInventoryName() {
+        return "container.external_distributor";
     }
 	
 	@Override
-    public boolean hasCustomInventoryName()
-    {
+    public boolean hasCustomInventoryName() {
         return false;
     }	
 	
 	@Override
-    public int getInventoryStackLimit()
-    {
+    public int getInventoryStackLimit() {
         return 64;
     }	
 	
 	@Override
-    public void closeInventory()
-    {
+    public void closeInventory() {
     }
+
 	@Override
-    public void openInventory()
-    {
+    public void openInventory() {
     }
 	
 	@Override
- 	public ItemStack getStackInSlotOnClosing(int slot)
-    {
+ 	public ItemStack getStackInSlotOnClosing(int slot) {
 		TileEntityManager manager = getManagerFromSlotId(slot);
 		if (manager != null) {	
 			return manager.getStackInSlotOnClosing(translateSlotId(slot));
@@ -308,12 +289,7 @@ public class TileEntityDistributor extends TileEntityBase
     }
  
  
-	
 
-	
-	
-
-	
 	private boolean isChunkValid(DistributorSide side, TileEntityManager manager, int chunkId, boolean top) {
 		for (DistributorSetting setting : DistributorSetting.settings) {
 			if (setting.isEnabled(this)) {
@@ -367,7 +343,7 @@ public class TileEntityDistributor extends TileEntityBase
 		
 		IFluidTank[] tanks = getTanks(from);
 		for (IFluidTank tank : tanks) {
-			FluidStack temp = null;
+			FluidStack temp;
 			temp = tank.drain(maxDrain, doDrain);
 			
 			if (temp != null && (ret == null || ret.isFluidEqual(temp))) {
@@ -395,20 +371,20 @@ public class TileEntityDistributor extends TileEntityBase
      */
 
 	private IFluidTank[] getTanks(ForgeDirection direction) {
-		TileEntityManager[] invs = getInventories();
+		TileEntityManager[] inventories = getInventories();
 	
-		if (invs.length > 0) {
+		if (inventories.length > 0) {
 			for (DistributorSide side : getSides()) {
 				if (side.getSide() == direction) {
 					ArrayList<IFluidTank> tanks = new ArrayList<IFluidTank>();
 					
 					if (hasTop && hasBot) {
-						populateTanks(tanks, side, invs[0], false);
-						populateTanks(tanks, side, invs[1], true);
+						populateTanks(tanks, side, inventories[0], false);
+						populateTanks(tanks, side, inventories[1], true);
 					}else if(hasTop) {
-						populateTanks(tanks, side, invs[0], true);		
+						populateTanks(tanks, side, inventories[0], true);
 					}else if(hasBot) {
-						populateTanks(tanks, side, invs[0], false);		
+						populateTanks(tanks, side, inventories[0], false);
 					}		
 					
 					return tanks.toArray(new IFluidTank[tanks.size()]);
@@ -435,13 +411,13 @@ public class TileEntityDistributor extends TileEntityBase
 		}
 	}
 	
-	private void populateSlots(ArrayList<Integer> slotchunks, DistributorSide side, TileEntityManager manager, boolean top) {
+	private void populateSlots(ArrayList<Integer> slotChunks, DistributorSide side, TileEntityManager manager, boolean top) {
 		if (manager != null && manager instanceof TileEntityCargo) {
 			for (int i = 0; i < 4; i++) {
 				if (isChunkValid(side, manager, i, top)) {					
-					int chunkid = i + (top ? 4 : 0);
-					if (!slotchunks.contains(chunkid)) {
-						slotchunks.add(chunkid);
+					int chunkId = i + (top ? 4 : 0);
+					if (!slotChunks.contains(chunkId)) {
+						slotChunks.add(chunkId);
 					}
 				}
 			}
@@ -453,29 +429,28 @@ public class TileEntityDistributor extends TileEntityBase
 
     //slots
 	@Override
-    public int[] getAccessibleSlotsFromSide(int direction)
-    {
-		TileEntityManager[] invs = getInventories();
+    public int[] getAccessibleSlotsFromSide(int direction) {
+		TileEntityManager[] inventories = getInventories();
 		
-		if (invs.length > 0) {
+		if (inventories.length > 0) {
 			for (DistributorSide side : getSides()) {
 				if (side.getIntSide() == direction) {
-					ArrayList<Integer> slotchunks = new ArrayList<Integer>();
+					ArrayList<Integer> slotChunks = new ArrayList<Integer>();
 					
 					if (hasTop && hasBot) {
-						populateSlots(slotchunks, side, invs[0], false);
-						populateSlots(slotchunks, side, invs[1], true);
+						populateSlots(slotChunks, side, inventories[0], false);
+						populateSlots(slotChunks, side, inventories[1], true);
 					}else if(hasTop) {
-						populateSlots(slotchunks, side, invs[0], true);		
+						populateSlots(slotChunks, side, inventories[0], true);
 					}else if(hasBot) {
-						populateSlots(slotchunks, side, invs[0], false);		
+						populateSlots(slotChunks, side, inventories[0], false);
 					}		
 					
-					int[] ret = new int[slotchunks.size() * 15];
+					int[] ret = new int[slotChunks.size() * 15];
 					int id = 0;
-					for (int chunkid : slotchunks) {
+					for (int chunkId : slotChunks) {
 						for (int i = 0; i < 15; i++) {
-							ret[id] = chunkid * 15 + i;
+							ret[id] = chunkId * 15 + i;
 							id++;
 						}
 					}
@@ -490,21 +465,18 @@ public class TileEntityDistributor extends TileEntityBase
 
     //in
 	@Override
-    public boolean canInsertItem(int slot, ItemStack item, int side)
-    {
+    public boolean canInsertItem(int slot, ItemStack item, int side) {
         return true;
     }
 
     //out
 	@Override
-    public boolean canExtractItem(int slot, ItemStack item, int side)
-    {
+    public boolean canExtractItem(int slot, ItemStack item, int side) {
         return true;
     }   
 	
 	@Override
-    public boolean isItemValidForSlot(int slotId, ItemStack item)
-    {	
+    public boolean isItemValidForSlot(int slotId, ItemStack item) {
 		return true;
 	}
 
@@ -523,11 +495,11 @@ public class TileEntityDistributor extends TileEntityBase
 	@Override
 	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
 		IFluidTank[] tanks =  getTanks(from);
-		FluidTankInfo[] infos = new FluidTankInfo[tanks.length];
-		for (int i = 0; i < infos.length; i++) {
-			infos[i] = new FluidTankInfo(tanks[i].getFluid(), tanks[i].getCapacity());
+		FluidTankInfo[] info = new FluidTankInfo[tanks.length];
+		for (int i = 0; i < info.length; i++) {
+			info[i] = new FluidTankInfo(tanks[i].getFluid(), tanks[i].getCapacity());
 		}
-		return infos;
+		return info;
 	}
 
 	

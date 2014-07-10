@@ -13,7 +13,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.detector.DetectorType;
-import vswe.stevesvehicles.old.TileEntities.TileEntityDetector;
+import vswe.stevesvehicles.tileentity.TileEntityDetector;
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

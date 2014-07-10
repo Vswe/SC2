@@ -1,6 +1,6 @@
 package vswe.stevesvehicles.upgrade.effect.external;
 
-import vswe.stevesvehicles.old.TileEntities.TileEntityUpgrade;
+import vswe.stevesvehicles.tileentity.TileEntityUpgrade;
 import vswe.stevesvehicles.upgrade.effect.BaseEffect;
 
 public class Redstone extends BaseEffect {

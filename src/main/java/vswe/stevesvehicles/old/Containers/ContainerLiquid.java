@@ -4,7 +4,7 @@ import net.minecraftforge.fluids.FluidStack;
 import vswe.stevesvehicles.container.slots.SlotLiquidFilter;
 import vswe.stevesvehicles.container.slots.SlotLiquidManagerInput;
 import vswe.stevesvehicles.container.slots.SlotLiquidOutput;
-import vswe.stevesvehicles.old.TileEntities.TileEntityLiquid;
+import vswe.stevesvehicles.tileentity.TileEntityLiquid;
 
 public class ContainerLiquid extends ContainerManager
 {

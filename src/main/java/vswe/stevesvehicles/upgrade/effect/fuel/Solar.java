@@ -1,6 +1,6 @@
 package vswe.stevesvehicles.upgrade.effect.fuel;
 
-import vswe.stevesvehicles.old.TileEntities.TileEntityUpgrade;
+import vswe.stevesvehicles.tileentity.TileEntityUpgrade;
 
 public class Solar extends RechargerBase {
 

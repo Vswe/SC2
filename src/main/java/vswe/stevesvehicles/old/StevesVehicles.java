@@ -28,7 +28,7 @@ import vswe.stevesvehicles.old.Listeners.MobInteractListener;
 import vswe.stevesvehicles.old.Listeners.OverlayRenderer;
 import vswe.stevesvehicles.old.Listeners.PlayerSleepListener;
 import vswe.stevesvehicles.old.Listeners.TicketListener;
-import vswe.stevesvehicles.old.TileEntities.TileEntityCargo;
+import vswe.stevesvehicles.tileentity.TileEntityCargo;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;

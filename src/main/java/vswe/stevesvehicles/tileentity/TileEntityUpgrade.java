@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.TileEntities;
+package vswe.stevesvehicles.tileentity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -224,8 +224,8 @@ public class TileEntityUpgrade extends TileEntityBase
 		}		
     }	
 	
-    public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-        return worldObj.getTileEntity(xCoord, yCoord, zCoord) == this && entityplayer.getDistanceSq((double) xCoord + 0.5D, (double) yCoord + 0.5D, (double) zCoord + 0.5D) <= 64D;
+    public boolean isUseableByPlayer(EntityPlayer entityPlayer) {
+        return worldObj.getTileEntity(xCoord, yCoord, zCoord) == this && entityPlayer.getDistanceSq((double) xCoord + 0.5D, (double) yCoord + 0.5D, (double) zCoord + 0.5D) <= 64D;
     }
 	
 	@Override
@@ -262,8 +262,7 @@ public class TileEntityUpgrade extends TileEntityBase
 	private int[] slotsForSide;
 	
 	@Override
-    public int getSizeInventory()
-    {
+    public int getSizeInventory() {
 		if (inventoryStacks == null) {
 			if (master == null) {
 				return 0;
@@ -342,7 +341,7 @@ public class TileEntityUpgrade extends TileEntityBase
 
 	@Override
     public String getInventoryName() {
-        return "container.assemblerupgrade";
+        return "container.assembler_upgrade";
     }
 	
 	@Override

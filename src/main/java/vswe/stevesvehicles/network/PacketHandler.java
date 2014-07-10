@@ -1,6 +1,5 @@
 package vswe.stevesvehicles.network;
 
-import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.FMLNetworkEvent;
@@ -20,7 +19,7 @@ import vswe.stevesvehicles.registry.RegistrySynchronizer;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.module.ModuleBase;
-import vswe.stevesvehicles.old.TileEntities.TileEntityBase;
+import vswe.stevesvehicles.tileentity.TileEntityBase;
 
 import vswe.stevesvehicles.vehicle.entity.IVehicleEntity;
 

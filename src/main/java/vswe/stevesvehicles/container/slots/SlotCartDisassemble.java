@@ -1,7 +1,7 @@
 package vswe.stevesvehicles.container.slots;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import vswe.stevesvehicles.old.TileEntities.TileEntityUpgrade;
+import vswe.stevesvehicles.tileentity.TileEntityUpgrade;
 import vswe.stevesvehicles.upgrade.effect.BaseEffect;
 import vswe.stevesvehicles.upgrade.effect.assembly.Disassemble;
 public class SlotCartDisassemble extends SlotCart {

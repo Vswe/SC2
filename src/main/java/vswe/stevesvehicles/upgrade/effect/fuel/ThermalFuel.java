@@ -2,7 +2,7 @@ package vswe.stevesvehicles.upgrade.effect.fuel;
 
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import vswe.stevesvehicles.old.TileEntities.TileEntityUpgrade;
+import vswe.stevesvehicles.tileentity.TileEntityUpgrade;
 import vswe.stevesvehicles.upgrade.effect.util.TankEffect;
 
 public class ThermalFuel extends TankEffect {

@@ -4,7 +4,7 @@ package vswe.stevesvehicles.detector;
 import vswe.stevesvehicles.client.gui.detector.DropDownMenuFlow;
 import vswe.stevesvehicles.client.gui.screen.GuiDetector;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
-import vswe.stevesvehicles.old.TileEntities.TileEntityDetector;
+import vswe.stevesvehicles.tileentity.TileEntityDetector;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 
 public class LogicObjectOperator extends LogicObject {

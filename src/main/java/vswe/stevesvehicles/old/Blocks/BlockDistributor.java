@@ -4,7 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import vswe.stevesvehicles.old.StevesVehicles;
-import vswe.stevesvehicles.old.TileEntities.TileEntityDistributor;
+import vswe.stevesvehicles.tileentity.TileEntityDistributor;
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

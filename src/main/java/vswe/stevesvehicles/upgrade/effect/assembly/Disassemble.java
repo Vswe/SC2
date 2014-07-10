@@ -11,8 +11,8 @@ import vswe.stevesvehicles.old.Containers.ContainerCartAssembler;
 import vswe.stevesvehicles.old.Helpers.TransferHandler;
 import vswe.stevesvehicles.container.slots.SlotCart;
 import vswe.stevesvehicles.container.slots.SlotModule;
-import vswe.stevesvehicles.old.TileEntities.TileEntityCartAssembler;
-import vswe.stevesvehicles.old.TileEntities.TileEntityUpgrade;
+import vswe.stevesvehicles.tileentity.TileEntityCartAssembler;
+import vswe.stevesvehicles.tileentity.TileEntityUpgrade;
 import vswe.stevesvehicles.upgrade.effect.BaseEffect;
 import vswe.stevesvehicles.upgrade.effect.util.InventoryEffect;
 

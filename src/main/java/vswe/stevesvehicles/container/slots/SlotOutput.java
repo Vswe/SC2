@@ -3,7 +3,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.module.data.ModuleType;
 import vswe.stevesvehicles.old.Items.ModItems;
-import vswe.stevesvehicles.old.TileEntities.TileEntityCartAssembler;
+import vswe.stevesvehicles.tileentity.TileEntityCartAssembler;
 
 public class SlotOutput extends SlotAssembler {
 

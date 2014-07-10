@@ -2,10 +2,10 @@ package vswe.stevesvehicles.old.Containers;
 import java.util.ArrayList;
 
 import vswe.stevesvehicles.container.ContainerBase;
-import vswe.stevesvehicles.old.TileEntities.TileEntityBase;
+import vswe.stevesvehicles.tileentity.TileEntityBase;
 import net.minecraft.inventory.IInventory;
 import vswe.stevesvehicles.old.Helpers.DistributorSide;
-import vswe.stevesvehicles.old.TileEntities.TileEntityDistributor;
+import vswe.stevesvehicles.tileentity.TileEntityDistributor;
 
 public class ContainerDistributor extends ContainerBase
 {

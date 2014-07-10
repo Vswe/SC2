@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.TileEntities;
+package vswe.stevesvehicles.tileentity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -16,8 +16,7 @@ import vswe.stevesvehicles.client.gui.screen.GuiDetector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class TileEntityDetector extends TileEntityBase
-{
+public class TileEntityDetector extends TileEntityBase {
 
 	@SideOnly(Side.CLIENT)
 	@Override
@@ -267,8 +266,8 @@ public class TileEntityDetector extends TileEntityBase
 	}
 
     @Override
-    public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-        return worldObj.getTileEntity(xCoord, yCoord, zCoord) == this && entityplayer.getDistanceSq((double) xCoord + 0.5D, (double) yCoord + 0.5D, (double) zCoord + 0.5D) <= 64D;
+    public boolean isUseableByPlayer(EntityPlayer entityPlayer) {
+        return worldObj.getTileEntity(xCoord, yCoord, zCoord) == this && entityPlayer.getDistanceSq((double) xCoord + 0.5D, (double) yCoord + 0.5D, (double) zCoord + 0.5D) <= 64D;
     }
 
  

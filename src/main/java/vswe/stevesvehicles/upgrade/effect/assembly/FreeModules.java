@@ -1,6 +1,6 @@
 package vswe.stevesvehicles.upgrade.effect.assembly;
 
-import vswe.stevesvehicles.old.TileEntities.TileEntityUpgrade;
+import vswe.stevesvehicles.tileentity.TileEntityUpgrade;
 import vswe.stevesvehicles.upgrade.effect.BaseEffect;
 
 

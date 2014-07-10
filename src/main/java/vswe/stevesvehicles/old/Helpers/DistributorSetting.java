@@ -3,8 +3,8 @@ import java.util.ArrayList;
 
 import vswe.stevesvehicles.localization.ILocalizedText;
 import vswe.stevesvehicles.localization.entry.block.LocalizationDistributor;
-import vswe.stevesvehicles.old.TileEntities.TileEntityDistributor;
-import vswe.stevesvehicles.old.TileEntities.TileEntityManager;
+import vswe.stevesvehicles.tileentity.TileEntityDistributor;
+import vswe.stevesvehicles.tileentity.TileEntityManager;
 	
 public class DistributorSetting {
 

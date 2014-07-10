@@ -1,9 +1,9 @@
 package vswe.stevesvehicles.old.Containers;
 import vswe.stevesvehicles.container.ContainerBase;
-import vswe.stevesvehicles.old.TileEntities.TileEntityBase;
+import vswe.stevesvehicles.tileentity.TileEntityBase;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
-import vswe.stevesvehicles.old.TileEntities.TileEntityManager;
+import vswe.stevesvehicles.tileentity.TileEntityManager;
 
 public abstract class ContainerManager extends ContainerBase
 {

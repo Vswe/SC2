@@ -1,6 +1,6 @@
 package vswe.stevesvehicles.container.slots;
 import vswe.stevesvehicles.module.data.ModuleType;
-import vswe.stevesvehicles.old.TileEntities.TileEntityCartAssembler;
+import vswe.stevesvehicles.tileentity.TileEntityCartAssembler;
 
 public class SlotHull extends SlotAssembler {
 

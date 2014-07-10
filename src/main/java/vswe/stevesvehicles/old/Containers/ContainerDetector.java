@@ -2,10 +2,10 @@ package vswe.stevesvehicles.old.Containers;
 import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.detector.LogicObjectOperator;
 import vswe.stevesvehicles.detector.OperatorObject;
-import vswe.stevesvehicles.old.TileEntities.TileEntityBase;
+import vswe.stevesvehicles.tileentity.TileEntityBase;
 import net.minecraft.inventory.IInventory;
 import vswe.stevesvehicles.detector.LogicObject;
-import vswe.stevesvehicles.old.TileEntities.TileEntityDetector;
+import vswe.stevesvehicles.tileentity.TileEntityDetector;
 
 public class ContainerDetector extends ContainerBase
 {

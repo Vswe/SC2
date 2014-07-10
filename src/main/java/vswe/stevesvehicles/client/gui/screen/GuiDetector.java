@@ -14,7 +14,7 @@ import vswe.stevesvehicles.detector.DetectorType;
 import vswe.stevesvehicles.client.gui.detector.DropDownMenu;
 import vswe.stevesvehicles.detector.LogicObject;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
-import vswe.stevesvehicles.old.TileEntities.TileEntityDetector;
+import vswe.stevesvehicles.tileentity.TileEntityDetector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

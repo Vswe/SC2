@@ -6,7 +6,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import vswe.stevesvehicles.old.StevesVehicles;
-import vswe.stevesvehicles.old.TileEntities.TileEntityActivator;
+import vswe.stevesvehicles.tileentity.TileEntityActivator;
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

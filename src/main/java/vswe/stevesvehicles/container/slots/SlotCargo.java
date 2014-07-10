@@ -1,5 +1,5 @@
 package vswe.stevesvehicles.container.slots;
-import vswe.stevesvehicles.old.TileEntities.TileEntityCargo;
+import vswe.stevesvehicles.tileentity.TileEntityCargo;
 
 public class SlotCargo extends SlotBase implements ISpecialSlotValidator {
 

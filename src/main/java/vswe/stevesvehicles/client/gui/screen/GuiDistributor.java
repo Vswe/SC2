@@ -11,8 +11,8 @@ import vswe.stevesvehicles.old.Containers.ContainerDistributor;
 import vswe.stevesvehicles.old.Helpers.DistributorSetting;
 import vswe.stevesvehicles.old.Helpers.DistributorSide;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
-import vswe.stevesvehicles.old.TileEntities.TileEntityDistributor;
-import vswe.stevesvehicles.old.TileEntities.TileEntityManager;
+import vswe.stevesvehicles.tileentity.TileEntityDistributor;
+import vswe.stevesvehicles.tileentity.TileEntityManager;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 import net.minecraft.inventory.IInventory;
 import vswe.stevesvehicles.container.slots.SlotCargo;
-import vswe.stevesvehicles.old.TileEntities.TileEntityCargo;
+import vswe.stevesvehicles.tileentity.TileEntityCargo;
 
 public class ContainerCargo extends ContainerManager
 {

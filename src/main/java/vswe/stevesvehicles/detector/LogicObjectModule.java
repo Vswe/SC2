@@ -6,7 +6,7 @@ import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
-import vswe.stevesvehicles.old.TileEntities.TileEntityDetector;
+import vswe.stevesvehicles.tileentity.TileEntityDetector;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 
 public class LogicObjectModule extends LogicObject {

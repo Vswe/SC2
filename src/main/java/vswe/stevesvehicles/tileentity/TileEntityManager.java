@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.TileEntities;
+package vswe.stevesvehicles.tileentity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
@@ -13,10 +13,8 @@ import vswe.stevesvehicles.old.Containers.ContainerManager;
 import vswe.stevesvehicles.old.Helpers.ManagerTransfer;
 
 public abstract class TileEntityManager extends TileEntityBase
-    implements IInventory
-{
-    public TileEntityManager()
-    {
+    implements IInventory {
+    public TileEntityManager() {
         cargoItemStacks = new ItemStack[getSizeInventory()];
         moveTime = 0;
         standardTransferHandler = new ManagerTransfer();
@@ -25,47 +23,38 @@ public abstract class TileEntityManager extends TileEntityBase
 	
 	
 	@Override
-    public ItemStack getStackInSlot(int i)
-    {
+    public ItemStack getStackInSlot(int i) {
         return cargoItemStacks[i];
     }
 
 	@Override
-    public ItemStack decrStackSize(int i, int j)
-    {
-        if (cargoItemStacks[i] != null)
-        {
-            if (cargoItemStacks[i].stackSize <= j)
-            {
+    public ItemStack decrStackSize(int i, int j) {
+        if (cargoItemStacks[i] != null) {
+            if (cargoItemStacks[i].stackSize <= j) {
                 ItemStack itemstack = cargoItemStacks[i];
                 cargoItemStacks[i] = null;
                 markDirty();
                 return itemstack;
             }
 
-            ItemStack itemstack1 = cargoItemStacks[i].splitStack(j);
+            ItemStack result = cargoItemStacks[i].splitStack(j);
 
-            if (cargoItemStacks[i].stackSize == 0)
-            {
+            if (cargoItemStacks[i].stackSize == 0) {
                 cargoItemStacks[i] = null;
             }
 
             markDirty();
-            return itemstack1;
-        }
-        else
-        {
+            return result;
+        }else {
             return null;
         }
     }
 
 	@Override
-    public void setInventorySlotContents(int i, ItemStack itemstack)
-    {
+    public void setInventorySlotContents(int i, ItemStack itemstack) {
         cargoItemStacks[i] = itemstack;
 
-        if (itemstack != null && itemstack.stackSize > getInventoryStackLimit())
-        {
+        if (itemstack != null && itemstack.stackSize > getInventoryStackLimit()) {
             itemstack.stackSize = getInventoryStackLimit();
         }
 
@@ -75,46 +64,40 @@ public abstract class TileEntityManager extends TileEntityBase
 	@Override
     public String getInventoryName()
     {
-        return "container.cargomanager";
+        return "container.manager";
     }
 
 	@Override
-    public boolean hasCustomInventoryName()
-    {
+    public boolean hasCustomInventoryName() {
         return false;
     }		
 	
 	@Override
-    public void readFromNBT(NBTTagCompound nbttagcompound)
-    {
+    public void readFromNBT(NBTTagCompound nbttagcompound) {
         super.readFromNBT(nbttagcompound);
         NBTTagList nbttaglist = nbttagcompound.getTagList("Items", NBTHelper.COMPOUND.getId());
         cargoItemStacks = new ItemStack[getSizeInventory()];
 
-        for (int i = 0; i < nbttaglist.tagCount(); i++)
-        {
-            NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.getCompoundTagAt(i);
-            byte byte0 = nbttagcompound1.getByte("Slot");
+        for (int i = 0; i < nbttaglist.tagCount(); i++) {
+            NBTTagCompound slotCompound = nbttaglist.getCompoundTagAt(i);
+            byte byte0 = slotCompound.getByte("Slot");
 
-            if (byte0 >= 0 && byte0 < cargoItemStacks.length)
-            {
-                cargoItemStacks[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+            if (byte0 >= 0 && byte0 < cargoItemStacks.length) {
+                cargoItemStacks[byte0] = ItemStack.loadItemStackFromNBT(slotCompound);
             }
         }
 
-        moveTime = nbttagcompound.getByte("movetime");
+        moveTime = nbttagcompound.getByte("moveTime");
         setLowestSetting(nbttagcompound.getByte("lowestNumber"));
         layoutType = nbttagcompound.getByte("layout");
-        byte temp = nbttagcompound.getByte("tocart");
+        byte temp = nbttagcompound.getByte("toCart");
 		byte temp2 = nbttagcompound.getByte("doReturn");
 
-        for (int i = 0; i < 4; i++)
-        {
+        for (int i = 0; i < 4; i++) {
             amount[i] = nbttagcompound.getByte("amount" + i);
             color[i] = nbttagcompound.getByte("color" + i);
 
-            if (color[i] == 0)
-            {
+            if (color[i] == 0) {
                 color[i] = i + 1;
             }
 
@@ -124,42 +107,36 @@ public abstract class TileEntityManager extends TileEntityBase
     }
 
 	@Override
-    public void writeToNBT(NBTTagCompound nbttagcompound)
-    {
+    public void writeToNBT(NBTTagCompound nbttagcompound) {
         super.writeToNBT(nbttagcompound);
-        nbttagcompound.setByte("movetime", (byte)moveTime);
+        nbttagcompound.setByte("moveTime", (byte)moveTime);
         nbttagcompound.setByte("lowestNumber", (byte)getLowestSetting());
         nbttagcompound.setByte("layout", (byte)layoutType);
         byte temp = 0;
 		byte temp2 = 0;
-        for (int i = 0; i < 4; i++)
-        {
+        for (int i = 0; i < 4; i++) {
             nbttagcompound.setByte("amount" + i, (byte)amount[i]);
             nbttagcompound.setByte("color" + i, (byte)color[i]);
 
-            if (toCart[i])
-            {
+            if (toCart[i]) {
                 temp |= (1 << i);
             }
 
-			if (doReturn[i])
-            {
+			if (doReturn[i]) {
                 temp2 |= (1 << i);
             }
         }
 
-        nbttagcompound.setByte("tocart", temp);
+        nbttagcompound.setByte("toCart", temp);
 		nbttagcompound.setByte("doReturn", temp2);
         NBTTagList nbttaglist = new NBTTagList();
 
-        for (int i = 0; i < cargoItemStacks.length; i++)
-        {
-            if (cargoItemStacks[i] != null)
-            {
-                NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-                nbttagcompound1.setByte("Slot", (byte)i);
-                cargoItemStacks[i].writeToNBT(nbttagcompound1);
-                nbttaglist.appendTag(nbttagcompound1);
+        for (int i = 0; i < cargoItemStacks.length; i++) {
+            if (cargoItemStacks[i] != null) {
+                NBTTagCompound slotCompound = new NBTTagCompound();
+                slotCompound.setByte("Slot", (byte) i);
+                cargoItemStacks[i].writeToNBT(slotCompound);
+                nbttaglist.appendTag(slotCompound);
             }
         }
 
@@ -167,8 +144,7 @@ public abstract class TileEntityManager extends TileEntityBase
     }
 
 	@Override
-    public int getInventoryStackLimit()
-    {
+    public int getInventoryStackLimit() {
         return 64;
     }
 
@@ -223,24 +199,21 @@ public abstract class TileEntityManager extends TileEntityBase
     }    
 	
 	@Override
-    public void updateEntity()
-    {	
+    public void updateEntity() {
 	
 		if (worldObj.isRemote) {
 			updateLayout();
 			return;
 		}
 	
-        if (getCart() == null || getCart().isDead ||  getSide() < 0 || getSide() > 3 || !getCart().getVehicle().isDisabled())
-        {
+        if (getCart() == null || getCart().isDead ||  getSide() < 0 || getSide() > 3 || !getCart().getVehicle().isDisabled()) {
         	standardTransferHandler.reset();
             return;
         }
 
         moveTime++;
 
-        if (moveTime >= 24)
-        {
+        if (moveTime >= 24) {
             moveTime = 0;
 
             if (!exchangeItems(standardTransferHandler)) {
@@ -256,10 +229,7 @@ public abstract class TileEntityManager extends TileEntityBase
     }
 
 
-	
-
 	public boolean exchangeItems(ManagerTransfer transfer) {
-		
         for (transfer.setSetting(transfer.getLowestSetting()); transfer.getSetting() < 4; transfer.setSetting(transfer.getSetting() + 1)) {
             if (color[transfer.getSetting()] - 1 != transfer.getSide()) {
                 continue;
@@ -317,12 +287,9 @@ public abstract class TileEntityManager extends TileEntityBase
 
 			layoutType += difference;
 
-			if (layoutType > 2)
-			{
+			if (layoutType > 2) {
 				layoutType = 0;
-			}
-			else if (layoutType < 0)
-			{
+			}else if (layoutType < 0) {
 				layoutType = 2;
 			}
 
@@ -333,12 +300,9 @@ public abstract class TileEntityManager extends TileEntityBase
 
 			int k = (railsAndDifferenceCombined & 4) >> 2;
 			int difference;
-            if (k == 0)
-            {
+            if (k == 0) {
                 difference = 1;
-            }
-            else
-            {
+            }else {
                 difference = -1;
             }
 
@@ -346,17 +310,13 @@ public abstract class TileEntityManager extends TileEntityBase
 			if(id == 2) {
 				amount[railID] += difference;
 
-				if (amount[railID] >= getAmountCount())
-				{
+				if (amount[railID] >= getAmountCount()) {
 					amount[railID] = 0;
-				}
-				else if (amount[railID] < 0)
-				{
+				}else if (amount[railID] < 0) {
 					amount[railID] = getAmountCount() - 1;
 				}
 
-				if (color[railID] - 1 == getSide())
-				{
+				if (color[railID] - 1 == getSide()) {
 					reset();
 				}
 			}else if(id == 3) {
@@ -374,17 +334,13 @@ public abstract class TileEntityManager extends TileEntityBase
 				}
 				color[railID] += difference;
 
-				if (color[railID] > 5)
-				{
+				if (color[railID] > 5) {
 					color[railID] = 1;
-				}
-				else if (color[railID] < 1)
-				{
+				}else if (color[railID] < 1) {
 					color[railID] = 5;
 				}
 
-				if (color[railID] - 1 == getSide())
-				{
+				if (color[railID] - 1 == getSide()) {
 					reset();
 				}
 			}else{
@@ -466,28 +422,20 @@ public abstract class TileEntityManager extends TileEntityBase
 	}
 
 
-    public int moveProgressScaled(int i)
-    {
+    public int moveProgressScaled(int i)  {
         return (moveTime * i) / 24;
     }
 
 	@Override
-    public void closeInventory()
-    {
+    public void closeInventory() {
     }
 	@Override
-    public void openInventory()
-    {
+    public void openInventory() {
     }
-	@Override
-    public boolean isUseableByPlayer(EntityPlayer entityplayer)
-    {
-        if (worldObj.getTileEntity(xCoord, yCoord, zCoord) != this)
-        {
-            return false;
-        }
 
-        return entityplayer.getDistanceSq((double)xCoord + 0.5D, (double)yCoord + 0.5D, (double)zCoord + 0.5D) <= 64D;
+	@Override
+    public boolean isUseableByPlayer(EntityPlayer entityPlayer) {
+        return worldObj.getTileEntity(xCoord, yCoord, zCoord) == this && entityPlayer.getDistanceSq((double) xCoord + 0.5D, (double) yCoord + 0.5D, (double) zCoord + 0.5D) <= 64D;
     }
 
     private ItemStack cargoItemStacks[];
@@ -499,27 +447,22 @@ public abstract class TileEntityManager extends TileEntityBase
 
     public int amount[] = new int[] {0, 0, 0, 0};
     public int color[] = new int[] {1, 2, 3, 4};
-    //public int lowestNumber = 0;
 
 
-
-    public ItemStack getStackInSlotOnClosing(int par1)
-    {
-        if (this.cargoItemStacks[par1] != null)
-        {
+    @Override
+    public ItemStack getStackInSlotOnClosing(int par1) {
+        if (this.cargoItemStacks[par1] != null) {
             ItemStack var2 = this.cargoItemStacks[par1];
             this.cargoItemStacks[par1] = null;
             return var2;
-        }
-        else
-        {
+        }else {
             return null;
         }
     }
 	
 	
 	protected void updateLayout() {}
-	protected void receiveClickData(int packetid, int id, int dif) {}
+	protected void receiveClickData(int packetId, int id, int dif) {}
 	protected abstract boolean isTargetValid(ManagerTransfer transfer);
 	protected abstract boolean doTransfer(ManagerTransfer transfer);
 	public abstract int getAmountCount();

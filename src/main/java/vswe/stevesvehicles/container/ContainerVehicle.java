@@ -1,7 +1,7 @@
 package vswe.stevesvehicles.container;
 import java.util.ArrayList;
 import java.util.HashMap;
-import vswe.stevesvehicles.old.TileEntities.TileEntityBase;
+import vswe.stevesvehicles.tileentity.TileEntityBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;

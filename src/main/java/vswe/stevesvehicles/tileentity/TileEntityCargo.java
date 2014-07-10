@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.TileEntities;
+package vswe.stevesvehicles.tileentity;
 import java.util.ArrayList;
 
 import net.minecraft.entity.player.InventoryPlayer;
@@ -47,15 +47,13 @@ public class TileEntityCargo extends TileEntityManager
 	public ContainerBase getContainer(InventoryPlayer inv) {
 		return new ContainerCargo(inv, this);		
 	}
-	public TileEntityCargo()
-    {
-		super();
-    }
+
+
 
 	public static ArrayList<CargoItemSelection> itemSelections;
 
 
-    //TODO maybe make this registration a bit nice, this would work fine actually but maybe clean it up
+    //TODO maybe make this registration a bit nice
 	public static void loadSelectionSettings() {
 		itemSelections = new ArrayList<CargoItemSelection>();
 		itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_ALL, Slot.class, new ItemStack(ModItems.carts, 1, 0)));
@@ -77,15 +75,14 @@ public class TileEntityCargo extends TileEntityManager
 	
 	
 	@Override
-    public int getSizeInventory()
-    {
+    public int getSizeInventory() {
         return 60;
     }
 
 	@Override
     public String getInventoryName()
     {
-        return "container.cargomanager";
+        return "container.cargo_manager";
     }
 
     public int target[] = new int[] {0, 0, 0, 0};
@@ -108,26 +105,22 @@ public class TileEntityCargo extends TileEntityManager
 	}
 	
 	@Override
-	protected void receiveClickData(int packetid, int id, int dif) {
-		if (packetid == 1) {
+	protected void receiveClickData(int packetId, int id, int dif) {
+		if (packetId == 1) {
 			target[id] += dif;
 
-			if (target[id] >= itemSelections.size())
-			{
+			if (target[id] >= itemSelections.size()) {
 				target[id] = 0;
-			}
-			else if (target[id] < 0)
-			{
+			}else if (target[id] < 0) {
 				target[id] = itemSelections.size() - 1;
 			}
 
-			if (color[id] - 1 == getSide())
-			{
+			if (color[id] - 1 == getSide()) {
 				reset();
 			}
 			
 			if (itemSelections.get(target[id]).getValidSlot() == null && dif != 0) {
-				receiveClickData(packetid, id, dif);
+				receiveClickData(packetId, id, dif);
 			}
 		}				
 	}
@@ -160,12 +153,10 @@ public class TileEntityCargo extends TileEntityManager
 		}
 	}
 
-    public int getAmount(int id)
-    {
+    public int getAmount(int id) {
         int val = getAmountId(id);
 
-        switch (val)
-        {
+        switch (val) {
             case 1:
                 return 1;
 
@@ -204,20 +195,14 @@ public class TileEntityCargo extends TileEntityManager
     //0 - MAX
     //1 - Items
     //2 - Stacks
-    public int getAmountType(int id)
-    {
+    public int getAmountType(int id) {
         int val = getAmountId(id);
 
-        if (val == 0)
-        {
+        if (val == 0) {
             return 0;
-        }
-        else if (val <= 6)
-        {
+        }else if (val <= 6) {
             return 1;
-        }
-        else
-        {
+        }else {
             return 2;
         }
     }
@@ -226,59 +211,50 @@ public class TileEntityCargo extends TileEntityManager
 	public int getAmountCount() {
 		return 11;
 	}
-	
 
 	@Override
-    public void readFromNBT(NBTTagCompound nbttagcompound)
-    {
+    public void readFromNBT(NBTTagCompound nbttagcompound) {
         super.readFromNBT(nbttagcompound);
         setWorkload(nbttagcompound.getByte("workload"));		
-        for (int i = 0; i < 4; i++)
-        {
+        for (int i = 0; i < 4; i++) {
             target[i] = nbttagcompound.getByte("target" + i);
         }
-		
 	}
 	
 	@Override
-    public void writeToNBT(NBTTagCompound nbttagcompound)
-    {
+    public void writeToNBT(NBTTagCompound nbttagcompound) {
 		super.writeToNBT(nbttagcompound);
 		nbttagcompound.setByte("workload", (byte)getWorkload());
-        for (int i = 0; i < 4; i++)
-        {
+        for (int i = 0; i < 4; i++) {
             nbttagcompound.setByte("target" + i, (byte)target[i]);
         }		
 	}
 	
 	@Override
 	protected boolean doTransfer(ManagerTransfer transfer) {
-		java.lang.Class slotCart = itemSelections.get(target[transfer.getSetting()]).getValidSlot();
+		Class slotCart = itemSelections.get(target[transfer.getSetting()]).getValidSlot();
 		if (slotCart == null) {
 			transfer.setLowestSetting(transfer.getSetting() + 1);
 			return true;
 		}
-		java.lang.Class slotCargo = SlotCargo.class;
+		Class slotCargo = SlotCargo.class;
 
 
 		IInventory fromInv;
 		Container fromCont;
-		java.lang.Class fromValid;
+		Class fromValid;
 		IInventory toInv;
 		Container toCont;
-		java.lang.Class toValid;
+		Class toValid;
 
-		if (toCart[transfer.getSetting()])
-		{
+		if (toCart[transfer.getSetting()]) {
 			fromInv = this;
 			fromCont = new ContainerCargo(null, this);
 			fromValid = slotCargo;
 			toInv = transfer.getCart();
 			toCont = transfer.getCart().getVehicle().getCon(null);
 			toValid = slotCart;
-		}
-		else
-		{
+		}else {
 			fromInv = transfer.getCart();
 			fromCont = transfer.getCart().getVehicle().getCon(null);
 			fromValid = slotCart;
@@ -288,46 +264,35 @@ public class TileEntityCargo extends TileEntityManager
 		}
 
 		latestTransferToBeUsed = transfer;
-		for (int i = 0; i < fromInv.getSizeInventory(); i++)
-		{
-			if (TransferHandler.isSlotOfType(fromCont.getSlot(i),fromValid) && fromInv.getStackInSlot(i) != null)
-			{
+		for (int i = 0; i < fromInv.getSizeInventory(); i++) {
+			if (TransferHandler.isSlotOfType(fromCont.getSlot(i),fromValid) && fromInv.getStackInSlot(i) != null) {
 				ItemStack iStack = fromInv.getStackInSlot(i);
-				int stacksize = iStack.stackSize;
+				int stackSize = iStack.stackSize;
 				int maxNumber;
 
-				if (getAmountType(transfer.getSetting()) == 1)
-				{
+				if (getAmountType(transfer.getSetting()) == 1) {
 					maxNumber = getAmount(transfer.getSetting()) - transfer.getWorkload();
-				}
-				else
-				{
+				}else {
 					maxNumber = -1;
 				}
 				
 				TransferHandler.TransferItem(iStack, toInv, toCont, toValid, maxNumber, TransferHandler.TransferType.MANAGER);
 
-				if (iStack.stackSize != stacksize)
-				{
-					if (getAmountType(transfer.getSetting()) == 1)
-					{
-						transfer.setWorkload(transfer.getWorkload() + stacksize - iStack.stackSize);
-					}
-					else if (getAmountType(transfer.getSetting()) == 2)
-					{
+				if (iStack.stackSize != stackSize) {
+					if (getAmountType(transfer.getSetting()) == 1) {
+						transfer.setWorkload(transfer.getWorkload() + stackSize - iStack.stackSize);
+					}else if (getAmountType(transfer.getSetting()) == 2) {
 						transfer.setWorkload(transfer.getWorkload() + 1);
 					}
 
 					markDirty();
 					transfer.getCart().markDirty();
 
-					if (iStack.stackSize == 0)
-					{
+					if (iStack.stackSize == 0) {
 						fromInv.setInventorySlotContents(i, null);
 					}
 
-					if (transfer.getWorkload() >= getAmount(transfer.getSetting()) && getAmountType(transfer.getSetting()) != 0)
-					{
+					if (transfer.getWorkload() >= getAmount(transfer.getSetting()) && getAmountType(transfer.getSetting()) != 0) {
 						transfer.setLowestSetting(transfer.getSetting() + 1); //this is not available anymore
 					}
 
@@ -339,8 +304,7 @@ public class TileEntityCargo extends TileEntityManager
 	}
 	
 	@Override
-    public boolean isItemValidForSlot(int slotId, ItemStack item)
-    {	
+    public boolean isItemValidForSlot(int slotId, ItemStack item) {
 		return true;
 	}
 

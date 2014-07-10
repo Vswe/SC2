@@ -14,7 +14,7 @@ import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.container.slots.SlotBase;
 import vswe.stevesvehicles.container.slots.SlotChest;
-import vswe.stevesvehicles.old.TileEntities.TileEntityCargo;
+import vswe.stevesvehicles.tileentity.TileEntityCargo;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

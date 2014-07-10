@@ -1,9 +1,9 @@
 package vswe.stevesvehicles.old.Containers;
 import vswe.stevesvehicles.container.ContainerBase;
-import vswe.stevesvehicles.old.TileEntities.TileEntityBase;
+import vswe.stevesvehicles.tileentity.TileEntityBase;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.IInventory;
-import vswe.stevesvehicles.old.TileEntities.TileEntityUpgrade;
+import vswe.stevesvehicles.tileentity.TileEntityUpgrade;
 import vswe.stevesvehicles.upgrade.effect.util.InventoryEffect;
 public class ContainerUpgrade extends ContainerBase
 {

@@ -44,7 +44,7 @@ import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.common.storage.tank.ModuleTank;
 import vswe.stevesvehicles.module.cart.ModuleWorker;
 import vswe.stevesvehicles.module.cart.tool.ModuleTool;
-import vswe.stevesvehicles.old.TileEntities.TileEntityCartAssembler;
+import vswe.stevesvehicles.tileentity.TileEntityCartAssembler;
 import vswe.stevesvehicles.vehicle.entity.IVehicleEntity;
 
 import java.lang.reflect.Constructor;
