@@ -858,7 +858,7 @@ public class GuiCartAssembler extends GuiBase {
             }
 		}else{
 			ArrayList<SlotAssembler> slots = assembler.getSlots();
-			for (int i = 0; i < slots.size(); i++) {
+			for (int i = 0; i < slots.size() - assembler.nonModularSlots(); i++) {
 				SlotAssembler slot = slots.get(i);
 				int targetX = slot.getX() - 1;
 				int targetY = slot.getY()  - 1;

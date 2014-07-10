@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.FakePlayerFactory;
@@ -435,10 +436,11 @@ public abstract class ModuleBase {
 	 @SideOnly(Side.CLIENT)
 	public void drawString(GuiVehicle gui,String str, int x, int y, int c) {
 		 drawString(gui, str, x, y, -1, false, c);
-	 }	 
-		 
+	 }
+
+
 	 @SideOnly(Side.CLIENT)	 
-	public void drawString(GuiVehicle gui,String str, int x, int y, int w, boolean center, int c) {
+	public void drawString(GuiVehicle gui, String str, int x, int y, int w, boolean center, int c) {
 		 int j = gui.getGuiLeft();
 		 int k = gui.getGuiTop();
 		 int[] rect = new int[] {x, y , w, 8};
@@ -456,10 +458,10 @@ public abstract class ModuleBase {
                  gui.setupAndStartScissor();
              }
 			 if (center) {
-				 gui.getFontRenderer().drawString(str,  rect[0] + (rect[2] - gui.getFontRenderer().getStringWidth(str)) / 2+getX(), rect[1] + getY() + dif, c);
+                 gui.getFontRenderer().drawString(str,  rect[0] + (rect[2] - gui.getFontRenderer().getStringWidth(str)) / 2+getX(), rect[1] + getY() + dif, c);
 				
 			 }else{
-				 gui.getFontRenderer().drawString(str, rect[0]+getX(), rect[1] + getY() + dif, c);
+                 gui.getFontRenderer().drawString(str, rect[0] + getX(), rect[1] + getY() + dif, c);
 			 }
 
              if (!stealInterface) {
@@ -467,7 +469,31 @@ public abstract class ModuleBase {
              }
 		 }
 	}
-	 
+
+    @SideOnly(Side.CLIENT)
+    public void drawScaledCenteredString(GuiVehicle gui, String str, int x, int y, int w, float multiplier, int color) {
+        x -= gui.getGuiLeft();
+        y -= gui.getGuiTop();
+
+        GL11.glPushMatrix();
+        GL11.glScalef(multiplier, multiplier, 1F);
+
+        int width = gui.getFontRenderer().getStringWidth(str);
+
+        x += (w - width * multiplier) / 2;
+
+
+        x += getX();
+        y += getY() - getVehicle().getRealScrollY();
+
+        gui.setupAndStartScissor();
+        gui.getFontRenderer().drawString(str, (int) ((x + gui.getGuiLeft()) / multiplier), (int) ((y + gui.getGuiTop()) / multiplier), color);
+        gui.stopScissor();
+
+
+        GL11.glPopMatrix();
+    }
+
 	 @SideOnly(Side.CLIENT)	 
 	public void drawStringWithShadow(GuiVehicle gui,String str, int x, int y, int c) {
 		 int j = gui.getGuiLeft();
@@ -517,12 +543,17 @@ public abstract class ModuleBase {
 		int[] rect = new int[] {x, y, 16, 16};
 		int dif = handleScroll(rect);
 		if (rect[3] > 0) {
+            RenderItem renderitem = new RenderItem();
+            gui.setZLevel(100);
+            renderitem.zLevel = 100;
             gui.setupAndStartScissor();
-			RenderItem renderitem = new RenderItem();
-			GL11.glDisable(GL11.GL_LIGHTING);
-			renderitem.renderItemIntoGUI(gui.getMinecraft().fontRenderer, gui.getMinecraft().renderEngine, item, gui.getGuiLeft() + rect[0] + getX(), gui.getGuiTop() + rect[1] + getY() + dif);
-			GL11.glEnable(GL11.GL_LIGHTING);
+
+            GL11.glEnable(GL11.GL_DEPTH_TEST);
+			renderitem.renderItemAndEffectIntoGUI(gui.getMinecraft().fontRenderer, gui.getMinecraft().renderEngine, item, rect[0] + getX(), rect[1] + getY() + dif);
+
             gui.stopScissor();
+            renderitem.zLevel = 0;
+            gui.setZLevel(0);
 		}
 	}	 
 	 

@@ -88,8 +88,7 @@ public class GuiVehicle extends GuiBase {
 		if (thief != null) {
 			drawModuleSlots(thief);
 			drawModuleBackground(thief, x, y);
-			drawModuleBackgroundItems(thief, x, y);
-			
+
 			for (ModuleBase module : vehicle.getModules()) {
 				if (module.hasGui()) {
 					if (module.hasSlots()) {
@@ -127,10 +126,6 @@ public class GuiVehicle extends GuiBase {
 			
 			renderModuleList(x, y);
 			
-			for (ModuleBase module : vehicle.getModules()) {
-				drawModuleBackgroundItems(module, x, y);
-			}
-			
 		}
 		
 		
@@ -158,6 +153,7 @@ public class GuiVehicle extends GuiBase {
     		this.drawIcon(count.getData().getIcon(), getGuiLeft() + getModuleDisplayX(i), getGuiTop() + getModuleDisplayY(i), 1, 1, 0, 0);
     	}
     	GL11.glDisable(GL11.GL_BLEND);
+
     }
     
     private void renderModuleListText(int x, int y) {    
@@ -398,6 +394,16 @@ public class GuiVehicle extends GuiBase {
 
     @Override
     protected void renderSlots(int x, int y) {
+        ModuleBase thief = vehicle.getInterfaceThief();
+
+        if (thief != null) {
+            drawModuleBackgroundItems(thief, x, y);
+        }else if(vehicle.getModules() != null) {
+            for (ModuleBase moduleBase : vehicle.getModules()) {
+                drawModuleBackgroundItems(moduleBase, x, y);
+            }
+        }
+
         setupScissor(SCROLLABLE_AREA);
         super.renderSlots(x, y);
     }

@@ -119,7 +119,6 @@ public class ModuleRegistryCartRails extends ModuleRegistry {
                                     Items.paper,       Items.paper,         Items.paper);
 
         height.addVehicles(VehicleRegistry.CART);
-        height.addSides(ModuleSide.TOP, ModuleSide.BACK);
         register(height);
     }
 

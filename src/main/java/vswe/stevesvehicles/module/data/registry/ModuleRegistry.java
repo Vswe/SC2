@@ -31,6 +31,7 @@ public class ModuleRegistry implements IRegistry<ModuleData> {
         add(new ModuleRegistryCartTools());
         add(new ModuleRegistryChests());
         add(new ModuleRegistryTanks());
+        add(new ModuleRegistryBarrel());
         add(new ModuleRegistryShooters());
         add(new ModuleRegistryCartDrillUtility());
         add(new ModuleRegistryCartRails());
@@ -44,6 +45,7 @@ public class ModuleRegistry implements IRegistry<ModuleData> {
         add(new ModuleRegistryCake());
         add(new ModuleRegistryIndependence());
         add(new ModuleRegistryProduction());
+
 
     }
 

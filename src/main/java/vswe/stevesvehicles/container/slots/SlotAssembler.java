@@ -128,7 +128,7 @@ public class SlotAssembler extends Slot {
 
 	@Override
     public boolean canTakeStack(EntityPlayer player) {
-        return this.getStack() != null && this.getStack().stackSize > 0 && !assembler.isInFreeMode();
+        return this.getStack() != null && this.getStack().stackSize > 0 && (!assembler.isInFreeMode() || getSlotIndex() >= assembler.getSlots().size() - assembler.nonModularSlots());
     }
 	
 

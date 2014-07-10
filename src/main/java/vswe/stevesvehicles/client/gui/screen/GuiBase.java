@@ -20,6 +20,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public abstract class GuiBase extends GuiContainerSpecial {
 
+
     public GuiBase(Container container) {
         super(container);
     }
@@ -476,9 +477,13 @@ public abstract class GuiBase extends GuiContainerSpecial {
         tessellator.addVertexWithUV((double)(x + w), (double)(y + 0), (double)this.zLevel, pt3[0], pt3[1]);
         tessellator.addVertexWithUV((double)(x + 0), (double)(y + 0), (double)this.zLevel, pt4[0], pt4[1]);
         tessellator.draw();
-    }	
-	
-	public static enum RenderRotation {
+    }
+
+    public void setZLevel(int ZLevel) {
+        this.zLevel = zLevel;
+    }
+
+    public static enum RenderRotation {
 		NORMAL,
 		ROTATE_90,
 		ROTATE_180,
