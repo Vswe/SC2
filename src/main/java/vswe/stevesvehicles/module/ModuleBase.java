@@ -442,20 +442,29 @@ public abstract class ModuleBase {
 		 int j = gui.getGuiLeft();
 		 int k = gui.getGuiTop();
 		 int[] rect = new int[] {x, y , w, 8};
-		 
+
+         boolean stealInterface = doStealInterface();
+         int dif = 0;
 		 //scroll the bounding box
-		 if (!doStealInterface()) {
-			 handleScroll(rect);
+		 if (!stealInterface) {
+             dif = handleScroll(rect);
 		 }
 		 
-		 //just draw the text if the whole text can be drawn
-		 if (rect[3] == 8) {
+
+		 if (rect[3] > 0) {
+             if (!stealInterface) {
+                 gui.setupAndStartScissor();
+             }
 			 if (center) {
-				 gui.getFontRenderer().drawString(str,  rect[0] + (rect[2] - gui.getFontRenderer().getStringWidth(str)) / 2+getX(), rect[1] + getY(), c);
+				 gui.getFontRenderer().drawString(str,  rect[0] + (rect[2] - gui.getFontRenderer().getStringWidth(str)) / 2+getX(), rect[1] + getY() + dif, c);
 				
 			 }else{
-				 gui.getFontRenderer().drawString(str, rect[0]+getX(), rect[1] + getY(), c);
+				 gui.getFontRenderer().drawString(str, rect[0]+getX(), rect[1] + getY() + dif, c);
 			 }
+
+             if (!stealInterface) {
+                 gui.stopScissor();
+             }
 		 }
 	}
 	 
@@ -506,12 +515,12 @@ public abstract class ModuleBase {
 	 
 	public void drawItemInInterface(GuiVehicle gui, ItemStack item, int x, int y) {
 		int[] rect = new int[] {x, y, 16, 16};
-		handleScroll(rect);
+		int dif = handleScroll(rect);
 		if (rect[3] > 0) {
             gui.setupAndStartScissor();
 			RenderItem renderitem = new RenderItem();
 			GL11.glDisable(GL11.GL_LIGHTING);
-			renderitem.renderItemIntoGUI(gui.getMinecraft().fontRenderer, gui.getMinecraft().renderEngine, item, gui.getGuiLeft() + rect[0] + getX(), gui.getGuiTop() + rect[1] + getY());
+			renderitem.renderItemIntoGUI(gui.getMinecraft().fontRenderer, gui.getMinecraft().renderEngine, item, gui.getGuiLeft() + rect[0] + getX(), gui.getGuiTop() + rect[1] + getY() + dif);
 			GL11.glEnable(GL11.GL_LIGHTING);
             gui.stopScissor();
 		}
