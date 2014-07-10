@@ -566,6 +566,7 @@ public class GuiCartAssembler extends GuiBase {
 	
 	private void render3DVehicle() {
 		if (assembler.createPlaceholder()) {
+            startScissor(145, 15, 281, 148);
             int left = this.guiLeft;
             int top = this.guiTop;
             GL11.glEnable(GL12.GL_RESCALE_NORMAL);
@@ -602,6 +603,7 @@ public class GuiCartAssembler extends GuiBase {
             GL11.glPopMatrix();
             RenderHelper.disableStandardItemLighting();
             GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+            stopScissor();
         }
 	}	
 
