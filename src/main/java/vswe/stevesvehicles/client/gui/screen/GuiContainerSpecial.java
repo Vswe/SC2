@@ -1,5 +1,7 @@
-package vswe.stevesvehicles.old.Interfaces;
+package vswe.stevesvehicles.client.gui.screen;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
@@ -18,7 +20,7 @@ import org.lwjgl.opengl.GL12;
 import java.util.HashSet;
 import java.util.Set;
 
-
+@SideOnly(Side.CLIENT)
 public abstract class GuiContainerSpecial extends GuiScreen {
 
     private static final float BRIGHTNESS_X = 240F;

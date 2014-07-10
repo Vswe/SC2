@@ -16,7 +16,6 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import vswe.stevesvehicles.old.Interfaces.GuiContainerSpecial;
 
 @SideOnly(Side.CLIENT)
 public abstract class GuiBase extends GuiContainerSpecial {
