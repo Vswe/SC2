@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.Blocks;
+package vswe.stevesvehicles.block;
 
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -27,7 +27,7 @@ import java.lang.reflect.Constructor;
 public enum ModBlocks {
     CARGO_MANAGER("cargo_manager", BlockCargoManager.class, TileEntityCargo.class, "cargo"),
     JUNCTION("junction_rail", BlockRailJunction.class),
-    ADVANCED_DETECTOR("advanced_detector_rail", BlockRailAdvDetector.class),
+    ADVANCED_DETECTOR("advanced_detector_rail", BlockRailAdvancedDetector.class),
     CART_ASSEMBLER("vehicle_assembler", BlockCartAssembler.class, TileEntityCartAssembler.class, "assembler"),
     MODULE_TOGGLER("module_toggler", BlockActivator.class, TileEntityActivator.class, "toggler"),
     EXTERNAL_DISTRIBUTOR("external_distributor", BlockDistributor.class, TileEntityDistributor.class, "distributor"),
@@ -95,11 +95,10 @@ public enum ModBlocks {
             }
         }
 
-
-        STORAGE.block.setHardness(5.0F).setResistance(10.0F);
     }
 
 
+    //TODO update recipes
     public static void addRecipes() {
         String blue = "dyeBlue";
         String orange = "dyeOrange";

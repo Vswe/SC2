@@ -7,7 +7,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import vswe.stevesvehicles.localization.ILocalizedText;
 import vswe.stevesvehicles.localization.LocalizedTextAdvanced;
-import vswe.stevesvehicles.old.Blocks.ModBlocks;
 
 
 public class CreativeTabCustom extends CreativeTabs {

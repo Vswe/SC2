@@ -1,32 +1,26 @@
-package vswe.stevesvehicles.old.Blocks;
+package vswe.stevesvehicles.block;
 import java.util.ArrayList;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.tileentity.TileEntityCartAssembler;
 import vswe.stevesvehicles.tileentity.TileEntityUpgrade;
-import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import vswe.stevesvehicles.network.PacketHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import vswe.stevesvehicles.tab.CreativeTabLoader;
 
 
-public class BlockCartAssembler extends BlockContainerBase
-{
+public class BlockCartAssembler extends BlockContainerBase {
 
-
-    public BlockCartAssembler()
-    {
+    public BlockCartAssembler() {
         super(Material.rock);
         setCreativeTab(CreativeTabLoader.blocks);
     }
@@ -39,8 +33,7 @@ public class BlockCartAssembler extends BlockContainerBase
 	
     @SideOnly(Side.CLIENT)
 	@Override
-    public IIcon getIcon(int side, int meta)
-    {
+    public IIcon getIcon(int side, int meta) {
         if (side == 0) {
 			return botIcon;
 		}else if(side == 1) {
@@ -52,37 +45,14 @@ public class BlockCartAssembler extends BlockContainerBase
 	
     @SideOnly(Side.CLIENT)
 	@Override
-    public void registerBlockIcons(IIconRegister register)
-    {
-        topIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "cart_assembler" + "_top");
-		botIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "cart_assembler" + "_bot");
+    public void registerBlockIcons(IIconRegister register) {
+        topIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":cart_assembler_top");
+		botIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":cart_assembler_bot");
 		sideIcons = new IIcon[4];
 		for (int i = 1; i <= 4; i++) {
-			sideIcons[i-1] = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "cart_assembler" + "_side_" + i);
+			sideIcons[i-1] = register.registerIcon(StevesVehicles.instance.textureHeader + ":cart_assembler_side_" + i);
 		}
     }
-	
-	@Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
-    {
-		if (entityplayer.isSneaking()) {
-			return false;
-		}
-	
-		TileEntityCartAssembler assembler = (TileEntityCartAssembler)world.getTileEntity(x, y, z);
-		if (assembler != null) {
-		    if (!world.isRemote)
-			{
-				FMLNetworkHandler.openGui(entityplayer, StevesVehicles.instance, 3, world, x, y, z);
-			}
-			
-			
-		}else{
-			return false;
-		}
-        return true;
-    }
-	
 
 	public void updateMultiBlock(World world, int x, int y, int z) {
 
@@ -201,8 +171,7 @@ public class BlockCartAssembler extends BlockContainerBase
 	
 
 	@Override
-    public TileEntity createNewTileEntity(World world, int var2)
-    {
+    public TileEntity createNewTileEntity(World world, int var2) {
         return new TileEntityCartAssembler();
     }
 	
@@ -213,69 +182,29 @@ public class BlockCartAssembler extends BlockContainerBase
 	}
 	
 	@Override
-	public void breakBlock(World world, int x, int y, int z, Block unknown1, int unknown2)
-    {
-		
-	
-        TileEntityCartAssembler var7 = (TileEntityCartAssembler)world.getTileEntity(x, y, z);
-		var7.isDead = true;
-		updateMultiBlock(world, x, y, z);
-        if (var7 != null)
-        {
-            for (int var8 = 0; var8 < var7.getSizeInventory(); ++var8)
-            {
-                ItemStack var9 = var7.getStackInSlotOnClosing(var8);
+	public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
 
-                if (var9 != null)
-                {
-                    float var10 = world.rand.nextFloat() * 0.8F + 0.1F;
-                    float var11 = world.rand.nextFloat() * 0.8F + 0.1F;
-                    EntityItem var14;
+        TileEntity te = world.getTileEntity(x, y, z);
+        if (te instanceof TileEntityCartAssembler) {
+            TileEntityCartAssembler assembler = (TileEntityCartAssembler)te;
+            assembler.isDead = true;
+            updateMultiBlock(world, x, y, z);
 
-                    for (float var12 = world.rand.nextFloat() * 0.8F + 0.1F; var9.stackSize > 0; world.spawnEntityInWorld(var14))
-                    {
-                        int var13 = world.rand.nextInt(21) + 10;
+            ItemStack outputItem = assembler.getOutputOnInterrupt();
+            if (outputItem != null) {
+                EntityItem entityItem = new EntityItem(world, (double)x + 0.2F, (double)y + 0.2F, (float)z + 0.2F, outputItem.copy());
+                entityItem.motionX = world.rand.nextGaussian() *  0.05F;
+                entityItem.motionY = world.rand.nextGaussian() *  0.25F;
+                entityItem.motionZ = world.rand.nextGaussian() *  0.05F;
 
-                        if (var13 > var9.stackSize)
-                        {
-                            var13 = var9.stackSize;
-                        }
 
-                        var9.stackSize -= var13;
-                        var14 = new EntityItem(world, (double)((float)x + var10), (double)((float)y + var11), (double)((float)z + var12), new ItemStack(var9.getItem(), var13, var9.getItemDamage()));
-                        float var15 = 0.05F;
-                        var14.motionX = (double)((float)world.rand.nextGaussian() * var15);
-                        var14.motionY = (double)((float)world.rand.nextGaussian() * var15 + 0.2F);
-                        var14.motionZ = (double)((float)world.rand.nextGaussian() * var15);
-
-                        if (var9.hasTagCompound())
-                        {
-                            var14.getEntityItem().setTagCompound((NBTTagCompound)var9.getTagCompound().copy());
-                        }
-                    }
-                }
+                world.spawnEntityInWorld(entityItem);
             }
-       
+        }
 
-			ItemStack outputItem = var7.getOutputOnInterrupt();
-			if (outputItem != null) {
-				EntityItem eItem = new EntityItem(world, (double)x + 0.2F, (double)y + 0.2F, (float)z + 0.2F, outputItem);
-				eItem.motionX = (double)((float)world.rand.nextGaussian() *  0.05F);
-				eItem.motionY = (double)((float)world.rand.nextGaussian() *  0.25F);
-				eItem.motionZ = (double)((float)world.rand.nextGaussian() *  0.05F);
 
-				if (outputItem.hasTagCompound())
-				{
-					eItem.getEntityItem().setTagCompound((NBTTagCompound)outputItem.getTagCompound().copy());
-				}		
-				world.spawnEntityInWorld(eItem);
-			}
-			
-		}
-        super.breakBlock(world, x, y, z, unknown1, unknown2);
+        super.breakBlock(world, x, y, z, block, meta);
     }	
-	
 
-		
 	
 }

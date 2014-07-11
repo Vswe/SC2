@@ -2,7 +2,7 @@ package vswe.stevesvehicles.tab;
 
 
 import net.minecraft.item.ItemStack;
-import vswe.stevesvehicles.old.Blocks.ModBlocks;
+import vswe.stevesvehicles.block.ModBlocks;
 import vswe.stevesvehicles.old.Helpers.ComponentTypes;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 import vswe.stevesvehicles.vehicle.VehicleType;

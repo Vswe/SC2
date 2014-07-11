@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.Blocks;
+package vswe.stevesvehicles.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -7,15 +7,15 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import vswe.stevesvehicles.old.Items.ModItems;
-import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.tab.CreativeTabLoader;
 
 public class BlockMetalStorage extends Block implements IBlockBase {
 
-    public BlockMetalStorage()
-    {
+    public BlockMetalStorage() {
         super(Material.iron);
         this.setCreativeTab(CreativeTabLoader.blocks);
+        setHardness(5.0F);
+        setResistance(10.0F);
     }
 
     
@@ -33,8 +33,7 @@ public class BlockMetalStorage extends Block implements IBlockBase {
 
     @SideOnly(Side.CLIENT)
 	@Override
-    public void registerBlockIcons(IIconRegister register)
-    {
+    public void registerBlockIcons(IIconRegister register) {
     	//do nothing here
     }
 

@@ -19,6 +19,10 @@ import vswe.stevesvehicles.vehicle.VehicleBase;
 
 import java.util.List;
 
+//TODO do something about advanced recipe modules so they know the amount of items in a barrel?
+//TODO what should happen when a cart with a barrel is broken? Currently it will only drop the items in the input and output slots, but one can't just drop all the items (could be 65k items).
+//TODO removing items by not shift clicking from the output slot can cause it not to update on the client properly, I think it has something to do with the fact that the slot content doesn't really change (it refills right away) and the server therefore thinks it doesn't have to send any info to the client. Only happens sometimes though, so might be something else.
+
 public abstract class ModuleBarrel extends ModuleStorage {
     public ModuleBarrel(VehicleBase vehicleBase) {
         super(vehicleBase);

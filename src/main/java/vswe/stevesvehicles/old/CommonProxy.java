@@ -21,7 +21,7 @@ public class CommonProxy implements IGuiHandler {
 			if (vehicle != null) {
 				return vehicle.getGui(player);
 			}
-		}else{	
+		}else if (id == 1){
 			TileEntity tileentity = world.getTileEntity(x, y, z);
 			if (tileentity instanceof TileEntityBase) {
 				return ((TileEntityBase)tileentity).getGui(player.inventory);
@@ -38,7 +38,7 @@ public class CommonProxy implements IGuiHandler {
             if (vehicle != null) {
 				return vehicle.getCon(player.inventory);
 			}
-		}else{
+		}else if (id == 1){
 			TileEntity tileentity = world.getTileEntity(x, y, z);
 			if (tileentity instanceof TileEntityBase) {
 				return ((TileEntityBase)tileentity).getContainer(player.inventory);

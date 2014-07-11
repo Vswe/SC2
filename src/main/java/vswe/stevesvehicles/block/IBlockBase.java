@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.Blocks;
+package vswe.stevesvehicles.block;
 
 
 public interface IBlockBase {

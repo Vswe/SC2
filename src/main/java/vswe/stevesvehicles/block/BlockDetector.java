@@ -1,29 +1,24 @@
-package vswe.stevesvehicles.old.Blocks;
+package vswe.stevesvehicles.block;
 import java.util.List;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.detector.DetectorType;
 import vswe.stevesvehicles.tileentity.TileEntityDetector;
-import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import vswe.stevesvehicles.tab.CreativeTabLoader;
 
-public class BlockDetector extends BlockContainerBase
-{
+public class BlockDetector extends BlockContainerBase {
 
-    public BlockDetector()
-    {
+    public BlockDetector() {
         super(Material.circuits);
         setCreativeTab(CreativeTabLoader.blocks);
     }
@@ -33,20 +28,17 @@ public class BlockDetector extends BlockContainerBase
 
     @SideOnly(Side.CLIENT)
 	@Override
-    public IIcon getIcon(int side, int meta)
-    {        
+    public IIcon getIcon(int side, int meta) {
         return DetectorType.getTypeFromMeta(meta).getIcon(side);
     }
 	
 	
     @SideOnly(Side.CLIENT)
 	@Override
-    public void registerBlockIcons(IIconRegister register)
-    {
+    public void registerBlockIcons(IIconRegister register) {
     	for (DetectorType type : DetectorType.values()) {
     		type.registerIcons(register);
     	}
-    	
     }
 
     
@@ -60,55 +52,24 @@ public class BlockDetector extends BlockContainerBase
 
 
     @Override
-	public boolean isBlockSolid(IBlockAccess world, int x, int y, int z, int side)
-    {
+	public boolean isBlockSolid(IBlockAccess world, int x, int y, int z, int side) {
         return true;
     }
+
 
 	@Override
-    public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
-    {
-		if (entityplayer.isSneaking()) {
-			return false;
-		}
-
-
-        if (world.isRemote)
-        {
-            return true;
-        }
-
-
-		FMLNetworkHandler.openGui(entityplayer, StevesVehicles.instance, 6, world, i, j, k);
-
-        return true;
-    }
-	
-    /**
-     * Is this block powering the block on the specified side
-     */
-	 @Override
-    public int isProvidingWeakPower(IBlockAccess world, int x, int y, int z, int side)
-    {
+    public int isProvidingWeakPower(IBlockAccess world, int x, int y, int z, int side) {
 		int meta = world.getBlockMetadata(x, y, z);
 		return ((meta & 8) != 0 && DetectorType.getTypeFromMeta(meta).shouldEmitRedstone()) ? 15 : 0;
     }
 
-    /**
-     * Is this block indirectly powering the block on the specified side
-     */
-	 @Override
-    public int isProvidingStrongPower(IBlockAccess world, int x, int y, int z, int side)
-    {
+	@Override
+    public int isProvidingStrongPower(IBlockAccess world, int x, int y, int z, int side) {
         return 0;
     }
 
-    /**
-     * Can this block provide power. Only wire currently seems to have this change based on its state.
-     */
-	 @Override
-    public boolean canProvidePower()
-    {
+	@Override
+    public boolean canProvidePower() {
         return true;
     }
 
@@ -124,8 +85,7 @@ public class BlockDetector extends BlockContainerBase
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world, int var2)
-    {
+    public TileEntity createNewTileEntity(World world, int meta) {
         return new TileEntityDetector();
     }
 	

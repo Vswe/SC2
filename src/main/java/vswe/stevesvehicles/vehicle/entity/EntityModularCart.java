@@ -23,7 +23,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
-import vswe.stevesvehicles.old.Blocks.ModBlocks;
+import vswe.stevesvehicles.block.ModBlocks;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.old.Helpers.DataWatcherLockable;
 import vswe.stevesvehicles.detector.DetectorType;
@@ -32,7 +32,6 @@ import vswe.stevesvehicles.module.ModuleBase;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.vehicle.VehicleCart;
 
 /**

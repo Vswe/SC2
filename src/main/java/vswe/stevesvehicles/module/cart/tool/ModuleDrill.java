@@ -15,7 +15,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.module.cart.LocalizationCartTool;
-import vswe.stevesvehicles.old.Blocks.ModBlocks;
+import vswe.stevesvehicles.block.ModBlocks;
 import vswe.stevesvehicles.old.Helpers.BlockCoordinate;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;

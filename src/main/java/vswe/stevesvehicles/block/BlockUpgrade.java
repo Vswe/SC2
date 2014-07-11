@@ -1,18 +1,14 @@
-package vswe.stevesvehicles.old.Blocks;
+package vswe.stevesvehicles.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.tileentity.TileEntityCartAssembler;
 import vswe.stevesvehicles.tileentity.TileEntityUpgrade;
-import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.util.MovingObjectPosition;
@@ -24,8 +20,7 @@ import vswe.stevesvehicles.upgrade.Upgrade;
 
 public class BlockUpgrade extends BlockContainerBase {
 
-    public BlockUpgrade()
-    {
+    public BlockUpgrade() {
         super(Material.rock);
         setCreativeTab(CreativeTabLoader.blocks);
     }
@@ -33,24 +28,18 @@ public class BlockUpgrade extends BlockContainerBase {
 
     @SideOnly(Side.CLIENT)
 	@Override
-    public IIcon getIcon(int side, int meta)
-    {
+    public IIcon getIcon(int side, int meta) {
 		return Upgrade.getStandardIcon();
     }	
 	
 	@Override
-    public void registerBlockIcons(IIconRegister register)
-    {
+    public void registerBlockIcons(IIconRegister register) {
 		//Load nothing here
     }
 	
-    /**
-     * Ray traces through the blocks collision from start vector to end vector returning a ray trace hit. Args: world,
-     * x, y, z, startVec, endVec
-     */
+
 	@Override
-    public MovingObjectPosition collisionRayTrace(World par1World, int par2, int par3, int par4, Vec3 par5Vec3, Vec3 par6Vec3)
-    {
+    public MovingObjectPosition collisionRayTrace(World par1World, int par2, int par3, int par4, Vec3 par5Vec3, Vec3 par6Vec3) {
         this.setBlockBoundsBasedOnState(par1World, par2, par3, par4);
         return super.collisionRayTrace(par1World, par2, par3, par4, par5Vec3, par6Vec3);
     }	
@@ -101,112 +90,56 @@ public class BlockUpgrade extends BlockContainerBase {
     }
 	
 	@Override
-   public void breakBlock(World world, int x, int y, int z, Block id, int meta) {
-		TileEntity tile = world.getTileEntity(x, y, z);
-		if (tile != null && tile instanceof TileEntityUpgrade) {
-			TileEntityUpgrade upgrade = (TileEntityUpgrade)tile;
+    public void breakBlock(World world, int x, int y, int z, Block id, int meta) {
+		TileEntity te = world.getTileEntity(x, y, z);
+		if (te != null && te instanceof TileEntityUpgrade) {
+			TileEntityUpgrade upgrade = (TileEntityUpgrade)te;
 			upgrade.removed();
 
-		
-		
 			if (meta != 1) {
                 Upgrade assemblerUpgrade = getUpgrade(world, x, y, z);
                 if (assemblerUpgrade != null) {
                     dropBlockAsItem(world, x, y, z, assemblerUpgrade.getItemStack());
                 }
 			}
-			
-			if (upgrade.hasInventory()) {
-				for (int var8 = 0; var8 < upgrade.getSizeInventory(); ++var8)
-				{
-					ItemStack var9 = upgrade.getStackInSlotOnClosing(var8);
+        }
 
-					if (var9 != null)
-					{
-						float var10 = world.rand.nextFloat() * 0.8F + 0.1F;
-						float var11 = world.rand.nextFloat() * 0.8F + 0.1F;
-						EntityItem var14;
-
-						for (float var12 = world.rand.nextFloat() * 0.8F + 0.1F; var9.stackSize > 0; world.spawnEntityInWorld(var14))
-						{
-							int var13 = world.rand.nextInt(21) + 10;
-
-							if (var13 > var9.stackSize)
-							{
-								var13 = var9.stackSize;
-							}
-
-							var9.stackSize -= var13;
-							var14 = new EntityItem(world, (double)((float)x + var10), (double)((float)y + var11), (double)((float)z + var12), new ItemStack(var9.getItem(), var13, var9.getItemDamage()));
-							float var15 = 0.05F;
-							var14.motionX = (double)((float)world.rand.nextGaussian() * var15);
-							var14.motionY = (double)((float)world.rand.nextGaussian() * var15 + 0.2F);
-							var14.motionZ = (double)((float)world.rand.nextGaussian() * var15);
-
-							if (var9.hasTagCompound())
-							{
-								var14.getEntityItem().setTagCompound((NBTTagCompound)var9.getTagCompound().copy());
-							}
-						}
-					}
-				}
-			}
-						
-		}
 		super.breakBlock(world, x, y, z, id, meta);
         ((BlockCartAssembler) ModBlocks.CART_ASSEMBLER.getBlock()).removeUpgrade(world, x, y, z);
     }
 
-    /**
-     * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
-     */
+
     @Override
-	public boolean renderAsNormalBlock()
-    {
+	public boolean renderAsNormalBlock() {
         return false;
     }
 
-	public boolean isOpaqueCube()
-    {
+    @Override
+	public boolean isOpaqueCube() {
         return false;
     }
 
-    /**
-     * The type of render function that is called for this block
-     */
 	@Override
-    public int getRenderType()
-    {
+    public int getRenderType() {
         return renderAsNormalBlock() || StevesVehicles.instance.blockRenderer == null ? 0 : StevesVehicles.instance.blockRenderer.getRenderId();
     }	
 	
 
-    /**
-     * Returns the bounding box of the wired rectangular prism to render.
-     */
-    public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
-    {
-        this.setBlockBoundsBasedOnState(par1World, par2, par3, par4);
-        return super.getSelectedBoundingBoxFromPool(par1World, par2, par3, par4);
+    @Override
+    public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z)  {
+        this.setBlockBoundsBasedOnState(world, x, y, z);
+        return super.getSelectedBoundingBoxFromPool(world, x, y, z);
     }	
 	
-    /**
-     * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
-     * cleared to be reused)
-     */
+
 	@Override
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
-    {
-        this.setBlockBoundsBasedOnState(par1World, par2, par3, par4);
-        return super.getCollisionBoundingBoxFromPool(par1World, par2, par3, par4);
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
+        this.setBlockBoundsBasedOnState(world, x, y, z);
+        return super.getCollisionBoundingBoxFromPool(world, x, y, z);
     }
 
-    /**
-     * Updates the blocks bounds based on its current state. Args: world, x, y, z
-     */
 	@Override
-    public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
-    {
+    public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         setUpgradeBounds(par1IBlockAccess, par2, par3, par4);
     }	
 	
@@ -253,37 +186,16 @@ public class BlockUpgrade extends BlockContainerBase {
 	}
 
 	@Override
-    public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9) {
-		
-		
-		if (entityplayer.isSneaking()) {
-			return false;
-		}
-
-
- 
-		
-		TileEntity tile = world.getTileEntity(i,j,k);
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+		TileEntity tile = world.getTileEntity(x, y, z);
 		if (tile != null && tile instanceof TileEntityUpgrade) {
 			TileEntityUpgrade upgrade = (TileEntityUpgrade)tile;
 
-			if (upgrade.getMaster() == null) {
-				return false;
-			}
-			
-			if (world.isRemote)
-			{
-				return true;
-			}
-			
-
 			if (upgrade.useStandardInterface()) {
-				FMLNetworkHandler.openGui(entityplayer, StevesVehicles.instance, 3, world, upgrade.getMaster().xCoord, upgrade.getMaster().yCoord, upgrade.getMaster().zCoord);
-				return true;
-			}
-		
-
-			FMLNetworkHandler.openGui(entityplayer, StevesVehicles.instance, 7, world, i, j, k);
+                return ModBlocks.CART_ASSEMBLER.getBlock().onBlockActivated(world, upgrade.getMaster().xCoord, upgrade.getMaster().yCoord, upgrade.getMaster().zCoord, player, side, hitX, hitY, hitZ);
+			}else{
+			    return super.onBlockActivated(world, x, y, z, player, side, hitX, hitY, hitZ);
+            }
 		}
 
 		
@@ -291,8 +203,7 @@ public class BlockUpgrade extends BlockContainerBase {
     }
 
 	@Override
-    public TileEntity createNewTileEntity(World world, int var2)
-    {
+    public TileEntity createNewTileEntity(World world, int meta) {
         return new TileEntityUpgrade();
     }
 }

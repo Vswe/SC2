@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.Blocks;
+package vswe.stevesvehicles.block;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityMinecart;
@@ -23,45 +23,38 @@ import vswe.stevesvehicles.upgrade.effect.external.Transposer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockRailAdvDetector extends BlockSpecialRailBase
-{
+public class BlockRailAdvancedDetector extends BlockSpecialRailBase {
 	
 	private IIcon normalIcon;
 	private IIcon cornerIcon;
 
-    public BlockRailAdvDetector()
-    {
+    public BlockRailAdvancedDetector() {
         super(false);
         setCreativeTab(CreativeTabLoader.blocks);
     }
 	
 	@Override
-    public IIcon getIcon(int side, int meta)
-    {
+    public IIcon getIcon(int side, int meta) {
         return meta >= 6 ? cornerIcon : normalIcon;
     }
 	
 
 	@Override
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister register)
-    {
-        normalIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "advanced_detector_rail");
-		cornerIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "advanced_detector_rail" + "_corner");
+    public void registerBlockIcons(IIconRegister register) {
+        normalIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":advanced_detector_rail");
+		cornerIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":advanced_detector_rail_corner");
     }	
 
-    /*  Return true if the rail can go up and down slopes
-     */
+
     @Override
-    public boolean canMakeSlopes(IBlockAccess world, int i, int j, int k)
-    {
+    public boolean canMakeSlopes(IBlockAccess world, int x, int y, int z) {
         return false;
     }
 
 
 	@Override
-	public void onMinecartPass(World world, EntityMinecart Minecart, int x, int y, int z)
-    {
+	public void onMinecartPass(World world, EntityMinecart Minecart, int x, int y, int z) {
 		if (world.isRemote || !(Minecart instanceof EntityModularCart)) {
 			return;
 		}
@@ -135,7 +128,7 @@ public class BlockRailAdvDetector extends BlockSpecialRailBase
 									isOrange = cart.temppushZ < 0;
 								}						
 							}
-							boolean isBlueBerry = false;
+
 							activator.handleCart(cart, isOrange);
 							cart.releaseCart();							
 						}
@@ -150,13 +143,11 @@ public class BlockRailAdvDetector extends BlockSpecialRailBase
 						if(upgrade != null && upgrade.getEffects() != null) {
 							for (BaseEffect effect : upgrade.getEffects()) {
 								if (effect instanceof Transposer) {
-									Transposer transposer = (Transposer)effect;
 									if (upgrade.getMaster() != null) {
 										for (TileEntityUpgrade tile : upgrade.getMaster().getUpgradeTiles()) {
 											if (tile.getEffects() != null) {
 												for (BaseEffect effect2 : tile.getEffects()) {
 													if (effect2 instanceof Disassemble) {
-														Disassemble disassembler = (Disassemble)effect2;
 														if (tile.getStackInSlot(0) == null) {
 															tile.setInventorySlotContents(0, ModuleDataItemHandler.createModularVehicle(cart.getVehicle()));
 															upgrade.getMaster().managerInteract(cart, false);
@@ -239,24 +230,15 @@ public class BlockRailAdvDetector extends BlockSpecialRailBase
     }
 	
 	private boolean isCartReadyForAction(EntityModularCart cart, int x, int y, int z) {
-		if ((int)cart.disabledX == x || (int)cart.disabledY == y || (int)cart.disabledZ == z)
-		{
-			return cart.getVehicle().isDisabled();
-		}
-		
-		return false;
-	}
+        return (cart.disabledX == x || cart.disabledY == y || cart.disabledZ == z) && cart.getVehicle().isDisabled();
+
+    }
 
 
 	@Override
-    public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
-    {
-		if (world.getBlock(i,j-1,k) == ModBlocks.DETECTOR_UNIT.getBlock()) {
-			return ModBlocks.DETECTOR_UNIT.getBlock().onBlockActivated(world, i, j-1, k, entityplayer, par6, par7, par8, par9);
-		}
-		
-        return false;
-    }	
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+        return world.getBlock(x, y - 1, z) == ModBlocks.DETECTOR_UNIT.getBlock() && ModBlocks.DETECTOR_UNIT.getBlock().onBlockActivated(world, x, y - 1, z, player, side, hitX, hitY, hitZ);
+    }
 
 
     public void refreshState(World world, int x, int y, int z, boolean flag) {

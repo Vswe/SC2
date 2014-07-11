@@ -4,6 +4,7 @@ import cpw.mods.fml.common.network.FMLEventChannel;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.oredict.RecipeSorter;
 import org.apache.logging.log4j.Logger;
+import vswe.stevesvehicles.block.ModBlocks;
 import vswe.stevesvehicles.detector.modulestate.registry.ModuleStateRegistry;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.network.PacketHandler;
@@ -95,7 +96,7 @@ public class StevesVehicles {
 
         ModItems.preBlockInit(config);
         ItemBlockStorage.init();
-        vswe.stevesvehicles.old.Blocks.ModBlocks.init();
+        ModBlocks.init();
         ModItems.postBlockInit(config);
 
         initCart(0, EntityModularCart.class);
@@ -140,7 +141,7 @@ public class StevesVehicles {
 		TileEntityCargo.loadSelectionSettings();
 
         ModItems.addRecipes();
-        vswe.stevesvehicles.old.Blocks.ModBlocks.addRecipes();
+        ModBlocks.addRecipes();
 
 	}
 	

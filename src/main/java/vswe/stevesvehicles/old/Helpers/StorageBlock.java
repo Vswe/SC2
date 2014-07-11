@@ -1,7 +1,7 @@
 package vswe.stevesvehicles.old.Helpers;
 
 import net.minecraft.item.ItemStack;
-import vswe.stevesvehicles.old.Blocks.ModBlocks;
+import vswe.stevesvehicles.block.ModBlocks;
 
 public class StorageBlock {
 

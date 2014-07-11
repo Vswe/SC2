@@ -6,8 +6,8 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import vswe.stevesvehicles.localization.entry.block.LocalizationDetector;
-import vswe.stevesvehicles.old.Blocks.BlockRailAdvDetector;
-import vswe.stevesvehicles.old.Blocks.ModBlocks;
+import vswe.stevesvehicles.block.BlockRailAdvancedDetector;
+import vswe.stevesvehicles.block.ModBlocks;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
@@ -68,7 +68,7 @@ public enum DetectorType {
 		
 		private void update(TileEntityDetector detector, boolean flag) {
 			if (detector.getWorldObj().getBlock(detector.xCoord, detector.yCoord + 1, detector.zCoord) == ModBlocks.ADVANCED_DETECTOR.getBlock()) {
-                ((BlockRailAdvDetector)ModBlocks.ADVANCED_DETECTOR.getBlock()).refreshState(detector.getWorldObj(), detector.xCoord, detector.yCoord + 1, detector.zCoord, flag);
+                ((BlockRailAdvancedDetector)ModBlocks.ADVANCED_DETECTOR.getBlock()).refreshState(detector.getWorldObj(), detector.xCoord, detector.yCoord + 1, detector.zCoord, flag);
 			}
 		}
 	},

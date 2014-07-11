@@ -3,7 +3,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import vswe.stevesvehicles.localization.entry.block.LocalizationLiquid;
-import vswe.stevesvehicles.old.Blocks.ModBlocks;
+import vswe.stevesvehicles.block.ModBlocks;
 import vswe.stevesvehicles.old.Containers.ContainerLiquid;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.tileentity.TileEntityLiquid;
