@@ -260,7 +260,7 @@ public abstract class GuiContainerSpecial extends GuiScreen {
             shouldSlotOverlayBeRendered = true;
         }
 
-        renderSlot(slot, slotItem, shouldSlotBeRendered, shouldSlotUnderlayBeRendered, shouldSlotOverlayBeRendered, info);
+        renderSlot(slot, slotItem, shouldSlotBeRendered, true, shouldSlotUnderlayBeRendered, shouldSlotOverlayBeRendered, info);
 
         itemRender.zLevel = 0;
         zLevel = 0;
@@ -273,15 +273,17 @@ public abstract class GuiContainerSpecial extends GuiScreen {
         }
     }
 
-    protected void renderSlot(Slot slot, ItemStack slotItem, boolean shouldSlotBeRendered, boolean shouldSlotUnderlayBeRendered, boolean shouldSlotOverlayBeRendered, String info) {
+    protected void renderSlot(Slot slot, ItemStack slotItem, boolean shouldSlotBeRendered, boolean shouldSlotItemBeRendered, boolean shouldSlotUnderlayBeRendered, boolean shouldSlotOverlayBeRendered, String info) {
         if (shouldSlotBeRendered) {
             if (shouldSlotUnderlayBeRendered) {
                 drawRect(slot.xDisplayPosition, slot.yDisplayPosition, slot.xDisplayPosition + SLOT_SIZE, slot.yDisplayPosition + SLOT_SIZE, SLOT_HOVER_COLOR);
             }
 
             GL11.glEnable(GL11.GL_DEPTH_TEST);
-            itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), slotItem, slot.xDisplayPosition, slot.yDisplayPosition);
-            itemRender.renderItemOverlayIntoGUI(fontRendererObj, mc.getTextureManager(), slotItem, slot.xDisplayPosition, slot.yDisplayPosition, info);
+            if (shouldSlotItemBeRendered && slotItem != null) {
+                itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), slotItem, slot.xDisplayPosition, slot.yDisplayPosition);
+                itemRender.renderItemOverlayIntoGUI(fontRendererObj, mc.getTextureManager(), slotItem, slot.xDisplayPosition, slot.yDisplayPosition, info);
+            }
 
             if (shouldSlotOverlayBeRendered) {
                 GL11.glDisable(GL11.GL_DEPTH_TEST);

@@ -1491,6 +1491,26 @@ public abstract class ModuleBase {
 		//draw the mouse overlay
 		gui.drawMouseOver(str,x,y);
 	}
+
+    @SideOnly(Side.CLIENT)
+         public final void drawStringOnMouseOver(GuiVehicle gui, String str, int x, int y) {
+        //convert to global coordinates
+        x += getX();
+        y += getY();
+
+        //draw the mouse overlay
+        gui.drawMouseOver(str, x, y);
+    }
+
+    @SideOnly(Side.CLIENT)
+    public final void drawStringOnMouseOver(GuiVehicle gui, List<String> info, int x, int y) {
+        //convert to global coordinates
+        x += getX();
+        y += getY();
+
+        //draw the mouse overlay
+        gui.drawMouseOver(info, x, y);
+    }
 	
 	
 	/**

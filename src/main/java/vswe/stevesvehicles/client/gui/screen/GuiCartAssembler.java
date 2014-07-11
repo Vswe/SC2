@@ -418,8 +418,7 @@ public class GuiCartAssembler extends GuiBase {
 
 
                 if (hover) {
-                    List<String> info = new ArrayList<String>();
-                    item.getItem().addInformation(item, Minecraft.getMinecraft().thePlayer, info, Minecraft.getMinecraft().gameSettings.advancedItemTooltips);
+                    List<String> info = item.getTooltip(this.mc.thePlayer, mc.gameSettings.advancedItemTooltips);
                     drawMouseOver(info, x, y);
                 }
 

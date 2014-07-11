@@ -8,6 +8,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
+import vswe.stevesvehicles.container.slots.ISpecialSlotRender;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.GeneratedInfo;
 import vswe.stevesvehicles.old.Helpers.ModuleCountPair;
@@ -413,11 +414,21 @@ public class GuiVehicle extends GuiBase {
     }
 
     @Override
-    protected void renderSlot(Slot slot, ItemStack slotItem, boolean shouldSlotBeRendered, boolean shouldSlotUnderlayBeRendered, boolean shouldSlotOverlayBeRendered, String info) {
+    protected void renderSlot(Slot slot, ItemStack slotItem, boolean shouldSlotBeRendered, boolean shouldSlotItemBeRendered, boolean shouldSlotUnderlayBeRendered, boolean shouldSlotOverlayBeRendered, String info) {
         if (shouldScissorSlot(slot)) {
             startScissor();
         }
-        super.renderSlot(slot, slotItem, shouldSlotBeRendered, shouldSlotUnderlayBeRendered, shouldSlotOverlayBeRendered, info);
+        boolean render = true;
+        if (slot instanceof ISpecialSlotRender) {
+            ISpecialSlotRender special = (ISpecialSlotRender)slot;
+            slotItem = special.getStackToRender(slotItem);
+            if (!special.renderSlot(slotItem, shouldSlotBeRendered, shouldSlotItemBeRendered, shouldSlotUnderlayBeRendered, shouldSlotOverlayBeRendered, info)) {
+                render = false;
+            }
+        }
+        if (render) {
+            super.renderSlot(slot, slotItem, shouldSlotBeRendered, shouldSlotItemBeRendered, shouldSlotUnderlayBeRendered, shouldSlotOverlayBeRendered, info);
+        }
         if (shouldScissorSlot(slot)) {
             stopScissor();
         }

@@ -13,7 +13,7 @@ public class ModuleHeightControl extends ModuleAddon {
 		super(vehicleBase);
 	}
 
-	@Override
+    @Override
 	public boolean hasSlots() {
 		return false;
 	}
