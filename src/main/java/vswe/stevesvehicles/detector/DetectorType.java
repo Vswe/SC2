@@ -2,19 +2,24 @@ package vswe.stevesvehicles.detector;
 
 import java.util.HashMap;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import vswe.stevesvehicles.localization.entry.block.LocalizationDetector;
 import vswe.stevesvehicles.block.BlockRailAdvancedDetector;
 import vswe.stevesvehicles.block.ModBlocks;
 import vswe.stevesvehicles.old.StevesVehicles;
+import vswe.stevesvehicles.recipe.IRecipeOutput;
+import vswe.stevesvehicles.recipe.ModuleRecipeShaped;
+import vswe.stevesvehicles.recipe.ModuleRecipeShapeless;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.tileentity.TileEntityDetector;
 
 
-public enum DetectorType {
+public enum DetectorType implements IRecipeOutput {
 	NORMAL(0, true, false, true,
 			"detector_manager_bot",
 			"detector_manager_top",
@@ -173,5 +178,18 @@ public enum DetectorType {
 	public HashMap<Byte, OperatorObject> getOperators() {
 		return operators;
 	}
-	
+
+
+    @Override
+    public ItemStack getItemStack() {
+        return new ItemStack(ModBlocks.DETECTOR_UNIT.getBlock(), 1, meta);
+    }
+
+    public void addShapedRecipe(Object ... recipe) {
+        GameRegistry.addRecipe(new ModuleRecipeShaped(this, 3, 3, recipe));
+    }
+
+    public void addShapelessRecipe(Object ... recipe) {
+        GameRegistry.addRecipe(new ModuleRecipeShapeless(this, recipe));
+    }
 }

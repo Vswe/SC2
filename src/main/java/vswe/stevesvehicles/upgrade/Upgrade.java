@@ -49,7 +49,7 @@ public class Upgrade implements IRecipeOutput {
 	
 
 	static {
-		sides = new HashMap<Byte, IIcon>();
+		sides = new HashMap<Byte, IIcon>(); //TODO clean this up
 
 	}
 	

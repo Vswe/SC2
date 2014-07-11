@@ -13,10 +13,12 @@ public class ModuleRecipeShaped extends ModuleRecipe {
     private int recipeStartX;
     private int recipeStartY;
 
-
-
     public ModuleRecipeShaped(IRecipeOutput result, int width, int height, Object[] recipe) {
-        super(result, recipe);
+        this(result, 1, width, height, recipe);
+    }
+
+    public ModuleRecipeShaped(IRecipeOutput result, int count, int width, int height, Object[] recipe) {
+        super(result, count, recipe);
 
         recipeStartX = width;
         recipeStartY = height;

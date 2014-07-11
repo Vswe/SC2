@@ -6,6 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.old.Helpers.ComponentTypes;
+import vswe.stevesvehicles.recipe.IRecipeOutput;
 import vswe.stevesvehicles.upgrade.Upgrade;
 import vswe.stevesvehicles.util.Tuple;
 
@@ -21,9 +22,7 @@ public abstract class RecipeItem {
         register(RecipeItemStandard.class, ItemStack.class);
         register(RecipeItemStandard.class, Block.class);
         register(RecipeItemStandard.class, Item.class);
-        register(RecipeItemComponent.class, ComponentTypes.class);
-        register(RecipeItemModule.class, ModuleData.class);
-        register(RecipeItemUpgrade.class, Upgrade.class);
+        register(RecipeItemOutput.class, IRecipeOutput.class);
         register(RecipeItemOreDictionary.class, String.class);
         register(RecipeItemCluster.class, Object[].class);
     }
@@ -58,8 +57,20 @@ public abstract class RecipeItem {
             return new Tuple<Class<? extends RecipeItem>, Class>(recipeItemClass, dataClass);
         }else{
             Class dataSuperClass = dataClass.getSuperclass();
-            return dataSuperClass == null ? null : getRecipeClassFromClass(dataSuperClass);
+            Tuple<Class<? extends RecipeItem>, Class> result = dataSuperClass == null ? null : getRecipeClassFromClass(dataSuperClass);
+            if (result != null) {
+                return result;
+            }else{
+                for (Class dataInterfaceClass : dataClass.getInterfaces()) {
+                    result = getRecipeClassFromClass(dataInterfaceClass);
+                    if (result != null) {
+                        return result;
+                    }
+                }
+            }
         }
+
+        return null;
     }
 
     public boolean isEmpty() {

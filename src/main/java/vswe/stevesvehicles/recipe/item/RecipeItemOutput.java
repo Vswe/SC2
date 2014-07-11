@@ -3,12 +3,13 @@ package vswe.stevesvehicles.recipe.item;
 
 import net.minecraft.item.ItemStack;
 import vswe.stevesvehicles.old.Helpers.ComponentTypes;
+import vswe.stevesvehicles.recipe.IRecipeOutput;
 
-public class RecipeItemComponent extends RecipeItemStackBase {
+public class RecipeItemOutput extends RecipeItemStackBase {
 
-    private ComponentTypes type;
+    private IRecipeOutput type;
 
-    public RecipeItemComponent(ComponentTypes type) {
+    public RecipeItemOutput(IRecipeOutput type) {
         this.type = type;
     }
 

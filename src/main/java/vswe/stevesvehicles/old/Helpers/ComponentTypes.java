@@ -4,8 +4,9 @@ package vswe.stevesvehicles.old.Helpers;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import vswe.stevesvehicles.old.Items.ModItems;
+import vswe.stevesvehicles.recipe.IRecipeOutput;
 
-public enum ComponentTypes {
+public enum ComponentTypes implements IRecipeOutput {
     WOODEN_WHEELS,
     IRON_WHEELS,
     RED_PIGMENT,
@@ -116,6 +117,7 @@ public enum ComponentTypes {
         return new ItemStack(ModItems.component, count, id);
     }
 
+    @Override
     public ItemStack getItemStack() {
         return getItemStack(1);
     }
