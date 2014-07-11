@@ -72,7 +72,7 @@ public class ModuleRegistryCartCleaning extends ModuleRegistry {
         ModuleData experience = new ModuleData("experience_bank", ModuleExperience.class, 36);
         experience.addShapedRecipe( null,                   Items.redstone,     null,
                                     Items.glowstone_dust,   Items.emerald,      Items.glowstone_dust,
-                                    SIMPLE_PCB,             Blocks.cauldron,    SIMPLE_PCB);
+                                    SIMPLE_PCB,             Items.cauldron,    SIMPLE_PCB);
 
 
         experience.addVehicles(VehicleRegistry.CART);

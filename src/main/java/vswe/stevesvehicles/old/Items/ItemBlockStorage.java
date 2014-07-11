@@ -22,16 +22,16 @@ public class ItemBlockStorage extends ItemBlock
 	
 	public static void init() {
 		blocks = new StorageBlock[] {
-			new StorageBlock("reinforced_metal", ComponentTypes.REINFORCED_METAL.getItemStack()),
-			new StorageBlock("galgadorian", ComponentTypes.GALGADORIAN_METAL.getItemStack()),
-			new StorageBlock("enhanced_galgadorian", ComponentTypes.ENHANCED_GALGADORIAN_METAL.getItemStack()),
+			new StorageBlock(0, "reinforced_metal", ComponentTypes.REINFORCED_METAL.getItemStack()),
+			new StorageBlock(1, "galgadorian", ComponentTypes.GALGADORIAN_METAL.getItemStack()),
+			new StorageBlock(2, "enhanced_galgadorian", ComponentTypes.ENHANCED_GALGADORIAN_METAL.getItemStack()),
 		};		
 	}
 	
 	public static void loadRecipes() {
-		for (int i = 0; i < blocks.length; i++) {
-			blocks[i].loadRecipe(i);
-		}
+        for (StorageBlock block : blocks) {
+            block.loadRecipe();
+        }
 	}
 	
     public IIcon[] icons;

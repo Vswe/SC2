@@ -3,6 +3,9 @@ package vswe.stevesvehicles.recipe.item;
 
 import net.minecraft.item.ItemStack;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RecipeItemCluster extends RecipeItem {
 
     private RecipeItem[] elements;
@@ -23,5 +26,17 @@ public class RecipeItemCluster extends RecipeItem {
         }
 
         return false;
+    }
+
+    @Override
+    public List<ItemStack> getVisualStacks() {
+        List<ItemStack> items = new ArrayList<ItemStack>();
+        for (RecipeItem element : elements) {
+            List<ItemStack> elementItems = element.getVisualStacks();
+            if (elementItems != null) {
+                items.addAll(elementItems);
+            }
+        }
+        return items;
     }
 }

@@ -54,4 +54,8 @@ public abstract class ModuleRecipe implements IRecipe {
         }
         return item;
     }
+
+    public RecipeItem[] getRecipeItems() {
+        return recipe;
+    }
 }

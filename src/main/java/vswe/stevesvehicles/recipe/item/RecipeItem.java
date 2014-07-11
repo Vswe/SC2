@@ -12,6 +12,7 @@ import vswe.stevesvehicles.util.Tuple;
 
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public abstract class RecipeItem {
@@ -78,4 +79,5 @@ public abstract class RecipeItem {
     }
 
     public abstract boolean matches(ItemStack other);
+    public abstract List<ItemStack> getVisualStacks();
 }

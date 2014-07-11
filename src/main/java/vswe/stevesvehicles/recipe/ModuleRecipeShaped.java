@@ -3,7 +3,6 @@ package vswe.stevesvehicles.recipe;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.recipe.item.RecipeItem;
 
 
@@ -12,6 +11,7 @@ public class ModuleRecipeShaped extends ModuleRecipe {
     private int height;
     private int recipeStartX;
     private int recipeStartY;
+    private int fullWidth;
 
     public ModuleRecipeShaped(IRecipeOutput result, int width, int height, Object[] recipe) {
         this(result, 1, width, height, recipe);
@@ -38,6 +38,8 @@ public class ModuleRecipeShaped extends ModuleRecipe {
 
         this.width = width - recipeStartX;
         this.height = height - recipeStartY;
+
+        this.fullWidth = width;
     }
 
     @Override
@@ -85,5 +87,9 @@ public class ModuleRecipeShaped extends ModuleRecipe {
         }
 
         return true;
+    }
+
+    public int getFullWidth() {
+        return fullWidth;
     }
 }

@@ -1,37 +1,48 @@
 package vswe.stevesvehicles.old.Helpers;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.ItemStack;
 import vswe.stevesvehicles.block.ModBlocks;
+import vswe.stevesvehicles.old.Items.ModItems;
+import vswe.stevesvehicles.recipe.IRecipeOutput;
+import vswe.stevesvehicles.recipe.ModuleRecipeShaped;
 
-public class StorageBlock {
+public class StorageBlock implements IRecipeOutput {
 
+    private int id;
 	private String name;
 	private ItemStack item;
-	public StorageBlock(String name, ItemStack item) {
+	public StorageBlock(int id, String name, ItemStack item) {
+        this.id = id;
 		this.name = name;
-		this.item = item.copy();
-		this.item.stackSize = 9;
+		this.item = item;
 	}
 	
 	public String getName() {
 		return name;
 	}
 
-	public void loadRecipe(int i) {
-		ItemStack block = new ItemStack(ModBlocks.STORAGE.getBlock(), 1, i);
-		
+	public void loadRecipe() {
 		//compress
-		RecipeHelper.addRecipe(block, new Object[][] {
-			{item, item, item},
-			{item, item, item},
-			{item, item, item}
-		});	
-		
-		//restore
-        RecipeHelper.addRecipe(item, new Object[][] {
-				{block}
-		});
+        Object[] items = new ItemStack[9];
+        for (int i = 0; i < items.length; i++) {
+            items[i] = item;
+        }
+        GameRegistry.addRecipe(new ModuleRecipeShaped(this, 3, 3, items));
+
+        //restore
+        GameRegistry.addRecipe(new ModuleRecipeShaped(new IRecipeOutput() {
+            @Override
+            public ItemStack getItemStack() {
+                ItemStack result = item.copy();
+                result.stackSize = 9;
+                return result;
+            }
+        }, 1, 1, new Object[] {getItemStack()}));
 	}
-	
-	
+
+    @Override
+    public ItemStack getItemStack() {
+        return new ItemStack(ModItems.storages, 1, id);
+    }
 }
