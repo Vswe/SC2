@@ -24,12 +24,12 @@ public enum ModuleSortMode {
         @Override
         public boolean isValid(TileEntityCartAssembler assembler, ModuleDataHull hull, ModuleData moduleData) {
             moduleRecursiveCache.clear();
-            return isModuleValid(assembler, hull, moduleData);
+            return doesModuleDataFit(assembler, moduleData) && isModuleValid(hull, moduleData);
         }
 
         private List<ModuleData> moduleRecursiveCache = new ArrayList<ModuleData>();
 
-        private boolean isModuleValid(TileEntityCartAssembler assembler, ModuleDataHull hull, ModuleData module) {
+        private boolean isModuleValid(ModuleDataHull hull, ModuleData module) {
             if (module.getCost() > hull.getComplexityMax()) {
                 return false;
             }
@@ -42,25 +42,20 @@ public enum ModuleSortMode {
                 }
             }
 
-            if (!doesModuleDataFit(assembler, module)) {
-                return false;
-            }
-
-
             try {
                 if (moduleRecursiveCache.contains(module)) {
                     return true;
                 }
                 moduleRecursiveCache.add(module);
 
-                if (module.getParent() != null && ! isModuleValid(assembler, hull, module.getParent())) {
+                if (module.getParent() != null && ! isModuleValid(hull, module.getParent())) {
                     return false;
                 }else if(module.getRequirement() != null) {
                     for (ModuleDataGroup moduleDataGroup : module.getRequirement()) {
                         boolean isAnyValid = false;
 
                         for (ModuleData moduleData : moduleDataGroup.getModules()) {
-                            if (isModuleValid(assembler, hull, moduleData)) {
+                            if (isModuleValid(hull, moduleData)) {
                                 isAnyValid = true;
                                 break;
                             }
