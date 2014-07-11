@@ -11,6 +11,7 @@ import vswe.stevesvehicles.module.data.ModuleDataHull;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.module.data.ModuleSide;
 import vswe.stevesvehicles.module.cart.hull.*;
+import vswe.stevesvehicles.old.Helpers.HolidayType;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.client.rendering.models.ModelHull;
 import vswe.stevesvehicles.client.rendering.models.ModelHullTop;
@@ -116,7 +117,7 @@ public class ModuleRegistryCartHulls extends ModuleRegistry {
                                     "plankWood",        Blocks.pumpkin,     "plankWood",
                                     WOODEN_WHEELS,      null,               WOODEN_WHEELS);
 
-        if (!StevesVehicles.isHalloween) {
+        if (!StevesVehicles.holidays.contains(HolidayType.HALLOWEEN)) {
             pumpkin.lock();
         }
 

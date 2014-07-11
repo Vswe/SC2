@@ -8,6 +8,7 @@ import vswe.stevesvehicles.block.ModBlocks;
 import vswe.stevesvehicles.detector.modulestate.registry.ModuleStateRegistry;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.network.PacketHandler;
+import vswe.stevesvehicles.old.Helpers.HolidayType;
 import vswe.stevesvehicles.recipe.ModuleRecipeShaped;
 import vswe.stevesvehicles.recipe.ModuleRecipeShapeless;
 import vswe.stevesvehicles.registry.RegistrySynchronizer;
@@ -21,7 +22,6 @@ import vswe.stevesvehicles.old.Helpers.EntityEasterEgg;
 import vswe.stevesvehicles.old.Helpers.GeneratedInfo;
 import vswe.stevesvehicles.old.Helpers.GiftItem;
 import vswe.stevesvehicles.old.Helpers.TradeHandler;
-import vswe.stevesvehicles.old.Helpers.WoodFuelHandler;
 import vswe.stevesvehicles.old.Items.*;
 import vswe.stevesvehicles.old.Listeners.ChunkListener;
 import vswe.stevesvehicles.old.Listeners.MobDeathListener;
@@ -40,15 +40,16 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 
+import java.util.EnumSet;
+
 @Mod(modid = "StevesVehicles", name = "Steve's Vehicles", version = GeneratedInfo.version)
 public class StevesVehicles {
 	public static boolean hasGreenScreen = false;
-	public static boolean isChristmas = false;
-	public static boolean isHalloween = false;
-	public static boolean isEaster = false;	
 	public static boolean freezeCartSimulation = false;
 	public static boolean renderSteve = false;
 	public static boolean arcadeDevOperator = false;
+
+    public static EnumSet<HolidayType> holidays = EnumSet.noneOf(HolidayType.class);
 
     public static final String CHANNEL = "SC2";
 	
@@ -124,8 +125,7 @@ public class StevesVehicles {
 		new TicketListener();
 		new ChunkListener();
 		new CraftingHandler();
-		new WoodFuelHandler();
-		if (isChristmas) {
+		if (holidays.contains(HolidayType.CHRISTMAS)) {
             tradeHandler = new TradeHandler();
 			new MobDeathListener();
 			new MobInteractListener();
@@ -149,4 +149,5 @@ public class StevesVehicles {
 		EntityRegistry.registerModEntity(cart, "Minecart.Vswe." + ID, ID, instance, 80, 3, true);
 		//MinecartRegistry.registerMinecart(cart, new ItemStack(cart, 1, ID));
 	}
+
 }

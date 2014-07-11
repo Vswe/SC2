@@ -9,6 +9,7 @@ import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleSide;
 import vswe.stevesvehicles.module.common.attachment.ModuleCakeServer;
 import vswe.stevesvehicles.module.common.attachment.ModuleCakeServerDynamite;
+import vswe.stevesvehicles.old.Helpers.HolidayType;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 
@@ -53,7 +54,7 @@ public class ModuleRegistryCake extends ModuleRegistry {
         trick.addSides(ModuleSide.TOP);
         register(trick);
 
-        if (!StevesVehicles.isHalloween) {
+        if (!StevesVehicles.holidays.contains(HolidayType.HALLOWEEN)) {
             trick.lock();
         }
     }

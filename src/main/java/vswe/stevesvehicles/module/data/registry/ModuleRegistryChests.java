@@ -3,6 +3,7 @@ package vswe.stevesvehicles.module.data.registry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.rendering.models.ModelEggBasket;
@@ -23,6 +24,7 @@ import vswe.stevesvehicles.module.common.storage.chest.ModuleFrontChest;
 import vswe.stevesvehicles.module.common.storage.chest.ModuleGiftStorage;
 import vswe.stevesvehicles.module.common.storage.chest.ModuleSideChests;
 import vswe.stevesvehicles.module.common.storage.chest.ModuleTopChest;
+import vswe.stevesvehicles.old.Helpers.HolidayType;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 
@@ -33,6 +35,10 @@ import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
 
 
 public class ModuleRegistryChests extends ModuleRegistry {
+
+    private static final String PLANK = "plankWood";
+    private static final String SLAB = "slabWood";
+
     public ModuleRegistryChests() {
         super("common.chests");
 
@@ -44,9 +50,9 @@ public class ModuleRegistryChests extends ModuleRegistry {
             }
         };
 
-        side.addShapedRecipe(   HUGE_CHEST_PANE,        CHEST_PANE,         HUGE_CHEST_PANE,
-                                LARGE_CHEST_PANE,       CHEST_LOCK,         LARGE_CHEST_PANE,
-                                HUGE_CHEST_PANE,        CHEST_PANE,         HUGE_CHEST_PANE);
+        side.addShapedRecipe(   PLANK,       SLAB,          PLANK,
+                                PLANK,       CHEST_LOCK,    PLANK,
+                                PLANK,       SLAB,          PLANK);
 
 
         side.addSides(ModuleSide.LEFT, ModuleSide.RIGHT);
@@ -64,9 +70,9 @@ public class ModuleRegistryChests extends ModuleRegistry {
             }
         };
 
-        top.addShapedRecipe(    HUGE_CHEST_PANE,        HUGE_CHEST_PANE,        HUGE_CHEST_PANE,
-                                CHEST_PANE,             CHEST_LOCK,             CHEST_PANE,
-                                HUGE_CHEST_PANE,        HUGE_CHEST_PANE,        HUGE_CHEST_PANE);
+        top.addShapedRecipe(    SLAB,       SLAB,           SLAB,
+                                SLAB,       CHEST_LOCK,     SLAB,
+                                PLANK,      PLANK,          PLANK);
 
 
         top.addSides(ModuleSide.TOP);
@@ -84,9 +90,9 @@ public class ModuleRegistryChests extends ModuleRegistry {
             }
         };
 
-        front.addShapedRecipe(  CHEST_PANE,             LARGE_CHEST_PANE,           CHEST_PANE,
-                                CHEST_PANE,             CHEST_LOCK,                 CHEST_PANE,
-                                LARGE_CHEST_PANE,       LARGE_CHEST_PANE,           LARGE_CHEST_PANE);
+        front.addShapedRecipe(  null,        PLANK,           null,
+                                SLAB,        CHEST_LOCK,      SLAB,
+                                PLANK,       PLANK,           PLANK);
 
 
         front.addSides(ModuleSide.FRONT);
@@ -95,9 +101,9 @@ public class ModuleRegistryChests extends ModuleRegistry {
 
 
         ModuleData internal = new ModuleData("internal_storage", ModuleFrontChest.class, 25);
-        internal.addShapedRecipe(   CHEST_PANE,       CHEST_PANE,       CHEST_PANE,
-                                    CHEST_PANE,       CHEST_LOCK,       CHEST_PANE,
-                                    CHEST_PANE,       CHEST_PANE,       CHEST_PANE);
+        internal.addShapedRecipe(   SLAB,       SLAB,           SLAB,
+                                    SLAB,       CHEST_LOCK,     SLAB,
+                                    SLAB,       SLAB,           SLAB);
 
 
         internal.addVehicles(VehicleRegistry.CART, VehicleRegistry.BOAT);
@@ -113,9 +119,9 @@ public class ModuleRegistryChests extends ModuleRegistry {
             }
         };
 
-        extracting.addShapedRecipe(     HUGE_IRON_PANE,        HUGE_IRON_PANE,          HUGE_IRON_PANE,
-                                        LARGE_IRON_PANE,       CHEST_LOCK,              LARGE_IRON_PANE,
-                                        HUGE_DYNAMIC_PANE,     LARGE_DYNAMIC_PANE,      HUGE_DYNAMIC_PANE);
+        extracting.addShapedRecipe(     Items.iron_ingot,     SIMPLE_PCB,       Items.iron_ingot,
+                                        Items.iron_ingot,     CHEST_LOCK,       Items.iron_ingot,
+                                        Items.iron_ingot,     SIMPLE_PCB,       Items.iron_ingot);
 
 
         extracting.addSides(ModuleSide.LEFT, ModuleSide.RIGHT, ModuleSide.CENTER);
@@ -149,7 +155,7 @@ public class ModuleRegistryChests extends ModuleRegistry {
         basket.addVehicles(VehicleRegistry.CART, VehicleRegistry.BOAT);
         register(basket);
 
-        if (!StevesVehicles.isEaster) {
+        if (!StevesVehicles.holidays.contains(HolidayType.EASTER)) {
             basket.lock();
         }
 
@@ -180,7 +186,7 @@ public class ModuleRegistryChests extends ModuleRegistry {
         gift.addVehicles(VehicleRegistry.CART, VehicleRegistry.BOAT);
         register(gift);
 
-        if (!StevesVehicles.isChristmas) {
+        if (!StevesVehicles.holidays.contains(HolidayType.CHRISTMAS)) {
             gift.lock();
         }
 

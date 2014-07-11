@@ -115,9 +115,6 @@ public enum ModBlocks implements IRecipeOutput {
     private static final String ORANGE = "dyeOrange";
 
     public static void addRecipes() {
-
-
-
         CARGO_MANAGER.addRecipe(    PLANKS,     PLANKS,         PLANKS,
                                     PLANKS,     SIMPLE_PCB,     PLANKS,
                                     PLANKS,     PLANKS,         PLANKS);

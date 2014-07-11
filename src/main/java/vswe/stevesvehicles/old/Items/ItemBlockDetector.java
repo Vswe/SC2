@@ -9,9 +9,7 @@ import vswe.stevesvehicles.tab.CreativeTabLoader;
 
 public class ItemBlockDetector extends ItemBlock {
 
-   
-    public ItemBlockDetector(Block b)
-    {
+    public ItemBlockDetector(Block b) {
         super(b);
         setHasSubtypes(true);
         setMaxDamage(0);
@@ -20,8 +18,7 @@ public class ItemBlockDetector extends ItemBlock {
 
 
  	@Override
-    public String getUnlocalizedName(ItemStack item)
-    {
+    public String getUnlocalizedName(ItemStack item) {
 
 		if (item != null && item.getItemDamage() >= 0 && item.getItemDamage() < DetectorType.values().length) {
             DetectorType detectorType = DetectorType.getTypeFromMeta(item.getItemDamage());

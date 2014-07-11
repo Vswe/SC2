@@ -5,6 +5,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import vswe.stevesvehicles.old.Helpers.HolidayType;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.old.StevesVehicles;
 import cpw.mods.fml.relauncher.Side;
@@ -21,7 +22,7 @@ public class PlayerSleepListener
         if (event.side == Side.SERVER) {
 			EntityPlayer player = event.player;
 			
-			if (StevesVehicles.isChristmas && player.isPlayerFullyAsleep()) {
+			if (StevesVehicles.holidays.contains(HolidayType.CHRISTMAS) && player.isPlayerFullyAsleep()) {
 				for (int i = 0; i < player.inventory.getSizeInventory();i++) {
 					ItemStack item = player.inventory.getStackInSlot(i);
 					if (item != null && item.getItem() == ModItems.component && item.getItemDamage() == 56) {

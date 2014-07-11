@@ -24,6 +24,7 @@ import vswe.stevesvehicles.module.common.addon.projectile.ModulePotion;
 import vswe.stevesvehicles.module.common.addon.projectile.ModuleSnowball;
 import vswe.stevesvehicles.module.common.attachment.ModuleShooter;
 import vswe.stevesvehicles.module.common.attachment.ModuleShooterAdvanced;
+import vswe.stevesvehicles.old.Helpers.HolidayType;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 
@@ -162,7 +163,7 @@ public class ModuleRegistryShooters extends ModuleRegistry {
         bat.addParent(advanced);
         detectors.add(bat);
         register(bat);
-        if (!StevesVehicles.isHalloween) {
+        if (!StevesVehicles.holidays.contains(HolidayType.HALLOWEEN)) {
             bat.lock();
         }
     }
@@ -213,7 +214,7 @@ public class ModuleRegistryShooters extends ModuleRegistry {
         snowball.addVehicles(VehicleRegistry.CART, VehicleRegistry.BOAT);
         snowball.addRequirement(shooters);
         register(snowball);
-        if (!StevesVehicles.isChristmas) {
+        if (!StevesVehicles.holidays.contains(HolidayType.CHRISTMAS)) {
             snowball.lock();
         }
 

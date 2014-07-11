@@ -18,9 +18,7 @@ import net.minecraft.potion.PotionEffect;
 import vswe.stevesvehicles.old.Helpers.EntityEasterEgg;
 import vswe.stevesvehicles.tab.CreativeTabLoader;
 
-public class ItemCartComponent extends Item
-{
-
+public class ItemCartComponent extends Item {
 
 	private IIcon icons[];
 	private IIcon unknownIcon;
@@ -42,8 +40,7 @@ public class ItemCartComponent extends Item
 
 	@Override
     @SideOnly(Side.CLIENT)
-    public IIcon getIconFromDamage(int dmg)
-    {
+    public IIcon getIconFromDamage(int dmg) {
 		if (dmg < 0 || dmg >= icons.length || icons[dmg] == null) {
 			return unknownIcon;
 		}else{
@@ -53,8 +50,7 @@ public class ItemCartComponent extends Item
 
 	@Override
 	@SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister register)
-    {
+    public void registerIcons(IIconRegister register) {
 		icons = new IIcon[size()];
 		for (int i = 0; i < icons.length; i++) {
 			if (getName(i) != null) {
@@ -65,8 +61,7 @@ public class ItemCartComponent extends Item
     }
 	
 	@Override
-    public String getUnlocalizedName(ItemStack item)
-    {
+    public String getUnlocalizedName(ItemStack item) {
 		if (item == null || item.getItemDamage() < 0 || item.getItemDamage() >= size() || getName(item.getItemDamage()) == null) {
 			return getUnlocalizedName();
 		}else{
@@ -79,30 +74,27 @@ public class ItemCartComponent extends Item
         return "steves_vehicles:item.component:unknown_component.name";
 	}
 
+    @SuppressWarnings("unchecked")
     @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
-	
-		if (par1ItemStack == null || par1ItemStack.getItemDamage() < 0 || par1ItemStack.getItemDamage() >= size() || getName(par1ItemStack.getItemDamage()) == null) {
-			if (par1ItemStack != null && par1ItemStack.getItem() instanceof ItemCartComponent){
-				par3List.add("Component id " + par1ItemStack.getItemDamage()); //TODO localize
+    public void addInformation(ItemStack item, EntityPlayer player, List lst, boolean useExtraInfo) {
+		if (item == null || item.getItemDamage() < 0 || item.getItemDamage() >= size() || getName(item.getItemDamage()) == null) {
+			if (item != null && item.getItem() instanceof ItemCartComponent){
+				lst.add("Component id " + item.getItemDamage()); //TODO localize
 			}else{
-				par3List.add("Unknown component id"); //TODO localize
+				lst.add("Unknown component id"); //TODO localize
 			}
 		}
-	}		
-	
+	}
+
+    @SuppressWarnings("unchecked")
     @SideOnly(Side.CLIENT)
     @Override
-    /**
-     * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
-     */
-    public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List)
-    {
+    public void getSubItems(Item item, CreativeTabs tab, List lst) {
 		for (int i = 0; i < size(); i++) {
-			ItemStack iStack = new ItemStack(par1, 1, i);
+			ItemStack iStack = new ItemStack(item, 1, i);
 			if (isValid(iStack)) {
-				par3List.add(iStack);
+				lst.add(iStack);
 			}
         }
     }
@@ -112,91 +104,55 @@ public class ItemCartComponent extends Item
 		if (item == null || !(item.getItem() instanceof ItemCartComponent) || getName(item.getItemDamage()) == null) {
 			return false;
 		}
-	
-		if (item.getItemDamage() >= 50 && item.getItemDamage() < 58) {
-			return StevesVehicles.isChristmas;
-		}
-		if (item.getItemDamage() >= 66 && item.getItemDamage() < 72) {
-			return StevesVehicles.isEaster;
-		}		
-		
-		if (item.getItemDamage() >= 72 && item.getItemDamage() < 80) {
-			return false;
-		}
-		
-		return true;
+
+        ComponentTypes type = ComponentTypes.values()[item.getItemDamage()];
+        return type.getRequiredHoliday() == null || StevesVehicles.holidays.contains(type.getRequiredHoliday());
 	}
 		
 		
-	//WOOD STUFF
-	public static ItemStack getWood(int type, boolean isLog) {
-		return getWood(type, isLog, 1);
-	}
-	
-	public static ItemStack getWood(int type, boolean isLog, int count) {
-		return new ItemStack(ModItems.component, count, 72 + type * 2 + (isLog ? 0 : 1));
-	}
-	
-	public static boolean isWoodLog(ItemStack item) {
-		if (item != null && item.getItemDamage() >= 72 && item.getItemDamage() < 80) {
-			return (item.getItemDamage() - 72) % 2 == 0;
-		}else{
-			return false;
-		}		
-	}
-	
-	public static boolean isWoodTwig(ItemStack item) {
-		if (item != null && item.getItemDamage() >= 72 && item.getItemDamage() < 80) {
-			return (item.getItemDamage() - 72) % 2 == 1;
-		}else{
-			return false;
-		}		
-	}		
+
 		
 	//EASTER STUFF
 	private boolean isEdibleEgg(ItemStack item) {
-		return item != null && item.getItemDamage() >= 66 && item.getItemDamage() < 70;
+		return item != null && (
+                item.getItemDamage() == ComponentTypes.EXPLOSIVE_EASTER_EGG.getId() ||
+                item.getItemDamage() == ComponentTypes.BURNING_EASTER_EGG.getId() ||
+                item.getItemDamage() == ComponentTypes.GLISTERING_EASTER_EGG.getId() ||
+                item.getItemDamage() == ComponentTypes.CHOCOLATE_EASTER_EGG.getId()
+        );
 	}	
 	
 	private boolean isThrowableEgg(ItemStack item) {
-		return item != null && item.getItemDamage() == 70;
+		return item != null && item.getItemDamage() == ComponentTypes.PAINTED_EASTER_EGG.getId();
 	}
 	
 	@Override
-    public ItemStack onEaten(ItemStack item, World world, EntityPlayer player)
-    {
+    public ItemStack onEaten(ItemStack item, World world, EntityPlayer player) {
 		if (isEdibleEgg(item)) {
-			if (item.getItemDamage() == 66) {
+			if (item.getItemDamage() == ComponentTypes.EXPLOSIVE_EASTER_EGG.getId()) {
 				//Explosive Easter Egg
 				
 				world.createExplosion(null, player.posX, player.posY, player.posZ, 0.1F, false);		
-			}else if (item.getItemDamage() == 67) {
+			}else if (item.getItemDamage() == ComponentTypes.BURNING_EASTER_EGG.getId()) {
 				//Burning Easter Egg
 				
 				player.setFire(5);
 				
-				if (!world.isRemote)
-				{
+				if (!world.isRemote) {
 					player.addPotionEffect(new PotionEffect(Potion.waterBreathing.id, 600, 0));
 				}					
-			}else if (item.getItemDamage() == 68) {
+			}else if (item.getItemDamage() == ComponentTypes.GLISTERING_EASTER_EGG.getId()) {
 				//Glistering Easter Egg
 			
-				if (!world.isRemote)
-				{
+				if (!world.isRemote) {
 					player.addPotionEffect(new PotionEffect(Potion.regeneration.id, 50, 2));
 				}	
-			}else if (item.getItemDamage() == 69) {
+			}else if (item.getItemDamage() == ComponentTypes.CHOCOLATE_EASTER_EGG.getId()) {
 				//Chocolate Easter Egg
 
-				if (!world.isRemote)
-				{
+				if (!world.isRemote) {
 					player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 300, 4));
 				}								
-			}else if (item.getItemDamage() == 70) {
-				//Colorful Easter Egg
-				
-			
 			}
 			
 
@@ -214,20 +170,17 @@ public class ItemCartComponent extends Item
     }	
 	
 	@Override
-    public int getMaxItemUseDuration(ItemStack item)
-    {
+    public int getMaxItemUseDuration(ItemStack item)  {
         return isEdibleEgg(item) ? 32 : super.getMaxItemUseDuration(item);
     }
 
 	@Override
-    public EnumAction getItemUseAction(ItemStack item)
-    {
+    public EnumAction getItemUseAction(ItemStack item) {
 		return isEdibleEgg(item) ? EnumAction.eat : super.getItemUseAction(item);
     }		
 	
 	@Override
-    public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer player)
-    {
+    public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer player){
         if (isEdibleEgg(item)) {
             player.setItemInUse(item, this.getMaxItemUseDuration(item));
 			return item;

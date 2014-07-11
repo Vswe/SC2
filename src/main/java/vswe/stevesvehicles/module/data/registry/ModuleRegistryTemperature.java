@@ -6,6 +6,7 @@ import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.common.addon.ModuleMelter;
 import vswe.stevesvehicles.module.common.addon.ModuleMelterExtreme;
 import vswe.stevesvehicles.module.common.addon.ModuleSnowCannon;
+import vswe.stevesvehicles.old.Helpers.HolidayType;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 
@@ -46,7 +47,7 @@ public class ModuleRegistryTemperature extends ModuleRegistry {
 
         freezer.addVehicles(VehicleRegistry.CART, VehicleRegistry.BOAT);
         register(freezer);
-        if (!StevesVehicles.isChristmas) {
+        if (!StevesVehicles.holidays.contains(HolidayType.CHRISTMAS)) {
             freezer.lock();
         }
     }

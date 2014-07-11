@@ -36,8 +36,7 @@ public class ItemBlockStorage extends ItemBlock
 	
     public IIcon[] icons;
     
-    public ItemBlockStorage(Block block)
-    {
+    public ItemBlockStorage(Block block) {
         super(block);
         setHasSubtypes(true);
         setMaxDamage(0);
@@ -46,8 +45,7 @@ public class ItemBlockStorage extends ItemBlock
 
 	@Override
     @SideOnly(Side.CLIENT)
-    public IIcon getIconFromDamage(int dmg)
-    {
+    public IIcon getIconFromDamage(int dmg) {
     	dmg %= icons.length;
     	
     	return icons[dmg];
@@ -55,16 +53,14 @@ public class ItemBlockStorage extends ItemBlock
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister register)
-    {
+    public void registerIcons(IIconRegister register) {
     	icons = new IIcon[blocks.length];
     	for (int i = 0; i < icons.length; i++) {
     		icons[i] = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + blocks[i].getName().replace(":","").replace(" ","_").toLowerCase());
     	}
     }	
 
-	public String getName(ItemStack item)
-    {
+	public String getName(ItemStack item) {
 		if (item == null) {
 			return "Unknown";
 		}else{
@@ -75,8 +71,7 @@ public class ItemBlockStorage extends ItemBlock
     }
 
  	@Override
-    public String getUnlocalizedName(ItemStack item)
-    {
+    public String getUnlocalizedName(ItemStack item) {
 
 		if (item != null && item.getItemDamage() >= 0 && item.getItemDamage() < blocks.length) {
             StorageBlock block = blocks[item.getItemDamage()];
@@ -86,22 +81,16 @@ public class ItemBlockStorage extends ItemBlock
         return "item.unknown";
     }	
 	
- 	 @Override
+ 	@Override
     @SideOnly(Side.CLIENT)
-    /**
-     * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
-     */
-    public void getSubItems(Item item, CreativeTabs tab, List items)
-    {
-        for (int i = 0; i < blocks.length; i++)
-        {
+    public void getSubItems(Item item, CreativeTabs tab, List items) {
+        for (int i = 0; i < blocks.length; i++) {
             items.add(new ItemStack(item, 1, i));
         }
     }
     
     @Override
-    public int getMetadata(int dmg)
-    {
+    public int getMetadata(int dmg) {
         return dmg;
     }   
 	

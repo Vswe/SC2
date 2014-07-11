@@ -23,6 +23,9 @@ import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
 
 public class ModuleRegistryTanks extends ModuleRegistry {
 
+    private static final String GLASS = "blockGlass";
+    private static final String PANE = "paneGlass";
+
     public ModuleRegistryTanks() {
         super("common.tanks");
 
@@ -34,9 +37,9 @@ public class ModuleRegistryTanks extends ModuleRegistry {
             }
         };
 
-        side.addShapedRecipe(   HUGE_TANK_PANE,        TANK_PANE,         HUGE_TANK_PANE,
-                                LARGE_TANK_PANE,       TANK_VALVE,        LARGE_TANK_PANE,
-                                HUGE_TANK_PANE,        TANK_PANE,         HUGE_TANK_PANE);
+        side.addShapedRecipe(   GLASS,       PANE,         GLASS,
+                                GLASS,       TANK_VALVE,   GLASS,
+                                GLASS,       PANE,         GLASS);
 
 
         side.addSides(ModuleSide.LEFT, ModuleSide.RIGHT);
@@ -53,9 +56,9 @@ public class ModuleRegistryTanks extends ModuleRegistry {
             }
         };
 
-        top.addShapedRecipe(    HUGE_TANK_PANE,         HUGE_TANK_PANE,         HUGE_TANK_PANE,
-                                TANK_PANE,              TANK_VALVE,             TANK_PANE,
-                                HUGE_TANK_PANE,         HUGE_TANK_PANE,         HUGE_TANK_PANE);
+        top.addShapedRecipe(    PANE,         PANE,         PANE,
+                                PANE,         TANK_VALVE,   PANE,
+                                GLASS,        GLASS,        GLASS);
 
 
         top.addSides(ModuleSide.TOP);
@@ -73,9 +76,9 @@ public class ModuleRegistryTanks extends ModuleRegistry {
             }
         };
 
-        front.addShapedRecipe(  TANK_PANE,              LARGE_TANK_PANE,        TANK_PANE,
-                                TANK_PANE,              TANK_VALVE,             TANK_PANE,
-                                LARGE_TANK_PANE,        LARGE_TANK_PANE,        LARGE_TANK_PANE);
+        front.addShapedRecipe(  null,    GLASS,         null,
+                                PANE,    TANK_VALVE,    PANE,
+                                GLASS,   GLASS,         GLASS);
 
 
         front.addSides(ModuleSide.FRONT);
@@ -92,9 +95,9 @@ public class ModuleRegistryTanks extends ModuleRegistry {
             }
         };
 
-        open.addShapedRecipe(   TANK_PANE,              null,                   TANK_PANE,
-                                TANK_PANE,              TANK_VALVE,             TANK_PANE,
-                                HUGE_TANK_PANE,         HUGE_TANK_PANE,         HUGE_TANK_PANE);
+        open.addShapedRecipe(   PANE,       null,          PANE,
+                                PANE,       TANK_VALVE,    PANE,
+                                GLASS,      GLASS,         GLASS);
 
 
         open.addSides(ModuleSide.TOP);
@@ -104,9 +107,9 @@ public class ModuleRegistryTanks extends ModuleRegistry {
 
 
         ModuleData internal = new ModuleData("internal_tank", ModuleInternalTank.class, 37);
-        internal.addShapedRecipe(   TANK_PANE,        TANK_PANE,        TANK_PANE,
-                                    TANK_PANE,        TANK_VALVE,       TANK_PANE,
-                                    TANK_PANE,        TANK_PANE,        TANK_PANE);
+        internal.addShapedRecipe(   PANE,        PANE,          PANE,
+                                    PANE,        TANK_VALVE,    PANE,
+                                    PANE,        PANE,          PANE);
 
 
         internal.setAllowDuplicate(true);
@@ -124,9 +127,9 @@ public class ModuleRegistryTanks extends ModuleRegistry {
             }
         };
 
-        advanced.addShapedRecipe(   HUGE_TANK_PANE,         HUGE_TANK_PANE,         HUGE_TANK_PANE,
-                                    HUGE_TANK_PANE,         TANK_VALVE,             HUGE_TANK_PANE,
-                                    HUGE_TANK_PANE,         HUGE_TANK_PANE,         HUGE_TANK_PANE);
+        advanced.addShapedRecipe(   GLASS,      GLASS,         GLASS,
+                                    GLASS,      TANK_VALVE,    GLASS,
+                                    GLASS,      GLASS,         GLASS);
 
 
         advanced.addSides(ModuleSide.CENTER, ModuleSide.TOP);

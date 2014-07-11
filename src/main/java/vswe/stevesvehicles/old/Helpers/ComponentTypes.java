@@ -1,10 +1,12 @@
 package vswe.stevesvehicles.old.Helpers;
 
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.recipe.IRecipeOutput;
+import vswe.stevesvehicles.recipe.ModuleRecipeShaped;
+import vswe.stevesvehicles.recipe.ModuleRecipeShapeless;
 
 public enum ComponentTypes implements IRecipeOutput {
     WOODEN_WHEELS,
@@ -14,8 +16,6 @@ public enum ComponentTypes implements IRecipeOutput {
     BLUE_PIGMENT,
     GLASS_O_MAGIC,
     DYNAMITE,
-    REMOVED_1(true),
-    REMOVED_2(true),
     SIMPLE_PCB,
     GRAPHICAL_INTERFACE,
     RAW_HANDLE,
@@ -37,16 +37,7 @@ public enum ComponentTypes implements IRecipeOutput {
     ENTITY_ANALYZER,
     EMPTY_DISK,
     TRI_TORCH,
-    CHEST_PANE,
-    LARGE_CHEST_PANE,
-    HUGE_CHEST_PANE,
     CHEST_LOCK,
-    IRON_PANE,
-    LARGE_IRON_PANE,
-    HUGE_IRON_PANE,
-    DYNAMIC_PANE,
-    LARGE_DYNAMIC_PANE,
-    HUGE_DYNAMIC_PANE,
     CLEANING_FAN,
     CLEANING_CORE,
     CLEANING_TUBE,
@@ -57,36 +48,95 @@ public enum ComponentTypes implements IRecipeOutput {
     GALGADORIAN_METAL,
     LARGE_LUMP_OF_GALGADOR,
     ENHANCED_GALGADORIAN_METAL,
-    STOLEN_PRESENT,
-    GREEN_WRAPPING_PAPER,
-    RED_WRAPPING_PAPER,
-    WARM_HAT,
-    RED_GIFT_RIBBON,
-    YELLOW_GIFT_RIBBON,
-    SOCK,
-    STUFFED_SOCK,
+    STOLEN_PRESENT {
+        @Override
+        public HolidayType getRequiredHoliday() {
+            return HolidayType.CHRISTMAS;
+        }
+    },
+    GREEN_WRAPPING_PAPER {
+        @Override
+        public HolidayType getRequiredHoliday() {
+            return HolidayType.CHRISTMAS;
+        }
+    },
+    RED_WRAPPING_PAPER {
+        @Override
+        public HolidayType getRequiredHoliday() {
+            return HolidayType.CHRISTMAS;
+        }
+    },
+    WARM_HAT {
+        @Override
+        public HolidayType getRequiredHoliday() {
+            return HolidayType.CHRISTMAS;
+        }
+    },
+    RED_GIFT_RIBBON {
+        @Override
+        public HolidayType getRequiredHoliday() {
+            return HolidayType.CHRISTMAS;
+        }
+    },
+    YELLOW_GIFT_RIBBON {
+        @Override
+        public HolidayType getRequiredHoliday() {
+            return HolidayType.CHRISTMAS;
+        }
+    },
+    SOCK {
+        @Override
+        public HolidayType getRequiredHoliday() {
+            return HolidayType.CHRISTMAS;
+        }
+    },
+    STUFFED_SOCK {
+        @Override
+        public HolidayType getRequiredHoliday() {
+            return HolidayType.CHRISTMAS;
+        }
+    },
     ADVANCED_SOLAR_PANEL,
     BLANK_UPGRADE,
     TANK_VALVE,
-    TANK_PANE,
-    LARGE_TANK_PANE,
-    HUGE_TANK_PANE,
     LIQUID_CLEANING_CORE,
     LIQUID_CLEANING_TUBE,
-    EXPLOSIVE_EASTER_EGG,
-    BURNING_EASTER_EGG,
-    GLISTERING_EASTER_EGG,
-    CHOCOLATE_EASTER_EGG,
-    PAINTED_EASTER_EGG,
-    BASKET,
-    OAK_LOG,
-    OAK_TWIG,
-    SPRUCE_LOG,
-    SPRUCE_TWIG,
-    BIRCH_LOG,
-    BIRCH_TWIG,
-    JUNGLE_LOG,
-    JUNGLE_TWIG,
+    EXPLOSIVE_EASTER_EGG {
+        @Override
+        public HolidayType getRequiredHoliday() {
+            return HolidayType.EASTER;
+        }
+    },
+    BURNING_EASTER_EGG {
+        @Override
+        public HolidayType getRequiredHoliday() {
+            return HolidayType.EASTER;
+        }
+    },
+    GLISTERING_EASTER_EGG {
+        @Override
+        public HolidayType getRequiredHoliday() {
+            return HolidayType.EASTER;
+        }
+    },
+    CHOCOLATE_EASTER_EGG {
+        @Override
+        public HolidayType getRequiredHoliday() {
+            return HolidayType.EASTER;
+        }
+    },
+    PAINTED_EASTER_EGG {
+        @Override
+        public HolidayType getRequiredHoliday() {
+            return HolidayType.EASTER;
+        }
+    },
+    BASKET {
+        @Override
+        public HolidayType getRequiredHoliday() {
+            return HolidayType.EASTER;
+        }
+    },
     HARDENED_SAW_BLADE,
     GALGADORIAN_SAW_BLADE,
     GALGADORIAN_WHEELS,
@@ -95,6 +145,7 @@ public enum ComponentTypes implements IRecipeOutput {
 
     private int id;
     private String unlocalizedName;
+
     ComponentTypes(boolean invalid) {
         if (invalid) {
             id = 0;
@@ -130,4 +181,31 @@ public enum ComponentTypes implements IRecipeOutput {
         return itemstack != null && itemstack.getItem() == ModItems.component && itemstack.getItemDamage() == id;
     }
 
+    public HolidayType getRequiredHoliday() {
+        return null;
+    }
+
+    public void addShapedRecipeWithSizeAndCount(int width, int height, int count, Object ... recipe) {
+        if (ModItems.component.isValid(getItemStack())) {
+            GameRegistry.addRecipe(new ModuleRecipeShaped(this, count, width, height, recipe));
+        }
+    }
+
+    public void addShapedRecipeWithSize(int width, int height, Object ... recipe) {
+        addShapedRecipeWithSizeAndCount(width, height, 1, recipe);
+    }
+
+    public void addShapedRecipe(Object ... recipe) {
+        addShapedRecipeWithSizeAndCount(3, 3, 1, recipe);
+    }
+
+    public void addShapelessRecipeWithCount(int count, Object ... recipe) {
+        if (ModItems.component.isValid(getItemStack())) {
+            GameRegistry.addRecipe(new ModuleRecipeShapeless(this, count, recipe));
+        }
+    }
+
+    public void addShapelessRecipe(Object ... recipe) {
+        addShapelessRecipeWithCount(1, recipe);
+    }
 }
