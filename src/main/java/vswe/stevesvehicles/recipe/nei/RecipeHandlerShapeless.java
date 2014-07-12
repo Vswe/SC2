@@ -21,9 +21,15 @@ public class RecipeHandlerShapeless extends RecipeHandler {
 
     protected class CachedModuleRecipeShapeless extends CachedModuleRecipe {
 
+        private boolean is2x2;
 
         public CachedModuleRecipeShapeless(ModuleRecipeShapeless recipe) {
             super(recipe);
+        }
+
+        @Override
+        protected void init(ModuleRecipe recipe) {
+            is2x2 = recipe.getRecipeItems().length <= 4;
         }
 
         @Override
@@ -34,6 +40,11 @@ public class RecipeHandlerShapeless extends RecipeHandler {
         @Override
         protected int getY(int id) {
             return 6 + STACK_ORDER[id][1] * 18;
+        }
+
+        @Override
+        public boolean is2x2() {
+            return is2x2;
         }
     }
 

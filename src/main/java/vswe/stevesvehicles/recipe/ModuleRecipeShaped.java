@@ -12,6 +12,7 @@ public class ModuleRecipeShaped extends ModuleRecipe {
     private int recipeStartX;
     private int recipeStartY;
     private int fullWidth;
+    private int fulLHeight;
 
     public ModuleRecipeShaped(IRecipeOutput result, int width, int height, Object[] recipe) {
         this(result, 1, width, height, recipe);
@@ -40,6 +41,7 @@ public class ModuleRecipeShaped extends ModuleRecipe {
         this.height = height - recipeStartY;
 
         this.fullWidth = width;
+        this.fulLHeight = height;
     }
 
     @Override
@@ -91,5 +93,9 @@ public class ModuleRecipeShaped extends ModuleRecipe {
 
     public int getFullWidth() {
         return fullWidth;
+    }
+
+    public int getFulLHeight() {
+        return fulLHeight;
     }
 }

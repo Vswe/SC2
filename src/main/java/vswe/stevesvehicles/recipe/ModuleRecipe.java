@@ -8,8 +8,6 @@ import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.recipe.item.RecipeItem;
 
 
-//TODO need a NEI addon to show up in NEI
-
 public abstract class ModuleRecipe implements IRecipe {
 
     private IRecipeOutput result;
