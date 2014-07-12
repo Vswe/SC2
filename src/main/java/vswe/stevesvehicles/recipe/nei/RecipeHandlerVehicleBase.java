@@ -26,6 +26,7 @@ import vswe.stevesvehicles.old.Helpers.TitleBox;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.tileentity.TileEntityCartAssembler;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +38,22 @@ public abstract class RecipeHandlerVehicleBase extends TemplateRecipeHandler {
         private int assemblyTime;
         private int coalAmount;
         private int modularCost;
+
+        public ModuleTypeRow[] getRows() {
+            return rows;
+        }
+
+        public int getAssemblyTime() {
+            return assemblyTime;
+        }
+
+        public int getCoalAmount() {
+            return coalAmount;
+        }
+
+        public int getModularCost() {
+            return modularCost;
+        }
 
         public CachedVehicleRecipeBase() {
             ingredients = new ArrayList<PositionedStack>();
@@ -97,7 +114,7 @@ public abstract class RecipeHandlerVehicleBase extends TemplateRecipeHandler {
 
     }
 
-    private class ModuleTypeRow {
+    protected class ModuleTypeRow {
         private int length;
         private int availableLength;
         private int maxLength;
@@ -121,8 +138,8 @@ public abstract class RecipeHandlerVehicleBase extends TemplateRecipeHandler {
         return 1;
     }
 
-    private static final int DISPLAY_WIDTH = 176;
-    private static final int DISPLAY_HEIGHT = 166;
+    protected static final int DISPLAY_WIDTH = 176;
+    protected static final int DISPLAY_HEIGHT = 166;
 
     private static final int ITEM_SIZE = 16;
     protected static final int BIG_SLOT_OFFSET = (GuiCartAssembler.BIG_SLOT_SIZE - ITEM_SIZE) / 2;
@@ -174,8 +191,9 @@ public abstract class RecipeHandlerVehicleBase extends TemplateRecipeHandler {
         drawTexturedModalRect(HULL_X, HULL_Y, GuiCartAssembler.BIG_SLOT_SRC_X, GuiCartAssembler.BIG_SLOT_SRC_Y, GuiCartAssembler.BIG_SLOT_SIZE, GuiCartAssembler.BIG_SLOT_SIZE);
         drawTexturedModalRect(RESULT_X, RESULT_Y, GuiCartAssembler.BIG_SLOT_SRC_X, GuiCartAssembler.BIG_SLOT_SRC_Y, GuiCartAssembler.BIG_SLOT_SIZE, GuiCartAssembler.BIG_SLOT_SIZE);
 
-        for (int i = 0; i < recipe.rows.length; i++) {
-            ModuleTypeRow row = recipe.rows[i];
+        ModuleTypeRow[] rows = recipe.getRows();
+        for (int i = 0; i < rows.length; i++) {
+            ModuleTypeRow row = rows[i];
 
             int baseY = ROW_Y + i * ROW_OFFSET_Y;
 
@@ -215,8 +233,9 @@ public abstract class RecipeHandlerVehicleBase extends TemplateRecipeHandler {
 
 
         FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
-        for (int i = 0; i < recipe.rows.length; i++) {
-            ModuleTypeRow row = recipe.rows[i];
+        ModuleTypeRow[] rows = recipe.getRows();
+        for (int i = 0; i < rows.length; i++) {
+            ModuleTypeRow row = rows[i];
 
             int targetX = ROW_X + TITLE_X + GuiCartAssembler.TITLE_BOX_TEXT_OFFSET_X;
             int targetY = ROW_Y + i * ROW_OFFSET_Y + TITLE_Y + GuiCartAssembler.TITLE_BOX_TEXT_OFFSET_Y;
@@ -224,13 +243,13 @@ public abstract class RecipeHandlerVehicleBase extends TemplateRecipeHandler {
         }
 
         fontRenderer.drawString("Capacity", COST_X, COST_Y, 0x404040); //TODO localize
-        fontRenderer.drawString(String.valueOf(recipe.modularCost), COST_X, COST_Y + fontRenderer.FONT_HEIGHT, 0x404040);
+        fontRenderer.drawString(String.valueOf(recipe.getModularCost()), COST_X, COST_Y + fontRenderer.FONT_HEIGHT, 0x404040);
 
         fontRenderer.drawString("Time", ASSEMBLY_X, ASSEMBLY_Y, 0x404040); //TODO localize
-        fontRenderer.drawString(GuiCartAssembler.formatTime(recipe.assemblyTime), ASSEMBLY_X, ASSEMBLY_Y + fontRenderer.FONT_HEIGHT, 0x404040);
+        fontRenderer.drawString(GuiCartAssembler.formatTime(recipe.getAssemblyTime()), ASSEMBLY_X, ASSEMBLY_Y + fontRenderer.FONT_HEIGHT, 0x404040);
 
         fontRenderer.drawString("Fuel", FUEL_X, FUEL_Y, 0x404040); //TODO localize
-        String str = String.valueOf(recipe.coalAmount);
+        String str = String.valueOf(recipe.getCoalAmount());
         fontRenderer.drawString(str, COAL_X - fontRenderer.getStringWidth(str) - 1, FUEL_Y + fontRenderer.FONT_HEIGHT, 0x404040);
     }
 
@@ -290,54 +309,77 @@ public abstract class RecipeHandlerVehicleBase extends TemplateRecipeHandler {
     }
 
     //all text was removed to remove the page text, manually redraw the missing title (with arrows)
-    private void repairRemovedTitle() {
+    protected void repairRemovedTitle() {
         FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
         String str = getRecipeName();
-        fontRenderer.drawString(str, (DISPLAY_WIDTH - fontRenderer.getStringWidth(str)) / 2, - 11, 0x404040);
+        fontRenderer.drawString(str, (DISPLAY_WIDTH - fontRenderer.getStringWidth(str)) / 2 - TRANSLATE_X, - 11, 0x404040);
 
+
+
+        Point mouse = getMouse();
+        drawArrows(mouse.x, mouse.y);
+
+    }
+
+    protected Point getMouse() {
+        ScaledResolution scaledresolution = new ScaledResolution(Minecraft.getMinecraft().gameSettings, Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
+        int w = scaledresolution.getScaledWidth();
+        int h = scaledresolution.getScaledHeight();
+        int mX = Mouse.getX() * w / Minecraft.getMinecraft().displayWidth;
+        int mY = h - Mouse.getY() * h / Minecraft.getMinecraft().displayHeight - 1;
+
+        mX -= (w - DISPLAY_WIDTH) / 2;
+        mY -= (h - DISPLAY_HEIGHT) / 2;
+
+        mX -= TRANSLATE_X;
+        mY -= TRANSLATE_Y;
+
+        return new Point(mX, mY);
+    }
+
+    protected void drawArrows(int mX, int mY) {
         if (hasButtons()) {
-            ScaledResolution scaledresolution = new ScaledResolution(Minecraft.getMinecraft().gameSettings, Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
-            int w = scaledresolution.getScaledWidth();
-            int h = scaledresolution.getScaledHeight();
-            int mX = Mouse.getX() * w / Minecraft.getMinecraft().displayWidth;
-            int mY = h - Mouse.getY() * h / Minecraft.getMinecraft().displayHeight - 1;
-
-            mX -= (w - DISPLAY_WIDTH) / 2;
-            mY -= (h - DISPLAY_HEIGHT) / 2;
-
-            mX -= TRANSLATE_X;
-            mY -= TRANSLATE_Y;
-
-            drawArrow("<", ARROW_LEFT_X, ARROW_Y, ARROW_WIDTH, ARROW_HEIGHT, mX, mY);
-            drawArrow(">", ARROW_RIGHT_X, ARROW_Y, ARROW_WIDTH, ARROW_HEIGHT, mX, mY);
+            drawArrow("<", ARROW_LEFT_X, ARROW_TOP_Y, ARROW_WIDTH, ARROW_HEIGHT, mX, mY);
+            drawArrow(">", ARROW_RIGHT_X, ARROW_TOP_Y, ARROW_WIDTH, ARROW_HEIGHT, mX, mY);
         }
     }
 
     protected abstract boolean hasButtons();
 
-    private static final int ARROW_LEFT_X = 13;
-    private static final int ARROW_RIGHT_X = 140;
-    private static final int ARROW_Y = -13;
-    private static final int ARROW_WIDTH = 13;
-    private static final int ARROW_HEIGHT = 12;
+    protected static final int TRANSLATE_X = 5;
+    protected static final int TRANSLATE_Y = 16;
 
-    private static final int TRANSLATE_X = 5;
-    private static final int TRANSLATE_Y = 16;
+    protected static final int ARROW_LEFT_X = 13;
+    protected static final int ARROW_RIGHT_X = 140;
+    protected static final int ARROW_TOP_Y = 3 - TRANSLATE_Y;
+    protected static final int ARROW_WIDTH = 13;
+    protected static final int ARROW_HEIGHT = 12;
 
-    private void drawArrow(String str, int x, int y, int w, int h, int mX, int mY) {
-        int color = x <= mX && mX < x + w && y <= mY && mY < y + h ? 0xFFFFA0 : 0xE0E0E0;
+
+
+    protected void drawArrow(String str, int x, int y, int w, int h, int mX, int mY) {
+        int color = inRect(x, y, w, h, mX, mY) ? 0xFFFFA0 : 0xE0E0E0;
         FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
         fontRenderer.drawStringWithShadow(str, x + (w - fontRenderer.getStringWidth(str)) / 2, y + (h - 8) / 2, color);
     }
 
-    private static final int EXTRA_HEIGHT_OVERLAP = 5;
+    protected boolean inRect(int x, int y, int w, int h, int mX, int mY) {
+        return x <= mX && mX < x + w && y <= mY && mY < y + h;
+    }
+
+    protected static final int EXTRA_HEIGHT_OVERLAP = 5;
     private static final int EXTRA_HEIGHT = 25;
+
+    protected int getBackgroundExtraHeight() {
+        return EXTRA_HEIGHT;
+    }
 
     @SuppressWarnings("SpellCheckingInspection")
     private static final ResourceLocation TEXTURE_BACKGROUND = new ResourceLocation("nei:textures/gui/recipebg.png");
     private void drawExtraBackground() {
         ResourceHelper.bindResource(TEXTURE_BACKGROUND);
-        drawTexturedModalRect(-TRANSLATE_X, -TRANSLATE_Y + DISPLAY_HEIGHT - EXTRA_HEIGHT_OVERLAP, 0, DISPLAY_HEIGHT - EXTRA_HEIGHT, DISPLAY_WIDTH, EXTRA_HEIGHT);
+        int extraHeight = getBackgroundExtraHeight();
+        drawTexturedModalRect(-TRANSLATE_X, -TRANSLATE_Y + DISPLAY_HEIGHT - EXTRA_HEIGHT_OVERLAP, 0, DISPLAY_HEIGHT - extraHeight, DISPLAY_WIDTH, extraHeight);
     }
 
 }
