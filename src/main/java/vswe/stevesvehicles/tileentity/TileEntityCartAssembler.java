@@ -678,7 +678,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 	 * @return The time it takes
 	 */
 	private int generateAssemblingTime(ArrayList<ModuleData> modules, ArrayList<ModuleData> removed) {
-		int timeRequired = 100;
+		int timeRequired = FLAT_VEHICLE_BASE_TIME;
 			
 		for (ModuleData module : modules) {
 			timeRequired += getAssemblingTime(module, false);
@@ -703,11 +703,16 @@ public class TileEntityCartAssembler extends TileEntityBase
 	 * @return The time it takes
 	 */
 	private int getAssemblingTime(ModuleData module, boolean isRemoved) {
-		int time = (int)(5 * Math.pow(module.getCost(), 2.2));
+		int time = getAssemblingTime(module);
 		time += getTimeDecreased(isRemoved);
 		
 		return Math.max(0, time);
 	}
+
+    public static int FLAT_VEHICLE_BASE_TIME = 100;
+    public static int getAssemblingTime(ModuleData data) {
+        return (int)(5 * Math.pow(data.getCost(), 2.2));
+    }
 	
 	/**
 	 * Get the cart that is the result of the modules in the design view. All the modules will however be left where they are.

@@ -8,10 +8,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import vswe.stevesvehicles.client.gui.screen.GuiCartAssembler;
+import vswe.stevesvehicles.container.slots.SlotAssemblerFuel;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataHull;
 import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
@@ -30,6 +34,9 @@ public class RecipeHandlerVehicle extends TemplateRecipeHandler {
         private List<PositionedStack> ingredients;
         private PositionedStack result;
         private ModuleTypeRow[] rows;
+        private int assemblyTime;
+        private int coalAmount;
+        private int modularCost;
         private boolean valid;
 
         public CachedVehicleRecipe(ItemStack result) {
@@ -38,7 +45,10 @@ public class RecipeHandlerVehicle extends TemplateRecipeHandler {
             ingredients = new ArrayList<PositionedStack>();
             List<ModuleData> modules = ModuleDataItemHandler.getModulesFromItem(result);
             if (modules != null) {
+                assemblyTime = TileEntityCartAssembler.FLAT_VEHICLE_BASE_TIME;
                 for (ModuleData module : modules) {
+                    modularCost += module.getCost();
+                    assemblyTime += TileEntityCartAssembler.getAssemblingTime(module);
                     if (module instanceof ModuleDataHull) {
                         ModuleDataHull hull = (ModuleDataHull)module;
 
@@ -76,9 +86,9 @@ public class RecipeHandlerVehicle extends TemplateRecipeHandler {
                             }
                             valid = true;
                         }
-                        break;
                     }
                 }
+                coalAmount = (int)Math.ceil(assemblyTime / (TileEntityFurnace.getItemBurnTime(new ItemStack(Items.coal)) * SlotAssemblerFuel.FUEL_MULTIPLIER));
             }
         }
 
@@ -124,10 +134,10 @@ public class RecipeHandlerVehicle extends TemplateRecipeHandler {
 
 
     private static final int ITEM_SIZE = 16;
-    private static final int HULL_X = 130;
+    private static final int HULL_X = 140;
     private static final int HULL_Y = -10;
-    private static final int RESULT_X = 130;
-    private static final int RESULT_Y = 50;
+    private static final int RESULT_X = 140;
+    private static final int RESULT_Y = 120;
 
     private static final int TITLE_X = -1;
     private static final int TITLE_Y = -9;
@@ -135,14 +145,31 @@ public class RecipeHandlerVehicle extends TemplateRecipeHandler {
     private static final int ROW_Y = -2;
     private static final int ROW_OFFSET_Y = 28;
 
+    private static final int COST_X = 120;
+    private static final int COST_Y = 25;
+
+    private static final int ASSEMBLY_X = 120;
+    private static final int ASSEMBLY_Y = 55;
+
+    private static final int FUEL_X = 120;
+    private static final int FUEL_Y = 85;
+    private static final int COAL_X = 146;
+    private static final int COAL_Y = 87;
 
     @Override
     public String getRecipeName() {
         return "SV Vehicle recipe";
     }
 
+    private RenderItem renderItem = new RenderItem();
+    private void drawItem(ItemStack item, int x, int y) {
+        renderItem.zLevel = 100;
 
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
+        renderItem.renderItemAndEffectIntoGUI(Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft().renderEngine, item, x, y);
 
+        renderItem.zLevel = 0;
+    }
 
     @Override
     public void drawBackground(int id) {
@@ -179,6 +206,7 @@ public class RecipeHandlerVehicle extends TemplateRecipeHandler {
         }
 
 
+        drawItem(new ItemStack(Items.coal), COAL_X, COAL_Y);
 
         disableTextRendering();
     }
@@ -201,6 +229,16 @@ public class RecipeHandlerVehicle extends TemplateRecipeHandler {
             int targetY = ROW_Y + i * ROW_OFFSET_Y + TITLE_Y + GuiCartAssembler.TITLE_BOX_TEXT_OFFSET_Y;
             fontRenderer.drawString(row.box.getName().translate().toUpperCase(), targetX, targetY, row.box.getColor());
         }
+
+        fontRenderer.drawString("Capacity", COST_X, COST_Y, 0x404040); //TODO localize
+        fontRenderer.drawString(String.valueOf(recipe.modularCost), COST_X, COST_Y + fontRenderer.FONT_HEIGHT, 0x404040);
+
+        fontRenderer.drawString("Time", ASSEMBLY_X, ASSEMBLY_Y, 0x404040); //TODO localize
+        fontRenderer.drawString(GuiCartAssembler.formatTime(recipe.assemblyTime), ASSEMBLY_X, ASSEMBLY_Y + fontRenderer.FONT_HEIGHT, 0x404040);
+
+        fontRenderer.drawString("Fuel", FUEL_X, FUEL_Y, 0x404040); //TODO localize
+        String str = String.valueOf(recipe.coalAmount);
+        fontRenderer.drawString(str, COAL_X - fontRenderer.getStringWidth(str) - 1, FUEL_Y + fontRenderer.FONT_HEIGHT, 0x404040);
     }
 
 

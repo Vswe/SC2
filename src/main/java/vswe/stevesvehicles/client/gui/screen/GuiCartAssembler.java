@@ -528,9 +528,8 @@ public class GuiCartAssembler extends GuiBase {
 		return String.format("%05.2f%%", percentage); // Tahg's the man
 	}
 	
-	private String formatTime(int ticks) {
+	public static String formatTime(int ticks) {
 		int seconds = ticks / 20;
-		//ticks -= seconds * 20;
 		int minutes = seconds / 60;
 		seconds -= minutes * 60;
 		int hours = minutes / 60;
