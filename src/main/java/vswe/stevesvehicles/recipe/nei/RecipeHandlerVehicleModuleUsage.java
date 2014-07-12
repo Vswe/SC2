@@ -8,6 +8,7 @@ import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataGroup;
 import vswe.stevesvehicles.module.data.ModuleDataHull;
 import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
+import vswe.stevesvehicles.module.data.ModuleSide;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.recipe.ModuleRecipe;
@@ -101,20 +102,28 @@ public class RecipeHandlerVehicleModuleUsage extends RecipeHandlerVehicleBase {
             if (module.getRequirement() != null) {
                 for (ModuleDataGroup moduleDataGroup : module.getRequirement()) {
                     List<ModuleData> modules = new ArrayList<ModuleData>();
-
+                    int requiredAmount = moduleDataGroup.getCount();
                     for (ModuleData moduleData : moduleDataGroup.getModules()) {
-                        if (addedModules.contains(moduleData) || moduleData.getIsValid() && hull.isModuleValid(moduleData)) {
+                        if (addedModules.contains(moduleData) ) {
+                            requiredAmount--;
+                        }
+
+                        if (moduleData.getIsValid() && hull.isModuleValid(moduleData) && canModuleBeAdded(addedModules, moduleData)) {
                             modules.add(moduleData);
                         }
                     }
 
 
                     if (modules.isEmpty()) {
-                        return false;
+                        return requiredAmount == 0;
                     }else{
-                        for (int i = 0; i < moduleDataGroup.getCount(); i++) {
+                        for (int i = 0; i < requiredAmount; i++) {
                             boolean added = false;
                             while (!added) {
+                                if (modules.isEmpty()) {
+                                    return false;
+                                }
+
                                 ModuleData moduleData = modules.get(random.nextInt(modules.size()));
                                 if (!addRequirements(hull, moduleData, addedModules, random)) {
                                     return false;
@@ -122,6 +131,9 @@ public class RecipeHandlerVehicleModuleUsage extends RecipeHandlerVehicleBase {
                                 addModuleItem(moduleData, moduleData.getItemStack());
                                 addedModules.add(moduleData);
                                 added = true;
+                                if (!canModuleBeAdded(addedModules, moduleData)) {
+                                    modules.remove(moduleData);
+                                }
                             }
                         }
                     }
@@ -129,6 +141,28 @@ public class RecipeHandlerVehicleModuleUsage extends RecipeHandlerVehicleBase {
 
                 }
             }
+            return true;
+        }
+
+        private boolean canModuleBeAdded(List<ModuleData> addedModules, ModuleData moduleData) {
+            if (!moduleData.getAllowDuplicate() && addedModules.contains(moduleData)) {
+                return false;
+            }
+
+            for (ModuleData addedModule : addedModules) {
+                if (addedModule.getNemesis() != null && addedModule.getNemesis().contains(moduleData)) {
+                    return false;
+                }
+
+                if (addedModule.getSides() != null && !addedModule.getSides().isEmpty() && moduleData.getSides() != null && !moduleData.getSides().isEmpty()  ) {
+                    for (ModuleSide moduleSide : moduleData.getSides()) {
+                        if (addedModule.getSides().contains(moduleSide)) {
+                            return false;
+                        }
+                    }
+                }
+            }
+
             return true;
         }
 
