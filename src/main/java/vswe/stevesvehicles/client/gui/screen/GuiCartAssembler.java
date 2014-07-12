@@ -193,10 +193,12 @@ public class GuiCartAssembler extends GuiBase {
     private static final int PROGRESS_BAR_PROGRESS_SRC_Y = 25;
     private static final int PROGRESS_BAR_FUEL_SRC_Y = 35;
 
-    private static final int TITLE_BOX_WIDTH = 115;
-    private static final int TITLE_BOX_HEIGHT = 11;
-    private static final int TITLE_BOX_SRC_X = 107;
-    private static final int TITLE_BOX_SRC_Y = 45;
+    public static final int TITLE_BOX_WIDTH = 115;
+    public static final int TITLE_BOX_HEIGHT = 11;
+    public static final int TITLE_BOX_SRC_X = 107;
+    public static final int TITLE_BOX_SRC_Y = 45;
+    public static final int TITLE_BOX_TEXT_OFFSET_X = 8;
+    public static final int TITLE_BOX_TEXT_OFFSET_Y = 2;
 
     private static final int STANDARD_BOX_SRC_X = 1;
     private static final int STANDARD_BOX_INCREASE_SRC_X = 12;
@@ -305,7 +307,7 @@ public class GuiCartAssembler extends GuiBase {
 			
 			
 			drawTexturedModalRect(left + targetX, top + targetY, TITLE_BOX_SRC_X, TITLE_BOX_SRC_Y, TITLE_BOX_WIDTH, TITLE_BOX_HEIGHT);
-            getFontRenderer().drawString(box.getName().translate().toUpperCase(), left + targetX + 8, top + targetY + 2, box.getColor());
+            getFontRenderer().drawString(box.getName().translate().toUpperCase(), left + targetX + TITLE_BOX_TEXT_OFFSET_X, top + targetY + TITLE_BOX_TEXT_OFFSET_Y, box.getColor());
             ResourceHelper.bindResource(TEXTURE_EXTRA);
 			GL11.glColor4f(1F, 1F, 1F, 1F);
 		}

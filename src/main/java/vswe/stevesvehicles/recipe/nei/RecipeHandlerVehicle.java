@@ -7,23 +7,20 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import vswe.stevesvehicles.client.gui.screen.GuiCartAssembler;
-import vswe.stevesvehicles.module.cart.hull.ModuleHull;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataHull;
 import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
 import vswe.stevesvehicles.module.data.ModuleType;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.old.Helpers.TitleBox;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.tileentity.TileEntityCartAssembler;
 
-import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,11 +43,11 @@ public class RecipeHandlerVehicle extends TemplateRecipeHandler {
                         ModuleDataHull hull = (ModuleDataHull)module;
 
                         rows = new ModuleTypeRow[] {
-                            new ModuleTypeRow(ModuleType.ENGINE, hull.getEngineMaxCount(), TileEntityCartAssembler.MAX_ENGINE_SLOTS),
-                            new ModuleTypeRow(ModuleType.TOOL, TileEntityCartAssembler.MAX_TOOL_SLOTS, TileEntityCartAssembler.MAX_TOOL_SLOTS),
-                            new ModuleTypeRow(ModuleType.ATTACHMENT, TileEntityCartAssembler.MAX_ATTACHMENT_SLOTS, TileEntityCartAssembler.MAX_ATTACHMENT_SLOTS),
-                            new ModuleTypeRow(ModuleType.STORAGE, hull.getStorageMaxCount(), TileEntityCartAssembler.MAX_STORAGE_SLOTS),
-                            new ModuleTypeRow(ModuleType.ADDON, hull.getAddonMaxCount(), TileEntityCartAssembler.MAX_ADDON_SLOTS)
+                            new ModuleTypeRow(ModuleType.ENGINE, TileEntityCartAssembler.ENGINE_BOX, hull.getEngineMaxCount(), TileEntityCartAssembler.MAX_ENGINE_SLOTS),
+                            new ModuleTypeRow(ModuleType.TOOL, TileEntityCartAssembler.TOOL_BOX, TileEntityCartAssembler.MAX_TOOL_SLOTS, TileEntityCartAssembler.MAX_TOOL_SLOTS),
+                            new ModuleTypeRow(ModuleType.ATTACHMENT, TileEntityCartAssembler.ATTACH_BOX, TileEntityCartAssembler.MAX_ATTACHMENT_SLOTS, TileEntityCartAssembler.MAX_ATTACHMENT_SLOTS),
+                            new ModuleTypeRow(ModuleType.STORAGE, TileEntityCartAssembler.STORAGE_BOX, hull.getStorageMaxCount(), TileEntityCartAssembler.MAX_STORAGE_SLOTS),
+                            new ModuleTypeRow(ModuleType.ADDON, TileEntityCartAssembler.ADDON_BOX, hull.getAddonMaxCount(), TileEntityCartAssembler.MAX_ADDON_SLOTS)
                         };
 
                         List<ItemStack> items = ModuleDataItemHandler.getModularItems(result);
@@ -106,8 +103,10 @@ public class RecipeHandlerVehicle extends TemplateRecipeHandler {
         private int availableLength;
         private int maxLength;
         private ModuleType type;
+        private TitleBox box;
 
-        private ModuleTypeRow(ModuleType type, int availableLength, int maxLength) {
+        private ModuleTypeRow(ModuleType type, TitleBox box, int availableLength, int maxLength) {
+            this.box = box;
             this.type = type;
             this.availableLength = availableLength;
             this.maxLength = maxLength;
@@ -123,15 +122,18 @@ public class RecipeHandlerVehicle extends TemplateRecipeHandler {
         return 1;
     }
 
-    private static final int ITEM_SIZE = 16;
-    private static final int HULL_X = 20;
-    private static final int HULL_Y = 0;
-    private static final int RESULT_X = 120;
-    private static final int RESULT_Y = 0;
 
-    private static final int ROW_X = 20;
-    private static final int ROW_Y = 28;
-    private static final int ROW_OFFSET_Y = 20;
+    private static final int ITEM_SIZE = 16;
+    private static final int HULL_X = 130;
+    private static final int HULL_Y = -10;
+    private static final int RESULT_X = 130;
+    private static final int RESULT_Y = 50;
+
+    private static final int TITLE_X = -1;
+    private static final int TITLE_Y = -9;
+    private static final int ROW_X = 1;
+    private static final int ROW_Y = -2;
+    private static final int ROW_OFFSET_Y = 28;
 
 
     @Override
@@ -156,17 +158,24 @@ public class RecipeHandlerVehicle extends TemplateRecipeHandler {
         for (int i = 0; i < recipe.rows.length; i++) {
             ModuleTypeRow row = recipe.rows[i];
 
+            int baseY = ROW_Y + i * ROW_OFFSET_Y;
+
             for (int j = 0; j < row.maxLength; j++) {
                 int x = j % 6;
                 int y = j / 6;
                 int targetX = ROW_X + x * GuiCartAssembler.SLOT_SIZE;
-                int targetY = ROW_Y + i * ROW_OFFSET_Y + y * GuiCartAssembler.SLOT_SIZE;
+                int targetY = baseY + y * GuiCartAssembler.SLOT_SIZE;
                 drawTexturedModalRect(targetX, targetY, GuiCartAssembler.SLOT_SRC_X, GuiCartAssembler.SLOT_SRC_Y, GuiCartAssembler.SLOT_SIZE, GuiCartAssembler.SLOT_SIZE);
                 if (j >= row.availableLength) {
                     drawTexturedModalRect(targetX + 1, targetY, GuiCartAssembler.SLOT_DOOR_SRC_X, GuiCartAssembler.SLOT_TOP_DOOR_SRC_Y, GuiCartAssembler.SLOT_DOOR_WIDTH, GuiCartAssembler.SLOT_DOOR_HEIGHT);
                     drawTexturedModalRect(targetX + 1, targetY + GuiCartAssembler.SLOT_DOOR_HEIGHT, GuiCartAssembler.SLOT_DOOR_SRC_X, GuiCartAssembler.SLOT_BOT_DOOR_SRC_Y, GuiCartAssembler.SLOT_DOOR_WIDTH, GuiCartAssembler.SLOT_DOOR_HEIGHT);
                 }
             }
+
+            GL11.glPushMatrix();
+            GL11.glTranslatef(0, 0, 500);
+            drawTexturedModalRect(ROW_X + TITLE_X, baseY + TITLE_Y, GuiCartAssembler.TITLE_BOX_SRC_X, GuiCartAssembler.TITLE_BOX_SRC_Y, GuiCartAssembler.TITLE_BOX_WIDTH, GuiCartAssembler.TITLE_BOX_HEIGHT);
+            GL11.glPopMatrix();
         }
 
 
@@ -175,14 +184,23 @@ public class RecipeHandlerVehicle extends TemplateRecipeHandler {
     }
 
     @Override
-    public void drawForeground(int recipe) {
+    public void drawForeground(int id) {
         enableTextRendering();
-        renderNameText();
 
-
+        CachedVehicleRecipe recipe = (CachedVehicleRecipe)arecipes.get(id);
         GL11.glColor4f(1, 1, 1, 1);
         GL11.glDisable(GL11.GL_LIGHTING);
         ResourceHelper.bindResource(GuiCartAssembler.TEXTURE_EXTRA);
+
+
+        FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
+        for (int i = 0; i < recipe.rows.length; i++) {
+            ModuleTypeRow row = recipe.rows[i];
+
+            int targetX = ROW_X + TITLE_X + GuiCartAssembler.TITLE_BOX_TEXT_OFFSET_X;
+            int targetY = ROW_Y + i * ROW_OFFSET_Y + TITLE_Y + GuiCartAssembler.TITLE_BOX_TEXT_OFFSET_Y;
+            fontRenderer.drawString(row.box.getName().translate().toUpperCase(), targetX, targetY, row.box.getColor());
+        }
     }
 
 
@@ -221,7 +239,6 @@ public class RecipeHandlerVehicle extends TemplateRecipeHandler {
         ============ METHODS TO GET RID OF THE PAGE TEXT ===========
      */
 
-    private static final int DISPLAY_WIDTH = 176;
     private static final ResourceLocation EMPTY_RESOURCE = ResourceHelper.getResource("/gui/blank.png");
     private boolean oldUnicodeFlag;
     private void disableTextRendering() {
@@ -247,9 +264,4 @@ public class RecipeHandlerVehicle extends TemplateRecipeHandler {
         return ReflectionHelper.getPrivateValue(FontRenderer.class, fontRenderer, 0);
     }
 
-    private void renderNameText() {
-        FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
-        String str = getRecipeName();
-        fontRenderer.drawString(str, (DISPLAY_WIDTH - fontRenderer.getStringWidth(str)) / 2, -11, 0x404040);
-    }
 }

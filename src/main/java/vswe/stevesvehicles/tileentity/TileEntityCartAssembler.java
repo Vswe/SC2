@@ -264,8 +264,15 @@ public class TileEntityCartAssembler extends TileEntityBase
     public static final int MAX_STORAGE_SLOTS = 6;
     public static final int MAX_ADDON_SLOTS = 12;
 
+    //TODO localize these
+    public static final TitleBox ENGINE_BOX = new TitleBox(new PlainText("Engines"), 65, 0xF7941D);
+    public static final TitleBox TOOL_BOX = new TitleBox(new PlainText("Tool"), 100, 0x662D91);
+    public static final TitleBox ATTACH_BOX = new TitleBox(new PlainText("Attachments"), 135, 0x005B7F);
+    public static final TitleBox STORAGE_BOX = new TitleBox(new PlainText("Storage"), 170, 0x9E0B0E);
+    public static final TitleBox ADDON_BOX = new TitleBox(new PlainText("Addons"), 205, 0x005826);
+    public static final TitleBox INFO_BOX = new TitleBox(new PlainText("Information"), 375, 30, 0xCCBE00);
 
-	
+
     public TileEntityCartAssembler() {
     	//create all the lists for everything
 		upgrades = new ArrayList<TileEntityUpgrade>();
@@ -285,24 +292,18 @@ public class TileEntityCartAssembler extends TileEntityBase
 		slots.add(hullSlot);
 
 
-        //TODO localize these
+
 		//create the title boxes at certain positions with certain colors
-		TitleBox engineBox = new TitleBox(new PlainText("Engines"), 65, 0xF7941D);
-		TitleBox toolBox = new TitleBox(new PlainText("Tool"), 100, 0x662D91);
-		TitleBox attachBox = new TitleBox(new PlainText("Attachments"), 135, 0x005B7F);
-		TitleBox storageBox = new TitleBox(new PlainText("Storage"), 170, 0x9E0B0E);
-		TitleBox addonBox = new TitleBox(new PlainText("Addons"), 205, 0x005826);
-		TitleBox infoBox = new TitleBox(new PlainText("Information"), 375, 30, 0xCCBE00);
-		titleBoxes.add(engineBox);
-		titleBoxes.add(toolBox);
-		titleBoxes.add(attachBox);
-		titleBoxes.add(storageBox);
-		titleBoxes.add(addonBox);
-		titleBoxes.add(infoBox);
+		titleBoxes.add(ENGINE_BOX);
+		titleBoxes.add(TOOL_BOX);
+		titleBoxes.add(ATTACH_BOX);
+		titleBoxes.add(STORAGE_BOX);
+		titleBoxes.add(ADDON_BOX);
+		titleBoxes.add(INFO_BOX);
 		
 		///create the engine slots
 		for (int i = 0; i < MAX_ENGINE_SLOTS; i++) {
-			SlotAssembler slot = new SlotAssembler(this, slotID++, engineBox.getX() + 2 + 18*i,engineBox.getY(), ModuleType.ENGINE, false,i);
+			SlotAssembler slot = new SlotAssembler(this, slotID++, ENGINE_BOX.getX() + 2 + 18*i, ENGINE_BOX.getY(), ModuleType.ENGINE, false,i);
 			slot.invalidate();
 			slots.add(slot);
 			engineSlots.add(slot);
@@ -311,14 +312,14 @@ public class TileEntityCartAssembler extends TileEntityBase
 
 		//create the tool slot
         for (int i = 0; i < MAX_TOOL_SLOTS; i++) {
-            toolSlot = new SlotAssembler(this, slotID++, toolBox.getX() + 2,toolBox.getY(), ModuleType.TOOL, false,i);
+            toolSlot = new SlotAssembler(this, slotID++, TOOL_BOX.getX() + 2, TOOL_BOX.getY(), ModuleType.TOOL, false,i);
             slots.add(toolSlot);
             toolSlot.invalidate();
         }
 		
 		//create the attachment slots
 		for (int i = 0; i < MAX_ATTACHMENT_SLOTS; i++) {
-			SlotAssembler slot = new SlotAssembler(this, slotID++, attachBox.getX() + 2 + 18*i,attachBox.getY(), ModuleType.ATTACHMENT, false,i);
+			SlotAssembler slot = new SlotAssembler(this, slotID++, ATTACH_BOX.getX() + 2 + 18*i, ATTACH_BOX.getY(), ModuleType.ATTACHMENT, false,i);
 			slot.invalidate();
 			slots.add(slot);
 			attachmentSlots.add(slot);
@@ -326,7 +327,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 		
 		//create the storage slots
 		for (int i = 0; i < MAX_STORAGE_SLOTS; i++) {
-			SlotAssembler slot = new SlotAssembler(this, slotID++, storageBox.getX() + 2 + 18*i,storageBox.getY(), ModuleType.STORAGE, false,i);
+			SlotAssembler slot = new SlotAssembler(this, slotID++, STORAGE_BOX.getX() + 2 + 18*i, STORAGE_BOX.getY(), ModuleType.STORAGE, false,i);
 			slot.invalidate();
 			slots.add(slot);
 			chestSlots.add(slot);
@@ -334,7 +335,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 		
 		//create the addon slots
 		for (int i = 0; i < MAX_ADDON_SLOTS; i++) {
-			SlotAssembler slot = new SlotAssembler(this, slotID++, addonBox.getX() + 2 + 18*(i%6), addonBox.getY() + 18 * (i/6), ModuleType.ADDON, false, i);
+			SlotAssembler slot = new SlotAssembler(this, slotID++, ADDON_BOX.getX() + 2 + 18*(i%6), ADDON_BOX.getY() + 18 * (i/6), ModuleType.ADDON, false, i);
 			slot.invalidate();
 			slots.add(slot);
 			addonSlots.add(slot);
