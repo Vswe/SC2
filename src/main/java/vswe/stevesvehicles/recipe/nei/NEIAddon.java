@@ -33,6 +33,7 @@ public class NEIAddon {
     private void register() {
         register(new RecipeHandlerShaped());
         register(new RecipeHandlerShapeless());
+        API.registerRecipeHandler(new RecipeHandlerVehicle());
     }
 
     @SideOnly(Side.CLIENT)

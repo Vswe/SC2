@@ -161,28 +161,28 @@ public class GuiCartAssembler extends GuiBase {
 	}
 	private static final ResourceLocation TEXTURE_LEFT = ResourceHelper.getResource("/gui/garagePart1.png");
 	private static final ResourceLocation TEXTURE_RIGHT = ResourceHelper.getResource("/gui/garagePart2.png");
-	private static final ResourceLocation TEXTURE_EXTRA = ResourceHelper.getResource("/gui/garageExtra.png");
+	public static final ResourceLocation TEXTURE_EXTRA = ResourceHelper.getResource("/gui/garageExtra.png");
 
     private static final int [] ASSEMBLING_PROGRESS_RECT = new int[] {375, 180, 115,11};
     private static final int [] FUEL_PROGRESS_RECT = new int[] {375, 200, 115,11};
 
     private static final int TEXTURE_SPACING = 1;
 
-    private static final int BIG_SLOT_SRC_X = 1;
-    private static final int BIG_SLOT_SRC_Y = 1;
-    private static final int BIG_SLOT_SIZE = 24;
+    public static final int BIG_SLOT_SRC_X = 1;
+    public static final int BIG_SLOT_SRC_Y = 1;
+    public static final int BIG_SLOT_SIZE = 24;
     private static final int MODIFIED_GREEN_SLOT_SRC_X = 1;
     private static final int MODIFIED_RED_SLOT_SRC_X = 20;
     private static final int MODIFIED_SLOT__SRC_Y = 45;
-    private static final int SLOT_SRC_X = 1;
-    private static final int SLOT_SRC_Y = 26;
-    private static final int SLOT_SIZE = 18;
+    public static final int SLOT_SRC_X = 1;
+    public static final int SLOT_SRC_Y = 26;
+    public static final int SLOT_SIZE = 18;
 
-    private static final int SLOT_DOOR_WIDTH = 16;
-    private static final int SLOT_DOOR_HEIGHT = 9;
-    private static final int SLOT_DOOR_SRC_X = 1;
-    private static final int SLOT_TOP_DOOR_SRC_Y = 63;
-    private static final int SLOT_BOT_DOOR_SRC_Y = 73;
+    public static final int SLOT_DOOR_WIDTH = 16;
+    public static final int SLOT_DOOR_HEIGHT = 9;
+    public static final int SLOT_DOOR_SRC_X = 1;
+    public static final int SLOT_TOP_DOOR_SRC_Y = 63;
+    public static final int SLOT_BOT_DOOR_SRC_Y = 73;
 
     private static final int ASSEMBLE_BUTTON_SRC_X = 26;
     private static final int ASSEMBLE_BUTTON_SRC_Y = 1;

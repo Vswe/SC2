@@ -22,8 +22,8 @@ import java.util.List;
 
 public abstract class RecipeHandler extends TemplateRecipeHandler {
     protected abstract class CachedModuleRecipe extends CachedRecipe {
-        public List<PositionedStack> ingredients;
-        public PositionedStack result;
+        private List<PositionedStack> ingredients;
+        private PositionedStack result;
 
         public CachedModuleRecipe(ModuleRecipe recipe) {
             init(recipe);

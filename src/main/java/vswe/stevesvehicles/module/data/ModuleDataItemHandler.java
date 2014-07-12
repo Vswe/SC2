@@ -270,8 +270,8 @@ public final class ModuleDataItemHandler {
 
     private ModuleDataItemHandler(){}
 
-    public static List<ItemStack> getModularItems(ItemStack cart) {
-        List<Tuple<ModuleData, NBTTagCompound>> modules = getModulesAndCompoundsFromItem(cart);
+    public static List<ItemStack> getModularItems(ItemStack vehicle) {
+        List<Tuple<ModuleData, NBTTagCompound>> modules = getModulesAndCompoundsFromItem(vehicle);
         List<ItemStack> items = new ArrayList<ItemStack>();
         for (Tuple<ModuleData, NBTTagCompound> module : modules) {
             ModuleData moduleData = module.getFirstObject();
