@@ -77,7 +77,7 @@ public class ModuleRegistryCartDrillUtility extends ModuleRegistry{
     }
 
 
-    private ModuleDataGroup drills = ModuleDataGroup.getGroup(ModuleRegistryCartTools.TOOL_KEY);
+    private ModuleDataGroup drills = ModuleDataGroup.getGroup(ModuleRegistryCartTools.DRILL_KEY);
     @Override
     public void register(ModuleData moduleData) {
         super.register(moduleData);

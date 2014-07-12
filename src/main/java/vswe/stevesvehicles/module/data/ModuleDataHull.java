@@ -55,4 +55,26 @@ public class ModuleDataHull extends ModuleData {
     public VehicleType getVehicle() {
         return getValidVehicles() == null || getValidVehicles().isEmpty() ? null : getValidVehicles().get(0);
     }
+
+    public boolean isModuleValid(ModuleData data) {
+        if (!data.getValidVehicles().contains(getVehicle())) {
+            return false;
+        }
+
+        if (data.getCost() > getComplexityMax()) {
+            return false;
+        }
+
+        if (data.getSides() != null && !data.getSides().isEmpty() && getSides() != null && !getSides().isEmpty()  ) {
+            for (ModuleSide moduleSide : getSides()) {
+                if (data.getSides().contains(moduleSide)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+
+
+    }
 }

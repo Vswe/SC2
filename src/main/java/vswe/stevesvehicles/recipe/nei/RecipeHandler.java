@@ -22,7 +22,7 @@ import java.util.List;
 
 public abstract class RecipeHandler extends TemplateRecipeHandler {
     protected abstract class CachedModuleRecipe extends CachedRecipe {
-        private List<PositionedStack> ingredients;
+        protected List<PositionedStack> ingredients;
         private PositionedStack result;
 
         public CachedModuleRecipe(ModuleRecipe recipe) {

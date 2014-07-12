@@ -7,18 +7,19 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import vswe.stevesvehicles.client.gui.screen.GuiCartAssembler;
 import vswe.stevesvehicles.container.slots.SlotAssemblerFuel;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataHull;
-import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
 import vswe.stevesvehicles.module.data.ModuleType;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.old.Helpers.TitleBox;
@@ -29,83 +30,71 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class RecipeHandlerVehicle extends TemplateRecipeHandler {
-    protected class CachedVehicleRecipe extends CachedRecipe {
-        private List<PositionedStack> ingredients;
-        private PositionedStack result;
+public abstract class RecipeHandlerVehicleBase extends TemplateRecipeHandler {
+    protected abstract class CachedVehicleRecipeBase extends CachedRecipe {
+        protected List<PositionedStack> ingredients;
         private ModuleTypeRow[] rows;
         private int assemblyTime;
         private int coalAmount;
         private int modularCost;
-        private boolean valid;
 
-        public CachedVehicleRecipe(ItemStack result) {
-            int offset = (GuiCartAssembler.BIG_SLOT_SIZE - ITEM_SIZE) / 2;
-            this.result = new PositionedStack(result.copy(), RESULT_X + offset, RESULT_Y + offset);
+        public CachedVehicleRecipeBase() {
             ingredients = new ArrayList<PositionedStack>();
-            List<ModuleData> modules = ModuleDataItemHandler.getModulesFromItem(result);
-            if (modules != null) {
+
+        }
+
+        protected void loadVehicleStats(List<ItemStack> items) {
+            if (items != null) {
+                modularCost = 0;
                 assemblyTime = TileEntityCartAssembler.FLAT_VEHICLE_BASE_TIME;
-                for (ModuleData module : modules) {
-                    modularCost += module.getCost();
-                    assemblyTime += TileEntityCartAssembler.getAssemblingTime(module);
-                    if (module instanceof ModuleDataHull) {
-                        ModuleDataHull hull = (ModuleDataHull)module;
-
-                        rows = new ModuleTypeRow[] {
-                            new ModuleTypeRow(ModuleType.ENGINE, TileEntityCartAssembler.ENGINE_BOX, hull.getEngineMaxCount(), TileEntityCartAssembler.MAX_ENGINE_SLOTS),
-                            new ModuleTypeRow(ModuleType.TOOL, TileEntityCartAssembler.TOOL_BOX, TileEntityCartAssembler.MAX_TOOL_SLOTS, TileEntityCartAssembler.MAX_TOOL_SLOTS),
-                            new ModuleTypeRow(ModuleType.ATTACHMENT, TileEntityCartAssembler.ATTACH_BOX, TileEntityCartAssembler.MAX_ATTACHMENT_SLOTS, TileEntityCartAssembler.MAX_ATTACHMENT_SLOTS),
-                            new ModuleTypeRow(ModuleType.STORAGE, TileEntityCartAssembler.STORAGE_BOX, hull.getStorageMaxCount(), TileEntityCartAssembler.MAX_STORAGE_SLOTS),
-                            new ModuleTypeRow(ModuleType.ADDON, TileEntityCartAssembler.ADDON_BOX, hull.getAddonMaxCount(), TileEntityCartAssembler.MAX_ADDON_SLOTS)
-                        };
-
-                        List<ItemStack> items = ModuleDataItemHandler.getModularItems(result);
-                        if (items != null) {
-                            for (ItemStack item : items) {
-                                ModuleData data = ModItems.modules.getModuleData(item);
-                                if (data != null) {
-                                    if (data instanceof ModuleDataHull) {
-                                        ingredients.add(new PositionedStack(item, HULL_X + offset, HULL_Y + offset));
-                                    }else{
-                                        for (int i = 0; i < rows.length; i++) {
-                                            ModuleTypeRow row = rows[i];
-                                            if (row.type.getClazz().isAssignableFrom(data.getModuleClass())) {
-                                                if (row.length < row.availableLength) {
-                                                    int id = row.length;
-                                                    int x = id % 6;
-                                                    int y = id / 6;
-                                                    ingredients.add(new PositionedStack(item, ROW_X + x * GuiCartAssembler.SLOT_SIZE + 1, ROW_Y + i * ROW_OFFSET_Y + y * GuiCartAssembler.SLOT_SIZE + 1));
-                                                    row.length++;
-                                                }
-                                                break;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            valid = true;
-                        }
+                for (ItemStack item : items) {
+                    ModuleData module = ModItems.modules.getModuleData(item);
+                    if (module != null) {
+                        modularCost += module.getCost();
+                        assemblyTime += TileEntityCartAssembler.getAssemblingTime(module);
                     }
                 }
                 coalAmount = (int)Math.ceil(assemblyTime / (TileEntityFurnace.getItemBurnTime(new ItemStack(Items.coal)) * SlotAssemblerFuel.FUEL_MULTIPLIER));
+            }else {
+                assemblyTime = 0;
+                modularCost = 0;
+                coalAmount = 0;
             }
         }
 
-
-        @Override
-        public List<PositionedStack> getIngredients() {
-            return ingredients;
+        protected void initHull(ModuleDataHull hull) {
+            rows = new ModuleTypeRow[] {
+                    new ModuleTypeRow(ModuleType.ENGINE, TileEntityCartAssembler.ENGINE_BOX, hull != null ? hull.getEngineMaxCount() : TileEntityCartAssembler.MAX_ENGINE_SLOTS, TileEntityCartAssembler.MAX_ENGINE_SLOTS),
+                    new ModuleTypeRow(ModuleType.TOOL, TileEntityCartAssembler.TOOL_BOX, TileEntityCartAssembler.MAX_TOOL_SLOTS, TileEntityCartAssembler.MAX_TOOL_SLOTS),
+                    new ModuleTypeRow(ModuleType.ATTACHMENT, TileEntityCartAssembler.ATTACH_BOX, TileEntityCartAssembler.MAX_ATTACHMENT_SLOTS, TileEntityCartAssembler.MAX_ATTACHMENT_SLOTS),
+                    new ModuleTypeRow(ModuleType.STORAGE, TileEntityCartAssembler.STORAGE_BOX, hull != null ? hull.getStorageMaxCount() : TileEntityCartAssembler.MAX_STORAGE_SLOTS, TileEntityCartAssembler.MAX_STORAGE_SLOTS),
+                    new ModuleTypeRow(ModuleType.ADDON, TileEntityCartAssembler.ADDON_BOX, hull != null ? hull.getAddonMaxCount() : TileEntityCartAssembler.MAX_ADDON_SLOTS, TileEntityCartAssembler.MAX_ADDON_SLOTS)
+            };
         }
 
-        @Override
-        public PositionedStack getResult() {
-            return result;
+        protected void addModuleItem(ModuleData module, ItemStack item) {
+            if (module instanceof ModuleDataHull) {
+                ingredients.add(new PositionedStack(item, HULL_X + BIG_SLOT_OFFSET, HULL_Y + BIG_SLOT_OFFSET));
+            }else{
+                for (int i = 0; i < rows.length; i++) {
+                    ModuleTypeRow row = rows[i];
+                    if (row.type.getClazz().isAssignableFrom(module.getModuleClass())) {
+                        if (row.length < row.availableLength) {
+                            int id = row.length;
+                            int x = id % 6;
+                            int y = id / 6;
+                            ingredients.add(new PositionedStack(item, ROW_X + x * GuiCartAssembler.SLOT_SIZE + 1, ROW_Y + i * ROW_OFFSET_Y + y * GuiCartAssembler.SLOT_SIZE + 1));
+                            row.length++;
+                        }
+                        break;
+                    }
+                }
+            }
+
         }
 
-        public boolean isValid() {
-            return valid;
-        }
+        protected abstract boolean isValid();
+
     }
 
     private class ModuleTypeRow {
@@ -123,7 +112,7 @@ public class RecipeHandlerVehicle extends TemplateRecipeHandler {
         }
     }
 
-    public RecipeHandlerVehicle() {
+    protected RecipeHandlerVehicleBase() {
 
     }
 
@@ -132,33 +121,36 @@ public class RecipeHandlerVehicle extends TemplateRecipeHandler {
         return 1;
     }
 
+    private static final int DISPLAY_WIDTH = 176;
+    private static final int DISPLAY_HEIGHT = 166;
 
     private static final int ITEM_SIZE = 16;
+    protected static final int BIG_SLOT_OFFSET = (GuiCartAssembler.BIG_SLOT_SIZE - ITEM_SIZE) / 2;
     private static final int HULL_X = 140;
-    private static final int HULL_Y = -10;
-    private static final int RESULT_X = 140;
-    private static final int RESULT_Y = 120;
+    private static final int HULL_Y = 4;
+    protected static final int RESULT_X = 140;
+    protected static final int RESULT_Y = 140;
 
     private static final int TITLE_X = -1;
-    private static final int TITLE_Y = -9;
+    private static final int TITLE_Y = -10;
     private static final int ROW_X = 1;
-    private static final int ROW_Y = -2;
-    private static final int ROW_OFFSET_Y = 28;
+    private static final int ROW_Y = 12;
+    private static final int ROW_OFFSET_Y = 29;
 
     private static final int COST_X = 120;
-    private static final int COST_Y = 25;
+    private static final int COST_Y = 39;
 
     private static final int ASSEMBLY_X = 120;
-    private static final int ASSEMBLY_Y = 55;
+    private static final int ASSEMBLY_Y = 69;
 
     private static final int FUEL_X = 120;
-    private static final int FUEL_Y = 85;
+    private static final int FUEL_Y = 99;
     private static final int COAL_X = 146;
-    private static final int COAL_Y = 87;
+    private static final int COAL_Y = 101;
 
     @Override
     public String getRecipeName() {
-        return "SV Vehicle recipe";
+        return "SV Vehicle Recipe";
     }
 
     private RenderItem renderItem = new RenderItem();
@@ -173,10 +165,10 @@ public class RecipeHandlerVehicle extends TemplateRecipeHandler {
 
     @Override
     public void drawBackground(int id) {
-        CachedVehicleRecipe recipe = (CachedVehicleRecipe)arecipes.get(id);
+        CachedVehicleRecipeBase recipe = (CachedVehicleRecipeBase)arecipes.get(id);
         GL11.glColor4f(1, 1, 1, 1);
-        GL11.glDepthFunc(GL11.GL_LEQUAL);
-        GL11.glEnable(GL11.GL_DEPTH_TEST);
+
+        drawExtraBackground();
 
         ResourceHelper.bindResource(GuiCartAssembler.TEXTURE_EXTRA);
         drawTexturedModalRect(HULL_X, HULL_Y, GuiCartAssembler.BIG_SLOT_SRC_X, GuiCartAssembler.BIG_SLOT_SRC_Y, GuiCartAssembler.BIG_SLOT_SIZE, GuiCartAssembler.BIG_SLOT_SIZE);
@@ -214,8 +206,9 @@ public class RecipeHandlerVehicle extends TemplateRecipeHandler {
     @Override
     public void drawForeground(int id) {
         enableTextRendering();
+        repairRemovedTitle();
 
-        CachedVehicleRecipe recipe = (CachedVehicleRecipe)arecipes.get(id);
+        CachedVehicleRecipeBase recipe = (CachedVehicleRecipeBase)arecipes.get(id);
         GL11.glColor4f(1, 1, 1, 1);
         GL11.glDisable(GL11.GL_LIGHTING);
         ResourceHelper.bindResource(GuiCartAssembler.TEXTURE_EXTRA);
@@ -258,13 +251,7 @@ public class RecipeHandlerVehicle extends TemplateRecipeHandler {
 
 
 
-    @Override
-    public void loadCraftingRecipes(ItemStack result) {
-        CachedVehicleRecipe cache = new CachedVehicleRecipe(result);
-        if (cache.isValid()) {
-            arecipes.add(cache);
-        }
-    }
+
 
     @Override
     public String getGuiTexture() {
@@ -300,6 +287,57 @@ public class RecipeHandlerVehicle extends TemplateRecipeHandler {
 
     private ResourceLocation[] getUnicodeResourceList(FontRenderer fontRenderer) {
         return ReflectionHelper.getPrivateValue(FontRenderer.class, fontRenderer, 0);
+    }
+
+    //all text was removed to remove the page text, manually redraw the missing title (with arrows)
+    private void repairRemovedTitle() {
+        FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
+        String str = getRecipeName();
+        fontRenderer.drawString(str, (DISPLAY_WIDTH - fontRenderer.getStringWidth(str)) / 2, - 11, 0x404040);
+
+        if (hasButtons()) {
+            ScaledResolution scaledresolution = new ScaledResolution(Minecraft.getMinecraft().gameSettings, Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
+            int w = scaledresolution.getScaledWidth();
+            int h = scaledresolution.getScaledHeight();
+            int mX = Mouse.getX() * w / Minecraft.getMinecraft().displayWidth;
+            int mY = h - Mouse.getY() * h / Minecraft.getMinecraft().displayHeight - 1;
+
+            mX -= (w - DISPLAY_WIDTH) / 2;
+            mY -= (h - DISPLAY_HEIGHT) / 2;
+
+            mX -= TRANSLATE_X;
+            mY -= TRANSLATE_Y;
+
+            drawArrow("<", ARROW_LEFT_X, ARROW_Y, ARROW_WIDTH, ARROW_HEIGHT, mX, mY);
+            drawArrow(">", ARROW_RIGHT_X, ARROW_Y, ARROW_WIDTH, ARROW_HEIGHT, mX, mY);
+        }
+    }
+
+    protected abstract boolean hasButtons();
+
+    private static final int ARROW_LEFT_X = 13;
+    private static final int ARROW_RIGHT_X = 140;
+    private static final int ARROW_Y = -13;
+    private static final int ARROW_WIDTH = 13;
+    private static final int ARROW_HEIGHT = 12;
+
+    private static final int TRANSLATE_X = 5;
+    private static final int TRANSLATE_Y = 16;
+
+    private void drawArrow(String str, int x, int y, int w, int h, int mX, int mY) {
+        int color = x <= mX && mX < x + w && y <= mY && mY < y + h ? 0xFFFFA0 : 0xE0E0E0;
+        FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
+        fontRenderer.drawStringWithShadow(str, x + (w - fontRenderer.getStringWidth(str)) / 2, y + (h - 8) / 2, color);
+    }
+
+    private static final int EXTRA_HEIGHT_OVERLAP = 5;
+    private static final int EXTRA_HEIGHT = 25;
+
+    @SuppressWarnings("SpellCheckingInspection")
+    private static final ResourceLocation TEXTURE_BACKGROUND = new ResourceLocation("nei:textures/gui/recipebg.png");
+    private void drawExtraBackground() {
+        ResourceHelper.bindResource(TEXTURE_BACKGROUND);
+        drawTexturedModalRect(-TRANSLATE_X, -TRANSLATE_Y + DISPLAY_HEIGHT - EXTRA_HEIGHT_OVERLAP, 0, DISPLAY_HEIGHT - EXTRA_HEIGHT, DISPLAY_WIDTH, EXTRA_HEIGHT);
     }
 
 }
