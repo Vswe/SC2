@@ -28,8 +28,8 @@ public class BlockRailJunction extends BlockSpecialRailBase {
 	@Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister register) {
-        normalIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":junction_rail");
-		cornerIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":junction_rail_corner");
+        normalIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":rails/junction");
+		cornerIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":rails/junction_corner");
     }
 
     @Override

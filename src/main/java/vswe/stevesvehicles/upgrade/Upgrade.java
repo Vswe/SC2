@@ -46,29 +46,13 @@ public class Upgrade implements IRecipeOutput {
             }
         }
     }
-	
 
-	static {
-		sides = new HashMap<Byte, IIcon>(); //TODO clean this up
-
-	}
-	
+    @SideOnly(Side.CLIENT)
+    private static IIcon standardSideIcon;
 
 	//used to fix the destroy animation
 	public static IIcon getStandardIcon() {
-		return sides.get((byte)0);
-	}
-	
-	@SideOnly(Side.CLIENT)
-	public static void initSides(IIconRegister register) {
-		ArrayList<Integer> used = new ArrayList<Integer>();
-	
-		for (Upgrade upgrade : UpgradeRegistry.getAllUpgrades()) {
-			if (!used.contains(upgrade.sideTexture)) {
-				sides.put((byte)upgrade.sideTexture, register.registerIcon(StevesVehicles.instance.textureHeader + ":upgrade_side_" + upgrade.sideTexture + "_icon"));
-				used.add(upgrade.sideTexture);
-			}	
-		}
+		return standardSideIcon;
 	}
 
 
@@ -79,15 +63,10 @@ public class Upgrade implements IRecipeOutput {
 
     public final void setFullRawUnlocalizedName(String val) {fullUnlocalizedName = val;}
 
-	private int sideTexture;
 	private final String unlocalizedName;
 	private ArrayList<EffectType> effects;
+
 	public Upgrade(String unlocalizedName) {
-		this(unlocalizedName, 0);
-	}
-	
-	public Upgrade(String unlocalizedName, int sideTexture) {
-		this.sideTexture = sideTexture;
 		this.unlocalizedName = unlocalizedName;
 		effects = new ArrayList<EffectType>();
 	}	
@@ -106,8 +85,11 @@ public class Upgrade implements IRecipeOutput {
 		return this;
 	}
 
+    public static boolean disableRecipes;
     public Upgrade addRecipe(IRecipe recipe) {
-        GameRegistry.addRecipe(recipe);
+        if (!disableRecipes) {
+            GameRegistry.addRecipe(recipe);
+        }
 
         return this;
     }
@@ -128,11 +110,6 @@ public class Upgrade implements IRecipeOutput {
         return this;
     }
 
-    public Upgrade addShapelessRecipe(Object ... recipe) {
-        addRecipe(new ModuleRecipeShapeless(this, recipe));
-
-        return this;
-    }
 
 	public ItemStack getItemStack() {
 		return getItemStack(1);
@@ -154,8 +131,8 @@ public class Upgrade implements IRecipeOutput {
 	private IIcon icon;
 	
 	@SideOnly(Side.CLIENT)
-	public void createIcon(IIconRegister register) {
-		icon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + getRawUnlocalizedName().replace("_upgrade", "") + "_icon");
+	protected void createIcon(IIconRegister register) {
+		icon = register.registerIcon(StevesVehicles.instance.textureHeader + ":upgrades/" + getFullRawUnlocalizedName().replace(".", "/").replace(":", "/"));
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -170,11 +147,19 @@ public class Upgrade implements IRecipeOutput {
 
 	@SideOnly(Side.CLIENT)
 	public IIcon getSideTexture() {
-		return sides.get((byte)sideTexture);
+		return standardSideIcon;
 	}
 
 
     public boolean connectToRedstone() {
         return false;
+    }
+
+    public static void registerIcons(IIconRegister register) {
+        standardSideIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":upgrades/sides/default");
+
+        for (Upgrade upgrade : UpgradeRegistry.getAllUpgrades()) {
+            upgrade.createIcon(register);
+        }
     }
 }

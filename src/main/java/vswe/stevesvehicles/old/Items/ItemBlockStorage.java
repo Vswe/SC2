@@ -56,7 +56,7 @@ public class ItemBlockStorage extends ItemBlock
     public void registerIcons(IIconRegister register) {
     	icons = new IIcon[blocks.length];
     	for (int i = 0; i < icons.length; i++) {
-    		icons[i] = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + blocks[i].getName().replace(":","").replace(" ","_").toLowerCase());
+    		icons[i] = register.registerIcon(StevesVehicles.instance.textureHeader + ":storage/" + blocks[i].getName());
     	}
     }	
 

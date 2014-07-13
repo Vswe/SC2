@@ -54,10 +54,10 @@ public class ItemCartComponent extends Item {
 		icons = new IIcon[size()];
 		for (int i = 0; i < icons.length; i++) {
 			if (getName(i) != null) {
-				icons[i] = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + getName(i) + "_icon");
+				icons[i] = register.registerIcon(StevesVehicles.instance.textureHeader + ":components/" + getName(i));
 			}
 		}
-		unknownIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "unknown_icon");
+		unknownIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":unknown");
     }
 	
 	@Override

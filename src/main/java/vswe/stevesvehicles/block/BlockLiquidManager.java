@@ -47,12 +47,12 @@ public class BlockLiquidManager extends BlockContainerBase {
     @SideOnly(Side.CLIENT)
 	@Override
     public void registerBlockIcons(IIconRegister register) {
-        topIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":liquid_manager_top");
-		botIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":liquid_manager_bot");
-		redIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":liquid_manager_red");
-		blueIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":liquid_manager_blue");
-		greenIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":liquid_manager_green");
-		yellowIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":liquid_manager_yellow");
+        topIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":managers/liquid/top");
+		botIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":managers/liquid/bot");
+		redIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":managers/liquid/red");
+		blueIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":managers/liquid/blue");
+		greenIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":managers/liquid/green");
+		yellowIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":managers/liquid/yellow");
     }
 
 

@@ -37,9 +37,9 @@ public class BlockActivator extends BlockContainerBase {
     @SideOnly(Side.CLIENT)
 	@Override
     public void registerBlockIcons(IIconRegister register) {
-        topIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":module_toggler_top");
-		botIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":module_toggler_bot");
-		sideIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":module_toggler_side");
+        topIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":toggler/top");
+		botIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":toggler/bot");
+		sideIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":toggler/side");
     }	
 	
 

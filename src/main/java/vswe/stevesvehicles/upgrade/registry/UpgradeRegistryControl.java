@@ -1,8 +1,13 @@
 package vswe.stevesvehicles.upgrade.registry;
 
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.util.IIcon;
+import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.upgrade.Upgrade;
 import vswe.stevesvehicles.upgrade.effect.assembly.Blueprint;
 import vswe.stevesvehicles.upgrade.effect.assembly.Disassemble;
@@ -19,7 +24,23 @@ public class UpgradeRegistryControl extends UpgradeRegistry {
     public UpgradeRegistryControl() {
         super("control");
 
-        Upgrade input = new Upgrade("module_input", 1);
+        Upgrade input = new Upgrade("module_input") {
+            @SideOnly(Side.CLIENT)
+            private IIcon side;
+
+            @SideOnly(Side.CLIENT)
+            @Override
+            protected void createIcon(IIconRegister register) {
+                super.createIcon(register);
+                side = register.registerIcon(StevesVehicles.instance.textureHeader + ":upgrades/sides/chest");
+            }
+
+            @SideOnly(Side.CLIENT)
+            @Override
+            public IIcon getSideTexture() {
+                return side;
+            }
+        };
         input.addEffect(InputChest.class, 7, 3);
 
         input.addShapedRecipe(  null,               SIMPLE_PCB,     null,

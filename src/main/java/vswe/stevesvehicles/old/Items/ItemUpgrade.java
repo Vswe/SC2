@@ -42,11 +42,7 @@ public class ItemUpgrade extends ItemBlock {
 	@Override
 	@SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister register) {
-        for (Upgrade upgrade : UpgradeRegistry.getAllUpgrades()) {
-            upgrade.createIcon(register);
-        }
-
-		Upgrade.initSides(register);
+		Upgrade.registerIcons(register);
     }	
 
 	public String getName(ItemStack item) {

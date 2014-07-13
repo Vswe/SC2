@@ -42,8 +42,8 @@ public class BlockRailAdvancedDetector extends BlockSpecialRailBase {
 	@Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister register) {
-        normalIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":advanced_detector_rail");
-		cornerIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":advanced_detector_rail_corner");
+        normalIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":rails/detector");
+		cornerIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":rails/detector_corner");
     }	
 
 

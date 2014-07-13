@@ -21,29 +21,29 @@ import vswe.stevesvehicles.tileentity.TileEntityDetector;
 
 public enum DetectorType implements IRecipeOutput {
 	NORMAL(0, true, false, true,
-			"detector_manager_bot",
-			"detector_manager_top",
-			"detector_manager_yellow",
-			"detector_manager_blue",
-			"detector_manager_green",
-			"detector_manager_red"),
+			"detectors/manager/bot",
+			"detectors/manager/top",
+			"detectors/manager/yellow",
+			"detectors/manager/blue",
+			"detectors/manager/green",
+			"detectors/manager/red"),
 			
 	UNIT(1, false, false, false,
-		"detector_manager_bot",
-		"detector_manager_bot",
-		"detector_unit_yellow",
-		"detector_unit_blue",
-		"detector_unit_green",
-		"detector_unit_red"),	
+		"detectors/unit/bot",
+		"detectors/unit/bot",
+		"detectors/unit/yellow",
+		"detectors/unit/blue",
+		"detectors/unit/green",
+		"detectors/unit/red"),	
 	
 		
 	STOP(2, true, true, false,
-		"detector_manager_bot",
-		"detector_station_top",
-		"detector_station_yellow",
-		"detector_station_blue",
-		"detector_station_green",
-		"detector_station_red") {
+		"detectors/station/bot",
+		"detectors/station/top",
+		"detectors/station/yellow",
+		"detectors/station/blue",
+		"detectors/station/green",
+		"detectors/station/red") {
 
 		@Override
 		public void activate(TileEntityDetector detector, VehicleBase vehicle) {
@@ -53,12 +53,12 @@ public enum DetectorType implements IRecipeOutput {
 	},
 		
 	JUNCTION(3, true, false, false,
-			"detector_manager_bot",
-			"detector_junction_top",
-			"detector_junction_yellow",
-			"detector_junction_blue",
-			"detector_junction_green",
-			"detector_junction_red") {
+			"detectors/junction/bot",
+			"detectors/junction/top",
+			"detectors/junction/yellow",
+			"detectors/junction/blue",
+			"detectors/junction/green",
+			"detectors/junction/red") {
 		
 		
 		@Override
@@ -79,12 +79,12 @@ public enum DetectorType implements IRecipeOutput {
 	},
 
 	REDSTONE(4, false, false, false,
-			"detector_redstone_bot",
-			"detector_redstone_bot",
-			"detector_redstone_yellow",
-			"detector_redstone_blue",
-			"detector_redstone_green",
-			"detector_redstone_red") {
+			"detectors/redstone/bot",
+			"detectors/redstone/top",
+			"detectors/redstone/yellow",
+			"detectors/redstone/blue",
+			"detectors/redstone/green",
+			"detectors/redstone/red") {
 			
 			@Override
 			public void initOperators(HashMap<Byte, OperatorObject> operators) {

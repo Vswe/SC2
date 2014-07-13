@@ -46,11 +46,11 @@ public class BlockCartAssembler extends BlockContainerBase {
     @SideOnly(Side.CLIENT)
 	@Override
     public void registerBlockIcons(IIconRegister register) {
-        topIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":cart_assembler_top");
-		botIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":cart_assembler_bot");
+        topIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":assembler/top");
+		botIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":assembler/bot");
 		sideIcons = new IIcon[4];
 		for (int i = 1; i <= 4; i++) {
-			sideIcons[i-1] = register.registerIcon(StevesVehicles.instance.textureHeader + ":cart_assembler_side_" + i);
+			sideIcons[i-1] = register.registerIcon(StevesVehicles.instance.textureHeader + ":assembler/side_" + i);
 		}
     }
 

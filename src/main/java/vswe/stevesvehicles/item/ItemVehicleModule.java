@@ -54,7 +54,7 @@ public class ItemVehicleModule extends Item {
             moduleData.createIcon(register);
         }
 
-        unknownIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "unknown_icon");
+        unknownIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":unknown");
     }
 
     @Override

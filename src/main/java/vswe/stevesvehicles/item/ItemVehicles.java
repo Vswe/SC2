@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
 import vswe.stevesvehicles.old.StevesVehicles;
@@ -38,9 +39,26 @@ public class ItemVehicles extends Item {
 	@Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister register) {
-        this.itemIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + "modular_cart" + "_icon"); //fallback icon
-    }	
+        for (VehicleType vehicleType : VehicleRegistry.getInstance().getAllVehicles()) {
+            vehicleType.registerIcons(register);
+        }
+        fallbackFallbackIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":unknown");
+    }
 
+    @SideOnly(Side.CLIENT)
+    private IIcon fallbackFallbackIcon; //if it fails to use a fallback icon :P
+
+    //this will only be used if the 3d rendering fails for some reason
+    @Override
+    @SideOnly(Side.CLIENT)
+    public IIcon getIconFromDamage(int dmg) {
+        VehicleType type = VehicleRegistry.getInstance().getTypeFromId(dmg);
+        if (type != null) {
+            return type.getFallbackIcon();
+        }else{
+            return fallbackFallbackIcon;
+        }
+    }
 
     //TODO
 	@Override
@@ -86,6 +104,7 @@ public class ItemVehicles extends Item {
             addInfo(ModuleDataItemHandler.getModulesAndCompoundsFromItem(item), list, null);
             addInfo(ModuleDataItemHandler.getSpareModulesAndCompoundsFromItem(item), list, ColorHelper.ORANGE);
 
+            //TODO localization
 			if (info.hasKey("maxTime")) {
 				list.add(ColorHelper.RED + "Incomplete cart!");
 				int maxTime = info.getInteger("maxTime");
@@ -98,7 +117,7 @@ public class ItemVehicles extends Item {
 				list.add(ColorHelper.WHITE + "Version: " + (info.hasKey("CartVersion") ? info.getByte("CartVersion") : 0));
 			}
 		}else{
-			list.add("No modules loaded");
+			list.add("No modules loaded"); //TODO localization
 		}
 	}
 
@@ -152,10 +171,6 @@ public class ItemVehicles extends Item {
 		return String.format("%02d:%02d:%02d", hours, minutes, seconds);
 	}	
 	
-	@Override
-	public boolean getShareTag() {
-		return true;
-	}
 
     @Override
     public String getUnlocalizedName(ItemStack item) {

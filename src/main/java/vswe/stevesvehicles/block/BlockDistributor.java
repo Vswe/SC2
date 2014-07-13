@@ -47,12 +47,12 @@ public class BlockDistributor extends BlockContainerBase {
     @SideOnly(Side.CLIENT)
 	@Override
     public void registerBlockIcons(IIconRegister register) {
-		purpleIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":cargo_distributor_purple");
-        orangeIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":cargo_distributor_orange");
-		redIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":cargo_distributor_red");
-		blueIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":cargo_distributor_blue");
-		greenIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":cargo_distributor_green");
-		yellowIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":cargo_distributor_yellow");
+		purpleIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":distributor/purple");
+        orangeIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":distributor/orange");
+		redIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":distributor/red");
+		blueIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":distributor/blue");
+		greenIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":distributor/green");
+		yellowIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":distributor/yellow");
     }	
 
 

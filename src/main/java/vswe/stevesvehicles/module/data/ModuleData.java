@@ -505,7 +505,7 @@ public class ModuleData implements IRecipeOutput {
 
     @SideOnly(Side.CLIENT)
     public void createIcon(IIconRegister register) {
-        icon = register.registerIcon(StevesVehicles.instance.textureHeader + ":" + getRawUnlocalizedName() + "_icon");
+        icon = register.registerIcon(StevesVehicles.instance.textureHeader + ":modules/" + getFullRawUnlocalizedName().replace(".", "/").replace(":", "/"));
     }
 
     @SideOnly(Side.CLIENT)

@@ -47,12 +47,12 @@ public class BlockCargoManager extends BlockContainerBase {
     @SideOnly(Side.CLIENT)
 	@Override
     public void registerBlockIcons(IIconRegister register) {
-        topIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":cargo_manager_top");
-		botIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":cargo_manager_bot");
-		redIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":cargo_manager_red");
-		blueIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":cargo_manager_blue");
-		greenIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":cargo_manager_green");
-		yellowIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":cargo_manager_yellow");
+        topIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":managers/cargo/top");
+		botIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":managers/cargo/bot");
+		redIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":managers/cargo/red");
+		blueIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":managers/cargo/blue");
+		greenIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":managers/cargo/green");
+		yellowIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":managers/cargo/yellow");
     }	
 
 
