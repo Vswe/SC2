@@ -8,7 +8,7 @@ import vswe.stevesvehicles.detector.LogicObjectOperator;
 import vswe.stevesvehicles.detector.OperatorObject;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.container.ContainerBase;
-import vswe.stevesvehicles.old.Containers.ContainerDetector;
+import vswe.stevesvehicles.container.ContainerDetector;
 import vswe.stevesvehicles.detector.DetectorType;
 import vswe.stevesvehicles.detector.LogicObject;
 import vswe.stevesvehicles.client.gui.screen.GuiBase;
@@ -26,7 +26,7 @@ public class TileEntityDetector extends TileEntityBase {
 	
 	@Override
 	public ContainerBase getContainer(InventoryPlayer inv) {
-		return new ContainerDetector(inv, this);		
+		return new ContainerDetector(this);
 	}
 	
 	public LogicObject mainObj;

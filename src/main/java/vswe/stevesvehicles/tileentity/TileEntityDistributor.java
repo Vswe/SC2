@@ -20,7 +20,7 @@ import net.minecraftforge.fluids.FluidTank;
 import vswe.stevesvehicles.localization.entry.block.LocalizationDistributor;
 import vswe.stevesvehicles.network.PacketHandler;
 import vswe.stevesvehicles.container.ContainerBase;
-import vswe.stevesvehicles.old.Containers.ContainerDistributor;
+import vswe.stevesvehicles.container.ContainerDistributor;
 import vswe.stevesvehicles.old.Helpers.DistributorSetting;
 import vswe.stevesvehicles.old.Helpers.DistributorSide;
 import vswe.stevesvehicles.old.Helpers.Tank;
@@ -39,7 +39,7 @@ public class TileEntityDistributor extends TileEntityBase
 	
 	@Override
 	public ContainerBase getContainer(InventoryPlayer inv) {
-		return new ContainerDistributor(inv, this);		
+		return new ContainerDistributor(this);
 	}
 	
 	private ArrayList<DistributorSide> sides;

@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.Containers;
+package vswe.stevesvehicles.container;
 import net.minecraft.inventory.IInventory;
 import net.minecraftforge.fluids.FluidStack;
 import vswe.stevesvehicles.container.slots.SlotLiquidFilter;
@@ -6,11 +6,9 @@ import vswe.stevesvehicles.container.slots.SlotLiquidManagerInput;
 import vswe.stevesvehicles.container.slots.SlotLiquidOutput;
 import vswe.stevesvehicles.tileentity.TileEntityLiquid;
 
-public class ContainerLiquid extends ContainerManager
-{
+public class ContainerLiquid extends ContainerManager {
 
-    public ContainerLiquid(IInventory invPlayer, TileEntityLiquid liquid)
-    {
+    public ContainerLiquid(IInventory invPlayer, TileEntityLiquid liquid) {
         super(liquid);
 		oldLiquids = new FluidStack[4];
 		

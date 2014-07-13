@@ -1,12 +1,11 @@
-package vswe.stevesvehicles.old.Containers;
+package vswe.stevesvehicles.container;
 import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.tileentity.TileEntityBase;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import vswe.stevesvehicles.tileentity.TileEntityManager;
 
-public abstract class ContainerManager extends ContainerBase
-{
+public abstract class ContainerManager extends ContainerBase {
 	public IInventory getMyInventory() {
 		return manager;
 	}
@@ -17,23 +16,19 @@ public abstract class ContainerManager extends ContainerBase
 	
 	
     private TileEntityManager manager;
-    public ContainerManager(TileEntityManager manager)
-    {
+    public ContainerManager(TileEntityManager manager) {
         this.manager = manager;		
     }
 
 	protected void addPlayer(IInventory invPlayer) {
-        for (int k = 0; k < 3; k++)
-        {
-            for (int j1 = 0; j1 < 9; j1++)
-            {
-                addSlotToContainer(new Slot(invPlayer, j1 + k * 9 + 9, j1 * 18 + offsetX(), 104 + k * 18 + 36));
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 9; j++) {
+                addSlotToContainer(new Slot(invPlayer, j + i * 9 + 9, j * 18 + offsetX(), 104 + i * 18 + 36));
             }
         }
 
-        for (int l = 0; l < 9; l++)
-        {
-            addSlotToContainer(new Slot(invPlayer, l, l * 18 + offsetX(), 162 + 36));
+        for (int i = 0; i < 9; i++) {
+            addSlotToContainer(new Slot(invPlayer, i, i * 18 + offsetX(), 162 + 36));
         }	
     }
 	

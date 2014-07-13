@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.Containers;
+package vswe.stevesvehicles.container;
 import java.util.ArrayList;
 
 import vswe.stevesvehicles.container.ContainerBase;
@@ -7,8 +7,7 @@ import net.minecraft.inventory.IInventory;
 import vswe.stevesvehicles.old.Helpers.ActivatorOption;
 import vswe.stevesvehicles.tileentity.TileEntityActivator;
 
-public class ContainerActivator extends ContainerBase
-{
+public class ContainerActivator extends ContainerBase {
 
 	
 	public IInventory getMyInventory() {
@@ -20,8 +19,7 @@ public class ContainerActivator extends ContainerBase
 	}
 
     private TileEntityActivator activator;
-    public ContainerActivator(IInventory invPlayer, TileEntityActivator activator)
-    {
+    public ContainerActivator(TileEntityActivator activator) {
         this.activator = activator;
 
 		lastOptions = new ArrayList<Integer>();
@@ -29,7 +27,6 @@ public class ContainerActivator extends ContainerBase
 			lastOptions.add(option.getOption());
 		}
     }
-
 
 	public ArrayList<Integer> lastOptions;
 	

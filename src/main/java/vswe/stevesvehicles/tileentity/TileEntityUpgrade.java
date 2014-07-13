@@ -19,7 +19,7 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.fluids.IFluidTank;
 import vswe.stevesvehicles.container.ContainerBase;
-import vswe.stevesvehicles.old.Containers.ContainerUpgrade;
+import vswe.stevesvehicles.container.ContainerUpgrade;
 import vswe.stevesvehicles.old.Helpers.NBTHelper;
 import vswe.stevesvehicles.old.Helpers.Tank;
 import vswe.stevesvehicles.client.gui.screen.GuiBase;

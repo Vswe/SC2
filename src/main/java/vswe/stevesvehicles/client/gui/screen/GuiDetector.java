@@ -9,7 +9,7 @@ import org.lwjgl.opengl.GL11;
 import vswe.stevesvehicles.client.gui.detector.DropDownMenuFlow;
 import vswe.stevesvehicles.client.gui.detector.DropDownMenuModules;
 import vswe.stevesvehicles.client.gui.detector.DropDownMenuStates;
-import vswe.stevesvehicles.old.Containers.ContainerDetector;
+import vswe.stevesvehicles.container.ContainerDetector;
 import vswe.stevesvehicles.detector.DetectorType;
 import vswe.stevesvehicles.client.gui.detector.DropDownMenu;
 import vswe.stevesvehicles.detector.LogicObject;
@@ -21,7 +21,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiDetector extends GuiBase {
     public GuiDetector(InventoryPlayer invPlayer, TileEntityDetector detector) {
-        super(new ContainerDetector(invPlayer, detector));
+        super(new ContainerDetector(detector));
         setXSize(255);
         setYSize(202);
 		this.detector = detector;

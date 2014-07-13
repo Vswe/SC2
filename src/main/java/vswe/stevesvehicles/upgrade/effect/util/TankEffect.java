@@ -8,7 +8,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 import vswe.stevesvehicles.client.gui.screen.GuiBase;
-import vswe.stevesvehicles.old.Containers.ContainerUpgrade;
+import vswe.stevesvehicles.container.ContainerUpgrade;
 import vswe.stevesvehicles.old.Helpers.ITankHolder;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.old.Helpers.Tank;

@@ -61,83 +61,83 @@ public abstract class ContainerBase extends Container {
     }
 
 	@Override
-    protected boolean mergeItemStack(ItemStack par1ItemStack, int par2, int par3, boolean par4){
+    protected boolean mergeItemStack(ItemStack item, int start, int end, boolean invert){
 		if (getMyInventory() == null) {
 			return false;
 		}		
 		
-        boolean var5 = false;
-        int var6 = par2;
+        boolean result = false;
+        int id = start;
 
-        if (par4) {
-            var6 = par3 - 1;
+        if (invert) {
+            id = end - 1;
         }
 
-        Slot var7;
-        ItemStack var8;
+        Slot slot;
+        ItemStack slotItem;
 
-        if (par1ItemStack.isStackable()) {
-            while (par1ItemStack.stackSize > 0 && (!par4 && var6 < par3 || par4 && var6 >= par2)) {
-                var7 = (Slot)this.inventorySlots.get(var6);
-                var8 = var7.getStack();
+        if (item.isStackable()) {
+            while (item.stackSize > 0 && (!invert && id < end || invert && id >= start)) {
+                slot = (Slot)this.inventorySlots.get(id);
+                slotItem = slot.getStack();
 
-                if (var8 != null && var8.stackSize > 0 && var8.getItem() == par1ItemStack.getItem() && (!par1ItemStack.getHasSubtypes() || par1ItemStack.getItemDamage() == var8.getItemDamage()) && ItemStack.areItemStackTagsEqual(par1ItemStack, var8)) {
-                    int var9 = var8.stackSize + par1ItemStack.stackSize;
+                if (slotItem != null && slotItem.stackSize > 0 && slotItem.getItem() == item.getItem() && (!item.getHasSubtypes() || item.getItemDamage() == slotItem.getItemDamage()) && ItemStack.areItemStackTagsEqual(item, slotItem)) {
+                    int size = slotItem.stackSize + item.stackSize;
 
-					int maxLimit = Math.min(par1ItemStack.getMaxStackSize(),var7.getSlotStackLimit());
-                    if (var9 <= maxLimit) {
-                        par1ItemStack.stackSize = 0;
-                        var8.stackSize = var9;
-                        var7.onSlotChanged();
-                        var5 = true;
-                    }else if (var8.stackSize < maxLimit) {
-                        par1ItemStack.stackSize -= maxLimit - var8.stackSize;
-                        var8.stackSize = maxLimit;
-                        var7.onSlotChanged();
-                        var5 = true;
+					int maxLimit = Math.min(item.getMaxStackSize(), slot.getSlotStackLimit());
+                    if (size <= maxLimit) {
+                        item.stackSize = 0;
+                        slotItem.stackSize = size;
+                        slot.onSlotChanged();
+                        result = true;
+                    }else if (slotItem.stackSize < maxLimit) {
+                        item.stackSize -= maxLimit - slotItem.stackSize;
+                        slotItem.stackSize = maxLimit;
+                        slot.onSlotChanged();
+                        result = true;
                     }
                 }
 
-                if (par4) {
-                    --var6;
+                if (invert) {
+                    --id;
                 }else{
-                    ++var6;
+                    ++id;
                 }
             }
         }
 
-        if (par1ItemStack.stackSize > 0){
-            if (par4){
-                var6 = par3 - 1;
+        if (item.stackSize > 0){
+            if (invert){
+                id = end - 1;
             }else{
-                var6 = par2;
+                id = start;
             }
 
-            while (!par4 && var6 < par3 || par4 && var6 >= par2){
-                var7 = (Slot)this.inventorySlots.get(var6);
-                var8 = var7.getStack();
+            while (!invert && id < end || invert && id >= start){
+                slot = (Slot)this.inventorySlots.get(id);
+                slotItem = slot.getStack();
 
-                if (var8 == null && TransferHandler.isItemValidForTransfer(var7, par1ItemStack, TransferHandler.TransferType.SHIFT)) {
-					int stackSize = Math.min(var7.getSlotStackLimit(), par1ItemStack.stackSize);
-					ItemStack newItem = par1ItemStack.copy();
+                if (slotItem == null && TransferHandler.isItemValidForTransfer(slot, item, TransferHandler.TransferType.SHIFT)) {
+					int stackSize = Math.min(slot.getSlotStackLimit(), item.stackSize);
+					ItemStack newItem = item.copy();
 					newItem.stackSize = stackSize;
-					par1ItemStack.stackSize -= stackSize;					
-                    var7.putStack(newItem);
-                    var7.onSlotChanged();
+					item.stackSize -= stackSize;
+                    slot.putStack(newItem);
+                    slot.onSlotChanged();
                     
-                    var5 = par1ItemStack.stackSize == 0;
+                    result = item.stackSize == 0;
                     break;
                 }
 
-                if (par4){
-                    --var6;
+                if (invert){
+                    --id;
                 }else{
-                    ++var6;
+                    ++id;
                 }
             }
         }
 
-        return var5;
+        return result;
     }
 	
 

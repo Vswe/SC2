@@ -1,17 +1,13 @@
-package vswe.stevesvehicles.old.Containers;
+package vswe.stevesvehicles.container;
 import java.util.ArrayList;
 
 import net.minecraft.inventory.IInventory;
 import vswe.stevesvehicles.container.slots.SlotCargo;
 import vswe.stevesvehicles.tileentity.TileEntityCargo;
 
-public class ContainerCargo extends ContainerManager
-{
+public class ContainerCargo extends ContainerManager {
 
-
-
-    public ContainerCargo(IInventory invPlayer, TileEntityCargo cargo)
-    {
+    public ContainerCargo(IInventory invPlayer, TileEntityCargo cargo) {
 		super(cargo);
 		
 		cargo.cargoSlots = new ArrayList<SlotCargo>();

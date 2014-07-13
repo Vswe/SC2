@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.Containers;
+package vswe.stevesvehicles.container;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -16,8 +16,7 @@ import vswe.stevesvehicles.tileentity.TileEntityCartAssembler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ContainerCartAssembler extends ContainerBase
-{
+public class ContainerCartAssembler extends ContainerBase {
 
 	public IInventory getMyInventory() {
 		return assembler;
@@ -28,8 +27,7 @@ public class ContainerCartAssembler extends ContainerBase
 	}
 
     private TileEntityCartAssembler assembler;
-    public ContainerCartAssembler(IInventory invPlayer, TileEntityCartAssembler assembler)
-    {
+    public ContainerCartAssembler(IInventory invPlayer, TileEntityCartAssembler assembler) {
         this.assembler = assembler;
 		
 		ArrayList<SlotAssembler> slots = assembler.getSlots();
@@ -39,10 +37,8 @@ public class ContainerCartAssembler extends ContainerBase
 		
 		
 		
-		for (int i = 0; i < 3; i++)
-        {
-            for (int k = 0; k < 9; k++)
-            {
+		for (int i = 0; i < 3; i++) {
+            for (int k = 0; k < 9; k++) {
                 addSlotToContainer(new Slot(invPlayer, k + i * 9 + 9, offsetX() + k * 18, i * 18 + offsetY()));
             }
         }
@@ -53,58 +49,52 @@ public class ContainerCartAssembler extends ContainerBase
         }
     }
 
-  
-    public boolean canInteractWith(EntityPlayer entityplayer)
-    {
-        return assembler.isUseableByPlayer(entityplayer);
+
+    @Override
+    public boolean canInteractWith(EntityPlayer player) {
+        return assembler.isUseableByPlayer(player);
     }
 
-    public void addCraftingToCrafters(ICrafting par1ICrafting)
-    {
-        super.addCraftingToCrafters(par1ICrafting);
+    @Override
+    public void addCraftingToCrafters(ICrafting player) {
+        super.addCraftingToCrafters(player);
 
-		assembler.initGuiData(this,par1ICrafting);
+		assembler.initGuiData(this,player);
     }
 
 	@SideOnly(Side.CLIENT)
-    public void updateProgressBar(int par1, int par2)
-    {
-		par2 &= 65535;
+    public void updateProgressBar(int id, int data) {
+		data &= 65535;
 
-		assembler.receiveGuiData(par1, (short)par2);
+		assembler.receiveGuiData(id, (short)data);
     }
 
-	public void detectAndSendChanges()
-    {
+    @Override
+	public void detectAndSendChanges() {
         super.detectAndSendChanges();
-		Iterator var1 = this.crafters.iterator();
+		Iterator players = this.crafters.iterator();
 
-		while (var1.hasNext())
-		{
-			ICrafting var2 = (ICrafting)var1.next();
+		while (players.hasNext()) {
+			ICrafting player = (ICrafting)players.next();
 
-			assembler.checkGuiData(this,var2);
+			assembler.checkGuiData(this,player);
 		}
     }
 	
-    protected int offsetX()
-    {
+    protected int offsetX() {
         return 176;
     }
 
-    protected int offsetY()
-    {
+    protected int offsetY() {
         return 174;
     }
 
 	public int lastMaxAssemblingTime;
-	public int lastCurrentAssemblingTime;
 	public boolean lastIsAssembling;
 	public int lastFuelLevel;
 	
 	@Override
-	public ItemStack slotClick(int slotID, int button, int keyflag, EntityPlayer player)
-    {
+	public ItemStack slotClick(int slotID, int button, int keyFlag, EntityPlayer player) {
 		if (slotID >= 0 && slotID < inventorySlots.size()) {
 			Slot hullSlot = (Slot)inventorySlots.get(slotID);
 			
@@ -136,7 +126,7 @@ public class ContainerCartAssembler extends ContainerBase
 			}
 		}
 		
-		return super.slotClick(slotID,button, keyflag, player);
+		return super.slotClick(slotID,button, keyFlag, player);
 	}
 	
 }

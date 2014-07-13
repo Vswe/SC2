@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.Containers;
+package vswe.stevesvehicles.container;
 import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.detector.LogicObjectOperator;
 import vswe.stevesvehicles.detector.OperatorObject;
@@ -7,9 +7,7 @@ import net.minecraft.inventory.IInventory;
 import vswe.stevesvehicles.detector.LogicObject;
 import vswe.stevesvehicles.tileentity.TileEntityDetector;
 
-public class ContainerDetector extends ContainerBase
-{
-
+public class ContainerDetector extends ContainerBase {
 
 	public IInventory getMyInventory() {
 		return null;
@@ -21,8 +19,7 @@ public class ContainerDetector extends ContainerBase
 	
     private TileEntityDetector detector;
 	public LogicObject mainObj;
-    public ContainerDetector(IInventory invPlayer, TileEntityDetector detector)
-    {
+    public ContainerDetector(TileEntityDetector detector) {
         this.detector = detector;
 
 		

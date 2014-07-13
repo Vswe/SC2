@@ -1,7 +1,7 @@
 package vswe.stevesvehicles.upgrade.effect.util;
 
 import net.minecraft.inventory.ICrafting;
-import vswe.stevesvehicles.old.Containers.ContainerUpgrade;
+import vswe.stevesvehicles.container.ContainerUpgrade;
 import vswe.stevesvehicles.client.gui.screen.GuiUpgrade;
 import vswe.stevesvehicles.tileentity.TileEntityUpgrade;
 import cpw.mods.fml.relauncher.Side;

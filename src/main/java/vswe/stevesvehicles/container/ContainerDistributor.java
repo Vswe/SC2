@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.Containers;
+package vswe.stevesvehicles.container;
 import java.util.ArrayList;
 
 import vswe.stevesvehicles.container.ContainerBase;
@@ -7,8 +7,7 @@ import net.minecraft.inventory.IInventory;
 import vswe.stevesvehicles.old.Helpers.DistributorSide;
 import vswe.stevesvehicles.tileentity.TileEntityDistributor;
 
-public class ContainerDistributor extends ContainerBase
-{
+public class ContainerDistributor extends ContainerBase {
 
 	public IInventory getMyInventory() {
 		return null;
@@ -20,15 +19,14 @@ public class ContainerDistributor extends ContainerBase
 	
 
     private TileEntityDistributor distributor;
-    public ContainerDistributor(IInventory invPlayer, TileEntityDistributor distributor)
-    {
+    public ContainerDistributor(TileEntityDistributor distributor) {
         this.distributor = distributor;
 
-		cachedValues = new ArrayList<Short>();
-		for (DistributorSide side : distributor.getSides()) {
-			cachedValues.add((short)0);
-			cachedValues.add((short)0);
-		}		
+        cachedValues = new ArrayList<Short>();
+        for (DistributorSide ignored : distributor.getSides()) {
+            cachedValues.add((short) 0);
+            cachedValues.add((short) 0);
+        }
     }
 
    

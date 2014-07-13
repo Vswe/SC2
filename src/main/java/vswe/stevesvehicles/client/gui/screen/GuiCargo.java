@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
 import vswe.stevesvehicles.localization.entry.block.LocalizationCargo;
 import vswe.stevesvehicles.localization.entry.block.LocalizationManager;
 import vswe.stevesvehicles.block.ModBlocks;
-import vswe.stevesvehicles.old.Containers.ContainerCargo;
+import vswe.stevesvehicles.container.ContainerCargo;
 import vswe.stevesvehicles.old.Helpers.CargoItemSelection;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.tileentity.TileEntityCargo;

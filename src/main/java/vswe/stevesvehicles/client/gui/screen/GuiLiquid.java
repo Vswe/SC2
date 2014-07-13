@@ -4,7 +4,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import vswe.stevesvehicles.localization.entry.block.LocalizationLiquid;
 import vswe.stevesvehicles.block.ModBlocks;
-import vswe.stevesvehicles.old.Containers.ContainerLiquid;
+import vswe.stevesvehicles.container.ContainerLiquid;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.tileentity.TileEntityLiquid;
 import cpw.mods.fml.relauncher.Side;

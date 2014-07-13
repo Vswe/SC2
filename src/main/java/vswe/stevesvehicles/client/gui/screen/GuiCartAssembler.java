@@ -22,7 +22,7 @@ import vswe.stevesvehicles.old.Helpers.ModuleSortMode;
 import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.network.PacketHandler;
 import vswe.stevesvehicles.old.StevesVehicles;
-import vswe.stevesvehicles.old.Containers.ContainerCartAssembler;
+import vswe.stevesvehicles.container.ContainerCartAssembler;
 import vswe.stevesvehicles.old.Helpers.DropDownMenuItem;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.old.Helpers.TitleBox;

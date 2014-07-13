@@ -1,12 +1,11 @@
-package vswe.stevesvehicles.old.Containers;
+package vswe.stevesvehicles.container;
 import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.tileentity.TileEntityBase;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.IInventory;
 import vswe.stevesvehicles.tileentity.TileEntityUpgrade;
 import vswe.stevesvehicles.upgrade.effect.util.InventoryEffect;
-public class ContainerUpgrade extends ContainerBase
-{
+public class ContainerUpgrade extends ContainerBase {
 
 	public IInventory getMyInventory() {
 		return upgrade;
@@ -34,17 +33,14 @@ public class ContainerUpgrade extends ContainerBase
         }
 		
 		
-		for (int i = 0; i < 3; i++)
-        {
-            for (int k = 0; k < 9; k++)
-            {
-                addSlotToContainer(new Slot(invPlayer, k + i * 9 + 9, offsetX() + k * 18, i * 18 + offsetY()));
+		for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 9; j++) {
+                addSlotToContainer(new Slot(invPlayer, j + i * 9 + 9, offsetX() + j * 18, i * 18 + offsetY()));
             }
         }
 
-        for (int j = 0; j < 9; j++)
-        {
-            addSlotToContainer(new Slot(invPlayer, j, offsetX() + j * 18, 58 + offsetY()));
+        for (int i = 0; i < 9; i++) {
+            addSlotToContainer(new Slot(invPlayer, i, offsetX() + i * 18, 58 + offsetY()));
         }		
     }
 

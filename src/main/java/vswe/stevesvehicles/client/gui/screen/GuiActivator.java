@@ -6,7 +6,7 @@ import org.lwjgl.opengl.GL11;
 
 import vswe.stevesvehicles.localization.entry.block.LocalizationToggler;
 import vswe.stevesvehicles.network.PacketHandler;
-import vswe.stevesvehicles.old.Containers.ContainerActivator;
+import vswe.stevesvehicles.container.ContainerActivator;
 import vswe.stevesvehicles.old.Helpers.ActivatorOption;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.tileentity.TileEntityActivator;
@@ -16,7 +16,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiActivator extends GuiBase {
     public GuiActivator(InventoryPlayer invPlayer, TileEntityActivator activator) {
-        super(new ContainerActivator(invPlayer, activator));
+        super(new ContainerActivator(activator));
         setXSize(255);
         setYSize(222);
 		this.activator = activator;

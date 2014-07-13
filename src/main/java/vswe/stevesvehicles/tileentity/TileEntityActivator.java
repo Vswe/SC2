@@ -11,7 +11,7 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.localization.entry.block.LocalizationToggler;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
-import vswe.stevesvehicles.old.Containers.ContainerActivator;
+import vswe.stevesvehicles.container.ContainerActivator;
 import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.old.Helpers.ActivatorOption;
 import vswe.stevesvehicles.client.gui.screen.GuiActivator;
@@ -37,7 +37,7 @@ public class TileEntityActivator extends TileEntityBase {
 	
 	@Override
 	public ContainerBase getContainer(InventoryPlayer inv) {
-		return new ContainerActivator(inv, this);		
+		return new ContainerActivator(this);
 	}
 	
 	/**
