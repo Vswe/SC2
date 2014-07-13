@@ -2,8 +2,7 @@ package vswe.stevesvehicles.old.Helpers;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.ItemStack;
-import vswe.stevesvehicles.block.ModBlocks;
-import vswe.stevesvehicles.old.Items.ModItems;
+import vswe.stevesvehicles.item.ModItems;
 import vswe.stevesvehicles.recipe.IRecipeOutput;
 import vswe.stevesvehicles.recipe.ModuleRecipeShaped;
 
@@ -43,6 +42,6 @@ public class StorageBlock implements IRecipeOutput {
 
     @Override
     public ItemStack getItemStack() {
-        return new ItemStack(ModItems.storages, 1, id);
+        return new ItemStack(ModItems.storage, 1, id);
     }
 }

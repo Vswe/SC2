@@ -7,7 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemEnchantedBook;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.ShapedOreRecipe;
-import vswe.stevesvehicles.old.Items.ModItems;
+import vswe.stevesvehicles.item.ModItems;
 
 import java.util.ArrayList;
 

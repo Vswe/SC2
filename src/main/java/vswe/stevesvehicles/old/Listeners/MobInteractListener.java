@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.village.MerchantRecipeList;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.EntityInteractEvent;
-import vswe.stevesvehicles.old.Items.ModItems;
+import vswe.stevesvehicles.item.ModItems;
 import vswe.stevesvehicles.old.Helpers.TradeHandler;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 

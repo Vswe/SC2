@@ -10,13 +10,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
-import vswe.stevesvehicles.old.Items.ModItems;
+import vswe.stevesvehicles.item.ModItems;
 import vswe.stevesvehicles.old.StevesVehicles;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import vswe.stevesvehicles.recipe.IRecipeOutput;
 import vswe.stevesvehicles.recipe.ModuleRecipeShaped;
-import vswe.stevesvehicles.recipe.ModuleRecipeShapeless;
 import vswe.stevesvehicles.upgrade.effect.BaseEffect;
 import vswe.stevesvehicles.upgrade.registry.UpgradeRegistry;
 

@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.Items;
+package vswe.stevesvehicles.item;
 import java.util.List;
 
 import net.minecraft.block.Block;
@@ -20,7 +20,6 @@ import net.minecraft.tileentity.TileEntity;
 import vswe.stevesvehicles.upgrade.registry.UpgradeRegistry;
 
 public class ItemUpgrade extends ItemBlock {
-
 
     public ItemUpgrade(Block block) {
         super(block);

@@ -8,7 +8,7 @@ import vswe.stevesvehicles.localization.entry.info.LocalizationLabel;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.old.Helpers.NBTHelper;
-import vswe.stevesvehicles.old.Items.ModItems;
+import vswe.stevesvehicles.item.ModItems;
 import vswe.stevesvehicles.util.Tuple;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
@@ -204,7 +204,7 @@ public final class ModuleDataItemHandler {
 
         data.setTag(VehicleBase.NBT_MODULES, modulesCompoundList);
 
-        ItemStack vehicleItem = new ItemStack(ModItems.carts, 1);
+        ItemStack vehicleItem = new ItemStack(ModItems.vehicles, 1);
         vehicleItem.setTagCompound(data);
         VehicleVersion.addVersion(vehicleItem);
 
@@ -290,5 +290,10 @@ public final class ModuleDataItemHandler {
         }
 
         return items;
+    }
+
+    public static boolean hasModules(ItemStack vehicle) {
+        NBTTagCompound compound = vehicle.getTagCompound();
+        return compound != null && compound.hasKey(VehicleBase.NBT_MODULES);
     }
 }

@@ -25,7 +25,7 @@ import vswe.stevesvehicles.module.data.ModuleType;
 import vswe.stevesvehicles.block.BlockCartAssembler;
 import vswe.stevesvehicles.block.ModBlocks;
 import vswe.stevesvehicles.old.Helpers.*;
-import vswe.stevesvehicles.old.Items.ModItems;
+import vswe.stevesvehicles.item.ModItems;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.upgrade.effect.assembly.FreeModules;
 import vswe.stevesvehicles.vehicle.VehicleBase;

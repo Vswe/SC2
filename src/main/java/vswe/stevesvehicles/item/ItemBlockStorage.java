@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.Items;
+package vswe.stevesvehicles.item;
 import java.util.List;
 
 import net.minecraft.block.Block;
@@ -15,8 +15,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import vswe.stevesvehicles.tab.CreativeTabLoader;
 
-public class ItemBlockStorage extends ItemBlock
-{
+public class ItemBlockStorage extends ItemBlock {
 
 	public static StorageBlock[] blocks;
 	

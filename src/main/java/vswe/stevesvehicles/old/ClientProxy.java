@@ -10,7 +10,7 @@ import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Fancy.FancyPancyLoader;
 import vswe.stevesvehicles.old.Helpers.*;
-import vswe.stevesvehicles.old.Items.ModItems;
+import vswe.stevesvehicles.item.ModItems;
 import vswe.stevesvehicles.client.rendering.RendererUpgrade;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;

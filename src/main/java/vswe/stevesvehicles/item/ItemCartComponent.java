@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.Items;
+package vswe.stevesvehicles.item;
 import java.util.List;
 
 import net.minecraft.client.renderer.texture.IIconRegister;

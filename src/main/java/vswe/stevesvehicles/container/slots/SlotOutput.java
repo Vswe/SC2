@@ -2,7 +2,7 @@ package vswe.stevesvehicles.container.slots;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.module.data.ModuleType;
-import vswe.stevesvehicles.old.Items.ModItems;
+import vswe.stevesvehicles.item.ModItems;
 import vswe.stevesvehicles.tileentity.TileEntityCartAssembler;
 
 public class SlotOutput extends SlotAssembler {
@@ -24,7 +24,7 @@ public class SlotOutput extends SlotAssembler {
 	
 	@Override
     public boolean isItemValid(ItemStack itemstack) {
-		if (!getAssembler().getIsAssembling() && itemstack.getItem() == ModItems.carts) {
+		if (!getAssembler().getIsAssembling() && itemstack.getItem() == ModItems.vehicles) {
 			NBTTagCompound info = itemstack.getTagCompound();
 			if (info != null && info.hasKey("maxTime")) {	
 				return true;

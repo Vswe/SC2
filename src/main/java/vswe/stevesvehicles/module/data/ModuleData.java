@@ -16,7 +16,7 @@ import vswe.stevesvehicles.localization.entry.info.LocalizationLabel;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.old.Helpers.ColorHelper;
-import vswe.stevesvehicles.old.Items.ModItems;
+import vswe.stevesvehicles.item.ModItems;
 import vswe.stevesvehicles.client.rendering.models.ModelVehicle;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.recipe.IRecipeOutput;

@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.localization.entry.block.LocalizationCargo;
 import vswe.stevesvehicles.old.Helpers.*;
-import vswe.stevesvehicles.old.Items.ModItems;
+import vswe.stevesvehicles.item.ModItems;
 import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.container.ContainerCargo;
 import vswe.stevesvehicles.container.ContainerManager;
@@ -56,7 +56,7 @@ public class TileEntityCargo extends TileEntityManager
     //TODO maybe make this registration a bit nice
 	public static void loadSelectionSettings() {
 		itemSelections = new ArrayList<CargoItemSelection>();
-		itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_ALL, Slot.class, new ItemStack(ModItems.carts, 1, 0)));
+		itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_ALL, Slot.class, new ItemStack(ModItems.vehicles, 1, 0)));
 		itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_ENGINE, SlotFuel.class, new ItemStack(ModItems.modules, 1, 0)));       //TODO don't use static ids for modules
 		itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_RAILER, SlotBuilder.class, new ItemStack(ModItems.modules, 1, 10))); //TODO don't use static ids for modules
 		itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_STORAGE, SlotChest.class, new ItemStack(Blocks.chest, 1)));

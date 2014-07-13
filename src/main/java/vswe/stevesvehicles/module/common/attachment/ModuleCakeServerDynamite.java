@@ -2,7 +2,7 @@ package vswe.stevesvehicles.module.common.attachment;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import vswe.stevesvehicles.old.Items.ModItems;
+import vswe.stevesvehicles.item.ModItems;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.container.slots.SlotBase;

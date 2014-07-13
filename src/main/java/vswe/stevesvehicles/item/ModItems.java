@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.Items;
+package vswe.stevesvehicles.item;
 
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -7,8 +7,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.common.config.Configuration;
-import vswe.stevesvehicles.item.ItemVehicles;
-import vswe.stevesvehicles.item.ItemVehicleModule;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.block.ModBlocks;
 import vswe.stevesvehicles.detector.DetectorType;
@@ -21,31 +19,30 @@ import java.util.HashMap;
 
 public final class ModItems {
 
-    public static ItemVehicles carts;
+    public static ItemVehicles vehicles;
     public static ItemCartComponent component;
     public static ItemVehicleModule modules;
     public static ItemUpgrade upgrades;
-    public static ItemBlockStorage storages;
+    public static ItemBlockStorage storage;
     public static ItemBlockDetector detectors;
 
 
-    private static final String CART_NAME = "ModularCart";
+    private static final String VEHICLE_NAME = "ModularVehicle";
     private static final String COMPONENTS_NAME = "ModuleComponents";
     private static final String MODULES_NAME = "CartModule";
 
     private static HashMap<String,Boolean> validModules = new HashMap<String,Boolean>();
 
     public static void preBlockInit(Configuration config) {
-        (carts = new ItemVehicles()).setUnlocalizedName(StevesVehicles.localStart + CART_NAME);
+        (vehicles = new ItemVehicles()).setUnlocalizedName(StevesVehicles.localStart + VEHICLE_NAME);
         component = new ItemCartComponent();
         modules = new ItemVehicleModule();
 
-        GameRegistry.registerItem(carts, CART_NAME);
+        GameRegistry.registerItem(vehicles, VEHICLE_NAME);
         GameRegistry.registerItem(component, COMPONENTS_NAME);
         GameRegistry.registerItem(modules, MODULES_NAME);
 
 
-        //TODO this is being called before all modules have been added, needs to be figured out
         for (ModuleData module : ModuleRegistry.getAllModules()) {
             if (!module.getIsLocked()) {
                 validModules.put(module.getFullRawUnlocalizedName(), config.get("EnabledModules", module.getName().replace(" ", "").replace(":","_"), module.getEnabledByDefault()).getBoolean(true));
@@ -53,8 +50,8 @@ public final class ModItems {
         }
 
         for (int i = 0; i < ItemCartComponent.size(); i++) {
-            ItemStack subcomponent = new ItemStack(component,1,i);
-            GameRegistry.registerCustomItemStack(subcomponent.getUnlocalizedName(), subcomponent);
+            ItemStack subComponent = new ItemStack(component,1,i);
+            GameRegistry.registerCustomItemStack(subComponent.getUnlocalizedName(), subComponent);
         }
 
     }
@@ -62,19 +59,14 @@ public final class ModItems {
     public static void postBlockInit(Configuration config) {
         detectors = (ItemBlockDetector) new ItemStack(ModBlocks.DETECTOR_UNIT.getBlock()).getItem();
         upgrades = (ItemUpgrade) new ItemStack(ModBlocks.UPGRADE.getBlock()).getItem();
-        storages = (ItemBlockStorage) new ItemStack(ModBlocks.STORAGE.getBlock()).getItem();
+        storage = (ItemBlockStorage) new ItemStack(ModBlocks.STORAGE.getBlock()).getItem();
 
 
 
         for (int i = 0; i < ItemBlockStorage.blocks.length; i++) {
-            ItemStack storage = new ItemStack(storages, 1, i);
+            ItemStack storage = new ItemStack(ModItems.storage, 1, i);
             GameRegistry.registerCustomItemStack(storage.getUnlocalizedName(), storage);
         }
-
-        //for (AssemblerUpgrade upgrade : AssemblerUpgrade.getUpgradesList()) {
-        //    ItemStack upgradeStack = new ItemStack(upgrades, 1, upgrade.getId());
-        //    GameRegistry.registerCustomItemStack(upgradeStack.getUnlocalizedName(), upgradeStack);
-        //}
 
         for (DetectorType type : DetectorType.values()) {
             ItemStack stack = new ItemStack(detectors, 1, type.getMeta());
@@ -94,7 +86,7 @@ public final class ModItems {
 
     public static void addRecipes() {
         for (ModuleData module : ModuleRegistry.getAllModules()) {
-            if (!module.getIsLocked()) { //&& validModules.get(module.getFullRawUnlocalizedName())) { //TODO see todo further up
+            if (!module.getIsLocked() && validModules.get(module.getFullRawUnlocalizedName())) {
                 module.loadRecipes();
             }
         }

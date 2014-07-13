@@ -6,7 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
-import vswe.stevesvehicles.old.Items.ModItems;
+import vswe.stevesvehicles.item.ModItems;
 import vswe.stevesvehicles.tab.CreativeTabLoader;
 
 public class BlockMetalStorage extends Block implements IBlockBase {
@@ -22,9 +22,9 @@ public class BlockMetalStorage extends Block implements IBlockBase {
     @SideOnly(Side.CLIENT)
 	@Override
     public IIcon getIcon(int side, int meta) {
-    	meta %= ModItems.storages.icons.length;
+    	meta %= ModItems.storage.icons.length;
     	
-    	return ModItems.storages.icons[meta];
+    	return ModItems.storage.icons[meta];
     }
     
     public int damageDropped(int meta) {

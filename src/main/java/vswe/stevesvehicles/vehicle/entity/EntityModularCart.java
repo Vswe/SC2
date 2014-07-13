@@ -24,7 +24,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
 import vswe.stevesvehicles.block.ModBlocks;
-import vswe.stevesvehicles.old.Items.ModItems;
+import vswe.stevesvehicles.item.ModItems;
 import vswe.stevesvehicles.old.Helpers.DataWatcherLockable;
 import vswe.stevesvehicles.detector.DetectorType;
 import vswe.stevesvehicles.module.ModuleBase;
@@ -189,7 +189,7 @@ public class EntityModularCart extends EntityMinecart
 
 			return cart;
 		}else{
-			return new ItemStack(ModItems.carts);
+			return new ItemStack(ModItems.vehicles);
 		}
     }
 

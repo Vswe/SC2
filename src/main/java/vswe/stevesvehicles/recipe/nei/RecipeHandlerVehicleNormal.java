@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataHull;
 import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
-import vswe.stevesvehicles.old.Items.ModItems;
+import vswe.stevesvehicles.item.ModItems;
 
 import java.util.List;
 
@@ -64,7 +64,7 @@ public class RecipeHandlerVehicleNormal extends RecipeHandlerVehicle {
 
     @Override
     public void loadCraftingRecipes(ItemStack result) {
-        if (result != null && result.getItem() == ModItems.carts) {
+        if (result != null && result.getItem() == ModItems.vehicles) {
             CachedVehicleRecipe cache = new CachedVehicleRecipeNormal(result);
             if (cache.isValid()) {
                 arecipes.add(cache);

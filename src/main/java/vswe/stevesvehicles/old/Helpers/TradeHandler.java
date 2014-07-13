@@ -6,7 +6,7 @@ import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
-import vswe.stevesvehicles.old.Items.ModItems;
+import vswe.stevesvehicles.item.ModItems;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 
 public class TradeHandler implements VillagerRegistry.IVillageTradeHandler

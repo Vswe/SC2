@@ -1,6 +1,6 @@
 package vswe.stevesvehicles.container.slots;
 import vswe.stevesvehicles.old.Helpers.ComponentTypes;
-import vswe.stevesvehicles.old.Items.ModItems;
+import vswe.stevesvehicles.item.ModItems;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 

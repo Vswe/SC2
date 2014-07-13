@@ -23,7 +23,7 @@ import vswe.stevesvehicles.module.data.ModuleDataHull;
 import vswe.stevesvehicles.module.data.ModuleType;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.old.Helpers.TitleBox;
-import vswe.stevesvehicles.old.Items.ModItems;
+import vswe.stevesvehicles.item.ModItems;
 import vswe.stevesvehicles.tileentity.TileEntityCartAssembler;
 
 import java.awt.Point;

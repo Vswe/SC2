@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
-import vswe.stevesvehicles.old.Items.ModItems;
+import vswe.stevesvehicles.item.ModItems;
 import vswe.stevesvehicles.container.ContainerCartAssembler;
 import vswe.stevesvehicles.old.Helpers.TransferHandler;
 import vswe.stevesvehicles.module.data.ModuleData;

@@ -6,7 +6,7 @@ import cpw.mods.fml.common.gameevent.TickEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import vswe.stevesvehicles.old.Helpers.HolidayType;
-import vswe.stevesvehicles.old.Items.ModItems;
+import vswe.stevesvehicles.item.ModItems;
 import vswe.stevesvehicles.old.StevesVehicles;
 import cpw.mods.fml.relauncher.Side;
 

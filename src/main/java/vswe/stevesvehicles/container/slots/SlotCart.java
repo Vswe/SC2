@@ -1,5 +1,5 @@
 package vswe.stevesvehicles.container.slots;
-import vswe.stevesvehicles.old.Items.ModItems;
+import vswe.stevesvehicles.item.ModItems;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.inventory.Slot;
@@ -10,6 +10,6 @@ public class SlotCart extends Slot {
 
 	@Override
     public boolean isItemValid(ItemStack itemstack) {
-        return itemstack != null && itemstack.getItem() == ModItems.carts && itemstack.getTagCompound() != null && !itemstack.getTagCompound().hasKey("maxTime");
+        return itemstack != null && itemstack.getItem() == ModItems.vehicles && itemstack.getTagCompound() != null && !itemstack.getTagCompound().hasKey("maxTime");
     }
 }

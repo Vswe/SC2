@@ -4,7 +4,7 @@ import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
-import vswe.stevesvehicles.old.Items.ModItems;
+import vswe.stevesvehicles.item.ModItems;
 
 import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
@@ -16,7 +16,7 @@ import java.util.List;
 
 public class RenderVehicleItem implements IItemRenderer {
 	public RenderVehicleItem() {
-		MinecraftForgeClient.registerItemRenderer(ModItems.carts, this);
+		MinecraftForgeClient.registerItemRenderer(ModItems.vehicles, this);
 	}
 
   /** 
@@ -28,7 +28,7 @@ public class RenderVehicleItem implements IItemRenderer {
      */
 	@Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-		return true;
+		return ModuleDataItemHandler.hasModules(item);
 	}
     
     /**
