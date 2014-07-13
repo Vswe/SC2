@@ -18,6 +18,8 @@ import vswe.stevesvehicles.localization.ILocalizedText;
 import vswe.stevesvehicles.localization.PlainText;
 import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
+import vswe.stevesvehicles.network.DataWriter;
+import vswe.stevesvehicles.network.PacketType;
 import vswe.stevesvehicles.old.Helpers.ModuleSortMode;
 import vswe.stevesvehicles.item.ModItems;
 import vswe.stevesvehicles.network.PacketHandler;
@@ -784,7 +786,9 @@ public class GuiCartAssembler extends GuiBase {
 		int y = y0 - getGuiTop();
 		
 		if (inRect(x,y, ASSEMBLE_RECT)) {
-            PacketHandler.sendPacket(0, new byte[0]);
+            DataWriter dw = PacketHandler.getDataWriter(PacketType.CONTAINER);
+            dw.writeByte(0);
+            PacketHandler.sendPacketToServer(dw);
 		}else if (inRect(x,y, BLACK_BACKGROUND)) {
             if (assembler.selectedTab == 0) {
                 if (button == 0) {
@@ -816,9 +820,10 @@ public class GuiCartAssembler extends GuiBase {
                     if (inRect(x, y, target)) {
                         int moduleId = ModuleRegistry.getIdFromModule(moduleData);
                         if (moduleId >= 0) {
-                            byte b1 = (byte)(moduleId & 255);
-                            byte b2 = (byte)((moduleId >>> 8) & 255);
-                            PacketHandler.sendPacket(2, new byte[] {b2, b1});
+                            DataWriter dw = PacketHandler.getDataWriter(PacketType.CONTAINER);
+                            dw.writeByte(2);
+                            dw.writeShort(moduleId);
+                            PacketHandler.sendPacketToServer(dw);
                         }
                     }
                 }
@@ -866,7 +871,10 @@ public class GuiCartAssembler extends GuiBase {
 					
 				if (inRect(x,y, new int[] {targetX, targetY, size, size})) {
 					if (slot.getStack() != null && ((i != 0 && slot.getStack().stackSize <= 0) || assembler.isInFreeMode())) {
-						PacketHandler.sendPacket(1, new byte[] {(byte)i});
+                        DataWriter dw = PacketHandler.getDataWriter(PacketType.CONTAINER);
+                        dw.writeByte(1);
+                        dw.writeByte(i);
+                        PacketHandler.sendPacketToServer(dw);
 					}
 				}
 				

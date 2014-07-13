@@ -10,6 +10,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.localization.entry.block.LocalizationToggler;
+import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.container.ContainerActivator;
 import vswe.stevesvehicles.container.ContainerBase;
@@ -95,14 +96,13 @@ public class TileEntityActivator extends TileEntityBase {
 
 
 	@Override
-	public void receivePacket(int id, byte[] data, EntityPlayer player) {
-		if (id == 0) {
-			boolean leftClick = (data[0] & 1) == 0;
-			int optionId = (data[0] & ~1) >> 1;
-			if (optionId >= 0 && optionId < options.size()) {
-				options.get(optionId).changeOption(leftClick);
-			}
-		}
+	public void receivePacket(DataReader dr, EntityPlayer player) {
+        boolean leftClick = dr.readBoolean();
+        int optionId = dr.readByte();
+        if (optionId >= 0 && optionId < options.size()) {
+            options.get(optionId).changeOption(leftClick);
+        }
+
 	}
 	
 

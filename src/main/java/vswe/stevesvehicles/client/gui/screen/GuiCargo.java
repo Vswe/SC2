@@ -17,6 +17,7 @@ import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.tileentity.TileEntityCargo;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import vswe.stevesvehicles.tileentity.TileEntityManager;
 
 @SideOnly(Side.CLIENT)
 public class GuiCargo extends GuiManager {
@@ -161,9 +162,9 @@ public class GuiCargo extends GuiManager {
 	}
 	
 	@Override
-	protected boolean sendOnClick(int id, int x, int y, byte data) {
+	protected boolean sendOnClick(int id, int button, int x, int y) {
 		if (inRect(x, y, getBoxCoordinate(id))) {
-			getManager().sendPacket(1, data);
+            sendPacket(TileEntityManager.PacketId.VEHICLE_PART, id, button == 0);
 			return true;
 		}else{
 			return false;

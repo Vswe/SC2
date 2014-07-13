@@ -7,6 +7,9 @@ import org.lwjgl.opengl.GL11;
 
 import vswe.stevesvehicles.localization.entry.block.LocalizationManager;
 import vswe.stevesvehicles.container.ContainerManager;
+import vswe.stevesvehicles.network.DataWriter;
+import vswe.stevesvehicles.network.PacketHandler;
+import vswe.stevesvehicles.network.PacketType;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.tileentity.TileEntityManager;
 import net.minecraft.block.Block;
@@ -280,32 +283,48 @@ public abstract class GuiManager extends GuiBase {
             y -= getGuiTop();
 
             if (inRect(x, y, getCenterCoordinate())) {
-                manager.sendPacket(5, (byte)(button == 0 ? 1 : -1));
+                sendPacket(TileEntityManager.PacketId.LAYOUT_TYPE, button == 0);
             }else{
 
 				for (int i = 0; i < 4; i++) {
-					byte data = (byte)i;
-					data |= (button << 2);
-
 					if (inRect(x, y, getArrowCoordinate(i))) {
-						manager.sendPacket(0, (byte)i);
+                        sendPacket(TileEntityManager.PacketId.TRANSFER_DIRECTION, i);
 						break;
 					}else if (inRect(x, y, getTextCoordinate(i))) {
-						manager.sendPacket(2, data);
+                        sendPacket(TileEntityManager.PacketId.AMOUNT, i, button == 0);
 						break;
 					}else if (inRect(x, y, getColorSelectorCoordinate(i))) {
-						manager.sendPacket(3, data);
+						sendPacket(TileEntityManager.PacketId.COLOR, i, button == 0);
 						break;
 					}else if (inRect(x, y, getReturnCoordinate(i))) {
-						manager.sendPacket(4, (byte)i);
+                        sendPacket(TileEntityManager.PacketId.RETURN_MODE, i);
 						break;
-					}else if (sendOnClick(i, x, y, data)) {
+					}else if (sendOnClick(i, button, x, y)) {
 						break;
 					}
 				}
 			}
 			
         }
+    }
+
+    protected void sendPacket(TileEntityManager.PacketId id, boolean dif) {
+        DataWriter dw = getDataWriter(id);
+        dw.writeBoolean(dif);
+        PacketHandler.sendPacketToServer(dw);
+    }
+
+    protected void sendPacket(TileEntityManager.PacketId id, int railId) {
+        DataWriter dw = getDataWriter(id);
+        dw.writeByte(railId);
+        PacketHandler.sendPacketToServer(dw);
+    }
+
+    protected void sendPacket(TileEntityManager.PacketId id, int railId, boolean dif) {
+        DataWriter dw = getDataWriter(id);
+        dw.writeByte(railId);
+        dw.writeBoolean(dif);
+        PacketHandler.sendPacketToServer(dw);
     }
 
     protected void setColor(int color) {
@@ -334,11 +353,18 @@ public abstract class GuiManager extends GuiBase {
         }
     }
 
+    protected DataWriter getDataWriter(TileEntityManager.PacketId id) {
+        DataWriter dw = PacketHandler.getDataWriter(PacketType.CONTAINER);
+        dw.writeEnum(id);
+        return dw;
+    }
+
+
 
     private TileEntityManager manager;
 	
 	protected void drawExtraOverlay(int id, int x, int y) {}
-	protected boolean sendOnClick(int id, int x, int y, byte data) {return false;}
+	protected boolean sendOnClick(int id, int button, int x, int y) {return false;}
 	protected int offsetObjectY(int layout, int x, int y) {return 0;}
 	protected void drawItems(int id, RenderItem renderitem, int left, int top) {}
 	protected abstract String getMaxSizeOverlay(int id);

@@ -81,9 +81,10 @@ public class PacketHandler {
             PacketType type = dr.readEnum(PacketType.class);
             World world = player.worldObj;
 
-            if (type == PacketType.VEHICLE || type == PacketType.BLOCK) {
-                int id = dr.readByte();
+            if (type == PacketType.CONTAINER) {
+
                 if (player.openContainer instanceof ContainerPlayer) {
+                    int id = dr.readByte();
                     int entityId = dr.readInteger();
 
                     int len = dr.readByte();
@@ -96,16 +97,17 @@ public class PacketHandler {
                         receivePacketAtVehicle(vehicle, id, data, player);
                     }
                 }else{
-
-                    int len = dr.readByte();
-                    byte[] data = new byte[len];
-                    for (int i = 0; i < len; i++) {
-                        data[i] = (byte)dr.readByte();
-                    }
-
                     Container con = player.openContainer;
 
                     if (con instanceof ContainerVehicle) {
+                        int id = dr.readByte();
+                        int len = dr.readByte();
+                        byte[] data = new byte[len];
+                        for (int i = 0; i < len; i++) {
+                            data[i] = (byte)dr.readByte();
+                        }
+
+
                         ContainerVehicle containerVehicle = (ContainerVehicle)con;
                         VehicleBase vehicle = containerVehicle.getVehicle();
 
@@ -114,7 +116,7 @@ public class PacketHandler {
                         ContainerBase containerBase =(ContainerBase)con;
                         TileEntityBase base = containerBase.getTileEntity();
                         if (base != null) {
-                            base.receivePacket(id, data, player);
+                            base.receivePacket(dr, player);
                         }
                     }
                 }
@@ -158,7 +160,7 @@ public class PacketHandler {
 
 
 	public static void sendPacket(int id, byte[] extraData) {
-        DataWriter dw = getDataWriter(PacketType.VEHICLE);
+        DataWriter dw = getDataWriter(PacketType.CONTAINER);
         dw.writeByte(id);
         dw.writeByte(extraData.length);
         for (byte b : extraData) {
@@ -166,6 +168,10 @@ public class PacketHandler {
         }
         dw.sendToServer();
 	}
+
+    public static void sendPacketToServer(DataWriter dw) {
+        dw.sendToServer();
+    }
 
 	public static void sendPacket(VehicleBase vehicleBase,int id, byte[] extraData) {
         DataWriter dw = getDataWriter(PacketType.VEHICLE);

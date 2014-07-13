@@ -18,6 +18,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import vswe.stevesvehicles.localization.PlainText;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
+import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.old.Helpers.DropDownMenuItem;
 import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
@@ -556,14 +557,16 @@ public class TileEntityCartAssembler extends TileEntityBase
 	}
 	
 	@Override
-	public void receivePacket(int id, byte[] data, EntityPlayer player) {
-		if (id == 0) {
+	public void receivePacket(DataReader dr, EntityPlayer player) {
+        int id = dr.readByte();
+        System.out.println(id);
+        if (id == 0) {
 			//if a player clicked the assemble button, try to assemble the cart
 			doAssemble();
 		}else if(id == 1) {
 
 			//if a slot was clicked with a module of an already existing cart, mark it for removal or to keep it depending on what it already is. This is also used to remove modules in free mode.
-			int slotId = data[0];
+			int slotId = dr.readByte();
             if (slotId >= 0 && slotId < getSlots().size()) {
                 SlotAssembler slot = getSlots().get(slotId);
                 if (slot.getStack() != null) {
@@ -591,16 +594,7 @@ public class TileEntityCartAssembler extends TileEntityBase
                 }
 			}
         }else if(id == 2) {
-            int b1 = data[1];
-            if (b1 < 0) {
-                b1 += 256;
-            }
-            int b2 = data[0];
-            if (b2 < 0) {
-                b2 += 256;
-            }
-
-            int val = (b2 << 8) | b1;
+            int val = dr.readShort();
             ModuleData moduleData = ModuleRegistry.getModuleFromId(val);
             if (moduleData != null) {
                 if (moduleData instanceof ModuleDataHull && getHullModule() != null) {

@@ -6,6 +6,7 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.detector.LogicObjectOperator;
 import vswe.stevesvehicles.detector.OperatorObject;
+import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.container.ContainerDetector;
@@ -93,30 +94,38 @@ public class TileEntityDetector extends TileEntityBase {
 
 
 	@Override
-	public void receivePacket(int id, byte[] data, EntityPlayer player) {
+	public void receivePacket(DataReader dr, EntityPlayer player) {
 		//add object
-		if (id == 0) {
-			byte lowestId = (byte)-1;
-			for (int i = 0; i < 128; i++) {
-				if (!isIdOccupied(mainObj, i)) {
-					lowestId = (byte)i;
-					break;
-				}
-			}
-			
-			if (lowestId == -1) {
-				return;
-			}
+		if (dr.readBoolean()) {
+            int count = dr.readByte();
+            for (int i = 0; i < count; i++) {
+                createObject(dr);
+            }
 
-            LogicObject.createObject(this, lowestId, data);
 		//remove object
-		}else if(id == 1) {
-			removeObject(mainObj, data[0]);
+		}else {
+			removeObject(mainObj, dr.readByte());
 		}
 	}
 
-	
-	public LogicObject getObjectFromId(LogicObject object, int id) {
+    private void createObject(DataReader dr) {
+        byte lowestId = (byte)-1;
+        for (int i = 0; i < 128; i++) {
+            if (!isIdOccupied(mainObj, i)) {
+                lowestId = (byte)i;
+                break;
+            }
+        }
+
+        if (lowestId == -1) {
+            return;
+        }
+
+        LogicObject.createObject(this, lowestId, dr);
+    }
+
+
+    public LogicObject getObjectFromId(LogicObject object, int id) {
 		if(object.getId() == id) {	
 			return object;
 		}

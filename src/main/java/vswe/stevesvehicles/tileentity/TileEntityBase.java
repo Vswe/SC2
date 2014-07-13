@@ -10,6 +10,7 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.tileentity.TileEntity;
 import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.client.gui.screen.GuiBase;
+import vswe.stevesvehicles.network.DataReader;
 
 public abstract class TileEntityBase extends TileEntity {
 
@@ -19,11 +20,10 @@ public abstract class TileEntityBase extends TileEntity {
 	
 	/**
 	 * Called when this tile entity receives a packet from the client.
-	 * @param id The id of the packet
-	 * @param data The bytes the client sent
+	 * @param dr The data reader with the packet data
 	 * @param player The player associated with the client sending the packet
 	 */
-	public void receivePacket(int id, byte[] data, EntityPlayer player) {}	
+	public void receivePacket(DataReader dr, EntityPlayer player) {}
 	
 	/**
 	 * Returns a new interface for this tile entity

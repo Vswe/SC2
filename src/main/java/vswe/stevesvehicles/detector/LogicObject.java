@@ -1,5 +1,6 @@
 package vswe.stevesvehicles.detector;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
@@ -7,8 +8,11 @@ import vswe.stevesvehicles.detector.modulestate.ModuleState;
 import vswe.stevesvehicles.detector.modulestate.registry.ModuleStateRegistry;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
+import vswe.stevesvehicles.network.DataReader;
+import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.network.PacketHandler;
 import vswe.stevesvehicles.client.gui.screen.GuiDetector;
+import vswe.stevesvehicles.network.PacketType;
 import vswe.stevesvehicles.tileentity.TileEntityDetector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -34,14 +38,31 @@ public abstract class LogicObject {
 
 	public void setParentAndUpdate(LogicObject parent) {
 		if (parent != null) {
-			PacketHandler.sendPacket(0, new byte[] {parent.id, (byte)getType(), (byte)((data >> 8) & 255), (byte)(data & 255)});
-			for (LogicObject child : children) {
-				child.setParentAndUpdate(this);
-			}			
+            List<LogicObject> objects = new ArrayList<LogicObject>();
+            fillTree(objects);
+            DataWriter dw = PacketHandler.getDataWriter(PacketType.CONTAINER);
+            dw.writeBoolean(true);
+            dw.writeByte(objects.size());
+            for (LogicObject object : objects) {
+                dw.writeByte(object.parent.id);
+                dw.writeByte(object.getType());
+                dw.writeShort(object.data);
+            }
+            PacketHandler.sendPacketToServer(dw);
 		}else{
-			PacketHandler.sendPacket(1,new byte[] {id});
+            DataWriter dw = PacketHandler.getDataWriter(PacketType.CONTAINER);
+            dw.writeBoolean(false);
+            dw.writeByte(id);
+            PacketHandler.sendPacketToServer(dw);
 		}
 	}
+
+    private void fillTree(List<LogicObject> objects) {
+        objects.add(this);
+        for (LogicObject child : children) {
+            child.fillTree(objects);
+        }
+    }
 	
 
 	public void setParent(LogicObject parent) {
@@ -199,14 +220,12 @@ public abstract class LogicObject {
     public abstract String getName();
     public abstract int getType();
 
-    public static void createObject(TileEntityDetector detector, byte id, byte[] data) {
-        byte parentId = data[0];
-        byte type = data[1];
-        int part1 = data[2] < 0 ? 256 + data[2] : data[2];
-        int part2 = data[3] < 0 ? 256 + data[3] : data[3];
-        int dataId = part1 << 8 | part2;
+    public static void createObject(TileEntityDetector detector, byte id, DataReader dr) {
+        int parentId = dr.readByte();
+        int type = dr.readByte();
+        int dataId = dr.readShort();
 
-        createObject(detector, id, parentId, type, (short)dataId);
+        createObject(detector, id, (byte)parentId, (byte)type, (short)dataId);
     }
 
 

@@ -1,13 +1,15 @@
 package vswe.stevesvehicles.client.gui.screen;
 import java.util.ArrayList;
 
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
 import vswe.stevesvehicles.localization.entry.block.LocalizationDistributor;
 import vswe.stevesvehicles.container.ContainerDistributor;
+import vswe.stevesvehicles.network.DataWriter;
+import vswe.stevesvehicles.network.PacketHandler;
+import vswe.stevesvehicles.network.PacketType;
 import vswe.stevesvehicles.old.Helpers.DistributorSetting;
 import vswe.stevesvehicles.old.Helpers.DistributorSide;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
@@ -18,7 +20,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiDistributor extends GuiBase {
-    public GuiDistributor(InventoryPlayer invPlayer, TileEntityDistributor distributor) {
+    public GuiDistributor(TileEntityDistributor distributor) {
         super(new ContainerDistributor(distributor));
         setXSize(255);
         setYSize(186);
@@ -197,7 +199,11 @@ public class GuiDistributor extends GuiBase {
 					int[] box = getSideBoxRect(id++);
 					
 					if (inRect(x,y, box)) {
-						distributor.sendPacket(0, new byte[] {(byte)activeId,(byte)side.getId()} );
+                        DataWriter dw = PacketHandler.getDataWriter(PacketType.CONTAINER);
+                        dw.writeByte(activeId);
+                        dw.writeByte(side.getId());
+                        dw.writeBoolean(true);
+                        PacketHandler.sendPacketToServer(dw);
 						break;
 					}
 				}
@@ -215,7 +221,12 @@ public class GuiDistributor extends GuiBase {
 								int[] settingsBox = getActiveSettingBoxRect(id, settingCount++);
 								
 								if (inRect(x,y, settingsBox)) {
-									distributor.sendPacket(1, new byte[] {(byte)setting.getId(),(byte)side.getId()} );
+                                    DataWriter dw = PacketHandler.getDataWriter(PacketType.CONTAINER);
+                                    dw.writeByte(activeId);
+                                    dw.writeByte(side.getId());
+                                    dw.writeBoolean(false);
+                                    PacketHandler.sendPacketToServer(dw);
+                                    break;
 								}
 									
 							}

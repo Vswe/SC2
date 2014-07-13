@@ -18,6 +18,7 @@ import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.FluidTank;
 import vswe.stevesvehicles.localization.entry.block.LocalizationDistributor;
+import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.network.PacketHandler;
 import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.container.ContainerDistributor;
@@ -34,7 +35,7 @@ public class TileEntityDistributor extends TileEntityBase
 	@SideOnly(Side.CLIENT)
 	@Override
 	public GuiBase getGui(InventoryPlayer inv) {
-		return new GuiDistributor(inv, this);
+		return new GuiDistributor(this);
 	}
 	
 	@Override
@@ -88,30 +89,18 @@ public class TileEntityDistributor extends TileEntityBase
 		dirty = true;
     }
 
-	protected void sendPacket(int id) {
-		sendPacket(id, new byte[0]);
-	}
-	protected void sendPacket(int id, byte data) {
-		sendPacket(id, new byte[] {data});
-	}
-	public void sendPacket(int id, byte[] data) {
-		PacketHandler.sendPacket(id,data);
-	}
 
 	@Override
-	public void receivePacket(int id, byte[] data, EntityPlayer player) {
-
-		if (id == 0 || id == 1) {
-			byte settingId = data[0];
-			byte sideId = data[1];
-			if (settingId >= 0 && settingId < DistributorSetting.settings.size() && sideId >= 0 && sideId < getSides().size()) {
-				if (id == 0) {
-					getSides().get(sideId).set(settingId);
-				}else{
-					getSides().get(sideId).reset(settingId);
-				}
-			}
-		}
+	public void receivePacket(DataReader dr, EntityPlayer player) {
+        int settingId = dr.readByte();
+        int sideId = dr.readByte();
+        if (settingId >= 0 && settingId < DistributorSetting.settings.size() && sideId >= 0 && sideId < getSides().size()) {
+            if (dr.readBoolean()) {
+                getSides().get(sideId).set(settingId);
+            }else{
+                getSides().get(sideId).reset(settingId);
+            }
+        }
 	}
 	
 

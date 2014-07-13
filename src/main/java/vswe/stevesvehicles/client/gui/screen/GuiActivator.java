@@ -5,8 +5,10 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import vswe.stevesvehicles.localization.entry.block.LocalizationToggler;
+import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.network.PacketHandler;
 import vswe.stevesvehicles.container.ContainerActivator;
+import vswe.stevesvehicles.network.PacketType;
 import vswe.stevesvehicles.old.Helpers.ActivatorOption;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.tileentity.TileEntityActivator;
@@ -106,9 +108,10 @@ public class GuiActivator extends GuiBase {
 			int[] box = getBoxRect(i);
 
 			if (inRect(x,y, box)) {
-				byte data = (byte)((button == 0) ? 0 : 1);
-				data |= i << 1;
-				PacketHandler.sendPacket(0,new byte [] {data});
+                DataWriter dw = PacketHandler.getDataWriter(PacketType.CONTAINER);
+                dw.writeBoolean(button == 0);
+                dw.writeByte(i);
+				PacketHandler.sendPacketToServer(dw);
 			}
 		}
     }

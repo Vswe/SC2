@@ -11,6 +11,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.localization.entry.block.LocalizationCargo;
+import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.old.Helpers.*;
 import vswe.stevesvehicles.item.ModItems;
 import vswe.stevesvehicles.container.ContainerBase;
@@ -80,8 +81,7 @@ public class TileEntityCargo extends TileEntityManager
     }
 
 	@Override
-    public String getInventoryName()
-    {
+    public String getInventoryName() {
         return "container.cargo_manager";
     }
 
@@ -105,24 +105,27 @@ public class TileEntityCargo extends TileEntityManager
 	}
 	
 	@Override
-	protected void receiveClickData(int packetId, int id, int dif) {
-		if (packetId == 1) {
-			target[id] += dif;
+	protected void receivePacket(PacketId id, DataReader dr) {
+		if (id == PacketId.VEHICLE_PART) {
+            int railId = dr.readByte();
+            int dif = dr.readBoolean() ? 1 : -1;
 
-			if (target[id] >= itemSelections.size()) {
-				target[id] = 0;
-			}else if (target[id] < 0) {
-				target[id] = itemSelections.size() - 1;
-			}
+			do {
+                target[railId] += dif;
 
-			if (color[id] - 1 == getSide()) {
-				reset();
-			}
-			
-			if (itemSelections.get(target[id]).getValidSlot() == null && dif != 0) {
-				receiveClickData(packetId, id, dif);
-			}
-		}				
+                if (target[railId] >= itemSelections.size()) {
+                    target[railId] = 0;
+                }else if (target[railId] < 0) {
+                    target[railId] = itemSelections.size() - 1;
+                }
+			}while (itemSelections.get(target[railId]).getValidSlot() == null);
+
+            if (color[railId] - 1 == getSide()) {
+                reset();
+            }
+		}else{
+            super.receivePacket(id, dr);
+        }
 	}
 	
 

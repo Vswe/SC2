@@ -38,17 +38,16 @@ public abstract class ModuleWoodcutter extends ModuleTool implements ISuppliesMo
 	    drawString(gui, LocalizationCartTool.CUTTER.translate(), 8, 6, 0x404040);
 	}
 
-	@Override
-	protected int getInventoryWidth() {
-		return super.getInventoryWidth() + 3;
-	}
-	
+
 	@Override
 	protected SlotBase getSlot(int slotId, int x, int y) {
         return new SlotSapling(getVehicle().getVehicleEntity(), this, slotId, 8 + x * 18, 28 + y * 18);
-	}	
-	
+	}
 
+    @Override
+    protected int getInventoryWidth() {
+        return 3;
+    }
 	
 	private ArrayList<ITreeModule> treeModules;
 	private ModulePlantSize plantSize;

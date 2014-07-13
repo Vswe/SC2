@@ -6,6 +6,9 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import vswe.stevesvehicles.network.DataReader;
+import vswe.stevesvehicles.network.DataWriter;
+import vswe.stevesvehicles.network.PacketType;
 import vswe.stevesvehicles.old.Helpers.NBTHelper;
 import vswe.stevesvehicles.network.PacketHandler;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
@@ -256,97 +259,97 @@ public abstract class TileEntityManager extends TileEntityBase
 	}
 	
 
-	public void sendPacket(int id) {
-		sendPacket(id, new byte[0]);
-	}
-	public void sendPacket(int id, byte data) {
-		sendPacket(id, new byte[] {data});
-	}
-	public void sendPacket(int id, byte[] data) {
-		PacketHandler.sendPacket(id,data);
-	}
-
-	public void receivePacket(int id, byte[] data, EntityPlayer player) {
-		if (id == 0) {
-			//switching direction of the transfer
-
-			int railID = data[0];
-			toCart[railID] = !toCart[railID];
-
-			if (color[railID] - 1 == getSide())
-			{
-				reset();
-			}
-		}else if(id == 4) {
-			int railID = data[0];
-			if (color[railID] != 5) {
-				doReturn[color[railID]-1] = !doReturn[color[railID]-1] ;
-			}
-		}else if(id == 5) {
-			int difference = data[0];
-
-			layoutType += difference;
-
-			if (layoutType > 2) {
-				layoutType = 0;
-			}else if (layoutType < 0) {
-				layoutType = 2;
-			}
-
-			reset();
-		}else{
-			byte railsAndDifferenceCombined = data[0];
-			int railID = railsAndDifferenceCombined & 3;
-
-			int k = (railsAndDifferenceCombined & 4) >> 2;
-			int difference;
-            if (k == 0) {
-                difference = 1;
-            }else {
-                difference = -1;
-            }
+    public enum PacketId {
+        TRANSFER_DIRECTION,
+        RETURN_MODE,
+        LAYOUT_TYPE,
+        VEHICLE_PART,
+        COLOR,
+        AMOUNT
+    }
 
 
-			if(id == 2) {
-				amount[railID] += difference;
 
-				if (amount[railID] >= getAmountCount()) {
-					amount[railID] = 0;
-				}else if (amount[railID] < 0) {
-					amount[railID] = getAmountCount() - 1;
-				}
+    protected void receivePacket(PacketId id, DataReader dr) {
+        int railId;
+        int difference;
+        switch (id) {
+            case TRANSFER_DIRECTION:
+                railId = dr.readByte();
+                toCart[railId] = !toCart[railId];
 
-				if (color[railID] - 1 == getSide()) {
-					reset();
-				}
-			}else if(id == 3) {
-				if (color[railID] != 5) {
-					boolean willStillExist = false;
-					for (int side=0;side<4;side++) {
-						if (side != railID && color[railID] == color[side]) {
-							willStillExist = true;
-							break;
-						}
-					}
-					if (!willStillExist) {
-						doReturn[color[railID]-1] = false;
-					}
-				}
-				color[railID] += difference;
+                if (color[railId] - 1 == getSide()) {
+                    reset();
+                }
+                break;
+            case RETURN_MODE:
+                railId = dr.readByte();
+                if (color[railId] != 5) {
+                    doReturn[color[railId]-1] = !doReturn[color[railId]-1] ;
+                }
+                break;
+            case LAYOUT_TYPE:
+                difference = dr.readBoolean() ? 1 : -1;
 
-				if (color[railID] > 5) {
-					color[railID] = 1;
-				}else if (color[railID] < 1) {
-					color[railID] = 5;
-				}
+                layoutType += difference;
 
-				if (color[railID] - 1 == getSide()) {
-					reset();
-				}
-			}else{
-				receiveClickData(id, railID, difference);
-			}
-		}
+                if (layoutType > 2) {
+                    layoutType = 0;
+                }else if (layoutType < 0) {
+                    layoutType = 2;
+                }
+
+                reset();
+                break;
+            case COLOR:
+                railId = dr.readByte();
+                difference = dr.readBoolean() ? 1 : -1;
+                if (color[railId] != 5) {
+                    boolean willStillExist = false;
+                    for (int side=0;side<4;side++) {
+                        if (side != railId && color[railId] == color[side]) {
+                            willStillExist = true;
+                            break;
+                        }
+                    }
+                    if (!willStillExist) {
+                        doReturn[color[railId]-1] = false;
+                    }
+                }
+                color[railId] += difference;
+
+                if (color[railId] > 5) {
+                    color[railId] = 1;
+                }else if (color[railId] < 1) {
+                    color[railId] = 5;
+                }
+
+                if (color[railId] - 1 == getSide()) {
+                    reset();
+                }
+                break;
+            case AMOUNT:
+                railId = dr.readByte();
+                difference = dr.readBoolean() ? 1 : -1;
+                amount[railId] += difference;
+
+                if (amount[railId] >= getAmountCount()) {
+                    amount[railId] = 0;
+                }else if (amount[railId] < 0) {
+                    amount[railId] = getAmountCount() - 1;
+                }
+
+                if (color[railId] - 1 == getSide()) {
+                    reset();
+                }
+                break;
+        }
+    }
+
+    @Override
+	public void receivePacket(DataReader dr, EntityPlayer player) {
+        PacketId id = dr.readEnum(PacketId.class);
+        receivePacket(id, dr);
 	}
 
 	
@@ -462,7 +465,6 @@ public abstract class TileEntityManager extends TileEntityBase
 	
 	
 	protected void updateLayout() {}
-	protected void receiveClickData(int packetId, int id, int dif) {}
 	protected abstract boolean isTargetValid(ManagerTransfer transfer);
 	protected abstract boolean doTransfer(ManagerTransfer transfer);
 	public abstract int getAmountCount();
