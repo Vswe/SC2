@@ -1,6 +1,5 @@
 package vswe.stevesvehicles.client.rendering.models;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.util.ResourceLocation;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.ModuleBase;
@@ -60,9 +59,9 @@ public class ModelShield extends ModelVehicle {
     }
 
     @Override
-    public void render(Render render,ModuleBase module, float yaw, float pitch, float roll, float multiplier, float partialTime) {
-		if (render == null || module == null || ((ModuleShield)module).hasShield()) {
-			super.render(render,module,yaw,pitch,roll, multiplier, partialTime);
+    public void render(ModuleBase module, float yaw, float pitch, float roll, float multiplier, float partialTime) {
+		if (module == null || ((ModuleShield)module).hasShield()) {
+			super.render(module, yaw, pitch, roll, multiplier, partialTime);
 		}
     }
 

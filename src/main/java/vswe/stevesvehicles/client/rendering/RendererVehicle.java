@@ -81,19 +81,19 @@ public abstract class RendererVehicle extends Render {
 
     protected abstract void applyMatrixUpdates(VehicleBase vehicle, MatrixObject matrix, float partialTickTime);
 
-	public void renderModels(VehicleBase vehicle, float yaw, float pitch, float roll, float mult, float partialtime) {
+	public void renderModels(VehicleBase vehicle, float yaw, float pitch, float roll, float multiplier, float partialTickTime) {
 		if (vehicle.getModules() != null) {
 			for (ModuleBase module : vehicle.getModules()) {
 				if (module.haveModels()) {
 					for (ModelVehicle model : module.getModels()) {
-						model.render(this, module, yaw, pitch, roll, mult, partialtime);
+						model.render(module, yaw, pitch, roll, multiplier, partialTickTime);
 					}
 				}
 			}
 		}
 	}
 
-	public void renderLiquidCuboid(FluidStack liquid, int tankSize, float x, float y, float z, float sizeX, float sizeY, float sizeZ, float mult) {
+	public static void renderLiquidCuboid(FluidStack liquid, int tankSize, float x, float y, float z, float sizeX, float sizeY, float sizeZ, float mult) {
 		IconData data = Tank.getIconAndTexture(liquid);
 		
 		if (data == null || data.getIcon() == null) {
@@ -123,7 +123,7 @@ public abstract class RendererVehicle extends Render {
 		}
 	}
 	
-	private void renderCuboid(IIcon icon, double sizeX, double sizeY, double sizeZ) {
+	private static void renderCuboid(IIcon icon, double sizeX, double sizeY, double sizeZ) {
 		renderFace(icon, sizeX, sizeZ, 0, 		90F, 	0F, 					-(float)(sizeY / 2),	0F					);
 		renderFace(icon, sizeX, sizeZ, 0, 		-90F, 	0F, 					(float)(sizeY / 2), 	0F					);
 		renderFace(icon, sizeX, sizeY, 0, 		0, 		0F, 					0F, 					(float)(sizeZ / 2)	);
@@ -133,7 +133,7 @@ public abstract class RendererVehicle extends Render {
 	}
 	
 	
-	private void renderFace(IIcon icon,  double totalTargetW, double totalTargetH, float yaw, float roll, float offX, float offY, float offZ) {
+	private static void renderFace(IIcon icon,  double totalTargetW, double totalTargetH, float yaw, float roll, float offX, float offY, float offZ) {
         GL11.glPushMatrix();
 
 		GL11.glTranslatef(offX, offY, offZ);
@@ -178,10 +178,9 @@ public abstract class RendererVehicle extends Render {
 		if (labels != null && labels.size() > 0) {
 			float distance = vehicle.getEntity().getDistanceToEntity(this.renderManager.livingPlayer);
 
-			if (distance <= 64F)
-			{
+			if (distance <= 64F) {
 					//place everything where it belongs
-					FontRenderer frend = this.getFontRendererFromRenderManager();
+					FontRenderer fontRenderer = this.getFontRendererFromRenderManager();
 					float var12 = 1.6F;
 					float var13 = 0.016666668F * var12;
 					GL11.glPushMatrix();
@@ -196,15 +195,15 @@ public abstract class RendererVehicle extends Render {
 					GL11.glEnable(GL11.GL_BLEND);
 					GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
-					int boxwidth = 0;
-					int boxheight = 0;
+					int boxWidth = 0;
+					int boxHeight = 0;
 					for (String label : labels) {
-						boxwidth = Math.max(boxwidth, frend.getStringWidth(label));
-						boxheight += frend.FONT_HEIGHT;
+						boxWidth = Math.max(boxWidth, fontRenderer.getStringWidth(label));
+						boxHeight += fontRenderer.FONT_HEIGHT;
 					}
 
-					int halfW = boxwidth / 2;
-					int halfH = boxheight / 2;
+					int halfW = boxWidth / 2;
+					int halfH = boxHeight / 2;
 
 					//background
 					Tessellator tes = Tessellator.instance;
@@ -221,15 +220,15 @@ public abstract class RendererVehicle extends Render {
 					GL11.glEnable(GL11.GL_TEXTURE_2D);
 					int yPos = -halfH;
 					for (String label : labels) {
-						frend.drawString(label, -frend.getStringWidth(label) / 2, yPos, 553648127/*A=32,R=255,G=255,B=255*/);
-						yPos += frend.FONT_HEIGHT;
+						fontRenderer.drawString(label, -fontRenderer.getStringWidth(label) / 2, yPos, 553648127/*A=32,R=255,G=255,B=255*/);
+						yPos += fontRenderer.FONT_HEIGHT;
 					}
 					GL11.glEnable(GL11.GL_DEPTH_TEST);
 					GL11.glDepthMask(true);
 					yPos = -halfH;
 					for (String label : labels) {
-						frend.drawString(label, -frend.getStringWidth(label) / 2, yPos, -1);
-						yPos += frend.FONT_HEIGHT;
+						fontRenderer.drawString(label, -fontRenderer.getStringWidth(label) / 2, yPos, -1);
+						yPos += fontRenderer.FONT_HEIGHT;
 					}
 					GL11.glEnable(GL11.GL_LIGHTING);
 					GL11.glDisable(GL11.GL_BLEND);
@@ -240,19 +239,12 @@ public abstract class RendererVehicle extends Render {
     }
 
 	 @Override
-    protected ResourceLocation getEntityTexture(Entity par1Entity)
-    {
+    protected ResourceLocation getEntityTexture(Entity par1Entity) {
         return null;
     }	 
-	 
-    /**
-     * Actually renders the given argument. This is a synthetic bridge method, always casting down its argument and then
-     * handing it off to a worker function which does the actual work. In all probabilty, the class Render is generic
-     * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
-     * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
-     */
-    public void doRender(Entity entity, double x, double y, double z, float yaw, float partialTickTime)
-    {
+
+    @Override
+    public void doRender(Entity entity, double x, double y, double z, float yaw, float partialTickTime) {
         this.renderVehicle(((IVehicleEntity) entity).getVehicle(), x, y, z, yaw, partialTickTime);
     }
 }

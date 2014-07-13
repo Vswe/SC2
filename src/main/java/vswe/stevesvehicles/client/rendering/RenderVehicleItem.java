@@ -93,7 +93,7 @@ public class RenderVehicleItem implements IItemRenderer {
 			}			
 			
 			for (ModelVehicle model : models.values()) {
-				model.render(null, null, 0, 0, 0, 0.0625F, 0);
+				model.render(null, 0, 0, 0, 0.0625F, 0);
 			}
 		}
 

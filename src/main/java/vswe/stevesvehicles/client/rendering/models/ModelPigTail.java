@@ -1,6 +1,5 @@
 package vswe.stevesvehicles.client.rendering.models;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
@@ -144,12 +143,12 @@ public class ModelPigTail extends ModelVehicle {
     }
 
     @Override
-	public void render(Render render,ModuleBase module, float yaw, float pitch, float roll, float multiplier, float partialTime) {
+	public void render(ModuleBase module, float yaw, float pitch, float roll, float multiplier, float partialTime) {
 		if (module != null) {
 			float[] color = module.getVehicle().getColor();
 			GL11.glColor4f(color[0], color[1], color[2], 1.0F);
 		}
-		super.render(render,module,yaw,pitch,roll, multiplier, partialTime);
+		super.render(module,yaw,pitch,roll, multiplier, partialTime);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
     }		
 

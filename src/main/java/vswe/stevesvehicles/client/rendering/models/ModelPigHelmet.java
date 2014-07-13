@@ -1,6 +1,5 @@
 package vswe.stevesvehicles.client.rendering.models;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
@@ -51,8 +50,8 @@ public class ModelPigHelmet extends ModelVehicle {
     }
 
 	@Override
-	public void render(Render render,ModuleBase module, float yaw, float pitch, float roll, float multiplier, float partialTime) {
-        if (render == null || module == null) {
+	public void render(ModuleBase module, float yaw, float pitch, float roll, float multiplier, float partialTime) {
+        if (module == null) {
 			return;
 		}
 
@@ -74,7 +73,7 @@ public class ModelPigHelmet extends ModelVehicle {
 			GL11.glColor3f(red, green, blue);		
 		}
 		
-		super.render(render,module,yaw,pitch,roll, multiplier, partialTime);
+		super.render(module,yaw,pitch,roll, multiplier, partialTime);
 		GL11.glColor3f(1.0F, 1.0F, 1.0F);
 		GL11.glScalef(1 / sizeMultiplier, 1 / sizeMultiplier, 1 / sizeMultiplier);
     }	

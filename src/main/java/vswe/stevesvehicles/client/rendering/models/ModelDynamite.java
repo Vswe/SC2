@@ -1,6 +1,5 @@
 package vswe.stevesvehicles.client.rendering.models;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
@@ -155,10 +154,10 @@ public class ModelDynamite extends ModelVehicle {
 
 	private float sizeMultiplier;
     @Override
-	public void render(Render render,ModuleBase module, float yaw, float pitch, float roll, float multiplier, float partialTime) {
+	public void render(ModuleBase module, float yaw, float pitch, float roll, float multiplier, float partialTime) {
 		if (module == null) {
 			sizeMultiplier = 1;
-			super.render(render,module,yaw,pitch,roll, multiplier, partialTime);
+			super.render(module,yaw,pitch,roll, multiplier, partialTime);
 		}else{
 	
 			float fuseMultiplier = (float)Math.abs(Math.sin(((float)((ModuleDynamite)module).getFuse() / ((ModuleDynamite)module).getFuseLength()) * Math.PI * 6));
@@ -166,14 +165,14 @@ public class ModelDynamite extends ModelVehicle {
 			sizeMultiplier = fuseMultiplier * 0.5F + 1;
 			GL11.glScalef(sizeMultiplier, sizeMultiplier, sizeMultiplier);
 
-			super.render(render,module,yaw,pitch,roll, multiplier, partialTime);
+			super.render(module,yaw,pitch,roll, multiplier, partialTime);
 
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
 			GL11.glDisable(GL11.GL_LIGHTING);
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_DST_ALPHA);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, fuseMultiplier);
-			super.render(render,module,yaw,pitch,roll, multiplier, partialTime);
+			super.render(module,yaw,pitch,roll, multiplier, partialTime);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			GL11.glDisable(GL11.GL_BLEND);
 			GL11.glEnable(GL11.GL_LIGHTING);

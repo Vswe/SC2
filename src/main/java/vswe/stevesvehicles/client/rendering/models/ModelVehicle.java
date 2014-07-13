@@ -43,8 +43,7 @@ public abstract class ModelVehicle extends ModelBase {
 
 
 
-    public void render(Render render, ModuleBase module, float yaw, float pitch, float roll, float multiplier, float partialTime) {
-		
+    public void render(ModuleBase module, float yaw, float pitch, float roll, float multiplier, float partialTime) {
 		ResourceLocation resource = getResource(module);
 		if (resource == null) {
 			return;

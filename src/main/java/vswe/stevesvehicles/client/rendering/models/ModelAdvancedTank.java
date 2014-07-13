@@ -1,6 +1,5 @@
 package vswe.stevesvehicles.client.rendering.models;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
@@ -90,12 +89,12 @@ public class ModelAdvancedTank extends ModelVehicle {
 
 
 	@Override
-	public void render(Render render,ModuleBase module, float yaw, float pitch, float roll, float multiplier, float partialTime) {
-		super.render(render, module, yaw, pitch, roll, multiplier, partialTime);
-		if (render != null && module != null) {
+	public void render(ModuleBase module, float yaw, float pitch, float roll, float multiplier, float partialTime) {
+		super.render(module, yaw, pitch, roll, multiplier, partialTime);
+		if (module != null) {
 			FluidStack liquid = ((ModuleTank)module).getFluid();
 			if (liquid != null) {
-				((RendererVehicle)render).renderLiquidCuboid(liquid,  ((ModuleTank)module).getCapacity(), 0, -4.5F, 0, 14, 13, 10, multiplier);
+                RendererVehicle.renderLiquidCuboid(liquid,  ((ModuleTank)module).getCapacity(), 0, -4.5F, 0, 14, 13, 10, multiplier);
 			}
 		}
     }
