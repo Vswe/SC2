@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.Fancy;
+package vswe.stevesvehicles.fancy;
 
 
 import java.security.MessageDigest;
@@ -175,6 +175,6 @@ public abstract class FancyPancyHandler {
     public abstract ThreadDownloadImageData getCurrentTexture(AbstractClientPlayer player);
     public abstract ResourceLocation getCurrentResource(AbstractClientPlayer player);
     public abstract void setCurrentResource(AbstractClientPlayer player, ResourceLocation resource, String url);
-    public abstract LOAD_TYPE getDefaultLoadType();
+    public abstract LoadType getDefaultLoadType();
     public abstract String getDefaultUrl();
 }

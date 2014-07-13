@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.Fancy;
+package vswe.stevesvehicles.fancy;
 
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import cpw.mods.fml.relauncher.Side;
@@ -41,8 +41,8 @@ public class CapeHandler extends FancyPancyHandler {
     }
 
     @Override
-    public LOAD_TYPE getDefaultLoadType() {
-        return LOAD_TYPE.KEEP;
+    public LoadType getDefaultLoadType() {
+        return LoadType.KEEP;
     }
 
     @Override

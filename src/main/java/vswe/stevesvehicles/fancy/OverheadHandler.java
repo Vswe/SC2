@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.Fancy;
+package vswe.stevesvehicles.fancy;
 
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -90,8 +90,8 @@ public class OverheadHandler extends FancyPancyHandler {
     }
 
     @Override
-    public LOAD_TYPE getDefaultLoadType() {
-        return LOAD_TYPE.OVERRIDE;
+    public LoadType getDefaultLoadType() {
+        return LoadType.OVERRIDE;
     }
 
     @Override

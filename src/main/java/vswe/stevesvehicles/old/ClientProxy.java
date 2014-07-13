@@ -8,7 +8,7 @@ import vswe.stevesvehicles.client.rendering.RendererCart;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
-import vswe.stevesvehicles.old.Fancy.FancyPancyLoader;
+import vswe.stevesvehicles.fancy.FancyPancyLoader;
 import vswe.stevesvehicles.old.Helpers.*;
 import vswe.stevesvehicles.item.ModItems;
 import vswe.stevesvehicles.client.rendering.RendererUpgrade;

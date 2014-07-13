@@ -93,7 +93,7 @@ public abstract class RendererVehicle extends Render {
 		}
 	}
 
-	public static void renderLiquidCuboid(FluidStack liquid, int tankSize, float x, float y, float z, float sizeX, float sizeY, float sizeZ, float mult) {
+	public static void renderLiquidCuboid(FluidStack liquid, int tankSize, float x, float y, float z, float sizeX, float sizeY, float sizeZ, float multiplier) {
 		IconData data = Tank.getIconAndTexture(liquid);
 		
 		if (data == null || data.getIcon() == null) {
@@ -105,15 +105,15 @@ public abstract class RendererVehicle extends Render {
 			float filled = liquid.amount / (float)tankSize;
 			
 	        GL11.glPushMatrix();
-	        GL11.glTranslatef(x * mult, (y + sizeY * (1 - filled) / 2) * mult , z * mult);
+	        GL11.glTranslatef(x * multiplier, (y + sizeY * (1 - filled) / 2) * multiplier , z * multiplier);
 			
 	        ResourceHelper.bindResource(data.getResource());
 	        Tank.applyColorFilter(liquid);
 	        float scale = 0.5F;
 	        GL11.glScalef(scale, scale, scale);
 			GL11.glDisable(GL11.GL_LIGHTING);
-			mult /= scale;
-			renderCuboid(data.getIcon(), sizeX * mult, sizeY * mult * filled, sizeZ * mult);
+			multiplier /= scale;
+			renderCuboid(data.getIcon(), sizeX * multiplier, sizeY * multiplier * filled, sizeZ * multiplier);
 			GL11.glEnable(GL11.GL_LIGHTING);		
 	        GL11.glDisable(GL11.GL_BLEND);
 	        GL11.glDisable(GL12.GL_RESCALE_NORMAL);

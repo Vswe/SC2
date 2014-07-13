@@ -1,10 +1,10 @@
-package vswe.stevesvehicles.old.Fancy;
+package vswe.stevesvehicles.fancy;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public enum ANIMATION_TYPE {
+public enum AnimationType {
     STILL("Still"),
     ANIMATION("Loop"),
     PAUSE("Pause"),
@@ -12,7 +12,7 @@ public enum ANIMATION_TYPE {
 
     private String code;
 
-    ANIMATION_TYPE(String code) {
+    AnimationType(String code) {
         this.code = code;
     }
 

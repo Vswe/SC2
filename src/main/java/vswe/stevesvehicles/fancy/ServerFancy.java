@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.Fancy;
+package vswe.stevesvehicles.fancy;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

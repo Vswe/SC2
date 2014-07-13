@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.Fancy;
+package vswe.stevesvehicles.fancy;
 
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import cpw.mods.fml.relauncher.Side;
@@ -42,8 +42,8 @@ public class SkinHandler extends FancyPancyHandler {
     }
 
     @Override
-    public LOAD_TYPE getDefaultLoadType() {
-        return LOAD_TYPE.OVERRIDE;
+    public LoadType getDefaultLoadType() {
+        return LoadType.OVERRIDE;
     }
 
     @Override

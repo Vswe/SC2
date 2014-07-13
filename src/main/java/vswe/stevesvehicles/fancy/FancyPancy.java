@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.old.Fancy;
+package vswe.stevesvehicles.fancy;
 
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import cpw.mods.fml.relauncher.Side;
@@ -24,13 +24,13 @@ public class FancyPancy {
     public int priority = 0;
     private String[] images;
     private int currentImage = 0;
-    private EnumSet<ANIMATION_TYPE> types;
+    private EnumSet<AnimationType> types;
     private int interval = 50;
     private int intervalWait = 200;
     private int ticks;
     private String[] servers;
     private boolean hasServerBlackList;
-    private LOAD_TYPE loadType;
+    private LoadType loadType;
     private List<SpecialLoadSetting> loadPixelSettings;
     private String[] teams;
     private List<int[]> dimensions;
@@ -131,12 +131,12 @@ public class FancyPancy {
     }
 
     public void update() {
-        if (types.contains(ANIMATION_TYPE.PAUSE) && currentImage == images.length - 1 && intervalWait >= 0) {
+        if (types.contains(AnimationType.PAUSE) && currentImage == images.length - 1 && intervalWait >= 0) {
             if (++ticks >= intervalWait) {
                 ticks = 0;
                 nextImage();
             }
-        }else if(!types.contains(ANIMATION_TYPE.STILL) && interval >= 0) {
+        }else if(!types.contains(AnimationType.STILL) && interval >= 0) {
             if (++ticks >= interval) {
                 ticks = 0;
                 nextImage();
@@ -145,10 +145,10 @@ public class FancyPancy {
     }
 
     private void setTypes(String[] typeStrings) {
-        types = EnumSet.noneOf(ANIMATION_TYPE.class);
+        types = EnumSet.noneOf(AnimationType.class);
         if (typeStrings != null) {
             for (String typeString : typeStrings) {
-                for (ANIMATION_TYPE animation : ANIMATION_TYPE.values()) {
+                for (AnimationType animation : AnimationType.values()) {
                     if (animation.getCode().equals(typeString)) {
                         types.add(animation);
                         break;
@@ -158,14 +158,14 @@ public class FancyPancy {
         }
 
         if (types.size() == 0) {
-            types.add(ANIMATION_TYPE.STILL);
-        }else if(types.contains(ANIMATION_TYPE.RANDOM)) {
+            types.add(AnimationType.STILL);
+        }else if(types.contains(AnimationType.RANDOM)) {
             nextImage();
         }
     }
 
     private void nextImage() {
-        if (types.contains(ANIMATION_TYPE.RANDOM)) {
+        if (types.contains(AnimationType.RANDOM)) {
             currentImage = (int)(Math.random() * images.length);
         }else{
             currentImage = (currentImage + 1) % images.length;
@@ -397,7 +397,7 @@ public class FancyPancy {
         if (loadSettings != null && loadSettings.length > 0) {
             String loadTypeString = loadSettings[0];
 
-            for (LOAD_TYPE load : LOAD_TYPE.values()) {
+            for (LoadType load : LoadType.values()) {
                 if (load.getCode().equals(loadTypeString)) {
                     loadType = load;
                     break;
