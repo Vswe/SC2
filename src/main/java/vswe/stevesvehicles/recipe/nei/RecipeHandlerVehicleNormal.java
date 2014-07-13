@@ -10,12 +10,12 @@ import vswe.stevesvehicles.old.Items.ModItems;
 
 import java.util.List;
 
-public class RecipeHandleVehicle extends RecipeHandlerVehicleBase {
-    private class CachedVehicleRecipe extends CachedVehicleRecipeBase {
+public class RecipeHandlerVehicleNormal extends RecipeHandlerVehicle {
+    private class CachedVehicleRecipeNormal extends CachedVehicleRecipe {
         private PositionedStack result;
         private boolean valid;
 
-        public CachedVehicleRecipe(ItemStack result) {
+        public CachedVehicleRecipeNormal(ItemStack result) {
             this.result = new PositionedStack(result.copy(), RESULT_X + BIG_SLOT_OFFSET, RESULT_Y + BIG_SLOT_OFFSET);
 
             List<ModuleData> modules = ModuleDataItemHandler.getModulesFromItem(result);
@@ -58,14 +58,14 @@ public class RecipeHandleVehicle extends RecipeHandlerVehicleBase {
         }
     }
 
-    public RecipeHandleVehicle() {
+    public RecipeHandlerVehicleNormal() {
 
     }
 
     @Override
     public void loadCraftingRecipes(ItemStack result) {
         if (result != null && result.getItem() == ModItems.carts) {
-            CachedVehicleRecipeBase cache = new CachedVehicleRecipe(result);
+            CachedVehicleRecipe cache = new CachedVehicleRecipeNormal(result);
             if (cache.isValid()) {
                 arecipes.add(cache);
             }

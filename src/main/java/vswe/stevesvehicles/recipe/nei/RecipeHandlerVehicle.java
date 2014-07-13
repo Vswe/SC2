@@ -27,12 +27,13 @@ import vswe.stevesvehicles.old.Items.ModItems;
 import vswe.stevesvehicles.tileentity.TileEntityCartAssembler;
 
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public abstract class RecipeHandlerVehicleBase extends TemplateRecipeHandler {
-    protected abstract class CachedVehicleRecipeBase extends CachedRecipe {
+public abstract class RecipeHandlerVehicle extends TemplateRecipeHandler {
+    protected abstract class CachedVehicleRecipe extends CachedRecipe {
         protected List<PositionedStack> ingredients;
         private ModuleTypeRow[] rows;
         private int assemblyTime;
@@ -55,7 +56,7 @@ public abstract class RecipeHandlerVehicleBase extends TemplateRecipeHandler {
             return modularCost;
         }
 
-        public CachedVehicleRecipeBase() {
+        public CachedVehicleRecipe() {
             ingredients = new ArrayList<PositionedStack>();
 
         }
@@ -90,6 +91,10 @@ public abstract class RecipeHandlerVehicleBase extends TemplateRecipeHandler {
         }
 
         protected void addModuleItem(ModuleData module, ItemStack item) {
+            addModuleItem(module, item, false);
+        }
+
+        protected void addModuleItem(ModuleData module, ItemStack item, boolean active) {
             if (module instanceof ModuleDataHull) {
                 ingredients.add(new PositionedStack(item, HULL_X + BIG_SLOT_OFFSET, HULL_Y + BIG_SLOT_OFFSET));
             }else{
@@ -102,6 +107,10 @@ public abstract class RecipeHandlerVehicleBase extends TemplateRecipeHandler {
                             int y = id / 6;
                             ingredients.add(new PositionedStack(item, ROW_X + x * GuiCartAssembler.SLOT_SIZE + 1, ROW_Y + i * ROW_OFFSET_Y + y * GuiCartAssembler.SLOT_SIZE + 1));
                             row.length++;
+
+                            if (active) {
+                                row.activeId = id;
+                            }
                         }
                         break;
                     }
@@ -120,6 +129,7 @@ public abstract class RecipeHandlerVehicleBase extends TemplateRecipeHandler {
         private int maxLength;
         private ModuleType type;
         private TitleBox box;
+        public int activeId = -1;
 
         private ModuleTypeRow(ModuleType type, TitleBox box, int availableLength, int maxLength) {
             this.box = box;
@@ -129,7 +139,7 @@ public abstract class RecipeHandlerVehicleBase extends TemplateRecipeHandler {
         }
     }
 
-    protected RecipeHandlerVehicleBase() {
+    protected RecipeHandlerVehicle() {
 
     }
 
@@ -180,9 +190,24 @@ public abstract class RecipeHandlerVehicleBase extends TemplateRecipeHandler {
         renderItem.zLevel = 0;
     }
 
+    private static final int PROGRESS_ARROW_SRC_RIGHT_X = 233;
+    private static final int PROGRESS_ARROW_SRC_LEFT_X = 210;
+    private static final int PROGRESS_ARROW_SRC_Y = 240;
+    private static final int PROGRESS_ARROW_WIDTH = 22;
+    private static final int PROGRESS_ARROW_HEIGHT = 15;
+    private static final int PROGRESS_ARROW_X = 114;
+    private static final int PROGRESS_ARROW_TOP_Y = 8;
+    private static final int PROGRESS_ARROW_BOT_Y = 144;
+
+    @Override
+    public void loadTransferRects() {
+        transferRects.add(new RecipeTransferRect(new Rectangle(PROGRESS_ARROW_X, PROGRESS_ARROW_BOT_Y, PROGRESS_ARROW_WIDTH, PROGRESS_ARROW_HEIGHT), RecipeHandlerVehicleModuleUsage.CODE));
+        transferRects.add(new RecipeTransferRect(new Rectangle(PROGRESS_ARROW_X, PROGRESS_ARROW_TOP_Y, PROGRESS_ARROW_WIDTH, PROGRESS_ARROW_HEIGHT), RecipeHandlerVehicleModuleUsage.CODE));
+    }
+
     @Override
     public void drawBackground(int id) {
-        CachedVehicleRecipeBase recipe = (CachedVehicleRecipeBase)arecipes.get(id);
+        CachedVehicleRecipe recipe = (CachedVehicleRecipe)arecipes.get(id);
         GL11.glColor4f(1, 1, 1, 1);
 
         drawExtraBackground();
@@ -190,6 +215,8 @@ public abstract class RecipeHandlerVehicleBase extends TemplateRecipeHandler {
         ResourceHelper.bindResource(GuiCartAssembler.TEXTURE_EXTRA);
         drawTexturedModalRect(HULL_X, HULL_Y, GuiCartAssembler.BIG_SLOT_SRC_X, GuiCartAssembler.BIG_SLOT_SRC_Y, GuiCartAssembler.BIG_SLOT_SIZE, GuiCartAssembler.BIG_SLOT_SIZE);
         drawTexturedModalRect(RESULT_X, RESULT_Y, GuiCartAssembler.BIG_SLOT_SRC_X, GuiCartAssembler.BIG_SLOT_SRC_Y, GuiCartAssembler.BIG_SLOT_SIZE, GuiCartAssembler.BIG_SLOT_SIZE);
+        drawTexturedModalRect(PROGRESS_ARROW_X, PROGRESS_ARROW_BOT_Y, PROGRESS_ARROW_SRC_RIGHT_X, PROGRESS_ARROW_SRC_Y, PROGRESS_ARROW_WIDTH, PROGRESS_ARROW_HEIGHT);
+        drawTexturedModalRect(PROGRESS_ARROW_X, PROGRESS_ARROW_TOP_Y, PROGRESS_ARROW_SRC_LEFT_X, PROGRESS_ARROW_SRC_Y, PROGRESS_ARROW_WIDTH, PROGRESS_ARROW_HEIGHT);
 
         ModuleTypeRow[] rows = recipe.getRows();
         for (int i = 0; i < rows.length; i++) {
@@ -203,16 +230,15 @@ public abstract class RecipeHandlerVehicleBase extends TemplateRecipeHandler {
                 int targetX = ROW_X + x * GuiCartAssembler.SLOT_SIZE;
                 int targetY = baseY + y * GuiCartAssembler.SLOT_SIZE;
                 drawTexturedModalRect(targetX, targetY, GuiCartAssembler.SLOT_SRC_X, GuiCartAssembler.SLOT_SRC_Y, GuiCartAssembler.SLOT_SIZE, GuiCartAssembler.SLOT_SIZE);
-                if (j >= row.availableLength) {
+                if (j == row.activeId) {
+                    drawTexturedModalRect(targetX, targetY, GuiCartAssembler.MODIFIED_GREEN_SLOT_SRC_X, GuiCartAssembler.MODIFIED_SLOT_SRC_Y, GuiCartAssembler.SLOT_SIZE, GuiCartAssembler.SLOT_SIZE);
+                }else if (j >= row.availableLength) {
                     drawTexturedModalRect(targetX + 1, targetY, GuiCartAssembler.SLOT_DOOR_SRC_X, GuiCartAssembler.SLOT_TOP_DOOR_SRC_Y, GuiCartAssembler.SLOT_DOOR_WIDTH, GuiCartAssembler.SLOT_DOOR_HEIGHT);
                     drawTexturedModalRect(targetX + 1, targetY + GuiCartAssembler.SLOT_DOOR_HEIGHT, GuiCartAssembler.SLOT_DOOR_SRC_X, GuiCartAssembler.SLOT_BOT_DOOR_SRC_Y, GuiCartAssembler.SLOT_DOOR_WIDTH, GuiCartAssembler.SLOT_DOOR_HEIGHT);
                 }
             }
 
-            GL11.glPushMatrix();
-            GL11.glTranslatef(0, 0, 500);
             drawTexturedModalRect(ROW_X + TITLE_X, baseY + TITLE_Y, GuiCartAssembler.TITLE_BOX_SRC_X, GuiCartAssembler.TITLE_BOX_SRC_Y, GuiCartAssembler.TITLE_BOX_WIDTH, GuiCartAssembler.TITLE_BOX_HEIGHT);
-            GL11.glPopMatrix();
         }
 
 
@@ -226,7 +252,7 @@ public abstract class RecipeHandlerVehicleBase extends TemplateRecipeHandler {
         enableTextRendering();
         repairRemovedTitle();
 
-        CachedVehicleRecipeBase recipe = (CachedVehicleRecipeBase)arecipes.get(id);
+        CachedVehicleRecipe recipe = (CachedVehicleRecipe)arecipes.get(id);
         GL11.glColor4f(1, 1, 1, 1);
         GL11.glDisable(GL11.GL_LIGHTING);
         ResourceHelper.bindResource(GuiCartAssembler.TEXTURE_EXTRA);

@@ -31,10 +31,10 @@ public class NEIAddon {
 
     @SideOnly(Side.CLIENT)
     private void register() {
-        register(new RecipeHandlerShaped());
-        register(new RecipeHandlerShapeless());
-        API.registerRecipeHandler(new RecipeHandleVehicle());
-        API.registerUsageHandler(new RecipeHandlerVehicleModuleUsage());
+        register(new RecipeHandlerModuleShaped());
+        register(new RecipeHandlerModuleShapeless());
+        API.registerRecipeHandler(new RecipeHandlerVehicleNormal());
+        register(new RecipeHandlerVehicleModuleUsage());
     }
 
     @SideOnly(Side.CLIENT)

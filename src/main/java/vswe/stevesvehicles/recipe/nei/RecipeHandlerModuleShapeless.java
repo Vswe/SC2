@@ -4,7 +4,7 @@ package vswe.stevesvehicles.recipe.nei;
 import vswe.stevesvehicles.recipe.ModuleRecipe;
 import vswe.stevesvehicles.recipe.ModuleRecipeShapeless;
 
-public class RecipeHandlerShapeless extends RecipeHandler {
+public class RecipeHandlerModuleShapeless extends RecipeHandlerModule {
 
     //same as the vanilla recipes use, for consistency
     private static final int[][] STACK_ORDER = {
@@ -48,7 +48,7 @@ public class RecipeHandlerShapeless extends RecipeHandler {
         }
     }
 
-    public RecipeHandlerShapeless() {
+    public RecipeHandlerModuleShapeless() {
 
     }
 

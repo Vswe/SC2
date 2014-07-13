@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
+import vswe.stevesvehicles.client.gui.screen.GuiCartAssembler;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataGroup;
 import vswe.stevesvehicles.module.data.ModuleDataHull;
@@ -23,14 +24,15 @@ import vswe.stevesvehicles.recipe.ModuleRecipe;
 import vswe.stevesvehicles.recipe.item.RecipeItem;
 
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-public class RecipeHandlerVehicleModuleUsage extends RecipeHandlerVehicleBase {
+public class RecipeHandlerVehicleModuleUsage extends RecipeHandlerVehicle {
 
-    private class CachedVehicleRecipeModuleWrapper extends CachedVehicleRecipeBase {
+    private class CachedVehicleRecipeModuleWrapper extends CachedVehicleRecipe {
         private List<CachedVehicleRecipeModule> recipes = new ArrayList<CachedVehicleRecipeModule>();
 
         public CachedVehicleRecipeModuleWrapper(ItemStack ingredient) {
@@ -120,7 +122,7 @@ public class RecipeHandlerVehicleModuleUsage extends RecipeHandlerVehicleBase {
         }
     }
 
-    private class CachedVehicleRecipeModule extends CachedVehicleRecipeBase {
+    private class CachedVehicleRecipeModule extends CachedVehicleRecipe {
         private CachedVehicleRecipeModuleWrapper wrapper;
         private ModuleData ingredientData;
         private ItemStack ingredient;
@@ -174,7 +176,7 @@ public class RecipeHandlerVehicleModuleUsage extends RecipeHandlerVehicleBase {
             initHull(null);
             modules.add(hull);
 
-            addModuleItem(ingredientData, ingredient);
+            addModuleItem(ingredientData, ingredient, true);
             modules.add(ingredientData);
 
             if (ingredientData.getParent() != null) {
@@ -303,10 +305,19 @@ public class RecipeHandlerVehicleModuleUsage extends RecipeHandlerVehicleBase {
     private boolean others;
     private boolean hasMultipleRecipes;
 
+    static final String CODE = "vehicle_assembler";
+
+
+
+    @Override
+    public String getOverlayIdentifier() {
+        return CODE;
+    }
+
     @Override
     public void loadUsageRecipes(String inputId, Object... ingredients) {
-        if (inputId.equals("crafting")) { //TODO this shouldn't be "crafting", it should be its own type that can be accessed from the normal vehicle recipe
-            CachedVehicleRecipeBase cache = new CachedVehicleRecipeModuleWrapper();
+        if (inputId.equals(CODE)) {
+            CachedVehicleRecipe cache = new CachedVehicleRecipeModuleWrapper();
             if (cache.isValid()) {
                 arecipes.add(cache);
             }
@@ -315,11 +326,20 @@ public class RecipeHandlerVehicleModuleUsage extends RecipeHandlerVehicleBase {
         }
     }
 
+    @Override
+    public void loadCraftingRecipes(String outputId, Object... results) {
+        if (outputId.equals(CODE)) {
+            loadUsageRecipes(outputId, results); //simulate the usage one, this allows the user to left click to show the recipes even though one "actually" should right click
+        }else{
+            super.loadCraftingRecipes(outputId, results);
+        }
+    }
+
 
     @Override
     public void loadUsageRecipes(ItemStack ingredient) {
         if (ingredient != null && ingredient.getItem() == ModItems.modules) {
-            CachedVehicleRecipeBase cache = new CachedVehicleRecipeModuleWrapper(ingredient);
+            CachedVehicleRecipe cache = new CachedVehicleRecipeModuleWrapper(ingredient);
             if (cache.isValid()) {
                 arecipes.add(cache);
             }

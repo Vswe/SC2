@@ -171,9 +171,9 @@ public class GuiCartAssembler extends GuiBase {
     public static final int BIG_SLOT_SRC_X = 1;
     public static final int BIG_SLOT_SRC_Y = 1;
     public static final int BIG_SLOT_SIZE = 24;
-    private static final int MODIFIED_GREEN_SLOT_SRC_X = 1;
-    private static final int MODIFIED_RED_SLOT_SRC_X = 20;
-    private static final int MODIFIED_SLOT__SRC_Y = 45;
+    public static final int MODIFIED_GREEN_SLOT_SRC_X = 1;
+    public static final int MODIFIED_RED_SLOT_SRC_X = 20;
+    public static final int MODIFIED_SLOT_SRC_Y = 45;
     public static final int SLOT_SRC_X = 1;
     public static final int SLOT_SRC_Y = 26;
     public static final int SLOT_SIZE = 18;
@@ -276,7 +276,7 @@ public class GuiCartAssembler extends GuiBase {
 					}else{
 						srcX = MODIFIED_GREEN_SLOT_SRC_X;
 					}
-					srcY = MODIFIED_SLOT__SRC_Y;
+					srcY = MODIFIED_SLOT_SRC_Y;
 				}else{
 					srcX = SLOT_SRC_X;
 					srcY = SLOT_SRC_Y;

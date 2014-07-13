@@ -4,7 +4,7 @@ package vswe.stevesvehicles.recipe.nei;
 import vswe.stevesvehicles.recipe.ModuleRecipe;
 import vswe.stevesvehicles.recipe.ModuleRecipeShaped;
 
-public class RecipeHandlerShaped extends RecipeHandler {
+public class RecipeHandlerModuleShaped extends RecipeHandlerModule {
 
     protected class CachedModuleRecipeShaped extends CachedModuleRecipe {
 
@@ -39,7 +39,7 @@ public class RecipeHandlerShaped extends RecipeHandler {
     }
 
 
-    public RecipeHandlerShaped() {
+    public RecipeHandlerModuleShaped() {
 
     }
 

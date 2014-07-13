@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public abstract class RecipeHandler extends TemplateRecipeHandler {
+public abstract class RecipeHandlerModule extends TemplateRecipeHandler {
     protected abstract class CachedModuleRecipe extends CachedRecipe {
         protected List<PositionedStack> ingredients;
         private PositionedStack result;
@@ -73,13 +73,13 @@ public abstract class RecipeHandler extends TemplateRecipeHandler {
         public abstract boolean is2x2();
     }
 
-    protected RecipeHandler() {
+    protected RecipeHandlerModule() {
 
     }
 
     @Override
     public String getGuiTexture() {
-        return "textures/gui/container/crafting_table.png"; //TODO own texture?
+        return "textures/gui/container/crafting_table.png";
     }
 
     @Override
