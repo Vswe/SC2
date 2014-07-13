@@ -286,7 +286,7 @@ public abstract class GuiContainerSpecial extends GuiScreen {
             }
 
             if (shouldSlotOverlayBeRendered) {
-                GL11.glDisable(GL11.GL_DEPTH_TEST);
+                GL11.glEnable(GL11.GL_DEPTH_TEST);
                 drawRect(slot.xDisplayPosition, slot.yDisplayPosition, slot.xDisplayPosition + SLOT_SIZE, slot.yDisplayPosition + SLOT_SIZE, SLOT_HOVER_COLOR);
                 GL11.glEnable(GL11.GL_DEPTH_TEST);
             }

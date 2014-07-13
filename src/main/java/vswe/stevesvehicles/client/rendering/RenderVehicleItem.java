@@ -56,6 +56,7 @@ public class RenderVehicleItem implements IItemRenderer {
 	@Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 		GL11.glPushMatrix();
+        GL11.glEnable(GL11.GL_ALPHA_TEST);
 		GL11.glScalef(-1.0F, -1.0F, 1.0F);
 		if (type == ItemRenderType.EQUIPPED) {
 			GL11.glTranslatef(0, -1, 1);
@@ -97,7 +98,7 @@ public class RenderVehicleItem implements IItemRenderer {
 			}
 		}
 
-
+        GL11.glDisable(GL11.GL_ALPHA_TEST);
 		GL11.glPopMatrix();	
 	}
 	
