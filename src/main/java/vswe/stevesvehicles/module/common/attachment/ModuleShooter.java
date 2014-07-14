@@ -1,5 +1,6 @@
 package vswe.stevesvehicles.module.common.attachment;
 import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IProjectile;
@@ -10,7 +11,10 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfo;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfoMultiBoolean;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.localization.entry.module.LocalizationShooter;
 import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
 import vswe.stevesvehicles.old.Helpers.EnchantmentInfo;
@@ -35,8 +39,13 @@ public class ModuleShooter extends ModuleAttachment implements ISuppliesModule {
 		generateInterfaceRegions();
 	}
 
-	
-	private ArrayList<ModuleProjectile> projectiles;
+    @Override
+    public void loadSimulationInfo(List<SimulationInfo> simulationInfo) {
+        simulationInfo.add(new SimulationInfoMultiBoolean(LocalizationAssembler.INFO_BARRELS, "barrels", 4));
+        simulationInfo.add(new SimulationInfoMultiBoolean(LocalizationAssembler.INFO_BARRELS, "barrels", 4));
+    }
+
+    private ArrayList<ModuleProjectile> projectiles;
 	private ModuleEnchants enchanter;
 	@Override
 	public void init() {
@@ -497,7 +506,7 @@ public class ModuleShooter extends ModuleAttachment implements ISuppliesModule {
 
 	public byte getActivePipes() {
 		if (isPlaceholder()) {
-			return getSimInfo().getActivePipes();
+			return (byte)(((SimulationInfoMultiBoolean)getSimulationInfo(0)).getIntegerValue() | (((SimulationInfoMultiBoolean)getSimulationInfo(1)).getIntegerValue() << 4));
 		}else{
 			return getDw(0);
 		}

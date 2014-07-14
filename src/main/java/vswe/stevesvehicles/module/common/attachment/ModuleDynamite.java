@@ -1,7 +1,11 @@
 package vswe.stevesvehicles.module.common.attachment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfo;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfoBoolean;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfoInteger;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.localization.entry.module.LocalizationIndependence;
 import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
 import vswe.stevesvehicles.old.Helpers.ComponentTypes;
@@ -10,12 +14,21 @@ import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.container.slots.SlotBase;
 import vswe.stevesvehicles.container.slots.SlotExplosion;
 
+import java.util.List;
+
 public class ModuleDynamite extends ModuleAttachment {
 	public ModuleDynamite(VehicleBase vehicleBase) {
 		super(vehicleBase);
 	}
 
-	@Override
+    @Override
+    public void loadSimulationInfo(List<SimulationInfo> simulationInfo) {
+        simulationInfo.add(new SimulationInfoInteger(LocalizationAssembler.INFO_FUSE, "fuse", 1, 75, 35));
+        simulationInfo.add(new SimulationInfoInteger(LocalizationAssembler.INFO_EXPLOSIVES, "explosives", 4, 54, 4));
+        simulationInfo.add(new SimulationInfoBoolean(LocalizationAssembler.INFO_EXPLODE, "explode"));
+    }
+
+    @Override
 	public void drawForeground(GuiVehicle gui) {
 	    drawString(gui, LocalizationIndependence.EXPLOSIVES_TITLE.translate(), 8, 6, 0x404040);
 	}
@@ -49,9 +62,10 @@ public class ModuleDynamite extends ModuleAttachment {
         super.update();
 
 		if (isPlaceholder()) {
-			if (getFuse() == 0 && getSimInfo().getShouldExplode()) {
+            boolean shouldExplode = ((SimulationInfoBoolean)getSimulationInfo(2)).getValue();
+			if (getFuse() == 0 && shouldExplode) {
 				setFuse(1);
-			}else if(getFuse() != 0 && !getSimInfo().getShouldExplode()) {
+			}else if(getFuse() != 0 && !shouldExplode) {
 				setFuse(0);
 			}
 		}
@@ -159,7 +173,7 @@ public class ModuleDynamite extends ModuleAttachment {
 
 	public float explosionSize() {
 		if (isPlaceholder()) {
-			return getSimInfo().getExplosionSize() / 2.5F;
+			return ((SimulationInfoInteger)getSimulationInfo(1)).getValue() / 2.5F;
 		}else{
 			return getDw(2) / 2.5F;
 		}
@@ -191,9 +205,10 @@ public class ModuleDynamite extends ModuleAttachment {
 		addDw(2,8);
 	}
 
+    private int simulationFuse;
 	public int getFuse() {
 		if (isPlaceholder()) {
-			return getSimInfo().fuse;
+            return simulationFuse;
 		}else{
 			int val = getDw(0);
 			if (val < 0) {
@@ -206,7 +221,7 @@ public class ModuleDynamite extends ModuleAttachment {
 
 	private void setFuse(int val) {
 		if (isPlaceholder()) {
-			getSimInfo().fuse = val;
+            simulationFuse = val;
 		}else{
 			updateDw(0, (byte)val);
 		}
@@ -222,7 +237,7 @@ public class ModuleDynamite extends ModuleAttachment {
 
 	public int getFuseLength() {
 		if (isPlaceholder()) {
-			return getSimInfo().getFuseLength();
+            return ((SimulationInfoInteger)getSimulationInfo(0)).getValue();
 		}else{	
 			int val = getDw(1);
 			if (val < 0) {

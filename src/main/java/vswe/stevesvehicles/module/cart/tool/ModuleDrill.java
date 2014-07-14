@@ -1,5 +1,6 @@
 package vswe.stevesvehicles.module.cart.tool;
 import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -13,7 +14,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfo;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfoBoolean;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.localization.entry.module.cart.LocalizationCartTool;
 import vswe.stevesvehicles.block.ModBlocks;
 import vswe.stevesvehicles.old.Helpers.BlockCoordinate;
@@ -41,9 +45,12 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
 	}
 
 
-	
-	
-	private ModuleDrillIntelligence intelligence;
+    @Override
+    public void loadSimulationInfo(List<SimulationInfo> simulationInfo) {
+        simulationInfo.add(new SimulationInfoBoolean(LocalizationAssembler.INFO_DRILL, "drill"));
+    }
+
+    private ModuleDrillIntelligence intelligence;
 	private ModuleLiquidSensors liquidSensors;
 	private ModuleOreTracker tracker;
 	@Override
@@ -478,7 +485,7 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
 
 	protected boolean isMining() {
 		if (isPlaceholder()) {
-			return getSimInfo().getDrillSpinning();
+			return getBooleanSimulationInfo();
 		}else{
 			return getDw(0) != 0;
 		}

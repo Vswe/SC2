@@ -1,7 +1,10 @@
 package vswe.stevesvehicles.module.cart.addon;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfo;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfoBoolean;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.localization.entry.module.cart.LocalizationCartTravel;
 import vswe.stevesvehicles.module.common.addon.ModuleAddon;
 import vswe.stevesvehicles.vehicle.VehicleBase;
@@ -10,12 +13,19 @@ import vswe.stevesvehicles.module.cart.ILeverModule;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+import java.util.List;
+
 public class ModuleBrake extends ModuleAddon implements ILeverModule {
 	public ModuleBrake(VehicleBase vehicleBase) {
 		super(vehicleBase);
 	}
 
-	@Override
+    @Override
+    public void loadSimulationInfo(List<SimulationInfo> simulationInfo) {
+        simulationInfo.add(new SimulationInfoBoolean(LocalizationAssembler.INFO_BRAKE, "brake"));
+    }
+
+    @Override
 	public boolean hasSlots() {
 		return false;
 	}
@@ -73,7 +83,7 @@ public class ModuleBrake extends ModuleAddon implements ILeverModule {
 
 	private boolean isForceStopping() {
 		if (isPlaceholder())  {
-			return getSimInfo().getBrakeActive();
+			return getBooleanSimulationInfo();
 		}else{
 			return getDw(0) != 0;
 		}

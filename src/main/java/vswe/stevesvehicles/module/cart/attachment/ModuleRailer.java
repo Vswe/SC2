@@ -1,5 +1,6 @@
 package vswe.stevesvehicles.module.cart.attachment;
 import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRailBase;
@@ -8,7 +9,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Vec3;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfo;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfoInteger;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.localization.entry.module.cart.LocalizationCartRails;
 import vswe.stevesvehicles.module.cart.ModuleWorker;
 import vswe.stevesvehicles.vehicle.VehicleBase;
@@ -21,7 +25,12 @@ public class ModuleRailer extends ModuleWorker implements ISuppliesModule {
 		super(vehicleBase);
 	}
 
-	@Override
+    @Override
+    public void loadSimulationInfo(List<SimulationInfo> simulationInfo) {
+        simulationInfo.add(new SimulationInfoInteger(LocalizationAssembler.INFO_RAILS, "rail", 0, getInventorySize(), 1));
+    }
+
+    @Override
 	public boolean hasGui(){
 		return true;
 	}
@@ -198,7 +207,7 @@ public class ModuleRailer extends ModuleWorker implements ISuppliesModule {
 
 	public int getRails() {
 		if (isPlaceholder()) {
-			return getSimInfo().getRailCount();
+			return getIntegerSimulationInfo();
 		}else{
 			return getDw(0);
 		}

@@ -16,10 +16,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfo;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfoInteger;
 import vswe.stevesvehicles.localization.PlainText;
+import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.network.DataReader;
-import vswe.stevesvehicles.old.Helpers.DropDownMenuItem;
 import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
 import vswe.stevesvehicles.module.data.ModuleType;
@@ -87,7 +89,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 	/**
 	 * Modules that are being removed by the assembler, used when modifying cart
 	 */
-	protected ArrayList<ItemStack> spareModules;
+	protected List<ItemStack> spareModules;
 	
 	/**
 	 * Defines if the Cart Assembler is busy
@@ -112,18 +114,14 @@ public class TileEntityCartAssembler extends TileEntityBase
 	/**
 	 * The graphical boxes drawn as module headers
 	 */
-	private ArrayList<TitleBox> titleBoxes;
+	private List<TitleBox> titleBoxes;
 	
 	/**
 	 * The graphical menus drawn in the dropdown menu at the simulated cart
 	 */
-	private ArrayList<DropDownMenuItem> dropDownItems;
+	private List<SimulationInfo> dropDownItems;
 	
-	/**
-	 * The object controlling the simulation of the cart
-	 */
-	private SimulationInfo info;
-	
+
 	/**
 	 * If the simulated cart should spin or not, this is false if the player is holding the cart with the mouse.
 	 */
@@ -165,27 +163,27 @@ public class TileEntityCartAssembler extends TileEntityBase
 	/**
 	 * All the slots this tile entity is using
 	 */
-	private ArrayList<SlotAssembler> slots;
+	private List<SlotAssembler> slots;
 	
 	/**
 	 * All the engine slots this tile entity is using
 	 */
-	private ArrayList<SlotAssembler> engineSlots;
+	private List<SlotAssembler> engineSlots;
 	
 	/**
 	 * All the addon slots this tile entity is using
 	 */
-	private ArrayList<SlotAssembler> addonSlots;
+	private List<SlotAssembler> addonSlots;
 	
 	/**
 	 * All storage slots this tile entity is using
 	 */
-	private ArrayList<SlotAssembler> chestSlots;	
+	private List<SlotAssembler> chestSlots;
 	
 	/**
 	 * All the attachment slots this tile entity is using
 	 */
-	private ArrayList<SlotAssembler> attachmentSlots;
+	private List<SlotAssembler> attachmentSlots;
 	
 	/**
 	 * The hull slot of this tile entity, this is where the user puts the hull to start designing the cart.
@@ -238,7 +236,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 	/**
 	 * A list of all the upgrades currently attached to this Cart Assembler
 	 */
-	private ArrayList<TileEntityUpgrade> upgrades;
+	private List<TileEntityUpgrade> upgrades;
 	
 	/**
 	 * Used to properly detach any upgrades when the Cart Assembler block is broken
@@ -278,7 +276,7 @@ public class TileEntityCartAssembler extends TileEntityBase
     	//create all the lists for everything
 		upgrades = new ArrayList<TileEntityUpgrade>();
 		spareModules = new ArrayList<ItemStack>(); 		
-		dropDownItems = new ArrayList<DropDownMenuItem>();		
+		dropDownItems = new ArrayList<SimulationInfo>();
 		slots = new ArrayList<SlotAssembler>();
 		engineSlots = new ArrayList<SlotAssembler>();
 		addonSlots = new ArrayList<SlotAssembler>();
@@ -347,16 +345,15 @@ public class TileEntityCartAssembler extends TileEntityBase
 		slots.add(fuelSlot);
 		outputSlot = new SlotOutput(this, slotID, 450,220);
 		slots.add(outputSlot);
-		
-		//create the simulation info
-		info = new SimulationInfo();
-		
+
 		//create the place to store all the items for the slots
 		inventoryStacks = new ItemStack[slots.size()];
 		
 		//create the arrays used by ISidedInventory
 		topBotSlots = new int[] {getSizeInventory() - nonModularSlots()};
 		sideSlots = new int[] {getSizeInventory() - nonModularSlots() + 1};
+
+        updateRenderMenu();
     }
 
 	
@@ -387,7 +384,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 	 * Get a list of all the upgrades. This is not the upgrades themselves, but rather the tile entities holding the upgrades
 	 * @return A list of the tile entities
 	 */
-	public ArrayList<TileEntityUpgrade> getUpgradeTiles() {
+	public List<TileEntityUpgrade> getUpgradeTiles() {
 		return upgrades;
 	}
 
@@ -410,19 +407,12 @@ public class TileEntityCartAssembler extends TileEntityBase
 	}	
 	
 
-	/**
-	 * Get the object that controls the simulation of the cart currently being designed
-	 * @return The simulation object
-	 */
-	public SimulationInfo getSimulationInfo() {
-		return info;
-	}
 	
 	/**
 	 * Get the menu items in the drop down menu used by the player to change the simulation of the cart being designed
 	 * @return The drop down menus
 	 */
-	public ArrayList<DropDownMenuItem> getDropDown() {
+	public List<SimulationInfo> getDropDown() {
 		return dropDownItems;
 	}	
 
@@ -430,7 +420,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 	 * Get the title boxes used for rendering titles for the different module groups
 	 * @return The list of title boxes
 	 */
-	public ArrayList<TitleBox> getTitleBoxes() {
+	public List<TitleBox> getTitleBoxes() {
 		return titleBoxes;
 	}
 	
@@ -454,7 +444,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 	 * Get all the slots used by this Cart Assembler
 	 * @return All the slots this tile entity is using
 	 */
-	public ArrayList<SlotAssembler> getSlots() {
+	public List<SlotAssembler> getSlots() {
 		return slots;
 	}
 	
@@ -462,7 +452,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 	 * Get all the engine slots used by this Cart Assembler
 	 * @return All the engine slots this tile entity is using
 	 */
-	public ArrayList<SlotAssembler> getEngines() {
+	public List<SlotAssembler> getEngines() {
 		return engineSlots;
 	}
 	
@@ -470,7 +460,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 	 * Get all the storage slots used by this Cart Assembler
 	 * @return All the storage slots this tile entity is using
 	 */
-	public ArrayList<SlotAssembler> getChests() {
+	public List<SlotAssembler> getChests() {
 		return chestSlots;
 	}	
 	
@@ -478,7 +468,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 	 * Get all the addon slots used by this Cart Assembler
 	 * @return All the addon slots this tile entity is using
 	 */	
-	public ArrayList<SlotAssembler> getAddons() {
+	public List<SlotAssembler> getAddons() {
 		return addonSlots;
 	}
 	
@@ -486,7 +476,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 	 * Get all the attachment slots used by this Cart Assembler
 	 * @return All the attachment slots this tile entity is using
 	 */	
-	public ArrayList<SlotAssembler> getAttachments() {
+	public List<SlotAssembler> getAttachments() {
 		return attachmentSlots;
 	}			
 	
@@ -1398,23 +1388,16 @@ public class TileEntityCartAssembler extends TileEntityBase
 	
 	
 	private void updateRenderMenu() {
-		ArrayList<DropDownMenuItem> list = info.getList();
-		dropDownItems.clear();
-		for (DropDownMenuItem item : list)  {
-			if (item.getModuleClass() == null)  {
-				dropDownItems.add(item);
-			}else{
-				for (int i = 0; i < getSizeInventory() - nonModularSlots(); i++) {
-					if (getStackInSlot(i) != null) {
-						if (ModuleDataItemHandler.isItemOfModularType(getStackInSlot(i),item.getModuleClass()) && (item.getExcludedClass() == null || !ModuleDataItemHandler.isItemOfModularType(getStackInSlot(i),item.getExcludedClass()))) {
-							dropDownItems.add(item);	
-							break;
-						}
-					}
-				}	
-			}
-		} 
-	}
+		dropDownItems = new ArrayList<SimulationInfo>();
+        if (StevesVehicles.hasGreenScreen) {
+            dropDownItems.add(new SimulationInfoInteger(LocalizationAssembler.INFO_BACKGROUND, null, 0, 3, 1));
+        }
+        if (placeholder != null) {
+            for (ModuleBase moduleBase : placeholder.getModules()) {
+                moduleBase.addSimulationInfo(dropDownItems);
+            }
+        }
+    }
 	
 	private int[] getModularInfoIds() {
 		List<Integer> dataList = new ArrayList<Integer>();
@@ -1703,5 +1686,13 @@ public class TileEntityCartAssembler extends TileEntityBase
     private boolean freeMode;
     public boolean isInFreeMode() {
         return freeMode;
+    }
+
+    public int getBackground() {
+        if (StevesVehicles.hasGreenScreen) {
+            return ((SimulationInfoInteger)getDropDown().get(0)).getValue();
+        }else{
+            return 0;
+        }
     }
 }

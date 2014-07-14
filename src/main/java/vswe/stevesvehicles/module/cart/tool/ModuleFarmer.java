@@ -1,5 +1,6 @@
 package vswe.stevesvehicles.module.cart.tool;
 import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
@@ -10,7 +11,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Vec3;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.common.IPlantable;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfo;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfoBoolean;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.localization.entry.module.cart.LocalizationCartTool;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.module.cart.ICropModule;
@@ -24,8 +28,12 @@ public abstract class ModuleFarmer extends ModuleTool implements ISuppliesModule
 		super(vehicleBase);
 	}
 
-	
-	protected abstract int getRange();
+    @Override
+    public void loadSimulationInfo(List<SimulationInfo> simulationInfo) {
+        simulationInfo.add(new SimulationInfoBoolean(LocalizationAssembler.INFO_FARM, "farming"));
+    }
+
+    protected abstract int getRange();
 	
 	public int getExternalRange() {
 		return getRange();
@@ -174,9 +182,9 @@ public abstract class ModuleFarmer extends ModuleTool implements ISuppliesModule
         if (isReadyToHarvestHandler(x, y + 1, z)){
             if (doPreWork()){
                 int efficiency = enchanter != null ? enchanter.getEfficiencyLevel() : 0;
-                int workingtime = (int)(getBaseFarmingTime() / Math.pow(1.3F, efficiency));
-                setFarming(workingtime * 4);
-                startWorking(workingtime);
+                int workingTime = (int)(getBaseFarmingTime() / Math.pow(1.3F, efficiency));
+                setFarming(workingTime * 4);
+                startWorking(workingTime);
                 return true;
             }else {
                 stopWorking();
@@ -278,12 +286,8 @@ public abstract class ModuleFarmer extends ModuleTool implements ISuppliesModule
 		Block block = getVehicle().getWorld().getBlock(x, y, z);
         int m = getVehicle().getWorld().getBlockMetadata(x, y, z);
 
-		if (block instanceof BlockCrops && m == 7) {
-			return true;
-		} 
-		
-		return false;
-	}
+        return block instanceof BlockCrops && m == 7;
+    }
 	
 	private int farming;
 	private float farmAngle;
@@ -313,7 +317,7 @@ public abstract class ModuleFarmer extends ModuleTool implements ISuppliesModule
 
 	protected boolean isFarming() {
 		if (isPlaceholder()) {
-			return getSimInfo().getIsFarming();
+			return getBooleanSimulationInfo();
 		}else{
 			return getVehicle().isEngineBurning() && getDw(0) != 0;
 		}

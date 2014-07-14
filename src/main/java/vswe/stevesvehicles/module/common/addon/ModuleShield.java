@@ -2,7 +2,10 @@ package vswe.stevesvehicles.module.common.addon;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfo;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfoBoolean;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.localization.entry.module.LocalizationIndependence;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
@@ -10,12 +13,19 @@ import vswe.stevesvehicles.module.IActivatorModule;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+import java.util.List;
+
 public class ModuleShield extends ModuleAddon implements IActivatorModule {
 	public ModuleShield(VehicleBase vehicleBase) {
 		super(vehicleBase);
 	}
 
-	public float getShieldDistance() {
+    @Override
+    public void loadSimulationInfo(List<SimulationInfo> simulationInfo) {
+        simulationInfo.add(new SimulationInfoBoolean(LocalizationAssembler.INFO_SHIELD, "shield", true));
+    }
+
+    public float getShieldDistance() {
 		return shieldDistance;
 	}
 
@@ -102,7 +112,7 @@ public class ModuleShield extends ModuleAddon implements IActivatorModule {
 	
 	private boolean getShieldStatus() {
 		if (isPlaceholder()) {
-			return getSimInfo().getShieldActive();
+			return getBooleanSimulationInfo();
 		}else{		
 			return getDw(0) != 0;
 		}

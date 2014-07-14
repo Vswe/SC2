@@ -29,5 +29,5 @@ public class CargoItemSelection {
 		    return	name.translate();
         }
 	}
-	
+
 }

@@ -9,7 +9,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfo;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfoBoolean;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.localization.entry.module.LocalizationShooter;
 import vswe.stevesvehicles.module.common.addon.mobdetector.ModuleEntityDetector;
 import vswe.stevesvehicles.vehicle.VehicleBase;
@@ -21,8 +24,12 @@ public class ModuleShooterAdvanced extends ModuleShooter {
 		super(vehicleBase);
 	}
 
-	
-	private ArrayList<ModuleEntityDetector> detectors;
+    @Override
+    public void loadSimulationInfo(List<SimulationInfo> simulationInfo) {
+        simulationInfo.add(new SimulationInfoBoolean(LocalizationAssembler.INFO_BARREL, "barrel"));
+    }
+
+    private ArrayList<ModuleEntityDetector> detectors;
 	@Override
 	public void preInit() {
 		super.preInit();
@@ -241,7 +248,7 @@ public class ModuleShooterAdvanced extends ModuleShooter {
 	@Override
 	protected boolean isPipeActive(int id) {
 		if (isPlaceholder()) {
-			return getSimInfo().getIsPipeActive();
+			return getBooleanSimulationInfo();
 		}else{
 			return selectedOptions() != 0;
 		}

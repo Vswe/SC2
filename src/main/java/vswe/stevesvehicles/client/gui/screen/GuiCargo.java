@@ -140,7 +140,7 @@ public class GuiCargo extends GuiManager {
 		ItemStack cartIcon;
 	
 		if (getCargo().target[id] < 0 || getCargo().target[id] >= TileEntityCargo.itemSelections.size() ||  TileEntityCargo.itemSelections.get(getCargo().target[id]).getIcon() == null) {
-			cartIcon = new ItemStack(Items.minecart, 1);
+			cartIcon = new ItemStack(Items.minecart);
 		}else{
 			cartIcon = TileEntityCargo.itemSelections.get(getCargo().target[id]).getIcon();
 		}

@@ -1,11 +1,16 @@
 package vswe.stevesvehicles.module.common.engine;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfo;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfoBoolean;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.localization.entry.module.LocalizationEngine;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public abstract class ModuleSolarBase extends ModuleEngine {
 	private int light;
@@ -18,7 +23,12 @@ public abstract class ModuleSolarBase extends ModuleEngine {
 		super(vehicleBase);
 	}
 
-	@Override
+    @Override
+    public void loadSimulationInfo(List<SimulationInfo> simulationInfo) {
+        simulationInfo.add(new SimulationInfoBoolean(LocalizationAssembler.INFO_LIGHT, "light"));
+    }
+
+    @Override
 	public boolean hasSlots() {
 		return false;
 	}
@@ -58,7 +68,7 @@ public abstract class ModuleSolarBase extends ModuleEngine {
 
 	private void updateDataForModel() {
 		if (isPlaceholder()) {
-			light = getSimInfo().getMaxLight() ? 15 : 14;
+			light = getBooleanSimulationInfo() ? 15 : 14;
 		}else{				
 			if (getVehicle().getWorld().isRemote) {
 				light = getDw(1);

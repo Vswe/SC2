@@ -1,6 +1,7 @@
 package vswe.stevesvehicles.container;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.tileentity.TileEntityBase;
@@ -30,7 +31,7 @@ public class ContainerCartAssembler extends ContainerBase {
     public ContainerCartAssembler(IInventory invPlayer, TileEntityCartAssembler assembler) {
         this.assembler = assembler;
 		
-		ArrayList<SlotAssembler> slots = assembler.getSlots();
+		List<SlotAssembler> slots = assembler.getSlots();
 		for (SlotAssembler slot : slots) {
 			addSlotToContainer(slot);
 		}

@@ -14,6 +14,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfo;
 import vswe.stevesvehicles.localization.ILocalizedText;
 import vswe.stevesvehicles.localization.PlainText;
 import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
@@ -25,7 +26,6 @@ import vswe.stevesvehicles.item.ModItems;
 import vswe.stevesvehicles.network.PacketHandler;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.container.ContainerCartAssembler;
-import vswe.stevesvehicles.old.Helpers.DropDownMenuItem;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.old.Helpers.TitleBox;
 import vswe.stevesvehicles.module.data.ModuleData;
@@ -38,6 +38,7 @@ import vswe.stevesvehicles.vehicle.VehicleType;
 
 @SideOnly(Side.CLIENT)
 public class GuiCartAssembler extends GuiBase {
+
     public GuiCartAssembler(InventoryPlayer invPlayer, TileEntityCartAssembler assembler) {
         super(new ContainerCartAssembler(invPlayer, assembler));
         this.assembler = assembler;
@@ -131,10 +132,18 @@ public class GuiCartAssembler extends GuiBase {
 	
 	private void addNewLine(ArrayList<TextWithColor> lines) {
 		lines.add(null);
-	}		
-	
-	
-	private class TextWithColor {
+	}
+
+    public int getDropDownX() {
+        return dropDownX;
+    }
+
+    public int getDropDownY() {
+        return dropDownY;
+    }
+
+
+    private class TextWithColor {
 		private String text;
 		private int color;
 		
@@ -202,14 +211,7 @@ public class GuiCartAssembler extends GuiBase {
     public static final int TITLE_BOX_TEXT_OFFSET_X = 8;
     public static final int TITLE_BOX_TEXT_OFFSET_Y = 2;
 
-    private static final int STANDARD_BOX_SRC_X = 1;
-    private static final int STANDARD_BOX_INCREASE_SRC_X = 12;
-    private static final int STANDARD_BOX_DECREASE_SRC_X = 23;
-    private static final int STANDARD_BOX_HOVER_SRC_X = 34;
-    private static final int STANDARD_BOX_SRC_Y = 141;
 
-    private static final int BOOLEAN_CHECK_SRC_X = 1;
-    private static final int BOOLEAN_CHECK_SRC_Y = 152;
 
 
     private static final int TAB_COUNT = 2;
@@ -245,7 +247,7 @@ public class GuiCartAssembler extends GuiBase {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);      
 	    int left = getGuiLeft();
         int top = getGuiTop();
-        int background = useTabs() ? 1 : assembler.getSimulationInfo().getBackground();
+        int background = useTabs() ? 1 : assembler.getBackground();
 		ResourceHelper.bindResource(BACKGROUNDS[background]);
         drawTexturedModalRect(left + 143, top + 15, 0, 0, 220, 148);
 		
@@ -256,7 +258,7 @@ public class GuiCartAssembler extends GuiBase {
 		
 		ResourceHelper.bindResource(TEXTURE_EXTRA);
 		
-		ArrayList<SlotAssembler> slots = assembler.getSlots();
+		List<SlotAssembler> slots = assembler.getSlots();
 		for (SlotAssembler slot : slots) {
 			
 			int targetX = slot.getX() - 1;
@@ -610,117 +612,31 @@ public class GuiCartAssembler extends GuiBase {
         }
 	}	
 
-    private static final int DROP_DOWN_SRC_X = 1;
-    private static final int DROP_DOWN_SHORT_SRC_Y = 82;
-    private static final int DROP_DOWN_LARGE_SRC_Y = 103;
 
-    private static final int DROP_DOWN_EXTRA_OPEN_SRC_X = 1;
-    private static final int DROP_DOWN_EXTRA_CLOSED_SRC_X = 44;
-    private static final int DROP_DOWN_EXTRA_SRC_Y = 124;
 
 
 	private void renderDropDownMenu(int x, int y) {
 		GL11.glPushMatrix();
 		GL11.glTranslatef(0, 0, 200.0F);
-	
-        int left = getGuiLeft();
-        int top = getGuiTop();
-	
-		if (dropdownX != -1 && dropdownY != -1) {
-			ArrayList<DropDownMenuItem> items = assembler.getDropDown();
+
+		if (dropDownX != -1 && dropDownY != -1) {
+			List<SimulationInfo> items = assembler.getDropDown();
 			for (int i = 0; i < items.size(); i++) {
-				DropDownMenuItem item = items.get(i);
-			
-				int rect[] = item.getRect(dropdownX, dropdownY,i );
-				int [] subRect = new int[0];
-				int srcX = DROP_DOWN_SRC_X;
-				int srcY = item.getIsLarge() ? DROP_DOWN_LARGE_SRC_Y : DROP_DOWN_SHORT_SRC_Y;
-								
-				drawTexturedModalRect(left + rect[0], top + rect[1], srcX, srcY, rect[2], rect[3]);
-				
-				if (item.getIsLarge()) {
-                    getFontRenderer().drawString(item.getName().toUpperCase(), left + rect[0] + 55, top + rect[1] + 7, 0x000000);
-                    ResourceHelper.bindResource(TEXTURE_EXTRA);
-                    GL11.glColor4f(1, 1, 1, 1);
-				}
-				
-				drawTexturedModalRect(left + rect[0] + 34, top + rect[1] + 2, (item.getImageID() % 16) * 16, 179 + (item.getImageID() / 16) * 16, 16, 16);
-				
-				if (item.hasSubmenu()) {
-					subRect = item.getSubRect(dropdownX, dropdownY,i );
-					srcX = item.getIsSubMenuOpen() ? DROP_DOWN_EXTRA_OPEN_SRC_X : DROP_DOWN_EXTRA_CLOSED_SRC_X;
-					srcY = DROP_DOWN_EXTRA_SRC_Y;
-									
-					drawTexturedModalRect(left + subRect[0], top + subRect[1], srcX, srcY, subRect[2], subRect[3]);
-				}
-				
-				switch (item.getType()) {
-					case BOOL:
-						drawBooleanBox(x,y, 5 + rect[0],5 + rect[1], item.getBOOL());
-						break;
-					case INT:
-						if (item.getIsSubMenuOpen()) {
-							drawIncrementBox(x, y, getOffSetXForSubMenuBox(0, 2) + subRect[0], 3 + subRect[1]);
-							drawDecrementBox(x, y, getOffSetXForSubMenuBox(1, 2) + subRect[0], 3 + subRect[1]);
-						}
-						int targetX = rect[0] + 16;
-						int targetY = rect[1] + 7;
-						int valueToWrite = item.getINT();
-                        getFontRenderer().drawString(String.valueOf(valueToWrite), left + targetX + (valueToWrite >= 10 ? -4 : 0), top + targetY, 0x000000);
-                        ResourceHelper.bindResource(TEXTURE_EXTRA);
-                        GL11.glColor4f(1, 1, 1, 1);
-						break;
-					case MULTIBOOL:
-						if (item.getIsSubMenuOpen()) {
-							int count = item.getMULTIBOOLCount();
-							for (int bool = 0; bool < count; bool++) {
-								drawBooleanBox(x,y, subRect[0] + getOffSetXForSubMenuBox(bool,count),subRect[1] + 3,item.getMULTIBOOL(bool));
-							}
-						}
-						
-						break;
-					default:				
-				}
-				
+				SimulationInfo item = items.get(i);
+
+                item.draw(this, i, x, y);
+                ResourceHelper.bindResource(TEXTURE_EXTRA);
+                GL11.glColor4f(1, 1, 1, 1);
 			}
 		}
 		
 		GL11.glPopMatrix();
 	}
 
-	private int getOffSetXForSubMenuBox(int id, int count) {	
-		return 2 +(int)(20 + (id - count / 2F) * 10);
-	}
-
-	private void drawIncrementBox(int mouseX, int mouseY, int x, int y) {
-		drawStandardBox(mouseX,mouseY, x, y, STANDARD_BOX_INCREASE_SRC_X);
-	}
-	private void drawDecrementBox(int mouseX, int mouseY, int x, int y) {
-		drawStandardBox(mouseX,mouseY, x, y, STANDARD_BOX_DECREASE_SRC_X);
-	}
 
 
-	private void drawBooleanBox(int mouseX, int mouseY, int x, int y, boolean itemValue) {
-		drawStandardBox(mouseX, mouseY, x,y, STANDARD_BOX_SRC_X);
-		if (itemValue) {
-			drawTexturedModalRect(getGuiLeft() + x + 2 , getGuiTop() + y + 2, BOOLEAN_CHECK_SRC_X, BOOLEAN_CHECK_SRC_Y, 6, 6);
-		}
-	}
 
-	private void drawStandardBox(int mouseX, int mouseY, int x, int y, int srcX) {
-		int targetX = getGuiLeft()+x;
-		int targetY = getGuiTop()+y;
 
-		drawTexturedModalRect(targetX, targetY, srcX, STANDARD_BOX_SRC_Y, 10, 10);
-		if (inRect(mouseX,mouseY, new int[] {targetX,targetY,10,10})) {
-			drawTexturedModalRect(targetX, targetY, STANDARD_BOX_HOVER_SRC_X, STANDARD_BOX_SRC_Y, 10, 10);
-		}
-	}
-	
-
-	private boolean clickBox(int mouseX, int mouseY, int x, int y) {
-		return inRect(mouseX, mouseY, new int[] {x,y, 10, 10});
-	}
 	
 
 	@Override
@@ -730,14 +646,14 @@ public class GuiCartAssembler extends GuiBase {
 		int y = y0 - getGuiTop();		
 		
 		if (assembler.selectedTab == 0) {
-            if (dropdownX != -1 && dropdownY != -1) {
-                ArrayList<DropDownMenuItem> items = assembler.getDropDown();
+            if (dropDownX != -1 && dropDownY != -1) {
+                List<SimulationInfo> items = assembler.getDropDown();
                 for (int i = 0; i < items.size(); i++) {
-                    DropDownMenuItem item = items.get(i);
+                    SimulationInfo item = items.get(i);
 
                     boolean insideSubRect = false;
-                    if (item.hasSubmenu()) {
-                        insideSubRect = inRect(x,y, item.getSubRect(dropdownX, dropdownY,i ));
+                    if (item.hasSubMenu()) {
+                        insideSubRect = inRect(x,y, item.getSubRect(dropDownX, dropDownY,i ));
                         if (!insideSubRect && item.getIsSubMenuOpen()) {
                             item.setIsSubMenuOpen(false);
                         }else if (insideSubRect && !item.getIsSubMenuOpen()) {
@@ -745,7 +661,7 @@ public class GuiCartAssembler extends GuiBase {
                         }
                     }
 
-                    boolean insideRect = insideSubRect || inRect(x,y, item.getRect(dropdownX, dropdownY,i ));
+                    boolean insideRect = insideSubRect || inRect(x,y, item.getRect(dropDownX, dropDownY,i ));
                     if (!insideRect && item.getIsLarge()) {
                         item.setIsLarge(false);
                     }else if (insideRect && !item.getIsLarge()) {
@@ -772,8 +688,8 @@ public class GuiCartAssembler extends GuiBase {
 	}
 	
 	
-	private int dropdownX = -1;
-	private int dropdownY = -1;
+	private int dropDownX = -1;
+	private int dropDownY = -1;
  	private int scrollingX;
 	private int scrollingY;
 	private boolean isScrolling;
@@ -799,10 +715,10 @@ public class GuiCartAssembler extends GuiBase {
                         assembler.setSpinning(false);
                     }
                 }else if (button == 1) {
-                    dropdownX = x;
-                    dropdownY = y;
-                    if (dropdownY + assembler.getDropDown().size() * 20 > 164) {
-                        dropdownY = 164 - assembler.getDropDown().size() * 20;
+                    dropDownX = x;
+                    dropDownY = y;
+                    if (dropDownY + assembler.getDropDown().size() * 20 > 164) {
+                        dropDownY = 164 - assembler.getDropDown().size() * 20;
                     }
                 }
             }else if(assembler.selectedTab == 1) {
@@ -862,7 +778,7 @@ public class GuiCartAssembler extends GuiBase {
                 }
             }
 		}else{
-			ArrayList<SlotAssembler> slots = assembler.getSlots();
+			List<SlotAssembler> slots = assembler.getSlots();
 			for (int i = 0; i < slots.size() - assembler.nonModularSlots(); i++) {
 				SlotAssembler slot = slots.get(i);
 				int targetX = slot.getX() - 1;
@@ -882,59 +798,20 @@ public class GuiCartAssembler extends GuiBase {
 		}
 		
 		if (button == 0 && assembler.selectedTab == 0) {
-			if (dropdownX != -1 && dropdownY != -1) {
-				boolean anyLargeItem = false;
-				ArrayList<DropDownMenuItem> items = assembler.getDropDown();
+			if (dropDownX != -1 && dropDownY != -1) {
+                boolean anyLargeItem = false;
+				List<SimulationInfo> items = assembler.getDropDown();
 				for (int i = 0; i < items.size(); i++) {
-					DropDownMenuItem item = items.get(i);	
+					SimulationInfo item = items.get(i);
 					
 					if (item.getIsLarge()) {
 						anyLargeItem = true;
-					}else{
-						continue;
+                        item.onMouseClick(this, i, x, y);
 					}
-					
-					int[] rect = item.getRect(dropdownX, dropdownY,i);
-					int[] subRect = new int[0];
-					
-					if (item.hasSubmenu() && item.getIsSubMenuOpen()) {
-						subRect = item.getSubRect(dropdownX, dropdownY,i);
-					}
-						
-					switch (item.getType()) {			
-						case BOOL:					
-							if (clickBox(x,y, 5 + rect[0],5 + rect[1])) {
-								item.setBOOL(!item.getBOOL());
-							}
-							break;
-						case INT:
-							if (item.getIsSubMenuOpen()) {
-								if (clickBox(x,y, getOffSetXForSubMenuBox(0,2) + subRect[0],3 + subRect[1])) {
-									item.setINT(item.getINT() + 1);
-								}
-								if (clickBox(x,y, getOffSetXForSubMenuBox(1,2) + subRect[0],3 + subRect[1])) {
-									item.setINT(item.getINT() - 1);
-								}
-							}
-							break;
-						case MULTIBOOL:
-							if (item.getIsSubMenuOpen()) {
-								int count = item.getMULTIBOOLCount();
-								for (int bool = 0; bool < count; bool++) {
-									if (clickBox(x,y, subRect[0] + getOffSetXForSubMenuBox(bool, count),subRect[1] + 3)) {
-										item.setMULTIBOOL(bool,!item.getMULTIBOOL(bool));
-										break;
-									}						
-								}
-							}
-						
-							break;
-						default:				
-					}	
 				}
-				
-				if (!anyLargeItem) {
-					dropdownX = dropdownY = -1;					
+
+                if (!anyLargeItem) {
+					dropDownX = dropDownY = -1;
 				}
 			}	
 		}

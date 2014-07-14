@@ -237,6 +237,9 @@ public class VehicleBase {
         }
 
         initModules();
+        for (ModuleBase module : modules) {
+            module.initSimulationInfo();
+        }
     }
 
 

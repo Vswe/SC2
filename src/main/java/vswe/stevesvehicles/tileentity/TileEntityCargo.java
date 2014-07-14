@@ -11,6 +11,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.localization.entry.block.LocalizationCargo;
+import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.old.Helpers.*;
 import vswe.stevesvehicles.item.ModItems;
@@ -53,21 +54,19 @@ public class TileEntityCargo extends TileEntityManager
 
 	public static ArrayList<CargoItemSelection> itemSelections;
 
-
-    //TODO maybe make this registration a bit nice
+    //TODO add a registry so ids are preserved?
 	public static void loadSelectionSettings() {
 		itemSelections = new ArrayList<CargoItemSelection>();
 		itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_ALL, Slot.class, new ItemStack(ModItems.vehicles, 1, 0)));
-		itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_ENGINE, SlotFuel.class, new ItemStack(ModItems.modules, 1, 0)));       //TODO don't use static ids for modules
-		itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_RAILER, SlotBuilder.class, new ItemStack(ModItems.modules, 1, 10))); //TODO don't use static ids for modules
-		itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_STORAGE, SlotChest.class, new ItemStack(Blocks.chest, 1)));
+		itemSelections.add(new CargoItemSelectionModule(LocalizationCargo.SLOT_ENGINE, SlotFuel.class, ModuleRegistry.getModuleFromName("common.engines:coal_engine")));
+		itemSelections.add(new CargoItemSelectionModule(LocalizationCargo.SLOT_RAILER, SlotBuilder.class, ModuleRegistry.getModuleFromName("cart.rails:railer")));
+        itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_STORAGE, SlotChest.class, new ItemStack(Blocks.chest, 1)));
 		itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_TORCH, SlotTorch.class, new ItemStack(Blocks.torch, 1)));
 		itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_EXPLOSIVE, ISlotExplosions.class, ComponentTypes.DYNAMITE.getItemStack()));
 		itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_ARROW, SlotArrow.class, new ItemStack(Items.arrow, 1)));
 		itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_BRIDGE, SlotBridge.class, new ItemStack(Blocks.brick_block, 1)));
 		itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_SEED, SlotSeed.class, new ItemStack(Items.wheat_seeds, 1)));
 		itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_FERTILIZER, SlotFertilizer.class, new ItemStack(Items.dye, 1, 15)));
-		itemSelections.add(new CargoItemSelection(null, null, null));
 		itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_SAPLING, SlotSapling.class, new ItemStack(Blocks.sapling, 1)));
 		itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_FIREWORK, SlotFirework.class, new ItemStack(Items.fireworks, 1)));
 		itemSelections.add(new CargoItemSelection(LocalizationCargo.SLOT_BUCKET, SlotMilker.class, new ItemStack(Items.bucket, 1)));

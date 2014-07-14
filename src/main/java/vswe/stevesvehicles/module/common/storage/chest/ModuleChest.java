@@ -1,16 +1,28 @@
 package vswe.stevesvehicles.module.common.storage.chest;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfo;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfoBoolean;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.module.common.storage.ModuleStorage;
 import vswe.stevesvehicles.container.slots.SlotBase;
 import vswe.stevesvehicles.container.slots.SlotChest;
+
+import java.util.List;
 
 public abstract class ModuleChest extends ModuleStorage {
 	public ModuleChest(VehicleBase vehicleBase) {
 		super(vehicleBase);
 	}
 
-	//called to update the module's actions. Called by the cart's update code.
+    @Override
+    public void loadSimulationInfo(List<SimulationInfo> simulationInfo) {
+        if (hasVisualChest()) {
+            simulationInfo.add(new SimulationInfoBoolean(LocalizationAssembler.INFO_CHEST, "storage"));
+        }
+    }
+
+    //called to update the module's actions. Called by the cart's update code.
 	@Override
 	public void update() {
 		super.update();
@@ -101,7 +113,7 @@ public abstract class ModuleChest extends ModuleStorage {
 	protected boolean isChestActive() {
 		if (hasVisualChest()) {
 			if (isPlaceholder()) {
-				return getSimInfo().getChestActive();
+				return getBooleanSimulationInfo();
 			}else{
 				return getDw(0) > 0;
 			}
@@ -155,5 +167,7 @@ public abstract class ModuleChest extends ModuleStorage {
 			}
 		}
 		return true;
-	}	
+	}
+
+
 }

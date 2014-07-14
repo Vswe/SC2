@@ -1,5 +1,6 @@
 package vswe.stevesvehicles.module.cart.tool;
 import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
@@ -7,7 +8,10 @@ import net.minecraft.init.Blocks;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Vec3;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfo;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfoBoolean;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.localization.entry.module.cart.LocalizationCartTool;
 import vswe.stevesvehicles.old.Helpers.BlockCoordinate;
 import vswe.stevesvehicles.vehicle.VehicleBase;
@@ -23,7 +27,12 @@ public abstract class ModuleWoodcutter extends ModuleTool implements ISuppliesMo
 		super(vehicleBase);
 	}
 
-	//lower numbers are prioritized
+    @Override
+    public void loadSimulationInfo(List<SimulationInfo> simulationInfo) {
+        simulationInfo.add(new SimulationInfoBoolean(LocalizationAssembler.INFO_CUTTING, "wood"));
+    }
+
+    //lower numbers are prioritized
 	public byte getWorkPriority() {
 		return 80;
 	}
@@ -320,7 +329,7 @@ public abstract class ModuleWoodcutter extends ModuleTool implements ISuppliesMo
 
 	protected boolean isCutting() {
 		if (isPlaceholder()) {
-			return getSimInfo().getIsCutting();
+			return getBooleanSimulationInfo();
 		}else{
 			return getDw(0) != 0;
 		}

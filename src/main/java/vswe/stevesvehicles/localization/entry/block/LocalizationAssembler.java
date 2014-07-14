@@ -3,6 +3,7 @@ package vswe.stevesvehicles.localization.entry.block;
 
 import vswe.stevesvehicles.localization.ILocalizedText;
 import vswe.stevesvehicles.localization.LocalizedTextSimple;
+import vswe.stevesvehicles.localization.PlainText;
 
 public final class LocalizationAssembler {
     public static final ILocalizedText TITLE = createSimple("title");
@@ -24,6 +25,25 @@ public final class LocalizationAssembler {
     public static final ILocalizedText BUSY_ASSEMBLER = createSimple("busy_assembler");
     public static final ILocalizedText OCCUPIED_DEPARTURE_BAY = createSimple("occupied_departure_bay");
 
+    //TODO localize these
+    public static final ILocalizedText INFO_BACKGROUND = new PlainText("Background");
+    public static final ILocalizedText INFO_CHEST = new PlainText("Chest");
+    public static final ILocalizedText INFO_INVISIBLE = new PlainText("Invisible");
+    public static final ILocalizedText INFO_BRAKE = new PlainText("Brake");
+    public static final ILocalizedText INFO_DRILL = new PlainText("Drill");
+    public static final ILocalizedText INFO_LIGHT = new PlainText("Light");
+    public static final ILocalizedText INFO_BRIDGE = new PlainText("Bridge");
+    public static final ILocalizedText INFO_FARM = new PlainText("Farm");
+    public static final ILocalizedText INFO_CUTTING = new PlainText("Cutting");
+    public static final ILocalizedText INFO_LIQUID = new PlainText("Liquid");
+    public static final ILocalizedText INFO_FUSE = new PlainText("Fuse");
+    public static final ILocalizedText INFO_RAILS = new PlainText("Rails");
+    public static final ILocalizedText INFO_EXPLOSIVES = new PlainText("Explosives");
+    public static final ILocalizedText INFO_EXPLODE = new PlainText("Explode");
+    public static final ILocalizedText INFO_SHIELD = new PlainText("Shield");
+    public static final ILocalizedText INFO_TORCHES = new PlainText("Torches");
+    public static final ILocalizedText INFO_BARRELS = new PlainText("Barrels");
+    public static final ILocalizedText INFO_BARREL = new PlainText("Barrel");
 
     private static final String HEADER = "steves_vehicles:gui.assembler:";
     private static ILocalizedText createSimple(String code) {

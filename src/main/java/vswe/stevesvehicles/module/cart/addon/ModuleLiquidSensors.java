@@ -3,18 +3,28 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.init.Blocks;
 import net.minecraftforge.fluids.IFluidBlock;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfo;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfoInteger;
+import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.module.common.addon.ModuleAddon;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.cart.attachment.ModuleLiquidDrainer;
 import vswe.stevesvehicles.module.cart.tool.ModuleDrill;
 
+import java.util.List;
+
 public class ModuleLiquidSensors extends ModuleAddon {
 	public ModuleLiquidSensors(VehicleBase vehicleBase) {
 		super(vehicleBase);
 	}
-	
-	@Override
+
+    @Override
+    public void loadSimulationInfo(List<SimulationInfo> simulationInfo) {
+        simulationInfo.add(new SimulationInfoInteger(LocalizationAssembler.INFO_LIQUID, "sensors", 1, 3, 1));
+    }
+
+    @Override
 	public void update() {
 		super.update();
 
@@ -102,7 +112,7 @@ public class ModuleLiquidSensors extends ModuleAddon {
 
 	public int getLight() {
 		if (isPlaceholder()) {
-			return getSimInfo().getLiquidLight();
+			return getIntegerSimulationInfo();
 		}else{
 			return getDw(0) & 3;
 		}
@@ -110,7 +120,7 @@ public class ModuleLiquidSensors extends ModuleAddon {
 
 	protected boolean isDrillSpinning() {
 		if (isPlaceholder()) {
-			return getSimInfo().getDrillSpinning();
+			return getIntegerSimulationInfo() != 1;
 		}else{
 			return (getDw(0) & 4) != 0;
 		}

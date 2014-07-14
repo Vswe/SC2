@@ -4,6 +4,7 @@ package vswe.stevesvehicles.registry;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
+import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,12 +26,27 @@ public class RegistryLoader<R extends IRegistry<E>, E> {
     int nextId;
 
     public E getObjectFromName(String name) {
-        int id = getIdFromName(name);
-        if (id == -1) {
-            return null;
+        if (nameToIdMapping.isEmpty()) {
+            //if the mapping hasn't been loaded yet, improvise. Once the mapping has been loaded this look up will go faster.
+            String[] split = name.split(":");
+            if (split.length == 2) {
+                R registry = registries.get(split[0]);
+                if (registry != null) {
+                    for (E e : registry.getElements()) {
+                        if (registry.getFullCode(e).equals(name)) {
+                            return e;
+                        }
+                    }
+                }
+            }
         }else{
-            return getObjectFromId(id);
+            int id = getIdFromName(name);
+            if (id != -1) {
+                return getObjectFromId(id);
+            }
         }
+
+        return null;
     }
 
     public int getIdFromObject(E object) {

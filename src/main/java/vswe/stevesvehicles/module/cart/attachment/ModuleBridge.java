@@ -6,19 +6,29 @@ import net.minecraft.block.BlockRailBase;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Vec3;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfo;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfoBoolean;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.module.cart.ModuleWorker;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.module.ISuppliesModule;
 import vswe.stevesvehicles.container.slots.SlotBase;
 import vswe.stevesvehicles.container.slots.SlotBridge;
 
+import java.util.List;
+
 public class ModuleBridge extends ModuleWorker implements ISuppliesModule {
 	public ModuleBridge(VehicleBase vehicleBase) {
 		super(vehicleBase);
 	}
 
-	@Override
+    @Override
+    public void loadSimulationInfo(List<SimulationInfo> simulationInfo) {
+        simulationInfo.add(new SimulationInfoBoolean(LocalizationAssembler.INFO_BRIDGE, "bridge"));
+    }
+
+    @Override
 	public boolean hasGui(){
 		return true;
 	}
@@ -132,7 +142,7 @@ public class ModuleBridge extends ModuleWorker implements ISuppliesModule {
 
 	public boolean needBridge() {
 		if (isPlaceholder()) {
-			return getSimInfo().getNeedBridge();
+			return getBooleanSimulationInfo();
 		}else{
 			return getDw(0) != 0;
 		}

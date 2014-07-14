@@ -5,7 +5,10 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Vec3;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfo;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfoMultiBoolean;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.module.cart.ModuleWorker;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
@@ -13,12 +16,19 @@ import vswe.stevesvehicles.module.ISuppliesModule;
 import vswe.stevesvehicles.container.slots.SlotBase;
 import vswe.stevesvehicles.container.slots.SlotTorch;
 
+import java.util.List;
+
 public class ModuleTorch extends ModuleWorker implements ISuppliesModule  {
 	public ModuleTorch(VehicleBase vehicleBase) {
 		super(vehicleBase);
 	}
 
-	@Override
+    @Override
+    public void loadSimulationInfo(List<SimulationInfo> simulationInfo) {
+        simulationInfo.add(new SimulationInfoMultiBoolean(LocalizationAssembler.INFO_TORCHES, "torch", 3, true));
+    }
+
+    @Override
 	public boolean hasGui(){
         return true;
     }
@@ -200,8 +210,7 @@ public class ModuleTorch extends ModuleWorker implements ISuppliesModule  {
 			generatePacket(x,y);
 		}
 
-        if (button != -1)
-        {
+        if (button != -1) {
             markerMoving = false;
         }
 	}	
@@ -267,7 +276,7 @@ public class ModuleTorch extends ModuleWorker implements ISuppliesModule  {
 
 	public int getTorches() {
 		if (isPlaceholder()) {
-			return getSimInfo().getTorchInfo();
+			return getMultiBooleanIntegerSimulationInfo();
 		}else{
 			return getDw(0);
 		}

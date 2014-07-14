@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.FakePlayerFactory;
@@ -26,6 +25,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfo;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfoBoolean;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfoInteger;
+import vswe.stevesvehicles.client.gui.assembler.SimulationInfoMultiBoolean;
 import vswe.stevesvehicles.client.gui.screen.GuiBase;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.container.ContainerVehicle;
@@ -36,7 +39,6 @@ import vswe.stevesvehicles.old.Buttons.ButtonBase;
 import vswe.stevesvehicles.client.rendering.models.ModelVehicle;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.CompButtons;
-import vswe.stevesvehicles.old.Helpers.SimulationInfo;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.container.slots.SlotBase;
 import cpw.mods.fml.relauncher.Side;
@@ -125,14 +127,7 @@ public abstract class ModuleBase {
 		return getVehicle().isPlaceholder;
 	}
 	
-	/**
-	 * If isPlaceholder returns true you can get the object controlling the simulation of the client only vehicle.
-	 * @return The Simulation Info object used to simulate the vehicle
-	 */
-	protected SimulationInfo getSimInfo() {
-		return getVehicle().placeholderAssembler.getSimulationInfo();
-	}
-	
+
 	/**
 	 * Sets the modular id of this module, this is basically the id of the {@link ModuleData} used to create this module.
 	 * @param val The module id
@@ -1684,5 +1679,42 @@ public abstract class ModuleBase {
         ModuleData data = getModuleData();
         return data == null ? null : data.getName();
     }
-	
+
+    private boolean hasSimulationInfoBeenLoaded;
+    private List<SimulationInfo> simulationInfo;
+    public final void  initSimulationInfo() {
+        if (!hasSimulationInfoBeenLoaded) {
+            simulationInfo = new ArrayList<SimulationInfo>();
+            loadSimulationInfo(simulationInfo);
+            hasSimulationInfoBeenLoaded = true;
+        }
+    }
+
+    public void loadSimulationInfo(List<SimulationInfo> simulationInfo) {
+
+    }
+
+    public SimulationInfo getSimulationInfo(int id) {
+        return simulationInfo.get(id);
+    }
+
+    public SimulationInfo getSimulationInfo() {
+        return getSimulationInfo(0);
+    }
+
+	public void addSimulationInfo(List<SimulationInfo> simulationInfo) {
+        simulationInfo.addAll(this.simulationInfo);
+    }
+
+    public boolean getBooleanSimulationInfo() {
+        return ((SimulationInfoBoolean)getSimulationInfo()).getValue();
+    }
+
+    public int getIntegerSimulationInfo() {
+        return ((SimulationInfoInteger)getSimulationInfo()).getValue();
+    }
+
+    public int getMultiBooleanIntegerSimulationInfo() {
+        return ((SimulationInfoMultiBoolean)getSimulationInfo()).getIntegerValue();
+    }
 }
