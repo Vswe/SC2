@@ -11,7 +11,8 @@ import org.lwjgl.opengl.GL11;
 
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.module.cart.LocalizationCartTravel;
-import vswe.stevesvehicles.network.PacketHandler;
+import vswe.stevesvehicles.network.DataReader;
+import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.cart.ILeverModule;
 import vswe.stevesvehicles.module.common.engine.ModuleEngine;
@@ -45,8 +46,9 @@ public class ModuleAdvancedControl extends ModuleAttachment implements ILeverMod
 		return 35;
 	}
 
-	private byte [] engineInformation;
-
+	private int[] engineInformation;
+    private static final int FUEL_IN_TOP_BAR = 20000;
+    private static final int MAX_BAR_LENGTH = 62;
 
 	@SideOnly(Side.CLIENT)
     @Override
@@ -55,11 +57,17 @@ public class ModuleAdvancedControl extends ModuleAttachment implements ILeverMod
 		
 		if (engineInformation != null) {
 			for (int i = 0; i < getVehicle().getEngines().size(); i++) {
-				drawImage(5, i * 15, 0, 0, 66, 15); 
-				
-				int upperBarLength = (engineInformation[i*2] & 63);
-				int lowerBarLength = (engineInformation[i*2 + 1] & 63);
-				
+                int totalFuel = engineInformation[i];
+				drawImage(5, i * 15, 0, 0, 66, 15);
+
+                float percentage = (totalFuel % FUEL_IN_TOP_BAR) / (float) FUEL_IN_TOP_BAR;
+                int upperBarLength = (int)(MAX_BAR_LENGTH * percentage);
+
+                int lowerBarLength = totalFuel / FUEL_IN_TOP_BAR;
+                if (lowerBarLength > MAX_BAR_LENGTH) {
+                    lowerBarLength = MAX_BAR_LENGTH;
+                }
+
 				ModuleEngine engine = getVehicle().getEngines().get(i);
 				float[] rgb = engine.getGuiBarColor();
 				GL11.glColor4f(rgb[0], rgb[1], rgb[2], 1.0F);
@@ -149,50 +157,57 @@ public class ModuleAdvancedControl extends ModuleAttachment implements ILeverMod
 	
 	
     @Override
-    public RAIL_DIRECTION getSpecialRailDirection(int x, int y, int z) {
+    public RailDirection getSpecialRailDirection(int x, int y, int z) {
 		if (isForwardKeyDown()) {
-			return RAIL_DIRECTION.FORWARD;
+			return RailDirection.FORWARD;
 		}else if(isLeftKeyDown()) {
-			return RAIL_DIRECTION.LEFT;
+			return RailDirection.LEFT;
 		}else if(isRightKeyDown()) {
-			return RAIL_DIRECTION.RIGHT;
+			return RailDirection.RIGHT;
 		}else {
-			return RAIL_DIRECTION.DEFAULT;
+			return RailDirection.DEFAULT;
 		}	
 	}
 
+    private DataWriter getDataWriter(PacketId id) {
+        DataWriter dw = getDataWriter();
+        dw.writeEnum(id);
+        return dw;
+    }
+
+    private enum PacketId {
+        ENGINE,
+        KEY,
+        DISTANCE,
+        RESET
+    }
 
 	
 	@Override
-	protected void receivePacket(int id, byte[] data, EntityPlayer player) {
-		if (id == 0) {
-			engineInformation = data;
-		}else if(id == 1) {
-			if (getVehicle().getEntity().riddenByEntity != null && getVehicle().getEntity().riddenByEntity instanceof EntityPlayer && getVehicle().getEntity().riddenByEntity == player) {
-				keyInformation = data[0];
-                ((EntityModularCart)getVehicle().getEntity()).resetRailDirection();
-			}
-		}else if(id == 2) {
-			int intOdo = 0;
-			int intTrip = 0;
-			for (int i = 0; i < 4; i++) {
-				int temp = data[i];
-				if (temp < 0) {
-					temp+=256;
-				}
-				intOdo |= temp << (i*8);
-				temp = data[i+4];
-				if (temp < 0) {
-					temp+=256;
-				}
-				intTrip |= temp << (i*8);
-			}
-			odo = intOdo;
-			trip = intTrip;
-		}else if (id == 3) {
-			trip = 0;
-			tripPacketTimer = 0;
-		}
+	protected void receivePacket(DataReader dr, EntityPlayer player) {
+        PacketId id = dr.readEnum(PacketId.class);
+        switch (id) {
+            case ENGINE:
+                engineInformation = new int[getVehicle().getEngines().size()];
+                for (int i = 0; i < engineInformation.length; i++) {
+                    engineInformation[i] = dr.readInteger();
+                }
+                break;
+            case KEY:
+                if (getVehicle().getEntity().riddenByEntity != null && getVehicle().getEntity().riddenByEntity instanceof EntityPlayer && getVehicle().getEntity().riddenByEntity == player) {
+                    keyInformation = (byte)dr.readByte();
+                    ((EntityModularCart)getVehicle().getEntity()).resetRailDirection();
+                }
+                break;
+            case DISTANCE:
+                odo = dr.readInteger();
+                trip = dr.readInteger();
+                break;
+            case RESET:
+                trip = 0;
+                tripPacketTimer = 0;
+                break;
+        }
 	}
 
 	private int tripPacketTimer;
@@ -328,7 +343,9 @@ public class ModuleAdvancedControl extends ModuleAttachment implements ILeverMod
 
 			
 			if (oldVal != keyInformation) {
-				PacketHandler.sendPacket(getVehicle(), 1 + getPacketStart(), new byte[] {keyInformation});
+                DataWriter dw = getDataWriter(PacketId.KEY);
+                dw.writeByte(keyInformation);
+                sendPacketToServer(dw);
 			}
 		}
 	}
@@ -355,54 +372,22 @@ public class ModuleAdvancedControl extends ModuleAttachment implements ILeverMod
 	private double odo;
 	private double trip;	
 	private void sendTripPacket(EntityPlayer player) {
-		byte[] data = new byte[8];
-		int intOdo = (int)odo;
-		int intTrip = (int)trip;
-
-		for (int i = 0; i < 4; i++) {
-			data[i] = (byte)((intOdo & (255 << (i * 8))) >> (i * 8));
-			data[i+4] = (byte)((intTrip & (255 << (i * 8))) >> (i * 8));
-		}
-		sendPacket(2, data, player);
+        DataWriter dw = getDataWriter(PacketId.DISTANCE);
+        dw.writeInteger((int)odo);
+        dw.writeInteger((int)trip);
+        sendPacketToPlayer(dw, player);
 	}
 	
 	private void sendEnginePacket(EntityPlayer player) {
-		int engineCount = getVehicle().getEngines().size();
-		//there's room for two engines in every single byte
-		byte[] data = new byte[engineCount * 2];
-		
-		for (int i = 0; i < getVehicle().getEngines().size(); i++) {
-			ModuleEngine engine  = getVehicle().getEngines().get(i);
-		
-			int totalFuel = engine.getTotalFuel();
-			
-			int fuelInTopBar = 20000;
-			int maxBarLength = 62;
-			float percentage = (totalFuel % fuelInTopBar) / (float)fuelInTopBar;
-			int upperBarLength = (int)(maxBarLength * percentage);
-			
-			int lowerBarLength = totalFuel / fuelInTopBar;
-			if (lowerBarLength > maxBarLength) {
-				lowerBarLength = maxBarLength;
-			}
-			
-			data[i*2] = (byte)(upperBarLength & 63);
-			data[i*2 + 1] = (byte)(lowerBarLength & 63);
-		}
-		
-		sendPacket(0, data, player);
+		DataWriter dw = getDataWriter(PacketId.ENGINE);
+        for (ModuleEngine moduleEngine : getVehicle().getEngines()) {
+            dw.writeInteger(moduleEngine.getTotalFuel());
+        }
+        sendPacketToPlayer(dw, player);
 	}
 	
 
-	
-	@Override
-	public int numberOfPackets() {
-		return 4;
-	}
 
-
-	
-	
 	private void setSpeedSetting(int val) {
 		if (val < 0 || val > 6) {
 			return;
@@ -484,7 +469,7 @@ public class ModuleAdvancedControl extends ModuleAttachment implements ILeverMod
 	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0) {
 			if (inRect(x,y, BUTTON_RECT)) {
-				sendPacket(3);
+                sendPacketToServer(getDataWriter(PacketId.RESET));
 			}
 		}
 	}

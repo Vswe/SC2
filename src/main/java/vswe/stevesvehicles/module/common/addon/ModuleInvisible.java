@@ -6,6 +6,7 @@ import vswe.stevesvehicles.client.gui.assembler.SimulationInfoBoolean;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.localization.entry.module.LocalizationVisual;
+import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.IActivatorModule;
@@ -101,26 +102,20 @@ public class ModuleInvisible extends ModuleAddon implements IActivatorModule {
 	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0) {
 			if (inRect(x,y, BUTTON_RECT)) {
-				sendPacket(0);
+				sendPacketToServer(getDataWriter());
 			}
 		}
 	}
 
 	@Override
-	protected void receivePacket(int id, byte[] data, EntityPlayer player) {
-		if (id == 0) {
-			setIsVisible(!isVisible());
-		}
+	protected void receivePacket(DataReader dr, EntityPlayer player) {
+	    setIsVisible(!isVisible());
 	}
 
 	public void setIsVisible(boolean val) {
 		updateDw(0, val ? 1 : 0);
 	}
-	
-	@Override
-	public int numberOfPackets() {
-		return 1;
-	}
+
 
     @Override
     public boolean shouldVehicleRender() {

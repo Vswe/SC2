@@ -47,19 +47,12 @@ public class PacketHandler {
                 ((BlockCartAssembler) ModBlocks.CART_ASSEMBLER.getBlock()).updateMultiBlock(world, x, y, z);
 
             }else if(type == PacketType.VEHICLE){
-                int id = dr.readByte();
                 int entityId = dr.readInteger();
 
-                int len = dr.readByte();
-                byte[] data = new byte[len];
-                for (int i = 0; i < len; i++) {
-                    data[i] = (byte)dr.readByte();
-                }
-
                 World world = player.worldObj;
-                vswe.stevesvehicles.vehicle.VehicleBase vehicle = getVehicle(entityId, world);
+                VehicleBase vehicle = getVehicle(entityId, world);
                 if (vehicle != null) {
-                    receivePacketAtVehicle(vehicle, id, data, player);
+                    receivePacketAtVehicle(vehicle, dr, player);
                 }
             }else if(type == PacketType.REGISTRY) {
                 RegistrySynchronizer.onPacket(dr);
@@ -81,43 +74,24 @@ public class PacketHandler {
             PacketType type = dr.readEnum(PacketType.class);
             World world = player.worldObj;
 
-            if (type == PacketType.CONTAINER) {
-
-                if (player.openContainer instanceof ContainerPlayer) {
-                    int id = dr.readByte();
+            if (type == PacketType.BLOCK || type == PacketType.VEHICLE) {
+                Container container = player.openContainer;
+                if (container instanceof ContainerPlayer) {
                     int entityId = dr.readInteger();
-
-                    int len = dr.readByte();
-                    byte[] data = new byte[len];
-                    for (int i = 0; i < len; i++) {
-                        data[i] = (byte)dr.readByte();
-                    }
                     VehicleBase vehicle = getVehicle(entityId, world);
                     if (vehicle != null) {
-                        receivePacketAtVehicle(vehicle, id, data, player);
+                        receivePacketAtVehicle(vehicle, dr, player);
                     }
-                }else{
-                    Container con = player.openContainer;
+                }else if (container instanceof ContainerVehicle) {
+                    ContainerVehicle containerVehicle = (ContainerVehicle)container;
+                    VehicleBase vehicle = containerVehicle.getVehicle();
 
-                    if (con instanceof ContainerVehicle) {
-                        int id = dr.readByte();
-                        int len = dr.readByte();
-                        byte[] data = new byte[len];
-                        for (int i = 0; i < len; i++) {
-                            data[i] = (byte)dr.readByte();
-                        }
-
-
-                        ContainerVehicle containerVehicle = (ContainerVehicle)con;
-                        VehicleBase vehicle = containerVehicle.getVehicle();
-
-                        receivePacketAtVehicle(vehicle, id, data, player);
-                    }else if(con instanceof ContainerBase) {
-                        ContainerBase containerBase =(ContainerBase)con;
-                        TileEntityBase base = containerBase.getTileEntity();
-                        if (base != null) {
-                            base.receivePacket(dr, player);
-                        }
+                    receivePacketAtVehicle(vehicle, dr, player);
+                }else if(container instanceof ContainerBase) {
+                    ContainerBase containerBase = (ContainerBase)container;
+                    TileEntityBase base = containerBase.getTileEntity();
+                    if (base != null) {
+                        base.receivePacket(dr, player);
                     }
                 }
             }
@@ -131,13 +105,8 @@ public class PacketHandler {
 
 
 
-	private void receivePacketAtVehicle(VehicleBase vehicle, int id,byte [] data, EntityPlayer player) {
-		for (ModuleBase module : vehicle.getModules()) {
-			if (id >= module.getPacketStart() && id < module.getPacketStart() + module.totalNumberOfPackets()) {
-				module.delegateReceivedPacket(id-module.getPacketStart(),data, player);
-				break;
-			}
-		}
+	private void receivePacketAtVehicle(VehicleBase vehicle, DataReader dr, EntityPlayer player) {
+        ModuleBase.delegateReceivedPacket(vehicle, dr, player);
 	}
 	
 	private VehicleBase getVehicle(int id, World world) {
@@ -159,48 +128,9 @@ public class PacketHandler {
     }
 
 
-	public static void sendPacket(int id, byte[] extraData) {
-        DataWriter dw = getDataWriter(PacketType.CONTAINER);
-        dw.writeByte(id);
-        dw.writeByte(extraData.length);
-        for (byte b : extraData) {
-            dw.writeByte(b);
-        }
-        dw.sendToServer();
-	}
-
     public static void sendPacketToServer(DataWriter dw) {
         dw.sendToServer();
     }
-
-	public static void sendPacket(VehicleBase vehicleBase,int id, byte[] extraData) {
-        DataWriter dw = getDataWriter(PacketType.VEHICLE);
-        dw.writeByte(id);
-
-        dw.writeInteger(vehicleBase.getEntity().getEntityId());
-
-        dw.writeByte(extraData.length);
-        for (byte b : extraData) {
-            dw.writeByte(b);
-        }
-        dw.sendToServer();
-    }
-	
-	public static void sendPacketToPlayer(int id, byte[] data, EntityPlayer player, VehicleBase vehicle) {
-        DataWriter dw = getDataWriter(PacketType.VEHICLE);
-
-        dw.writeByte((byte) PacketType.VEHICLE.ordinal());
-        dw.writeByte((byte)id);
-
-        dw.writeInteger(vehicle.getEntity().getEntityId());
-
-        dw.writeByte(data.length);
-        for (byte b : data) {
-            dw.writeByte(b);
-        }
-			
-        dw.sendToPlayer((EntityPlayerMP)player);
-	}
 
     public static void sendPacketToPlayer(DataWriter dw, EntityPlayer player) {
         dw.sendToPlayer((EntityPlayerMP)player);

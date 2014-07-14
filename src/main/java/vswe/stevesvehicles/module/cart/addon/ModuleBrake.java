@@ -7,6 +7,8 @@ import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.localization.entry.module.cart.LocalizationCartTravel;
 import vswe.stevesvehicles.module.common.addon.ModuleAddon;
+import vswe.stevesvehicles.network.DataReader;
+import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.cart.ILeverModule;
@@ -103,27 +105,27 @@ public class ModuleBrake extends ModuleAddon implements ILeverModule {
 	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0) {
 			if (inRect(x,y, START_STOP_RECT)) {
-				sendPacket(0);
+                DataWriter dw = getDataWriter();
+                dw.writeBoolean(true);
+				sendPacketToServer(dw);
 			}else if (inRect(x,y, TURN_BACK_RECT)) {
-				sendPacket(1);
+                DataWriter dw = getDataWriter();
+                dw.writeBoolean(false);
+                sendPacketToServer(dw);
 			}
 		}
 	}
 
 	@Override
-	protected void receivePacket(int id, byte[] data, EntityPlayer player) {
-		if (id == 0) {
+	protected void receivePacket(DataReader dr, EntityPlayer player) {
+		if (dr.readBoolean()) {
 			setForceStopping(!isForceStopping());
-		}else if(id == 1) {
+		}else{
 			turnback();
 		}
 	}
 
-	@Override
-	public int numberOfPackets() {
-		return 2;
-	}
-	
+
 	@Override
 	public float getLeverState() {
 		if (isForceStopping()) {

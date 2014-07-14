@@ -4,6 +4,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.module.cart.LocalizationCartCultivationUtil;
+import vswe.stevesvehicles.network.DataReader;
+import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.common.addon.ModuleAddon;
@@ -74,34 +76,28 @@ public class ModulePlantSize extends ModuleAddon {
 	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0 || button == 1) {
 			if (inRect(x,y, box)) {
-				sendPacket(0, (byte)button);
+                DataWriter dw = getDataWriter();
+                dw.writeBoolean(button == 0);
+				sendPacketToServer(dw);
 			}
 		}
 	}
 	
 
-	@Override
-	protected void receivePacket(int id, byte[] data, EntityPlayer player) {
-		if (id == 0) {
-			if (data[0] == 1) {
-				size--;
-				if (size < 1) {
-					size = 7;
-				}
-			}else{
-				size++;
-				if (size > 7) {
-					size = 1;
-				}
-			}
-		}
+	protected void receivePacket(DataReader dr, EntityPlayer player) {
+        if (dr.readBoolean()) {
+            size--;
+            if (size < 1) {
+                size = 7;
+            }
+        }else{
+            size++;
+            if (size > 7) {
+                size = 1;
+            }
+        }
 	}
 
-	@Override
-	public int numberOfPackets() {
-		return 1;
-	}	
-	
 	
 	@Override
 	public int numberOfGuiData() {

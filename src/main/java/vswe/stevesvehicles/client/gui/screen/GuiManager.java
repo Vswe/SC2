@@ -354,7 +354,7 @@ public abstract class GuiManager extends GuiBase {
     }
 
     protected DataWriter getDataWriter(TileEntityManager.PacketId id) {
-        DataWriter dw = PacketHandler.getDataWriter(PacketType.CONTAINER);
+        DataWriter dw = PacketHandler.getDataWriter(PacketType.BLOCK);
         dw.writeEnum(id);
         return dw;
     }

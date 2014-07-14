@@ -108,7 +108,7 @@ public class GuiActivator extends GuiBase {
 			int[] box = getBoxRect(i);
 
 			if (inRect(x,y, box)) {
-                DataWriter dw = PacketHandler.getDataWriter(PacketType.CONTAINER);
+                DataWriter dw = PacketHandler.getDataWriter(PacketType.BLOCK);
                 dw.writeBoolean(button == 0);
                 dw.writeByte(i);
 				PacketHandler.sendPacketToServer(dw);

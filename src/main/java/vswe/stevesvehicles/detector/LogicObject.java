@@ -40,7 +40,7 @@ public abstract class LogicObject {
 		if (parent != null) {
             List<LogicObject> objects = new ArrayList<LogicObject>();
             fillTree(objects);
-            DataWriter dw = PacketHandler.getDataWriter(PacketType.CONTAINER);
+            DataWriter dw = PacketHandler.getDataWriter(PacketType.BLOCK);
             dw.writeBoolean(true);
             dw.writeByte(objects.size());
             for (LogicObject object : objects) {
@@ -50,7 +50,7 @@ public abstract class LogicObject {
             }
             PacketHandler.sendPacketToServer(dw);
 		}else{
-            DataWriter dw = PacketHandler.getDataWriter(PacketType.CONTAINER);
+            DataWriter dw = PacketHandler.getDataWriter(PacketType.BLOCK);
             dw.writeBoolean(false);
             dw.writeByte(id);
             PacketHandler.sendPacketToServer(dw);

@@ -5,6 +5,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import org.lwjgl.opengl.GL11;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.module.LocalizationVisual;
+import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 
@@ -71,7 +72,7 @@ public class ModuleColorRandomizer extends ModuleAddon {
 	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0) {
 			if (inRect(x,y, BUTTON)) {
-				sendPacket(0);
+				sendPacketToServer(getDataWriter());
 			}
 		}
 	}
@@ -113,16 +114,11 @@ public class ModuleColorRandomizer extends ModuleAddon {
 		addDw(2,255);
 	}
 
-	@Override
-	public int numberOfPackets() {
-		return 3;
-	}
+
 
 	@Override
-	protected void receivePacket(int id, byte[] data, EntityPlayer player) {
-		if (id == 0) {
-			randomizeColor();
-		}
+	protected void receivePacket(DataReader dr, EntityPlayer player) {
+	    randomizeColor();
 	}
 
 	public int getColorVal(int i) {

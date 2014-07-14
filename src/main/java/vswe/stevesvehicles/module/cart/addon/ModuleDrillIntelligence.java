@@ -5,6 +5,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.module.cart.LocalizationCartDrillUtility;
 import vswe.stevesvehicles.module.common.addon.ModuleAddon;
+import vswe.stevesvehicles.network.DataReader;
+import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.ModuleBase;
@@ -208,17 +210,11 @@ public class ModuleDrillIntelligence extends ModuleAddon {
 			isDisabled[id] = data;
 		}
 	}	
+
 	
 	@Override
-	public int numberOfPackets() {
-		return 1;
-	}	
-	
-	@Override
-	protected void receivePacket(int id, byte[] data, EntityPlayer player) {
-		if (id == 0) {
-			swapActiveness(data[0]);
-		}
+	protected void receivePacket(DataReader dr, EntityPlayer player) {
+	    swapActiveness(dr.readByte());
 	}	
 	
 	@Override
@@ -259,7 +255,9 @@ public class ModuleDrillIntelligence extends ModuleAddon {
 					
 					if (inRect(x, y, rect)) {
 						lastId = j * w + i;
-						sendPacket(0, (byte)(j * w + i));
+                        DataWriter dw = getDataWriter();
+                        dw.writeByte(j * w + i);
+					    sendPacketToServer(dw);
 						return;
 					}
 				}
@@ -286,7 +284,9 @@ public class ModuleDrillIntelligence extends ModuleAddon {
 						clicked = true;
 						clickedState = isActive(j * w + i);
 						lastId = j * w + i;
-						sendPacket(0, (byte)(j * w + i));
+                        DataWriter dw = getDataWriter();
+                        dw.writeByte(j * w + i);
+                        sendPacketToServer(dw);
 						return;
 					}
 				}

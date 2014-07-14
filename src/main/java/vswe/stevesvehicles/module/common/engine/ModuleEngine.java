@@ -3,6 +3,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.module.LocalizationEngine;
+import vswe.stevesvehicles.network.DataReader;
+import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.vehicle.VehicleBase;
@@ -126,26 +128,23 @@ public abstract class ModuleEngine extends ModuleBase {
 	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (inRect(x,y, priorityButton)) {
 			if (button == 0 || button == 1) {
-				sendPacket(0,(byte)button);
+                DataWriter dw = getDataWriter();
+                dw.writeBoolean(button == 0);
+				sendPacketToServer(dw);
 			}
 		}
 	}
 	@Override
-	protected void receivePacket(int id, byte[] data, EntityPlayer player) {
-		if (id == 0) {
-			int priority = getPriority();
-			priority += data[0] == 0 ? 1 : -1;
-			priority %= 4;
-			if (priority < 0) {
-				priority += 4;
-			}
-			setPriority(priority);
-		}
+	protected void receivePacket(DataReader dr, EntityPlayer player) {
+        int priority = getPriority();
+        priority += dr.readBoolean() ? 1 : -1;
+        priority %= 4;
+        if (priority < 0) {
+            priority += 4;
+        }
+        setPriority(priority);
 	}
-	@Override
-	public int numberOfPackets() {
-		return 1;
-	}
+
 	
 	@Override
 	public void initDw() {

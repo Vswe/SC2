@@ -10,6 +10,8 @@ import vswe.stevesvehicles.client.gui.assembler.SimulationInfoMultiBoolean;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.module.cart.ModuleWorker;
+import vswe.stevesvehicles.network.DataReader;
+import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.ISuppliesModule;
@@ -174,22 +176,16 @@ public class ModuleTorch extends ModuleWorker implements ISuppliesModule  {
 			lightLimit = (data & 240) >> 4;
 		}
 	}
-	
-	@Override
-	public int numberOfPackets() {
-		return 1;
-	}
+
 
 	@Override
-	protected void receivePacket(int id, byte[] data, EntityPlayer player) {
-		if (id == 0) {
-			lightLimit = data[0];
-			if (lightLimit < 0) {
-				lightLimit = 0;
-			}else if (lightLimit > 15) {
-				lightLimit = 15;
-			}			
-		}
+	protected void receivePacket(DataReader dr, EntityPlayer player) {
+        lightLimit = dr.readByte();
+        if (lightLimit < 0) {
+            lightLimit = 0;
+        }else if (lightLimit > 15) {
+            lightLimit = 15;
+        }
 	}
 	
 	boolean markerMoving = false;
@@ -198,7 +194,7 @@ public class ModuleTorch extends ModuleWorker implements ISuppliesModule  {
 	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0) {
 			if (inRect(x,y, boxRect)) {
-				generatePacket(x,y);
+				generatePacket(x);
 				markerMoving = true;
 			}
 		}
@@ -207,7 +203,7 @@ public class ModuleTorch extends ModuleWorker implements ISuppliesModule  {
 	@Override
 	public void mouseMovedOrUp(GuiVehicle gui,int x, int y, int button) {
 		if(markerMoving){
-			generatePacket(x,y);
+			generatePacket(x);
 		}
 
         if (button != -1) {
@@ -215,7 +211,7 @@ public class ModuleTorch extends ModuleWorker implements ISuppliesModule  {
         }
 	}	
 	
-	private void generatePacket(int x, int y) {
+	private void generatePacket(int x) {
 		int xInBox = x - boxRect[0];
 		int val = xInBox / 3;
 		if (val < 0) {
@@ -223,21 +219,12 @@ public class ModuleTorch extends ModuleWorker implements ISuppliesModule  {
 		}else if (val > 15) {
 			val = 15;
 		}
-		sendPacket(0, (byte)val);	
+        DataWriter dw = getDataWriter();
+        dw.writeByte(val);
+        sendPacketToServer(dw);
 	}
 	
-	public void setThreshold(byte val) {
-		lightLimit = val;
-	}
-	
-	public int getThreshold() {
-		return lightLimit;
-	}	
-	
-	public int getLightLevel() {
-		return light;
-	}
-	
+
 	@Override
 	public void update() {
 		super.update();

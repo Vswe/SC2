@@ -199,7 +199,7 @@ public class GuiDistributor extends GuiBase {
 					int[] box = getSideBoxRect(id++);
 					
 					if (inRect(x,y, box)) {
-                        DataWriter dw = PacketHandler.getDataWriter(PacketType.CONTAINER);
+                        DataWriter dw = PacketHandler.getDataWriter(PacketType.BLOCK);
                         dw.writeByte(activeId);
                         dw.writeByte(side.getId());
                         dw.writeBoolean(true);
@@ -221,7 +221,7 @@ public class GuiDistributor extends GuiBase {
 								int[] settingsBox = getActiveSettingBoxRect(id, settingCount++);
 								
 								if (inRect(x,y, settingsBox)) {
-                                    DataWriter dw = PacketHandler.getDataWriter(PacketType.CONTAINER);
+                                    DataWriter dw = PacketHandler.getDataWriter(PacketType.BLOCK);
                                     dw.writeByte(activeId);
                                     dw.writeByte(side.getId());
                                     dw.writeBoolean(false);

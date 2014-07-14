@@ -10,6 +10,8 @@ import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.ILocalizedText;
 import vswe.stevesvehicles.localization.entry.module.LocalizationVisual;
 import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
+import vswe.stevesvehicles.network.DataReader;
+import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 
@@ -188,8 +190,10 @@ public class ModuleNote extends ModuleAttachment {
 					trackPacketID = 2;		
 				}
 				if (trackPacketID != -1) {
-					byte info = (byte)(i | (trackPacketID << MAXIMUM_TRACKS_PER_MODULE_BIT_COUNT));
-					sendPacket(1, info);		
+                    DataWriter dw = getDataWriter(PacketId.GLOBAL);
+                    dw.writeByte(i);
+                    dw.writeByte(trackPacketID);
+                    sendPacketToServer(dw);
 				}
 			
 			}
@@ -214,15 +218,21 @@ public class ModuleNote extends ModuleAttachment {
 			
 			if (createTrack.down) {
 				createTrack.down = false;
-				sendPacket(0, (byte)0);
+				DataWriter dw = getDataWriter(PacketId.GLOBAL);
+                dw.writeByte(0);
+                sendPacketToServer(dw);
 			}
 			if (removeTrack.down) {
 				removeTrack.down = false;
-				sendPacket(0, (byte)1);
+                DataWriter dw = getDataWriter(PacketId.GLOBAL);
+                dw.writeByte(1);
+                sendPacketToServer(dw);
 			}
 			if (speedButton.down) {
 				speedButton.down = false;
-				sendPacket(0, (byte)2);
+                DataWriter dw = getDataWriter(PacketId.GLOBAL);
+                dw.writeByte(2);
+                sendPacketToServer(dw);
 			}			
 			
 			for (int i = 0; i < instrumentButtons.size(); i++) {
@@ -769,9 +779,11 @@ public class ModuleNote extends ModuleAttachment {
 							}
 						}
 						if (currentInstrument != -1 || note.instrumentId != 0) {
-							byte info = (byte)i;
-							info |= instrumentInfo << MAXIMUM_TRACKS_PER_MODULE_BIT_COUNT;
-							sendPacket(2, new byte[] {info,(byte)j});
+                            DataWriter dw = getDataWriter(PacketId.NOTE);
+                            dw.writeByte(i);
+                            dw.writeByte(j);
+                            dw.writeByte(instrumentInfo);
+                            sendPacketToServer(dw);
 						}
 					}
 				}
@@ -855,76 +867,90 @@ public class ModuleNote extends ModuleAttachment {
 	private void setPlaying(boolean val) {
 		updateDw(0, val ? 1 : 0);
 	}
+
+    private DataWriter getDataWriter(PacketId id) {
+        DataWriter dw = getDataWriter();
+        dw.writeEnum(id);
+        return dw;
+    }
 	
 
-	@Override
-	public int numberOfPackets() {
-		return 3;
-	}
+    private enum PacketId {
+        GLOBAL,
+        TRACK,
+        NOTE
+    }
 	
 	@Override
-	protected void receivePacket(int id, byte[] data, EntityPlayer player) {
-		if (id == 0) {
-			if (data[0] == 0) {
-				if (tracks.size() < maximumTracksPerModule) {
-					new Track();
-				}
-			}else if(data[0] == 1) {
-				if (tracks.size() > 0) {
-					tracks.remove(tracks.size() -1);
-				}
-			}else if(data[0] == 2) {
-				speedSetting++;
-				if (speedSetting >= 7) {
-					speedSetting = 0;
-				}
-			}
-		}else if(id == 1) {
-			int trackID = data[0] & maximumTracksPerModule;
-			int trackPacketID = ((data[0] & ~maximumTracksPerModule) >> MAXIMUM_TRACKS_PER_MODULE_BIT_COUNT);
-			if (trackID < tracks.size()) {
-				Track track = tracks.get(trackID);
-				
-				if (trackPacketID == 0) {
-					if (track.notes.size() < maximumNotesPerTrack) {
-						new Note(track);
-					}
-				}else if(trackPacketID == 1){
-					if (track.notes.size() > 0) {
-						track.notes.remove(track.notes.size()-1);
-					}				
-				}else if (trackPacketID == 2) {
-					track.volume = (track.volume + 1) % 4;
-				}
-			}
-		}else if(id == 2) {
-			byte info = data[0];
-			byte noteID = data[1];
-				
-			byte trackID = (byte)(info & maximumTracksPerModule);
-			byte instrumentInfo = (byte)(((byte)(info & ~(byte)maximumTracksPerModule)) >> (byte) MAXIMUM_TRACKS_PER_MODULE_BIT_COUNT);
-			
-			if (trackID < tracks.size()) {
-				Track track = tracks.get(trackID);
-				if (noteID < track.notes.size()) {
-					Note note = track.notes.get(noteID);
-					
-					if (instrumentInfo < 6) {
-						note.instrumentId = instrumentInfo;
-					}else if (instrumentInfo == 6){
-						note.pitch+=1;
-						if (note.pitch > 24) {
-							note.pitch = 0;
-						}
-					}else{
-						note.pitch-=1;
-						if (note.pitch < 0) {
-							note.pitch = 24;
-						}					
-					}
-				}
-			}			
-		}
+	protected void receivePacket(DataReader dr, EntityPlayer player) {
+        int trackID;
+        PacketId id = dr.readEnum(PacketId.class);
+        switch (id) {
+            case GLOBAL:
+                int subId = dr.readByte();
+                if (subId == 0) {
+                    if (tracks.size() < maximumTracksPerModule) {
+                        new Track();
+                    }
+                }else if(subId == 1) {
+                    if (tracks.size() > 0) {
+                        tracks.remove(tracks.size() -1);
+                    }
+                }else if(subId == 2) {
+                    speedSetting++;
+                    if (speedSetting >= 7) {
+                        speedSetting = 0;
+                    }
+                }
+                break;
+            case TRACK:
+                trackID = dr.readByte();
+                int trackPacketID = dr.readByte();
+                if (trackID < tracks.size()) {
+                    Track track = tracks.get(trackID);
+
+                    if (trackPacketID == 0) {
+                        if (track.notes.size() < maximumNotesPerTrack) {
+                            new Note(track);
+                        }
+                    }else if(trackPacketID == 1){
+                        if (track.notes.size() > 0) {
+                            track.notes.remove(track.notes.size()-1);
+                        }
+                    }else if (trackPacketID == 2) {
+                        track.volume = (track.volume + 1) % 4;
+                    }
+                }
+
+                break;
+            case NOTE:
+                trackID = dr.readByte();
+                int noteID = dr.readByte();
+                int instrumentInfo = dr.readByte();
+
+
+                if (trackID < tracks.size()) {
+                    Track track = tracks.get(trackID);
+                    if (noteID < track.notes.size()) {
+                        Note note = track.notes.get(noteID);
+
+                        if (instrumentInfo < 6) {
+                            note.instrumentId = instrumentInfo;
+                        }else if (instrumentInfo == 6){
+                            note.pitch+=1;
+                            if (note.pitch > 24) {
+                                note.pitch = 0;
+                            }
+                        }else{
+                            note.pitch-=1;
+                            if (note.pitch < 0) {
+                                note.pitch = 24;
+                            }
+                        }
+                    }
+                }
+                break;
+        }
 	}
 
 

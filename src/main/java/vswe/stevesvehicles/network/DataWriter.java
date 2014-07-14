@@ -106,24 +106,24 @@ public class DataWriter {
 
 
 
-    public void sendToPlayer(EntityPlayerMP player) {
+    void sendToPlayer(EntityPlayerMP player) {
         packetHandler.sendTo(createPacket(), player);
     }
 
-    public void sendToServer() {
+    void sendToServer() {
         packetHandler.sendToServer(createPacket());
     }
 
 
-    public void sendToAllPlayers() {
+    void sendToAllPlayers() {
         packetHandler.sendToAll(createPacket());
     }
 
-    public void sendToAllPlayersAround(TileEntity te, double range) {
+    void sendToAllPlayersAround(TileEntity te, double range) {
         sendToAllPlayersAround(te.getWorldObj(), te.xCoord, te.yCoord, te.zCoord, range);
     }
 
-    public void sendToAllPlayersAround(World world, int x, int y, int z, double range) {
+    void sendToAllPlayersAround(World world, int x, int y, int z, double range) {
         packetHandler.sendToAllAround(createPacket(), new NetworkRegistry.TargetPoint(world.provider.dimensionId, x + 0.5,y + 0.5, z, range));
     }
 

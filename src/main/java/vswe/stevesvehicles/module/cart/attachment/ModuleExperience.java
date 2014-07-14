@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.module.cart.LocalizationCartCleaning;
+import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import cpw.mods.fml.relauncher.Side;
@@ -119,7 +120,7 @@ public class ModuleExperience extends ModuleAttachment {
 	@SideOnly(Side.CLIENT)
 	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (inRect(x, y, CONTAINER_RECT)) {
-			sendPacket(0);
+			sendPacketToServer(getDataWriter());
 		}
 	}
 	
@@ -144,17 +145,11 @@ public class ModuleExperience extends ModuleAttachment {
 	}
 	
 
+
 	@Override
-	protected int numberOfPackets() {
-		return 1;
-	}
-	
-	@Override
-	protected void receivePacket(int id, byte[] data, EntityPlayer player) {
-		if (id == 0) {
-			player.addExperience(Math.min(experienceAmount, 50));
-			experienceAmount -= Math.min(experienceAmount, 50);
-		}
+	protected void receivePacket(DataReader dr, EntityPlayer player) {
+        player.addExperience(Math.min(experienceAmount, 50));
+        experienceAmount -= Math.min(experienceAmount, 50);
 	}
 	
 	

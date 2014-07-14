@@ -702,7 +702,7 @@ public class GuiCartAssembler extends GuiBase {
 		int y = y0 - getGuiTop();
 		
 		if (inRect(x,y, ASSEMBLE_RECT)) {
-            DataWriter dw = PacketHandler.getDataWriter(PacketType.CONTAINER);
+            DataWriter dw = PacketHandler.getDataWriter(PacketType.BLOCK);
             dw.writeByte(0);
             PacketHandler.sendPacketToServer(dw);
 		}else if (inRect(x,y, BLACK_BACKGROUND)) {
@@ -736,7 +736,7 @@ public class GuiCartAssembler extends GuiBase {
                     if (inRect(x, y, target)) {
                         int moduleId = ModuleRegistry.getIdFromModule(moduleData);
                         if (moduleId >= 0) {
-                            DataWriter dw = PacketHandler.getDataWriter(PacketType.CONTAINER);
+                            DataWriter dw = PacketHandler.getDataWriter(PacketType.BLOCK);
                             dw.writeByte(2);
                             dw.writeShort(moduleId);
                             PacketHandler.sendPacketToServer(dw);
@@ -787,7 +787,7 @@ public class GuiCartAssembler extends GuiBase {
 					
 				if (inRect(x,y, new int[] {targetX, targetY, size, size})) {
 					if (slot.getStack() != null && ((i != 0 && slot.getStack().stackSize <= 0) || assembler.isInFreeMode())) {
-                        DataWriter dw = PacketHandler.getDataWriter(PacketType.CONTAINER);
+                        DataWriter dw = PacketHandler.getDataWriter(PacketType.BLOCK);
                         dw.writeByte(1);
                         dw.writeByte(i);
                         PacketHandler.sendPacketToServer(dw);

@@ -9,6 +9,8 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidTank;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.module.LocalizationTank;
+import vswe.stevesvehicles.network.DataReader;
+import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.*;
 import vswe.stevesvehicles.client.gui.screen.GuiBase;
@@ -247,14 +249,10 @@ public abstract class ModuleTank extends ModuleStorage implements IFluidTank, IT
 	}	
 
 	
+
 	@Override
-	protected int numberOfPackets() {
-		return 1;
-	}
-	
-	@Override
-	protected void receivePacket(int id, byte[] data, EntityPlayer player) {
-		if (id == 0 && (getFluid() != null || tank.isLocked() /* just to allow the user to unlock it if something goes wrong*/)) {
+	protected void receivePacket(DataReader dr, EntityPlayer player) {
+		if ((getFluid() != null || tank.isLocked() /* just to allow the user to unlock it if something goes wrong*/)) {
 			tank.setLocked(!tank.isLocked());
 			if (!tank.isLocked() && tank.getFluid() != null && tank.getFluid().amount <= 0) {
 				tank.setFluid(null);
@@ -283,11 +281,10 @@ public abstract class ModuleTank extends ModuleStorage implements IFluidTank, IT
 	@Override
 	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (inRect(x, y, TANK_BOUNDS)) {
-			byte data = (byte)button;
-			if (GuiScreen.isShiftKeyDown()) {
-				data |= 2;
-			}
-			sendPacket(0, data);
+            DataWriter dw = getDataWriter();
+            dw.writeBoolean(button == 0);
+            dw.writeBoolean(GuiScreen.isShiftKeyDown());
+            sendPacketToServer(dw);
 		}
 	}
 		

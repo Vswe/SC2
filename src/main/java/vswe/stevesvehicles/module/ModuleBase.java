@@ -1,6 +1,5 @@
 package vswe.stevesvehicles.module;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -33,12 +32,14 @@ import vswe.stevesvehicles.client.gui.screen.GuiBase;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.container.ContainerVehicle;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
-import vswe.stevesvehicles.old.Helpers.NBTHelper;
+import vswe.stevesvehicles.network.DataReader;
+import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.network.PacketHandler;
-import vswe.stevesvehicles.old.Buttons.ButtonBase;
+import vswe.stevesvehicles.network.PacketType;
+import vswe.stevesvehicles.old.Helpers.NBTHelper;
 import vswe.stevesvehicles.client.rendering.models.ModelVehicle;
+import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
-import vswe.stevesvehicles.old.Helpers.CompButtons;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.container.slots.SlotBase;
 import cpw.mods.fml.relauncher.Side;
@@ -52,7 +53,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 public abstract class ModuleBase {
 	//the vehicle this module is part of
-	private vswe.stevesvehicles.vehicle.VehicleBase vehicle;
+	private VehicleBase vehicle;
 	
 	//the inventory this module is using, could be an empty array. getInventorySize is controlling the size of this  
 	private	ItemStack[] cargo;
@@ -66,16 +67,16 @@ public abstract class ModuleBase {
 	//sending values between the client and the server
 	private int guiDataOffset;
 	private int dataWatcherOffset;
-	private int packetOffset;
 	
-	private ArrayList<ButtonBase> buttons;
-	private CompButtons buttonSorter;
-	
-	//the slot global startindex for this module, used to transfer the local indices to global ones
+
+	//the slot global start index for this module, used to transfer the local indices to global ones
 	protected int slotGlobalStart;
 	
 	//the id of this module, this is assigned on creation. The id is the same as the ModuleData which created the module.
 	private int moduleId;
+
+    //the of this module, this is the position among modules that this module has.
+    private int positionId;
 	
 	//the models this module is using, this is generated from the ModuleData creating this module
 	private ArrayList<ModelVehicle> models;
@@ -96,13 +97,7 @@ public abstract class ModuleBase {
 	 * Initializes the modules, this is done after all modules has been added to the vehicle, and given proper IDs and everything.
 	 */
 	public void init() {
-		//prepare any server-client buttons, these are only used in the assembly module atm
-		if (useButtons()) {
-			buttons = new ArrayList<ButtonBase>();
-			buttonSorter = new CompButtons();
-			loadButtons();
-			buttonVisibilityChanged();
-		}	
+
 	}
 	
 	/**
@@ -143,8 +138,17 @@ public abstract class ModuleBase {
 	public int getModuleId() {
 		return moduleId;
 	}
-	
-	/**
+
+
+    public int getPositionId() {
+        return positionId;
+    }
+
+    public void setPositionId(int positionId) {
+        this.positionId = positionId;
+    }
+
+    /**
 	 * Is called when the vehicle's inventory has been changed
 	 */
 	public void onInventoryChanged() {}
@@ -618,7 +622,7 @@ public abstract class ModuleBase {
 		
 			//if there's still something to draw(that it's not scrolled outside the screen)
 			if (rect[3] > 0) {
-				gui.drawRect(gui.getGuiLeft() + rect[0] + getX(), gui.getGuiTop() + rect[1] + getY(), srcX, srcY, rect[2], rect[3], rotation);
+				gui.drawRect(gui.getGuiLeft() + rect[0] + getX(), gui.getGuiTop() + rect[1] + getY(), srcX, srcY, rect[2], rect[3], rotation, textureSize);
 			}
 		}
 	}
@@ -715,27 +719,7 @@ public abstract class ModuleBase {
 	public boolean useButtons() {
 		return false;
 	}
-	
-	/**
-	 * Called when a client/server button changes visibility state
-	 */
-	public final void buttonVisibilityChanged() {
-		Collections.sort(buttons, buttonSorter);
 
-		ButtonBase.LOCATION lastLoc = null;
-		int id = 0;
-		for (ButtonBase button : buttons) {
-			if (button.isVisible()) {
-				if (lastLoc != null && button.getLocation() != lastLoc) {
-					id = 0;
-				}
-				lastLoc = button.getLocation();
-				button.setCurrentID(id);	
-				id++;				
-			}
-		}				
-	}
-	
 	
 	/**
 	 * Allows the module to override the direction the vehicle is going. This mechanic is not finished and hence won't work perfectly.
@@ -744,8 +728,8 @@ public abstract class ModuleBase {
 	 * @param z The z coordinate in the world
 	 * @return The direction to go, default means that the module won't chane it
 	 */
-	public RAIL_DIRECTION getSpecialRailDirection(int x, int y, int z) {
-		return RAIL_DIRECTION.DEFAULT;
+	public RailDirection getSpecialRailDirection(int x, int y, int z) {
+		return RailDirection.DEFAULT;
 	}
 
     public void openInventory() {
@@ -761,7 +745,7 @@ public abstract class ModuleBase {
 	 * @author Vswe
 	 *
 	 */
-	public enum RAIL_DIRECTION {DEFAULT, NORTH, WEST, SOUTH, EAST, LEFT, FORWARD, RIGHT}
+	public enum RailDirection {DEFAULT, NORTH, WEST, SOUTH, EAST, LEFT, FORWARD, RIGHT}
 	
 	
 	/**
@@ -769,18 +753,7 @@ public abstract class ModuleBase {
 	 */
 	protected void loadButtons() {}
 	
-	//next id for the server/client buttons
-	private int moduleButtonId = 0;
-	
-	/**
-	 * Adds a new server/client button to the module
-	 * @param button The button to be added
-	 */
-	public final void addButton(ButtonBase button) {
-		button.setIdInModule(moduleButtonId++);
-		buttons.add(button);
-	}
-	
+
 
 	/**
 	 * Handles the writing of the NBT data when the world is being saved
@@ -849,71 +822,7 @@ public abstract class ModuleBase {
      *
      */
 	protected void load(NBTTagCompound tagCompound) {}
-	
-	/**
-	 * Draw the text of server/client buttons
-	 * @param gui The gui to draw on
-	 */
-	 @SideOnly(Side.CLIENT)
-	public final void drawButtonText(GuiVehicle gui) {
-		for (ButtonBase button : buttons) {
-			button.drawButtonText(gui, this);
-		}
-	}	
-	/**
-	 * Draw the graphics of server/client buttons
-	 * @param gui The gui to draw on
-	 * @param x The x coordinate of the mouse
-	 * @param y The y coordinate of the mouse
-	 */
-	 @SideOnly(Side.CLIENT)
-	public final void drawButtons(GuiVehicle gui, int x, int y) {
-		for (ButtonBase button : buttons) {
-			button.drawButton(gui, this, x, y);
-		}
-	}
-	/**
-	 * Draw the mouse overlay of server/client buttons
-	 * @param gui The gui to draw on
-	 * @param x The x coordinate of the mouse
-	 * @param y The y coordinate of the mouse
-	 */	
-	 @SideOnly(Side.CLIENT)
-	public final void drawButtonOverlays(GuiVehicle gui, int x, int y) {
-		for (ButtonBase button : buttons) {
-			if (button.isVisible()) {
-				drawStringOnMouseOver(gui, button.toString(), x, y, button.getBounds());
-			}
-		}
-	}
-	
-	/**
-	 * Handles mouse click of server/client buttons
-	 * @param gui The gui to draw on
-	 * @param x The x coordinate of the mouse
-	 * @param y The y coordinate of the mouse
-	 * @param mousebutton The button which was pressed
-	 */	
-	@SideOnly(Side.CLIENT)	 
-	public final void mouseClickedButton(GuiVehicle gui, int x, int y, int mousebutton) {
-		for (ButtonBase button : buttons) {
-			if (inRect(x,y, button.getBounds())) {
-				button.computeOnClick(gui, mousebutton);
-			}
-		}
-	}	
-	
-	/**
-	 * Sends a packet to the server that a server/client button has been pressed
-	 * @param button The button that was pressed
-	 * @param clickinfo The information about the click, which mouse button was clicked, if the shift key was down, etc.
-	 */
-	public void sendButtonPacket(ButtonBase button, byte clickinfo) {
-		byte id = (byte)button.getIdInModule();
-		System.out.println("Sent button " + button.getIdInModule());
 
-		sendPacket(totalNumberOfPackets() - 1, new byte[] {id, clickinfo});
-	}
 	
 	/**
 	 * Used to draw background for a module
@@ -1032,142 +941,31 @@ public abstract class ModuleBase {
 		return false;
 	}
 
-	/**
-	 * The number of packets this module will use, this includes the packet used for system/client buttons
-	 * @return The packet count
-	 */
-	public final int totalNumberOfPackets() {
-		return numberOfPackets() + (useButtons() ? 1 : 0);
-	}
-	
-	/**
-	 * The number of normal packets this module will allocate
-	 * @return The packet count
-	 */
-	protected int numberOfPackets() {
-		return 0;
+    protected DataWriter getDataWriter() {
+        DataWriter dw = PacketHandler.getDataWriter(PacketType.VEHICLE);
+        dw.writeByte(getPositionId());
+        return dw;
+    }
+
+
+	protected void sendPacketToServer(DataWriter dw) {
+        PacketHandler.sendPacketToServer(dw);
 	}
 
-	/**
-	 * Gets the packet offset used as a header to determine which module owns a packet. This is done by the vehicle.
-	 * @return The packet offset
-	 */
-	public int getPacketStart() {
-		return packetOffset;
-	}
+    protected void sendPacketToPlayer(DataWriter dw, EntityPlayer player) {
+        PacketHandler.sendPacketToPlayer(dw, player);
+    }
 
-	/**
-	 * Sets the packet offset used as a header to determine which module own a packet. This is done by the vehicle.
-	 * @param val The packet offset
-	 */
-	public void setPacketStart(int val) {
-		packetOffset = val;
-	}
 
-	/**
-	 * Sends a packet from the client to the server
-	 * @param id The local id of the packet
-	 */
-	protected void sendPacket(int id) {
-		sendPacket(id, new byte[0]);
-	}
-	/**
-	 * Sends a packet from the client to the server
-	 * @param id The local id of the packet
-	 * @param data An extra byte sent along
-	 */
-	public void sendPacket(int id, byte data) {
-		sendPacket(id, new byte[] {data});
-	}
-	/**
-	 * Sends a packet from the client to the server
-	 * @param id The local id of the packet
-	 * @param data A byte array of data sent along
-	 */
-	public void sendPacket(int id, byte[] data) {
-		PacketHandler.sendPacket(getPacketStart() + id,data);
-	}
-	
-	/**
-	 * Sends a packet from the server to a player's client
-	 * @param id The local id of the packet
-	 * @param player The player to send it to
-	 */
-	protected void sendPacket(int id, EntityPlayer player) {
-		sendPacket(id, new byte[0], player);
-	}
-	
-	/**
-	 * Sends a packet from the server to a player's client
-	 * @param id The local id of the packet
-	 * @param data An extra byte sent along
-	 * @param player The player to send it to
-	 */
-	protected void sendPacket(int id, byte data, EntityPlayer player) {
-		sendPacket(id, new byte[] {data},player);
-	}
-	/**
-	 * Sends a packet from the server to a player's client
-	 * @param id The local id of the packet
-	 * @param data A byte array of data sent along
-	 * @param player The player to send it to
-	 */
-	protected void sendPacket(int id, byte[] data, EntityPlayer player) {
-		PacketHandler.sendPacketToPlayer(getPacketStart() + id,data, player, getVehicle());
-	}
 
-	/**
-	 * Receive a normal packet on the server or the client
-	 * @param id The local id of the packet
-	 * @param data The byte array of extra data, could be empty
-	 * @param player The player who sent or received the packet
-	 */
-	protected void receivePacket(int id, byte[] data, EntityPlayer player) {}
+	protected void receivePacket(DataReader dr, EntityPlayer player) {}
 
-	/**
-	 * Handles a packet received on the server or the client and sends it where it should be handled
-	 * @param id The local id of the packet
-	 * @param data The byte array of extra data, could be empty
-	 * @param player The player who sent or received the packet
-	 */
-	public final void delegateReceivedPacket(int id, byte[] data, EntityPlayer player) {
-		//if it's an invalid packet, don't do anything
-		if (id < 0 || id >= totalNumberOfPackets()) {
-			return;
-			
-		//if it's a server/client button packet
-		}else if(id == totalNumberOfPackets() - 1 && useButtons()) {		
-			int buttonId = data[0];
-			if (buttonId < 0) {
-				buttonId += 256;
-			}
-			System.out.println("Received button " + buttonId);
-			for (ButtonBase button : buttons) {
 
-				//find the correct button
-				if (button.getIdInModule() == buttonId) {
-					
-					//extract the information
-					byte buttoninformation = data[1];
-					
-					boolean isCtrlDown = (buttoninformation & (1 << 6)) != 0;
-					boolean isShiftDown = (buttoninformation & (1 << 7)) != 0;
-					
-					int mousebutton = buttoninformation & 63;
-					
-					//tell the button on the server side that it has been clicked
-					if (button.isVisible() && button.isEnabled()) {
-						button.onServerClick(player, mousebutton, isCtrlDown, isShiftDown);
-					}
-					break;
-				}
-			}
-			
-		//if it's a normal packet
-		}else{
-			receivePacket(id, data, player);
-		}
-
+	public static void delegateReceivedPacket(VehicleBase vehicle, DataReader dr, EntityPlayer player) {
+        int id = dr.readByte();
+        if (id >= 0 && id < vehicle.getModules().size()) {
+            vehicle.getModules().get(id).receivePacket(dr, player);
+        }
 	}
 	
 	/**
@@ -1717,4 +1515,14 @@ public abstract class ModuleBase {
     public int getMultiBooleanIntegerSimulationInfo() {
         return ((SimulationInfoMultiBoolean)getSimulationInfo()).getIntegerValue();
     }
+
+    private static final int DEFAULT_TEXTURE_SIZE = 256;
+    private int textureSize = DEFAULT_TEXTURE_SIZE;
+    public void setTextureSize(int val) {
+        this.textureSize = val;
+    }
+    public void resetTextureSize() {
+        setTextureSize(DEFAULT_TEXTURE_SIZE);
+    }
+
 }

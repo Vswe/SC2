@@ -5,8 +5,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.arcade.ArcadeGame;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.arcade.sweeper.Tile.TILE_STATE;
-import vswe.stevesvehicles.arcade.tracks.TrackStory;
 import vswe.stevesvehicles.localization.entry.arcade.LocalizationSweeper;
+import vswe.stevesvehicles.network.DataReader;
+import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.common.attachment.ModuleArcade;
@@ -205,12 +206,11 @@ public class ArcadeSweeper extends ArcadeGame {
 				if (highscore[currentGameType] > ticks / 20) {
 					highscoreTicks = 1;
 					int val = ticks / 20;
-					
-					
-					byte byte1 = (byte)(val & 255);
-					byte byte2 = (byte)((val & (255 << 8)) >> 8);					
-					
-					getModule().sendPacket(3, new byte[] {(byte)currentGameType, byte1, byte2});
+
+                    DataWriter dw = getDataWriter();
+                    dw.writeByte(currentGameType);
+                    dw.writeShort(val);
+                    sendPacketToServer(dw);
 				}
 			}else{
 				if (result == Tile.TileOpenResult.BLOB) {
@@ -268,50 +268,41 @@ public class ArcadeSweeper extends ArcadeGame {
 	}
 	
 	@Override
-	public void receivePacket(int id, byte[] data, EntityPlayer player) {
-		if (id == 3) {
-			short data1 = data[1];
-			short data2 = data[2];
-			if (data1 < 0) {
-				data1 += 256;
-			}
-			if (data2 < 0) {
-				data2 += 256;
-			}
-			
-			highscore[data[0]] = (data1 | (data2 << 8));
-		}
+	public void receivePacket(DataReader dr, EntityPlayer player) {
+	    highscore[dr.readByte()] = dr.readShort();
 	}	
 	
 	
 	@Override
 	public void checkGuiData(Object[] info) {
 		for (int i = 0; i < 3; i++) {
-			getModule().updateGuiData(info, TrackStory.stories.size() + 2 + i, (short)(highscore[i]));
+			updateGuiData(info, i, (short) (highscore[i]));
 		}
 	}
-	
-	
-	
-	
-	@Override
+
+    @Override
+    public int numberOfGuiData() {
+        return 3;
+    }
+
+    @Override
 	public void receiveGuiData(int id, short data) {
-		if (id >= TrackStory.stories.size() + 2 && id < TrackStory.stories.size() + 5) {
-			highscore[id - (TrackStory.stories.size() + 2)] = data;
+		if (id >= 0 && id < 3) {
+			highscore[id] = data;
 		}
 	}	
 	
 	@Override
 	public void save(NBTTagCompound tagCompound) {
 		for (int i = 0; i < 3; i++) {
-			tagCompound.setShort("HighscoreSweeper" + i, (short)highscore[i]);
+			tagCompound.setShort("Highscore" + i, (short)highscore[i]);
 		}
 	}
 	
 	@Override
 	public void load(NBTTagCompound tagCompound) {
 		for (int i = 0; i < 3; i++) {
-			highscore[i] = tagCompound.getShort("HighscoreSweeper" + i);
+			highscore[i] = tagCompound.getShort("Highscore" + i);
 		}
 	}		
 }

@@ -400,6 +400,10 @@ public abstract class GuiBase extends GuiContainerSpecial {
         drawRect(x, y, u, v, w, h, rotation, 0.00390625F);
     }
 
+    public void drawRect(int x, int y, int u, int v, int w, int h, RenderRotation rotation,  int textureSize) {
+        drawRect(x, y, u, v, w, h, rotation, 1F / textureSize);
+    }
+
     public void drawRectWithTextureSize(int x, int y, int u, int v, int w, int h, int textureSize) {
         drawRect(x, y, u, v, w, h, RenderRotation.NORMAL, 1F / textureSize);
     }

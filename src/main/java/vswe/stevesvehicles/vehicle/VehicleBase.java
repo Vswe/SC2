@@ -307,6 +307,7 @@ public class VehicleBase {
 
                 ModuleBase module = (ModuleBase)moduleObject;
                 module.setModuleId(id);
+                module.setPositionId(modules.size());
                 modules.add(module);
             }catch(Exception e) {
                 System.out.println("Failed to load module with ID " + id + "! More info below.");
@@ -362,7 +363,6 @@ public class VehicleBase {
 
         int guiData = 0;
         int dataWatcher = 0;
-        int packets = 0;
 
         //generate all the models this cart should use
         if (getWorld().isRemote) {
@@ -434,9 +434,6 @@ public class VehicleBase {
                     module.initDw();
                 }
 
-                //allocate some packet IDs to the module if required
-                module.setPacketStart(packets);
-                packets += module.totalNumberOfPackets();
             }
 
 

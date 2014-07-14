@@ -4,6 +4,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.module.common.addon.ModuleAddon;
+import vswe.stevesvehicles.network.DataReader;
+import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.HeightControlOre;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
@@ -133,69 +135,58 @@ public class ModuleHeightControl extends ModuleAddon {
 	@Override
 	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0) {
-			byte packetData = 0;
+            int arrow = -1;
 			if (inRect(x,y, ARROW_MIDDLE)) {
-				//set bit 0 to 1
-				packetData |= 1;
-			}else {
-				if (inRect(x,y, ARROW_UP)) {
-					//set bit 1 to 0
-                    packetData &= ~1;
-				}else if (inRect(x,y, ARROW_DOWN)) {
-					//set bit 1 to 1
-					packetData |= 2;
-				}else{
-					return;
-				}
-				if (GuiScreen.isShiftKeyDown()) {
-					//set bit 2 to 1
-					packetData |= 4;
-				}
+                arrow = 0;
+			}else if (inRect(x,y, ARROW_UP)) {
+                arrow = 1;
+			}else if (inRect(x,y, ARROW_DOWN)) {
+                arrow = 2;
 			}
 
-			sendPacket(0, packetData);
+            if (arrow != -1) {
+                DataWriter dw = getDataWriter();
+                dw.writeByte(arrow);
+                dw.writeBoolean(GuiScreen.isShiftKeyDown());
+                sendPacketToServer(dw);
+            }
+
 		}
 	}
 
 	@Override
-	protected void receivePacket(int id, byte[] data, EntityPlayer player) {
-		if (id == 0) {
-			byte info = data[0];
+	protected void receivePacket(DataReader dr, EntityPlayer player) {
+        int arrow = dr.readByte();
+        boolean isShift = dr.readBoolean();
 
-			if ((info & 1) != 0) {
-				setYTarget(getVehicle().y());
-			}else{
-				int multiplier;
-				int dif;
-				if ((info & 2) == 0) {
-					multiplier = 1;
-				}else{
-					multiplier = -1;
-				}
+        if (arrow == 0) {
+            setYTarget(getVehicle().y());
+        }else{
+            int multiplier;
+            int dif;
+            if (arrow == 1) {
+                multiplier = 1;
+            }else{
+                multiplier = -1;
+            }
 
-				if ((info & 4) == 0) {
-					dif = 1;
-				}else{
-					dif = 10;
-				}
+            if (isShift) {
+                dif = 1;
+            }else{
+                dif = 10;
+            }
 
-				int targetY = getYTarget();
+            int targetY = getYTarget();
 
-				targetY += multiplier * dif;
-				if (targetY < 0) {
-					targetY = 0;
-				}else if (targetY > 255) {
-					targetY = 255;
-				}
+            targetY += multiplier * dif;
+            if (targetY < 0) {
+                targetY = 0;
+            }else if (targetY > 255) {
+                targetY = 255;
+            }
 
-				setYTarget(targetY);
-			}
-		}
-	}
-
-	@Override
-	public int numberOfPackets() {
-		return 1;
+            setYTarget(targetY);
+        }
 	}
 
 	@Override

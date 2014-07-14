@@ -306,18 +306,12 @@ public class GuiVehicle extends GuiBase {
     private void drawModuleForeground(ModuleBase module) {
     	if (module.hasGui()) {
 	    	module.drawForeground(this);
-			if (module.useButtons()) {
-				module.drawButtonText(this);
-			}
     	}
     }
     
     private void drawModuleMouseOver(ModuleBase module, int x, int y) {
 		if (module.hasGui()) {
 			module.drawMouseOver(this,x-getGuiLeft()-module.getX(),y-getGuiTop()-module.getY());
-			if (module.useButtons()) {
-				module.drawButtonOverlays(this,x-getGuiLeft()-module.getX(),y-getGuiTop()-module.getY());
-			}					
 		}    	
     }
     
@@ -362,9 +356,6 @@ public class GuiVehicle extends GuiBase {
     private void drawModuleBackground(ModuleBase module, int x, int y) {
 		if (module.hasGui()) {
 			module.drawBackground(this,x-getGuiLeft()-module.getX(),y-getGuiTop()-module.getY());
-			if (module.useButtons()) {
-				module.drawButtons(this,x-getGuiLeft()-module.getX(),y-getGuiTop()-module.getY());
-			}
 		}  	
     }
     
@@ -378,9 +369,6 @@ public class GuiVehicle extends GuiBase {
     
     private void handleModuleMouseClicked(ModuleBase module, int x, int y, int button) {
 		module.mouseClicked(this,x-getGuiLeft()-module.getX(),y-getGuiTop()-module.getY(),button);
-		if (module.useButtons()) {
-			module.mouseClickedButton(this,x-getGuiLeft()-module.getX(),y-getGuiTop()-module.getY(),button);
-		}  	
     }
     
     private void handleModuleMouseMoved(ModuleBase module, int x, int y, int button) {

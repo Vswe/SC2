@@ -11,6 +11,8 @@ import vswe.stevesvehicles.arcade.ArcadeGame;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.arcade.tracks.TrackStory;
 import vswe.stevesvehicles.localization.entry.arcade.LocalizationInvaders;
+import vswe.stevesvehicles.network.DataReader;
+import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.common.attachment.ModuleArcade;
@@ -404,55 +406,44 @@ public class ArcadeInvaders extends ArcadeGame {
 		if (score > highscore) {
 			newHighscore = true;			
 			int val = score;
-			
-			byte byte1 = (byte)(val & 255);
-			byte byte2 = (byte)((val & (255 << 8)) >> 8);
-			
-			getModule().sendPacket(2, new byte[] {byte1, byte2});
+
+            DataWriter dw = getDataWriter();
+            dw.writeShort(val);
+			sendPacketToServer(dw);
 		}
 		
 	}
 	
 	@Override
-	public void receivePacket(int id, byte[] data, EntityPlayer player) {
-		if (id == 2) {
-			short data1 = data[0];
-			short data2 = data[1];
-			if (data1 < 0) {
-				data1 += 256;
-			}
-			if (data2 < 0) {
-				data2 += 256;
-			}
-			
-			highscore = (data1 | (data2 << 8));
-		}
+	public void receivePacket(DataReader dr, EntityPlayer player) {
+	    highscore = dr.readShort();
 	}	
 	
 	
 	@Override
 	public void checkGuiData(Object[] info) {
-		getModule().updateGuiData(info, TrackStory.stories.size() + 1, (short)(highscore));
+		updateGuiData(info, 0, (short) (highscore));
 	}
-	
-	
-	
-	
-	@Override
+
+
+    @Override
+    public int numberOfGuiData() {
+        return 1;
+    }
+
+    @Override
 	public void receiveGuiData(int id, short data) {
-		if (id == TrackStory.stories.size() + 1) {
-			highscore = data;
-		}
+        highscore = data;
 	}	
 	
 	@Override
 	public void save(NBTTagCompound tagCompound) {
-		tagCompound.setShort("HighscoreGhast", (short)highscore);
+		tagCompound.setShort("Highscore", (short)highscore);
 	}
 	
 	@Override
 	public void load(NBTTagCompound tagCompound) {
-		highscore = tagCompound.getShort("HighscoreGhast");
+		highscore = tagCompound.getShort("Highscore");
 	}	
 	
 	

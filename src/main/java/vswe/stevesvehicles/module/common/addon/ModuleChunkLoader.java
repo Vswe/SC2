@@ -2,6 +2,7 @@ package vswe.stevesvehicles.module.common.addon;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
+import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.IActivatorModule;
@@ -113,24 +114,16 @@ public class ModuleChunkLoader extends ModuleAddon implements IActivatorModule{
 	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0) {
 			if (inRect(x,y, BUTTON_RECT)) {
-				sendPacket(0);
+				sendPacketToServer(getDataWriter());
 			}
 		}
 	}
 	
 
 	@Override
-	protected void receivePacket(int id, byte[] data, EntityPlayer player) {
-		if (id == 0) {
-			setChunkLoading(!isLoadingChunk());
-		}
+	protected void receivePacket(DataReader dr, EntityPlayer player) {
+        setChunkLoading(!isLoadingChunk());
 	}
-
-	@Override
-	public int numberOfPackets() {
-		return 1;
-	}
-
 
 	@Override
 	public int numberOfDataWatchers() {

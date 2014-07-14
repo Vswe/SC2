@@ -15,6 +15,8 @@ import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.localization.entry.module.LocalizationShooter;
 import vswe.stevesvehicles.module.common.addon.mobdetector.ModuleEntityDetector;
+import vswe.stevesvehicles.network.DataReader;
+import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.ModuleBase;
@@ -92,7 +94,9 @@ public class ModuleShooterAdvanced extends ModuleShooter {
 		if (button == 0) {
 			for (int i = 0; i < detectors.size(); i++) {
 				if (inRect(x,y,getSelectionBox(i))) {
-					sendPacket(0, (byte)i);
+                    DataWriter dw = getDataWriter();
+                    dw.writeByte(i);
+                    sendPacketToServer(dw);
 					break;
 				}
 			}
@@ -205,16 +209,10 @@ public class ModuleShooterAdvanced extends ModuleShooter {
     }
 
 	@Override
-	protected void receivePacket(int id, byte[] data, EntityPlayer player) {
-		if (id == 0) {
-			switchOption(data[0]);
-		}
+	protected void receivePacket(DataReader dr, EntityPlayer player) {
+	    switchOption(dr.readByte());
 	}
 
-	@Override
-	public int numberOfPackets() {
-		return 1;
-	}
 
 	@Override
 	public int numberOfDataWatchers() {
@@ -230,7 +228,7 @@ public class ModuleShooterAdvanced extends ModuleShooter {
 	private void switchOption(int id) {
 		byte val = getDw(0);
 		val ^= 1 << id;
-		updateDw(0,val);
+		updateDw(0, val);
 	}
 
 	public void setOptions(byte val) {

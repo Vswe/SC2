@@ -6,6 +6,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.module.LocalizationVisual;
+import vswe.stevesvehicles.network.DataReader;
+import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.LabelInformation;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
@@ -200,23 +202,19 @@ public class ModuleLabel extends ModuleAddon {
 			int[] rect = getBoxArea(i);
 			
 			if (inRect(x, y, rect)) {
-				sendPacket(0, (byte)i);
+                DataWriter dw = getDataWriter();
+                dw.writeByte(i);
+                sendPacketToServer(dw);
 				break;
 			}
 		}
 	}
 	
 	
+
 	@Override
-	protected int numberOfPackets() {
-		return 1;
-	}
-	
-	@Override
-	protected void receivePacket(int id, byte[] data, EntityPlayer player) {
-		if (id == 0) {
-			toggleActive(data[0]);
-		}
+	protected void receivePacket(DataReader dr, EntityPlayer player) {
+	    toggleActive(dr.readByte());
 	}
 	
 	@Override

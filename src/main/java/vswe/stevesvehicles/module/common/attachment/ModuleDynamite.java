@@ -8,6 +8,8 @@ import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.localization.entry.module.LocalizationIndependence;
 import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
+import vswe.stevesvehicles.network.DataReader;
+import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.old.Helpers.ComponentTypes;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
@@ -129,7 +131,9 @@ public class ModuleDynamite extends ModuleAttachment {
                tempFuse = MAX_FUSE_LENGTH;
             }
 
-			sendPacket(0, (byte)tempFuse);
+            DataWriter dw = getDataWriter();
+            dw.writeByte(tempFuse);
+            sendPacketToServer(dw);
 		}
 
         if (button != -1) {
@@ -255,15 +259,8 @@ public class ModuleDynamite extends ModuleAttachment {
 	private static final int MAX_FUSE_LENGTH = 150;
 
 	@Override
-	public int numberOfPackets() {
-		return 1;
-	}
-
-	@Override
-	protected void receivePacket(int id, byte[] data, EntityPlayer player) {
-		if (id == 0) {
-			setFuseLength(data[0]);
-		}
+	protected void receivePacket(DataReader dr, EntityPlayer player) {
+	    setFuseLength(dr.readByte());
 	}
 
 	

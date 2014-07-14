@@ -17,6 +17,8 @@ import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.localization.entry.module.LocalizationShooter;
 import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
+import vswe.stevesvehicles.network.DataReader;
+import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.old.Helpers.EnchantmentInfo;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
@@ -196,7 +198,10 @@ public class ModuleShooter extends ModuleAttachment implements ISuppliesModule {
 			}else{
 				for (int i = 0; i < pipes.size(); i++) {
 					if (inRect(x,y, getRectForPipe(pipes.get(i)))) {
-						sendPacket(0, (byte)i);
+                        DataWriter dw = getDataWriter();
+                        dw.writeBoolean(true);
+                        dw.writeByte(i);
+                        sendPacketToServer(dw);
 						break;
 					}
 				}
@@ -215,27 +220,27 @@ public class ModuleShooter extends ModuleAttachment implements ISuppliesModule {
             if (interval != arrowInterval)
             {
 				if (interval >= 0 && interval < AInterval.length) {
-					sendPacket(1,(byte)interval);
+                    DataWriter dw = getDataWriter();
+                    dw.writeBoolean(false);
+                    dw.writeByte(interval);
+                    sendPacketToServer(dw);
 				}
             }
         }
 	}
 
 	@Override
-	protected void receivePacket(int id, byte[] data, EntityPlayer player) {
-		if (id == 0) {
+	protected void receivePacket(DataReader dr, EntityPlayer player) {
+		if (dr.readBoolean()) {
 			byte info = getActivePipes();
-			info ^= 1 << data[0];
+			info ^= 1 << dr.readByte();
 			setActivePipes(info);
-		}else if(id == 1) {
-			byte info = data[0];
-			if (info < 0)
-			{
-				info = 0;
-			}
-			else if (info >= AInterval.length)
-			{
-				info = (byte)(AInterval.length-1);
+		}else {
+			int info = dr.readByte();
+			if (info < 0){
+				info = 0; }
+			else if (info >= AInterval.length) {
+				info = AInterval.length - 1;
 			}
 
 			arrowInterval = info;
@@ -243,10 +248,6 @@ public class ModuleShooter extends ModuleAttachment implements ISuppliesModule {
 		}
 	}
 
-	@Override
-	public int numberOfPackets() {
-		return 2;
-	}
 
 	@Override
 	public int numberOfGuiData() {
@@ -425,9 +426,9 @@ public class ModuleShooter extends ModuleAttachment implements ISuppliesModule {
 	
 	                                                    
 	
-	protected void setHeading(Entity projectile, double motionX, double motionY, double motionZ, float motionMult, float motionNoise) {
+	protected void setHeading(Entity projectile, double motionX, double motionY, double motionZ, float motionMultiplier, float motionNoise) {
 		if (projectile instanceof IProjectile) {
-			((IProjectile)projectile).setThrowableHeading(motionX,motionY,motionZ,motionMult,motionNoise);
+			((IProjectile)projectile).setThrowableHeading(motionX,motionY,motionZ,motionMultiplier,motionNoise);
 		}else if(projectile instanceof EntityFireball) {
 			//Not a projective :S
 			EntityFireball fireball = (EntityFireball)projectile;

@@ -23,6 +23,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.module.LocalizationTravel;
 import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
+import vswe.stevesvehicles.network.DataReader;
+import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.IActivatorModule;
@@ -100,18 +102,22 @@ public class ModuleCage extends ModuleAttachment implements IActivatorModule {
 	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0) {
 			if (inRect(x,y, AUTO_RECT)) {
-				sendPacket(0);
+                DataWriter dw = getDataWriter();
+                dw.writeBoolean(true);
+                sendPacketToServer(dw);
 			}else if (inRect(x,y, MANUAL_RECT)) {
-				sendPacket(1);
+                DataWriter dw = getDataWriter();
+                dw.writeBoolean(false);
+                sendPacketToServer(dw);
 			}
 		}
 	}
 
 	@Override
-	protected void receivePacket(int id, byte[] data, EntityPlayer player) {
-		if  (id == 0) {
+	protected void receivePacket(DataReader dr, EntityPlayer player) {
+		if (dr.readBoolean()) {
 			disablePickup = !disablePickup;
-		}else if (id == 1) {
+		}else {
 			if (!isCageEmpty()) {
 				manualDrop();
 			}else{
@@ -120,10 +126,6 @@ public class ModuleCage extends ModuleAttachment implements IActivatorModule {
 		}
 	}
 
-	@Override
-	public int numberOfPackets() {
-		return 2;
-	}
 
     private int cooldown = 0;
     private static int PICK_UP_COOLDOWN = 20;

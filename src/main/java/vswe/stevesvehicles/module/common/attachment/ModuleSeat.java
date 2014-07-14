@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.module.LocalizationTravel;
 import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
+import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import cpw.mods.fml.relauncher.Side;
@@ -87,27 +88,20 @@ public class ModuleSeat extends ModuleAttachment {
 	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0) {
 			if (inRect(x,y, BUTTON_RECT)) {
-				sendPacket(0);
+				sendPacketToServer(getDataWriter());
 			}
 		}
 	}
 
 	@Override
-	protected void receivePacket(int id, byte[] data, EntityPlayer player) {
-		if (id == 0) {
-			if (player != null) { 
-				if (getVehicle().getEntity().riddenByEntity == null) {
-					player.mountEntity(getVehicle().getEntity());
-				}else if (getVehicle().getEntity().riddenByEntity == player){
-					player.mountEntity(null);
-				}
-			}
-		}
-	}
-
-	@Override
-	public int numberOfPackets() {
-		return 1;
+	protected void receivePacket(DataReader dr, EntityPlayer player) {
+        if (player != null) {
+            if (getVehicle().getEntity().riddenByEntity == null) {
+                player.mountEntity(getVehicle().getEntity());
+            }else if (getVehicle().getEntity().riddenByEntity == player){
+                player.mountEntity(null);
+            }
+        }
 	}
 
 	@Override

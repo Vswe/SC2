@@ -7,6 +7,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.arcade.ArcadeGame;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.arcade.LocalizationTrack;
+import vswe.stevesvehicles.network.DataReader;
+import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
@@ -31,7 +33,7 @@ public class ArcadeTracks extends ArcadeGame {
 			@Override
 			public void onCrash() {				
 				if (isPlayingFinalLevel() && currentStory < unlockedLevels.length - 1 && unlockedLevels[currentStory + 1] == -1) {
-					getModule().sendPacket(0, new byte[] {(byte)(currentStory + 1), (byte)0});
+                    sendPacket(currentStory + 1, 0);
 				}
 			}
 		});
@@ -509,10 +511,17 @@ public class ArcadeTracks extends ArcadeGame {
 		if (isPlayingNormalLevel()) {
 			int nextLevel = currentLevel + 1;
 			if (nextLevel > unlockedLevels[currentStory]) {
-				getModule().sendPacket(0, new byte[] {(byte)currentStory, (byte)nextLevel});
+                sendPacket(currentStory, nextLevel);
 			}		
 		}
-	}	
+	}
+
+    private void sendPacket(int story, int level) {
+        DataWriter dw = getDataWriter();
+        dw.writeByte(story);
+        dw.writeByte(level);
+        sendPacketToServer(dw);
+    }
 	
 	public int[] getMenuArea() {
 		return new int[] {(VehicleBase.MODULAR_SPACE_WIDTH - 256) / 2, (VehicleBase.MODULAR_SPACE_HEIGHT - 113) / 2 ,256, 113};
@@ -756,24 +765,28 @@ public class ArcadeTracks extends ArcadeGame {
 	}
 	
 	@Override
-	public void receivePacket(int id, byte[] data, EntityPlayer player) {
-		if (id == 0) {
-			unlockedLevels[data[0]] = data[1];
-			if (unlockedLevels[data[0]] > TrackStory.stories.get(data[0]).getLevels().size() - 1) {
-				unlockedLevels[data[0]] = TrackStory.stories.get(data[0]).getLevels().size() - 1;
-			}
-			
-		}
+	public void receivePacket(DataReader dr, EntityPlayer player) {
+        int story = dr.readByte();
+        int level = dr.readByte();
+        unlockedLevels[story] = level;
+        if (unlockedLevels[story] > TrackStory.stories.get(story).getLevels().size() - 1) {
+            unlockedLevels[story] = TrackStory.stories.get(story).getLevels().size() - 1;
+        }
 	}
 	
 	@Override
 	public void checkGuiData(Object[] info) {
 		for (int i = 0; i < unlockedLevels.length; i++) {
-			getModule().updateGuiData(info, i, (short)unlockedLevels[i]);
+			updateGuiData(info, i, (short) unlockedLevels[i]);
 		}
 	}
-	
-	@Override
+
+    @Override
+    public int numberOfGuiData() {
+        return TrackStory.stories.size();
+    }
+
+    @Override
 	public void receiveGuiData(int id, short data) {
 		if (id >= 0 && id < unlockedLevels.length) {	
 			unlockedLevels[id] = data;

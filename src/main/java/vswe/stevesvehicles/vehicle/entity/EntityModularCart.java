@@ -391,15 +391,15 @@ public class EntityModularCart extends EntityMinecart
 	 * @return The meta data of the rail
 	 */
 	public int getRailMeta(int x, int y, int z) {		
-		ModuleBase.RAIL_DIRECTION dir = ModuleBase.RAIL_DIRECTION.DEFAULT;
+		ModuleBase.RailDirection dir = ModuleBase.RailDirection.DEFAULT;
 		for (ModuleBase module : vehicleBase.getModules()) {
 			dir = module.getSpecialRailDirection(x,y,z);
-			if (dir != ModuleBase.RAIL_DIRECTION.DEFAULT) {
+			if (dir != ModuleBase.RailDirection.DEFAULT) {
 				break;
 			}
 		}
 	
-		if (dir == ModuleBase.RAIL_DIRECTION.DEFAULT)  {
+		if (dir == ModuleBase.RailDirection.DEFAULT)  {
 			return -1;
 		}
 	

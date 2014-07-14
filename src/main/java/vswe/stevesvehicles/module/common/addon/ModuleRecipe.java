@@ -9,6 +9,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.module.LocalizationProduction;
+import vswe.stevesvehicles.network.DataReader;
+import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.ModuleBase;
@@ -185,22 +187,24 @@ public abstract class ModuleRecipe extends ModuleAddon {
 	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (canUseAdvancedFeatures()) {
 			if (inRect(x, y, getArea())) {
-				sendPacket(0, (byte)button);
+                DataWriter dw = getDataWriter(PacketId.TARGET);
+                dw.writeBoolean(button == 0);
+                sendPacketToServer(dw);
 			}
 			
 			for (int i = 0; i < 3; i++) {
 				if (mode == 1 || i == 1) {
 					if (inRect(x, y, getControlRect(i))) {
 						if (i == 1) {
-							sendPacket(1, (byte)button);
+                            DataWriter dw = getDataWriter(PacketId.MODE);
+                            dw.writeBoolean(button == 0);
+                            sendPacketToServer(dw);
 						}else{
-							byte encodedData = (byte)(i == 0 ? 0 : 1);
-							if (GuiScreen.isCtrlKeyDown()) {
-								encodedData |= 2;
-							}else if (GuiScreen.isShiftKeyDown()) {
-								encodedData |= 4;
-							}
-							sendPacket(2, (byte)encodedData);
+                            DataWriter dw = getDataWriter(PacketId.MAX_COUNT);
+                            dw.writeBoolean(i == 0);
+                            dw.writeBoolean(GuiScreen.isCtrlKeyDown());
+                            dw.writeBoolean(GuiScreen.isShiftKeyDown());
+                            sendPacketToServer(dw);
 						}
 						break;
 					}
@@ -208,42 +212,51 @@ public abstract class ModuleRecipe extends ModuleAddon {
 			}
 		}
 	}
-	
-	@Override 
-	protected int numberOfPackets() {
-		return canUseAdvancedFeatures() ? 3 : 0;
-	}
-	
-	@Override
-	protected void receivePacket(int id, byte[] data, EntityPlayer player) {
-		if (canUseAdvancedFeatures()) {
-			if	(id == 0) {
-				dirty = true;
-				changeTarget(data[0] == 0);
-			}else if(id == 1) {
-				if (data[0] == 0) {
-					if (++mode > 2) {
-						mode = 0;
-					}
-				}else{
-					if (--mode < 0) {
-						mode = 2;
-					}	
-				}
-			}else if(id == 2) {
-				
 
-				int dif = (data[0] & 1) == 0 ? 1 : -1;
-				
-				if ((data[0] & 2) != 0) {
-					dif *= 64;
-				}else if((data[0] & 4) != 0) {
-					dif *= 10;
-				}
-				
-				maxItemCount = Math.min(Math.max(1, maxItemCount + dif), 999);
-												
-			}
+    private DataWriter getDataWriter(PacketId id) {
+        DataWriter dw = getDataWriter();
+        dw.writeEnum(id);
+        return dw;
+    }
+
+    private enum PacketId {
+        TARGET,
+        MODE,
+        MAX_COUNT
+    }
+
+	@Override
+	protected void receivePacket(DataReader dr, EntityPlayer player) {
+		if (canUseAdvancedFeatures()) {
+            PacketId id = dr.readEnum(PacketId.class);
+            switch (id) {
+                case TARGET:
+                    dirty = true;
+                    changeTarget(dr.readBoolean());
+                    break;
+                case MODE:
+                    if (dr.readBoolean()) {
+                        if (++mode > 2) {
+                            mode = 0;
+                        }
+                    }else{
+                        if (--mode < 0) {
+                            mode = 2;
+                        }
+                    }
+                    break;
+                case MAX_COUNT:
+                    int dif = dr.readBoolean() ? 1 : -1;
+
+                    if (dr.readBoolean()) {
+                        dif *= 64;
+                    }else if(dr.readBoolean()) {
+                        dif *= 10;
+                    }
+
+                    maxItemCount = Math.min(Math.max(1, maxItemCount + dif), 999);
+                    break;
+            }
 		}
 	}
 	

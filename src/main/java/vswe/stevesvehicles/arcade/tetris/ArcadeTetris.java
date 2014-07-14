@@ -6,6 +6,8 @@ import vswe.stevesvehicles.arcade.ArcadeGame;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.arcade.tracks.TrackStory;
 import vswe.stevesvehicles.localization.entry.arcade.LocalizationStacker;
+import vswe.stevesvehicles.network.DataReader;
+import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.common.attachment.ModuleArcade;
@@ -70,12 +72,12 @@ public class ArcadeTetris extends ArcadeGame {
 						int removedCount = 0;
 						for (int y = 0; y < board[0].length; y++) {
 							boolean valid = true;
-							for (int x = 0; x < board.length; x++) {
-								if (board[x][y] == null) {
-									valid = false;
-									break;
-								}
-							}
+                            for (TetrisBlock[] col : board) {
+                                if (col[y] == null) {
+                                    valid = false;
+                                    break;
+                                }
+                            }
 							
 							if (valid) {
 								for (int y2 = y; y2 >= 0; y2--) {
@@ -110,7 +112,8 @@ public class ArcadeTetris extends ArcadeGame {
 						quickMove = false;
 						gameOverTicks = 0;
 						newHighScore();
-						playSound("gameover", 1, 1);
+                        //noinspection SpellCheckingInspection
+                        playSound("gameover", 1, 1);
 					}
 				}else{
 					generatePiece();
@@ -218,38 +221,30 @@ public class ArcadeTetris extends ArcadeGame {
 	private void newHighScore() {
 		if (score > highscore) {
 			int val = score / 100;
-			
-			byte byte1 = (byte)(val & 255);
-			byte byte2 = (byte)((val & (255 << 8)) >> 8);
-			
-			getModule().sendPacket(1, new byte[] {byte1, byte2});
+
+            DataWriter dw = getDataWriter();
+            dw.writeShort(val);
+			sendPacketToServer(dw);
 			newHighScore = true;
 		}
 	}
 	
 	@Override
-	public void receivePacket(int id, byte[] data, EntityPlayer player) {
-		if (id == 1) {
-			short data1 = data[0];
-			short data2 = data[1];
-			if (data1 < 0) {
-				data1 += 256;
-			}
-			if (data2 < 0) {
-				data2 += 256;
-			}
-			
-			highscore = (data1 | (data2 << 8)) * 100;
-		}
+	public void receivePacket(DataReader dr, EntityPlayer player) {
+        highscore = dr.readShort() * 100;
 	}
 	
 	@Override
 	public void checkGuiData(Object[] info) {
-		getModule().updateGuiData(info, TrackStory.stories.size(), (short)(highscore / 100));
+		updateGuiData(info, 0, (short) (highscore / 100));
 	}
-	
-	
-	@Override
+
+    @Override
+    public int numberOfGuiData() {
+        return 1;
+    }
+
+    @Override
 	public void receiveGuiData(int id, short data) {
 		if (id == TrackStory.stories.size()) {
 			highscore = data * 100;

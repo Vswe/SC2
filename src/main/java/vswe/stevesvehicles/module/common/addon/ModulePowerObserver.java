@@ -5,6 +5,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.module.LocalizationUtility;
+import vswe.stevesvehicles.network.DataReader;
+import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.module.common.engine.ModuleEngine;
@@ -188,46 +190,58 @@ public class ModulePowerObserver extends ModuleAddon {
 		}
 	}	
 
-	@Override
-	public int numberOfPackets() {
-		return 3;
-	}	
-	
+
 	private short[] areaData = new short[4];
 	private short[] powerLevel = new short[4];
+
+    private DataWriter getDataWriter(PacketId id) {
+        DataWriter dw = getDataWriter();
+        dw.writeEnum(id);
+        return dw;
+    }
+
+    private enum PacketId {
+        ADD,
+        REMOVE,
+        AMOUNT
+    }
 	
 	@Override
-	protected void receivePacket(int id, byte[] data, EntityPlayer player) {
-		if (id == 0) {
-			int area = data[0];
-			int engine = data[1];
-			
-			areaData[area] |= 1 << engine;
-		}else if (id == 1) {
-			int area = data[0];
-			int engine = data[1];		
-		
-			areaData[area] &= ~(1 << engine);
-		}else if(id == 2) {
-			int area = data[0];
-			int button = data[1] & 1;
-			boolean shift = (data[1] & 2) != 0;
-			
-			int change = button == 0 ? 1 : -1;
-			if (shift) {
-				change *= 10;
-			}
-			
-			short value = powerLevel[area];
-			value += change;
-			if (value < 0) {
-				value = 0;
-			}else if(value > 999){
-				value = 999;
-			}
-			
-			powerLevel[area] = value;
-		}
+	protected void receivePacket(DataReader dr, EntityPlayer player) {
+        PacketId id = dr.readEnum(PacketId.class);
+        int area = dr.readByte();
+        int engine;
+
+        switch (id) {
+            case ADD:
+                engine = dr.readByte();
+                areaData[area] |= 1 << engine;
+                break;
+            case REMOVE:
+                engine = dr.readByte();
+                areaData[area] &= ~(1 << engine);
+                break;
+            case AMOUNT:
+                int change = dr.readBoolean() ? 1 : -1;
+                boolean shift = dr.readBoolean();
+
+                if (shift) {
+                    change *= 10;
+                }
+
+                short value = powerLevel[area];
+                value += change;
+                if (value < 0) {
+                    value = 0;
+                }else if(value > 999){
+                    value = 999;
+                }
+
+                powerLevel[area] = value;
+                break;
+        }
+
+
 	}	
 	
 	private int currentEngine = -1;
@@ -240,7 +254,10 @@ public class ModulePowerObserver extends ModuleAddon {
 					int[] rect = getAreaRect(i);
 	
 					if (inRect(x, y, rect)) {
-						sendPacket(0, new byte[] {(byte)i, (byte)currentEngine});
+                        DataWriter dw = getDataWriter(PacketId.ADD);
+                        dw.writeByte(i);
+                        dw.writeByte(currentEngine);
+                        sendPacketToServer(dw);
 						break;
 					}
 				}
@@ -256,7 +273,10 @@ public class ModulePowerObserver extends ModuleAddon {
 			int[] rect = getPowerRect(i);
 		
 			if (inRect(x, y, rect)) {
-				sendPacket(2, new byte[] {(byte)i, (byte)(button | (GuiScreen.isShiftKeyDown() ? 2 : 0))});
+                DataWriter dw = getDataWriter(PacketId.AMOUNT);
+                dw.writeByte(i);
+                dw.writeBoolean(button == 0);
+                dw.writeBoolean(GuiScreen.isShiftKeyDown());
 				break;
 			}
 		}				
@@ -279,7 +299,10 @@ public class ModulePowerObserver extends ModuleAddon {
 						int[] rect = getEngineRectInArea(i, count);
 					
 						if (inRect(x, y, rect)) {
-							sendPacket(1, new byte[] {(byte)i, (byte)j});
+                            DataWriter dw = getDataWriter(PacketId.REMOVE);
+                            dw.writeByte(i);
+                            dw.writeByte(j);
+                            sendPacketToServer(dw);
 							break;
 						}
 						count++;

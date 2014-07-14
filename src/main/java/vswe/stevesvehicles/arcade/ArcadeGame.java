@@ -2,8 +2,13 @@ package vswe.stevesvehicles.arcade;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.ILocalizedText;
+import vswe.stevesvehicles.network.DataReader;
+import vswe.stevesvehicles.network.DataWriter;
+import vswe.stevesvehicles.network.PacketHandler;
+import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.old.StevesVehicles;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.old.Helpers.SoundHandler;
@@ -11,7 +16,9 @@ import vswe.stevesvehicles.module.common.attachment.ModuleArcade;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-//TODO add some kind of registry for these
+import java.lang.reflect.Constructor;
+import java.util.ArrayList;
+
 
 public abstract class ArcadeGame {
 	
@@ -61,7 +68,7 @@ public abstract class ArcadeGame {
 	
 	public void save(NBTTagCompound tagCompound) {}
 	public void load(NBTTagCompound tagCompound) {}
-	public void receivePacket(int id, byte[] data, EntityPlayer player) {}
+	public void receivePacket(DataReader dr, EntityPlayer player) {}
 	public void checkGuiData(Object[] info) {}
 	public void receiveGuiData(int id, short data) {}
 
@@ -132,5 +139,69 @@ public abstract class ArcadeGame {
 				);	
 		}		
 	}
-	
+
+    private int id;
+    public static void createGame(ModuleArcade module, Class<? extends ArcadeGame> gameType, ArrayList<ArcadeGame> games) {
+        try {
+            Constructor<? extends ArcadeGame> constructor = gameType.getConstructor(ModuleArcade.class);
+            Object obj = constructor.newInstance(module);
+            ArcadeGame game = (ArcadeGame)obj;
+            game.id = games.size();
+            games.add(game);
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
+    private int guiDataOffset;
+    public int numberOfGuiData() {
+        return 0;
+    }
+
+    public void setGuiDataOffset(int offset) {
+        guiDataOffset = offset;
+    }
+
+    protected final void updateGuiData(Object[] info, int id, short data) {
+        getModule().updateGuiData(info, id + guiDataOffset, data);
+    }
+
+    public static void delegateReceivedGuiData(ArrayList<ArcadeGame> games, int id, short data) {
+        for(ArcadeGame game : games) {
+            if (id < game.numberOfGuiData()) {
+                game.receiveGuiData(id, data);
+                break;
+            }else{
+                id -= game.numberOfGuiData();
+            }
+        }
+    }
+
+    public static void delegateReceivedPacket(ArrayList<ArcadeGame> games, DataReader dr, EntityPlayer player) {
+        int id = dr.readByte();
+        games.get(id).receivePacket(dr, player);
+    }
+
+    protected DataWriter getDataWriter() {
+        DataWriter dw = getModule().getDataWriter();
+        dw.writeByte(this.id);
+        return dw;
+    }
+
+    protected void sendPacketToServer(DataWriter dw) {
+        PacketHandler.sendPacketToServer(dw);
+    }
+
+    protected void sendPacketToPlayer(DataWriter dw, EntityPlayer player) {
+        PacketHandler.sendPacketToPlayer(dw, player);
+    }
+
+    private ResourceLocation texture;
+    public ResourceLocation getIconResource() {
+        if (texture == null) {
+            texture = ResourceHelper.getResource("/gui/arcade/" + getModule().getGameName(this) + ".png");
+        }
+        return texture;
+    }
 }

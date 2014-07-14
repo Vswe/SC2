@@ -6,6 +6,8 @@ import org.lwjgl.opengl.GL11;
 
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.module.LocalizationVisual;
+import vswe.stevesvehicles.network.DataReader;
+import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 
@@ -62,7 +64,7 @@ public class ModuleColorizer extends ModuleAddon {
 		ResourceHelper.bindResource("/gui/color.png");
 
 		for (int i = 0; i < 3; i++) {
-			drawMarker(gui, x, y, i);
+			drawMarker(gui, i);
 		}
 
 		float[] color = getColor();
@@ -80,7 +82,7 @@ public class ModuleColorizer extends ModuleAddon {
 	}
 
 
-	private void drawMarker(GuiVehicle gui, int x, int y, int id) {
+	private void drawMarker(GuiVehicle gui, int id) {
 		float[] colorArea = new float[3];
 		float[] colorMarker = new float[3];
 		for (int i = 0; i < 3; i++) {
@@ -121,7 +123,10 @@ public class ModuleColorizer extends ModuleAddon {
                tempColor = 255;
             }
 
-			sendPacket(markerMoving, (byte)tempColor);
+            DataWriter dw = getDataWriter();
+            dw.writeByte(markerMoving);
+            dw.writeByte(tempColor);
+            sendPacketToServer(dw);
 		}
 
         if (button != -1) {
@@ -142,15 +147,12 @@ public class ModuleColorizer extends ModuleAddon {
 		addDw(2,255);
 	}
 
-	@Override
-	public int numberOfPackets() {
-		return 3;
-	}
 
 	@Override
-	protected void receivePacket(int id, byte[] data, EntityPlayer player) {
+	protected void receivePacket(DataReader dr, EntityPlayer player) {
+        int id = dr.readByte();
 		if (id >= 0 && id < 3) {
-			setColorVal(id, data[0]);
+			setColorVal(id, dr.readByte());
 		}
 	}
 	

@@ -13,6 +13,7 @@ import vswe.stevesvehicles.container.slots.SlotBarrel;
 import vswe.stevesvehicles.container.slots.SlotBase;
 import vswe.stevesvehicles.localization.entry.module.LocalizationBarrel;
 import vswe.stevesvehicles.module.common.storage.ModuleStorage;
+import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.old.Helpers.ColorHelper;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
 import vswe.stevesvehicles.vehicle.VehicleBase;
@@ -219,21 +220,14 @@ public abstract class ModuleBarrel extends ModuleStorage {
     }
 
     @Override
-    protected int numberOfPackets() {
-        return 1;
-    }
-
-    @Override
-    protected void receivePacket(int id, byte[] data, EntityPlayer player) {
-        if (id == 0) {
-            isLocked = !isLocked;
-        }
+    protected void receivePacket(DataReader dr, EntityPlayer player) {
+        isLocked = !isLocked;
     }
 
     @Override
     public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
         if (inRect(x, y, BARREL_X + BOX_X, BARREL_Y + BOX_Y, BOX_WIDTH, BOX_HEIGHT)) {
-            sendPacket(0);
+            sendPacketToServer(getDataWriter());
         }
     }
 
@@ -379,20 +373,6 @@ public abstract class ModuleBarrel extends ModuleStorage {
             return storedItem;
         }else{
             return getStack(0);
-        }
-    }
-
-    //TODO remove
-    @Override
-    public String getModuleName() {
-        if (super.getModuleName().contains("basic")) {
-            return "Basic Barrel";
-        }else if (super.getModuleName().contains("normal")) {
-            return "Standard Barrel";
-        }else if (super.getModuleName().contains("large")) {
-            return "Large Barrel";
-        }else{
-            return "Barrel";
         }
     }
 

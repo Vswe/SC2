@@ -2,6 +2,7 @@ package vswe.stevesvehicles.module.common.storage.tank;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.localization.entry.module.LocalizationTank;
+import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ColorHelper;
 
@@ -38,9 +39,11 @@ public class ModuleCheatTank extends ModuleTank{
 	
 
 	@Override
-	protected void receivePacket(int id, byte[] data, EntityPlayer player) {
-		if (id == 0 && (data[0] & 1) != 0) {
-			if (mode != 0 && (data[0] & 2) != 0) {
+	protected void receivePacket(DataReader dr, EntityPlayer player) {
+        int button = dr.readBoolean() ? 0 : 1;
+        boolean isShift = dr.readBoolean();
+		if (button != 0) {
+			if (mode != 0 && isShift) {
 				mode = 0;
 			}else if (++mode == colors.length) {
 				mode = 1;
@@ -49,7 +52,7 @@ public class ModuleCheatTank extends ModuleTank{
 			updateAmount();
 			updateDw();
 		}else{
-			super.receivePacket(id, data, player);
+			super.receivePacket(dr, player);
 		}
 	}	
 

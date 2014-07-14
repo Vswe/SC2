@@ -20,6 +20,7 @@ import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.localization.entry.module.cart.LocalizationCartTool;
 import vswe.stevesvehicles.block.ModBlocks;
+import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.old.Helpers.BlockCoordinate;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.old.Helpers.ResourceHelper;
@@ -524,22 +525,17 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
 	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0) {
 			if (inRect(x,y, BUTTON_RECT)) {
-				sendPacket(0);
+				sendPacketToServer(getDataWriter());
 			}
 		}
 	}
 
 	@Override
-	protected void receivePacket(int id, byte[] data, EntityPlayer player) {
-		if (id == 0) {
-			setDrillEnabled(!isDrillEnabled());
-		}
+	protected void receivePacket(DataReader dr, EntityPlayer player) {
+	    setDrillEnabled(!isDrillEnabled());
 	}
 
-	@Override
-	public int numberOfPackets() {
-		return 1;
-	}
+
 
     @Override
     public boolean hasSlots() {
