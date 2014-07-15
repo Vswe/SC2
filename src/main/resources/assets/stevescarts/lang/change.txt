@@ -418,26 +418,26 @@ item.SC2:BlockStorage1.name=steves_vehicles:tile.metal_storage:galgadorian
 item.SC2:BlockStorage2.name=steves_vehicles:tile.metal_storage:enhanced_galgadorian
 
 # Upgrades
-item.SC2:batteries.name=steves_vehicles:tile.power:batteries.name
-item.SC2:power_crystal.name=steves_vehicles:tile.power:power_crystal.name
-item.SC2:co2_friendly.name=steves_vehicles:tile.power:co2_friendly.name
-item.SC2:generic_engine.name=steves_vehicles:tile.power:generic_engine.name
-item.SC2:thermal_engine_upgrade.name=steves_vehicles:tile.power:thermal_engine_upgrade.name
-item.SC2:solar_panel.name=steves_vehicles:tile.power:solar_panel.name
-item.SC2:module_knowledge.name=steves_vehicles:tile.production:module_knowledge.name
-item.SC2:industrial_espionage.name=steves_vehicles:tile.production:industrial_espionage.name
-item.SC2:experienced_assembler.name=steves_vehicles:tile.production:experienced_assembler.name
-item.SC2:new_era.name=steves_vehicles:tile.production:new_era.name
-item.SC2:quick_demolisher.name=steves_vehicles:tile.production:quick_demolisher.name
-item.SC2:entropy.name=steves_vehicles:tile.production:entropy.name
-item.SC2:creative_mode.name=steves_vehicles:tile.production:creative_mode.name
-item.SC2:module_input.name=steves_vehicles:tile.control:module_input.name
-item.SC2:production_line.name=steves_vehicles:tile.control:production_line.name
-item.SC2:cart_deployer.name=steves_vehicles:tile.control:cart_deployer.name
-item.SC2:cart_modifier.name=steves_vehicles:tile.control:cart_modifier.name
-item.SC2:cart_crane.name=steves_vehicles:tile.control:cart_crane.name
-item.SC2:redstone_control.name=steves_vehicles:tile.control:redstone_control.name
-item.SC2:manager_bridge.name=steves_vehicles:tile.control:manager_bridge.name
+item.SC2:batteries.name=steves_vehicles:tile.upgrade:power.batteries.name
+item.SC2:power_crystal.name=steves_vehicles:tile.upgrade:power.power_crystal.name
+item.SC2:co2_friendly.name=steves_vehicles:tile.upgrade:power.co2_friendly.name
+item.SC2:generic_engine.name=steves_vehicles:tile.upgrade:power.generic_engine.name
+item.SC2:thermal_engine_upgrade.name=steves_vehicles:tile.upgrade:power.thermal_engine_upgrade.name
+item.SC2:solar_panel.name=steves_vehicles:tile.upgrade:power.solar_panel.name
+item.SC2:module_knowledge.name=steves_vehicles:tile.upgrade:production.module_knowledge.name
+item.SC2:industrial_espionage.name=steves_vehicles:tile.upgrade:production.industrial_espionage.name
+item.SC2:experienced_assembler.name=steves_vehicles:tile.upgrade:production.experienced_assembler.name
+item.SC2:new_era.name=steves_vehicles:tile.upgrade:production.new_era.name
+item.SC2:quick_demolisher.name=steves_vehicles:tile.upgrade:production.quick_demolisher.name
+item.SC2:entropy.name=steves_vehicles:tile.upgrade:production.entropy.name
+item.SC2:creative_mode.name=steves_vehicles:tile.upgrade:production.creative_mode.name
+item.SC2:module_input.name=steves_vehicles:tile.upgrade:control.module_input.name
+item.SC2:production_line.name=steves_vehicles:tile.upgrade:control.production_line.name
+item.SC2:cart_deployer.name=steves_vehicles:tile.upgrade:control.cart_deployer.name
+item.SC2:cart_modifier.name=steves_vehicles:tile.upgrade:control.cart_modifier.name
+item.SC2:cart_crane.name=steves_vehicles:tile.upgrade:control.cart_crane.name
+item.SC2:redstone_control.name=steves_vehicles:tile.upgrade:control.redstone_control.name
+item.SC2:manager_bridge.name=steves_vehicles:tile.upgrade:control.manager_bridge.name
 
 # Detector Units
 item.SC2:BlockDetector0.name=steves_vehicles:tile.detector_unit:normal.name
