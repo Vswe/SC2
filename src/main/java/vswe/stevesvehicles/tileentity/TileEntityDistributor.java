@@ -23,7 +23,7 @@ import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.container.ContainerDistributor;
 import vswe.stevesvehicles.tileentity.distributor.DistributorSetting;
 import vswe.stevesvehicles.tileentity.distributor.DistributorSide;
-import vswe.stevesvehicles.tanks.Tank;
+import vswe.stevesvehicles.tank.Tank;
 import vswe.stevesvehicles.client.gui.screen.GuiBase;
 import vswe.stevesvehicles.client.gui.screen.GuiDistributor;
 import cpw.mods.fml.relauncher.Side;

@@ -1,4 +1,4 @@
-package vswe.stevesvehicles.tanks;
+package vswe.stevesvehicles.tank;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

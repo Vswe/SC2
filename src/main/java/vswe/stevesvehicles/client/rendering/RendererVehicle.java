@@ -16,7 +16,7 @@ import vswe.stevesvehicles.client.rendering.models.ModelVehicle;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.client.IconData;
 import vswe.stevesvehicles.client.ResourceHelper;
-import vswe.stevesvehicles.tanks.Tank;
+import vswe.stevesvehicles.tank.Tank;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.vehicle.entity.IVehicleEntity;
 

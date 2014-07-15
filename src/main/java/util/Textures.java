@@ -1,3 +1,5 @@
+package util;
+
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.item.ComponentTypes;
@@ -16,9 +18,9 @@ import java.util.Map;
 
 
 //Temporary class for some file util
-public class Util {
+public class Textures {
     public static void main(String[] args) throws IOException{
-        //this code is just for moving stuff around during development, doesn't reall matter that it's using absolute paths
+        //this code is just for moving stuff around during development, doesn't really matter that it's using absolute paths
         File itemDir = new File("C:\\Users\\Vswe\\Dropbox\\Minecraft Modding\\SC2\\src\\main\\resources\\assets\\stevescarts\\textures\\items");
         File blockDir = new File("C:\\Users\\Vswe\\Dropbox\\Minecraft Modding\\SC2\\src\\main\\resources\\assets\\stevescarts\\textures\\blocks");
 

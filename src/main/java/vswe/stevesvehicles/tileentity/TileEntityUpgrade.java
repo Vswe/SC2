@@ -21,7 +21,7 @@ import net.minecraftforge.fluids.IFluidTank;
 import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.container.ContainerUpgrade;
 import vswe.stevesvehicles.nbt.NBTHelper;
-import vswe.stevesvehicles.tanks.Tank;
+import vswe.stevesvehicles.tank.Tank;
 import vswe.stevesvehicles.client.gui.screen.GuiBase;
 import vswe.stevesvehicles.client.gui.screen.GuiUpgrade;
 import vswe.stevesvehicles.upgrade.Upgrade;

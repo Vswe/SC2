@@ -1,5 +1,5 @@
 # ======================================
-				BLOCK GUI
+#				BLOCK GUI
 # ======================================
 
 # Cart assembler gui localization
@@ -193,7 +193,7 @@ gui.SC2:stateTankEmpty=Alespon jedna nadrz je prazdna
 
 
 # ======================================
-				ITEMS
+#				ITEMS
 # ======================================
 
 # Carts
@@ -386,7 +386,7 @@ item.SC2:blade_arm.name=Cepelova ruka
 
 
 # ======================================
-				BLOCKS
+#				BLOCKS
 # ======================================
 
 tile.SC2:BlockCargoManager.name=Nakladni manazer
@@ -433,7 +433,7 @@ item.SC2:BlockDetector4.name=Detekovaci ruditova jednotka
 
 
 # ======================================
-				MODULE MISC
+#				MODULE MISC
 # ======================================
 
 # Categories
@@ -500,7 +500,7 @@ info.SC2:maxAddonCount=Nejveci pocet pridavku: [%1]
 
 
 # ======================================
-				UPGRADES
+#				UPGRADES
 # ======================================
 
 info.SC2:effectBlueprint=Povoli ti pouziti modrych karet.
@@ -523,7 +523,7 @@ info.SC2:effectEfficiency=Efektivita zhotoveni [%1]%.
 
 
 # ======================================
-				MODULES
+#				MODULES
 # ======================================
 
 # Addons
@@ -658,7 +658,7 @@ modules.attachments.SC2:controlSystemReset=Resetovat meric cesty
 
 
 # ======================================
-				Steve's Arcade 
+#				Steve's Arcade
 # ======================================
 
 # Ghast Invaders

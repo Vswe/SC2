@@ -1,5 +1,5 @@
 # ======================================
-				BLOCK GUI
+#				BLOCK GUI
 # ======================================
 
 # Cart assembler gui localization
@@ -195,7 +195,7 @@ gui.SC2:stateTankEmpty=§§Oes yna unrhyw tanciau gwbl gwag
 
 
 # ======================================
-				ITEMS
+#				ITEMS
 # ======================================
 
 # Carts
@@ -389,7 +389,7 @@ item.SC2:blade_arm.name=Braich Llafn
 
 
 # ======================================
-				BLOCKS
+#				BLOCKS
 # ======================================
 
 tile.SC2:BlockCargoManager.name=Rheolwr Llwyth
@@ -437,7 +437,7 @@ item.SC2:BlockDetector4.name=Uned Carregcoch Synhwyrydd
 
 
 # ======================================
-				MODULE MISC
+#				MODULE MISC
 # ======================================
 
 # Categories
@@ -503,7 +503,7 @@ info.SC2:maxEngineCount=Uchafswm Injânau: [%1]
 info.SC2:maxAddonCount=Uchafswm nifer o ychwanegiadau: [%1]
 
 # ======================================
-				UPGRADES
+#				UPGRADES
 # ======================================
 
 info.SC2:effectBlueprint=Galluogi y defnydd o Certiau Glasbrint.
@@ -526,7 +526,7 @@ info.SC2:effectEfficiency=Effeitiolrwydd cyosodi [%1]%.
 
 
 # ======================================
-				MODULES
+#				MODULES
 # ======================================
 
 # Addons
@@ -657,7 +657,7 @@ modules.attachments.SC2:noteVolume=Cryfder y trac: [%1->Muted|Low|Medium|High]
 
 
 # ======================================
-				Steve's Arcade 
+#				Steve's Arcade
 # ======================================
 # Ghast Invaders
 arcade.SC2:ghastInvaders=Goresgynwyr Ghastiaid
