@@ -71,7 +71,7 @@ public class Upgrade implements IRecipeOutput {
 	}	
 
 	public String getUnlocalizedNameForItem() {
-        return "steves_vehicles:tile." + getFullRawUnlocalizedName();
+        return "steves_vehicles:tile.upgrade." + getFullRawUnlocalizedName();
     }
 
     public String getUnlocalizedName() {

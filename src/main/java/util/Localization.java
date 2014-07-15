@@ -16,25 +16,22 @@ public class Localization {
         File langDir = new File("C:\\Users\\Vswe\\Dropbox\\Minecraft Modding\\SC2\\src\\main\\resources\\assets\\stevescarts\\lang");
 
         File change = new File(langDir, "change.txt");
-        File fallBack = new File(langDir, "en_US.lang");
         for (File child : langDir.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
                 return name.endsWith("en_US.lang");
             }
         })) {
-            writeDataToFile(getUpdatedData(change, fallBack, child), child);
+            writeDataToFile(getUpdatedData(change, child), child);
         }
     }
 
 
-    private static List<String> getUpdatedData(File change, File fallBack, File target) {
+    private static List<String> getUpdatedData(File change, File target) {
         List<String> changeData = readFile(change);
-        List<String> fallBackData = readFile(fallBack);
         List<String> targetData = readFile(target);
 
         List<String> result = new ArrayList<String>();
-        int fallBacks = 0;
         int missingEntries = 0;
         for (String line : changeData) {
             if (line.startsWith("#") || line.startsWith(" ") || line.isEmpty()) {
@@ -44,24 +41,20 @@ public class Localization {
                 String newKey = line.split("=")[1];
                 String value = getValueFromKey(targetData, oldKey);
                 if (value == null) {
-                    fallBacks++;
-                    value = getValueFromKey(fallBackData, oldKey);
-                    if (value == null) {
-                        missingEntries++;
-                        value = "Missing Entry";
-                    }
+                    missingEntries++;
+                }else{
+                    result.add(newKey + "=" + value);
                 }
 
-                result.add(newKey + "=" + value);
+
             }
         }
 
-        if (fallBacks > 0) {
-            System.err.println("Had to use the fallback file " + fallBacks + " times for " + target.getName());
-            if (missingEntries > 0) {
-                System.err.println("Found " + missingEntries + " missing entries for " + target.getName());
-            }
+
+        if (missingEntries > 0) {
+            System.err.println("Found " + missingEntries + " missing entries for " + target.getName());
         }
+
 
 
         return result;
