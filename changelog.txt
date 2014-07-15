@@ -55,3 +55,9 @@ Changed features, from a player's perspective.
 * The raw hardener recipe is now shapeless and yields 4 raw hardeners (rather than 2). This means that the reinforced stuff is much cheaper when it comes to obsidian and diamond. It also affects the price of galgadorian stuff (since that uses reinforced metal) but it doesn't affect it too much since it still uses a diamond block (i.e. diamond cost in the raw hardener was only a small part of the diamond cost).
 
 * Other blocks and components have received various tweaks.
+
+* The elements in the drop down menu in the assembler can now be registered per module. This means that other mods can register their own elements as well as its behaviour changing slightly. For instance, the railer element's maximum will now depend on which railer you have. Also if multiple solar engines are added they may be controlled individually.
+
+* Item and block icons have been rearranged to have a better structure. Some blocks have also received individual textures where they previously shared them with other blocks (for instance all detector units used the same texture at the bottom).
+
+* The Steve's Arcade can now receive games from other mods. If more than 4 games exist (Steve's Vehicles register 4 games), multiple pages of games will be shown.
