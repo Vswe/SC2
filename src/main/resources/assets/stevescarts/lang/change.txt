@@ -10,7 +10,7 @@ steves_vehicles:gui.tab:blocks=steves_vehicles:gui.tab:blocks
 # ======================================
 
 # Cart assembler gui localization
-gui.SC2:cartAssembler=steves_vehicles:gui.assembler:tile
+gui.SC2:cartAssembler=steves_vehicles:gui.assembler:title
 gui.SC2:basicAssembleInstruction=steves_vehicles:gui.assembler:basic_instruction
 gui.SC2:invalidHullError=steves_vehicles:gui.assembler:invalid_hull
 gui.SC2:hullCapacity=steves_vehicles:gui.assembler:hull_capacity

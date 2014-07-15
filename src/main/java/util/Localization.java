@@ -19,7 +19,7 @@ public class Localization {
         for (File child : langDir.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
-                return name.endsWith("en_US.lang");
+                return name.endsWith(".lang");
             }
         })) {
             writeDataToFile(getUpdatedData(change, child), child);
