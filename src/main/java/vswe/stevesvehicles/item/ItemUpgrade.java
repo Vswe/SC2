@@ -44,20 +44,12 @@ public class ItemUpgrade extends ItemBlock {
 		Upgrade.registerIcons(register);
     }	
 
-	public String getName(ItemStack item) {
-		Upgrade upgrade = UpgradeRegistry.getUpgradeFromId(item.getItemDamage());
-		if (upgrade != null) {
-			return upgrade.getName();
-		}	
-	
-        return "Unknown";
-    }
 
  	@Override
     public String getUnlocalizedName(ItemStack item) {
 		Upgrade upgrade = UpgradeRegistry.getUpgradeFromId(item.getItemDamage());
 		if (upgrade != null) {
-			return "steves_vehicles:tile.upgrade:" + upgrade.getRawUnlocalizedName();
+			return upgrade.getUnlocalizedNameForItem();
 		}	
 	
         return "item.unknown";

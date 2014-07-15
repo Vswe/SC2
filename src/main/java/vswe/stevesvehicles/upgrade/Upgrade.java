@@ -70,8 +70,12 @@ public class Upgrade implements IRecipeOutput {
 		effects = new ArrayList<EffectType>();
 	}	
 
-	public String getUnlocalizedName() {
-        return "steves_vehicles:tile." + getFullRawUnlocalizedName() + ".name";
+	public String getUnlocalizedNameForItem() {
+        return "steves_vehicles:tile." + getFullRawUnlocalizedName();
+    }
+
+    public String getUnlocalizedName() {
+        return getUnlocalizedNameForItem() + ".name";
     }
 
 	public String getName() {
