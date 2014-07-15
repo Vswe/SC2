@@ -1,4 +1,11 @@
 # ======================================
+#				CREATIVE TAB
+# ======================================
+steves_vehicles:gui.tab:base=steves_vehicles:gui.tab:base
+steves_vehicles:gui.tab:items=steves_vehicles:gui.tab:items
+steves_vehicles:gui.tab:blocks=steves_vehicles:gui.tab:blocks
+
+# ======================================
 #				BLOCK GUI
 # ======================================
 
