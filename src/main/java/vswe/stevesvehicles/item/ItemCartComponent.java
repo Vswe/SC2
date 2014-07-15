@@ -15,6 +15,8 @@ import net.minecraft.world.World;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import vswe.stevesvehicles.holiday.EntityEasterEgg;
+import vswe.stevesvehicles.localization.ILocalizedText;
+import vswe.stevesvehicles.localization.LocalizedTextAdvanced;
 import vswe.stevesvehicles.tab.CreativeTabLoader;
 
 public class ItemCartComponent extends Item {
@@ -73,15 +75,19 @@ public class ItemCartComponent extends Item {
         return "steves_vehicles:item.component:unknown_component.name";
 	}
 
+
+    private static final ILocalizedText UNKNOWN_MODULE = new LocalizedTextAdvanced("steves_vehicles:item.component:unknown_component");
+    private static final ILocalizedText UNKNOWN_MODULE_ID = new LocalizedTextAdvanced("steves_vehicles:item.component:unknown_component_id");
+
     @SuppressWarnings("unchecked")
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack item, EntityPlayer player, List lst, boolean useExtraInfo) {
 		if (item == null || item.getItemDamage() < 0 || item.getItemDamage() >= size() || getName(item.getItemDamage()) == null) {
 			if (item != null && item.getItem() instanceof ItemCartComponent){
-				lst.add("Component id " + item.getItemDamage()); //TODO localize
+				lst.add(UNKNOWN_MODULE.translate(String.valueOf(item.getItemDamage())));
 			}else{
-				lst.add("Unknown component id"); //TODO localize
+				lst.add(UNKNOWN_MODULE_ID.translate());
 			}
 		}
 	}

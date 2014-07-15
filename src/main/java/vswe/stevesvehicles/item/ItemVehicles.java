@@ -10,6 +10,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import util.Localization;
+import vswe.stevesvehicles.localization.entry.info.LocalizationLabel;
 import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
 import vswe.stevesvehicles.module.data.ModuleDataPair;
 import vswe.stevesvehicles.StevesVehicles;
@@ -104,20 +106,20 @@ public class ItemVehicles extends Item {
             addInfo(ModuleDataItemHandler.getModulesAndCompoundsFromItem(item), list, null);
             addInfo(ModuleDataItemHandler.getSpareModulesAndCompoundsFromItem(item), list, ColorHelper.ORANGE);
 
-            //TODO localization
 			if (info.hasKey("maxTime")) {
-				list.add(ColorHelper.RED + "Incomplete cart!");
+				list.add(ColorHelper.RED + LocalizationLabel.INCOMPLETE.translate());
 				int maxTime = info.getInteger("maxTime");
 				int currentTime = info.getInteger("currentTime");
 				int timeLeft = maxTime - currentTime;
-				list.add(ColorHelper.RED + "Time left: " + formatTime(timeLeft));
+				list.add(ColorHelper.RED + LocalizationLabel.TIME_LEFT.translate() + ": " + formatTime(timeLeft));
 			}
 
 			if (GeneratedInfo.inDev) {
+                //dev version only, no localization required
 				list.add(ColorHelper.WHITE + "Version: " + (info.hasKey("CartVersion") ? info.getByte("CartVersion") : 0));
 			}
 		}else{
-			list.add("No modules loaded"); //TODO localization
+			list.add(LocalizationLabel.NO_MODULES.translate());
 		}
 	}
 

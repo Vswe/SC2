@@ -39,7 +39,12 @@ public final class LocalizationLabel {
     public static final ILocalizedText MAX_ENGINES = createAdvanced("max_engines");
     public static final ILocalizedText MAX_STORAGE = createAdvanced("max_storage");
     public static final ILocalizedText MAX_ADDONS = createAdvanced("max_addons");
+    public static final ILocalizedText NO_MODULES = createSimple("no_modules");
+    public static final ILocalizedText INCOMPLETE = createSimple("incomplete");
+    public static final ILocalizedText TIME_LEFT = createSimple("time_left");
 
+    public static final ILocalizedText NO_VEHICLE_TYPE = createSimple("no_vehicle_type");
+    public static final ILocalizedText INVALID_VEHICLE_TYPE = createAdvanced("invalid_vehicle_type");
 
     private static final String HEADER = "steves_vehicles:gui.info.label:";
     private static ILocalizedText createSimple(String code) {

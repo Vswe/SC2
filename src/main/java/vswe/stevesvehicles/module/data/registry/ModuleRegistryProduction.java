@@ -56,9 +56,9 @@ public class ModuleRegistryProduction extends ModuleRegistry {
 
 
         ModuleData milker = new ModuleData("milker", ModuleMilker.class, 26);
-        //milker.addShapedRecipe(    Items.redstone,         SIMPLE_PCB,       Items.redstone,
-        //        SIMPLE_PCB,             smelter,          SIMPLE_PCB,
-        //        Items.redstone,         SIMPLE_PCB,       Items.redstone); //TODO add the recipe, forgot to add it
+        milker.addShapedRecipe(     Items.wheat,    Items.wheat,    Items.wheat,
+                                    SIMPLE_PCB,     Items.bucket,   SIMPLE_PCB,
+                                    null,           SIMPLE_PCB,     null);
 
         milker.addVehicles(VehicleRegistry.CART, VehicleRegistry.BOAT);
         milker.addRequirement(ModuleDataGroup.getGroup(ModuleRegistryTravel.CAGE_KEY));

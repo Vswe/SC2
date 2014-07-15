@@ -20,19 +20,9 @@ import java.util.List;
 
 public final class ModuleDataItemHandler {
 
-    //Modules list -> valid/error messages & total cost
-    //ItemStack + ModuleType -> isValid
-    //Module + ModuleType -> isValid
-    //ItemStack + ModuleType.clazz -> isValid
-
-    //Modules list -> vehicle item
-    //VehicleBase -> vehicle item
-
-    //vehicle item -> modules list
-
     public static String checkForErrors(ModuleDataHull hull, ArrayList<ModuleData> modules) {
         if (hull.getValidVehicles() == null || hull.getValidVehicles().isEmpty()) {
-            return "The hull of this vehicle has no vehicle type"; //TODO localization
+            return LocalizationLabel.NO_VEHICLE_TYPE.translate();
         }
 
         VehicleType vehicleType = hull.getValidVehicles().get(0);
@@ -51,7 +41,7 @@ public final class ModuleDataItemHandler {
             ModuleData mod1 = modules.get(i);
 
             if (mod1.getValidVehicles() == null || !mod1.getValidVehicles().contains(vehicle)) {
-                return mod1.getName() + " can't be placed as a part of a " + vehicle.getName(); //TODO localization
+                return LocalizationLabel.INVALID_VEHICLE_TYPE.translate(mod1.getName(), vehicle.getName());
             }
 
             if (mod1.getCost() > hull.getComplexityMax()) {

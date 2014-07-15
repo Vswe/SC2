@@ -16,7 +16,7 @@ public final class LocalizationSweeper {
     public static final ILocalizedText CURRENT_MAP = createAdvanced("current_map");
     public static final ILocalizedText HIGH_SCORE_TITLE = createSimple("high_score_title");
     public static final ILocalizedText HIGH_SCORE_ENTRY = createAdvanced("high_score_entry");
-    public static final ILocalizedText RESTART = createSimple("restart"); //TODO add to lang file
+    public static final ILocalizedText RESTART = createSimple("restart");
 
     private static final String HEADER = "steves_vehicles:gui.arcade.sweeper:";
     private static ILocalizedText createSimple(String code) {

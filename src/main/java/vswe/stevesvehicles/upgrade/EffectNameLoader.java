@@ -108,7 +108,7 @@ public final class EffectNameLoader {
         Upgrade.registerInfo(FuelCostFree.class, new IEffectInfo() {
             @Override
             public String getName(Object... params) {
-                return LocalizationUpgrade.FUEL_COST.translate("0"); //TODO add localization for this one
+                return LocalizationUpgrade.FUEL_COST_FREE.translate();
             }
         });
 
@@ -161,7 +161,7 @@ public final class EffectNameLoader {
         Upgrade.registerInfo(FreeModules.class, new IEffectInfo() {
             @Override
             public String getName(Object... params) {
-                return "Receive free modules from the assembler."; //TODO add localization for this one
+                return LocalizationUpgrade.FREE_MODULES.translate();
             }
         });
     }

@@ -8,6 +8,7 @@ import vswe.stevesvehicles.localization.LocalizedTextSimple;
 public final class LocalizationIndependence {
     public static final ILocalizedText SHIELD_TOGGLE = createAdvanced("divine_shield.toggle");
     public static final ILocalizedText EXPLOSIVES_TITLE = createSimple("dynamite_carrier.title");
+    public static final ILocalizedText CHUNK = createAdvanced("chunk_loader.message");
 
     private static final String HEADER = "steves_vehicles:gui.common.independence:";
     private static ILocalizedText createSimple(String code) {

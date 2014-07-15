@@ -28,6 +28,47 @@ steves_vehicles:gui.assembler:no_hull=You have no hull
 steves_vehicles:gui.assembler:invalid_hull_short=The hull added is not a hull!
 steves_vehicles:gui.assembler:busy_assembler=The Assembler is busy!
 steves_vehicles:gui.assembler:occupied_departure_bay=There's a Cart in the Departure Bay.
+steves_vehicles:gui.assembler:assemble=Assemble
+steves_vehicles:gui.assembler:modify=Modify
+steves_vehicles:gui.assembler:engines=Engines
+steves_vehicles:gui.assembler:tool=Tool
+steves_vehicles:gui.assembler:attachments=Attachments
+steves_vehicles:gui.assembler:storage=Storage
+steves_vehicles:gui.assembler:addons=Addons
+steves_vehicles:gui.assembler:information=Information
+
+steves_vehicles:gui.assembler:recipe.vehicle_title=SV Vehicle Recipe
+steves_vehicles:gui.assembler:recipe.shaped_title=SV Shaped Crafting
+steves_vehicles:gui.assembler:recipe.shapeless_title=SV Shapeless Crafting
+steves_vehicles:gui.assembler:recipe.fuel=Fuel
+steves_vehicles:gui.assembler:recipe.capacity=Capacity
+steves_vehicles:gui.assembler:recipe.time=Time
+
+steves_vehicles:gui.assembler:search_relaxed=Relaxed
+steves_vehicles:gui.assembler:search_normal=Normal
+steves_vehicles:gui.assembler:search_strict=Strict
+steves_vehicles:gui.assembler:search_page=Page
+
+steves_vehicles:gui.assembler:info.background=Background
+steves_vehicles:gui.assembler:info.chest=Chest
+steves_vehicles:gui.assembler:info.invisible=Invisible
+steves_vehicles:gui.assembler:info.brake=Brake
+steves_vehicles:gui.assembler:info.drill=Drill
+steves_vehicles:gui.assembler:info.light=Light
+steves_vehicles:gui.assembler:info.bridge=Bridge
+steves_vehicles:gui.assembler:info.farm=Farm
+steves_vehicles:gui.assembler:info.cutting=Cutting
+steves_vehicles:gui.assembler:info.liquid=Liquid
+steves_vehicles:gui.assembler:info.fuse=Fuse
+steves_vehicles:gui.assembler:info.rails=Rails
+steves_vehicles:gui.assembler:info.explosives=Explosives
+steves_vehicles:gui.assembler:info.explode=Explode
+steves_vehicles:gui.assembler:info.shield=Shield
+steves_vehicles:gui.assembler:info.torches=Torches
+steves_vehicles:gui.assembler:info.barrels=Barrels
+steves_vehicles:gui.assembler:info.barrel=Barrel
+
+
 
 
 # Cargo manager and Liquid manager shared gui localization
@@ -203,8 +244,9 @@ steves_vehicles:gui.state.storage:tank_spare=Is there any completely empty tank
 #				ITEMS
 # ======================================
 
-# Carts
+# Vehicles
 steves_vehicles:item.vehicle:cart.name=Modular cart
+steves_vehicles:item.vehicle:boat.name=Modular boat
 
 # Modules
 steves_vehicles:item.common:unknown_module.name=Unknown SC2 module
@@ -305,9 +347,15 @@ steves_vehicles:item.common.production:smelter.name=Smelter
 steves_vehicles:item.common.production:advanced_crafter.name=Advanced Crafter
 steves_vehicles:item.common.production:advanced_smelter.name=Advanced Smelter
 steves_vehicles:item.common.production:milker.name=Milker
+steves_vehicles:item.common.barrel:basic_barrel.name=Small Barrel
+steves_vehicles:item.common.barrel:normal_barrel.name=Barrel
+steves_vehicles:item.common.barrel:large_barrel.name=Large Barrel
 
 # Components
-steves_vehicles:item.component:unknown_component.name=Unknown SC2 Component
+steves_vehicles:item.component:unknown_component=Component id [%1]
+steves_vehicles:item.component:unknown_component_id=Unknown component id
+steves_vehicles:item.component:unknown_component.name=Unknown SV Component
+
 steves_vehicles:item.component:wooden_wheels.name=Wooden Wheels
 steves_vehicles:item.component:iron_wheels.name=Iron Wheels
 steves_vehicles:item.component:red_pigment.name=Red Pigment
@@ -424,6 +472,7 @@ steves_vehicles:tile.upgrade.production:new_era.name=Upgrade: New Era
 steves_vehicles:tile.upgrade.production:quick_demolisher.name=Upgrade: Quick Demolisher
 steves_vehicles:tile.upgrade.production:entropy.name=Upgrade: Entropy
 steves_vehicles:tile.upgrade.production:creative_mode.name=Upgrade: Creative Mode
+steves_vehicles:tile.upgrade.production:creative_mode_deluxe.name=Upgrade: Creative Mode - Deluxe!
 steves_vehicles:tile.upgrade.control:module_input.name=Upgrade: Module input
 steves_vehicles:tile.upgrade.control:production_line.name=Upgrade: Production line
 steves_vehicles:tile.upgrade.control:cart_deployer.name=Upgrade: Cart Deployer
@@ -464,6 +513,8 @@ steves_vehicles:gui.info.group:entity=[%1:Entity Detector|Entity Detectors]
 steves_vehicles:gui.info.group:shooter=[%1:Shooter|Shooters]
 steves_vehicles:gui.info.group:tool=[%1:Tool|Tools]
 steves_vehicles:gui.info.group:tool_shooter=[%1:Tool|Tools] or [%1:Shooter|Shooters]
+steves_vehicles:gui.info.group:seat=[%1:Seat|Seats]
+steves_vehicles:gui.info.group:cage=[%1:Cage|Cages]
 
 # Messages
 steves_vehicles:gui.info.message:thunder_pig=In memory of Vswe's Thunderpig arena victory. Thanks everyone who donated during the 2013 Minecraft Marathon
@@ -506,30 +557,37 @@ steves_vehicles:gui.info.label:missing_vehicle_error=This module isn't valid for
 steves_vehicles:gui.info.label:capacity=Modular capacity: [%1]
 steves_vehicles:gui.info.label:complexity_cap=Module complexity cap: [%1]
 steves_vehicles:gui.info.label:max_engines=Max engines count: [%1]
-steves_vehicles:gui.info.label:max_addons=Max Addon count: [%1]
+steves_vehicles:gui.info.label:max_addons=Max addon count: [%1]
+steves_vehicles:gui.info.label:max_storage=Max storage count: [%1]
+steves_vehicles:gui.info.label:no_modules=No modules loaded
+steves_vehicles:gui.info.label:incomplete=Incomplete vehicle!
+steves_vehicles:gui.info.label:time_left=Time left
+steves_vehicles:gui.info.label:no_vehicle_type=The hull of this vehicle has no vehicle type
+steves_vehicles:gui.info.label::invalid_vehicle_type=[%1] can't be placed as a part of a [%2]
 
 # ======================================
 #				UPGRADES
 # ======================================
 
-steves_vehicles:gui.info.upgrade:blueprint=Enable the use of Blueprint carts.
-steves_vehicles:gui.info.upgrade:combustion=Enabled standard fuel sources.
-steves_vehicles:gui.info.upgrade:deployer=Enables deployment of finished carts.
-steves_vehicles:gui.info.upgrade:disassemble=Allows you to disassemble and modify carts.
-steves_vehicles:gui.info.upgrade:fuel_capacity=Fuel capacity [%1].
-steves_vehicles:gui.info.upgrade:fuel_cost=Fuel cost [%1]%.
-steves_vehicles:gui.info.upgrade:input_chest=Input Chest with [%1] slots.
-steves_vehicles:gui.info.upgrade:manager=Connects the Assembler with a Manager.
-steves_vehicles:gui.info.upgrade:generator=Generate [%1] [%2:unit|units] of power per minute.
-steves_vehicles:gui.info.upgrade:redstone=Enables redstone controlled assembling.
-steves_vehicles:gui.info.upgrade:solar=Generate power while in the sun.
-steves_vehicles:gui.info.upgrade:thermal=Power the Cart Assembler with lava in internal tank.
-steves_vehicles:gui.info.upgrade:time_flat=Module assembling time [%1] [%1:second|seconds].
-steves_vehicles:gui.info.upgrade:time_flat_cart=Cart assembling time [%1] [%1:second|seconds].
-steves_vehicles:gui.info.upgrade:time_flat_remove=Module disassembling time [%1] [%1:second|seconds].
+steves_vehicles:gui.info.upgrade:blueprint=Enable the use of Blueprint carts
+steves_vehicles:gui.info.upgrade:combustion=Enabled standard fuel sources
+steves_vehicles:gui.info.upgrade:deployer=Enables deployment of finished carts
+steves_vehicles:gui.info.upgrade:disassemble=Allows you to disassemble and modify carts
+steves_vehicles:gui.info.upgrade:fuel_capacity=Fuel capacity [%1]
+steves_vehicles:gui.info.upgrade:fuel_cost=Fuel cost [%1]%
+steves_vehicles:gui.info.upgrade:fuel_cost_free=Removes the fuel cost
+steves_vehicles:gui.info.upgrade:input_chest=Input Chest with [%1] slots
+steves_vehicles:gui.info.upgrade:manager=Connects the Assembler with a Manager
+steves_vehicles:gui.info.upgrade:generator=Generate [%1] [%2:unit|units] of power per minute
+steves_vehicles:gui.info.upgrade:redstone=Enables redstone controlled assembling
+steves_vehicles:gui.info.upgrade:solar=Generate power while in the sun
+steves_vehicles:gui.info.upgrade:thermal=Power the Cart Assembler with lava in internal tank
+steves_vehicles:gui.info.upgrade:time_flat=Module assembling time [%1] [%1:second|seconds]
+steves_vehicles:gui.info.upgrade:time_flat_cart=Cart assembling time [%1] [%1:second|seconds]
+steves_vehicles:gui.info.upgrade:time_flat_remove=Module disassembling time [%1] [%1:second|seconds]
 steves_vehicles:gui.info.upgrade:transposer=Can pick up carts for modifying
-steves_vehicles:gui.info.upgrade:efficiency=Assembling efficiency [%1]%.
-
+steves_vehicles:gui.info.upgrade:efficiency=Assembling efficiency [%1]%
+steves_vehicles:gui.info.upgrade:free_modules=Receive free modules from the assembler
 
 # ======================================
 #				MODULES
@@ -581,8 +639,13 @@ steves_vehicles:gui.common.production:common.disabled=Don't produce anything
 steves_vehicles:gui.common.production:common.change_limit=[%1->Increase|Decrease] items to keep stocked.
 steves_vehicles:gui.common.production:common.change_limit_ten=Shift click to change by 10.
 steves_vehicles:gui.common.production:common.change_limit_stack=Ctrl click to change by 64.
+steves_vehicles:gui.common.production:common.infinite=Inf
 steves_vehicles:gui.common.independence:divine_shield.toggle=[%1->Activate|Deactivate] shield
 steves_vehicles:gui.common.visual:color_randomizer.randomize=Randomize Color
+steves_vehicles:gui.common.independence:chunk_loader.message=[%1->Activate|Deactivate] chunk loading
+steves_vehicles:gui.common.util:enchanter.left=[%1]% left of this tier
+steves_vehicles:gui.common.travel:arcade.pages=Page [%1] of [%2]
+steves_vehicles:gui.common.travel:arcade.exit=Exit
 
 # Engines
 steves_vehicles:gui.common.engines:creative_engine.power=Power Level: [%1]
@@ -652,6 +715,21 @@ steves_vehicles:gui.common.visual:note_sequencer.remove_note=Remove rightmost no
 steves_vehicles:gui.common.visual:note_sequencer.volume=Track volume: [%1->Muted|Low|Medium|High]
 steves_vehicles:gui.common.travel:seat.message=[%1->This cart is occupied|Mount cart|Dismount cart]
 steves_vehicles:gui.cart.travel:advanced_control_system.reset_trip=Reset trip-meter
+steves_vehicles:gui.cart.rails:torch_placer.light=Threshold: [%1] Current: [%2]
+
+
+#Storage
+steves_vehicles:gui.common.barrel:common.empty=This barrel is empty
+steves_vehicles:gui.common.barrel:common.full=This barrel is completely filled
+steves_vehicles:gui.common.barrel:common.filled_percentage=This barrel is [%1] filled
+steves_vehicles:gui.common.barrel:common.filled_amount=That's [%1] / [%2] items
+steves_vehicles:gui.common.barrel:common.filled_amount_stacks=or [%1] stacks and [%2] items
+steves_vehicles:gui.common.barrel:common.stacks=This barrel can hold [%1] stacks
+steves_vehicles:gui.common.barrel:common.stack_size=With a stack size of [%1] that's [%2] items
+steves_vehicles:gui.common.barrel:common.locked=This barrel is locked
+steves_vehicles:gui.common.barrel:common.unlock=Click to unlock
+steves_vehicles:gui.common.barrel:common.lock=Click to lock to this item
+
 
 # ======================================
 #				Steve's Arcade
@@ -665,6 +743,7 @@ steves_vehicles:gui.arcade.invaders:shoot=Shoot
 steves_vehicles:gui.arcade.invaders:left=Move left
 steves_vehicles:gui.arcade.invaders:right=Move right
 steves_vehicles:gui.arcade.invaders:restart=Restart
+
 steves_vehicles:gui.arcade.sweeper:title=Creeper Sweeper
 steves_vehicles:gui.arcade.sweeper:map_tiny=Tiny
 steves_vehicles:gui.arcade.sweeper:map_medium=Medium
@@ -675,11 +754,19 @@ steves_vehicles:gui.arcade.sweeper:change_map=Change map size
 steves_vehicles:gui.arcade.sweeper:current_map=Current [%1]
 steves_vehicles:gui.arcade.sweeper:high_score_title=High Scores
 steves_vehicles:gui.arcade.sweeper:high_score_entry=[%1]: [%2]s
+steves_vehicles:gui.arcade.sweeper:restart=Restart
+
 steves_vehicles:gui.arcade.stacker:title=Mob Stacker
 steves_vehicles:gui.arcade.stacker:removed=Removed lines: [%1]
 steves_vehicles:gui.arcade.stacker:removed_combo=Removed [%1->single|double|triple|quadruple] lines: [%2]
 steves_vehicles:gui.arcade.stacker:rotate=Rotate
 steves_vehicles:gui.arcade.stacker:drop=Drop
+steves_vehicles:gui.arcade.stacker:score=Score: [%1]
+steves_vehicles:gui.arcade.stacker:high_score=High Score: [%1]
+steves_vehicles:gui.arcade.stacker:left=Move left
+steves_vehicles:gui.arcade.stacker:right=Move right
+steves_vehicles:gui.arcade.stacker:reset=Reset
+
 steves_vehicles:gui.arcade.track:title=Track Operator
 steves_vehicles:gui.arcade.track:save_error=Failed to save
 steves_vehicles:gui.arcade.track:save_message=Save

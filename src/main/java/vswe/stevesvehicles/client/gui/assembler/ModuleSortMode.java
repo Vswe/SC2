@@ -3,6 +3,8 @@ package vswe.stevesvehicles.client.gui.assembler;
 
 import net.minecraft.item.ItemStack;
 import vswe.stevesvehicles.container.slots.SlotAssembler;
+import vswe.stevesvehicles.localization.ILocalizedText;
+import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataGroup;
 import vswe.stevesvehicles.module.data.ModuleDataHull;
@@ -14,13 +16,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum ModuleSortMode {
-    RELAXED {
+    RELAXED(LocalizationAssembler.SEARCH_RELAXED) {
         @Override
         public boolean isValid(TileEntityCartAssembler assembler, ModuleDataHull hull, ModuleData moduleData) {
             return true;
         }
     },
-    NORMAL {
+    NORMAL(LocalizationAssembler.SEARCH_NORMAL) {
         @Override
         public boolean isValid(TileEntityCartAssembler assembler, ModuleDataHull hull, ModuleData moduleData) {
             moduleRecursiveCache.clear();
@@ -73,7 +75,7 @@ public enum ModuleSortMode {
             }
         }
     },
-    STRICT {
+    STRICT(LocalizationAssembler.SEARCH_STRICT) {
         @Override
         public boolean isValid(TileEntityCartAssembler assembler, ModuleDataHull hull, ModuleData moduleData) {
             if (!doesModuleDataFit(assembler, moduleData)) {
@@ -99,9 +101,15 @@ public enum ModuleSortMode {
     }
 
 
+    private ILocalizedText name;
+
+    ModuleSortMode(ILocalizedText name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
-        return super.toString().charAt(0) + super.toString().toLowerCase().substring(1); //TODO localize
+        return name.translate();
     }
 
     public abstract boolean isValid(TileEntityCartAssembler assembler, ModuleDataHull hull, ModuleData moduleData);

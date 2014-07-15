@@ -18,6 +18,7 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import vswe.stevesvehicles.client.gui.screen.GuiCartAssembler;
 import vswe.stevesvehicles.container.slots.SlotAssemblerFuel;
+import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataHull;
 import vswe.stevesvehicles.module.data.ModuleType;
@@ -177,7 +178,7 @@ public abstract class RecipeHandlerVehicle extends TemplateRecipeHandler {
 
     @Override
     public String getRecipeName() {
-        return "SV Vehicle Recipe";
+        return LocalizationAssembler.VEHICLE_RECIPE_TITLE.translate();
     }
 
     private RenderItem renderItem = new RenderItem();
@@ -268,13 +269,13 @@ public abstract class RecipeHandlerVehicle extends TemplateRecipeHandler {
             fontRenderer.drawString(row.box.getName().translate().toUpperCase(), targetX, targetY, row.box.getColor());
         }
 
-        fontRenderer.drawString("Capacity", COST_X, COST_Y, 0x404040); //TODO localize
+        fontRenderer.drawString(LocalizationAssembler.CAPACITY_RECIPE.translate(), COST_X, COST_Y, 0x404040);
         fontRenderer.drawString(String.valueOf(recipe.getModularCost()), COST_X, COST_Y + fontRenderer.FONT_HEIGHT, 0x404040);
 
-        fontRenderer.drawString("Time", ASSEMBLY_X, ASSEMBLY_Y, 0x404040); //TODO localize
+        fontRenderer.drawString(LocalizationAssembler.TIME_RECIPE.translate(), ASSEMBLY_X, ASSEMBLY_Y, 0x404040);
         fontRenderer.drawString(GuiCartAssembler.formatTime(recipe.getAssemblyTime()), ASSEMBLY_X, ASSEMBLY_Y + fontRenderer.FONT_HEIGHT, 0x404040);
 
-        fontRenderer.drawString("Fuel", FUEL_X, FUEL_Y, 0x404040); //TODO localize
+        fontRenderer.drawString(LocalizationAssembler.FUEL_RECIPE.translate(), FUEL_X, FUEL_Y, 0x404040);
         String str = String.valueOf(recipe.getCoalAmount());
         fontRenderer.drawString(str, COAL_X - fontRenderer.getStringWidth(str) - 1, FUEL_Y + fontRenderer.FONT_HEIGHT, 0x404040);
     }

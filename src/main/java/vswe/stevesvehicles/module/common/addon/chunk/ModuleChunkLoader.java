@@ -3,6 +3,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.module.LocalizationIndependence;
 import vswe.stevesvehicles.module.common.addon.ModuleAddon;
 import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.vehicle.VehicleBase;
@@ -106,11 +107,7 @@ public class ModuleChunkLoader extends ModuleAddon implements IActivatorModule{
 
 
 	private String getStateName() {
-		if (!isLoadingChunk()) {
-			return "Activate chunk loading"; //TODO localization
-		}else{
-			return "Deactivate chunk loading";
-		}
+        return LocalizationIndependence.CHUNK.translate(isLoadingChunk() ? "1" : "0");
 	}
 
 	@Override

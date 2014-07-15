@@ -13,8 +13,7 @@ import vswe.stevesvehicles.arcade.sweeper.ArcadeSweeper;
 import vswe.stevesvehicles.arcade.tetris.ArcadeTetris;
 import vswe.stevesvehicles.arcade.tracks.ArcadeTracks;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
-import vswe.stevesvehicles.localization.ILocalizedText;
-import vswe.stevesvehicles.localization.LocalizedTextAdvanced;
+import vswe.stevesvehicles.localization.entry.module.LocalizationTravel;
 import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
 import vswe.stevesvehicles.arcade.ArcadeGame;
 import vswe.stevesvehicles.network.DataReader;
@@ -117,13 +116,13 @@ public class ModuleArcade extends ModuleAttachment {
 
             if (games.size() > GAMES_PER_PAGE) {
                 int pages = (int)Math.ceil((float) games.size() / GAMES_PER_PAGE);
-                drawString(gui, temp.translate(String.valueOf(currentPage + 1), String.valueOf(pages)), ARROW_X + ARROW_WIDTH, ARROW_Y + 5, ARROW_SPACE_WIDTH, true, 0x404040);
+                drawString(gui, LocalizationTravel.ARCADE_PAGES.translate(String.valueOf(currentPage + 1), String.valueOf(pages)), ARROW_X + ARROW_WIDTH, ARROW_Y + 5, ARROW_SPACE_WIDTH, true, 0x404040);
             }
 		}
 	}
 	
     private int currentPage;
-    private ILocalizedText temp = new LocalizedTextAdvanced("Page [%1] of [%2]"); //TODO localize
+
 
     private static final int GAMES_PER_PAGE = 4;
     private static final int ARROW_SRC_X = 35;
@@ -193,7 +192,7 @@ public class ModuleArcade extends ModuleAttachment {
 	@SideOnly(Side.CLIENT)
 	public void drawMouseOver(GuiVehicle gui, int x, int y) {
 		if (isGameActive()) {
-			drawStringOnMouseOver(gui, "Exit", x, y, EXIT_AREA); //TODO localize
+			drawStringOnMouseOver(gui, LocalizationTravel.ARCADE_EXIT.translate(), x, y, EXIT_AREA);
 			currentGame.drawMouseOver(gui, x, y);
 		}
 	}	

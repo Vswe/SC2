@@ -20,7 +20,6 @@ import vswe.stevesvehicles.client.gui.assembler.ModuleSortMode;
 import vswe.stevesvehicles.client.gui.assembler.SimulationInfo;
 import vswe.stevesvehicles.client.gui.assembler.SimulationInfoInteger;
 import vswe.stevesvehicles.client.gui.assembler.TitleBox;
-import vswe.stevesvehicles.localization.PlainText;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.nbt.NBTHelper;
@@ -267,13 +266,12 @@ public class TileEntityCartAssembler extends TileEntityBase
     public static final int MAX_STORAGE_SLOTS = 6;
     public static final int MAX_ADDON_SLOTS = 12;
 
-    //TODO localize these
-    public static final TitleBox ENGINE_BOX = new TitleBox(new PlainText("Engines"), 65, 0xF7941D);
-    public static final TitleBox TOOL_BOX = new TitleBox(new PlainText("Tool"), 100, 0x662D91);
-    public static final TitleBox ATTACH_BOX = new TitleBox(new PlainText("Attachments"), 135, 0x005B7F);
-    public static final TitleBox STORAGE_BOX = new TitleBox(new PlainText("Storage"), 170, 0x9E0B0E);
-    public static final TitleBox ADDON_BOX = new TitleBox(new PlainText("Addons"), 205, 0x005826);
-    public static final TitleBox INFO_BOX = new TitleBox(new PlainText("Information"), 375, 30, 0xCCBE00);
+    public static final TitleBox ENGINE_BOX = new TitleBox(LocalizationAssembler.TITLE_ENGINES, 65, 0xF7941D);
+    public static final TitleBox TOOL_BOX = new TitleBox(LocalizationAssembler.TITLE_TOOL, 100, 0x662D91);
+    public static final TitleBox ATTACH_BOX = new TitleBox(LocalizationAssembler.TITLE_ATTACHMENTS, 135, 0x005B7F);
+    public static final TitleBox STORAGE_BOX = new TitleBox(LocalizationAssembler.TITLE_STORAGE, 170, 0x9E0B0E);
+    public static final TitleBox ADDON_BOX = new TitleBox(LocalizationAssembler.TITLE_ADDONS, 205, 0x005826);
+    public static final TitleBox INFO_BOX = new TitleBox(LocalizationAssembler.TITLE_INFORMATION, 375, 30, 0xCCBE00);
 
 
     public TileEntityCartAssembler() {

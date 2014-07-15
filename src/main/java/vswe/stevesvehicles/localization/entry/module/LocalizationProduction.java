@@ -16,6 +16,7 @@ public final class LocalizationProduction {
     public static final ILocalizedText CHANGE_LIMIT = createAdvanced("change_limit");
     public static final ILocalizedText CHANGE_LIMIT_TEN = createSimple("change_limit_ten");
     public static final ILocalizedText CHANGE_LIMIT_STACK = createSimple("change_limit_stack");
+    public static final ILocalizedText INFINITE = createSimple("infinite");
 
     private static final String HEADER = "steves_vehicles:gui.common.production:common.";
     private static ILocalizedText createSimple(String code) {

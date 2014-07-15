@@ -1,6 +1,7 @@
 package vswe.stevesvehicles.module.common.addon.enchanter;
 
 import vswe.stevesvehicles.client.gui.ColorHelper;
+import vswe.stevesvehicles.localization.entry.module.LocalizationUtility;
 
 public class EnchantmentData {
 
@@ -80,7 +81,7 @@ public class EnchantmentData {
 		
 		
 
-		return ColorHelper.YELLOW + getEnchantment().getEnchantment().getTranslatedName(getLevel()) + "\n" + percentage + "% left of this tier"; //TODO localize
+		return ColorHelper.YELLOW + getEnchantment().getEnchantment().getTranslatedName(getLevel()) + "\n" + LocalizationUtility.ENCHANTER_LEFT.translate(String.valueOf(percentage));
 	}
 
 

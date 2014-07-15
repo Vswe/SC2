@@ -347,7 +347,7 @@ public class GuiCartAssembler extends GuiBase {
 		}
 		
 		drawTexturedModalRect(left + ASSEMBLE_RECT[0], top + ASSEMBLE_RECT[1], srcX, srcY, ASSEMBLE_RECT[2], ASSEMBLE_RECT[3]);
-        ILocalizedText buttonText = isDisassembling ? new PlainText("Modify") :  new PlainText("Assemble"); //TODO localize
+        ILocalizedText buttonText = isDisassembling ? LocalizationAssembler.MODIFY :  LocalizationAssembler.ASSEMBLE;
         String str = buttonText.translate().toUpperCase();
         int textWidth = getFontRenderer().getStringWidth(str);
         getFontRenderer().drawString(str, left + ASSEMBLE_RECT[0] + (ASSEMBLE_RECT[2] - textWidth) / 2, top + ASSEMBLE_RECT[1] + 2, color);
@@ -424,6 +424,7 @@ public class GuiCartAssembler extends GuiBase {
 
 
                 if (hover) {
+                    //noinspection unchecked
                     List<String> info = item.getTooltip(this.mc.thePlayer, mc.gameSettings.advancedItemTooltips);
                     drawMouseOver(info, x, y);
                 }
@@ -435,7 +436,7 @@ public class GuiCartAssembler extends GuiBase {
 
             drawArrowSetting(left + MODULE_ARROW_MODE_X, top + MODULE_ARROW_SETTING_Y, assembler.sortMode.toString(), x, y);
             if (modulePageCount > 1) {
-                drawArrowSetting(left + MODULE_ARROW_PAGE_X, top + MODULE_ARROW_SETTING_Y, "Page " + (currentModulePage + 1), x, y); //TODO localize
+                drawArrowSetting(left + MODULE_ARROW_PAGE_X, top + MODULE_ARROW_SETTING_Y, LocalizationAssembler.SEARCH_PAGE.translate() + " " + (currentModulePage + 1), x, y);
             }
 
         }

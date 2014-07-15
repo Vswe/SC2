@@ -11,11 +11,11 @@ public final class LocalizationStacker {
     public static final ILocalizedText REMOVED_COMBO = createAdvanced("removed_combo");
     public static final ILocalizedText ROTATE = createSimple("rotate");
     public static final ILocalizedText DROP = createSimple("drop");
-    public static final ILocalizedText HIGH_SCORE = createSimple("high_score"); //TODO add to lang file
-    public static final ILocalizedText SCORE = createSimple("score"); //TODO add to lang file
-    public static final ILocalizedText RIGHT = createSimple("right"); //TODO add to lang file
-    public static final ILocalizedText LEFT = createSimple("left"); //TODO add to lang file
-    public static final ILocalizedText RESET = createSimple("reset"); //TODO add to lang file
+    public static final ILocalizedText HIGH_SCORE = createAdvanced("high_score");
+    public static final ILocalizedText SCORE = createAdvanced("score");
+    public static final ILocalizedText RIGHT = createSimple("right");
+    public static final ILocalizedText LEFT = createSimple("left");
+    public static final ILocalizedText RESET = createSimple("reset");
 
     private static final String HEADER = "steves_vehicles:gui.arcade.stacker:";
     private static ILocalizedText createSimple(String code) {

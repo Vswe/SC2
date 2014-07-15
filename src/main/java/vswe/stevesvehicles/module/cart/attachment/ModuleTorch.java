@@ -10,6 +10,7 @@ import vswe.stevesvehicles.client.gui.assembler.SimulationInfo;
 import vswe.stevesvehicles.client.gui.assembler.SimulationInfoMultiBoolean;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
+import vswe.stevesvehicles.localization.entry.module.cart.LocalizationCartRails;
 import vswe.stevesvehicles.module.cart.ModuleWorker;
 import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.network.DataWriter;
@@ -152,7 +153,7 @@ public class ModuleTorch extends ModuleWorker implements ISuppliesModule  {
 
 	@Override
 	public void drawMouseOver(GuiVehicle gui, int x, int y) {
-		drawStringOnMouseOver(gui, "Threshold: " + lightLimit + " Current: " + light, x,y, boxRect); //TODO localize
+		drawStringOnMouseOver(gui, LocalizationCartRails.TORCH.translate(String.valueOf(lightLimit), String.valueOf(light)), x,y, boxRect);
 	}	
 	
 	@Override

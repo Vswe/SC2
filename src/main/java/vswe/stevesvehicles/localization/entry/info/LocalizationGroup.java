@@ -15,8 +15,8 @@ public class LocalizationGroup {
     public static final ILocalizedText SHOOTER = createAdvanced("shooter");
     public static final ILocalizedText TOOL = createAdvanced("tool");
     public static final ILocalizedText TOOL_SHOOTER = createAdvanced("tool_shooter");
-    public static final ILocalizedText SEAT = createAdvanced("seat"); //TODO add to lang file
-    public static final ILocalizedText CAGE = createAdvanced("cage"); //TODO add to lang file
+    public static final ILocalizedText SEAT = createAdvanced("seat");
+    public static final ILocalizedText CAGE = createAdvanced("cage");
 
     private static final String HEADER = "steves_vehicles:gui.info.group:";
     private static ILocalizedText createAdvanced(String code) {

@@ -1,6 +1,7 @@
 package vswe.stevesvehicles.recipe.nei;
 
 
+import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.recipe.ModuleRecipe;
 import vswe.stevesvehicles.recipe.ModuleRecipeShaped;
 
@@ -45,7 +46,7 @@ public class RecipeHandlerModuleShaped extends RecipeHandlerModule {
 
     @Override
     public String getRecipeName() {
-        return "SV Shaped Crafting";
+        return LocalizationAssembler.SHAPED_RECIPE_TITLE.translate();
     }
 
     @Override

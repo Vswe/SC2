@@ -83,7 +83,7 @@ public abstract class ModuleRecipe extends ModuleAddon {
 			
 			switch(mode) {
 				case 0:
-					str = "Inf"; //TODO localization
+					str = LocalizationProduction.INFINITE.translate();
 					break;
 				case 1:
 					str = String.valueOf(maxItemCount);
