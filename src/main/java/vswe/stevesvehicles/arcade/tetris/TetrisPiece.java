@@ -2,7 +2,7 @@ package vswe.stevesvehicles.arcade.tetris;
 
 import vswe.stevesvehicles.arcade.ArcadeGame;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
-import vswe.stevesvehicles.old.StevesVehicles;
+import vswe.stevesvehicles.StevesVehicles;
 
 public class TetrisPiece {
 

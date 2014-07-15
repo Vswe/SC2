@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Vec3;
 import vswe.stevesvehicles.client.gui.assembler.SimulationInfo;
 import vswe.stevesvehicles.client.gui.assembler.SimulationInfoMultiBoolean;
@@ -13,7 +14,7 @@ import vswe.stevesvehicles.module.cart.ModuleWorker;
 import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.module.ISuppliesModule;
 import vswe.stevesvehicles.container.slots.SlotBase;
 import vswe.stevesvehicles.container.slots.SlotTorch;
@@ -124,9 +125,11 @@ public class ModuleTorch extends ModuleWorker implements ISuppliesModule  {
 	private int light;
 	private int lightLimit = 8;
 
+    private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/torch.png");
+
 	@Override
 	public void drawBackground(GuiVehicle gui, int x, int y) {
-		ResourceHelper.bindResource("/gui/torch.png");
+		ResourceHelper.bindResource(TEXTURE);
 
 		int barLength = 3 * light;
 		if (light == 15) {

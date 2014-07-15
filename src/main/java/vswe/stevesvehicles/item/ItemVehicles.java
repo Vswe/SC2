@@ -11,15 +11,15 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
-import vswe.stevesvehicles.old.StevesVehicles;
+import vswe.stevesvehicles.module.data.ModuleDataPair;
+import vswe.stevesvehicles.StevesVehicles;
 import vswe.stevesvehicles.util.Tuple;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 import vswe.stevesvehicles.vehicle.VehicleType;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.vehicle.version.VehicleVersion;
-import vswe.stevesvehicles.old.Helpers.ColorHelper;
-import vswe.stevesvehicles.old.Helpers.GeneratedInfo;
-import vswe.stevesvehicles.old.Helpers.ModuleCountPair;
+import vswe.stevesvehicles.client.gui.ColorHelper;
+import vswe.stevesvehicles.GeneratedInfo;
 import vswe.stevesvehicles.module.data.ModuleData;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -124,14 +124,14 @@ public class ItemVehicles extends Item {
     private void addInfo(List<Tuple<ModuleData, NBTTagCompound>> modules, List list, ColorHelper color) {
         if (modules != null) {
 
-            ArrayList<ModuleCountPair> counts = new ArrayList<ModuleCountPair>();
+            ArrayList<ModuleDataPair> counts = new ArrayList<ModuleDataPair>();
 
             for (Tuple<ModuleData, NBTTagCompound> moduleTuple : modules) {
                 ModuleData module = moduleTuple.getFirstObject();
                 NBTTagCompound moduleCompound = moduleTuple.getSecondObject();
                 boolean found = false;
                 if (module.hasExtraData()) {
-                    for (ModuleCountPair count : counts) {
+                    for (ModuleDataPair count : counts) {
                         if (count.isContainingData(module)) {
                             count.increase();
                             found = true;
@@ -141,7 +141,7 @@ public class ItemVehicles extends Item {
                 }
 
                 if (!found) {
-                    ModuleCountPair count = new ModuleCountPair(module);
+                    ModuleDataPair count = new ModuleDataPair(module);
                     if (module.hasExtraData()) {
                         count.setExtraData(moduleCompound);
                     }
@@ -149,7 +149,7 @@ public class ItemVehicles extends Item {
                 }
             }
 
-            for (ModuleCountPair count : counts) {
+            for (ModuleDataPair count : counts) {
                 if (color != null) {
                     list.add(color + count.toString());
                 }else{

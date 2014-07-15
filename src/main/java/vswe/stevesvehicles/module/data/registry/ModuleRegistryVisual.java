@@ -16,7 +16,7 @@ import vswe.stevesvehicles.module.common.attachment.ModuleFirework;
 import vswe.stevesvehicles.module.common.attachment.ModuleNote;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 
-import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
+import static vswe.stevesvehicles.item.ComponentTypes.*;
 
 public class ModuleRegistryVisual extends ModuleRegistry {
     public ModuleRegistryVisual() {

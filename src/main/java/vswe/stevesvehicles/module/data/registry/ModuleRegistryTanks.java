@@ -19,7 +19,7 @@ import vswe.stevesvehicles.module.common.storage.tank.ModuleSideTanks;
 import vswe.stevesvehicles.module.common.storage.tank.ModuleTopTank;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 
-import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
+import static vswe.stevesvehicles.item.ComponentTypes.*;
 
 public class ModuleRegistryTanks extends ModuleRegistry {
 

@@ -24,13 +24,13 @@ import vswe.stevesvehicles.module.common.addon.projectile.ModulePotion;
 import vswe.stevesvehicles.module.common.addon.projectile.ModuleSnowball;
 import vswe.stevesvehicles.module.common.attachment.ModuleShooter;
 import vswe.stevesvehicles.module.common.attachment.ModuleShooterAdvanced;
-import vswe.stevesvehicles.old.Helpers.HolidayType;
-import vswe.stevesvehicles.old.StevesVehicles;
+import vswe.stevesvehicles.holiday.HolidayType;
+import vswe.stevesvehicles.StevesVehicles;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 
 import java.util.ArrayList;
 
-import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
+import static vswe.stevesvehicles.item.ComponentTypes.*;
 
 
 public class ModuleRegistryShooters extends ModuleRegistry {

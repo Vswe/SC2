@@ -2,12 +2,13 @@ package vswe.stevesvehicles.module.cart.addon.cultivation;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.module.cart.LocalizationCartCultivationUtil;
 import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.module.common.addon.ModuleAddon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -47,13 +48,14 @@ public class ModulePlantSize extends ModuleAddon {
 	@Override
 	public void drawForeground(GuiVehicle gui) {
 	    drawString(gui, LocalizationCartCultivationUtil.PLANTER_RANGE_TITLE.translate(), 8, 6, 0x404040);
-	}	
-		
+	}
+
+    private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/plant_size.png");
 	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawBackground(GuiVehicle gui, int x, int y) {
-		ResourceHelper.bindResource("/gui/plant_size.png");
+		ResourceHelper.bindResource(TEXTURE);
 
 		int srcX = 1 + ((size - 1) % 5) * 45;
 		int srcY = 1 + ((size - 1) / 5 + 1) * 45;

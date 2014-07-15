@@ -2,9 +2,9 @@ package vswe.stevesvehicles.client.gui.detector;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import vswe.stevesvehicles.detector.LogicObjectOperator;
-import vswe.stevesvehicles.detector.OperatorObject;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.tileentity.detector.LogicObjectOperator;
+import vswe.stevesvehicles.tileentity.detector.OperatorObject;
+import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.client.gui.screen.GuiDetector;
 
 @SideOnly(Side.CLIENT)

@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.util.IIcon;
-import vswe.stevesvehicles.old.StevesVehicles;
+import vswe.stevesvehicles.StevesVehicles;
 import vswe.stevesvehicles.upgrade.Upgrade;
 import vswe.stevesvehicles.upgrade.effect.assembly.Blueprint;
 import vswe.stevesvehicles.upgrade.effect.assembly.Disassemble;
@@ -18,7 +18,7 @@ import vswe.stevesvehicles.upgrade.effect.external.Redstone;
 import vswe.stevesvehicles.upgrade.effect.external.Transposer;
 import vswe.stevesvehicles.upgrade.effect.time.TimeFlatCart;
 
-import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
+import static vswe.stevesvehicles.item.ComponentTypes.*;
 
 public class UpgradeRegistryControl extends UpgradeRegistry {
     public UpgradeRegistryControl() {

@@ -7,13 +7,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import vswe.stevesvehicles.network.DataReader;
-import vswe.stevesvehicles.network.DataWriter;
-import vswe.stevesvehicles.network.PacketType;
-import vswe.stevesvehicles.old.Helpers.NBTHelper;
-import vswe.stevesvehicles.network.PacketHandler;
+import vswe.stevesvehicles.nbt.NBTHelper;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.container.ContainerManager;
-import vswe.stevesvehicles.old.Helpers.ManagerTransfer;
+import vswe.stevesvehicles.tileentity.manager.ManagerTransfer;
 
 public abstract class TileEntityManager extends TileEntityBase
     implements IInventory {

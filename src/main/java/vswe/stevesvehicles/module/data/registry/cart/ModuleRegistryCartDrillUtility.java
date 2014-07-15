@@ -17,7 +17,7 @@ import vswe.stevesvehicles.module.cart.addon.ModuleOreTracker;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 
-import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
+import static vswe.stevesvehicles.item.ComponentTypes.*;
 
 public class ModuleRegistryCartDrillUtility extends ModuleRegistry{
     public ModuleRegistryCartDrillUtility() {

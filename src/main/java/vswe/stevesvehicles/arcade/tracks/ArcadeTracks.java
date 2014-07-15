@@ -4,14 +4,15 @@ import java.util.ArrayList;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import vswe.stevesvehicles.arcade.ArcadeGame;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.arcade.LocalizationTrack;
 import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.network.DataWriter;
-import vswe.stevesvehicles.old.StevesVehicles;
+import vswe.stevesvehicles.StevesVehicles;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.module.common.attachment.ModuleArcade;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -309,9 +310,9 @@ public class ArcadeTracks extends ArcadeGame {
 	public static final int LEFT_MARGIN = 5;	
 	public static final int TOP_MARGIN = 5;
 
-	private static final String TEXTURE_MENU = "/gui/trackgamemenu.png";
-	private static final String TEXTURE_GAME = "/gui/trackgame.png";
-	
+    private static final ResourceLocation TEXTURE_MENU = ResourceHelper.getResource("/gui/trackgamemenu.png");
+    private static final ResourceLocation TEXTURE_GAME = ResourceHelper.getResource("/gui/trackgame.png");
+
 	@Override
 	public void drawBackground(GuiVehicle gui, int x, int y) {
 		if (!isSaveMenuOpen && isMenuOpen) {
@@ -564,7 +565,8 @@ public class ArcadeTracks extends ArcadeGame {
 
 	
 	
-	private boolean isButtonVisible(int id) {
+	@SuppressWarnings("SimplifiableIfStatement") //easier to see this way
+    private boolean isButtonVisible(int id) {
 		if (id == 4 || id == 5) {
 			return isMenuOpen && currentMenuTab == 0;
 		}else if(id > 5 && id < 10) {

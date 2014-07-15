@@ -6,11 +6,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.module.cart.LocalizationCartCleaning;
 import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -104,10 +105,12 @@ public class ModuleExperience extends ModuleAttachment {
     private static final int CONTENT_SRC_X = 28;
     private static final int CONTENT_SRC_Y = 1;
 
+    private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/experience.png");
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawBackground(GuiVehicle gui, int x, int y) {
-		ResourceHelper.bindResource("/gui/experience.png");
+		ResourceHelper.bindResource(TEXTURE);
 		
 		for (int i = 0; i < 3; i++) {
 			drawContent(gui, i);

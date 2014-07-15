@@ -3,12 +3,13 @@ package vswe.stevesvehicles.module.common.addon;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.module.LocalizationUtility;
 import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.module.common.engine.ModuleEngine;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -53,9 +54,11 @@ public class ModulePowerObserver extends ModuleAddon {
 	private boolean removeOnPickup() {
 		return true;
 	}
-	
 
-	
+    private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/observer.png");
+    private static final ResourceLocation ITEM_TEXTURE = ResourceHelper.getResourceFromPath("/atlas/items.png");
+
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawBackground(GuiVehicle gui, int x, int y) {
@@ -65,7 +68,7 @@ public class ModulePowerObserver extends ModuleAddon {
 			}
 		}
 		
-		ResourceHelper.bindResource("/gui/observer.png");		
+		ResourceHelper.bindResource(TEXTURE);
 					
 		for (int i = 0; i < 4; i++) {
 			int[] rect = getAreaRect(i);
@@ -84,7 +87,7 @@ public class ModulePowerObserver extends ModuleAddon {
 				}
 			}
 			
-			ResourceHelper.bindResource("/gui/observer.png");	
+			ResourceHelper.bindResource(TEXTURE);
 			
 			rect = getPowerRect(i);
 			if (isAreaActive(i)) {
@@ -109,7 +112,7 @@ public class ModulePowerObserver extends ModuleAddon {
 	private void drawEngine(GuiVehicle gui, int id, int [] rect) {
 		ModuleEngine engine = getVehicle().getEngines().get(id);
 		
-		ResourceHelper.bindResourcePath("/atlas/items.png");
+		ResourceHelper.bindResource(ITEM_TEXTURE);
 		
 		drawImage(gui, engine.getModuleData().getIcon(), rect, 0, 0);
 	}
@@ -132,8 +135,8 @@ public class ModulePowerObserver extends ModuleAddon {
 		return new int[] {area[0] + 4 + number * 20, area[1] + 3, 16, 16};
 	}
 	
-	private int[] getPowerRect(int areaid) {
-		int[] area = getAreaRect(areaid);
+	private int[] getPowerRect(int areaId) {
+		int[] area = getAreaRect(areaId);
 		
 		return new int[] {area[0] + area[2] + 10, area[1] + 2, 35, 18};
 	}	

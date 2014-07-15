@@ -2,13 +2,14 @@ package vswe.stevesvehicles.module.cart.addon;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.module.cart.LocalizationCartDrillUtility;
 import vswe.stevesvehicles.module.common.addon.ModuleAddon;
 import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.cart.tool.ModuleDrill;
 
@@ -83,14 +84,14 @@ public class ModuleDrillIntelligence extends ModuleAddon {
 		}
 	
 		return guiH;
-	}		
-	
+	}
 
-	
+
+    private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/intelligence.png");
 	
 	@Override
 	public void drawBackground(GuiVehicle gui, int x, int y) {
-		ResourceHelper.bindResource("/gui/intelligence.png");
+		ResourceHelper.bindResource(TEXTURE);
 
 		int w = getDrillWidth();
 		int h = getDrillHeight();

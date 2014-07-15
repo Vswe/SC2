@@ -10,12 +10,12 @@ import vswe.stevesvehicles.module.data.ModuleDataGroup;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.module.data.ModuleSide;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistryTravel;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.module.cart.addon.ModuleBrake;
 import vswe.stevesvehicles.module.cart.attachment.ModuleAdvancedControl;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 
-import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
+import static vswe.stevesvehicles.item.ComponentTypes.*;
 
 public class ModuleRegistryCartTravel extends ModuleRegistry {
     public ModuleRegistryCartTravel() {

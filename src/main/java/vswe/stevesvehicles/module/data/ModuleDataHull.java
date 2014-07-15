@@ -2,8 +2,7 @@ package vswe.stevesvehicles.module.data;
 
 import vswe.stevesvehicles.localization.entry.info.LocalizationLabel;
 import vswe.stevesvehicles.module.ModuleBase;
-import vswe.stevesvehicles.old.Helpers.ColorHelper;
-import vswe.stevesvehicles.vehicle.VehicleBase;
+import vswe.stevesvehicles.client.gui.ColorHelper;
 import vswe.stevesvehicles.vehicle.VehicleType;
 
 import java.util.List;

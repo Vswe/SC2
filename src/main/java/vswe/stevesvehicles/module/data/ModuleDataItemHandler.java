@@ -7,7 +7,7 @@ import net.minecraft.nbt.NBTTagList;
 import vswe.stevesvehicles.localization.entry.info.LocalizationLabel;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
-import vswe.stevesvehicles.old.Helpers.NBTHelper;
+import vswe.stevesvehicles.nbt.NBTHelper;
 import vswe.stevesvehicles.item.ModItems;
 import vswe.stevesvehicles.util.Tuple;
 import vswe.stevesvehicles.vehicle.VehicleBase;

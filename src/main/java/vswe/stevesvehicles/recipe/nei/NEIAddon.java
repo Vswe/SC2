@@ -7,7 +7,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import vswe.stevesvehicles.old.Helpers.GeneratedInfo;
+import vswe.stevesvehicles.GeneratedInfo;
 
 
 //TODO make sure nothing goes wrong just because NEI doesn't exist

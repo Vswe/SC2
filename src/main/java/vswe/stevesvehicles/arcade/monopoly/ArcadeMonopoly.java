@@ -3,13 +3,14 @@ package vswe.stevesvehicles.arcade.monopoly;
 import java.util.ArrayList;
 import java.util.EnumSet;
 
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import vswe.stevesvehicles.arcade.ArcadeGame;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.PlainText;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.module.common.attachment.ModuleArcade;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -1090,12 +1091,11 @@ public class ArcadeMonopoly extends ArcadeGame {
 		
 		
 	}
-	
-	private static String[] textures;
+
+	private static final ResourceLocation[] TEXTURES = new ResourceLocation[5];
 	static {
-		textures = new String[5];
-		for (int i = 0; i < textures.length; i++) {
-			textures[i] = "/gui/monopoly_" + i + ".png";
+		for (int i = 0; i < TEXTURES.length; i++) {
+			TEXTURES[i] = ResourceHelper.getResource("/gui/monopoly_" + i + ".png");
 		}
 		
 	}
@@ -1103,7 +1103,7 @@ public class ArcadeMonopoly extends ArcadeGame {
 	
 
 	public void loadTexture(GuiVehicle gui, int number) {
-		ResourceHelper.bindResource(textures[number]);
+		ResourceHelper.bindResource(TEXTURES[number]);
 		GL11.glColor4f(1F, 1F, 1F, 1F);	
 	}
 

@@ -6,11 +6,11 @@ import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.common.addon.ModuleMelter;
 import vswe.stevesvehicles.module.common.addon.ModuleMelterExtreme;
 import vswe.stevesvehicles.module.common.addon.ModuleSnowCannon;
-import vswe.stevesvehicles.old.Helpers.HolidayType;
-import vswe.stevesvehicles.old.StevesVehicles;
+import vswe.stevesvehicles.holiday.HolidayType;
+import vswe.stevesvehicles.StevesVehicles;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 
-import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
+import static vswe.stevesvehicles.item.ComponentTypes.*;
 
 
 public class ModuleRegistryTemperature extends ModuleRegistry {

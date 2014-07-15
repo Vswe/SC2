@@ -23,7 +23,7 @@ import vswe.stevesvehicles.module.common.engine.ModuleThermalAdvanced;
 import vswe.stevesvehicles.module.common.engine.ModuleThermalStandard;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 
-import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
+import static vswe.stevesvehicles.item.ComponentTypes.*;
 
 
 public class ModuleRegistryEngines extends ModuleRegistry {

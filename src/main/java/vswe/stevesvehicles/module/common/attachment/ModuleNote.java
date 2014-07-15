@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
@@ -13,7 +14,7 @@ import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
 import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 
 public class ModuleNote extends ModuleAttachment {
 
@@ -571,12 +572,12 @@ public class ModuleNote extends ModuleAttachment {
 		}		
 		
 	}
-	
 
+    private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/note.png");
 	
 	@Override
 	public void drawBackground(GuiVehicle gui, int x, int y) {
-		ResourceHelper.bindResource("/gui/note.png");
+		ResourceHelper.bindResource(TEXTURE);
 
 
 		for(int i = getScrollY(); i < Math.min(tracks.size(), getScrollY() + TRACKS_IN_VIEW); i++) {

@@ -20,9 +20,9 @@ import vswe.stevesvehicles.module.cart.attachment.ModuleFertilizer;
 import vswe.stevesvehicles.module.cart.attachment.ModuleHydrater;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 
-import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
+import static vswe.stevesvehicles.item.ComponentTypes.*;
 
-import static vswe.stevesvehicles.old.Helpers.ComponentTypes.EMPTY_DISK;
+import static vswe.stevesvehicles.item.ComponentTypes.EMPTY_DISK;
 
 public class ModuleRegistryCartCultivationUtil extends ModuleRegistry {
     public ModuleRegistryCartCultivationUtil() {

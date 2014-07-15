@@ -2,7 +2,6 @@ package vswe.stevesvehicles.recipe.item;
 
 
 import net.minecraft.item.ItemStack;
-import vswe.stevesvehicles.old.Helpers.ComponentTypes;
 import vswe.stevesvehicles.recipe.IRecipeOutput;
 
 public class RecipeItemOutput extends RecipeItemStackBase {

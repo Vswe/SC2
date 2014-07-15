@@ -1,11 +1,12 @@
 package vswe.stevesvehicles.module.common.engine;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.module.LocalizationEngine;
 import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.network.DataWriter;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 
@@ -98,10 +99,11 @@ public abstract class ModuleEngine extends ModuleBase {
 	}
 
 	private static final int TEXTURE_SPACING = 1;
-	
+	private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/engine.png");
+
 	@Override
 	public void drawBackground(GuiVehicle gui, int x, int y) {
-		ResourceHelper.bindResource("/gui/engine.png");
+		ResourceHelper.bindResource(TEXTURE);
 
 		int sourceX = TEXTURE_SPACING + (16 + TEXTURE_SPACING) * getPriority();
 		int sourceY = TEXTURE_SPACING;

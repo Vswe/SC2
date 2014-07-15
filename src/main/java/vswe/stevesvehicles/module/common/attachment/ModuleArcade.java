@@ -9,7 +9,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import vswe.stevesvehicles.arcade.invader.ArcadeInvaders;
-import vswe.stevesvehicles.arcade.monopoly.ArcadeMonopoly;
 import vswe.stevesvehicles.arcade.sweeper.ArcadeSweeper;
 import vswe.stevesvehicles.arcade.tetris.ArcadeTetris;
 import vswe.stevesvehicles.arcade.tracks.ArcadeTracks;
@@ -21,7 +20,7 @@ import vswe.stevesvehicles.arcade.ArcadeGame;
 import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

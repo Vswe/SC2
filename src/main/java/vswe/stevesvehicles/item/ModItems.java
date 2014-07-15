@@ -9,11 +9,11 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.common.config.Configuration;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.block.ModBlocks;
-import vswe.stevesvehicles.detector.DetectorType;
+import vswe.stevesvehicles.tileentity.detector.DetectorType;
 import vswe.stevesvehicles.module.data.ModuleData;
-import vswe.stevesvehicles.old.StevesVehicles;
+import vswe.stevesvehicles.StevesVehicles;
 
-import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
+import static vswe.stevesvehicles.item.ComponentTypes.*;
 
 import java.util.HashMap;
 

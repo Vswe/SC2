@@ -2,11 +2,10 @@ package vswe.stevesvehicles.client.gui.detector;
 
 
 import net.minecraft.util.IIcon;
-import vswe.stevesvehicles.detector.LogicObject;
-import vswe.stevesvehicles.detector.LogicObjectModule;
+import vswe.stevesvehicles.tileentity.detector.LogicObjectModule;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.client.gui.screen.GuiDetector;
 
 public class DropDownMenuModules extends DropDownMenuPages {

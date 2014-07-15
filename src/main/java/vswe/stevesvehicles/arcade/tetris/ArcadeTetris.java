@@ -2,6 +2,7 @@ package vswe.stevesvehicles.arcade.tetris;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import vswe.stevesvehicles.arcade.ArcadeGame;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.arcade.tracks.TrackStory;
@@ -9,7 +10,7 @@ import vswe.stevesvehicles.localization.entry.arcade.LocalizationStacker;
 import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.module.common.attachment.ModuleArcade;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -132,9 +133,9 @@ public class ArcadeTetris extends ArcadeGame {
 	
 	public static final int BOARD_START_X = (478 - 100) / 2;
 	public static final int BOARD_START_Y = (VehicleBase.MODULAR_SPACE_HEIGHT - 150) / 2;
-	
-	private static final String TEXTURE = "/gui/tetris.png";
-	
+
+    private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/tetris.png");
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawBackground(GuiVehicle gui, int x, int y) {

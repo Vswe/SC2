@@ -1,6 +1,7 @@
 package vswe.stevesvehicles.module.common.attachment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import vswe.stevesvehicles.client.gui.assembler.SimulationInfo;
 import vswe.stevesvehicles.client.gui.assembler.SimulationInfoBoolean;
 import vswe.stevesvehicles.client.gui.assembler.SimulationInfoInteger;
@@ -10,9 +11,9 @@ import vswe.stevesvehicles.localization.entry.module.LocalizationIndependence;
 import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
 import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.network.DataWriter;
-import vswe.stevesvehicles.old.Helpers.ComponentTypes;
+import vswe.stevesvehicles.item.ComponentTypes;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.container.slots.SlotBase;
 import vswe.stevesvehicles.container.slots.SlotExplosion;
 
@@ -97,11 +98,11 @@ public class ModuleDynamite extends ModuleAttachment {
 		return new int[] {fuseStartX + (int)(105 *  (1F - getFuseLength() / (float) MAX_FUSE_LENGTH)), fuseStartY, 4, 10};
 	}
 
-
+    private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/explosions.png");
 	
 	@Override
 	public void drawBackground(GuiVehicle gui, int x, int y) {
-		ResourceHelper.bindResource("/gui/explosions.png");
+		ResourceHelper.bindResource(TEXTURE);
 
 		drawImage(gui, fuseStartX, fuseStartY + 3, 16, 1, 105 , 4);
 		drawImage(gui, fuseStartX + 105, fuseStartY - 4, 1, 12 , 16, 16);

@@ -7,13 +7,14 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.module.cart.LocalizationCartTravel;
 import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.network.DataWriter;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.module.cart.ILeverModule;
 import vswe.stevesvehicles.module.common.engine.ModuleEngine;
 import cpw.mods.fml.relauncher.Side;
@@ -50,10 +51,12 @@ public class ModuleAdvancedControl extends ModuleAttachment implements ILeverMod
     private static final int FUEL_IN_TOP_BAR = 20000;
     private static final int MAX_BAR_LENGTH = 62;
 
+    private static final ResourceLocation OVERLAY_TEXTURE = ResourceHelper.getResource("/gui/drive.png");
+
 	@SideOnly(Side.CLIENT)
     @Override
 	public void renderOverlay( net.minecraft.client.Minecraft minecraft) {
-		ResourceHelper.bindResource("/gui/drive.png");
+		ResourceHelper.bindResource(OVERLAY_TEXTURE);
 		
 		if (engineInformation != null) {
 			for (int i = 0; i < getVehicle().getEngines().size(); i++) {
@@ -445,11 +448,12 @@ public class ModuleAdvancedControl extends ModuleAttachment implements ILeverMod
 	
 
     private static final int TEXTURE_SPACING = 1;
+    private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/advanced_lever.png");
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawBackground(GuiVehicle gui, int x, int y) {
-		ResourceHelper.bindResource("/gui/advanced_lever.png");
+		ResourceHelper.bindResource(TEXTURE);
 
 		if (inRect(x,y, BUTTON_RECT)) {
 			drawImage(gui, BUTTON_RECT, TEXTURE_SPACING, TEXTURE_SPACING * 2 + BUTTON_RECT[3]);

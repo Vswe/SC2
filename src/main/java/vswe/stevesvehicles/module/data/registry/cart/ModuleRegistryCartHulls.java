@@ -11,8 +11,8 @@ import vswe.stevesvehicles.module.data.ModuleDataHull;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.module.data.ModuleSide;
 import vswe.stevesvehicles.module.cart.hull.*;
-import vswe.stevesvehicles.old.Helpers.HolidayType;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.holiday.HolidayType;
+import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.client.rendering.models.ModelHull;
 import vswe.stevesvehicles.client.rendering.models.ModelHullTop;
 import vswe.stevesvehicles.client.rendering.models.ModelPigHead;
@@ -23,10 +23,10 @@ import vswe.stevesvehicles.client.rendering.models.ModelPumpkinHullTop;
 import vswe.stevesvehicles.module.cart.hull.HullGalgadorian;
 import vswe.stevesvehicles.module.cart.hull.HullPig;
 import vswe.stevesvehicles.module.cart.hull.HullPumpkin;
-import vswe.stevesvehicles.old.StevesVehicles;
+import vswe.stevesvehicles.StevesVehicles;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 
-import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
+import static vswe.stevesvehicles.item.ComponentTypes.*;
 
 public class ModuleRegistryCartHulls extends ModuleRegistry {
     public ModuleRegistryCartHulls() {

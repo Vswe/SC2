@@ -13,7 +13,7 @@ import vswe.stevesvehicles.client.gui.assembler.SimulationInfoBoolean;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.localization.entry.module.cart.LocalizationCartTool;
-import vswe.stevesvehicles.old.Helpers.BlockCoordinate;
+import vswe.stevesvehicles.block.BlockCoordinate;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.module.ISuppliesModule;
 import vswe.stevesvehicles.module.cart.ITreeModule;

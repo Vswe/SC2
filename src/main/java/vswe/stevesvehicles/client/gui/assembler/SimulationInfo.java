@@ -5,8 +5,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import vswe.stevesvehicles.client.gui.screen.GuiCartAssembler;
 import vswe.stevesvehicles.localization.ILocalizedText;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
-import vswe.stevesvehicles.old.StevesVehicles;
+import vswe.stevesvehicles.client.ResourceHelper;
 
 
 public abstract class SimulationInfo {

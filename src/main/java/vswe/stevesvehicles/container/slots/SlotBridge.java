@@ -1,6 +1,6 @@
 package vswe.stevesvehicles.container.slots;
 import net.minecraft.init.Blocks;
-import vswe.stevesvehicles.old.Helpers.TransferHandler;
+import vswe.stevesvehicles.transfer.TransferHandler;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;

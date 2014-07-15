@@ -2,6 +2,7 @@ package vswe.stevesvehicles.module.common.addon;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
@@ -9,7 +10,7 @@ import vswe.stevesvehicles.localization.entry.module.LocalizationVisual;
 import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 
 public class ModuleColorizer extends ModuleAddon {
 	public ModuleColorizer(VehicleBase vehicleBase) {
@@ -59,9 +60,11 @@ public class ModuleColorizer extends ModuleAddon {
     private static final int MARKER_SRC_X = 1;
     private static final int MARKER_SRC_Y = 9;
 
+    private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/color.png");
+
 	@Override
 	public void drawBackground(GuiVehicle gui, int x, int y) {
-		ResourceHelper.bindResource("/gui/color.png");
+		ResourceHelper.bindResource(TEXTURE);
 
 		for (int i = 0; i < 3; i++) {
 			drawMarker(gui, i);

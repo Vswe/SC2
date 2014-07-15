@@ -1,11 +1,8 @@
 package vswe.stevesvehicles.upgrade.registry;
 
 
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import vswe.stevesvehicles.upgrade.Upgrade;
 import vswe.stevesvehicles.upgrade.effect.assembly.FreeModules;
 import vswe.stevesvehicles.upgrade.effect.assembly.WorkEfficiency;
@@ -15,7 +12,7 @@ import vswe.stevesvehicles.upgrade.effect.time.TimeFlat;
 import vswe.stevesvehicles.upgrade.effect.time.TimeFlatCart;
 import vswe.stevesvehicles.upgrade.effect.time.TimeFlatRemoved;
 
-import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
+import static vswe.stevesvehicles.item.ComponentTypes.*;
 
 public class UpgradeRegistryProduction extends UpgradeRegistry {
     public UpgradeRegistryProduction() {

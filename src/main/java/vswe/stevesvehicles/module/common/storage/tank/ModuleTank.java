@@ -4,15 +4,19 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidTank;
+import vswe.stevesvehicles.client.ResourceHelper;
+import vswe.stevesvehicles.client.gui.ColorHelper;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.module.LocalizationTank;
 import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.network.DataWriter;
+import vswe.stevesvehicles.tanks.ITankHolder;
+import vswe.stevesvehicles.tanks.Tank;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.*;
 import vswe.stevesvehicles.client.gui.screen.GuiBase;
 import vswe.stevesvehicles.module.common.storage.ModuleStorage;
 import vswe.stevesvehicles.container.slots.SlotBase;
@@ -134,13 +138,14 @@ public abstract class ModuleTank extends ModuleStorage implements IFluidTank, IT
 	
 
 	protected static final int[] TANK_BOUNDS = {35, 20, 36, 51};
-	
+    private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/tank.png");
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawBackground(GuiVehicle gui, int x, int y) {
 		tank.drawFluid(gui, TANK_BOUNDS[0], TANK_BOUNDS[1]);
 
-		ResourceHelper.bindResource("/gui/tank.png");		
+		ResourceHelper.bindResource(TEXTURE);
 		drawImage(gui, TANK_BOUNDS, 1, 1);
 	
 	}

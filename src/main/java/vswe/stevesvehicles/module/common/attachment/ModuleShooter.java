@@ -11,6 +11,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 import vswe.stevesvehicles.client.gui.assembler.SimulationInfo;
 import vswe.stevesvehicles.client.gui.assembler.SimulationInfoMultiBoolean;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
@@ -19,12 +20,12 @@ import vswe.stevesvehicles.localization.entry.module.LocalizationShooter;
 import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
 import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.network.DataWriter;
-import vswe.stevesvehicles.old.Helpers.EnchantmentInfo;
+import vswe.stevesvehicles.module.common.addon.enchanter.EnchantmentInfo;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.module.ISuppliesModule;
 import vswe.stevesvehicles.module.ModuleBase;
-import vswe.stevesvehicles.module.common.addon.ModuleEnchants;
+import vswe.stevesvehicles.module.common.addon.enchanter.ModuleEnchants;
 import vswe.stevesvehicles.module.common.addon.projectile.ModuleProjectile;
 import vswe.stevesvehicles.container.slots.SlotArrow;
 import vswe.stevesvehicles.container.slots.SlotBase;
@@ -134,12 +135,12 @@ public class ModuleShooter extends ModuleAttachment implements ISuppliesModule {
 	private int[] intervalSelection;
 	private int[] intervalDragArea;
 
-	
-		
+
+    private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/shooter.png");
 	
 	@Override
 	public void drawBackground(GuiVehicle gui, int x, int y) {
-		ResourceHelper.bindResource("/gui/shooter.png");
+		ResourceHelper.bindResource(TEXTURE);
 
 		drawImage(gui, pipeSelectionX + (26-8) / 2, pipeSelectionY + (26-8) / 2 - 1, 1, 111, 8, 9);
 

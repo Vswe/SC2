@@ -6,8 +6,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import vswe.stevesvehicles.old.Helpers.ComponentTypes;
-import vswe.stevesvehicles.old.StevesVehicles;
+import vswe.stevesvehicles.StevesVehicles;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,7 +14,7 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.world.World;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import vswe.stevesvehicles.old.Helpers.EntityEasterEgg;
+import vswe.stevesvehicles.holiday.EntityEasterEgg;
 import vswe.stevesvehicles.tab.CreativeTabLoader;
 
 public class ItemCartComponent extends Item {

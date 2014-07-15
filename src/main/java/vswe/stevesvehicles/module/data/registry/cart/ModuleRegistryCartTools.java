@@ -13,7 +13,7 @@ import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataGroup;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.module.data.ModuleSide;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.module.cart.tool.ModuleDrillDiamond;
 import vswe.stevesvehicles.module.cart.tool.ModuleDrillGalgadorian;
 import vswe.stevesvehicles.module.cart.tool.ModuleDrillHardened;
@@ -25,7 +25,7 @@ import vswe.stevesvehicles.module.cart.tool.ModuleWoodcutterGalgadorian;
 import vswe.stevesvehicles.module.cart.tool.ModuleWoodcutterHardened;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 
-import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
+import static vswe.stevesvehicles.item.ComponentTypes.*;
 
 
 public class ModuleRegistryCartTools extends ModuleRegistry {

@@ -5,16 +5,16 @@ import java.util.ArrayList;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 
 import vswe.stevesvehicles.arcade.ArcadeGame;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
-import vswe.stevesvehicles.arcade.tracks.TrackStory;
 import vswe.stevesvehicles.localization.entry.arcade.LocalizationInvaders;
 import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.module.common.attachment.ModuleArcade;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -206,8 +206,8 @@ public class ArcadeInvaders extends ArcadeGame {
 		
 	}
 	
-	private static final String TEXTURE = "/gui/invaders.png";
-	
+
+    private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/invaders.png");
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawBackground(GuiVehicle gui, int x, int y) {
@@ -268,7 +268,8 @@ public class ArcadeInvaders extends ArcadeGame {
 	
 	
 	
-	private final static String[][] numbers = new String[][] 
+	@SuppressWarnings("SpellCheckingInspection")
+    private final static String[][] numbers = new String[][]
 	{
 		{
 			"XXXX",

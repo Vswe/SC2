@@ -4,15 +4,15 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataGroup;
-import vswe.stevesvehicles.module.common.addon.ModuleCrafter;
-import vswe.stevesvehicles.module.common.addon.ModuleCrafterAdv;
-import vswe.stevesvehicles.module.common.addon.ModuleSmelter;
-import vswe.stevesvehicles.module.common.addon.ModuleSmelterAdv;
+import vswe.stevesvehicles.module.common.addon.recipe.ModuleCrafter;
+import vswe.stevesvehicles.module.common.addon.recipe.ModuleCrafterAdv;
+import vswe.stevesvehicles.module.common.addon.recipe.ModuleSmelter;
+import vswe.stevesvehicles.module.common.addon.recipe.ModuleSmelterAdv;
 import vswe.stevesvehicles.module.common.attachment.ModuleMilker;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 
 
-import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
+import static vswe.stevesvehicles.item.ComponentTypes.*;
 
 public class ModuleRegistryProduction extends ModuleRegistry {
 

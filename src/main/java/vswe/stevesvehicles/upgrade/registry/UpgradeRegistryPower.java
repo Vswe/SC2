@@ -11,7 +11,7 @@ import vswe.stevesvehicles.upgrade.effect.fuel.Recharger;
 import vswe.stevesvehicles.upgrade.effect.fuel.Solar;
 import vswe.stevesvehicles.upgrade.effect.fuel.ThermalFuel;
 
-import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
+import static vswe.stevesvehicles.item.ComponentTypes.*;
 
 public class UpgradeRegistryPower extends UpgradeRegistry {
     public UpgradeRegistryPower() {

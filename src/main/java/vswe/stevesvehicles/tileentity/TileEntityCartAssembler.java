@@ -16,20 +16,24 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import vswe.stevesvehicles.client.gui.assembler.ModuleSortMode;
 import vswe.stevesvehicles.client.gui.assembler.SimulationInfo;
 import vswe.stevesvehicles.client.gui.assembler.SimulationInfoInteger;
+import vswe.stevesvehicles.client.gui.assembler.TitleBox;
 import vswe.stevesvehicles.localization.PlainText;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
+import vswe.stevesvehicles.nbt.NBTHelper;
 import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
 import vswe.stevesvehicles.module.data.ModuleType;
 import vswe.stevesvehicles.block.BlockCartAssembler;
 import vswe.stevesvehicles.block.ModBlocks;
-import vswe.stevesvehicles.old.Helpers.*;
 import vswe.stevesvehicles.item.ModItems;
-import vswe.stevesvehicles.old.StevesVehicles;
+import vswe.stevesvehicles.StevesVehicles;
+import vswe.stevesvehicles.tileentity.manager.ManagerTransfer;
+import vswe.stevesvehicles.transfer.TransferHandler;
 import vswe.stevesvehicles.upgrade.effect.assembly.FreeModules;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
@@ -1129,11 +1133,11 @@ public class TileEntityCartAssembler extends TileEntityBase
             if (effect instanceof Disassemble) {
                 for (ItemStack item : spareModules)  {
                     TransferHandler.TransferItem(
-                                item,
-                                effect.getUpgrade(),
-                                new ContainerUpgrade(null,effect.getUpgrade()),
-                                1
-                                );
+                            item,
+                            effect.getUpgrade(),
+                            new ContainerUpgrade(null, effect.getUpgrade()),
+                            1
+                    );
                     if (item.stackSize > 0) {
                         puke(item);
                     }

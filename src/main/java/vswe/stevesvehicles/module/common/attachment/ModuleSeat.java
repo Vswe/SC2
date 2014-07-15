@@ -1,12 +1,13 @@
 package vswe.stevesvehicles.module.common.attachment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.module.LocalizationTravel;
 import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
 import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -41,11 +42,12 @@ public class ModuleSeat extends ModuleAttachment {
 	}
 
 	private static final int TEXTURE_SPACING = 1;
-	
+    private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/chair.png");
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawBackground(GuiVehicle gui, int x, int y) {
-		ResourceHelper.bindResource("/gui/chair.png");
+		ResourceHelper.bindResource(TEXTURE);
 
 		int imageID = getState();
 		int borderID = 0;

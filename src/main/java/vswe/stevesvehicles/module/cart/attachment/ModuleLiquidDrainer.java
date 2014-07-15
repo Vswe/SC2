@@ -8,7 +8,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidBlock;
 import vswe.stevesvehicles.module.cart.ModuleWorker;
-import vswe.stevesvehicles.old.Helpers.BlockCoordinate;
+import vswe.stevesvehicles.block.BlockCoordinate;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.module.cart.tool.ModuleDrill;
 public class ModuleLiquidDrainer extends ModuleWorker {

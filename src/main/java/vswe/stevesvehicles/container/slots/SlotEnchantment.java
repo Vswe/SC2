@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import vswe.stevesvehicles.old.Helpers.EnchantmentInfo;
+import vswe.stevesvehicles.module.common.addon.enchanter.EnchantmentInfo;
 
 public class SlotEnchantment extends SlotBase {
 

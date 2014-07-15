@@ -2,10 +2,10 @@ package vswe.stevesvehicles.module.cart.tool;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
-import vswe.stevesvehicles.old.Helpers.EnchantmentInfo;
+import vswe.stevesvehicles.module.common.addon.enchanter.EnchantmentInfo;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.module.ModuleBase;
-import vswe.stevesvehicles.module.common.addon.ModuleEnchants;
+import vswe.stevesvehicles.module.common.addon.enchanter.ModuleEnchants;
 import vswe.stevesvehicles.module.cart.ModuleWorker;
 
 public abstract class ModuleTool extends ModuleWorker {

@@ -1,6 +1,7 @@
 package vswe.stevesvehicles.module.cart.addon;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import vswe.stevesvehicles.client.gui.assembler.SimulationInfo;
 import vswe.stevesvehicles.client.gui.assembler.SimulationInfoBoolean;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
@@ -10,7 +11,7 @@ import vswe.stevesvehicles.module.common.addon.ModuleAddon;
 import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.module.cart.ILeverModule;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -54,11 +55,12 @@ public class ModuleBrake extends ModuleAddon implements ILeverModule {
 
 
 	private static final int TEXTURE_SPACING = 1;
+    private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/lever.png");
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawBackground(GuiVehicle gui, int x, int y) {
-		ResourceHelper.bindResource("/gui/lever.png");
+		ResourceHelper.bindResource(TEXTURE);
 
 		drawButton(gui, x, y, START_STOP_RECT, isForceStopping() ? 2 : 1);
 		drawButton(gui, x, y, TURN_BACK_RECT, 0);

@@ -27,16 +27,15 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.container.ContainerVehicle;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
-import vswe.stevesvehicles.old.Helpers.ActivatorOption;
+import vswe.stevesvehicles.tileentity.toggler.TogglerOption;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.client.rendering.models.ModelVehicle;
-import vswe.stevesvehicles.old.Helpers.ComparatorWorkModule;
-import vswe.stevesvehicles.old.StevesVehicles;
+import vswe.stevesvehicles.module.cart.ComparatorWorkModule;
+import vswe.stevesvehicles.module.data.ModuleDataPair;
+import vswe.stevesvehicles.StevesVehicles;
 import vswe.stevesvehicles.vehicle.version.VehicleVersion;
-import vswe.stevesvehicles.old.Helpers.DataWatcherLockable;
-import vswe.stevesvehicles.old.Helpers.GuiAllocationHelper;
-import vswe.stevesvehicles.old.Helpers.ModuleCountPair;
-import vswe.stevesvehicles.old.Helpers.TransferHandler;
+import vswe.stevesvehicles.vehicle.entity.DataWatcherLockable;
+import vswe.stevesvehicles.transfer.TransferHandler;
 import vswe.stevesvehicles.module.common.addon.ModuleCreativeSupplies;
 import vswe.stevesvehicles.module.common.engine.ModuleEngine;
 import vswe.stevesvehicles.module.IActivatorModule;
@@ -60,7 +59,7 @@ public class VehicleBase {
     public boolean isPlaceholder;
     protected int modularSpaceHeight;
     public boolean canScrollModules;
-    private ArrayList<ModuleCountPair> moduleCounts;
+    private ArrayList<ModuleDataPair> moduleCounts;
     private int workingTime;
     private int motorRotation;
     protected boolean engineFlag = false;
@@ -171,7 +170,7 @@ public class VehicleBase {
      */
     public byte cartVersion;
 
-    public ArrayList<ModuleCountPair> getModuleCounts() {
+    public ArrayList<ModuleDataPair> getModuleCounts() {
         return moduleCounts;
     }
 
@@ -325,13 +324,13 @@ public class VehicleBase {
      * and initiate every module.
      */
     private void initModules() {
-        moduleCounts = new ArrayList<ModuleCountPair>();
+        moduleCounts = new ArrayList<ModuleDataPair>();
         for (ModuleBase module : modules) {
             ModuleData data = ModuleRegistry.getModuleFromId(module.getModuleId());
 
             boolean found = false;
             if (!data.hasExtraData()) {
-                for (ModuleCountPair count : moduleCounts) {
+                for (ModuleDataPair count : moduleCounts) {
                     if (count.isContainingData(data)) {
                         count.increase();
                         found = true;
@@ -340,7 +339,7 @@ public class VehicleBase {
                 }
             }
             if (!found) {
-                ModuleCountPair count = new ModuleCountPair(data);
+                ModuleDataPair count = new ModuleDataPair(data);
                 moduleCounts.add(count);
                 if (data.hasExtraData()) {
                     NBTTagCompound compound = new NBTTagCompound();
@@ -889,7 +888,7 @@ public class VehicleBase {
      * @param option The option to handle
      * @param isOrange Whether the cart is moving the orange direction or not
      */
-    public void handleActivator(ActivatorOption option, boolean isOrange) {
+    public void handleActivator(TogglerOption option, boolean isOrange) {
         for (ModuleBase module : modules) {
             if (module instanceof IActivatorModule && option.getModule().isAssignableFrom(module.getClass())) {
                 IActivatorModule activator = (IActivatorModule)module;
@@ -1535,4 +1534,11 @@ public class VehicleBase {
 	public Random getRandom() {
 		return rand;
 	}
+
+    private class GuiAllocationHelper {
+        public int width;
+        public int maxHeight;
+
+        public List<ModuleBase> modules = new ArrayList<ModuleBase>();
+    }
 }

@@ -21,8 +21,8 @@ import vswe.stevesvehicles.container.slots.SlotAssemblerFuel;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataHull;
 import vswe.stevesvehicles.module.data.ModuleType;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
-import vswe.stevesvehicles.old.Helpers.TitleBox;
+import vswe.stevesvehicles.client.ResourceHelper;
+import vswe.stevesvehicles.client.gui.assembler.TitleBox;
 import vswe.stevesvehicles.item.ModItems;
 import vswe.stevesvehicles.tileentity.TileEntityCartAssembler;
 

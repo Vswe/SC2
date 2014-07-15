@@ -3,7 +3,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.util.ResourceLocation;
 import vswe.stevesvehicles.module.ModuleBase;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 
 @SideOnly(Side.CLIENT)
 public class ModelLiquidDrainer extends ModelCleaner {

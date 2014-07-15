@@ -5,12 +5,13 @@ import net.minecraft.block.BlockSapling;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Vec3;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.module.cart.LocalizationCartCultivationUtil;
 import vswe.stevesvehicles.module.cart.ModuleWorker;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.module.ISuppliesModule;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.cart.tool.ModuleFarmer;
@@ -51,12 +52,13 @@ public class ModuleFertilizer extends ModuleWorker implements ISuppliesModule {
 				break;
 			}
 		}
-	}	
+	}
 
+    private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/fertilize.png");
 
 	@Override
 	public void drawBackground(GuiVehicle gui, int x, int y) {
-		ResourceHelper.bindResource("/gui/fertilize.png");
+		ResourceHelper.bindResource(TEXTURE);
 
 		float percentage = fertilizerStorage / (float) getMaxFertilizerStorage();
 		int size = (int)(percentage * 23);

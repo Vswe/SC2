@@ -10,7 +10,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import vswe.stevesvehicles.detector.DetectorType;
+import vswe.stevesvehicles.tileentity.detector.DetectorType;
 import vswe.stevesvehicles.tileentity.TileEntityDetector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

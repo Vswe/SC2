@@ -25,8 +25,7 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
 import vswe.stevesvehicles.block.ModBlocks;
 import vswe.stevesvehicles.item.ModItems;
-import vswe.stevesvehicles.old.Helpers.DataWatcherLockable;
-import vswe.stevesvehicles.detector.DetectorType;
+import vswe.stevesvehicles.tileentity.detector.DetectorType;
 import vswe.stevesvehicles.module.ModuleBase;
 
 

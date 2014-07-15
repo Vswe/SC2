@@ -8,7 +8,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import vswe.stevesvehicles.detector.DetectorType;
+import vswe.stevesvehicles.tileentity.detector.DetectorType;
 import vswe.stevesvehicles.item.ItemBlockDetector;
 import vswe.stevesvehicles.item.ItemBlockStorage;
 import vswe.stevesvehicles.item.ItemUpgrade;
@@ -22,7 +22,7 @@ import vswe.stevesvehicles.tileentity.TileEntityDistributor;
 import vswe.stevesvehicles.tileentity.TileEntityLiquid;
 import vswe.stevesvehicles.tileentity.TileEntityUpgrade;
 
-import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
+import static vswe.stevesvehicles.item.ComponentTypes.*;
 
 import java.lang.reflect.Constructor;
 

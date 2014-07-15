@@ -2,7 +2,7 @@ package vswe.stevesvehicles.container.slots;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
-import vswe.stevesvehicles.old.Helpers.Tank;
+import vswe.stevesvehicles.tanks.Tank;
 public class SlotLiquidInput extends SlotBase {
 	private Tank tank;
 	private int maxsize;

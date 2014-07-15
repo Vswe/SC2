@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
 import vswe.stevesvehicles.item.ModItems;
 import vswe.stevesvehicles.container.ContainerCartAssembler;
-import vswe.stevesvehicles.old.Helpers.TransferHandler;
+import vswe.stevesvehicles.transfer.TransferHandler;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataHull;
 import vswe.stevesvehicles.container.slots.SlotAssemblerFuel;

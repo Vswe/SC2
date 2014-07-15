@@ -8,6 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Vec3;
 import vswe.stevesvehicles.client.gui.assembler.SimulationInfo;
 import vswe.stevesvehicles.client.gui.assembler.SimulationInfoBoolean;
@@ -18,7 +19,7 @@ import vswe.stevesvehicles.module.common.addon.mobdetector.ModuleEntityDetector;
 import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.module.ModuleBase;
 
 public class ModuleShooterAdvanced extends ModuleShooter {
@@ -77,10 +78,11 @@ public class ModuleShooterAdvanced extends ModuleShooter {
 		}
 	}
 
+    private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/mob_detector.png");
 
 	@Override
 	public void drawBackground(GuiVehicle gui, int x, int y) {
-		ResourceHelper.bindResource("/gui/mob_detector.png");
+		ResourceHelper.bindResource(TEXTURE);
 		
 		for (int i = 0; i < detectors.size(); i++) {
 			int srcX = isOptionActive(i) ? 1 : 10;

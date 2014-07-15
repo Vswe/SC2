@@ -7,11 +7,11 @@ import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataGroup;
 import vswe.stevesvehicles.module.data.registry.cart.ModuleRegistryCartTools;
 import vswe.stevesvehicles.module.common.addon.ModuleCreativeSupplies;
-import vswe.stevesvehicles.module.common.addon.ModuleEnchants;
+import vswe.stevesvehicles.module.common.addon.enchanter.ModuleEnchants;
 import vswe.stevesvehicles.module.common.addon.ModulePowerObserver;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 
-import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
+import static vswe.stevesvehicles.item.ComponentTypes.*;
 
 
 public class ModuleRegistryUtility extends ModuleRegistry {

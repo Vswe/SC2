@@ -1,11 +1,10 @@
 package vswe.stevesvehicles.client.gui.detector;
 
 
-import vswe.stevesvehicles.detector.LogicObject;
-import vswe.stevesvehicles.detector.LogicObjectState;
-import vswe.stevesvehicles.detector.modulestate.ModuleState;
-import vswe.stevesvehicles.detector.modulestate.registry.ModuleStateRegistry;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.tileentity.detector.LogicObjectState;
+import vswe.stevesvehicles.tileentity.detector.modulestate.ModuleState;
+import vswe.stevesvehicles.tileentity.detector.modulestate.registry.ModuleStateRegistry;
+import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.client.gui.screen.GuiDetector;
 
 public class DropDownMenuStates extends DropDownMenuPages {

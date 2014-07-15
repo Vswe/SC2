@@ -14,9 +14,9 @@ import org.lwjgl.opengl.GL12;
 
 import vswe.stevesvehicles.client.rendering.models.ModelVehicle;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.IconData;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
-import vswe.stevesvehicles.old.Helpers.Tank;
+import vswe.stevesvehicles.client.IconData;
+import vswe.stevesvehicles.client.ResourceHelper;
+import vswe.stevesvehicles.tanks.Tank;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.vehicle.entity.IVehicleEntity;
 

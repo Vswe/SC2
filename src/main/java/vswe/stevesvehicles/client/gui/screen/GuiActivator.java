@@ -9,8 +9,8 @@ import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.network.PacketHandler;
 import vswe.stevesvehicles.container.ContainerActivator;
 import vswe.stevesvehicles.network.PacketType;
-import vswe.stevesvehicles.old.Helpers.ActivatorOption;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.tileentity.toggler.TogglerOption;
+import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.tileentity.TileEntityActivator;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -31,7 +31,7 @@ public class GuiActivator extends GuiBase {
         getFontRenderer().drawString(LocalizationToggler.TITLE.translate(), 8, 6, 0x404040);
 		
 		for (int i = 0; i < activator.getOptions().size(); i++) {
-			ActivatorOption option = activator.getOptions().get(i);
+			TogglerOption option = activator.getOptions().get(i);
 
 			int[] box = getBoxRect(i);
 			
@@ -39,7 +39,7 @@ public class GuiActivator extends GuiBase {
 		}			
 		
 		for (int i = 0; i < activator.getOptions().size(); i++) {
-			ActivatorOption option = activator.getOptions().get(i);
+			TogglerOption option = activator.getOptions().get(i);
 
 			int[] box = getBoxRect(i);
 
@@ -77,7 +77,7 @@ public class GuiActivator extends GuiBase {
 		y -= top;
 		
 		for (int i = 0; i < activator.getOptions().size(); i++) {
-			ActivatorOption option = activator.getOptions().get(i);
+			TogglerOption option = activator.getOptions().get(i);
 			
 			int[] box = getBoxRect(i);
 			int srcX = 0;

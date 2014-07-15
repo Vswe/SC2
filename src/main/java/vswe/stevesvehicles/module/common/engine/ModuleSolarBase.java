@@ -1,12 +1,13 @@
 package vswe.stevesvehicles.module.common.engine;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import vswe.stevesvehicles.client.gui.assembler.SimulationInfo;
 import vswe.stevesvehicles.client.gui.assembler.SimulationInfoBoolean;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.localization.entry.module.LocalizationEngine;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -112,14 +113,14 @@ public abstract class ModuleSolarBase extends ModuleEngine {
         drawString(gui,str, 8, 42, 0x404040);
 	}
 
-	
+    private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/solar.png");
 	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawBackground(GuiVehicle gui, int x, int y) {
 		super.drawBackground(gui,x,y);
 
-		ResourceHelper.bindResource("/gui/solar.png");
+		ResourceHelper.bindResource(TEXTURE);
 
 	    int lightWidth = light * 3;
 

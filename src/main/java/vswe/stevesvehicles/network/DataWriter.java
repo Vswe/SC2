@@ -11,8 +11,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import static vswe.stevesvehicles.old.StevesVehicles.CHANNEL;
-import static vswe.stevesvehicles.old.StevesVehicles.packetHandler;
+import static vswe.stevesvehicles.StevesVehicles.CHANNEL;
+import static vswe.stevesvehicles.StevesVehicles.packetHandler;
 
 import java.io.IOException;
 

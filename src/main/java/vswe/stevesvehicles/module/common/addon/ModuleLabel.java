@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.module.LocalizationVisual;
 import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.LabelInformation;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.common.engine.ModuleEngine;
 import vswe.stevesvehicles.container.slots.SlotBase;
@@ -113,11 +113,12 @@ public class ModuleLabel extends ModuleAddon {
 		return new int[] {10, 17 + i * 12, 8, 8};
 	}
 
-	
+    private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/label.png");
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawBackground(GuiVehicle gui, int x, int y) {
-		ResourceHelper.bindResource("/gui/label.png");
+		ResourceHelper.bindResource(TEXTURE);
 		
 		for (int i = 0; i < labels.size(); i++) {
 			int[] rect = getBoxArea(i);

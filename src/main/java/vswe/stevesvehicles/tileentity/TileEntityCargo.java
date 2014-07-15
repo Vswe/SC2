@@ -10,10 +10,10 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import vswe.stevesvehicles.item.ComponentTypes;
 import vswe.stevesvehicles.localization.entry.block.LocalizationCargo;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.network.DataReader;
-import vswe.stevesvehicles.old.Helpers.*;
 import vswe.stevesvehicles.item.ModItems;
 import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.container.ContainerCargo;
@@ -36,6 +36,11 @@ import vswe.stevesvehicles.container.slots.SlotSeed;
 import vswe.stevesvehicles.container.slots.SlotTorch;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import vswe.stevesvehicles.tileentity.manager.ManagerTransfer;
+import vswe.stevesvehicles.tileentity.manager.cargo.CargoItemSelection;
+import vswe.stevesvehicles.tileentity.manager.cargo.CargoItemSelectionModule;
+import vswe.stevesvehicles.transfer.TransferHandler;
+
 public class TileEntityCargo extends TileEntityManager
 {
     
@@ -267,7 +272,7 @@ public class TileEntityCargo extends TileEntityManager
 
 		latestTransferToBeUsed = transfer;
 		for (int i = 0; i < fromInv.getSizeInventory(); i++) {
-			if (TransferHandler.isSlotOfType(fromCont.getSlot(i),fromValid) && fromInv.getStackInSlot(i) != null) {
+			if (TransferHandler.isSlotOfType(fromCont.getSlot(i), fromValid) && fromInv.getStackInSlot(i) != null) {
 				ItemStack iStack = fromInv.getStackInSlot(i);
 				int stackSize = iStack.stackSize;
 				int maxNumber;

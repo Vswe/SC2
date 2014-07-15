@@ -2,12 +2,13 @@ package vswe.stevesvehicles.module.common.addon;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.module.LocalizationVisual;
 import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 
 
 public class ModuleColorRandomizer extends ModuleAddon {
@@ -43,9 +44,11 @@ public class ModuleColorRandomizer extends ModuleAddon {
 		return 50;
 	}
 
+    private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/color_randomizer.png");
+
 	@Override
 	public void drawBackground(GuiVehicle gui, int x, int y) {
-		ResourceHelper.bindResource("/gui/color_randomizer.png");
+		ResourceHelper.bindResource(TEXTURE);
 
 		float[] color = getColor();
 		GL11.glColor4f(color[0], color[1], color[2], 1.0F);

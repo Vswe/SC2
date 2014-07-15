@@ -26,9 +26,6 @@ import vswe.stevesvehicles.vehicle.entity.IVehicleEntity;
 
 public class PacketHandler {
 
-    //TODO? replace the networking with DataWriters and DataReaders maybe?
-    //TODO Might some clean up at least
-
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public void onClientPacket(FMLNetworkEvent.ClientCustomPacketEvent event) {

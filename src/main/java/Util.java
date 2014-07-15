@@ -1,6 +1,6 @@
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
-import vswe.stevesvehicles.old.Helpers.ComponentTypes;
+import vswe.stevesvehicles.item.ComponentTypes;
 import vswe.stevesvehicles.upgrade.Upgrade;
 import vswe.stevesvehicles.upgrade.registry.UpgradeRegistry;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;

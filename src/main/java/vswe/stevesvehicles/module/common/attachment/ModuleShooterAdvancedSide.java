@@ -1,58 +1,58 @@
 package vswe.stevesvehicles.module.common.attachment;
 
+import vswe.stevesvehicles.client.rendering.AnimationRigPart;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.AnimationRig;
-import vswe.stevesvehicles.old.Helpers.AnimationRigVal;
+import vswe.stevesvehicles.client.rendering.AnimationRig;
 
 public class ModuleShooterAdvancedSide extends ModuleShooterAdvanced {
 
 	private AnimationRig rig;
-	private AnimationRigVal handlePos;
-	private AnimationRigVal basePos;
-	private AnimationRigVal handleRot;
-	private AnimationRigVal gunRot;
-	private AnimationRigVal backPos;
-	private AnimationRigVal backRot;
-	private AnimationRigVal attacherRot;
-	private AnimationRigVal stabalizerOut;
-	private AnimationRigVal stabalizerDown;
-	private AnimationRigVal standOut;
-	private AnimationRigVal standUp;
-	private AnimationRigVal standSlide;
-	private AnimationRigVal armBasePos;
-	private AnimationRigVal armPos;
-	private AnimationRigVal armRot;
-	private AnimationRigVal missilePos;
-	private AnimationRigVal missileRot;
-	private AnimationRigVal armBasePos2;
-	private AnimationRigVal armPos2;
-	private AnimationRigVal armRot2;
+	private AnimationRigPart handlePos;
+	private AnimationRigPart basePos;
+	private AnimationRigPart handleRot;
+	private AnimationRigPart gunRot;
+	private AnimationRigPart backPos;
+	private AnimationRigPart backRot;
+	private AnimationRigPart attacherRot;
+	private AnimationRigPart stabalizerOut;
+	private AnimationRigPart stabalizerDown;
+	private AnimationRigPart standOut;
+	private AnimationRigPart standUp;
+	private AnimationRigPart standSlide;
+	private AnimationRigPart armBasePos;
+	private AnimationRigPart armPos;
+	private AnimationRigPart armRot;
+	private AnimationRigPart missilePos;
+	private AnimationRigPart missileRot;
+	private AnimationRigPart armBasePos2;
+	private AnimationRigPart armPos2;
+	private AnimationRigPart armRot2;
 	
 	public ModuleShooterAdvancedSide(VehicleBase vehicleBase) {
 		super(vehicleBase);
 		
 		rig = new AnimationRig();
 		
-		handlePos = new AnimationRigVal(rig, 8.55F, 9.4F, 0);
-		basePos = new AnimationRigVal(rig, 1.05F, 4F, 0.05F);
-		handleRot = new AnimationRigVal(rig, (float)Math.PI, (float)Math.PI * 3 / 2, 0.075F);
-		gunRot = new AnimationRigVal(rig, 0, -(float)Math.PI / 2, 0);
-		backPos = new AnimationRigVal(rig, 4.5F, -3F, 0.3F);
-		backRot = new AnimationRigVal(rig, 0, -(float)Math.PI / 2, 0.2F);
-		attacherRot = new AnimationRigVal(rig, 0, -(float)Math.PI, 0.2F);
-		stabalizerOut = new AnimationRigVal(rig, 0.001F, 0.8F, 0.1F);
-		stabalizerDown = new AnimationRigVal(rig, 0, -2, 0.1F);
-		standOut = new AnimationRigVal(rig, 0.001F, 0.8F, 0.1F);
-		standUp = new AnimationRigVal(rig, 0, 2, 0.1F);
-		standSlide = new AnimationRigVal(rig, 0, 0.25F, 0.01F);
-		armBasePos  = new AnimationRigVal(rig, 0.5F, 10F, 0.3F);
-		armPos = new AnimationRigVal(rig, -2.25F, 2.5F, 0);
-		armRot  = new AnimationRigVal(rig, 0, (float)Math.PI / 2, 0.2F);
-		missilePos = new AnimationRigVal(rig, 0, 3, 0.1F);
-		missileRot = new AnimationRigVal(rig, 0, -0.2F, 0F);
-		armRot2  = new AnimationRigVal(rig, 0, (float)Math.PI / 2, 0.2F);		
-		armBasePos2  = new AnimationRigVal(rig, 0, 9.5F, 0.3F);
-		armPos2 = new AnimationRigVal(rig, 0, 5F, 0);
+		handlePos = new AnimationRigPart(rig, 8.55F, 9.4F, 0);
+		basePos = new AnimationRigPart(rig, 1.05F, 4F, 0.05F);
+		handleRot = new AnimationRigPart(rig, (float)Math.PI, (float)Math.PI * 3 / 2, 0.075F);
+		gunRot = new AnimationRigPart(rig, 0, -(float)Math.PI / 2, 0);
+		backPos = new AnimationRigPart(rig, 4.5F, -3F, 0.3F);
+		backRot = new AnimationRigPart(rig, 0, -(float)Math.PI / 2, 0.2F);
+		attacherRot = new AnimationRigPart(rig, 0, -(float)Math.PI, 0.2F);
+		stabalizerOut = new AnimationRigPart(rig, 0.001F, 0.8F, 0.1F);
+		stabalizerDown = new AnimationRigPart(rig, 0, -2, 0.1F);
+		standOut = new AnimationRigPart(rig, 0.001F, 0.8F, 0.1F);
+		standUp = new AnimationRigPart(rig, 0, 2, 0.1F);
+		standSlide = new AnimationRigPart(rig, 0, 0.25F, 0.01F);
+		armBasePos  = new AnimationRigPart(rig, 0.5F, 10F, 0.3F);
+		armPos = new AnimationRigPart(rig, -2.25F, 2.5F, 0);
+		armRot  = new AnimationRigPart(rig, 0, (float)Math.PI / 2, 0.2F);
+		missilePos = new AnimationRigPart(rig, 0, 3, 0.1F);
+		missileRot = new AnimationRigPart(rig, 0, -0.2F, 0F);
+		armRot2  = new AnimationRigPart(rig, 0, (float)Math.PI / 2, 0.2F);
+		armBasePos2  = new AnimationRigPart(rig, 0, 9.5F, 0.3F);
+		armPos2 = new AnimationRigPart(rig, 0, 5F, 0);
 
 		
 		handlePos.setUpAndDown(basePos);

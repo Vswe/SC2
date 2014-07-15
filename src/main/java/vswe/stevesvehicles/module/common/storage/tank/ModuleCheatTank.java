@@ -4,7 +4,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.localization.entry.module.LocalizationTank;
 import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.ColorHelper;
+import vswe.stevesvehicles.client.gui.ColorHelper;
 
 
 public class ModuleCheatTank extends ModuleTank{

@@ -3,7 +3,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.EntityCake;
 
 
 public class ModuleCake extends ModuleProjectile {

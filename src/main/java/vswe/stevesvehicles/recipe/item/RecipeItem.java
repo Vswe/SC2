@@ -4,10 +4,7 @@ package vswe.stevesvehicles.recipe.item;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import vswe.stevesvehicles.module.data.ModuleData;
-import vswe.stevesvehicles.old.Helpers.ComponentTypes;
 import vswe.stevesvehicles.recipe.IRecipeOutput;
-import vswe.stevesvehicles.upgrade.Upgrade;
 import vswe.stevesvehicles.util.Tuple;
 
 import java.lang.reflect.Constructor;

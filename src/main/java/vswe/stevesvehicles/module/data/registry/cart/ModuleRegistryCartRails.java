@@ -20,7 +20,7 @@ import vswe.stevesvehicles.module.cart.attachment.ModuleRemover;
 import vswe.stevesvehicles.module.cart.attachment.ModuleTorch;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 
-import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
+import static vswe.stevesvehicles.item.ComponentTypes.*;
 
 public class ModuleRegistryCartRails extends ModuleRegistry {
     public ModuleRegistryCartRails() {

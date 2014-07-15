@@ -4,11 +4,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.module.LocalizationCake;
 import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.module.ISuppliesModule;
 import vswe.stevesvehicles.container.slots.SlotBase;
 import vswe.stevesvehicles.container.slots.SlotCake;
@@ -129,11 +130,13 @@ public class ModuleCakeServer extends ModuleAttachment implements ISuppliesModul
 
     private static final int TEXTURE_SPACING = 1;
 	private static final int[] RECT = {40, 20, 13, 36};
-	
+    private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/cake.png");
+
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawBackground(GuiVehicle gui, int x, int y) {
-		ResourceHelper.bindResource("/gui/cake.png");
+		ResourceHelper.bindResource(TEXTURE);
 				
 		drawImage(gui, RECT, TEXTURE_SPACING, TEXTURE_SPACING + (inRect(x, y, RECT) ? RECT[3] + TEXTURE_SPACING : 0));
 		int maxHeight = RECT[3] - 2;

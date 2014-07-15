@@ -8,12 +8,12 @@ import vswe.stevesvehicles.client.rendering.models.ModelDynamite;
 import vswe.stevesvehicles.client.rendering.models.ModelShield;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleSide;
-import vswe.stevesvehicles.module.common.addon.ModuleChunkLoader;
+import vswe.stevesvehicles.module.common.addon.chunk.ModuleChunkLoader;
 import vswe.stevesvehicles.module.common.addon.ModuleShield;
 import vswe.stevesvehicles.module.common.attachment.ModuleDynamite;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 
-import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
+import static vswe.stevesvehicles.item.ComponentTypes.*;
 
 
 public class ModuleRegistryIndependence extends ModuleRegistry {

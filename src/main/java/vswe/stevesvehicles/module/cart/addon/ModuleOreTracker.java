@@ -7,7 +7,7 @@ import net.minecraft.block.BlockOre;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import vswe.stevesvehicles.module.common.addon.ModuleAddon;
-import vswe.stevesvehicles.old.Helpers.BlockCoordinate;
+import vswe.stevesvehicles.block.BlockCoordinate;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.module.cart.tool.ModuleDrill;
 

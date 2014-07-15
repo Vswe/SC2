@@ -10,7 +10,7 @@ import vswe.stevesvehicles.container.ContainerManager;
 import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.network.PacketHandler;
 import vswe.stevesvehicles.network.PacketType;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.tileentity.TileEntityManager;
 import net.minecraft.block.Block;
 

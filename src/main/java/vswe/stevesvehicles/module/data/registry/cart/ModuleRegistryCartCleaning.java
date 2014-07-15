@@ -2,7 +2,6 @@ package vswe.stevesvehicles.module.data.registry.cart;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import vswe.stevesvehicles.client.rendering.models.ModelCleaner;
 import vswe.stevesvehicles.client.rendering.models.ModelHullTop;
@@ -10,13 +9,13 @@ import vswe.stevesvehicles.client.rendering.models.ModelLiquidDrainer;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.module.data.ModuleSide;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.module.cart.attachment.ModuleCleaner;
 import vswe.stevesvehicles.module.cart.attachment.ModuleExperience;
 import vswe.stevesvehicles.module.cart.attachment.ModuleLiquidDrainer;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 
-import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
+import static vswe.stevesvehicles.item.ComponentTypes.*;
 
 
 

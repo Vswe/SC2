@@ -2,13 +2,13 @@ package vswe.stevesvehicles.module.cart.addon;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.module.common.addon.ModuleAddon;
 import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.HeightControlOre;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 
 public class ModuleHeightControl extends ModuleAddon {
 	public ModuleHeightControl(VehicleBase vehicleBase) {
@@ -69,10 +69,11 @@ public class ModuleHeightControl extends ModuleAddon {
 	}
 
 		
-	
+	private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/height_control.png");
+
 	@Override
 	public void drawBackground(GuiVehicle gui, int x, int y) {
-		ResourceHelper.bindResource("/gui/height_control.png");
+		ResourceHelper.bindResource(TEXTURE);
 
 		//draw the box for the numbers
 		drawImage(gui, LEVEL_NUMBER_BOX_X, LEVEL_NUMBER_BOX_Y, 6, 42, 21, 15);
@@ -97,6 +98,9 @@ public class ModuleHeightControl extends ModuleAddon {
                     srcY = 1;
 					srcX = 1;
                 }else{
+                    if (!ore.useDefaultTexture) {
+                        ResourceHelper.bindResource(ore.specialTexture);
+                    }
 					srcX = ore.srcX;
                     srcY = ore.srcY;
 
@@ -107,6 +111,8 @@ public class ModuleHeightControl extends ModuleAddon {
 				}
 
                 drawImage(gui, ORE_MAP_X + i * 4, ORE_MAP_Y + j * 4, srcX, srcY, 4, 4);
+
+                ResourceHelper.bindResource(TEXTURE);
             }
         }
 

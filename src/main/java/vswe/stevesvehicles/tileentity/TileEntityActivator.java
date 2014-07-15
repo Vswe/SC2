@@ -11,13 +11,13 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.localization.entry.block.LocalizationToggler;
 import vswe.stevesvehicles.network.DataReader;
+import vswe.stevesvehicles.tileentity.toggler.TogglerOption;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.container.ContainerActivator;
 import vswe.stevesvehicles.container.ContainerBase;
-import vswe.stevesvehicles.old.Helpers.ActivatorOption;
 import vswe.stevesvehicles.client.gui.screen.GuiActivator;
 import vswe.stevesvehicles.client.gui.screen.GuiBase;
-import vswe.stevesvehicles.module.common.addon.ModuleChunkLoader;
+import vswe.stevesvehicles.module.common.addon.chunk.ModuleChunkLoader;
 import vswe.stevesvehicles.module.common.addon.ModuleInvisible;
 import vswe.stevesvehicles.module.common.addon.ModuleShield;
 import vswe.stevesvehicles.module.common.attachment.ModuleCage;
@@ -44,7 +44,7 @@ public class TileEntityActivator extends TileEntityBase {
 	/**
 	 * The different settings the toggler can toggle
 	 */
-	private ArrayList<ActivatorOption> options;
+	private ArrayList<TogglerOption> options;
 
     public TileEntityActivator() {
 		loadOptions();
@@ -55,20 +55,20 @@ public class TileEntityActivator extends TileEntityBase {
      * Load the different settings the player can toggle and change. For example the drill.
      */
 	private void loadOptions() {
-		options = new ArrayList<ActivatorOption>();
-		options.add(new ActivatorOption(LocalizationToggler.DRILL_OPTION, ModuleDrill.class));
-		options.add(new ActivatorOption(LocalizationToggler.SHIELD_OPTION, ModuleShield.class));
-		options.add(new ActivatorOption(LocalizationToggler.INVISIBILITY_OPTION, ModuleInvisible.class));
-		options.add(new ActivatorOption(LocalizationToggler.CHUNK_OPTION, ModuleChunkLoader.class));
-		options.add(new ActivatorOption(LocalizationToggler.AUTO_CAGE_OPTION, ModuleCage.class, 0));
-		options.add(new ActivatorOption(LocalizationToggler.CAGE_OPTION, ModuleCage.class, 1));
+		options = new ArrayList<TogglerOption>();
+		options.add(new TogglerOption(LocalizationToggler.DRILL_OPTION, ModuleDrill.class));
+		options.add(new TogglerOption(LocalizationToggler.SHIELD_OPTION, ModuleShield.class));
+		options.add(new TogglerOption(LocalizationToggler.INVISIBILITY_OPTION, ModuleInvisible.class));
+		options.add(new TogglerOption(LocalizationToggler.CHUNK_OPTION, ModuleChunkLoader.class));
+		options.add(new TogglerOption(LocalizationToggler.AUTO_CAGE_OPTION, ModuleCage.class, 0));
+		options.add(new TogglerOption(LocalizationToggler.CAGE_OPTION, ModuleCage.class, 1));
 	}
 	
 	/**
 	 * Get the different settings the toggler can toggle
 	 * @return A list of the settings
 	 */
-	public ArrayList<ActivatorOption> getOptions() {
+	public ArrayList<TogglerOption> getOptions() {
 		return options;
 	}
 
@@ -77,7 +77,7 @@ public class TileEntityActivator extends TileEntityBase {
         super.readFromNBT(nbttagcompound);
         
         //load all the options
- 		for (ActivatorOption option : options) {
+ 		for (TogglerOption option : options) {
 			option.setOption(nbttagcompound.getByte(option.getName()));
 		}
     }
@@ -87,7 +87,7 @@ public class TileEntityActivator extends TileEntityBase {
         super.writeToNBT(nbttagcompound);
         
         //save all the options
-		for (ActivatorOption option : options) {
+		for (TogglerOption option : options) {
 			nbttagcompound.setByte(option.getName(), (byte)option.getOption());
 		}
     }
@@ -147,7 +147,7 @@ public class TileEntityActivator extends TileEntityBase {
 	public void handleCart(EntityModularCart cart, boolean isOrange) {
 		
 		//tell the cart to update with any option that is not disabled
-		for (ActivatorOption option : options) {
+		for (TogglerOption option : options) {
 			if (!option.isDisabled()) {
 				cart.getVehicle().handleActivator(option, isOrange);
 			}

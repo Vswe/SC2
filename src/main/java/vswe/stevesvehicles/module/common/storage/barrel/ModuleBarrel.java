@@ -14,8 +14,8 @@ import vswe.stevesvehicles.container.slots.SlotBase;
 import vswe.stevesvehicles.localization.entry.module.LocalizationBarrel;
 import vswe.stevesvehicles.module.common.storage.ModuleStorage;
 import vswe.stevesvehicles.network.DataReader;
-import vswe.stevesvehicles.old.Helpers.ColorHelper;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.gui.ColorHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 
 import java.util.List;

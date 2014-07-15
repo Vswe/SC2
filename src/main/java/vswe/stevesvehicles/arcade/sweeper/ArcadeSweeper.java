@@ -2,6 +2,7 @@ package vswe.stevesvehicles.arcade.sweeper;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import vswe.stevesvehicles.arcade.ArcadeGame;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.arcade.sweeper.Tile.TILE_STATE;
@@ -9,7 +10,7 @@ import vswe.stevesvehicles.localization.entry.arcade.LocalizationSweeper;
 import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.module.common.attachment.ModuleArcade;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -68,7 +69,8 @@ public class ArcadeSweeper extends ArcadeGame {
 		}
 	}
 	
-	private void newGame(int width, int height, int totalCreepers) {	
+	@SuppressWarnings("ConstantConditions")
+    private void newGame(int width, int height, int totalCreepers) {
 		isPlaying = true;
 		ticks = 0;
 		creepersLeft = totalCreepers;
@@ -126,13 +128,13 @@ public class ArcadeSweeper extends ArcadeGame {
 	private int getMarginTop() {
 		return (VehicleBase.MODULAR_SPACE_HEIGHT - tiles[0].length * 10) / 2;
 	}
-	
-	private static final String TEXTURE_MENU = "/gui/sweeper.png";
-	
+
+    private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/sweeper.png");
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawBackground(GuiVehicle gui, int x, int y) {
-		ResourceHelper.bindResource(TEXTURE_MENU);
+		ResourceHelper.bindResource(TEXTURE);
 		
 		for (int i = 0; i < tiles.length; i++) {
 			for(int j = 0; j < tiles[0].length; j++) {	
@@ -159,7 +161,8 @@ public class ArcadeSweeper extends ArcadeGame {
 			openTile(xc, yc, true);
 		}else if(button == 1 && isValidCoordinate(xc, yc)) {
 			hasStarted = true;
-			playSound("flagclick", 1, 1);
+            //noinspection SpellCheckingInspection
+            playSound("flagclick", 1, 1);
 			tiles[xc][yc].mark();
 		}else if(button == 2 && isValidCoordinate(xc, yc)) {
 			if (tiles[xc][yc].getState() == TILE_STATE.OPENED) {
@@ -215,7 +218,8 @@ public class ArcadeSweeper extends ArcadeGame {
 			}else{
 				if (result == Tile.TileOpenResult.BLOB) {
 					if (first) {
-						playSound("blobclick", 1, 1);
+                        //noinspection SpellCheckingInspection
+                        playSound("blobclick", 1, 1);
 					}
 					
 					for (int i = -1; i <= 1; i++) {

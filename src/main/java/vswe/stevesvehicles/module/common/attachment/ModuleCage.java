@@ -20,13 +20,14 @@ import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.passive.EntityWaterMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.module.LocalizationTravel;
 import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
 import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.module.IActivatorModule;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -62,11 +63,13 @@ public class ModuleCage extends ModuleAttachment implements IActivatorModule {
 	}
 
     private static final int TEXTURE_SPACING = 1;
-	
+
+    private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/cage.png");
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawBackground(GuiVehicle gui, int x, int y) {
-		ResourceHelper.bindResource("/gui/cage.png");
+		ResourceHelper.bindResource(TEXTURE);
 
 		drawButton(gui, x, y, AUTO_RECT, disablePickup ? 2 : 3);
 		drawButton(gui, x, y, MANUAL_RECT, isCageEmpty() ? 0 : 1);

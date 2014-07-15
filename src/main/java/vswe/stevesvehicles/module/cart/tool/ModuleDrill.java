@@ -13,6 +13,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Vec3;
 import vswe.stevesvehicles.client.gui.assembler.SimulationInfo;
 import vswe.stevesvehicles.client.gui.assembler.SimulationInfoBoolean;
@@ -21,9 +22,9 @@ import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
 import vswe.stevesvehicles.localization.entry.module.cart.LocalizationCartTool;
 import vswe.stevesvehicles.block.ModBlocks;
 import vswe.stevesvehicles.network.DataReader;
-import vswe.stevesvehicles.old.Helpers.BlockCoordinate;
+import vswe.stevesvehicles.block.BlockCoordinate;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.module.IActivatorModule;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.cart.addon.ModuleDrillIntelligence;
@@ -556,12 +557,14 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
 	private static final int TEXTURE_SPACING = 1;
     private static final int[] BUTTON_RECT = new int[] {15,30, 24, 12};
 
+    private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/drill.png");
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawBackground(GuiVehicle gui, int x, int y) {
 		super.drawBackground(gui, x, y);
 		
-		ResourceHelper.bindResource("/gui/drill.png");
+		ResourceHelper.bindResource(TEXTURE);
 
 		int imageID = isDrillEnabled() ? 1 : 0;
 		int borderID = 0;

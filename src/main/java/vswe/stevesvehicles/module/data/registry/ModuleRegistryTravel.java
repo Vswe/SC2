@@ -15,7 +15,7 @@ import vswe.stevesvehicles.module.common.attachment.ModuleCage;
 import vswe.stevesvehicles.module.common.attachment.ModuleSeat;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 
-import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
+import static vswe.stevesvehicles.item.ComponentTypes.*;
 
 public class ModuleRegistryTravel extends ModuleRegistry {
     public static final String SEAT_KEY = "Seats";

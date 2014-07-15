@@ -17,21 +17,21 @@ import vswe.stevesvehicles.localization.entry.info.LocalizationMessage;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleSide;
-import vswe.stevesvehicles.old.Helpers.GiftItem;
+import vswe.stevesvehicles.holiday.GiftItem;
 import vswe.stevesvehicles.module.common.storage.chest.ModuleEggBasket;
 import vswe.stevesvehicles.module.common.storage.chest.ModuleExtractingChests;
 import vswe.stevesvehicles.module.common.storage.chest.ModuleFrontChest;
 import vswe.stevesvehicles.module.common.storage.chest.ModuleGiftStorage;
 import vswe.stevesvehicles.module.common.storage.chest.ModuleSideChests;
 import vswe.stevesvehicles.module.common.storage.chest.ModuleTopChest;
-import vswe.stevesvehicles.old.Helpers.HolidayType;
-import vswe.stevesvehicles.old.StevesVehicles;
+import vswe.stevesvehicles.holiday.HolidayType;
+import vswe.stevesvehicles.StevesVehicles;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-import static vswe.stevesvehicles.old.Helpers.ComponentTypes.*;
+import static vswe.stevesvehicles.item.ComponentTypes.*;
 
 
 public class ModuleRegistryChests extends ModuleRegistry {

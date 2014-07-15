@@ -9,10 +9,10 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import vswe.stevesvehicles.container.slots.ISpecialSlotRender;
+import vswe.stevesvehicles.module.data.ModuleDataPair;
 import vswe.stevesvehicles.vehicle.VehicleBase;
-import vswe.stevesvehicles.old.Helpers.GeneratedInfo;
-import vswe.stevesvehicles.old.Helpers.ModuleCountPair;
-import vswe.stevesvehicles.old.Helpers.ResourceHelper;
+import vswe.stevesvehicles.GeneratedInfo;
+import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.container.slots.SlotBase;
 import cpw.mods.fml.relauncher.Side;
@@ -140,13 +140,13 @@ public class GuiVehicle extends GuiBase {
     	x -= getGuiLeft();
     	y -= getGuiTop();
     	
-    	ArrayList<ModuleCountPair> moduleCounts = vehicle.getModuleCounts();
+    	ArrayList<ModuleDataPair> moduleCounts = vehicle.getModuleCounts();
     	ResourceHelper.bindResource(moduleTexture);
     	
     	GL11.glEnable(GL11.GL_BLEND);
     	
     	for (int i = 0; i < moduleCounts.size(); i++) {
-    		ModuleCountPair count = moduleCounts.get(i);
+    		ModuleDataPair count = moduleCounts.get(i);
     		
     		float alpha = inRect(x, y, getModuleDisplayX(i), getModuleDisplayY(i), 16, 16) ? 1 : 0.5F;
     		GL11.glColor4f(1F, 1F, 1F, alpha);
@@ -161,14 +161,14 @@ public class GuiVehicle extends GuiBase {
     	x -= getGuiLeft();
     	y -= getGuiTop();    	
     	
-    	ArrayList<ModuleCountPair> moduleCounts = vehicle.getModuleCounts();
+    	ArrayList<ModuleDataPair> moduleCounts = vehicle.getModuleCounts();
     	GL11.glColor4f(1F, 1F, 1F, 1F);
     	
     	getFontRenderer().drawString(vehicle.getVehicleName(), 5, 172, 0x404040);
     	
     	GL11.glEnable(GL11.GL_BLEND);
     	for (int i = 0; i < moduleCounts.size(); i++) {
-    		ModuleCountPair count = moduleCounts.get(i);
+    		ModuleDataPair count = moduleCounts.get(i);
     		
     		if (count.getCount() != 1) {
         		int alpha = (int)((inRect(x, y, getModuleDisplayX(i), getModuleDisplayY(i), 16, 16) ? 1 : 0.75F) * 256);
@@ -184,11 +184,11 @@ public class GuiVehicle extends GuiBase {
     	x -= getGuiLeft();
     	y -= getGuiTop();    	
     	
-    	ArrayList<ModuleCountPair> moduleCounts = vehicle.getModuleCounts();
+    	ArrayList<ModuleDataPair> moduleCounts = vehicle.getModuleCounts();
     	GL11.glColor4f(1F, 1F, 1F, 1F);
     	
     	for (int i = 0; i < moduleCounts.size(); i++) {
-    		ModuleCountPair count = moduleCounts.get(i);
+    		ModuleDataPair count = moduleCounts.get(i);
     		
     		if (inRect(x, y, getModuleDisplayX(i), getModuleDisplayY(i), 16, 16)) {
     			drawMouseOver(count.toString(), x, y);
