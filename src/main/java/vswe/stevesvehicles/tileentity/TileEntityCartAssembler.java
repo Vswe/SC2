@@ -1694,7 +1694,7 @@ public class TileEntityCartAssembler extends TileEntityBase
         if (StevesVehicles.hasGreenScreen) {
             return ((SimulationInfoInteger)getDropDown().get(0)).getValue();
         }else{
-            return 0;
+            return 1;
         }
     }
 }

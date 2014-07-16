@@ -525,7 +525,7 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
 	@Override
 	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0) {
-			if (inRect(x,y, BUTTON_RECT)) {
+			if (inRect(x,y, TOGGLE_BOX_RECT)) {
 				sendPacketToServer(getDataWriter());
 			}
 		}
@@ -554,35 +554,30 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
 	}
 
 
-	private static final int TEXTURE_SPACING = 1;
-    private static final int[] BUTTON_RECT = new int[] {15,30, 24, 12};
+    @Override
+    public int guiWidth() {
+        return 45;
+    }
 
-    private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/drill.png");
+    @Override
+    public int guiHeight() {
+        return 40;
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void drawBackground(GuiVehicle gui, int x, int y) {
-		super.drawBackground(gui, x, y);
-		
-		ResourceHelper.bindResource(TEXTURE);
 
-		int imageID = isDrillEnabled() ? 1 : 0;
-		int borderID = 0;
-		if (inRect(x,y, BUTTON_RECT)) {
-			borderID = 1;			
-		}
 
-		drawImage(gui, BUTTON_RECT, TEXTURE_SPACING,  TEXTURE_SPACING + (TEXTURE_SPACING + BUTTON_RECT[3]) * borderID);
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void drawBackground(GuiVehicle gui, int x, int y) {
+        drawToggleBox(gui, "drill", isDrillEnabled(), x, y);
+    }
 
-		int srcY = TEXTURE_SPACING + (TEXTURE_SPACING + BUTTON_RECT[3]) * 2 + imageID * (TEXTURE_SPACING + BUTTON_RECT[3] - 2);
-		drawImage(gui, BUTTON_RECT[0] + 1, BUTTON_RECT[1] + 1, 0, srcY, BUTTON_RECT[2] - 2, BUTTON_RECT[3] - 2);
-	}
 
-	@Override
-	public void drawMouseOver(GuiVehicle gui, int x, int y) {
-		super.drawMouseOver(gui,x, y);
-		drawStringOnMouseOver(gui, getStateName(), x,y, BUTTON_RECT);
-	}	
+    @Override
+    public void drawMouseOver(GuiVehicle gui, int x, int y) {
+        drawStringOnMouseOver(gui, getStateName(), x,y, TOGGLE_IMAGE_RECT);
+    }
+
 	
 	private String getStateName() {
         return LocalizationCartTool.DRILL_TOGGLE.translate(isDrillEnabled() ? "1" : "0");

@@ -612,7 +612,7 @@ steves_vehicles:gui.cart.drill_utility:drill_intelligence.locked=The drill will 
 steves_vehicles:gui.cart.drill_utility:drill_intelligence.change=Change drill intelligence
 steves_vehicles:gui.cart.drill_utility:drill_intelligence.current=Currently: [%1->Enabled|Disabled]
 steves_vehicles:gui.common.util:enchanter.instruction=Add an Enchanted Book in the slot to the left.
-steves_vehicles:gui.common.visual:invisibility_core.toggle=[%1->Activate|Deactivate] invisibility core
+steves_vehicles:gui.common.visual:invisibility_core.state=The vehicle is [%1->visible|invisible]
 steves_vehicles:gui.common.visual:information_provider.name_label=Name
 steves_vehicles:gui.common.visual:information_provider.distance_label=Distance
 steves_vehicles:gui.common.visual:information_provider.distance_message=Distance: [%1]m
@@ -640,12 +640,15 @@ steves_vehicles:gui.common.production:common.change_limit=[%1->Increase|Decrease
 steves_vehicles:gui.common.production:common.change_limit_ten=Shift click to change by 10.
 steves_vehicles:gui.common.production:common.change_limit_stack=Ctrl click to change by 64.
 steves_vehicles:gui.common.production:common.infinite=Inf
-steves_vehicles:gui.common.independence:divine_shield.toggle=[%1->Activate|Deactivate] shield
+steves_vehicles:gui.common.independence:divine_shield.state=Shield is [%1->disabled|enabled]
 steves_vehicles:gui.common.visual:color_randomizer.randomize=Randomize Color
-steves_vehicles:gui.common.independence:chunk_loader.message=[%1->Activate|Deactivate] chunk loading
+steves_vehicles:gui.common.independence:chunk_loader.state=Chunk loading is [%1->disabled|enabled]
 steves_vehicles:gui.common.util:enchanter.left=[%1]% left of this tier
-steves_vehicles:gui.common.travel:arcade.pages=Page [%1] of [%2]
-steves_vehicles:gui.common.travel:arcade.exit=Exit
+steves_vehicles:gui.common.travel:steves_arcade.pages=Page [%1] of [%2]
+steves_vehicles:gui.common.travel:steves_arcade.exit=Exit
+steves_vehicles:gui.cart.rails:height_controller.move_target=Click to move the target level
+steves_vehicles:gui.cart.rails:height_controller.move_target_ten=Shift click to move it by 10
+steves_vehicles:gui.cart.rails:height_controller.reset_target=Click to set the target to the current Y level
 
 # Engines
 steves_vehicles:gui.common.engines:creative_engine.power=Power Level: [%1]
@@ -675,7 +678,7 @@ steves_vehicles:gui.common.tank:common.invalid_fluid=Unknown
 
 # Tools
 steves_vehicles:gui.cart.tools:drill.title=Drill
-steves_vehicles:gui.cart.tools:drill.toggle=[%1->Enable|Disable] drill
+steves_vehicles:gui.cart.tools:drill.state=Drill is [%1->disabled|enabled]
 steves_vehicles:gui.cart.tools:farmer.title=Farmer
 steves_vehicles:gui.cart.tools:wood_cutter.title=Wood cutter
 
@@ -686,12 +689,14 @@ steves_vehicles:gui.cart.travel:advanced_control_system.title=Adv Control Sys
 steves_vehicles:gui.cart.travel:advanced_control_system.units=[%1->|k|M|G|T|P]m
 steves_vehicles:gui.cart.travel:advanced_control_system.odo=ODO
 steves_vehicles:gui.cart.travel:advanced_control_system.trip=TRIP
-steves_vehicles:gui.common.travel:cage.auto_message=[%1->Activate|Deactivate] auto pick up
+steves_vehicles:gui.common.travel:cage.state_message=Auto pick up is [%1->disabled|enabled]
 steves_vehicles:gui.common.travel:cage.message=[%1->Grab nearby|Release caged] creature
 steves_vehicles:gui.common.cake:common.title=Cake Server
 steves_vehicles:gui.common.cake:common.cakes_label=Cakes: [%1] / [%2]
 steves_vehicles:gui.common.cake:common.slices_label=Slices: [%1] / [%2]
 steves_vehicles:gui.common.independence:dynamite_carrier.title=Explosives
+steves_vehicles:gui.common.independence:dynamite_carrier.fuse_length=Fuse length: [%1]
+steves_vehicles:gui.common.independence:dynamite_carrier.exploding=It's going to explode! Fuse: [%1] / [%2]
 steves_vehicles:gui.cart.cleaning:experience_bank.title=Experience
 steves_vehicles:gui.cart.cleaning:experience_bank.level=Experience level: [%1] / [%2]
 steves_vehicles:gui.cart.cleaning:experience_bank.extract=Click to extract 50xp

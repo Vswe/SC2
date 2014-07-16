@@ -339,14 +339,19 @@ public class GuiVehicle extends GuiBase {
 			}
 
 			if (GeneratedInfo.inDev) {
-				drawTexturedModalRect(getGuiLeft() + module.getX(), getGuiTop() + module.getY(), xSize-256, 18, 3, 3);
-				drawTexturedModalRect(getGuiLeft() + module.getX() + module.guiWidth() - 2, getGuiTop() + module.getY(), xSize-256 + 3, 18, 3, 3);
-				drawTexturedModalRect(getGuiLeft() + module.getX() + module.guiWidth() - 2, getGuiTop() + module.getY() + module.guiHeight() - 2, xSize-256 + 3, 18+3, 3, 3);
-				drawTexturedModalRect(getGuiLeft() + module.getX(), getGuiTop() + module.getY() + module.guiHeight() - 2, xSize-256, 18 + 3, 3, 3);
+
+				drawTexturedModalRect(getGuiLeft() + module.getX(), getGuiTop() + module.getY() - vehicle.getRealScrollY(), MARKER_SRC_X, MARKER_SRC_Y, 3, 3);
+				drawTexturedModalRect(getGuiLeft() + module.getX() + module.guiWidth() - 2, getGuiTop() + module.getY() - vehicle.getRealScrollY(), MARKER_SRC_X + 3, MARKER_SRC_Y, 3, 3);
+				drawTexturedModalRect(getGuiLeft() + module.getX() + module.guiWidth() - 2, getGuiTop() + module.getY() + module.guiHeight() - 2 - vehicle.getRealScrollY(), MARKER_SRC_X + 3, MARKER_SRC_Y + 3, 3, 3);
+				drawTexturedModalRect(getGuiLeft() + module.getX(), getGuiTop() + module.getY() + module.guiHeight() - 2 - vehicle.getRealScrollY(), MARKER_SRC_X, MARKER_SRC_Y + 3, 3, 3);
 			}
 		}
 		
-    } 
+    }
+
+    private static final int MARKER_SRC_X = 250;
+    private static final int MARKER_SRC_Y = 250;
+
 
     private void resetSlot(SlotBase slot) {
 		slot.xDisplayPosition = -9001;

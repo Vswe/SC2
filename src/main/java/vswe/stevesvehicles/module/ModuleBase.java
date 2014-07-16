@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.FakePlayerFactory;
@@ -24,6 +25,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
+import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.client.gui.assembler.SimulationInfo;
 import vswe.stevesvehicles.client.gui.assembler.SimulationInfoBoolean;
 import vswe.stevesvehicles.client.gui.assembler.SimulationInfoInteger;
@@ -1525,4 +1527,32 @@ public abstract class ModuleBase {
         setTextureSize(DEFAULT_TEXTURE_SIZE);
     }
 
+    private static final ResourceLocation TOGGLE_TEXTURE = ResourceHelper.getResource("/gui/toggle_base.png");
+    private static final int TEXTURE_SPACING = 1;
+    private static final int TOGGLE_IMAGE_BORDER_SRC_X = 1;
+    private static final int TOGGLE_IMAGE_BORDER_SRC_Y = 19;
+    protected static final int[] TOGGLE_BOX_RECT = new int[] {10, 21, 8, 8};
+    protected static final int[] TOGGLE_IMAGE_RECT = new int[] {20, 16, 18, 18};
+    private ResourceLocation toggleImageTexture;
+
+    @SideOnly(Side.CLIENT)
+    protected void drawToggleBox(GuiVehicle gui, String texture, boolean enabled, int x, int y) {
+        if (toggleImageTexture == null) {
+            toggleImageTexture = ResourceHelper.getResource("/gui/toggle/" + texture + ".png");
+        }
+
+        ResourceHelper.bindResource(TOGGLE_TEXTURE);
+
+        int backgroundId = enabled ? 1 : 0;
+        int borderID = inRect(x,y, TOGGLE_BOX_RECT) ? 1 : 0;
+
+        ResourceHelper.bindResource(toggleImageTexture);
+        setTextureSize(16);
+        drawImage(gui, TOGGLE_IMAGE_RECT[0] + 1, TOGGLE_IMAGE_RECT[1] + 1, 0, 0, TOGGLE_IMAGE_RECT[2] - 2, TOGGLE_IMAGE_RECT[3] - 2);
+        resetTextureSize();
+
+        ResourceHelper.bindResource(TOGGLE_TEXTURE);
+        drawImage(gui, TOGGLE_IMAGE_RECT, TOGGLE_IMAGE_BORDER_SRC_X, TOGGLE_IMAGE_BORDER_SRC_Y + (enabled ? 0 : TEXTURE_SPACING + TOGGLE_IMAGE_RECT[3]));
+        drawImage(gui, TOGGLE_BOX_RECT, TEXTURE_SPACING + (TEXTURE_SPACING + TOGGLE_BOX_RECT[2]) * backgroundId, TEXTURE_SPACING + (TEXTURE_SPACING + TOGGLE_BOX_RECT[3]) * borderID);
+    }
 }

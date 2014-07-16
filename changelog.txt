@@ -61,3 +61,13 @@ Changed features, from a player's perspective.
 * Item and block icons have been rearranged to have a better structure. Some blocks have also received individual textures where they previously shared them with other blocks (for instance all detector units used the same texture at the bottom).
 
 * The Steve's Arcade can now receive games from other mods. If more than 4 games exist (Steve's Vehicles register 4 games), multiple pages of games will be shown.
+
+* The chunk loader will now run for an extra second after running out of fuel. This should make it more stable.
+
+* Drills, the divine shield, the cage, the invisibility core and the chunk loader has received new interfaces that are more clear whether they are active or not.
+
+* The colorizer's scroll bars are now easier to scroll (one can click anywhere on the bars to pick up the marker) and is easier to see what values they have while scrolling (the mouse over effect will be displayed while scrolling now matter where the mouse is).
+
+* The Dynamite Carrier's fuse length can now be changed easier with a better scroll bar. The current fuse length (and the remaining fuse when exploding) are now being displayed in a tooltip.
+
+* The Height Controller has received a slightly improved interface. The buttons now uses hover effects and tooltips with instructions.

@@ -38,7 +38,8 @@ public abstract class GuiBase extends GuiContainerSpecial {
 	public boolean inRect(int x, int y, int[] coords) {
 		return coords != null && x >= coords[0] && x < coords[0] + coords[2] && y >= coords[1] && y < coords[1] + coords[3];
 	}
-	
+
+    //TODO due to the scaling the mouse over may go outside the screen(since it doesn't realize the mouse over should go to the left rather than to the right when close to the right hand edge)
 	public void drawMouseOver(List text, int x, int y) {
 		GL11.glDisable(GL11.GL_LIGHTING);
 

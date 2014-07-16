@@ -20,7 +20,7 @@ public final class LocalizationVisual {
     public static final ILocalizedText FUEL_MESSAGE_NO_CONSUMPTION = createSimple("information_provider.fuel_message_no_consumption");
     public static final ILocalizedText STORAGE_LABEL = createSimple("information_provider.storage_label");
     public static final ILocalizedText LABELS = createSimple("information_provider.labels");
-    public static final ILocalizedText INVISIBILITY_TOGGLE = createAdvanced("invisibility_core.toggle");
+    public static final ILocalizedText INVISIBILITY_TOGGLE = createAdvanced("invisibility_core.state");
     public static final ILocalizedText PIANO = createSimple("note_sequencer.piano");
     public static final ILocalizedText BASS_DRUM = createSimple("note_sequencer.bass_drum");
     public static final ILocalizedText SNARE_DRUM = createSimple("note_sequencer.snare_drum");

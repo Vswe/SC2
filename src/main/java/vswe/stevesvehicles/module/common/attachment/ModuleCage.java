@@ -47,15 +47,6 @@ public class ModuleCage extends ModuleAttachment implements IActivatorModule {
 		return true;
 	}
 
-	@Override
-	public int guiWidth() {
-		return 80;
-	}
-
-	@Override
-	public int guiHeight() {
-		return 35;
-	}
 
 	@Override
 	public void drawForeground(GuiVehicle gui) {
@@ -66,12 +57,25 @@ public class ModuleCage extends ModuleAttachment implements IActivatorModule {
 
     private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/cage.png");
 
+    @Override
+    public int guiWidth() {
+        return 80;
+    }
+
+    @Override
+    public int guiHeight() {
+        return 40;
+    }
+
+
+
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void drawBackground(GuiVehicle gui, int x, int y) {
+        drawToggleBox(gui, "cage", !disablePickup, x, y);
 		ResourceHelper.bindResource(TEXTURE);
 
-		drawButton(gui, x, y, AUTO_RECT, disablePickup ? 2 : 3);
 		drawButton(gui, x, y, MANUAL_RECT, isCageEmpty() ? 0 : 1);
 	}
 
@@ -85,14 +89,13 @@ public class ModuleCage extends ModuleAttachment implements IActivatorModule {
 		int srcY = (TEXTURE_SPACING + coordinates[3]) * 2 + imageId * (TEXTURE_SPACING + coordinates[3] - 2);
 		drawImage(gui, coordinates[0] + 1, coordinates[1] + 1, 0, srcY, coordinates[2] - 2, coordinates[3] - 2);
 	}	
-	
-	private static final int[] AUTO_RECT = new int[] {15, 20, 24, 12};
-	private static final int[] MANUAL_RECT = new int[] {AUTO_RECT[0] + AUTO_RECT[2] + 5, AUTO_RECT[1], AUTO_RECT[2], AUTO_RECT[3]};
+
+	private static final int[] MANUAL_RECT = new int[] {44, 20, 24, 12};
 
 
 	@Override
 	public void drawMouseOver(GuiVehicle gui, int x, int y) {
-		drawStringOnMouseOver(gui, LocalizationTravel.CAGE_AUTO_MESSAGE.translate(disablePickup ? "0" : "1"), x, y, AUTO_RECT);
+        drawStringOnMouseOver(gui, LocalizationTravel.CAGE_AUTO_MESSAGE.translate(disablePickup ? "0" : "1"), x,y, TOGGLE_IMAGE_RECT);
 		drawStringOnMouseOver(gui, LocalizationTravel.CAGE_MESSAGE.translate(isCageEmpty() ? "0" : "1"), x, y, MANUAL_RECT);
 	}
 
@@ -104,7 +107,7 @@ public class ModuleCage extends ModuleAttachment implements IActivatorModule {
 	@Override
 	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0) {
-			if (inRect(x,y, AUTO_RECT)) {
+			if (inRect(x,y, TOGGLE_BOX_RECT)) {
                 DataWriter dw = getDataWriter();
                 dw.writeBoolean(true);
                 sendPacketToServer(dw);

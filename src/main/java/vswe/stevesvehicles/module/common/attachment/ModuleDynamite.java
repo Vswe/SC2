@@ -92,10 +92,12 @@ public class ModuleDynamite extends ModuleAttachment {
 	}
 
 	private boolean markerMoving;
-	private int fuseStartX = super.guiWidth() + 5;
-	private int fuseStartY = 27;
+	private static final int FUSE_START_X = 30;
+	private static final int FUSE_START_Y = 27;
+    private static final int[] FUSE_AREA = {FUSE_START_X, FUSE_START_Y + 3, 105, 4};
+
 	private int[] getMovableMarker() {
-		return new int[] {fuseStartX + (int)(105 *  (1F - getFuseLength() / (float) MAX_FUSE_LENGTH)), fuseStartY, 4, 10};
+		return new int[] {FUSE_START_X + (int)(105 *  (1F - getFuseLength() / (float) MAX_FUSE_LENGTH)), FUSE_START_Y, 4, 10};
 	}
 
     private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/explosions.png");
@@ -104,17 +106,29 @@ public class ModuleDynamite extends ModuleAttachment {
 	public void drawBackground(GuiVehicle gui, int x, int y) {
 		ResourceHelper.bindResource(TEXTURE);
 
-		drawImage(gui, fuseStartX, fuseStartY + 3, 16, 1, 105 , 4);
-		drawImage(gui, fuseStartX + 105, fuseStartY - 4, 1, 12 , 16, 16);
-		drawImage(gui, fuseStartX + (int)(105 *  (1F - (getFuseLength()-getFuse()) / (float) MAX_FUSE_LENGTH)), fuseStartY,  (isPrimed() ? 11 : 6), 1, 4, 10);
+		drawImage(gui, FUSE_AREA, 16, 1);
+		drawImage(gui, FUSE_START_X + 105, FUSE_START_Y - 4, 1, 12 , 16, 16);
+		drawImage(gui, FUSE_START_X + (int)(105 *  (1F - (getFuseLength()-getFuse()) / (float) MAX_FUSE_LENGTH)), FUSE_START_Y,  (isPrimed() ? 11 : 6), 1, 4, 10);
 		drawImage(gui, getMovableMarker(), 1, 1);
 	}
 
-	@Override
+    @Override
+    public void drawMouseOver(GuiVehicle gui, int x, int y) {
+        if (markerMoving || inRect(x, y, FUSE_AREA) || inRect(x, y, getMovableMarker())) {
+            if (getFuse() != 0) {
+                drawStringOnMouseOver(gui, LocalizationIndependence.EXPLODING.translate(String.valueOf(getFuseLength() - getFuse()), String.valueOf(getFuseLength())), x, y);
+            }else{
+                drawStringOnMouseOver(gui, LocalizationIndependence.FUSE_LENGTH.translate(String.valueOf(getFuseLength())), x, y);
+            }
+        }
+    }
+
+    @Override
 	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0) {
-			if (getFuse() == 0 && inRect(x,y, getMovableMarker())) {
+			if (getFuse() == 0 && (inRect(x,y, getMovableMarker()) || inRect(x, y, FUSE_AREA))) {
 				markerMoving = true;
+                moveMarker(x);
 			}
 		}
 	}
@@ -124,23 +138,27 @@ public class ModuleDynamite extends ModuleAttachment {
 		if (getFuse() != 0) {
 			markerMoving = false;
 		}else if(markerMoving){
-            int tempFuse = MAX_FUSE_LENGTH - (int)((x - fuseStartX)/(105F/ MAX_FUSE_LENGTH));
-
-            if (tempFuse < 2) {
-                tempFuse = 2;
-            }else if (tempFuse > MAX_FUSE_LENGTH) {
-               tempFuse = MAX_FUSE_LENGTH;
-            }
-
-            DataWriter dw = getDataWriter();
-            dw.writeByte(tempFuse);
-            sendPacketToServer(dw);
+            moveMarker(x);
 		}
 
         if (button != -1) {
             markerMoving = false;
         }
 	}
+
+    private void moveMarker(int x) {
+        int tempFuse = MAX_FUSE_LENGTH - (int)((x - FUSE_START_X)/(105F/ MAX_FUSE_LENGTH));
+
+        if (tempFuse < 2) {
+            tempFuse = 2;
+        }else if (tempFuse > MAX_FUSE_LENGTH) {
+            tempFuse = MAX_FUSE_LENGTH;
+        }
+
+        DataWriter dw = getDataWriter();
+        dw.writeByte(tempFuse);
+        sendPacketToServer(dw);
+    }
 
 	private boolean isPrimed() {
 		return (getFuse() / 5) % 2 == 0 && getFuse() != 0;

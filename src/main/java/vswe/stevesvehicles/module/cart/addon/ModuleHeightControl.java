@@ -3,7 +3,9 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+import vswe.stevesvehicles.client.gui.ColorHelper;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
+import vswe.stevesvehicles.localization.entry.module.cart.LocalizationCartRails;
 import vswe.stevesvehicles.module.common.addon.ModuleAddon;
 import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.network.DataWriter;
@@ -51,16 +53,12 @@ public class ModuleHeightControl extends ModuleAddon {
         int x = LEVEL_NUMBER_BOX_X + 6;
         int color = 0xFFFFFF;
 
-        if (getYTarget() >= 100)
-        {
+        if (getYTarget() >= 100) {
             x -= 4;
-        }
-        else if (getYTarget() < 10)
-        {
+        }else if (getYTarget() < 10) {
             x += 3;
 
-            if (getYTarget() < 5)
-            {
+            if (getYTarget() < 5) {
                 color = 0xFF0000;
             }
         }
@@ -79,9 +77,9 @@ public class ModuleHeightControl extends ModuleAddon {
 		drawImage(gui, LEVEL_NUMBER_BOX_X, LEVEL_NUMBER_BOX_Y, 6, 42, 21, 15);
 
 		//draw the controls
-		drawImage(gui, ARROW_UP, 6, 15);
-		drawImage(gui, ARROW_MIDDLE, 6, 25);
-		drawImage(gui, ARROW_DOWN, 6, 32);
+		drawHoverImage(gui, ARROW_UP, 6, 15, x, y);
+		drawHoverImage(gui, ARROW_MIDDLE, 6, 25, x, y);
+		drawHoverImage(gui, ARROW_DOWN, 6, 32, x, y);
 
 		//draw the ores map
 		for (int i = 0; i < HeightControlOre.ores.size(); i++) {
@@ -127,7 +125,24 @@ public class ModuleHeightControl extends ModuleAddon {
         }
 	}
 
-	private void drawMarker(GuiVehicle gui, int pos, boolean isTargetLevel) {
+    @Override
+    public void drawMouseOver(GuiVehicle gui, int x, int y) {
+        String change = LocalizationCartRails.MOVE_TARGET.translate() + "\n" + ColorHelper.GRAY + LocalizationCartRails.MOVE_TARGET_TEN.translate();
+        drawStringOnMouseOver(gui, change, x, y, ARROW_UP);
+        drawStringOnMouseOver(gui, change, x, y, ARROW_DOWN);
+
+        drawStringOnMouseOver(gui, LocalizationCartRails.RESET_TARGET.translate(), x, y, ARROW_MIDDLE);
+
+    }
+
+    private void drawHoverImage(GuiVehicle gui, int[] bounds, int u, int v, int mX, int mY) {
+        if (inRect(mX, mY, bounds)) {
+            u += bounds[2] + 1;
+        }
+        drawImage(gui, bounds, u, v);
+    }
+
+    private void drawMarker(GuiVehicle gui, int pos, boolean isTargetLevel) {
 		int srcX = 6;
 		int srcY = isTargetLevel ? 8 : 1;
 
@@ -177,9 +192,9 @@ public class ModuleHeightControl extends ModuleAddon {
             }
 
             if (isShift) {
-                dif = 1;
-            }else{
                 dif = 10;
+            }else{
+                dif = 1;
             }
 
             int targetY = getYTarget();

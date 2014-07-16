@@ -7,7 +7,7 @@ import vswe.stevesvehicles.localization.LocalizedTextSimple;
 
 public final class LocalizationTravel {
     public static final ILocalizedText SEAT_MESSAGE = createAdvanced("seat.message");
-    public static final ILocalizedText CAGE_AUTO_MESSAGE = createAdvanced("cage.auto_message");
+    public static final ILocalizedText CAGE_AUTO_MESSAGE = createAdvanced("cage.state_message");
     public static final ILocalizedText CAGE_MESSAGE = createAdvanced("cage.message");
     public static final ILocalizedText ARCADE_PAGES = createAdvanced("steves_arcade.pages");
     public static final ILocalizedText ARCADE_EXIT = createSimple("steves_arcade.exit");

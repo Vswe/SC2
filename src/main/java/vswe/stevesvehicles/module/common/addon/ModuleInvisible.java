@@ -6,6 +6,7 @@ import vswe.stevesvehicles.client.gui.assembler.SimulationInfo;
 import vswe.stevesvehicles.client.gui.assembler.SimulationInfoBoolean;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.localization.entry.block.LocalizationAssembler;
+import vswe.stevesvehicles.localization.entry.module.LocalizationIndependence;
 import vswe.stevesvehicles.localization.entry.module.LocalizationVisual;
 import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.vehicle.VehicleBase;
@@ -36,15 +37,7 @@ public class ModuleInvisible extends ModuleAddon implements IActivatorModule {
 		return true;
 	}
 
-	@Override
-	public int guiWidth() {
-		return 90;
-	}
 
-	@Override
-	public int guiHeight() {
-		return 35;
-	}
 
 	@Override
 	public void drawForeground(GuiVehicle gui) {
@@ -52,34 +45,32 @@ public class ModuleInvisible extends ModuleAddon implements IActivatorModule {
 	}
 
 
-    private static final int TEXTURE_SPACING = 1;
-    private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/invisible.png");
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void drawBackground(GuiVehicle gui, int x, int y) {
-		ResourceHelper.bindResource(TEXTURE);
+    @Override
+    public int guiWidth() {
+        return 90;
+    }
 
-		int imageID = isVisible() ? 1 : 0;
-		int borderID = 0;
-		if (inRect(x,y, BUTTON_RECT)) {
-			borderID = 1;			
-		}
+    @Override
+    public int guiHeight() {
+        return 40;
+    }
 
-		drawImage(gui, BUTTON_RECT, TEXTURE_SPACING, TEXTURE_SPACING + (TEXTURE_SPACING + BUTTON_RECT[3]) * borderID);
 
-		int srcY = TEXTURE_SPACING + (TEXTURE_SPACING + BUTTON_RECT[3]) * 2 + imageID * (TEXTURE_SPACING + BUTTON_RECT[3] - 2);
-		drawImage(gui, BUTTON_RECT[0] + 1, BUTTON_RECT[1] + 1, TEXTURE_SPACING, srcY, BUTTON_RECT[2] - 2, BUTTON_RECT[3] - 2);
-	}
 
-	private static final int[] BUTTON_RECT = new int[] {20,20, 24, 12};
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void drawBackground(GuiVehicle gui, int x, int y) {
+        drawToggleBox(gui, "invisible", !isVisible(), x, y);
+    }
 
-	@Override
-	public void drawMouseOver(GuiVehicle gui, int x, int y) {
-		drawStringOnMouseOver(gui, getStateName(), x,y, BUTTON_RECT);
-	}
 
-	
+    @Override
+    public void drawMouseOver(GuiVehicle gui, int x, int y) {
+        drawStringOnMouseOver(gui, getStateName(), x,y, TOGGLE_IMAGE_RECT);
+    }
+
+
 	@Override 
 	public void update() {
 		super.update();
@@ -103,7 +94,7 @@ public class ModuleInvisible extends ModuleAddon implements IActivatorModule {
 	@Override
 	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0) {
-			if (inRect(x,y, BUTTON_RECT)) {
+			if (inRect(x,y, TOGGLE_BOX_RECT)) {
 				sendPacketToServer(getDataWriter());
 			}
 		}

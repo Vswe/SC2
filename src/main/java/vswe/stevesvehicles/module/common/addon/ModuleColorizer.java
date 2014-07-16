@@ -80,7 +80,9 @@ public class ModuleColorizer extends ModuleAddon {
 	public void drawMouseOver(GuiVehicle gui, int x, int y) {
 		String[] colorNames = new String[] {LocalizationVisual.RED.translate(), LocalizationVisual.GREEN.translate(), LocalizationVisual.BLUE.translate()};
 		for (int i = 0; i < 3; i++) {
-			drawStringOnMouseOver(gui, colorNames[i] + ": " + getColorVal(i), x,y, getArea(i));
+            if (markerMoving == i || (markerMoving == -1 && inRect(x, y, getArea(i)))) {
+                drawStringOnMouseOver(gui, colorNames[i]  + ": " + getColorVal(i), x, y);
+            }
 		}
 	}
 
@@ -108,8 +110,9 @@ public class ModuleColorizer extends ModuleAddon {
 	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0) {
 			for (int i = 0; i < 3; i++) {
-				if (inRect(x,y, getMovableMarker(i))) {
+				if (inRect(x,y, getMovableMarker(i)) || inRect(x, y ,getArea(i))) {
 					markerMoving = i;
+                    moveMarker(x);
 				}
 			}
 		}
@@ -118,24 +121,28 @@ public class ModuleColorizer extends ModuleAddon {
 	@Override
 	public void mouseMovedOrUp(GuiVehicle gui,int x, int y, int button) {
 		if(markerMoving != -1){
-            int tempColor = (int)((x - MARKER_OFFSET_X)/(SCROLL_WIDTH /255F));
-
-            if (tempColor < 0) {
-                tempColor = 0;
-            }else if (tempColor > 255) {
-               tempColor = 255;
-            }
-
-            DataWriter dw = getDataWriter();
-            dw.writeByte(markerMoving);
-            dw.writeByte(tempColor);
-            sendPacketToServer(dw);
+            moveMarker(x);
 		}
 
         if (button != -1) {
             markerMoving = -1;
         }
-	}	
+	}
+
+    private void moveMarker(int x) {
+        int tempColor = (int)((x - MARKER_OFFSET_X)/(SCROLL_WIDTH /255F));
+
+        if (tempColor < 0) {
+            tempColor = 0;
+        }else if (tempColor > 255) {
+            tempColor = 255;
+        }
+
+        DataWriter dw = getDataWriter();
+        dw.writeByte(markerMoving);
+        dw.writeByte(tempColor);
+        sendPacketToServer(dw);
+    }
 	
 	
 	@Override

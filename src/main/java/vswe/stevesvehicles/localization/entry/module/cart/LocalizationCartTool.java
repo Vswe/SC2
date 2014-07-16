@@ -7,7 +7,7 @@ import vswe.stevesvehicles.localization.LocalizedTextSimple;
 
 public final class LocalizationCartTool {
     public static final ILocalizedText DRILL = createSimple("drill.title");
-    public static final ILocalizedText DRILL_TOGGLE = createAdvanced("drill.toggle");
+    public static final ILocalizedText DRILL_TOGGLE = createAdvanced("drill.state");
     public static final ILocalizedText FARMER = createSimple("farmer.title");
     public static final ILocalizedText CUTTER = createSimple("wood_cutter.title");
 

@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import vswe.stevesvehicles.arcade.invader.ArcadeInvaders;
+import vswe.stevesvehicles.arcade.monopoly.ArcadeMonopoly;
 import vswe.stevesvehicles.arcade.sweeper.ArcadeSweeper;
 import vswe.stevesvehicles.arcade.tetris.ArcadeTetris;
 import vswe.stevesvehicles.arcade.tracks.ArcadeTracks;
@@ -105,13 +106,13 @@ public class ModuleArcade extends ModuleAttachment {
 			currentGame.drawForeground(gui);
 		}else{
 		    drawString(gui, getModuleName(), 8, 6, 0x404040);
-		    
-			for (int i = 0; i < games.size(); i++) {
-				int[] text = getButtonTextArea(i);
-				
-				if (text[3] == 8) {				
-					drawString(gui, games.get(i).getName(), text[0], text[1], 0x404040);
-				}
+
+            int start = currentPage * GAMES_PER_PAGE;
+            int end = Math.min(start + GAMES_PER_PAGE, games.size());
+            for (int i = start; i < end; i++) {
+				int[] text = getButtonTextArea(i - start);
+
+				drawString(gui, games.get(i).getName(), text[0], text[1], 0x404040);
 			}
 
             if (games.size() > GAMES_PER_PAGE) {
