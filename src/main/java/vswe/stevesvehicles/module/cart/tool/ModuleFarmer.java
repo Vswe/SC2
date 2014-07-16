@@ -216,6 +216,7 @@ public abstract class ModuleFarmer extends ModuleTool implements ISuppliesModule
                 }
 
                 getVehicle().getWorld().setBlockToAir(x, y + 1, z);
+                damageTool(3);
 
             }
         }

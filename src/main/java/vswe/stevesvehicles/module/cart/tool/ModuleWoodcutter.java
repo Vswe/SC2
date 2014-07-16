@@ -303,8 +303,10 @@ public abstract class ModuleWoodcutter extends ModuleTool implements ISuppliesMo
 		
 		if (isLeavesHandler(b, x, y, z)) {
 			baseTime = 2;
+            damageTool(1);
 		}else{
 			baseTime = 25;
+            damageTool(5);
 		}
 
 		

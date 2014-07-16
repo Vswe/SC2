@@ -296,6 +296,7 @@ public abstract class ModuleDrill extends ModuleTool implements IActivatorModule
             getVehicle().getWorld().setBlockToAir(targetX, targetY, targetZ);
         }
 
+        damageTool(1 + (int)h);
 		startWorking(getTimeToMine(h));
 		startDrill();
         return true;

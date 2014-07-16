@@ -44,15 +44,15 @@ public class EnchantmentInfo {
 
 	public static ArrayList<EnchantmentInfo> enchants = new ArrayList<EnchantmentInfo>();
 	
-	public static EnchantmentInfo fortune = new EnchantmentInfo(Enchantment.fortune, Enchantment_Type.TOOL, 50000);
-	public static EnchantmentInfo efficiency = new EnchantmentInfo(Enchantment.efficiency, Enchantment_Type.TOOL, 50000);
-	public static EnchantmentInfo unbreaking = new EnchantmentInfo(Enchantment.unbreaking, Enchantment_Type.TOOL, 64000);
+	public static EnchantmentInfo fortune = new EnchantmentInfo(Enchantment.fortune, Enchantment_Type.TOOL, 500000);
+	public static EnchantmentInfo efficiency = new EnchantmentInfo(Enchantment.efficiency, Enchantment_Type.TOOL, 500000);
+	//public static EnchantmentInfo unbreaking = new EnchantmentInfo(Enchantment.unbreaking, Enchantment_Type.TOOL, 64000);
 	
 	
-	public static EnchantmentInfo power = new EnchantmentInfo(Enchantment.power, Enchantment_Type.SHOOTER, 750);
-	public static EnchantmentInfo punch = new EnchantmentInfo(Enchantment.punch, Enchantment_Type.SHOOTER, 1000);
-	public static EnchantmentInfo flame = new EnchantmentInfo(Enchantment.flame, Enchantment_Type.SHOOTER, 1000);
-	public static EnchantmentInfo infinity = new EnchantmentInfo(Enchantment.infinity, Enchantment_Type.SHOOTER, 500);
+	public static EnchantmentInfo power = new EnchantmentInfo(Enchantment.power, Enchantment_Type.SHOOTER, 3750);
+	public static EnchantmentInfo punch = new EnchantmentInfo(Enchantment.punch, Enchantment_Type.SHOOTER, 5000);
+	public static EnchantmentInfo flame = new EnchantmentInfo(Enchantment.flame, Enchantment_Type.SHOOTER, 5000);
+	public static EnchantmentInfo infinity = new EnchantmentInfo(Enchantment.infinity, Enchantment_Type.SHOOTER, 2500);
 
 	public static boolean isItemValid(ArrayList<Enchantment_Type> enabledTypes, ItemStack itemstack) {
 	

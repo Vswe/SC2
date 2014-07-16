@@ -50,4 +50,10 @@ public abstract class ModuleTool extends ModuleWorker {
         }
 	}
 
+    protected void damageTool(int val) {
+        if (enchanter != null) {
+            enchanter.damageEnchant(EnchantmentInfo.Enchantment_Type.TOOL, val);
+        }
+    }
+
 }
