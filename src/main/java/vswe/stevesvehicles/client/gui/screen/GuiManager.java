@@ -136,8 +136,6 @@ public abstract class GuiManager extends GuiBase {
 			int offsetY;
 
             offsetX = ARROW_BASE_OFFSET;
-            sizeX = ARROW_SIZE - offsetX;
-
 
             sizeY = scaledProgress;
             if (sizeY > ARROW_BASE_SIZE) {
@@ -146,23 +144,22 @@ public abstract class GuiManager extends GuiBase {
             offsetY = ARROW_SIZE - sizeY;
 
 
-            drawRectWithSourceOffset(left + targetX, top + targetY, sourceX, sourceY, sizeX, sizeY, rotation, offsetX, offsetY, ARROW_SIZE, ARROW_SIZE);
+            drawRectWithSourceOffset(left + targetX, top + targetY, sourceX, sourceY, rotation, offsetX, offsetY, ARROW_SIZE, ARROW_SIZE);
 
 
 			//draw the second part(with the head) of the white arrow
 			if (scaledProgress > ARROW_BASE_SIZE) {
 				scaledProgress -= ARROW_BASE_SIZE;
 
-                sizeX = scaledProgress;
-                if (sizeX > ARROW_HEAD_SIZE) {
-                    sizeX = ARROW_HEAD_SIZE;
+                sizeX = scaledProgress + ARROW_SIZE - ARROW_HEAD_SIZE;
+                if (sizeX > ARROW_SIZE) {
+                    sizeX = ARROW_SIZE;
                 }
-                offsetX = ARROW_HEAD_SIZE - sizeX;
+                offsetX = ARROW_SIZE - sizeX;
 
                 offsetY = 0;
-                sizeY = ARROW_SIZE;
 
-                drawRectWithSourceOffset(left + targetX, top + targetY, sourceX, sourceY, sizeX, sizeY, rotation, offsetX, offsetY, ARROW_SIZE, ARROW_SIZE);
+                drawRectWithSourceOffset(left + targetX, top + targetY, sourceX, sourceY, rotation, offsetX, offsetY, ARROW_SIZE, ARROW_SIZE);
 			}
 		}	
 	}

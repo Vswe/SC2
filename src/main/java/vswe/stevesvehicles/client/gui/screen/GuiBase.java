@@ -341,9 +341,13 @@ public abstract class GuiBase extends GuiContainerSpecial {
 	}
 
 
-    //TODO
     @SuppressWarnings("SuspiciousNameCombination")
-    public void drawRectWithSourceOffset(int x, int y, int u, int v, int w, int h, RenderRotation rotation, int offsetX, int offsetY, int fullWidth, int fullHeight) {
+    public void drawRectWithSourceOffset(int x, int y, int u, int v, RenderRotation rotation, int offsetX, int offsetY, int fullWidth, int fullHeight) {
+        int w = fullWidth - offsetX;
+        int h = fullHeight - offsetY;
+        int srcW = w;
+        int srcH = h;
+        boolean rotateSize = false;
         switch (rotation) {
             case NORMAL:
                 x += offsetX;
@@ -351,45 +355,64 @@ public abstract class GuiBase extends GuiContainerSpecial {
                 u += offsetX;
                 v += offsetY;
                 break;
-            default:
             case ROTATE_90:
-                offsetX = 0;
-                offsetY = 0;
-                //TODO
-                x += fullWidth - (offsetX + w);
-                y += offsetY;
+                x += 0;
+                y += offsetX;
                 u += offsetX;
                 v += offsetY;
-                int temp = w;
-                w = h;
-                h = temp;
-
+                rotateSize = true;
                 break;
             case ROTATE_180:
-                x += fullWidth - (offsetX + w);
-                y += fullHeight - (offsetY + h);
+                x += 0;
+                y += 0;
                 u += offsetX;
                 v += offsetY;
+                break;
+            case ROTATE_270:
+                x += offsetY;
+                y += 0;
+                u += offsetX;
+                v += offsetY;
+                rotateSize = true;
                 break;
 
 
             case FLIP_HORIZONTAL:
-                x += fullWidth - (offsetX + w);
+                x += 0;
                 y += offsetY;
                 u += offsetX;
                 v += offsetY;
                 break;
-
-            case FLIP_VERTICAL:
-                x += offsetX;
-                y += fullHeight - (offsetY + h);
+            case ROTATE_90_FLIP:
+                x += 0;
+                y += 0;
                 u += offsetX;
                 v += offsetY;
+                rotateSize = true;
+                break;
+            case FLIP_VERTICAL:
+                x += offsetX;
+                y += 0;
+                u += offsetX;
+                v += offsetY;
+                break;
+            case ROTATE_270_FLIP:
+                x += offsetY;
+                y += offsetX;
+                u += offsetX;
+                v += offsetY;
+                rotateSize = true;
                 break;
 
         }
 
-        drawRect(x, y, u, v, w, h, rotation);
+        if (rotateSize) {
+            int temp = w;
+            w = h;
+            h = temp;
+        }
+
+        drawRect(x, y, u, v, w, h, srcW, srcH, rotation, 0.00390625F);
     }
 
 
@@ -410,9 +433,13 @@ public abstract class GuiBase extends GuiContainerSpecial {
     }
 
     private void drawRect(int x, int y, int u, int v, int w, int h, RenderRotation rotation, float multiplier) {
+        drawRect(x, y ,u, v, w, h, w ,h ,rotation, multiplier);
+    }
+
+    private void drawRect(int x, int y, int u, int v, int w1, int h1, int w2, int h2, RenderRotation rotation, float multiplier) {
         double a = (double)((float)(u + 0) * multiplier);
-        double b = (double)((float)(u + w) * multiplier);
-        double c = (double)((float)(v + h) * multiplier);
+        double b = (double)((float)(u + w2) * multiplier);
+        double c = (double)((float)(v + h2) * multiplier);
         double d = (double)((float)(v + 0) * multiplier);
            
         double [] ptA = new double[] {a, c};
@@ -478,15 +505,15 @@ public abstract class GuiBase extends GuiContainerSpecial {
         
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
-        tessellator.addVertexWithUV((double)(x + 0), (double)(y + h), (double)this.zLevel, pt1[0], pt1[1]);
-        tessellator.addVertexWithUV((double)(x + w), (double)(y + h), (double)this.zLevel, pt2[0], pt2[1]);
-        tessellator.addVertexWithUV((double)(x + w), (double)(y + 0), (double)this.zLevel, pt3[0], pt3[1]);
+        tessellator.addVertexWithUV((double)(x + 0), (double)(y + h1), (double)this.zLevel, pt1[0], pt1[1]);
+        tessellator.addVertexWithUV((double)(x + w1), (double)(y + h1), (double)this.zLevel, pt2[0], pt2[1]);
+        tessellator.addVertexWithUV((double)(x + w1), (double)(y + 0), (double)this.zLevel, pt3[0], pt3[1]);
         tessellator.addVertexWithUV((double)(x + 0), (double)(y + 0), (double)this.zLevel, pt4[0], pt4[1]);
         tessellator.draw();
     }
 
     public void setZLevel(int ZLevel) {
-        this.zLevel = zLevel;
+        this.zLevel = ZLevel;
     }
 
     public static enum RenderRotation {
