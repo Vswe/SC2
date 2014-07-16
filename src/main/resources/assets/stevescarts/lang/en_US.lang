@@ -562,6 +562,7 @@ steves_vehicles:gui.info.label:max_storage=Max storage count: [%1]
 steves_vehicles:gui.info.label:no_modules=No modules loaded
 steves_vehicles:gui.info.label:incomplete=Incomplete vehicle!
 steves_vehicles:gui.info.label:time_left=Time left
+steves_vehicles:gui.info.label:interrupt_instruction=Put it in the Assembler's output
 steves_vehicles:gui.info.label:no_vehicle_type=The hull of this vehicle has no vehicle type
 steves_vehicles:gui.info.label::invalid_vehicle_type=[%1] can't be placed as a part of a [%2]
 

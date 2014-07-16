@@ -816,7 +816,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 				for (int i = 0; i < getSizeInventory() - nonModularSlots(); i++) {
 					if (getStackInSlot(i) != null) {
 						ModuleData data = ModItems.modules.getModuleData(getStackInSlot(i));
-						if (data != null) {
+						if (data != null && getStackInSlot(i).stackSize != getRemovedSize()) {
 							modules.add(data);
 						}
 					}				
@@ -1143,7 +1143,10 @@ public class TileEntityCartAssembler extends TileEntityBase
                 return;
             }
         }
-	}
+        for (ItemStack item : spareModules) {
+            puke(item);
+        }
+    }
 	
 	public void puke(ItemStack item) {
 		EntityItem entityitem = new EntityItem(worldObj, xCoord, yCoord + 0.25, zCoord , item);
@@ -1160,34 +1163,18 @@ public class TileEntityCartAssembler extends TileEntityBase
 			loaded = true;
 		}
 
-        //TODO rewrite this (this allows cart that were assembling when a assembler was broken to be put into the output slot and allow it to continue)
-		/*if (!isAssembling && outputSlot != null && outputSlot.getStack() != null) {
+		if (!isAssembling && outputSlot != null) {
 			ItemStack itemInSlot = outputSlot.getStack();
-			if (itemInSlot.getItem() == ModItems.cart) {
+			if (itemInSlot != null && itemInSlot.getItem() == ModItems.vehicles) {
 			
 				NBTTagCompound info = itemInSlot.getTagCompound();
-				if (info != null && info.hasKey("maxTime")) {
-					ItemStack newItem = new ItemStack(ModItems.cart);
-					
-					NBTTagCompound save = new NBTTagCompound();
-					save.setByteArray("Modules", info.getByteArray("Modules"));				
-					newItem.setTagCompound(save);
-					
-					int moduleCount = info.getByteArray("Modules").length;
-					
-					maxAssemblingTime = info.getInteger("maxTime");
-					setAssemblingTime(info.getInteger("currentTime"));	
-					spareModules.clear();
-					if (info.hasKey("Spares")) {
-						byte[] moduleIDs = info.getByteArray("Spares");
-						for (int i = 0; i < moduleIDs.length; i++) {
-							byte id = moduleIDs[i];
-							ItemStack module = new ItemStack(ModItems.modules, 1, id);
-							ModItems.modules.addExtraDataToModule(module, info, i + moduleCount);
-							spareModules.add(module);
-						}
-					}
-					
+				if (info != null && info.hasKey(VehicleBase.NBT_INTERRUPT_MAX_TIME)) {
+					ItemStack newItem = ModuleDataItemHandler.createModularVehicle(ModuleDataItemHandler.getModularItems(itemInSlot));
+                    spareModules = ModuleDataItemHandler.getSpareItems(itemInSlot);
+
+                    maxAssemblingTime = info.getInteger(VehicleBase.NBT_INTERRUPT_MAX_TIME);
+                    setAssemblingTime(info.getInteger(VehicleBase.NBT_INTERRUPT_TIME));
+
 					if (itemInSlot.hasDisplayName()) {
 						newItem.setStackDisplayName(itemInSlot.getDisplayName());
 					}
@@ -1198,7 +1185,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 					
 				}		
 			}	
-		}*/
+		}
 	
 		if (getFuelLevel() > getMaxFuelLevel()) {
 			setFuelLevel(getMaxFuelLevel());
@@ -1406,7 +1393,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 		for (int i = 0; i < getSizeInventory() - nonModularSlots(); i++) {
 			if (getStackInSlot(i) != null) {
 				ModuleData data = ModItems.modules.getModuleData(getStackInSlot(i));
-				if (data != null) {
+				if (data != null && getStackInSlot(i).stackSize != getRemovedSize()) {
 					dataList.add(getStackInSlot(i).getItemDamage());
 				}
 			}
@@ -1614,44 +1601,27 @@ public class TileEntityCartAssembler extends TileEntityBase
 		tagCompound.setInteger("maxTime", maxAssemblingTime);
 		tagCompound.setInteger("currentTime", getAssemblingTime());
 		tagCompound.setBoolean("isAssembling", isAssembling);
-    }	
+    }
+
+
+
 
 	public ItemStack getOutputOnInterrupt() {
-        //TODO rewrite to output an interrupted vehicle
-		/*if (outputItem == null) {
+		if (outputItem == null) {
 			return null;
 		}else if (!outputItem.hasTagCompound()) {
 			return null;
 		}else {
 			NBTTagCompound info = outputItem.getTagCompound();
-			if (info == null) {
-				return null;
-			}else{
-				info.setInteger("currentTime", getAssemblingTime());
-				info.setInteger("maxTime", maxAssemblingTime);
-				
-				int moduleCount = info.getByteArray("Modules").length;
-				
-				NBTTagCompound spares = new NBTTagCompound();
-				byte [] moduleIDs = new byte[spareModules.size()];
-				for (int i = 0; i < spareModules.size(); i++) {
-					ItemStack item = spareModules.get(i);
-					ModuleData data = ModItems.modules.getModuleData(item);
-					if (data != null) {		
-						moduleIDs[i] = data.getID();
-						ModItems.modules.addExtraDataToCart(info, item, i + moduleCount);
-					}					
-				}
+
+            info.setInteger(VehicleBase.NBT_INTERRUPT_TIME, getAssemblingTime());
+            info.setInteger(VehicleBase.NBT_INTERRUPT_MAX_TIME, maxAssemblingTime);
+
+            ModuleDataItemHandler.addSparesToVehicleItems(outputItem, spareModules);
 
 
-				info.setByteArray("Spares", moduleIDs);				
-								
-				
-				return outputItem;
-			}
-		}*/
-		
-		return null;
+            return outputItem;
+		}
 	}
 
 	@Override

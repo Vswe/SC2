@@ -4,6 +4,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import vswe.stevesvehicles.module.data.ModuleType;
 import vswe.stevesvehicles.item.ModItems;
 import vswe.stevesvehicles.tileentity.TileEntityCartAssembler;
+import vswe.stevesvehicles.vehicle.VehicleBase;
 
 public class SlotOutput extends SlotAssembler {
 
@@ -26,7 +27,7 @@ public class SlotOutput extends SlotAssembler {
     public boolean isItemValid(ItemStack itemstack) {
 		if (!getAssembler().getIsAssembling() && itemstack.getItem() == ModItems.vehicles) {
 			NBTTagCompound info = itemstack.getTagCompound();
-			if (info != null && info.hasKey("maxTime")) {	
+			if (info != null && info.hasKey(VehicleBase.NBT_INTERRUPT_MAX_TIME)) {
 				return true;
 			}
 			

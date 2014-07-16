@@ -16,6 +16,7 @@ import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
 import vswe.stevesvehicles.module.data.ModuleDataPair;
 import vswe.stevesvehicles.StevesVehicles;
 import vswe.stevesvehicles.util.Tuple;
+import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 import vswe.stevesvehicles.vehicle.VehicleType;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
@@ -73,7 +74,7 @@ public class ItemVehicles extends Item {
                try {
                     NBTTagCompound info = par1ItemStack.getTagCompound();
                     if (info != null) {
-                        if (!info.hasKey("maxTime")) {
+                        if (!info.hasKey(VehicleBase.NBT_INTERRUPT_MAX_TIME)) {
                             EntityModularCart cart = new EntityModularCart(par3World, (double)((float)par4 + 0.5F), (double)((float)par5 + 0.5F), (double)((float)par6 + 0.5F), info, par1ItemStack.hasDisplayName() ? par1ItemStack.getDisplayName() : null);
                             par3World.spawnEntityInWorld(cart);
                         }
@@ -95,7 +96,7 @@ public class ItemVehicles extends Item {
     @SideOnly(Side.CLIENT)
 	@Override
     /**
-     * allows items to add custom lines of information to the mouseover description
+     * allows items to add custom lines of information to the mouse over description
      */
     public void addInformation(ItemStack item, EntityPlayer player, List list, boolean useExtraInfo) {
 		VehicleVersion.updateItemStack(item);
@@ -106,12 +107,14 @@ public class ItemVehicles extends Item {
             addInfo(ModuleDataItemHandler.getModulesAndCompoundsFromItem(item), list, null);
             addInfo(ModuleDataItemHandler.getSpareModulesAndCompoundsFromItem(item), list, ColorHelper.ORANGE);
 
-			if (info.hasKey("maxTime")) {
+			if (info.hasKey(VehicleBase.NBT_INTERRUPT_MAX_TIME)) {
 				list.add(ColorHelper.RED + LocalizationLabel.INCOMPLETE.translate());
-				int maxTime = info.getInteger("maxTime");
-				int currentTime = info.getInteger("currentTime");
+                list.add(ColorHelper.RED + LocalizationLabel.INTERRUPT_INSTRUCTION.translate());
+				int maxTime = info.getInteger(VehicleBase.NBT_INTERRUPT_MAX_TIME);
+				int currentTime = info.getInteger(VehicleBase.NBT_INTERRUPT_TIME);
 				int timeLeft = maxTime - currentTime;
 				list.add(ColorHelper.RED + LocalizationLabel.TIME_LEFT.translate() + ": " + formatTime(timeLeft));
+
 			}
 
 			if (GeneratedInfo.inDev) {

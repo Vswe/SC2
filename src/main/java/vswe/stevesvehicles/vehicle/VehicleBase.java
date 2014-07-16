@@ -1154,6 +1154,9 @@ public class VehicleBase {
     public static final String NBT_MODULES = "Modules";
     public static final String NBT_SPARES = "Spares";
     public static final String NBT_ID = "Id";
+    public static final String NBT_INTERRUPT_TIME = "current_time";
+    public static final String NBT_INTERRUPT_MAX_TIME = "max_time";
+
     public void writeToNBT(NBTTagCompound compound) {
         if (name != null) {
             compound.setString("cartName", name);

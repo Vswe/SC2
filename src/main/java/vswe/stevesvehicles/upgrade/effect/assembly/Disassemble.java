@@ -15,6 +15,7 @@ import vswe.stevesvehicles.tileentity.TileEntityCartAssembler;
 import vswe.stevesvehicles.tileentity.TileEntityUpgrade;
 import vswe.stevesvehicles.upgrade.effect.BaseEffect;
 import vswe.stevesvehicles.upgrade.effect.util.InventoryEffect;
+import vswe.stevesvehicles.vehicle.VehicleBase;
 
 public class Disassemble extends InventoryEffect {
 
@@ -107,7 +108,7 @@ public class Disassemble extends InventoryEffect {
 
 	private boolean updateCart(TileEntityUpgrade upgrade, ItemStack cart) {
 		if (upgrade.getMaster() != null) {
-			if (cart == null || cart.getItem() != ModItems.vehicles || cart.getTagCompound() == null || cart.getTagCompound().hasKey("maxTime")) {
+			if (cart == null || cart.getItem() != ModItems.vehicles || cart.getTagCompound() == null || cart.getTagCompound().hasKey(VehicleBase.NBT_INTERRUPT_MAX_TIME)) {
 				resetMaster(upgrade.getMaster(), false);
 				lastVehicle = null;
 				if (cart != null) {

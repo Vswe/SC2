@@ -62,7 +62,7 @@ public class StevesVehicles {
 	public static boolean renderSteve = false;
 	public static boolean arcadeDevOperator = false;
 
-    public static EnumSet<HolidayType> holidays = EnumSet.noneOf(HolidayType.class);
+    public static EnumSet<HolidayType> holidays = EnumSet.allOf(HolidayType.class);
 
     public static final String CHANNEL = "SC2";
 	
