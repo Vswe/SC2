@@ -8,7 +8,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import vswe.stevesvehicles.module.common.storage.barrel.ModuleBarrel;
 
-public class SlotBarrel extends SlotChest implements ISpecialSlotRender {
+public class SlotBarrel extends SlotChest implements ISpecialSlotRender, ISpecialSlotSize {
     private ModuleBarrel barrel;
     private boolean input;
     public SlotBarrel(IInventory inventory, ModuleBarrel barrel, int id, int x, int y, boolean input) {
@@ -42,5 +42,10 @@ public class SlotBarrel extends SlotChest implements ISpecialSlotRender {
     @Override
     public boolean canTakeStack(EntityPlayer player) {
         return getStack() == null || getStack().stackSize > 0;
+    }
+
+    @Override
+    public int getItemSize() {
+        return input ? 0 : barrel.getTotalCount();
     }
 }

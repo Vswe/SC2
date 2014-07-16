@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
+import vswe.stevesvehicles.container.slots.ISpecialSlotSize;
 import vswe.stevesvehicles.localization.entry.module.LocalizationProduction;
 import vswe.stevesvehicles.module.common.addon.ModuleAddon;
 import vswe.stevesvehicles.network.DataReader;
@@ -368,7 +369,11 @@ public abstract class ModuleRecipe extends ModuleAddon {
             for (SlotBase outputSlot : outputSlots) {
                 ItemStack item = outputSlot.getStack();
                 if (item != null && item.isItemEqual(result) && ItemStack.areItemStackTagsEqual(item, result)) {
-                    count += item.stackSize;
+                    if (outputSlot instanceof ISpecialSlotSize) {
+                        count += ((ISpecialSlotSize)outputSlot).getItemSize();
+                    }else{
+                        count += item.stackSize;
+                    }
                     if (count >= maxItemCount) {
                         return false;
                     }

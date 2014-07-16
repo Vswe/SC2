@@ -146,7 +146,7 @@ public class StevesVehicles {
 		}
         new RegistrySynchronizer();
 
-		GiftItem.init();
+
 
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 		if (event.getSide() == Side.CLIENT) {
@@ -157,7 +157,7 @@ public class StevesVehicles {
 
         ModItems.addRecipes();
         ModBlocks.addRecipes();
-
+        GiftItem.init();
 	}
 
     @SideOnly(Side.CLIENT)

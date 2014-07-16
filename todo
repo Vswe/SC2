@@ -2,5 +2,4 @@ Things to be done before phase one is done and therefore the testing of phase on
 
 Rework the enchanter to make it more useful
 Fixed the rendering of manager arrows (method in GuiBase)
-Add recipes to barrels and maybe fix it's drop and item amount detection
 
