@@ -690,6 +690,9 @@ public class TileEntityCartAssembler extends TileEntityBase
 	 */
 	private int getAssemblingTime(ModuleData module, boolean isRemoved) {
 		int time = getAssemblingTime(module);
+        if (isRemoved) {
+            time /= 4;
+        }
 		time += getTimeDecreased(isRemoved);
 		
 		return Math.max(0, time);
@@ -697,7 +700,7 @@ public class TileEntityCartAssembler extends TileEntityBase
 
     public static int FLAT_VEHICLE_BASE_TIME = 100;
     public static int getAssemblingTime(ModuleData data) {
-        return (int)(5 * Math.pow(data.getCost(), 2.2));
+        return (int)(4 * Math.pow(data.getCost(), 2));
     }
 	
 	/**
@@ -850,13 +853,13 @@ public class TileEntityCartAssembler extends TileEntityBase
 	
 	@Override
 	public void initGuiData(Container con, ICrafting crafting) {
-		updateGuiData(con, crafting, 0, getShortFromInt(true,maxAssemblingTime));
-		updateGuiData(con, crafting, 1, getShortFromInt(false,maxAssemblingTime));
-		updateGuiData(con, crafting, 2, getShortFromInt(true,getAssemblingTime()));
-		updateGuiData(con, crafting, 3, getShortFromInt(false,getAssemblingTime()));
+		updateGuiData(con, crafting, 0, getShortFromInt(true, maxAssemblingTime));
+		updateGuiData(con, crafting, 1, getShortFromInt(false, maxAssemblingTime));
+		updateGuiData(con, crafting, 2, getShortFromInt(true, getAssemblingTime()));
+		updateGuiData(con, crafting, 3, getShortFromInt(false, getAssemblingTime()));
 		updateGuiData(con, crafting, 4, (short)(isAssembling ? 1 : 0));
 		updateGuiData(con, crafting, 5, getShortFromInt(true, getFuelLevel()));
-		updateGuiData(con, crafting, 6, getShortFromInt(false,getFuelLevel()));		
+		updateGuiData(con, crafting, 6, getShortFromInt(false, getFuelLevel()));
 	}
 	@Override
 	public void checkGuiData(Container container, ICrafting crafting) {
@@ -871,8 +874,8 @@ public class TileEntityCartAssembler extends TileEntityBase
 			con.lastIsAssembling = isAssembling;	
 		}	
 		if (con.lastFuelLevel != getFuelLevel()) {
-			updateGuiData(con, crafting, 5, getShortFromInt(true,getFuelLevel()));	
-			updateGuiData(con, crafting, 6, getShortFromInt(false,getFuelLevel()));	
+			updateGuiData(con, crafting, 5, getShortFromInt(true, getFuelLevel()));
+			updateGuiData(con, crafting, 6, getShortFromInt(false, getFuelLevel()));
 			con.lastFuelLevel = getFuelLevel();	
 		}		
 	}

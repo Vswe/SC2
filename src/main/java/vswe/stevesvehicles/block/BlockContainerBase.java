@@ -46,7 +46,7 @@ public abstract class BlockContainerBase extends BlockContainer implements IBloc
         if (te instanceof IInventory) {
             IInventory inventory = (IInventory)te;
             for (int i = 0; i < inventory.getSizeInventory(); ++i) {
-                ItemStack item = inventory.getStackInSlot(i);
+                ItemStack item = inventory.getStackInSlotOnClosing(i);
 
                 if (item != null) {
                     float offsetX = world.rand.nextFloat() * 0.8F + 0.1F;

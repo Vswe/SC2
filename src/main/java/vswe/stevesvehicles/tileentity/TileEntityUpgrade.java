@@ -366,22 +366,15 @@ public class TileEntityUpgrade extends TileEntityBase
 		
 	@Override
 	public ItemStack getStackInSlotOnClosing(int i) {
-		if (inventoryStacks == null) {
-			if (master == null) {
-				return null;
-			}else{
-				return master.getStackInSlotOnClosing(i);
-			}
+		if (!hasInventory()) {
+            return null;
 		}else{
 			ItemStack item = getStackInSlot(i);
 		
-			if (item != null)
-			{
+			if (item != null) {
 				setInventorySlotContents(i, null);
 				return item;
-			}
-			else
-			{
+			}else {
 				return null;
 			}
 		}	

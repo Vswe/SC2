@@ -1,7 +1,6 @@
 Things to be done before phase one is done and therefore the testing of phase one can start. When the testing is done phase two can be started (the addition of boats).
 
 Rework the enchanter to make it more useful
-Tweak assemble and disassemble times?
 Fixed the rendering of manager arrows (method in GuiBase)
 Add recipes to barrels and maybe fix it's drop and item amount detection
-Fix so the assembler drop interrupted vehicles properly.
+

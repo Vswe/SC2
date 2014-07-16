@@ -71,3 +71,7 @@ Changed features, from a player's perspective.
 * The Dynamite Carrier's fuse length can now be changed easier with a better scroll bar. The current fuse length (and the remaining fuse when exploding) are now being displayed in a tooltip.
 
 * The Height Controller has received a slightly improved interface. The buttons now uses hover effects and tooltips with instructions.
+
+* The assembly time for a vehicle is 100 ticks plus the sum of the modules' assembly time. The assembly time of a module used to be 5 * c^2.2 where c is its modular cost. This was changed to be 4 * c^2. This means that every module is faster to assemble but it's more noticeable for complex modules.
+
+* The disassemble time of a module used to be the same as the assemble time for a module. Now, the disassemble time for a module is a quarter of the assemble time for that module.
