@@ -27,7 +27,7 @@ public class MobHatEquip {
 		if (target instanceof EntityVillager) {
 			EntityVillager villager = (EntityVillager)target;
 			
-			if (villager.getProfession() != TradeHandler.santaId) {
+			if (villager.getProfession() != TradeHandler.SANTA_ID) {
 				ItemStack item = player.getCurrentEquippedItem();
 
 				//if it's the santa hat :)
@@ -37,7 +37,7 @@ public class MobHatEquip {
 					}
 				
 					if (!player.worldObj.isRemote) {
-						villager.setProfession(TradeHandler.santaId);
+						villager.setProfession(TradeHandler.SANTA_ID);
 						MerchantRecipeList list = villager.getRecipes(player);
 						list.clear();
 						VillagerRegistry.manageVillagerTrades(list, villager, villager.getProfession(), new Random());
