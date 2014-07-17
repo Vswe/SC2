@@ -104,22 +104,23 @@ public class OverheadHandler extends FancyPancyHandler {
 
         if (event.entity instanceof AbstractClientPlayer && event.renderer instanceof RenderPlayer) {
             AbstractClientPlayer player = (AbstractClientPlayer)event.entity;
-            RenderPlayer renderer = (RenderPlayer)event.renderer;
-            EntityPlayer observer = Minecraft.getMinecraft().thePlayer;
-            boolean isObserver = player == observer;
+            if (!player.isInvisible()) {
+                RenderPlayer renderer = (RenderPlayer)event.renderer;
+                EntityPlayer observer = Minecraft.getMinecraft().thePlayer;
+                boolean isObserver = player == observer;
 
-            double distanceSq = player.getDistanceSqToEntity(observer);
-            double distanceLimit = player.isSneaking() ? RendererLivingEntity.NAME_TAG_RANGE_SNEAK : RendererLivingEntity.NAME_TAG_RANGE;
+                double distanceSq = player.getDistanceSqToEntity(observer);
+                double distanceLimit = player.isSneaking() ? RendererLivingEntity.NAME_TAG_RANGE_SNEAK : RendererLivingEntity.NAME_TAG_RANGE;
 
-            if (distanceSq < distanceLimit * distanceLimit) {
-                if (player.isPlayerSleeping()) {
-                    renderOverHead(renderer, player, event.x, event.y - 1.5D, event.z, isObserver);
-                }else{
-                    renderOverHead(renderer, player, event.x, event.y, event.z, isObserver);
+                if (distanceSq < distanceLimit * distanceLimit) {
+                    if (player.isPlayerSleeping()) {
+                        renderOverHead(renderer, player, event.x, event.y - 1.5D, event.z, isObserver);
+                    }else{
+                        renderOverHead(renderer, player, event.x, event.y, event.z, isObserver);
+                    }
                 }
+
             }
-
-
         }
     }
 
@@ -133,6 +134,8 @@ public class OverheadHandler extends FancyPancyHandler {
             }
             renderManager.renderEngine.bindTexture(data.resourceLocation);
 
+
+
             GL11.glPushMatrix();
             GL11.glTranslatef((float)x, (float)y + player.height + (isObserver ? 0.8F : 1.1F), (float)z);
             GL11.glNormal3f(0, 1, 0);
@@ -141,6 +144,7 @@ public class OverheadHandler extends FancyPancyHandler {
 
             GL11.glScalef(-1, -1, 1);
             GL11.glDisable(GL11.GL_LIGHTING);
+            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             GL11.glEnable(GL11.GL_BLEND);
 
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.8F);
@@ -155,6 +159,7 @@ public class OverheadHandler extends FancyPancyHandler {
             GL11.glPopMatrix();
         }
     }
+
 
 
 }
