@@ -4,7 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.init.Items;
 import vswe.stevesvehicles.client.rendering.models.cart.ModelCleaner;
-import vswe.stevesvehicles.client.rendering.models.cart.ModelHullTop;
+import vswe.stevesvehicles.client.rendering.models.common.ModelHullTop;
 import vswe.stevesvehicles.client.rendering.models.cart.ModelLiquidDrainer;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;

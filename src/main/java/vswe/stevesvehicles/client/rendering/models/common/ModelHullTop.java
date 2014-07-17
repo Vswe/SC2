@@ -1,13 +1,13 @@
-package vswe.stevesvehicles.client.rendering.models.boat;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+package vswe.stevesvehicles.client.rendering.models.common;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
+
 import vswe.stevesvehicles.client.rendering.models.ModelVehicle;
 import vswe.stevesvehicles.module.ModuleBase;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class ModelHullTop extends ModelVehicle {
 

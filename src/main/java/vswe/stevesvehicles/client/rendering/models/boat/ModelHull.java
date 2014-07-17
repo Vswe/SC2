@@ -26,16 +26,12 @@ public class ModelHull extends ModelVehicle {
     public ModelHull(ResourceLocation resource) {
 		this.resource = resource;
 
-        byte boatLength = 24;
-        byte boatHeight = 6;
-        byte boatWidth = 20;
-        byte boatOffSurface = 4;
 
-        ModelRenderer bot = new ModelRenderer(this, 0, 8);
-        ModelRenderer front = new ModelRenderer(this, 0, 0);
-        ModelRenderer left = new ModelRenderer(this, 0, 0);
-        ModelRenderer right = new ModelRenderer(this, 0, 0);
-        ModelRenderer back = new ModelRenderer(this, 0, 0);
+        ModelRenderer bot = new ModelRenderer(this, 0, 0);
+        ModelRenderer front = new ModelRenderer(this, 0, 14);
+        ModelRenderer left = new ModelRenderer(this, 0, 14);
+        ModelRenderer right = new ModelRenderer(this, 0, 14);
+        ModelRenderer back = new ModelRenderer(this, 0, 14);
 
 		addRenderer(bot);
 		addRenderer(front);
@@ -44,81 +40,84 @@ public class ModelHull extends ModelVehicle {
 		addRenderer(back);
 
         bot.addBox(
-                -boatLength / 2,
-                -boatWidth / 2 + 2,
-                -3.0F,
-                boatLength,
-                boatWidth - 4,
-                4,
+                -cartLength / 2,    //X
+                -(cartWidth - 4) / 2,	    //Y
+                -1.0F, 			    //Z
+                cartLength,		    //Size X
+                cartWidth - 4,		    //Size Y
+                2,			        //Size Z
                 0.0F
         );
         bot.setRotationPoint(
-                0.0F,
-                boatOffSurface,
-                0.0F
+                0.0F, 			    //X
+                cartOnGround,	    //Y
+                0.0F			    //Z
         );
 
         front.addBox(
-                -boatLength / 2 + 2,
-                -boatHeight - 1,
-                -1.0F,
-                boatLength - 4,
-                boatHeight,
-                2,
-                0.0F);
-        front.setRotationPoint(
-                -boatLength / 2 + 1,
-                boatOffSurface,
-                0.0F);
-
-        back.addBox(
-                -boatLength / 2 + 2,
-                -boatHeight - 1,
-                -1.0F,
-                boatLength - 4,
-                boatHeight,
-                2,
+                -cartWidth / 2,			//X
+                -cartHeight - 1, 		//Y
+                -1.0F, 					//Z
+                cartWidth, 				//Size X
+                cartHeight,				//Size Y
+                2,						//Size Z
                 0.0F
         );
-        back.setRotationPoint(
-                boatLength / 2 - 1,
-                boatOffSurface,
-                0.0F);
+        front.setRotationPoint(
+                -cartLength / 2 + 1,	//X
+                cartOnGround,			//Y
+                0.0F					//Z
+        );
 
         left.addBox(
-                -boatLength / 2 + 2,
-                -boatHeight - 1,
-                -1.0F,
-                boatLength - 4,
-                boatHeight, 2,
+                -cartLength / 2 + 2,	//X
+                -cartHeight - 1,		//Y
+                -1.0F,					//Z
+                cartLength - 4,			//Size X
+                cartHeight,				//Size Y
+                2,						//Size Z
                 0.0F
         );
         left.setRotationPoint(
-                0.0F,
-                boatOffSurface,
-                -boatWidth / 2 + 1
+                0.0F,					//X
+                cartOnGround,			//Y
+                -cartWidth / 2 + 1		//Z
         );
 
         right.addBox(
-                -boatLength / 2 + 2,
-                -boatHeight - 1,
-                -1.0F,
-                boatLength - 4,
-                boatHeight,
-                2,
+                -cartLength / 2 + 2,	//X
+                -cartHeight - 1,		//Y
+                -1.0F,					//Z
+                cartLength - 4,			//Size X
+                cartHeight,				//Size Y
+                2,						//Size Z
                 0.0F
         );
         right.setRotationPoint(
-                0.0F,
-                boatOffSurface,
-                boatWidth / 2 - 1
+                0.0F, 					//X
+                cartOnGround,			//Y
+                cartWidth / 2 - 1		//Z
         );
 
+        back.addBox(
+                -cartWidth / 2,			//X
+                -cartHeight - 1,		//Y
+                -1.0F,					//Z
+                cartWidth , 			//Size X
+                cartHeight,				//Size Y
+                2,						//Size Z
+                0.0F
+        );
+        back.setRotationPoint(
+                cartLength / 2 - 1, 	//X
+                cartOnGround,			//Y
+                0.0F					//Z
+        );
 
         bot.rotateAngleX = ((float)Math.PI / 2F);
         front.rotateAngleY = ((float)Math.PI * 3F / 2F);
-        back.rotateAngleY = ((float)Math.PI / 2F);
         left.rotateAngleY = (float)Math.PI;
+        back.rotateAngleY = ((float)Math.PI / 2F);
     }
 
     @Override

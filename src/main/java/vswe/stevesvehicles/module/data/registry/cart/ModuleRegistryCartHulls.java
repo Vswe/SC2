@@ -14,7 +14,7 @@ import vswe.stevesvehicles.module.common.hull.*;
 import vswe.stevesvehicles.holiday.HolidayType;
 import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.client.rendering.models.cart.ModelHull;
-import vswe.stevesvehicles.client.rendering.models.cart.ModelHullTop;
+import vswe.stevesvehicles.client.rendering.models.common.ModelHullTop;
 import vswe.stevesvehicles.client.rendering.models.cart.ModelPigHead;
 import vswe.stevesvehicles.client.rendering.models.cart.ModelPigHelmet;
 import vswe.stevesvehicles.client.rendering.models.cart.ModelPigTail;

@@ -1,5 +1,6 @@
 package vswe.stevesvehicles.client.rendering.models.cart;
 import net.minecraft.util.ResourceLocation;
+import vswe.stevesvehicles.client.rendering.models.common.ModelHullTop;
 import vswe.stevesvehicles.module.ModuleBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

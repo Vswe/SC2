@@ -6,8 +6,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import vswe.stevesvehicles.client.ResourceHelper;
 import vswe.stevesvehicles.client.rendering.models.boat.ModelHull;
-import vswe.stevesvehicles.client.rendering.models.cart.ModelHullTop;
 
+import vswe.stevesvehicles.client.rendering.models.common.ModelHullTop;
+import vswe.stevesvehicles.module.common.hull.HullCreative;
+import vswe.stevesvehicles.module.common.hull.HullGalgadorian;
 import vswe.stevesvehicles.module.common.hull.HullReinforced;
 import vswe.stevesvehicles.module.common.hull.HullStandard;
 import vswe.stevesvehicles.module.common.hull.HullWood;
@@ -27,7 +29,7 @@ public class ModuleRegistryBoatHulls extends ModuleRegistry {
             @SideOnly(Side.CLIENT)
             public void loadModels() {
                 addModel("Hull", new ModelHull(ResourceHelper.getResource("/models/boat/wooden_hull.png")));
-                //addModel("Top", new ModelHullTop(ResourceHelper.getResource("/models/hullModelWoodenTop.png")));
+                addModel("Top", new ModelHullTop(ResourceHelper.getResource("/models/cart/hullModelWoodenTop.png")));
             }
         };
 
@@ -41,8 +43,8 @@ public class ModuleRegistryBoatHulls extends ModuleRegistry {
             @Override
             @SideOnly(Side.CLIENT)
             public void loadModels() {
-                addModel("Hull", new ModelHull(ResourceHelper.getResource("/models/boat/wooden_hull.png")));
-                //addModel("Top", new ModelHullTop(ResourceHelper.getResource("/models/hullModelStandardTop.png")));
+                addModel("Hull", new ModelHull(ResourceHelper.getResource("/models/boat/standard_hull.png")));
+                addModel("Top", new ModelHullTop(ResourceHelper.getResource("/models/cart/hullModelStandardTop.png")));
             }
         };
 
@@ -56,8 +58,8 @@ public class ModuleRegistryBoatHulls extends ModuleRegistry {
             @Override
             @SideOnly(Side.CLIENT)
             public void loadModels() {
-                addModel("Hull", new ModelHull(ResourceHelper.getResource("/models/boat/wooden_hull.png")));
-                //addModel("Top", new ModelHullTop(ResourceHelper.getResource("/models/hullModelLargeTop.png")));
+                addModel("Hull", new ModelHull(ResourceHelper.getResource("/models/boat/reinforced_hull.png")));
+                addModel("Top", new ModelHullTop(ResourceHelper.getResource("/models/cart/hullModelLargeTop.png")));
             }
         };
 
@@ -65,7 +67,33 @@ public class ModuleRegistryBoatHulls extends ModuleRegistry {
         reinforced.addVehicles(VehicleRegistry.BOAT);
         register(reinforced);
 
-        //TODO add more hulls
+
+
+        ModuleData galgadorian = new ModuleDataHull("galgadorian_hull", HullGalgadorian.class, 1000, 5,  6, 12, 150) {
+            @Override
+            @SideOnly(Side.CLIENT)
+            public void loadModels() {
+                addModel("Hull", new ModelHull(ResourceHelper.getResource("/models/boat/galgadorian_hull.png")));
+                addModel("Top", new ModelHullTop(ResourceHelper.getResource("/models/cart/hullModelGalgadorianTop.png")));
+            }
+        };
+
+        galgadorian.addVehicles(VehicleRegistry.BOAT);
+        register(galgadorian);
+
+
+        ModuleData creative = new ModuleDataHull("creative_hull", HullCreative.class, 10000, 5, 6, 12, 150) {
+            @Override
+            @SideOnly(Side.CLIENT)
+            public void loadModels() {
+                addModel("Hull", new ModelHull(ResourceHelper.getResource("/models/boat/creative_hull.png")));
+                addModel("Top", new ModelHullTop(ResourceHelper.getResource("/models/cart/hullModelCreativeTop.png")));
+            }
+        };
+
+        creative.addVehicles(VehicleRegistry.BOAT);
+        register(creative);
+
         //TODO add recipes
     }
 

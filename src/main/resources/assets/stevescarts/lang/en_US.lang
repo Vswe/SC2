@@ -250,13 +250,18 @@ steves_vehicles:item.vehicle:boat.name=Modular boat
 
 # Modules
 steves_vehicles:item.common:unknown_module.name=Unknown SC2 module
-steves_vehicles:item.cart.hulls:wooden_hull.name=Wooden Hull
-steves_vehicles:item.cart.hulls:standard_hull.name=Standard Hull
-steves_vehicles:item.cart.hulls:reinforced_hull.name=Reinforced Hull
-steves_vehicles:item.cart.hulls:galgadorian_hull.name=Galgadorian Hull
-steves_vehicles:item.cart.hulls:pumpkin_chariot.name=Pumpkin chariot
+steves_vehicles:item.cart.hulls:wooden_hull.name=Wooden Cart Hull
+steves_vehicles:item.cart.hulls:standard_hull.name=Standard Cart Hull
+steves_vehicles:item.cart.hulls:reinforced_hull.name=Reinforced Cart Hull
+steves_vehicles:item.cart.hulls:galgadorian_hull.name=Galgadorian Cart Hull
+steves_vehicles:item.cart.hulls:pumpkin_chariot.name=Pumpkin Chariot
 steves_vehicles:item.cart.hulls:mechanical_pig.name=Mechanical Pig
-steves_vehicles:item.cart.hulls:creative_hull.name=Creative Hull
+steves_vehicles:item.cart.hulls:creative_hull.name=Creative Cart Hull
+steves_vehicles:item.boat.hulls:wooden_hull.name=Wooden Boat Hull
+steves_vehicles:item.boat.hulls:standard_hull.name=Standard Boat Hull
+steves_vehicles:item.boat.hulls:reinforced_hull.name=Reinforced Boat Hull
+steves_vehicles:item.boat.hulls:galgadorian_hull.name=Galgadorian Boat Hull
+steves_vehicles:item.boat.hulls:creative_hull.name=Creative Boat Hull
 steves_vehicles:item.common.engines:tiny_coal_engine.name=Tiny Coal Engine
 steves_vehicles:item.common.engines:basic_solar_engine.name=Basic Solar Engine
 steves_vehicles:item.common.engines:thermal_engine.name=Thermal Engine

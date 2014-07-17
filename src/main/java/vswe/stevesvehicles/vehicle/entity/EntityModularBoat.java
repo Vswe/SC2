@@ -75,6 +75,13 @@ public class EntityModularBoat extends EntityBoat implements IVehicleEntity {
         }
     }
 
+    @Override
+    public void onUpdate() {
+        super.onUpdate();
+
+        vehicleBase.onUpdate();
+    }
+
 
     //Inventory, Tank and a few other methods. These methods are required due to the implementing interfaces, but all logic is handled in the VehicleBase.
 
