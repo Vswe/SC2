@@ -339,9 +339,10 @@ public class ModuleShooter extends ModuleAttachment implements ISuppliesModule {
 
         double speedX = getVehicle().getEntity().motionX;
         double speedZ = getVehicle().getEntity().motionZ;
-        //TODO probably need to check if the motion is small, rather than if it's equals to 0
-        boolean movingX = speedX != 0;
-        boolean movingZ = speedZ != 0;
+        System.out.println(speedX + " : " + speedZ);
+
+        boolean movingX = Math.abs(speedX) < 0.005;
+        boolean movingZ = Math.abs(speedZ) < 0.005;
 
 		if ((movingX && movingZ) || (!movingX && !movingZ) || !getVehicle().hasFuel()) {
 			return;

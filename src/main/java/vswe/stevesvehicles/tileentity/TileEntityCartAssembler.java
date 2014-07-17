@@ -551,7 +551,6 @@ public class TileEntityCartAssembler extends TileEntityBase
 	@Override
 	public void receivePacket(DataReader dr, EntityPlayer player) {
         int id = dr.readByte();
-        System.out.println(id);
         if (id == 0) {
 			//if a player clicked the assemble button, try to assemble the cart
 			doAssemble();
