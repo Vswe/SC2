@@ -19,7 +19,7 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "2.0.0.b15"
+version = "2.0.0.b16"
 group= "vswe.stevescarts" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "StevesCarts"
 

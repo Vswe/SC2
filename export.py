@@ -49,7 +49,7 @@ else:
 	
 
 #set version
-gen_path = "src/main/java/vswe/stevescarts/Helpers/GeneratedInfo.java";
+gen_path = "src/main/java/vswe/stevesvehicles/GeneratedInfo.java";
 
 info = open(gen_path, "r")
 content = info.read()

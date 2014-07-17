@@ -20,7 +20,7 @@ public enum ColorHelper {
 
 	@Override
 	public String toString() {
-		return "§" + Integer.toHexString(ordinal());
+		return "\u00a7" + Integer.toHexString(ordinal());
 	}
 	
 }

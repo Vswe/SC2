@@ -30,7 +30,7 @@ public abstract class ModuleState {
     }
 
     public String getUnlocalizedName() {
-        return "steves_vehicle:gui.state." + fullUnlocalizedName;
+        return "steves_vehicles:gui.state." + fullUnlocalizedName;
     }
 
     public abstract boolean isValid(VehicleBase vehicle);

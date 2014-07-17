@@ -25,6 +25,7 @@ import vswe.stevesvehicles.recipe.ModuleRecipeShapeless;
 import vswe.stevesvehicles.vehicle.VehicleType;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -55,7 +56,7 @@ public class ModuleData implements IRecipeOutput {
     @SideOnly(Side.CLIENT)
     private ArrayList<String> removedModels;
     @SideOnly(Side.CLIENT)
-    private float modelMultiplier = 0.75F;
+    private float modelMultiplier;
     @SideOnly(Side.CLIENT)
     private IIcon icon;
 
@@ -170,13 +171,7 @@ public class ModuleData implements IRecipeOutput {
         if (this.sides == null) {
             this.sides = new ArrayList<ModuleSide>();
         }
-        for (ModuleSide side : sides) {
-            this.sides.add(side);
-
-            if (side == ModuleSide.TOP) { //TODO do this in a nicer way
-                removeModel("Rails");
-            }
-        }
+        Collections.addAll(this.sides, sides);
 
         return this;
     }
@@ -217,21 +212,25 @@ public class ModuleData implements IRecipeOutput {
         m1.addNemesis(m2);
     }
 
+    @SideOnly(Side.CLIENT)
     public float getModelMultiplier() {
         return modelMultiplier;
     }
 
+    @SideOnly(Side.CLIENT)
     public ModuleData setModelMultiplier(float val) {
         modelMultiplier = val;
 
         return this;
     }
 
+    @SideOnly(Side.CLIENT)
     public ModuleData addModel(String tag, ModelVehicle model) {
         addModel(tag, model, false);
         addModel(tag, model, true);
         return this;
     }
+    @SideOnly(Side.CLIENT)
     public ModuleData addModel(String tag, ModelVehicle model, boolean placeholder) {
         if (placeholder) {
             if (modelsPlaceholder == null) {
@@ -250,6 +249,7 @@ public class ModuleData implements IRecipeOutput {
         return this;
     }
 
+    @SideOnly(Side.CLIENT)
     public HashMap<String,ModelVehicle> getModels(boolean placeholder) {
         if (placeholder) {
             return modelsPlaceholder;
@@ -258,6 +258,7 @@ public class ModuleData implements IRecipeOutput {
         }
     }
 
+    @SideOnly(Side.CLIENT)
     public boolean haveModels(boolean placeholder) {
         if (placeholder) {
             return modelsPlaceholder != null;
@@ -266,6 +267,7 @@ public class ModuleData implements IRecipeOutput {
         }
     }
 
+    @SideOnly(Side.CLIENT)
     public ModuleData removeModel(String tag) {
         if (removedModels == null) {
             removedModels = new ArrayList<String>();
@@ -277,10 +279,12 @@ public class ModuleData implements IRecipeOutput {
         return this;
     }
 
+    @SideOnly(Side.CLIENT)
     public ArrayList<String> getRemovedModels() {
         return removedModels;
     }
 
+    @SideOnly(Side.CLIENT)
     public boolean haveRemovedModels() {
         return removedModels != null;
     }
@@ -500,7 +504,18 @@ public class ModuleData implements IRecipeOutput {
     }
 
     @SideOnly(Side.CLIENT)
-    public void loadModels() {}
+    protected void loadModels() {}
+
+    @SideOnly(Side.CLIENT)
+    public void loadClientValues() {
+        modelMultiplier = 0.75F;
+        loadModels();
+
+        //TODO do this in a nicer way
+        if (sides != null && sides.contains(ModuleSide.TOP)) {
+           removeModel("Rails");
+        }
+    }
 
 
     @SideOnly(Side.CLIENT)
