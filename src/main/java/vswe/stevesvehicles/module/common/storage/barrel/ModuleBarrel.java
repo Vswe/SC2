@@ -2,6 +2,8 @@ package vswe.stevesvehicles.module.common.storage.barrel;
 
 
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -141,6 +143,7 @@ public abstract class ModuleBarrel extends ModuleStorage {
         drawHoverImage(gui, BARREL_X + SIGN_X, BARREL_Y + SIGN_Y, SIGN_SRC_X, SIGN_SRC_Y, SIGN_WIDTH, SIGN_HEIGHT, x, y);
     }
 
+    @SideOnly(Side.CLIENT)
     private void drawHoverImage(GuiVehicle gui, int x, int y, int u, int v, int w, int h, int mX, int mY) {
         if (inRect(mX, mY, x, y, w, h )) {
             GL11.glEnable(GL11.GL_BLEND);
@@ -160,8 +163,7 @@ public abstract class ModuleBarrel extends ModuleStorage {
             if (item != null) {
                 List<String> info = null;
                 try {
-                    //noinspection unchecked
-                    info = item.getTooltip(Minecraft.getMinecraft().thePlayer, Minecraft.getMinecraft().gameSettings.advancedItemTooltips);
+                    info = getInfo(item);
                 }catch (Exception ignored) {} //if some item fails to generate its tooltip we don't want to crash, just ignore displaying a tooltip
 
                 if (info != null) {
@@ -216,6 +218,13 @@ public abstract class ModuleBarrel extends ModuleStorage {
         }
 
 
+    }
+
+
+    @SideOnly(Side.CLIENT)
+    private List<String> getInfo(ItemStack item) {
+        //noinspection unchecked
+        return item.getTooltip(Minecraft.getMinecraft().thePlayer, Minecraft.getMinecraft().gameSettings.advancedItemTooltips);
     }
 
     @Override
