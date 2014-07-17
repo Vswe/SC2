@@ -10,6 +10,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 import vswe.stevesvehicles.tileentity.detector.DetectorType;
 import vswe.stevesvehicles.tileentity.TileEntityDetector;
 import cpw.mods.fml.relauncher.Side;
@@ -50,6 +51,15 @@ public class BlockDetector extends BlockContainerBase {
     }
 
 
+    @Override
+    public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
+        return true;
+    }
+
+    @Override
+    public boolean isBlockNormalCube() {
+        return true;
+    }
 
     @Override
 	public boolean isBlockSolid(IBlockAccess world, int x, int y, int z, int side) {

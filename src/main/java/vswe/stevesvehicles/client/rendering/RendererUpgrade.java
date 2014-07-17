@@ -1,5 +1,6 @@
 package vswe.stevesvehicles.client.rendering;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
@@ -30,16 +31,7 @@ public class RendererUpgrade implements ISimpleBlockRenderingHandler
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
 	
 		TileEntity te = world.getTileEntity(x, y, z);
-		if (te instanceof TileEntityCartAssembler) {
-			TileEntityCartAssembler assembler = (TileEntityCartAssembler)te;
-			BlockCartAssembler b = (BlockCartAssembler)block;
-			
-
-			renderer.renderStandardBlock(block, x, y, z);
-			
-	
-			return true;
-		}else if(te instanceof TileEntityUpgrade){
+        if(te instanceof TileEntityUpgrade){
 			TileEntityUpgrade upgrade = (TileEntityUpgrade)te;
 			BlockUpgrade b = (BlockUpgrade)block;
 			

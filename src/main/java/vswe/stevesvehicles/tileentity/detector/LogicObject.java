@@ -39,7 +39,7 @@ public abstract class LogicObject {
 	public void setParentAndUpdate(LogicObject parent) {
 		if (parent != null) {
             List<LogicObject> objects = new ArrayList<LogicObject>();
-            fillTree(objects);
+            fillTree(objects, parent);
             DataWriter dw = PacketHandler.getDataWriter(PacketType.BLOCK);
             dw.writeBoolean(true);
             dw.writeByte(objects.size());
@@ -57,10 +57,11 @@ public abstract class LogicObject {
 		}
 	}
 
-    private void fillTree(List<LogicObject> objects) {
+    private void fillTree(List<LogicObject> objects, LogicObject parent) {
+        this.parent = parent;
         objects.add(this);
         for (LogicObject child : children) {
-            child.fillTree(objects);
+            child.fillTree(objects, this);
         }
     }
 	

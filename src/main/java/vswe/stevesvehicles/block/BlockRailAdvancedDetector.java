@@ -37,9 +37,11 @@ public class BlockRailAdvancedDetector extends BlockSpecialRailBase {
     public IIcon getIcon(int side, int meta) {
         return meta >= 6 ? cornerIcon : normalIcon;
     }
-	
 
-	@Override
+
+
+
+    @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister register) {
         normalIcon = register.registerIcon(StevesVehicles.instance.textureHeader + ":rails/detector");
