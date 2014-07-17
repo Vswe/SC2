@@ -128,7 +128,9 @@ public class ModuleFertilizer extends ModuleWorker implements ISuppliesModule {
 				if ((metadata > 0 && getVehicle().getRandom().nextInt(250) == 0) || (metadata == 0 && getVehicle().getRandom().nextInt(1000) == 0)) {
 					getVehicle().getWorld().setBlockMetadataWithNotify(x, y + 1, z, metadataOfBlockAbove + 1, 3);
 
-					fertilizerStorage--;
+                    if (!getVehicle().hasCreativeSupplies()) {
+					    fertilizerStorage--;
+                    }
 				}
 			}else if (block instanceof BlockSapling && getVehicle().getWorld().getBlockLightValue(x, y + 2, z) >= 9) {
 				if (getVehicle().getRandom().nextInt(100) == 0) {
@@ -136,7 +138,10 @@ public class ModuleFertilizer extends ModuleWorker implements ISuppliesModule {
 						getVehicle().getWorld().setBlockMetadataWithNotify(x, y + 1, z, metadataOfBlockAbove | 8, 3);
 						((BlockSapling) Blocks.sapling).func_149878_d(getVehicle().getWorld(), x, y + 1, z, getVehicle().getRandom());
 					}
-					fertilizerStorage--;
+
+                    if (!getVehicle().hasCreativeSupplies()) {
+					    fertilizerStorage--;
+                    }
 				}
 			}
 		}

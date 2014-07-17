@@ -77,7 +77,9 @@ public class ModuleHydrater extends ModuleWorker {
                 } else {
                     stopWorking();
 
-                    getVehicle().drain(FluidRegistry.WATER, waterCost, true);
+                    if (!getVehicle().hasCreativeSupplies()) {
+                        getVehicle().drain(FluidRegistry.WATER, waterCost, true);
+                    }
                     getVehicle().getWorld().setBlockMetadataWithNotify(x, y, z, m + waterCost, 3);
                 }
             }
