@@ -98,7 +98,7 @@ public class RenderVehicleItem implements IItemRenderer {
 			}
 		}
 
-        GL11.glDisable(GL11.GL_ALPHA_TEST);
+        //GL11.glDisable(GL11.GL_ALPHA_TEST);
 		GL11.glPopMatrix();	
 	}
 	

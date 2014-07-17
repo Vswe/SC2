@@ -194,6 +194,8 @@ public class BlockUpgrade extends BlockContainerBase {
 			if (upgrade.useStandardInterface()) {
                 if (upgrade.getMaster() != null) {
                     return ModBlocks.CART_ASSEMBLER.getBlock().onBlockActivated(world, upgrade.getMaster().xCoord, upgrade.getMaster().yCoord, upgrade.getMaster().zCoord, player, side, hitX, hitY, hitZ);
+                }else{
+                    return false;
                 }
             }else{
 			    return super.onBlockActivated(world, x, y, z, player, side, hitX, hitY, hitZ);
