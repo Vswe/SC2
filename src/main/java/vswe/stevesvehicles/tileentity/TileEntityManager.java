@@ -208,6 +208,7 @@ public abstract class TileEntityManager extends TileEntityBase
 	
         if (getCart() == null || getCart().isDead ||  getSide() < 0 || getSide() > 3 || !getCart().getVehicle().isDisabled()) {
         	standardTransferHandler.reset();
+            moveTime = 0;
             return;
         }
 
