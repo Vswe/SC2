@@ -943,10 +943,17 @@ public abstract class ModuleBase {
 		return false;
 	}
 
-    protected DataWriter getDataWriter() {
+    protected DataWriter getDataWriter(boolean hasInterfaceOpen) {
         DataWriter dw = PacketHandler.getDataWriter(PacketType.VEHICLE);
+        if (!hasInterfaceOpen) {
+            dw.writeInteger(getVehicle().getEntity().getEntityId());
+        }
         dw.writeByte(getPositionId());
         return dw;
+    }
+
+    protected DataWriter getDataWriter() {
+        return getDataWriter(true);
     }
 
 

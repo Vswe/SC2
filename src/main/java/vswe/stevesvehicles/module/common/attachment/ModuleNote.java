@@ -876,7 +876,7 @@ public class ModuleNote extends ModuleAttachment {
     }
 	
 
-    private enum PacketId {
+    public enum PacketId {
         GLOBAL,
         TRACK,
         NOTE

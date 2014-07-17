@@ -27,6 +27,8 @@ public class RendererUpgrade implements ISimpleBlockRenderingHandler
 		//renderer.renderStandardBlock(block, x, y, z);
 	}
 
+    //TODO render the upgrades and other blocks with properly rotated textures (they are currently flipped on some sides)
+
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
 	
@@ -40,6 +42,7 @@ public class RendererUpgrade implements ISimpleBlockRenderingHandler
 			int side = b.setUpgradeBounds(world, x, y, z);
 			Tessellator.instance.setColorOpaque_F(1.0F, 1.0F, 1.0F);
 			if (side != -1) {
+                //TODO make this work when smooth lighting is on
 				renderer.renderFaceYPos(block, x, y, z, upgrade.getTexture(side == 0));
 				renderer.renderFaceYNeg(block, x, y, z, upgrade.getTexture(side == 1));
 				renderer.renderFaceZNeg(block, x, y, z, upgrade.getTexture(side == 2));

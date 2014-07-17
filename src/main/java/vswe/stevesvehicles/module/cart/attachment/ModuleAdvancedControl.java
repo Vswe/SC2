@@ -87,9 +87,11 @@ public class ModuleAdvancedControl extends ModuleAttachment implements ILeverMod
         drawImage(5,enginesEndAt,0,15,32,32);
 		if (minecraft.gameSettings.keyBindForward.getIsKeyPressed()) {
 			drawImage(5+10,enginesEndAt + 5,32 + 10,15 + 5,12,6);
-		}else if (minecraft.gameSettings.keyBindLeft.getIsKeyPressed()) {
+		}
+        if (minecraft.gameSettings.keyBindLeft.getIsKeyPressed()) {
 			drawImage(5+2,enginesEndAt + 13,32 + 2,15 + 13,6,12);
-		}else if (minecraft.gameSettings.keyBindRight.getIsKeyPressed()) {
+		}
+        if (minecraft.gameSettings.keyBindRight.getIsKeyPressed()) {
 			drawImage(5+24,enginesEndAt + 13,32 + 24,15 + 13,6,12);
 		}    
 
@@ -172,13 +174,13 @@ public class ModuleAdvancedControl extends ModuleAttachment implements ILeverMod
 		}	
 	}
 
-    private DataWriter getDataWriter(PacketId id) {
-        DataWriter dw = getDataWriter();
+    private DataWriter getDataWriter(PacketId id, boolean hasInterfaceOpen) {
+        DataWriter dw = getDataWriter(hasInterfaceOpen);
         dw.writeEnum(id);
         return dw;
     }
 
-    private enum PacketId {
+    public enum PacketId {
         ENGINE,
         KEY,
         DISTANCE,
@@ -266,7 +268,7 @@ public class ModuleAdvancedControl extends ModuleAttachment implements ILeverMod
 			
 			if (isForwardKeyDown() && isLeftKeyDown() && isRightKeyDown()) {
 				if (getVehicle().getEntity().riddenByEntity != null && getVehicle().getEntity().riddenByEntity instanceof EntityPlayer) {
-					getVehicle().getEntity().riddenByEntity.mountEntity(getVehicle().getEntity());
+					getVehicle().getEntity().riddenByEntity.mountEntity(null);
 					keyInformation = (byte)0;
 				}			
 			}
@@ -346,7 +348,7 @@ public class ModuleAdvancedControl extends ModuleAttachment implements ILeverMod
 
 			
 			if (oldVal != keyInformation) {
-                DataWriter dw = getDataWriter(PacketId.KEY);
+                DataWriter dw = getDataWriter(PacketId.KEY, false);
                 dw.writeByte(keyInformation);
                 sendPacketToServer(dw);
 			}
@@ -375,14 +377,14 @@ public class ModuleAdvancedControl extends ModuleAttachment implements ILeverMod
 	private double odo;
 	private double trip;	
 	private void sendTripPacket(EntityPlayer player) {
-        DataWriter dw = getDataWriter(PacketId.DISTANCE);
+        DataWriter dw = getDataWriter(PacketId.DISTANCE, false);
         dw.writeInteger((int)odo);
         dw.writeInteger((int)trip);
         sendPacketToPlayer(dw, player);
 	}
 	
 	private void sendEnginePacket(EntityPlayer player) {
-		DataWriter dw = getDataWriter(PacketId.ENGINE);
+		DataWriter dw = getDataWriter(PacketId.ENGINE, false);
         for (ModuleEngine moduleEngine : getVehicle().getEngines()) {
             dw.writeInteger(moduleEngine.getTotalFuel());
         }
@@ -473,7 +475,7 @@ public class ModuleAdvancedControl extends ModuleAttachment implements ILeverMod
 	public void mouseClicked(GuiVehicle gui, int x, int y, int button) {
 		if (button == 0) {
 			if (inRect(x,y, BUTTON_RECT)) {
-                sendPacketToServer(getDataWriter(PacketId.RESET));
+                sendPacketToServer(getDataWriter(PacketId.RESET, true));
 			}
 		}
 	}

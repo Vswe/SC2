@@ -203,7 +203,7 @@ public class ModulePowerObserver extends ModuleAddon {
         return dw;
     }
 
-    private enum PacketId {
+    public enum PacketId {
         ADD,
         REMOVE,
         AMOUNT

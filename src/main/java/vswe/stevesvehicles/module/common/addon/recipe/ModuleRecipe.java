@@ -224,7 +224,7 @@ public abstract class ModuleRecipe extends ModuleAddon {
         return dw;
     }
 
-    private enum PacketId {
+    public enum PacketId {
         TARGET,
         MODE,
         MAX_COUNT
