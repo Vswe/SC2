@@ -12,6 +12,7 @@ public class ModuleDataGroup {
 	private List<ModuleData> modules;
 	private int count;
     private List<ModuleDataGroup> clones;
+    private List<ModuleDataGroup> nameClones;
 	private ModuleDataGroup(ILocalizedText name) {
 		this.name = name;
 		count = 1;
@@ -60,6 +61,12 @@ public class ModuleDataGroup {
 		return newObj;
 	}
 
+    public ModuleDataGroup copyWithName(String key, int count) {
+        ModuleDataGroup newObj = copy(key, count);
+        addNameClone(newObj);
+        return newObj;
+    }
+
     public ModuleDataGroup getUnlinkedCopy(String key, int count) {
         ModuleDataGroup newObj = createGroup(key, name).setCount(count);
         for (ModuleData obj : getModules()) {
@@ -107,6 +114,16 @@ public class ModuleDataGroup {
         }
     }
 
+    private void addNameClone(ModuleDataGroup group) {
+        if (nameClones == null) {
+            nameClones = new ArrayList<ModuleDataGroup>();
+        }
+
+        if (!nameClones.contains(group)) {
+            nameClones.add(group);
+        }
+    }
+
 	public void add(ModuleDataGroup group) {
         group.addClone(this);
 
@@ -115,12 +132,21 @@ public class ModuleDataGroup {
 		}
 	}
 
+    public void setName(ILocalizedText name) {
+        this.name = name;
+        if (nameClones != null) {
+            for (ModuleDataGroup nameClone : nameClones) {
+                nameClone.setName(name);
+            }
+        }
+    }
+
     private static Map<String, ModuleDataGroup> groups = new HashMap<String, ModuleDataGroup>();
     public static ModuleDataGroup createGroup(String key, ILocalizedText name) {
         if (groups.containsKey(key)) {
             ModuleDataGroup group = groups.get(key);
             if (group.name == null && name != null) {
-                group.name = name;
+                group.setName(name);
             }
             return group;
         }else{

@@ -122,7 +122,7 @@ public class ModuleRegistryEngines extends ModuleRegistry {
 
 
         thermalLarge.addVehicles(VehicleRegistry.CART, VehicleRegistry.BOAT);
-        thermalLarge.addRequirement(ModuleDataGroup.getGroup(ModuleRegistryTanks.TANK_KEY).copy(ModuleRegistryTanks.TANK_KEY + 2, 2));
+        thermalLarge.addRequirement(ModuleDataGroup.getGroup(ModuleRegistryTanks.TANK_KEY).copyWithName(ModuleRegistryTanks.TANK_KEY + 2, 2));
         register(thermalLarge);
         ModuleData.addNemesis(thermalLarge, thermalSmall);
 

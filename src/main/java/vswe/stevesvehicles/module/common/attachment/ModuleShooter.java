@@ -339,7 +339,6 @@ public class ModuleShooter extends ModuleAttachment implements ISuppliesModule {
 
         double speedX = getVehicle().getEntity().motionX;
         double speedZ = getVehicle().getEntity().motionZ;
-        System.out.println(speedX + " : " + speedZ);
 
         boolean movingX = Math.abs(speedX) < 0.005;
         boolean movingZ = Math.abs(speedZ) < 0.005;
