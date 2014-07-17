@@ -31,6 +31,7 @@ import vswe.stevesvehicles.module.ModuleBase;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.vehicle.VehicleCart;
 
 /**
@@ -43,7 +44,7 @@ public class EntityModularCart extends EntityMinecart
     implements IVehicleEntity
 {
 
-	private vswe.stevesvehicles.vehicle.VehicleBase vehicleBase;
+	private VehicleBase vehicleBase;
     public int disabledX;
     public int disabledY;
     public int disabledZ;
@@ -73,7 +74,7 @@ public class EntityModularCart extends EntityMinecart
 
 
     @Override
-    public vswe.stevesvehicles.vehicle.VehicleBase getVehicle() {
+    public VehicleBase getVehicle() {
         return vehicleBase;
     }
 
@@ -139,8 +140,7 @@ public class EntityModularCart extends EntityMinecart
 	 * Initiates the entity, used for initiating data watchers.
 	 */
 	@Override
-    protected void entityInit()
-    {
+    protected void entityInit() {
         super.entityInit();
         this.dataWatcher.addObject(16, new Byte((byte)0));
     }	
@@ -727,42 +727,13 @@ public class EntityModularCart extends EntityMinecart
     @Override
     public void readSpawnData(ByteBuf data) {vehicleBase.readSpawnData(data);}
 
-
-
-	/**
-	 * Returns the bounding box of the cart.
-	 */
 	@Override
-	public AxisAlignedBB getBoundingBox(){
-		if (vehicleBase.isPlaceholder) {
-			return null;
-		}else{
-			return super.getBoundingBox();
-		}
-    }
-	
-	/**
-	 * Returns whether something can collide with the cart or not.
-	 */
+	public AxisAlignedBB getBoundingBox(){return vehicleBase.isPlaceholder ? null : super.getBoundingBox();}
 	@Override
-	public boolean canBeCollidedWith(){
-		if (vehicleBase.isPlaceholder) {
-			return false;
-		}else{
-			return super.canBeCollidedWith();
-		}
-    }
-	
-	/**
-	 * Returns whether the cart can be pushed or not
-	 */
+	public boolean canBeCollidedWith(){return !vehicleBase.isPlaceholder && super.canBeCollidedWith();}
 	@Override
 	public boolean canBePushed() {
-		if (vehicleBase.isPlaceholder) {
-			return false;
-		}else{
-			return super.canBePushed();
-		}
+        return !vehicleBase.isPlaceholder && super.canBePushed();
     }	
 	
 

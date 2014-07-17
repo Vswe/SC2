@@ -5,7 +5,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import vswe.stevesvehicles.client.rendering.models.ModelNote;
+import vswe.stevesvehicles.client.rendering.models.common.ModelNote;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleSide;
 import vswe.stevesvehicles.module.common.addon.ModuleColorRandomizer;

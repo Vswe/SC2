@@ -22,7 +22,7 @@ public abstract class ModelVehicle extends ModelBase {
 	//{0,0,0} is in the middle of the floor of the cart
 	//positive size means that the opposing corner of the object has a higher x/y/z value
 
-
+//TODO get rid of these
 	protected final byte cartLength = 20;
     protected final byte cartHeight = 8;
     protected final byte cartWidth = 16;

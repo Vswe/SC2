@@ -10,19 +10,19 @@ import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataHull;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.module.data.ModuleSide;
-import vswe.stevesvehicles.module.cart.hull.*;
+import vswe.stevesvehicles.module.common.hull.*;
 import vswe.stevesvehicles.holiday.HolidayType;
 import vswe.stevesvehicles.client.ResourceHelper;
-import vswe.stevesvehicles.client.rendering.models.ModelHull;
-import vswe.stevesvehicles.client.rendering.models.ModelHullTop;
-import vswe.stevesvehicles.client.rendering.models.ModelPigHead;
-import vswe.stevesvehicles.client.rendering.models.ModelPigHelmet;
-import vswe.stevesvehicles.client.rendering.models.ModelPigTail;
-import vswe.stevesvehicles.client.rendering.models.ModelPumpkinHull;
-import vswe.stevesvehicles.client.rendering.models.ModelPumpkinHullTop;
-import vswe.stevesvehicles.module.cart.hull.HullGalgadorian;
-import vswe.stevesvehicles.module.cart.hull.HullPig;
-import vswe.stevesvehicles.module.cart.hull.HullPumpkin;
+import vswe.stevesvehicles.client.rendering.models.cart.ModelHull;
+import vswe.stevesvehicles.client.rendering.models.cart.ModelHullTop;
+import vswe.stevesvehicles.client.rendering.models.cart.ModelPigHead;
+import vswe.stevesvehicles.client.rendering.models.cart.ModelPigHelmet;
+import vswe.stevesvehicles.client.rendering.models.cart.ModelPigTail;
+import vswe.stevesvehicles.client.rendering.models.cart.ModelPumpkinHull;
+import vswe.stevesvehicles.client.rendering.models.cart.ModelPumpkinHullTop;
+import vswe.stevesvehicles.module.common.hull.HullGalgadorian;
+import vswe.stevesvehicles.module.common.hull.HullPig;
+import vswe.stevesvehicles.module.common.hull.HullPumpkin;
 import vswe.stevesvehicles.StevesVehicles;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
 
@@ -36,8 +36,8 @@ public class ModuleRegistryCartHulls extends ModuleRegistry {
             @Override
             @SideOnly(Side.CLIENT)
             public void loadModels() {
-                addModel("Hull", new ModelHull(ResourceHelper.getResource("/models/hullModelWooden.png")));
-                addModel("Top", new ModelHullTop(ResourceHelper.getResource("/models/hullModelWoodenTop.png")));
+                addModel("Hull", new ModelHull(ResourceHelper.getResource("/models/cart/hullModelWooden.png")));
+                addModel("Top", new ModelHullTop(ResourceHelper.getResource("/models/cart/hullModelWoodenTop.png")));
             }
         };
 
@@ -54,8 +54,8 @@ public class ModuleRegistryCartHulls extends ModuleRegistry {
             @Override
             @SideOnly(Side.CLIENT)
             public void loadModels() {
-                addModel("Hull", new ModelHull(ResourceHelper.getResource("/models/hullModelStandard.png")));
-                addModel("Top", new ModelHullTop(ResourceHelper.getResource("/models/hullModelStandardTop.png")));
+                addModel("Hull", new ModelHull(ResourceHelper.getResource("/models/cart/hullModelStandard.png")));
+                addModel("Top", new ModelHullTop(ResourceHelper.getResource("/models/cart/hullModelStandardTop.png")));
             }
         };
 
@@ -72,8 +72,8 @@ public class ModuleRegistryCartHulls extends ModuleRegistry {
             @Override
             @SideOnly(Side.CLIENT)
             public void loadModels() {
-                addModel("Hull", new ModelHull(ResourceHelper.getResource("/models/hullModelLarge.png")));
-                addModel("Top", new ModelHullTop(ResourceHelper.getResource("/models/hullModelLargeTop.png")));
+                addModel("Hull", new ModelHull(ResourceHelper.getResource("/models/cart/hullModelLarge.png")));
+                addModel("Top", new ModelHullTop(ResourceHelper.getResource("/models/cart/hullModelLargeTop.png")));
             }
         };
 
@@ -90,8 +90,8 @@ public class ModuleRegistryCartHulls extends ModuleRegistry {
             @Override
             @SideOnly(Side.CLIENT)
             public void loadModels() {
-                addModel("Hull", new ModelHull(ResourceHelper.getResource("/models/hullModelGalgadorian.png")));
-                addModel("Top", new ModelHullTop(ResourceHelper.getResource("/models/hullModelGalgadorianTop.png")));
+                addModel("Hull", new ModelHull(ResourceHelper.getResource("/models/cart/hullModelGalgadorian.png")));
+                addModel("Top", new ModelHullTop(ResourceHelper.getResource("/models/cart/hullModelGalgadorianTop.png")));
             }
         };
 
@@ -108,8 +108,8 @@ public class ModuleRegistryCartHulls extends ModuleRegistry {
             @Override
             @SideOnly(Side.CLIENT)
             public void loadModels() {
-                addModel("Hull", new ModelPumpkinHull(ResourceHelper.getResource("/models/hullModelPumpkin.png"), ResourceHelper.getResource("/models/hullModelWooden.png")));
-                addModel("Top", new ModelPumpkinHullTop(ResourceHelper.getResource("/models/hullModelPumpkinTop.png"), ResourceHelper.getResource("/models/hullModelWoodenTop.png")));
+                addModel("Hull", new ModelPumpkinHull(ResourceHelper.getResource("/models/cart/hullModelPumpkin.png"), ResourceHelper.getResource("/models/cart/hullModelWooden.png")));
+                addModel("Top", new ModelPumpkinHullTop(ResourceHelper.getResource("/models/cart/hullModelPumpkinTop.png"), ResourceHelper.getResource("/models/cart/hullModelWoodenTop.png")));
             }
         };
 
@@ -128,8 +128,8 @@ public class ModuleRegistryCartHulls extends ModuleRegistry {
             @Override
             @SideOnly(Side.CLIENT)
             public void loadModels() {
-                addModel("Hull", new ModelHull(ResourceHelper.getResource("/models/hullModelPig.png")));
-                addModel("Top", new ModelHullTop(ResourceHelper.getResource("/models/hullModelPigTop.png")));
+                addModel("Hull", new ModelHull(ResourceHelper.getResource("/models/cart/hullModelPig.png")));
+                addModel("Top", new ModelHullTop(ResourceHelper.getResource("/models/cart/hullModelPigTop.png")));
                 addModel("Head", new ModelPigHead());
                 addModel("Tail", new ModelPigTail());
                 addModel("Helmet", new ModelPigHelmet(false));

@@ -2,10 +2,10 @@ package vswe.stevesvehicles.module.data.registry;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import vswe.stevesvehicles.client.rendering.models.ModelAdvancedTank;
-import vswe.stevesvehicles.client.rendering.models.ModelFrontTank;
-import vswe.stevesvehicles.client.rendering.models.ModelSideTanks;
-import vswe.stevesvehicles.client.rendering.models.ModelTopTank;
+import vswe.stevesvehicles.client.rendering.models.common.ModelAdvancedTank;
+import vswe.stevesvehicles.client.rendering.models.common.ModelFrontTank;
+import vswe.stevesvehicles.client.rendering.models.common.ModelSideTanks;
+import vswe.stevesvehicles.client.rendering.models.common.ModelTopTank;
 import vswe.stevesvehicles.localization.entry.info.LocalizationGroup;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataGroup;

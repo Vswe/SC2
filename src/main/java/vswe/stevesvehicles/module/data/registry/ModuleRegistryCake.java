@@ -3,7 +3,7 @@ package vswe.stevesvehicles.module.data.registry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.init.Items;
-import vswe.stevesvehicles.client.rendering.models.ModelCake;
+import vswe.stevesvehicles.client.rendering.models.common.ModelCake;
 import vswe.stevesvehicles.localization.entry.info.LocalizationMessage;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleSide;

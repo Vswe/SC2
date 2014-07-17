@@ -165,7 +165,7 @@ public final class ModuleDataItemHandler {
 
 
 
-    private static final String NBT_VEHICLE_ID = "VehicleId";
+
     public static ItemStack createModularVehicle(VehicleType vehicle, List<ModuleData> moduleDataList, List<ModuleBase> modules, List<NBTTagCompound> moduleSourceCompounds) {
         if (vehicle == null) {
             return null;
@@ -177,13 +177,10 @@ public final class ModuleDataItemHandler {
         }
 
         NBTTagCompound data = new NBTTagCompound();
-        data.setByte(NBT_VEHICLE_ID, (byte)vehicleId);
-
-
 
         data.setTag(VehicleBase.NBT_MODULES, getModuleList(moduleDataList, modules, moduleSourceCompounds));
 
-        ItemStack vehicleItem = new ItemStack(ModItems.vehicles, 1);
+        ItemStack vehicleItem = new ItemStack(ModItems.vehicles, 1, vehicleId);
         vehicleItem.setTagCompound(data);
         VehicleVersion.addVersion(vehicleItem);
 

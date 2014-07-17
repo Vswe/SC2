@@ -2,6 +2,7 @@ package vswe.stevesvehicles.module.data.registry;
 
 
 import vswe.stevesvehicles.module.data.ModuleData;
+import vswe.stevesvehicles.module.data.registry.boat.ModuleRegistryBoatHulls;
 import vswe.stevesvehicles.module.data.registry.cart.ModuleRegistryCartCleaning;
 import vswe.stevesvehicles.module.data.registry.cart.ModuleRegistryCartCultivationUtil;
 import vswe.stevesvehicles.module.data.registry.cart.ModuleRegistryCartDrillUtility;
@@ -27,6 +28,7 @@ public class ModuleRegistry implements IRegistry<ModuleData> {
 
     public static void init() {
         add(new ModuleRegistryCartHulls());
+        add(new ModuleRegistryBoatHulls());
         add(new ModuleRegistryEngines());
         add(new ModuleRegistryCartTools());
         add(new ModuleRegistryChests());

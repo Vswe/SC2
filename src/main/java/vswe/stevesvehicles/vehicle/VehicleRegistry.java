@@ -1,8 +1,12 @@
 package vswe.stevesvehicles.vehicle;
 
 
+import cpw.mods.fml.common.registry.EntityRegistry;
+import net.minecraft.entity.Entity;
+import vswe.stevesvehicles.StevesVehicles;
 import vswe.stevesvehicles.registry.IRegistry;
 import vswe.stevesvehicles.registry.RegistryLoader;
+import vswe.stevesvehicles.vehicle.entity.EntityModularBoat;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 
 import java.util.ArrayList;
@@ -13,7 +17,7 @@ import java.util.Map;
 
 public class VehicleRegistry implements IRegistry<VehicleType> {
     public static final VehicleType CART = new VehicleType(EntityModularCart.class, "cart");
-    public static final VehicleType BOAT = new VehicleType(EntityModularCart.class, "boat");
+    public static final VehicleType BOAT = new VehicleType(EntityModularBoat.class, "boat");
 
     public static void init() {
         loader = new RegistryLoader<VehicleRegistry, VehicleType>();
@@ -50,6 +54,7 @@ public class VehicleRegistry implements IRegistry<VehicleType> {
         }else{
             vehicles.put(vehicleType.getUnlocalizedName(), vehicleType);
             allVehicles.add(vehicleType);
+            EntityRegistry.registerModEntity((Class<? extends Entity>)vehicleType.getClazz(), vehicleType.getRawUnlocalizedName(), allVehicles.size(), StevesVehicles.instance, 80, 3, true);
         }
     }
 

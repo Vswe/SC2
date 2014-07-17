@@ -6,7 +6,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import vswe.stevesvehicles.client.rendering.models.ModelLawnMower;
+import vswe.stevesvehicles.client.rendering.models.cart.ModelLawnMower;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataGroup;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;

@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 import vswe.stevesvehicles.block.ModBlocks;
 import vswe.stevesvehicles.client.gui.GuiHandler;
 import vswe.stevesvehicles.client.rendering.RenderVehicleItem;
+import vswe.stevesvehicles.client.rendering.RendererBoat;
 import vswe.stevesvehicles.client.rendering.RendererCart;
 import vswe.stevesvehicles.client.rendering.RendererUpgrade;
 import vswe.stevesvehicles.client.sounds.MinecartSoundMuter;
@@ -34,6 +35,7 @@ import vswe.stevesvehicles.registry.RegistrySynchronizer;
 import vswe.stevesvehicles.tab.CreativeTabLoader;
 import vswe.stevesvehicles.upgrade.registry.UpgradeRegistry;
 import vswe.stevesvehicles.vehicle.VehicleRegistry;
+import vswe.stevesvehicles.vehicle.entity.EntityModularBoat;
 import vswe.stevesvehicles.vehicle.entity.EntityModularCart;
 import vswe.stevesvehicles.module.common.addon.projectile.EntityCake;
 import vswe.stevesvehicles.holiday.EntityEasterEgg;
@@ -110,9 +112,6 @@ public class StevesVehicles {
         ModBlocks.init();
         ModItems.postBlockInit(config);
 
-        initCart(0, EntityModularCart.class);
-
-
 		EntityRegistry.registerModEntity(EntityEasterEgg.class, "Egg.Vswe", 2, instance, 80, 3, true);
 		EntityRegistry.registerModEntity(EntityCake.class, "Cake.Vswe", 3, instance, 80, 3, true);
 
@@ -164,7 +163,10 @@ public class StevesVehicles {
         new FancyPancyLoader();
 
 
+        //TODO move to the vehicle types?
         RenderingRegistry.registerEntityRenderingHandler(EntityModularCart.class, new RendererCart());
+        RenderingRegistry.registerEntityRenderingHandler(EntityModularBoat.class, new RendererBoat());
+
         RenderingRegistry.registerEntityRenderingHandler(EntityEasterEgg.class, new RenderSnowball(ModItems.component, ComponentTypes.PAINTED_EASTER_EGG.getId()));
         StevesVehicles.instance.blockRenderer = new RendererUpgrade();
         new RenderVehicleItem();
@@ -184,9 +186,6 @@ public class StevesVehicles {
         new MinecartSoundMuter();
     }
 
-    private void initCart(int ID, Class<? extends EntityModularCart> cart) {
-		EntityRegistry.registerModEntity(cart, "Minecart.Vswe." + ID, ID, instance, 80, 3, true);
-		//MinecartRegistry.registerMinecart(cart, new ItemStack(cart, 1, ID));
-	}
+
 
 }

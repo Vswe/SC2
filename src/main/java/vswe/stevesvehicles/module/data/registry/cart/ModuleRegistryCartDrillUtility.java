@@ -5,7 +5,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import vswe.stevesvehicles.client.rendering.models.ModelLiquidSensors;
+import vswe.stevesvehicles.client.rendering.models.cart.ModelLiquidSensors;
 import vswe.stevesvehicles.module.data.ModuleData;
 import vswe.stevesvehicles.module.data.ModuleDataGroup;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistryTanks;

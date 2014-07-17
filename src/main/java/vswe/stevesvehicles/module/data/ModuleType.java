@@ -6,7 +6,7 @@ import vswe.stevesvehicles.localization.entry.info.LocalizationCategory;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.module.common.engine.ModuleEngine;
 import vswe.stevesvehicles.module.common.addon.ModuleAddon;
-import vswe.stevesvehicles.module.cart.hull.ModuleHull;
+import vswe.stevesvehicles.module.common.hull.ModuleHull;
 import vswe.stevesvehicles.module.cart.attachment.ModuleAttachment;
 import vswe.stevesvehicles.module.common.storage.ModuleStorage;
 import vswe.stevesvehicles.module.cart.tool.ModuleTool;
