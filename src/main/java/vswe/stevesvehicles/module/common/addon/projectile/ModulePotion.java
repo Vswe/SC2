@@ -16,9 +16,7 @@ public class ModulePotion extends ModuleProjectile {
 		return item.getItem() == Items.potionitem && ItemPotion.isSplash(item.getItemDamage());
 	}
 	public Entity createProjectile(Entity target, ItemStack item) {
-		EntityPotion potion = new EntityPotion(getVehicle().getWorld());
-		potion.setPotionDamage(item.getItemDamage());
-		return potion;
+        return new EntityPotion(getVehicle().getWorld(), 0, 0, 0, item);
 	}
 
 }
