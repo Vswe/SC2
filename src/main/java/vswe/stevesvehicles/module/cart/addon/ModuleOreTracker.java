@@ -61,14 +61,17 @@ public class ModuleOreTracker extends ModuleAddon {
         if (b != null) {
         	if (b instanceof BlockOre) {
         		return true;
-	        }else{       	
-	        	int oreId = OreDictionary.getOreID(new ItemStack(b));
-	        	if (oreId == - 1) {
-	        		return false;
-	        	}else{
-	        		String oreName = OreDictionary.getOreName(oreId);
-	        		return oreName.toLowerCase().startsWith("ore");
-	        	}
+	        }else{
+                ItemStack item = new ItemStack(b);
+                if (item.getItem() != null) {
+                    int oreId = OreDictionary.getOreID(item);
+                    if (oreId == - 1) {
+                        return false;
+                    }else{
+                        String oreName = OreDictionary.getOreName(oreId);
+                        return oreName.toLowerCase().startsWith("ore");
+                    }
+                }
 	        }
         }
 
