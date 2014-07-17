@@ -1222,14 +1222,14 @@ public class VehicleBase {
 
 
         if (modules != null && !player.isSneaking()) {
-            boolean interupt = false;
+            boolean interrupt = false;
             for (ModuleBase module : modules) {
                 if (module.onInteractFirst(player)) {
-                    interupt = true;
+                    interrupt = true;
                 }
             }
-            if (interupt) {
-                return true;
+            if (interrupt) {
+                return false;
             }
         }
 
