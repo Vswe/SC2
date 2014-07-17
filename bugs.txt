@@ -1,0 +1,9 @@
+Placed carts spawn above the ground
+Upgrades don't graphicaly connect for other players
+Upgrades are darker
+
+Textures are flipped sometimes on blocks, tihs makes the module toggler showing the arrows in the wrong directions
+A cart with a chunk loader vanished
+
+Can't reproduce:
+Pumpkin chariot is not looking like a pumpkin
