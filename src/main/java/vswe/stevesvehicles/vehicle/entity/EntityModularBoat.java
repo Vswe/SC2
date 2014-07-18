@@ -119,9 +119,10 @@ public class EntityModularBoat extends EntityBoatBase implements IVehicleEntity 
         if (riddenByEntity != null && riddenByEntity instanceof EntityLivingBase) {
             EntityLivingBase rider = (EntityLivingBase)riddenByEntity;
 
-            double speed = motionX * motionX + motionZ * motionZ;
+            double speed = Math.sqrt(motionX * motionX + motionZ * motionZ);
             double prevSpeed = speed;
-            speed += rider.moveForward * speedMultiplier * 2;
+            speed += rider.moveForward * 0.1;
+            System.out.println(speed);
             double rotation = -rider.moveStrafing * 0.1;
             if (speed <= 0) {
                 motionX = 0;

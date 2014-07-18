@@ -43,7 +43,7 @@ public abstract class ArcadeGame {
 	@SideOnly(Side.CLIENT)
 	public void update() {
         if (StevesVehicles.instance.useArcadeSounds) {
-            ((EntityModularCart)getModule().getVehicle().getEntity()).silent(); //TODO
+            //((EntityModularCart)getModule().getVehicle().getEntity()).silent(); //TODO
         }
 	}
 	

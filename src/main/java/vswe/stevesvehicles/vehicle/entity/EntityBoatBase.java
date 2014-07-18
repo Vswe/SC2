@@ -23,7 +23,6 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
     public EntityBoatBase(World world) {
         super(world);
         isBoatEmpty = true;
-        speedMultiplier = MIN_SPEED;
         preventEntitySpawning = true;
         setSize(1.5F, 0.6F);
         yOffset = height / 2;
@@ -44,7 +43,7 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
 
     /** true if no player in boat */
     private boolean isBoatEmpty;
-    protected double speedMultiplier;
+
     private int boatPosRotationIncrements;
     private double boatX;
     private double boatY;
@@ -176,8 +175,7 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
     }
 
     private static final int COLLISION_SLICES = 5;
-    private static final double MAX_SPEED = 0.35;
-    private static final double MIN_SPEED = 0.07;
+    private static final double MAX_SPEED = 2.35; //depending on the throttle one can give in the handleSteering method this speed might not actually be achievable
     private static final double MAX_YAW_SPEED = 20;
 
     @Override
@@ -206,7 +204,7 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
         }else {
             handleFloating();
             handleSteering();
-            handleSpeedLimits(horizontalSpeed);
+            handleSpeedLimits();
             handleBlockRemoval();
             handleMovement(horizontalSpeed);
             handleRotation();
@@ -271,9 +269,9 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
                 onCrash(false);
             }
         }else {
-            motionX *= 0.99;
+            motionX *= 0.95;
             motionY *= 0.95;
-            motionZ *= 0.99;
+            motionZ *= 0.95;
         }
     }
 
@@ -316,40 +314,20 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
         }
     }
 
-    private void handleSpeedLimits(double horizontalSpeed) {
-        double oldHorizontalSpeed = horizontalSpeed;
-        horizontalSpeed = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
+    private void handleSpeedLimits() {
+        double horizontalSpeed = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
 
         if (horizontalSpeed > MAX_SPEED) {
-            double motionMultiplier = MAX_SPEED / horizontalSpeed;
-            motionX *= motionMultiplier;
-            motionZ *= motionMultiplier;
-            horizontalSpeed = MAX_SPEED;
-        }
+            double yaw = Math.atan2(motionZ, motionX);
 
-        if (horizontalSpeed > oldHorizontalSpeed && speedMultiplier < MAX_SPEED) {
-            speedMultiplier += (MAX_SPEED - speedMultiplier) / (MAX_SPEED * 100);
-
-            if (speedMultiplier > MAX_SPEED) {
-                speedMultiplier = MAX_SPEED;
-            }
-        } else {
-            speedMultiplier -= (speedMultiplier - MIN_SPEED) / (MAX_SPEED * 100);
-
-            if (speedMultiplier < MIN_SPEED) {
-                speedMultiplier = MIN_SPEED;
-            }
+            motionX = Math.cos(yaw) * MAX_SPEED;
+            motionZ = Math.sin(yaw) * MAX_SPEED;
         }
 
     }
 
     protected void handleSteering() {
-        if (riddenByEntity != null && riddenByEntity instanceof EntityLivingBase) {
-            EntityLivingBase rider = (EntityLivingBase)riddenByEntity;
-            float turn = riddenByEntity.rotationYaw - rider.moveStrafing * 90.0F;
-            motionX += -Math.sin(turn * Math.PI / 180.0F) * speedMultiplier * rider.moveForward * 0.05;
-            motionZ += Math.cos(turn * Math.PI / 180.0F) * speedMultiplier * rider.moveForward * 0.05;
-        }
+
     }
 
 
@@ -397,9 +375,9 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
                 motionZ *= 0.5D;
             }
 
-            motionX *= 0.99;
+            motionX *= 0.95;
             motionY *= 0.95;
-            motionZ *= 0.99;
+            motionZ *= 0.95;
         }
     }
 
