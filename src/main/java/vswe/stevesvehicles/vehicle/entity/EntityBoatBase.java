@@ -44,7 +44,7 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
 
     /** true if no player in boat */
     private boolean isBoatEmpty;
-    private double speedMultiplier;
+    protected double speedMultiplier;
     private int boatPosRotationIncrements;
     private double boatX;
     private double boatY;
@@ -239,7 +239,7 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
         double yaw = (double)this.rotationYaw;
         double differenceX = prevPosX - posX;
         double differenceZ = prevPosZ - posZ;
-        double differenceSquared = differenceX * differenceX + differenceZ + differenceZ;
+        double differenceSquared = differenceX * differenceX + differenceZ * differenceZ;
 
         if (differenceSquared > 0.001D) {
             yaw = Math.atan2(differenceZ, differenceX) * 180 / Math.PI;
@@ -328,13 +328,13 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
         }
 
         if (horizontalSpeed > oldHorizontalSpeed && speedMultiplier < MAX_SPEED) {
-            speedMultiplier += (MAX_SPEED - speedMultiplier) / MAX_SPEED;
+            speedMultiplier += (MAX_SPEED - speedMultiplier) / (MAX_SPEED * 100);
 
             if (speedMultiplier > MAX_SPEED) {
                 speedMultiplier = MAX_SPEED;
             }
         } else {
-            speedMultiplier -= (speedMultiplier - MIN_SPEED) / MAX_SPEED;
+            speedMultiplier -= (speedMultiplier - MIN_SPEED) / (MAX_SPEED * 100);
 
             if (speedMultiplier < MIN_SPEED) {
                 speedMultiplier = MIN_SPEED;
@@ -352,8 +352,10 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
         }
     }
 
+
     protected void handleFloating() {
         int slicesInWater = getSlicesInWater();
+
         if (slicesInWater < COLLISION_SLICES) {
             motionY += 0.04 * (2D * slicesInWater / COLLISION_SLICES - 1);
 
@@ -430,8 +432,8 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
         int slicesInWater = 0;
 
         for (int i = 0; i < COLLISION_SLICES; i++) {
-            double sliceMinY = boundingBox.minY + (boundingBox.maxY - boundingBox.minY) * i / COLLISION_SLICES - 0.125D;
-            double sliceMaxY = boundingBox.minY + (boundingBox.maxY - boundingBox.minY) * (i + 1) / COLLISION_SLICES - 0.125D;
+            double sliceMinY = boundingBox.minY + (boundingBox.maxY - boundingBox.minY) * i / (double)COLLISION_SLICES - 0.125D;
+            double sliceMaxY = boundingBox.minY + (boundingBox.maxY - boundingBox.minY) * (i + 1) / (double)COLLISION_SLICES - 0.125D;
 
             AxisAlignedBB sliceBox = AxisAlignedBB.getAABBPool().getAABB(
                     boundingBox.minX, sliceMinY, boundingBox.minZ,
@@ -459,7 +461,6 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
     public void updateRiderPosition() {
         if (riddenByEntity != null) {
             riddenByEntity.setPosition(posX, posY + getMountedYOffset() + riddenByEntity.getYOffset(), posZ);
-
         }
     }
 

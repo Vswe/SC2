@@ -1,11 +1,14 @@
 package vswe.stevesvehicles.vehicle.entity;
 
 import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -108,7 +111,28 @@ public class EntityModularBoat extends EntityBoatBase implements IVehicleEntity 
 
     @Override
     protected ItemStack getBoatItem() {
-        return  vehicleBase.getVehicleItem();
+        return vehicleBase.getVehicleItem();
+    }
+
+    @Override
+    protected void handleSteering() {
+        if (riddenByEntity != null && riddenByEntity instanceof EntityLivingBase) {
+            EntityLivingBase rider = (EntityLivingBase)riddenByEntity;
+
+            double speed = motionX * motionX + motionZ * motionZ;
+            double prevSpeed = speed;
+            speed += rider.moveForward * speedMultiplier * 2;
+            if (speed <= 0) {
+                motionX = 0;
+                motionZ = 0;
+            }else{
+                double yaw = prevSpeed < 0.00002 ? rotationYaw * Math.PI / 180 - 180 : Math.atan2(motionZ, motionX);
+                yaw -= rider.moveStrafing * 0.1;
+
+                motionX = Math.cos(yaw) * speed;
+                motionZ = Math.sin(yaw) * speed;
+            }
+        }
     }
 
     //Inventory, Tank and a few other methods. These methods are required due to the implementing interfaces, but all logic is handled in the VehicleBase.
