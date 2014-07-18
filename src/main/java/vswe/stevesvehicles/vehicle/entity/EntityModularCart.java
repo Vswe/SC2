@@ -180,57 +180,13 @@ public class EntityModularCart extends EntityMinecart
 	 */
 	@Override
     public ItemStack getCartItem() {
-		if (vehicleBase.getModules() != null) {
-			ItemStack cart = ModuleDataItemHandler.createModularVehicle(vehicleBase);
-			if (vehicleBase.getVehicleRawName() != null && !vehicleBase.getVehicleRawName().isEmpty()) {
-				cart.setStackDisplayName(vehicleBase.getVehicleRawName());
-			}
-
-			return cart;
-		}else{
-			return new ItemStack(ModItems.vehicles);
-		}
+        return vehicleBase.getVehicleItem();
     }
 
-	/**
-	 * When the cart 
-	 */
+
 	@Override
 	public void killMinecart(DamageSource dmg) {
 		this.setDead();
-		if (vehicleBase.dropOnDeath()) {
-			this.entityDropItem(getCartItem(), 0.0F);
-			
-		   for (int i = 0; i < this.getSizeInventory(); ++i)
-			{
-				ItemStack itemstack = this.getStackInSlot(i);
-
-				if (itemstack != null)
-				{
-					float f = this.rand.nextFloat() * 0.8F + 0.1F;
-					float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
-					float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
-
-					while (itemstack.stackSize > 0)
-					{
-						int j = this.rand.nextInt(21) + 10;
-
-						if (j > itemstack.stackSize)
-						{
-							j = itemstack.stackSize;
-						}
-
-						itemstack.stackSize -= j;
-						EntityItem entityitem = new EntityItem(this.worldObj, this.posX + (double)f, this.posY + (double)f1, this.posZ + (double)f2, new ItemStack(itemstack.getItem(), j, itemstack.getItemDamage()));
-						float f3 = 0.05F;
-						entityitem.motionX = (double)((float)this.rand.nextGaussian() * f3);
-						entityitem.motionY = (double)((float)this.rand.nextGaussian() * f3 + 0.2F);
-						entityitem.motionZ = (double)((float)this.rand.nextGaussian() * f3);
-						this.worldObj.spawnEntityInWorld(entityitem);
-					}
-				}
-			}			
-		}
 	}
 	
 
@@ -295,11 +251,7 @@ public class EntityModularCart extends EntityMinecart
 	 */
 	@Override
 	public boolean attackEntityFrom(DamageSource type, float dmg) {
-        if (vehicleBase.canBeAttacked(type, dmg)) {
-		    return super.attackEntityFrom(type,dmg);
-        }else{
-            return false;
-        }
+        return vehicleBase.canBeAttacked(type, dmg) && super.attackEntityFrom(type, dmg);
 	}
 	
 	/**

@@ -1,11 +1,12 @@
 package vswe.stevesvehicles.vehicle.entity;
 
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
@@ -15,7 +16,7 @@ import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.vehicle.VehicleBoat;
 
 
-public class EntityModularBoat extends EntityBoat implements IVehicleEntity {
+public class EntityModularBoat extends EntityBoatBase implements IVehicleEntity {
     private VehicleBase vehicleBase;
 
     public EntityModularBoat(World world) {
@@ -82,6 +83,24 @@ public class EntityModularBoat extends EntityBoat implements IVehicleEntity {
         vehicleBase.onUpdate();
     }
 
+
+    @Override
+    public void setDead() {
+        vehicleBase.preDeath();
+        super.setDead();
+        vehicleBase.postDeath();
+    }
+
+    @Override
+    public boolean attackEntityFrom(DamageSource type, float dmg) {
+        return vehicleBase.canBeAttacked(type, dmg) && super.attackEntityFrom(type, dmg);
+    }
+
+
+    @Override
+    protected ItemStack getBoatItem() {
+        return  vehicleBase.getVehicleItem();
+    }
 
     //Inventory, Tank and a few other methods. These methods are required due to the implementing interfaces, but all logic is handled in the VehicleBase.
 

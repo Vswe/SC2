@@ -15,7 +15,6 @@ public class GuiHandler implements IGuiHandler {
 		if (id == 0) {
 			VehicleBase vehicle = getVehicle(x, world);
 			if (vehicle != null) {
-                System.out.println("Client");
 				return vehicle.getGui(player);
 			}
 		}else if (id == 1){
@@ -33,7 +32,6 @@ public class GuiHandler implements IGuiHandler {
 		if (id == 0) {
             VehicleBase vehicle = getVehicle(x, world);
             if (vehicle != null) {
-                System.out.println("Server");
 				return vehicle.getCon(player.inventory);
 			}
 		}else if (id == 1){

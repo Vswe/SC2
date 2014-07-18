@@ -8,6 +8,7 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -26,6 +27,8 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import vswe.stevesvehicles.client.gui.screen.GuiVehicle;
 import vswe.stevesvehicles.container.ContainerVehicle;
+import vswe.stevesvehicles.item.ModItems;
+import vswe.stevesvehicles.module.data.ModuleDataItemHandler;
 import vswe.stevesvehicles.module.data.registry.ModuleRegistry;
 import vswe.stevesvehicles.tileentity.toggler.TogglerOption;
 import vswe.stevesvehicles.module.data.ModuleData;
@@ -1066,10 +1069,26 @@ public class VehicleBase {
 
 
     public void preDeath() {
-        //removes all the items on the client side, this is so the client won't drop ghost items
-        if (getWorld().isRemote) {
-            for (int var1 = 0; var1 < vehicleEntity.getSizeInventory(); ++var1) {
-                vehicleEntity.setInventorySlotContents(var1, null);
+        if (dropOnDeath() && !getWorld().isRemote) {
+            entity.entityDropItem(getVehicleItem(), 0.0F);
+
+            for (int i = 0; i < vehicleEntity.getSizeInventory(); ++i) {
+                ItemStack itemstack = vehicleEntity.getStackInSlotOnClosing(i);
+
+                if (itemstack != null) {
+                    float offsetX = rand.nextFloat() * 0.8F + 0.1F;
+                    float offsetY = rand.nextFloat() * 0.8F + 0.1F;
+                    float offsetZ = rand.nextFloat() * 0.8F + 0.1F;
+
+
+                    EntityItem entityitem = new EntityItem(getWorld(), entity.posX + offsetX, entity.posY + offsetY, entity.posZ + offsetZ, itemstack.copy());
+
+                    entityitem.motionX = rand.nextGaussian() * 0.05F;
+                    entityitem.motionY = rand.nextGaussian() * 0.05F + 0.2F;
+                    entityitem.motionZ = rand.nextGaussian() * 0.05F;
+                    getWorld().spawnEntityInWorld(entityitem);
+
+                }
             }
         }
     }
@@ -1537,6 +1556,26 @@ public class VehicleBase {
 	public Random getRandom() {
 		return rand;
 	}
+
+    public ItemStack getVehicleItem() {
+        if (modules != null) {
+            ItemStack vehicle = ModuleDataItemHandler.createModularVehicle(this);
+            if (vehicle != null) {
+                if (getVehicleRawName() != null && !getVehicleRawName().isEmpty()) {
+                    vehicle.setStackDisplayName(getVehicleRawName());
+                }
+
+                return vehicle;
+            }
+        }else{
+            int id = VehicleRegistry.getInstance().getIdFromType(vehicleType);
+            if (id != -1) {
+                return new ItemStack(ModItems.vehicles, 1, id);
+            }
+        }
+
+        return null;
+    }
 
     private class GuiAllocationHelper {
         public int width;
