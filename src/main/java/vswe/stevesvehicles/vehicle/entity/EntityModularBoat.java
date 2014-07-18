@@ -122,12 +122,14 @@ public class EntityModularBoat extends EntityBoatBase implements IVehicleEntity 
             double speed = motionX * motionX + motionZ * motionZ;
             double prevSpeed = speed;
             speed += rider.moveForward * speedMultiplier * 2;
+            double rotation = -rider.moveStrafing * 0.1;
             if (speed <= 0) {
                 motionX = 0;
                 motionZ = 0;
+                rotationYaw += 180 * rotation / Math.PI;
             }else{
                 double yaw = prevSpeed < 0.00002 ? rotationYaw * Math.PI / 180 - 180 : Math.atan2(motionZ, motionX);
-                yaw -= rider.moveStrafing * 0.1;
+                yaw += rotation;
 
                 motionX = Math.cos(yaw) * speed;
                 motionZ = Math.sin(yaw) * speed;
