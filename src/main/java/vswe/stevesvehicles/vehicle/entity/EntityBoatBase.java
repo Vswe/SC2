@@ -14,8 +14,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
@@ -109,10 +107,6 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
             if (creative || this.getDamageTaken() > 40.0F) {
                 if (riddenByEntity != null) {
                     riddenByEntity.mountEntity(null);
-                }
-
-                if (!creative) {
-                    entityDropItem(getBoatItem(), 0);
                 }
 
                 setDead();
@@ -285,7 +279,6 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
 
     protected void onCrash(boolean fall) {
         setDead();
-        entityDropItem(getBoatItem(), 0F);
     }
 
     protected boolean hasCrashed(double horizontalSpeed) {
@@ -296,7 +289,7 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
         for (int x = -1; x <= 1; x += 2) {
             double differenceX = x * 0.4;
             int targetX = MathHelper.floor_double(posX + differenceX);
-            for (int y = 0; x <= 2; y += 1) {
+            for (int y = 0; y <= 2; y += 1) {
                 int targetY = MathHelper.floor_double(posY) + y;
                 for (int z = -1; z <= 1; z += 2) {
                     double differenceZ = z * 0.4;
@@ -465,9 +458,8 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
     @Override
     public void updateRiderPosition() {
         if (riddenByEntity != null) {
-            double offsetX = Math.cos(rotationYaw * Math.PI / 180) * 0.4D;
-            double offsetZ = Math.sin(rotationYaw * Math.PI / 180) * 0.4D;
-            riddenByEntity.setPosition(posX + offsetX, posY + getMountedYOffset() + riddenByEntity.getYOffset(), posZ + offsetZ);
+            riddenByEntity.setPosition(posX, posY + getMountedYOffset() + riddenByEntity.getYOffset(), posZ);
+
         }
     }
 

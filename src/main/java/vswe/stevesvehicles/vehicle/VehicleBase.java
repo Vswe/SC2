@@ -1070,7 +1070,7 @@ public class VehicleBase {
 
     public void preDeath() {
         if (dropOnDeath() && !getWorld().isRemote) {
-            entity.entityDropItem(getVehicleItem(), 0.0F);
+            entity.entityDropItem(getVehicleItem(), 0.0F); //TODO prevent this from dropping in creative?
 
             for (int i = 0; i < vehicleEntity.getSizeInventory(); ++i) {
                 ItemStack itemstack = vehicleEntity.getStackInSlotOnClosing(i);

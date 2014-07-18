@@ -59,7 +59,7 @@ public abstract class RendererVehicle extends Render {
         applyMatrixUpdates(vehicle, matrix, partialTickTime);
 
 		//apply the rotations
-        GL11.glTranslatef((float)x, (float)y, (float)z);
+        GL11.glTranslatef((float)matrix.x, (float)matrix.y, (float)matrix.z);
 
 		GL11.glRotatef(matrix.yaw, 0.0F, 1.0F, 0.0F);
 		GL11.glRotatef(matrix.pitch, 0.0F, 0.0F, 1.0F);
@@ -69,12 +69,12 @@ public abstract class RendererVehicle extends Render {
 
 		//render the cart's models
 		GL11.glScalef(-1.0F, -1.0F, 1.0F);
-		renderModels(vehicle, (float)(Math.PI * yaw / 180F), matrix.pitch, matrix.roll, 0.0625F, partialTickTime);
+		renderModels(vehicle, (float)(Math.PI * matrix.yaw / 180F), matrix.pitch, matrix.roll, 0.0625F, partialTickTime);
 
 		GL11.glPopMatrix();
 
 		//render any labels above the cart
-		renderLabel(vehicle,x,y,z);
+		renderLabel(vehicle, matrix.x, matrix.y, matrix.z);
 		
 		
     }

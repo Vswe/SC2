@@ -96,6 +96,15 @@ public class EntityModularBoat extends EntityBoatBase implements IVehicleEntity 
         return vehicleBase.canBeAttacked(type, dmg) && super.attackEntityFrom(type, dmg);
     }
 
+    @Override
+    public double getMountedYOffset() {
+        float offset = vehicleBase.getMountedYOffset();
+        if (offset != 0) {
+            return offset;
+        }
+
+        return super.getMountedYOffset();
+    }
 
     @Override
     protected ItemStack getBoatItem() {
