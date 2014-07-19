@@ -11,7 +11,6 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
@@ -24,7 +23,7 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
         super(world);
         isBoatEmpty = true;
         preventEntitySpawning = true;
-        setSize(1.5F, 0.6F);
+        setSize(0.98F, 0.7F);
         yOffset = height / 2;
     }
 
@@ -175,7 +174,7 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
     }
 
     private static final int COLLISION_SLICES = 5;
-    private static final double MAX_SPEED = 2.35; //depending on the throttle one can give in the handleSteering method this speed might not actually be achievable
+    private static final double MAX_SPEED = 0.35; //depending on the throttle one can give in the handleSteering method this speed might not actually be achievable
     private static final double MAX_YAW_SPEED = 20;
 
     @Override
@@ -212,15 +211,17 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
         }
     }
 
+    private static final double BOUNDING_BOX_EXPANSION = 0.8;
+
     protected void handleEntityInteraction() {
         if (!worldObj.isRemote) {
-            List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, boundingBox.expand(0.2, 0, 0.2));
+            List list = worldObj.getEntitiesWithinAABB(EntityBoat.class, boundingBox.expand(BOUNDING_BOX_EXPANSION, 0, BOUNDING_BOX_EXPANSION));
 
             if (list != null && !list.isEmpty()) {
                 for (Object obj : list) {
                     Entity entity = (Entity)obj;
 
-                    if (entity != this.riddenByEntity && entity.canBePushed() && entity instanceof EntityBoat) {
+                    if (entity != this.riddenByEntity && entity.canBePushed() && entity != this) {
                         entity.applyEntityCollision(this);
                     }
                 }
@@ -252,6 +253,8 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
         }
 
         rotationYaw += yawDifference;
+
+
         setRotation(rotationYaw, rotationPitch);
     }
 
@@ -281,6 +284,10 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
 
     protected boolean hasCrashed(double horizontalSpeed) {
         return isCollidedHorizontally && horizontalSpeed > 0.2D;
+    }
+
+    protected boolean hasFallen(float fallDistance) {
+        return fallDistance > 3;
     }
 
     protected void handleBlockRemoval() {
@@ -425,6 +432,37 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
         return slicesInWater;
     }
 
+    @Override
+    public void applyEntityCollision(Entity other) {
+        if (!(other instanceof EntityBoat)) {
+            super.applyEntityCollision(other);
+        }else if (other.riddenByEntity != this && other.ridingEntity != this) {
+            double differenceX = other.posX - this.posX;
+            double differenceZ = other.posZ - this.posZ;
+            double difference = MathHelper.abs_max(differenceX, differenceZ);
+
+            System.out.println(difference + " " + worldObj.isRemote);
+            if (difference >= 0.01) {
+                difference = (double)MathHelper.sqrt_double(difference);
+                differenceX /= difference;
+                differenceZ /= difference;
+                double inverted = 1 / difference;
+
+                if (inverted > 1) {
+                    inverted = 1;
+                }
+
+                differenceX *= inverted;
+                differenceZ *= inverted;
+                differenceX *= 0.05;
+                differenceZ *= 0.05;
+                differenceX *= 1 - this.entityCollisionReduction;
+                differenceZ *= 1 - this.entityCollisionReduction;
+                this.addVelocity(-differenceX, 0D, -differenceZ);
+                other.addVelocity(differenceX, 0D, differenceZ);
+            }
+        }
+    }
 
     /**
      * One can't call a super class' super class' method and since we extend EntityBoat simply to make this a boat we
@@ -475,7 +513,7 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
         int z = MathHelper.floor_double(posZ);
 
         if (onGround) {
-            if (fallDistance > 3) {
+            if (hasFallen(fallDistance)) {
                 fall(fallDistance);
 
                 if (!worldObj.isRemote && !isDead) {

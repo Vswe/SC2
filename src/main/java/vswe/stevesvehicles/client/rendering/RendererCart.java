@@ -69,7 +69,7 @@ public class RendererCart extends RendererVehicle {
             damageTime = 0.0F;
         }
 
-        matrix.flip = (cart.motionX > 0) != (cart.motionZ > 0);
+        matrix.flip = (cart.motionX > 0) == (cart.motionZ > 0);
         if (cart.cornerFlip) {
             matrix.flip = !matrix.flip;
         }

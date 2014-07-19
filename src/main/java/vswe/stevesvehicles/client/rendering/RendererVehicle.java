@@ -64,8 +64,8 @@ public abstract class RendererVehicle extends Render {
 		GL11.glRotatef(matrix.yaw, 0.0F, 1.0F, 0.0F);
 		GL11.glRotatef(matrix.pitch, 0.0F, 0.0F, 1.0F);
         GL11.glRotatef(matrix.roll, 1.0F, 0.0F, 0.0F);
-		matrix.yaw += matrix.flip ? 0F : 180F;
-		GL11.glRotatef(matrix.flip ? 0F : 180F, 0.0F, 1.0F, 0.0F);
+		matrix.yaw += matrix.flip ? 180 : 0;
+		GL11.glRotatef(matrix.flip ? 180 : 0, 0.0F, 1.0F, 0.0F);
 
 		//render the cart's models
 		GL11.glScalef(-1.0F, -1.0F, 1.0F);
@@ -245,6 +245,47 @@ public abstract class RendererVehicle extends Render {
 
     @Override
     public void doRender(Entity entity, double x, double y, double z, float yaw, float partialTickTime) {
+        /*
+            The yaw received as a parameter is defined as:
+            float yaw = entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * partialTickTime;
+
+            However, if the previous angle was 180 and the current is -180, those are exactly the same angle but the
+            above algorithm thinks there's a difference of 360 which will cause that update tick to have an entity
+            spinning out of control. This will just last for the frames for that tick which will make the entity
+            flash in wrong angles (unless the difference is wrongly calculated multiple ticks in a row).
+
+            This is why the supplied yaw is disregarded, this might however cause problems when the yaw specified is
+            supposed to be something completely different than the actual one, for example when being drawn in
+            interfaces. This is why the supplied yaw is actually used if the difference between the current and previous
+            yaw rotations are big enough.
+         */
+
+        if (Math.abs(entity.rotationYaw - entity.prevRotationYaw) >= 1) {
+            float currentYaw = fitAngleWithin360(entity.rotationYaw);
+            float previousYaw = fitAngleWithin360(entity.prevRotationYaw);
+
+
+            float normalDifference = currentYaw - previousYaw;
+            float bestDifference = normalDifference;
+            for (int i = -360; i <= 360; i += 360) {
+                float difference = normalDifference + i;
+                if (Math.abs(difference) < Math.abs(bestDifference)) {
+                    bestDifference = difference;
+                }
+            }
+
+            yaw = fitAngleWithin360(previousYaw + bestDifference * partialTickTime);
+        }
+
         this.renderVehicle(((IVehicleEntity) entity).getVehicle(), x, y, z, yaw, partialTickTime);
+    }
+
+    private float fitAngleWithin360(float angle) {
+        angle %= 360;
+        if (angle < 0) {
+            angle += 360;
+        }
+
+        return angle;
     }
 }

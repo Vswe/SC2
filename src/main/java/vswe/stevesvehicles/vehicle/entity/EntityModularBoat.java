@@ -2,14 +2,11 @@ package vswe.stevesvehicles.vehicle.entity;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
@@ -114,28 +111,37 @@ public class EntityModularBoat extends EntityBoatBase implements IVehicleEntity 
         return vehicleBase.getVehicleItem();
     }
 
+    private static final double MINIMUM_STEERING_SPEED = 0.01;
+
     @Override
     protected void handleSteering() {
+        double speed = Math.sqrt(motionX * motionX + motionZ * motionZ);
+
+
         if (riddenByEntity != null && riddenByEntity instanceof EntityLivingBase) {
             EntityLivingBase rider = (EntityLivingBase)riddenByEntity;
-
-            double speed = Math.sqrt(motionX * motionX + motionZ * motionZ);
             double prevSpeed = speed;
             speed += rider.moveForward * 0.1;
-            System.out.println(speed);
+
             double rotation = -rider.moveStrafing * 0.1;
-            if (speed <= 0) {
+            if (speed <= MINIMUM_STEERING_SPEED) {
                 motionX = 0;
                 motionZ = 0;
                 rotationYaw += 180 * rotation / Math.PI;
             }else{
-                double yaw = prevSpeed < 0.00002 ? rotationYaw * Math.PI / 180 - 180 : Math.atan2(motionZ, motionX);
+                double yaw = prevSpeed < MINIMUM_STEERING_SPEED ? (rotationYaw  - 180) * Math.PI / 180 : Math.atan2(motionZ, motionX);
                 yaw += rotation;
 
                 motionX = Math.cos(yaw) * speed;
                 motionZ = Math.sin(yaw) * speed;
             }
         }
+
+    }
+
+    @Override
+    protected boolean hasCrashed(double horizontalSpeed) {
+        return false;
     }
 
     //Inventory, Tank and a few other methods. These methods are required due to the implementing interfaces, but all logic is handled in the VehicleBase.
