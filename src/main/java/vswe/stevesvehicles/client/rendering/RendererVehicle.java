@@ -256,7 +256,7 @@ public abstract class RendererVehicle extends Render {
 
             This is why the supplied yaw is disregarded, this might however cause problems when the yaw specified is
             supposed to be something completely different than the actual one, for example when being drawn in
-            interfaces. This is why the supplied yaw is actually used if the difference between the current and previous
+            interfaces. This is why the yaw is recalculated only if the difference between the current and previous
             yaw rotations are big enough.
          */
 
