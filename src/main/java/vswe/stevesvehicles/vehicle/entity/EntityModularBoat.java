@@ -113,6 +113,9 @@ public class EntityModularBoat extends EntityBoatBase implements IVehicleEntity 
 
     private static final double MINIMUM_STEERING_SPEED = 0.01;
 
+
+    private int directionMultiplier;
+    private boolean hasRider;
     @Override
     protected void handleSteering() {
         double speed = Math.sqrt(motionX * motionX + motionZ * motionZ);
@@ -121,7 +124,12 @@ public class EntityModularBoat extends EntityBoatBase implements IVehicleEntity 
         if (riddenByEntity != null && riddenByEntity instanceof EntityLivingBase) {
             EntityLivingBase rider = (EntityLivingBase)riddenByEntity;
             double prevSpeed = speed;
-            speed += rider.moveForward * 0.1;
+            double speedDifference = rider.moveForward * 0.1;
+            if (!hasRider || speed <= MINIMUM_STEERING_SPEED) {
+                hasRider = true;
+                directionMultiplier = rider.moveForward >= 0 ? 1 : -1;
+            }
+            speed += speedDifference * directionMultiplier;
 
             double rotation = -rider.moveStrafing * 0.1;
             if (speed <= MINIMUM_STEERING_SPEED) {
@@ -129,15 +137,26 @@ public class EntityModularBoat extends EntityBoatBase implements IVehicleEntity 
                 motionZ = 0;
                 rotationYaw += 180 * rotation / Math.PI;
             }else{
-                double yaw = prevSpeed < MINIMUM_STEERING_SPEED ? (rotationYaw  - 180) * Math.PI / 180 : Math.atan2(motionZ, motionX);
+                speed *= directionMultiplier;
+                rotation *= directionMultiplier;
+
+
+                double yaw = prevSpeed < MINIMUM_STEERING_SPEED * 50000000 ? (rotationYaw  - 180) * Math.PI / 180 : Math.atan2(motionZ, motionX);
                 yaw += rotation;
 
                 motionX = Math.cos(yaw) * speed;
                 motionZ = Math.sin(yaw) * speed;
+
+                rotationYaw = (float)yaw * 180 / (float)Math.PI - 180;
             }
+            preventRotationUpdate = true;
+        }else{
+            hasRider = false;
         }
 
     }
+
+
 
     @Override
     protected boolean hasCrashed(double horizontalSpeed) {

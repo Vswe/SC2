@@ -56,6 +56,8 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
     @SideOnly(Side.CLIENT)
     private double velocityZ;
 
+    protected boolean preventRotationUpdate;
+
 
     @Override
     protected boolean canTriggerWalking() {
@@ -234,27 +236,30 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
     }
 
     protected void handleRotation() {
+        if (preventRotationUpdate) {
+            preventRotationUpdate = false;
+        }else{
+            double yaw = (double)this.rotationYaw;
+            double differenceX = prevPosX - posX;
+            double differenceZ = prevPosZ - posZ;
+            double differenceSquared = differenceX * differenceX + differenceZ * differenceZ;
+
+            if (differenceSquared > 0.001D) {
+                yaw = Math.atan2(differenceZ, differenceX) * 180 / Math.PI;
+            }
+
+            double yawDifference = MathHelper.wrapAngleTo180_double(yaw - rotationYaw);
+
+            if (yawDifference > MAX_YAW_SPEED) {
+                yawDifference = MAX_YAW_SPEED;
+            }else if (yawDifference < -MAX_YAW_SPEED) {
+                yawDifference = -MAX_YAW_SPEED;
+            }
+
+            rotationYaw += yawDifference;
+        }
+
         rotationPitch = 0;
-        double yaw = (double)this.rotationYaw;
-        double differenceX = prevPosX - posX;
-        double differenceZ = prevPosZ - posZ;
-        double differenceSquared = differenceX * differenceX + differenceZ * differenceZ;
-
-        if (differenceSquared > 0.001D) {
-            yaw = Math.atan2(differenceZ, differenceX) * 180 / Math.PI;
-        }
-
-        double yawDifference = MathHelper.wrapAngleTo180_double(yaw - rotationYaw);
-
-        if (yawDifference > MAX_YAW_SPEED) {
-            yawDifference = MAX_YAW_SPEED;
-        }else if (yawDifference < -MAX_YAW_SPEED) {
-            yawDifference = -MAX_YAW_SPEED;
-        }
-
-        rotationYaw += yawDifference;
-
-
         setRotation(rotationYaw, rotationPitch);
     }
 
@@ -441,7 +446,7 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
             double differenceZ = other.posZ - this.posZ;
             double difference = MathHelper.abs_max(differenceX, differenceZ);
 
-            System.out.println(difference + " " + worldObj.isRemote);
+            //System.out.println(difference + " " + worldObj.isRemote);
             if (difference >= 0.01) {
                 difference = (double)MathHelper.sqrt_double(difference);
                 differenceX /= difference;
