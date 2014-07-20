@@ -1,7 +1,10 @@
 package vswe.stevesvehicles.client.rendering;
 
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.util.MathHelper;
 import vswe.stevesvehicles.vehicle.VehicleBase;
+import vswe.stevesvehicles.vehicle.entity.EntityBoatBase;
 import vswe.stevesvehicles.vehicle.entity.EntityModularBoat;
 
 
@@ -22,5 +25,6 @@ public class RendererBoat extends RendererVehicle {
         }
 
         matrix.yaw = 180 - matrix.yaw;
+
     }
 }

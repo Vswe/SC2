@@ -17,6 +17,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import vswe.stevesvehicles.network.DataReader;
 
 public abstract class EntityBoatBase extends EntityBoat { //The only reason this extends EntityBoat is for vanilla and mods to actually think these are boats
     public EntityBoatBase(World world) {
@@ -140,14 +141,15 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void setPositionAndRotation2(double x, double y, double z, float yaw, float pitch, int partialTick) {
+    public void setPositionAndRotation2(double x, double y, double z, float yaw, float pitch, int tick) {
         if (isBoatEmpty) {
-            this.boatPosRotationIncrements = partialTick + 5;
+            this.boatPosRotationIncrements = tick + 5;
         }else {
             double distanceX = x - this.posX;
             double distanceY = y - this.posY;
             double distanceZ = z - this.posZ;
             double distance = distanceX * distanceX + distanceY * distanceY + distanceZ * distanceZ;
+
 
             if (distance <= 1) {
                 return;
@@ -210,8 +212,12 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
             handleMovement(horizontalSpeed);
             handleRotation();
             handleEntityInteraction();
+
+            updateRiderBoat();
         }
     }
+
+
 
     private static final double BOUNDING_BOX_EXPANSION = 0.8;
 
@@ -359,7 +365,11 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
 
     }
 
+    protected void updateRiderBoat() {
 
+    }
+
+    @SideOnly(Side.CLIENT)
     protected void updateClientSoloBoat() {
         if (boatPosRotationIncrements > 0) {
             double targetX = posX + (boatX - posX) / (double)boatPosRotationIncrements;
@@ -484,6 +494,7 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
             riddenByEntity.setPosition(posX, posY + getMountedYOffset() + riddenByEntity.getYOffset(), posZ);
         }
     }
+
 
     @Override
     protected void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {}

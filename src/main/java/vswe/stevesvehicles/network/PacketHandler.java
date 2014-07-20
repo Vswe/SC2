@@ -21,6 +21,7 @@ import vswe.stevesvehicles.container.ContainerBase;
 import vswe.stevesvehicles.module.ModuleBase;
 import vswe.stevesvehicles.tileentity.TileEntityBase;
 
+import vswe.stevesvehicles.vehicle.entity.EntityModularBoat;
 import vswe.stevesvehicles.vehicle.entity.IVehicleEntity;
 
 
@@ -90,6 +91,10 @@ public class PacketHandler {
                     if (base != null) {
                         base.receivePacket(dr, player);
                     }
+                }
+            }else if(type == PacketType.BOAT_MOVEMENT) {
+                if (player.ridingEntity instanceof EntityModularBoat) {
+                    ((EntityModularBoat)player.ridingEntity).onMovementPacket(dr);
                 }
             }
 

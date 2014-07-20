@@ -1,5 +1,7 @@
 package vswe.stevesvehicles.vehicle.entity;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,6 +14,10 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
+import vswe.stevesvehicles.network.DataReader;
+import vswe.stevesvehicles.network.DataWriter;
+import vswe.stevesvehicles.network.PacketHandler;
+import vswe.stevesvehicles.network.PacketType;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.vehicle.VehicleBoat;
 
@@ -123,7 +129,6 @@ public class EntityModularBoat extends EntityBoatBase implements IVehicleEntity 
 
         if (riddenByEntity != null && riddenByEntity instanceof EntityLivingBase) {
             EntityLivingBase rider = (EntityLivingBase)riddenByEntity;
-            double prevSpeed = speed;
             double speedDifference = rider.moveForward * 0.1;
             if (!hasRider || speed <= MINIMUM_STEERING_SPEED) {
                 hasRider = true;
@@ -141,7 +146,7 @@ public class EntityModularBoat extends EntityBoatBase implements IVehicleEntity 
                 rotation *= directionMultiplier;
 
 
-                double yaw = prevSpeed < MINIMUM_STEERING_SPEED * 50000000 ? (rotationYaw  - 180) * Math.PI / 180 : Math.atan2(motionZ, motionX);
+                double yaw = (rotationYaw  - 180) * Math.PI / 180;
                 yaw += rotation;
 
                 motionX = Math.cos(yaw) * speed;
@@ -155,6 +160,105 @@ public class EntityModularBoat extends EntityBoatBase implements IVehicleEntity 
         }
 
     }
+
+    /*
+        Both the server and the client does the steering calculations, just like with the vanilla boat. The algorithm
+        used for this boat is however much more dependant on its input values than the vanilla one and will therefore
+        cause plenty of irregularities if the input values differ slightly. This will actually be the case which causing
+        differences between the client and the server.
+
+        These differences will make the boat bump into boats when it's not even close and run through boats all because
+        the server boat is a few blocks over in another direction. The more you drive the bigger this different might become.
+        If it's big enough you'll be too far away from your boat when you're actually in it that the server won't even
+        let you interact with the boat (you can open the interface but not do anything in it).
+
+        For the vanilla boat this doesn't turn into an issue (the steering is more basic and doesn't become a problem).
+        This is why, when you're riding a vanilla boat, the client doesn't care about where the server says the boat is.
+        If one would start listening to this (when the client and server calculates the steering differently) the client
+        boat would jump into place from time to time (when it receives server info) which would make the steering
+        very hacky and therefore the experience very bad since one can't go where one wants to.
+
+        One could implement smooth transitions between the values which does help a bit, but the issues are still there
+        even if they are graphically smoother. Making them graphically smoother also makes them slower to update to real
+        values and therefore making any future values more wrong. That means that the next update has an even bigger
+        problem to try to smoothly fix.
+
+        One could tell the boats to only be controlled on the server side, which removes this issue. However, this makes
+        the steering constantly hacky due to the fact that the server isn't constantly sending data to the client.
+        Making it constantly doing so wouldn't be perfect either, the received data will always be delayed and if it is
+        delayed a few ticks it becomes impossible to control since what you do might happen a second later. Also, if lag,
+        or any other reason, causes the packets to not be received frequent enough the boat will just be stuck in on
+        place waiting for the next packet. If the boats update client side too they can fill in for the missing information
+        while waiting for a new packet (this is how it's done in most cases).
+
+        Due to the problems described above the steering has been solved in a slightly ugly way. However, this gives the
+        player a smooth steering experience and keeps the server and client synced. The client with the player controlling
+        the boat has almost full control of the boat. That client periodically sends information about where the boat is.
+        The server then obeys and moves the boat to that location. Both the client and the server runs the steering
+        algorithm to keep them in about the same location between syncs. When the server receives information it makes
+        sure that the information is not plain stupid. This is to prevent the client to send invalid data and cause
+        the boat to run through objects.
+     */
+
+    private static final double MAX_MOVEMENT = 1.5;
+    private static final double MAX_SPEED = 0.5;
+    private static final int SYNC_DELAY = 30;
+    private static final int ALLOWED_SYNC_DELAY_JITTER = 5;
+    private int delay = 0;
+    @Override
+    protected void updateRiderBoat() {
+        if (worldObj.isRemote) {
+            if (delay < SYNC_DELAY) {
+                delay++;
+            }else{
+                delay = 0;
+                DataWriter dw = PacketHandler.getDataWriter(PacketType.BOAT_MOVEMENT);
+                dw.writeInteger(Float.floatToIntBits((float)posX));
+                dw.writeInteger(Float.floatToIntBits((float)posY));
+                dw.writeInteger(Float.floatToIntBits((float)posZ));
+                dw.writeInteger(Float.floatToIntBits(rotationYaw));
+                dw.writeInteger(Float.floatToIntBits((float)motionX));
+                dw.writeInteger(Float.floatToIntBits((float)motionY));
+                dw.writeInteger(Float.floatToIntBits((float)motionZ));
+                PacketHandler.sendPacketToServer(dw);
+            }
+        }else{
+            delay++;
+        }
+    }
+
+    public void onMovementPacket(DataReader dr) {
+        if (delay >= SYNC_DELAY - ALLOWED_SYNC_DELAY_JITTER) {
+            delay = 0;
+
+            double tempX = Float.intBitsToFloat(dr.readSignedInteger());
+            double tempY = Float.intBitsToFloat(dr.readSignedInteger());
+            double tempZ = Float.intBitsToFloat(dr.readSignedInteger());
+
+            tempX = restrictMovement(tempX, posX, MAX_MOVEMENT);
+            tempY = restrictMovement(tempY, posY, MAX_MOVEMENT);
+            tempZ = restrictMovement(tempZ, posZ, MAX_MOVEMENT);
+
+            moveEntity(tempX - posX, tempY - posY, tempZ - posZ);
+
+            rotationYaw = Float.intBitsToFloat(dr.readSignedInteger());
+            motionX = restrictMovement(Float.intBitsToFloat(dr.readSignedInteger()), motionX, MAX_SPEED);
+            motionY = restrictMovement(Float.intBitsToFloat(dr.readSignedInteger()), motionY, MAX_SPEED);
+            motionZ = restrictMovement(Float.intBitsToFloat(dr.readSignedInteger()), motionZ, MAX_SPEED);
+
+        }
+    }
+
+    private double restrictMovement(double target, double source, double maxDifference) {
+        if (target > source + maxDifference) {
+            return source + maxDifference;
+        }else if(target < source - maxDifference) {
+            return source - maxDifference;
+        }else{
+            return target;
+        }
+    }
+
 
 
 
@@ -232,4 +336,6 @@ public class EntityModularBoat extends EntityBoatBase implements IVehicleEntity 
     public VehicleBase getVehicle() {
         return vehicleBase;
     }
+
+
 }
