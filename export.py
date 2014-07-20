@@ -31,7 +31,7 @@ changelog += ']'
 targetfolder = "../../public/"
 if not isDev:
 	max_version = 0
-	for name in glob.glob(targetfolder + "StevesCarts2.0.0.b*.zip"):
+	for name in glob.glob(targetfolder + "StevesCarts2.0.0.b*.jar"):
 		shortname = os.path.basename(name)
 		version = shortname[18:-4]
 		try:

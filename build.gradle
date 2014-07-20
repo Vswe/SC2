@@ -19,12 +19,12 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "2.0.0.b12"
+version = "2.0.0.b16"
 group= "vswe.stevescarts" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "StevesCarts"
 
 minecraft {
-    version = "1.7.2-10.12.1.1103"
+    version = "1.7.10-10.13.0.1187"
     assetDir = "eclipse/assets"
 
     replace '${version}', project.version

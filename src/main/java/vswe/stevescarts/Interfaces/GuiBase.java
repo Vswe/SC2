@@ -181,7 +181,7 @@ public abstract class GuiBase extends GuiNEIKiller
 	
 	protected float getScale() {	
 	
-        net.minecraft.client.gui.ScaledResolution scaledresolution = new net.minecraft.client.gui.ScaledResolution(this.mc.gameSettings, this.mc.displayWidth, this.mc.displayHeight);
+        net.minecraft.client.gui.ScaledResolution scaledresolution = new net.minecraft.client.gui.ScaledResolution(this.mc, this.mc.displayWidth, this.mc.displayHeight);
         float w = scaledresolution.getScaledWidth() * 0.9F;
         float h = scaledresolution.getScaledHeight() * 0.9F;
 		float multX = w / getXSize();
