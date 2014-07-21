@@ -29,8 +29,8 @@ public class FancyPancyLoader implements Runnable {
 
     public FancyPancyLoader() {
         fancyTypes = new HashMap<String, FancyPancyHandler>();
-        add(new CapeHandler());
-        add(new SkinHandler());
+        //add(new CapeHandler());
+        //add(new SkinHandler());
         add(new OverheadHandler());
 
         new Thread(this).start();
