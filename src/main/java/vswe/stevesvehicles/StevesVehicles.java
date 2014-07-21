@@ -10,9 +10,11 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.oredict.RecipeSorter;
 import org.apache.logging.log4j.Logger;
 import vswe.stevesvehicles.block.ModBlocks;
+import vswe.stevesvehicles.buoy.EntityBuoy;
 import vswe.stevesvehicles.client.gui.GuiHandler;
 import vswe.stevesvehicles.client.rendering.RenderVehicleItem;
 import vswe.stevesvehicles.client.rendering.RendererBoat;
+import vswe.stevesvehicles.client.rendering.RendererBuoy;
 import vswe.stevesvehicles.client.rendering.RendererCart;
 import vswe.stevesvehicles.client.rendering.RendererUpgrade;
 import vswe.stevesvehicles.client.sounds.MinecartSoundMuter;
@@ -112,8 +114,9 @@ public class StevesVehicles {
         ModBlocks.init();
         ModItems.postBlockInit(config);
 
-		EntityRegistry.registerModEntity(EntityEasterEgg.class, "Egg.Vswe", 2, instance, 80, 3, true);
-		EntityRegistry.registerModEntity(EntityCake.class, "Cake.Vswe", 3, instance, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityEasterEgg.class, "Egg.Vswe", 20, instance, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityCake.class, "Cake.Vswe", 21, instance, 80, 3, true);
+        EntityRegistry.registerModEntity(EntityBuoy.class, "buoy", 22, instance, 80, 3, false);
 
         if (event.getSide() == Side.CLIENT) {
             loadSounds();
@@ -178,6 +181,7 @@ public class StevesVehicles {
         for (ModuleData moduleData : ModuleRegistry.getAllModules()) {
             moduleData.loadClientValues();
         }
+        RenderingRegistry.registerEntityRenderingHandler(EntityBuoy.class, new RendererBuoy());
     }
 
     @SideOnly(Side.CLIENT)

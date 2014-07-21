@@ -41,8 +41,7 @@ import vswe.stevesvehicles.tileentity.manager.cargo.CargoItemSelection;
 import vswe.stevesvehicles.tileentity.manager.cargo.CargoItemSelectionModule;
 import vswe.stevesvehicles.transfer.TransferHandler;
 
-public class TileEntityCargo extends TileEntityManager
-{
+public class TileEntityCargo extends TileEntityManager {
     
 	@SideOnly(Side.CLIENT)
 	@Override

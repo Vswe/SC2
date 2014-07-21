@@ -88,10 +88,10 @@ public enum ModBlocks implements IRecipeOutput {
                         GameRegistry.registerTileEntity(blockInfo.tileEntityClazz, blockInfo.tileEntityName);
                     }
                 }else{
-                    System.out.println("This is not a block (" + blockInfo.unlocalizedName + ")");
+                    System.err.println("This is not a block (" + blockInfo.unlocalizedName + ")");
                 }
             }catch(Exception e) {
-                System.out.println("Failed to create block (" + blockInfo.unlocalizedName + ")");
+                System.err.println("Failed to create block (" + blockInfo.unlocalizedName + ")");
 
                 e.printStackTrace();
             }

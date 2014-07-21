@@ -19,6 +19,7 @@ import java.util.HashMap;
 
 public final class ModItems {
 
+    public static ItemBuoy buoys;
     public static ItemVehicles vehicles;
     public static ItemCartComponent component;
     public static ItemVehicleModule modules;
@@ -30,6 +31,7 @@ public final class ModItems {
     private static final String VEHICLE_NAME = "ModularVehicle";
     private static final String COMPONENTS_NAME = "ModuleComponents";
     private static final String MODULES_NAME = "CartModule";
+    private static final String BUOY_NAME = "Buoy";
 
     private static HashMap<String,Boolean> validModules = new HashMap<String,Boolean>();
 
@@ -37,11 +39,12 @@ public final class ModItems {
         (vehicles = new ItemVehicles()).setUnlocalizedName(StevesVehicles.localStart + VEHICLE_NAME);
         component = new ItemCartComponent();
         modules = new ItemVehicleModule();
+        buoys = new ItemBuoy();
 
         GameRegistry.registerItem(vehicles, VEHICLE_NAME);
         GameRegistry.registerItem(component, COMPONENTS_NAME);
         GameRegistry.registerItem(modules, MODULES_NAME);
-
+        GameRegistry.registerItem(buoys, BUOY_NAME);
 
         for (ModuleData module : ModuleRegistry.getAllModules()) {
             if (!module.getIsLocked()) {

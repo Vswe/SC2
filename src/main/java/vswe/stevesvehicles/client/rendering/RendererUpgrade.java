@@ -31,8 +31,7 @@ public class RendererUpgrade implements ISimpleBlockRenderingHandler
 
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
-	
-		TileEntity te = world.getTileEntity(x, y, z);
+        TileEntity te = world.getTileEntity(x, y, z);
         if(te instanceof TileEntityUpgrade){
 			TileEntityUpgrade upgrade = (TileEntityUpgrade)te;
 			BlockUpgrade b = (BlockUpgrade)block;

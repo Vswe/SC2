@@ -493,7 +493,9 @@ steves_vehicles:tile.detector_unit:stop.name=Detector Station
 steves_vehicles:tile.detector_unit:junction.name=Detector Junction
 steves_vehicles:tile.detector_unit:redstone.name=Detector Redstone Unit
 
-
+#Buoys
+steves_vehicles:tile.buoy:normal.name=Buoy
+steves_vehicles:tile.buoy:other.name=Test Buoy
 
 # ======================================
 #				MODULE MISC
