@@ -435,7 +435,7 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
             double sliceMinY = boundingBox.minY + (boundingBox.maxY - boundingBox.minY) * i / (double)COLLISION_SLICES - 0.125D;
             double sliceMaxY = boundingBox.minY + (boundingBox.maxY - boundingBox.minY) * (i + 1) / (double)COLLISION_SLICES - 0.125D;
 
-            AxisAlignedBB sliceBox = AxisAlignedBB.getAABBPool().getAABB(
+            AxisAlignedBB sliceBox = AxisAlignedBB.getBoundingBox(
                     boundingBox.minX, sliceMinY, boundingBox.minZ,
                     boundingBox.maxX, sliceMaxY, boundingBox.maxZ
             );

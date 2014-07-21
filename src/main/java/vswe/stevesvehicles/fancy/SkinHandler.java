@@ -17,17 +17,20 @@ public class SkinHandler extends FancyPancyHandler {
 
     @Override
     public String getDefaultUrl(AbstractClientPlayer player) {
-        return AbstractClientPlayer.getSkinUrl(StringUtils.stripControlCodes(player.getDisplayName()));
+        return null;
+        //return AbstractClientPlayer.getSkinUrl(StringUtils.stripControlCodes(player.getDisplayName()));
     }
 
     @Override
     public ResourceLocation getDefaultResource(AbstractClientPlayer player) {
-        return AbstractClientPlayer.getLocationSkin(StringUtils.stripControlCodes(player.getDisplayName()));
+        return null;
+        //return AbstractClientPlayer.getLocationSkin(StringUtils.stripControlCodes(player.getDisplayName()));
     }
 
     @Override
     public ThreadDownloadImageData getCurrentTexture(AbstractClientPlayer player) {
-        return player.getTextureSkin();
+        return null;
+        //return player.getTextureSkin();
     }
 
     @Override

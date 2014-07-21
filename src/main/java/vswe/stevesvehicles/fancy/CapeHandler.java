@@ -16,17 +16,20 @@ public class CapeHandler extends FancyPancyHandler {
 
     @Override
     public String getDefaultUrl(AbstractClientPlayer player) {
-        return AbstractClientPlayer.getCapeUrl(StringUtils.stripControlCodes(player.getDisplayName()));
+        return null;
+        //return AbstractClientPlayer.getCapeUrl(StringUtils.stripControlCodes(player.getDisplayName()));
     }
 
     @Override
     public ResourceLocation getDefaultResource(AbstractClientPlayer player) {
-        return AbstractClientPlayer.getLocationCape(StringUtils.stripControlCodes(player.getDisplayName()));
+        return null;
+        //return AbstractClientPlayer.getLocationCape(StringUtils.stripControlCodes(player.getDisplayName()));
     }
 
     @Override
     public ThreadDownloadImageData getCurrentTexture(AbstractClientPlayer player) {
-        return player.getTextureCape();
+        return null;
+        //return player.getTextureCape();
     }
 
     @Override

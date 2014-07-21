@@ -47,7 +47,7 @@ public class UserFancy {
                     //2 managed to download a fancy
                     //3 has Mojang fancy path
 
-                    hasMojangFancy = fancyData.isTextureUploaded();
+                    hasMojangFancy = FancyPancyLoader.isImageReady(fancyData);
                     doneMojangFancyCheck = true;
                     updateActive(player);
                 }

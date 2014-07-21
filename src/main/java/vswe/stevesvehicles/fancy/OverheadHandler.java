@@ -126,7 +126,7 @@ public class OverheadHandler extends FancyPancyHandler {
 
     private void renderOverHead(RenderPlayer renderer, AbstractClientPlayer player, double x, double y, double z, boolean isObserver) {
         OverheadData data = getData(player);
-        if (data.image != null && data.image.isTextureUploaded()) {
+        if (FancyPancyLoader.isImageReady(data.image)) {
             RenderManager renderManager = ReflectionHelper.getPrivateValue(Render.class, renderer, 1);
             //check if it's in an inventory
             if (isObserver && player.openContainer != null && renderManager.playerViewY == 180 /* set to 180 when rendering, it might be 180 at other points but won't be the end of the world*/) {

@@ -64,7 +64,7 @@ public abstract class FancyPancyHandler {
     }
 
     private void generateServerHash() {
-        ServerData data = ReflectionHelper.getPrivateValue(Minecraft.class, Minecraft.getMinecraft(), 6);
+        ServerData data = ReflectionHelper.getPrivateValue(Minecraft.class, Minecraft.getMinecraft(), 7);
         String ip;
         if (data != null) {
             if (data.serverIP.equals("127.0.0.1")) {
@@ -163,7 +163,7 @@ public abstract class FancyPancyHandler {
 
         //no need to download the fancy if we have it already
         if (object == null) {
-            object = new ThreadDownloadImageData(fancyUrl, fallbackResource, optionalBuffer);
+            object = new ThreadDownloadImageData(null, fancyUrl, fallbackResource, optionalBuffer);
             texturemanager.loadTexture(fancy, object);
         }
 
