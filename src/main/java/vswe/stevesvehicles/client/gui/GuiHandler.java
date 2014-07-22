@@ -4,6 +4,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import vswe.stevesvehicles.buoy.EntityBuoy;
+import vswe.stevesvehicles.client.gui.screen.GuiBuoy;
+import vswe.stevesvehicles.container.ContainerBuoy;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import cpw.mods.fml.common.network.IGuiHandler;
 import vswe.stevesvehicles.tileentity.TileEntityBase;
@@ -22,7 +25,12 @@ public class GuiHandler implements IGuiHandler {
 			if (tileentity instanceof TileEntityBase) {
 				return ((TileEntityBase)tileentity).getGui(player.inventory);
 			}
-		}
+		}else if(id == 2) {
+            Entity entity = world.getEntityByID(x);
+            if (entity instanceof EntityBuoy) {
+                return new GuiBuoy((EntityBuoy)entity);
+            }
+        }
 		
 		return null;
 	}
@@ -39,7 +47,12 @@ public class GuiHandler implements IGuiHandler {
 			if (tileentity instanceof TileEntityBase) {
 				return ((TileEntityBase)tileentity).getContainer(player.inventory);
 			}
-		}
+		}else if(id == 2) {
+            Entity entity = world.getEntityByID(x);
+            if (entity instanceof EntityBuoy) {
+                return new ContainerBuoy((EntityBuoy)entity);
+            }
+        }
 		
 		return null;
 	}

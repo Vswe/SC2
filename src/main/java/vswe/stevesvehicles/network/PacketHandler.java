@@ -12,6 +12,8 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.world.World;
+import vswe.stevesvehicles.buoy.EntityBuoy;
+import vswe.stevesvehicles.container.ContainerBuoy;
 import vswe.stevesvehicles.container.ContainerVehicle;
 import vswe.stevesvehicles.block.BlockCartAssembler;
 import vswe.stevesvehicles.block.ModBlocks;
@@ -54,6 +56,11 @@ public class PacketHandler {
                 }
             }else if(type == PacketType.REGISTRY) {
                 RegistrySynchronizer.onPacket(dr);
+            }else if(type == PacketType.BUOY) {
+                Container container = player.openContainer;
+                if (container instanceof ContainerBuoy) {
+                    ((ContainerBuoy)container).receiveInfo(dr);
+                }
             }
 
 

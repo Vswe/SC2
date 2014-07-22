@@ -5,6 +5,7 @@ public enum PacketType{
     VEHICLE,
     BLOCK,
     REGISTRY,
-    BOAT_MOVEMENT
+    BOAT_MOVEMENT,
+    BUOY
 }
 

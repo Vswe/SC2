@@ -22,7 +22,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class GuiDistributor extends GuiBase {
     public GuiDistributor(TileEntityDistributor distributor) {
         super(new ContainerDistributor(distributor));
-        setXSize(255);
+        setXSize(256);
         setYSize(186);
 		this.distributor = distributor;
     }

@@ -6,15 +6,16 @@ import net.minecraft.util.StatCollector;
 import vswe.stevesvehicles.client.ResourceHelper;
 
 public enum BuoyType {
-    NORMAL(),
-    OTHER();
+    NORMAL(0xE25B00),
+    OTHER(0x003866);
 
 
-    BuoyType() {
+    BuoyType(int color) {
+        this.color = color;
         this.texture = ResourceHelper.getResource("/models/buoy/" + this.toString().toLowerCase() + ".png");
     }
 
-
+    private int color;
     private ResourceLocation texture;
 
     public String getUnlocalizedName() {
@@ -35,5 +36,9 @@ public enum BuoyType {
 
     public ResourceLocation getTexture() {
         return texture;
+    }
+
+    public int getColor() {
+        return color;
     }
 }

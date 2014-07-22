@@ -22,7 +22,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class GuiDetector extends GuiBase {
     public GuiDetector(InventoryPlayer invPlayer, TileEntityDetector detector) {
         super(new ContainerDetector(detector));
-        setXSize(255);
+        setXSize(256);
         setYSize(202);
 		this.detector = detector;
 
