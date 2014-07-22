@@ -143,18 +143,17 @@ public abstract class GuiBase extends GuiContainerSpecial {
 	}	
 	
 	@Override
-	protected void drawGuiContainerForegroundLayer(int x, int y) {
+	protected final void drawGuiContainerForegroundLayer(int x, int y) {
 		this.drawGuiForeground(x,y);
 	}	
 	public void drawGuiForeground(int x, int y) {}
 
-    public void applyColor(int color) {
-        float a = (float)(color >> 24 & 255) / 255.0F;
+    public void applyColor(int color, float multiplier) {
         float r = (float)(color >> 16 & 255) / 255.0F;
         float g = (float)(color >> 8 & 255) / 255.0F;
         float b = (float)(color & 255) / 255.0F;
 
-        GL11.glColor4f(r, g, b, a);
+        GL11.glColor4f(r * multiplier, g * multiplier, b * multiplier, 1);
     }
 	
 	@Override
@@ -227,13 +226,13 @@ public abstract class GuiBase extends GuiContainerSpecial {
 	
 		
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
+	protected final void drawGuiContainerBackgroundLayer(float f, int x, int y) {
 		this.drawGuiBackground(f,x,y);
 	}
 	public void drawGuiBackground(float f, int x, int y) {}
 	
 	@Override
-	protected void mouseClicked(int x, int y, int button) {
+	protected final void mouseClicked(int x, int y, int button) {
 		x = scaleX(x);
 		y = scaleY(y);
 		super.mouseClicked(x, y, button);
@@ -243,7 +242,7 @@ public abstract class GuiBase extends GuiContainerSpecial {
 	public void mouseClick(int x, int y, int button) {}
 
 	@Override
-	protected void mouseMovedOrUp(int x, int y, int button) {
+	protected final void mouseMovedOrUp(int x, int y, int button) {
 		x = scaleX(x);
 		y = scaleY(y);	
 	
@@ -289,19 +288,19 @@ public abstract class GuiBase extends GuiContainerSpecial {
     }
 	
 	@Override
-	protected void mouseClickMove(int x, int y, int button, long timeSinceClick) {	
+	protected final void mouseClickMove(int x, int y, int button, long timeSinceClick) {
 		x = scaleX(x);
 		y = scaleY(y);
 	
 		super.mouseClickMove(x,y,button,timeSinceClick);
-		this.mouseMoved(x,y,-1);		
+		this.mouseMoved(x,y, button);
 		this.mouseDragged(x,y,button);
 	}
 	
 	public void mouseMoved(int x, int y, int button) {}
 	public void mouseDragged(int x, int y, int button) {}
 	@Override
-    protected void keyTyped(char character, int extraInformation)
+    protected final void keyTyped(char character, int extraInformation)
     {
 		if (extraInformation == 1 || !disableStandardKeyFunctionality()) {
 			super.keyTyped(character,extraInformation);
