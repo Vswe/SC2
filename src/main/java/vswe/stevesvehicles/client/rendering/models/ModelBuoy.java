@@ -186,8 +186,12 @@ public class ModelBuoy extends ModelBase {
             part.render(multiplier);
         }
 
-        EntityBuoy buoy = (EntityBuoy)entity;
-        GL11.glColor4f(buoy.getLampColor(), 0, 0, 1);
+        if (entity == null) {
+            GL11.glColor4f(0.5F, 0, 0, 1);
+        }else{
+            EntityBuoy buoy = (EntityBuoy)entity;
+            GL11.glColor4f(buoy.getLampColor(), 0, 0, 1);
+        }
         lamp.render(multiplier);
         GL11.glColor4f(1, 1, 1, 1);
     }

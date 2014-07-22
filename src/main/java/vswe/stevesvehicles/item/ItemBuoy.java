@@ -2,6 +2,7 @@ package vswe.stevesvehicles.item;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -34,12 +35,13 @@ public class ItemBuoy extends Item {
 		}	
 	
         return "item.unknown";
-    }	
+    }
 
- 	
     @Override
-    public int getMetadata(int dmg) {
-        return dmg;
+    public void getSubItems(Item item, CreativeTabs tab, List list) {
+        for (BuoyType buoyType : BuoyType.values()) {
+            list.add(new ItemStack(item, 1, buoyType.getMeta()));
+        }
     }
 
     private static final int VIEW_MULTIPLIER = 5;
@@ -93,7 +95,7 @@ public class ItemBuoy extends Item {
 
                     if (world.isAirBlock(targetX, targetY, targetZ)) {
                         if (!world.isRemote) {
-                            EntityBuoy buoy = new EntityBuoy(world, targetX, targetY, targetZ);
+                            EntityBuoy buoy = new EntityBuoy(world, targetX, targetY, targetZ, BuoyType.getType(item.getItemDamage()));
                             world.spawnEntityInWorld(buoy);
                         }
                         if (!player.capabilities.isCreativeMode) {

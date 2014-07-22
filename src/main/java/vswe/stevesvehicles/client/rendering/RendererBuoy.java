@@ -29,10 +29,8 @@ public class RendererBuoy extends Render {
         GL11.glPopMatrix();
     }
 
-    private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/models/buoy/normal.png");
-
     @Override
     protected ResourceLocation getEntityTexture(Entity entity) {
-        return TEXTURE;
+        return ((EntityBuoy)entity).getBuoyType().getTexture();
     }
 }

@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 import vswe.stevesvehicles.block.ModBlocks;
 import vswe.stevesvehicles.buoy.EntityBuoy;
 import vswe.stevesvehicles.client.gui.GuiHandler;
+import vswe.stevesvehicles.client.rendering.RenderBuoyItem;
 import vswe.stevesvehicles.client.rendering.RenderVehicleItem;
 import vswe.stevesvehicles.client.rendering.RendererBoat;
 import vswe.stevesvehicles.client.rendering.RendererBuoy;
@@ -182,6 +183,7 @@ public class StevesVehicles {
             moduleData.loadClientValues();
         }
         RenderingRegistry.registerEntityRenderingHandler(EntityBuoy.class, new RendererBuoy());
+        new RenderBuoyItem();
     }
 
     @SideOnly(Side.CLIENT)

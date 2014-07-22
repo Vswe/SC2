@@ -1,15 +1,21 @@
 package vswe.stevesvehicles.buoy;
 
+import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import vswe.stevesvehicles.item.ModItems;
 
 
-public class EntityBuoy extends Entity {
+public class EntityBuoy extends Entity implements IEntityAdditionalSpawnData {
     private int renderTick;
     private float renderMultiplier;
+    private BuoyType buoyType = BuoyType.NORMAL;
 
     public EntityBuoy(World world) {
         super(world);
@@ -18,6 +24,14 @@ public class EntityBuoy extends Entity {
         setSize(1, 2);
 
         renderMultiplier = 0.8F + rand.nextFloat() * 0.4F;
+    }
+
+    public EntityBuoy(World world, int x, int y, int z, BuoyType buoyType) {
+        this(world);
+        this.posX = x + 0.5;
+        this.posY = y ;
+        this.posZ = z + 0.5;
+        this.buoyType = buoyType;
     }
 
     @Override
@@ -34,11 +48,13 @@ public class EntityBuoy extends Entity {
         return true;
     }
 
-    public EntityBuoy(World world, int x, int y, int z) {
-        this(world);
-        this.posX = x + 0.5;
-        this.posY = y ;
-        this.posZ = z + 0.5;
+    public ItemStack getBuoyItem() {
+        return new ItemStack(ModItems.buoys, 1, buoyType.getMeta());
+    }
+
+    @Override
+    public ItemStack getPickedResult(MovingObjectPosition target) {
+        return getBuoyItem();
     }
 
     @Override
@@ -62,14 +78,16 @@ public class EntityBuoy extends Entity {
 
     }
 
+    private static final String NBT_TYPE = "BuoyType";
+
     @Override
     protected void readEntityFromNBT(NBTTagCompound compound) {
-
+        buoyType = BuoyType.getType(compound.getByte(NBT_TYPE));
     }
 
     @Override
     protected void writeEntityToNBT(NBTTagCompound compound) {
-
+        compound.setByte(NBT_TYPE, (byte)buoyType.getMeta());
     }
 
     @Override
@@ -91,5 +109,19 @@ public class EntityBuoy extends Entity {
 
     public float getRenderMultiplier() {
         return renderMultiplier;
+    }
+
+    public BuoyType getBuoyType() {
+        return buoyType;
+    }
+
+    @Override
+    public void writeSpawnData(ByteBuf buffer) {
+        buffer.writeByte(buoyType.getMeta());
+    }
+
+    @Override
+    public void readSpawnData(ByteBuf additionalData) {
+        buoyType = BuoyType.getType(additionalData.readByte());
     }
 }
