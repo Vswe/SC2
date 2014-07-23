@@ -2,6 +2,7 @@ package vswe.stevesvehicles.container;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
@@ -49,7 +50,33 @@ public class ContainerBuoy extends ContainerBase {
     @SideOnly(Side.CLIENT)
     public GuiBuoy gui;
 
-    public void receiveInfo(DataReader dr) {
+    public void receiveInfo(DataReader dr, boolean server) {
+        if (server) {
+            int entityId = dr.readSignedInteger();
+            Entity entity = entityBuoy.worldObj.getEntityByID(entityId);
+            EntityBuoy otherBuoy = null;
+            if (entity instanceof EntityBuoy && !entity.isDead) {
+                otherBuoy = (EntityBuoy)entity;
+            }
 
+            boolean next = dr.readBoolean();
+
+
+            EntityBuoy oldNext = entityBuoy.getBuoy(next);
+            if (oldNext != null) {
+                oldNext.setBuoy(null, !next);
+            }
+            entityBuoy.setBuoy(otherBuoy, next);
+
+            if (otherBuoy != null) {
+                EntityBuoy oldPrev = otherBuoy.getBuoy(!next);
+                if (oldPrev != null) {
+                    oldPrev.setBuoy(null, next);
+                }
+                otherBuoy.setBuoy(entityBuoy, !next);
+            }
+
+
+        }
     }
 }

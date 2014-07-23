@@ -16,6 +16,9 @@ import vswe.stevesvehicles.container.ContainerBuoy;
 import vswe.stevesvehicles.localization.ILocalizedText;
 import vswe.stevesvehicles.localization.PlainText;
 import vswe.stevesvehicles.module.data.ModuleDataPair;
+import vswe.stevesvehicles.network.DataWriter;
+import vswe.stevesvehicles.network.PacketHandler;
+import vswe.stevesvehicles.network.PacketType;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.vehicle.entity.EntityModularBoat;
 
@@ -28,10 +31,16 @@ import java.util.List;
 public class GuiBuoy extends GuiBase {
     private EntityBuoy selected;
     private EntityBuoy buoy;
+
+    //cached versions
+    private EntityBuoy next;
+    private EntityBuoy previous;
+
     private long lastUpdateTime;
     private static final int REFRESH_DELAY = 3000;
     private List<MapElement> mapElements = new ArrayList<MapElement>();
     private List<ListElement> listElements = new ArrayList<ListElement>();
+    private List<BuoyInfo> infoPanels = new ArrayList<BuoyInfo>();
     private int scroll;
     private boolean isScrolling;
 
@@ -42,8 +51,47 @@ public class GuiBuoy extends GuiBase {
         super(new ContainerBuoy(entityBuoy));
         this.buoy = entityBuoy;
         setXSize(256);
-        setYSize(174);
+        setYSize(256);
         reloadElements();
+
+        //TODO localized
+        infoPanels.add(new BuoyInfo(new PlainText("Active"), 8, 6) {
+            @Override
+            protected EntityBuoy getBuoy() {
+                return buoy;
+            }
+        });
+
+        infoPanels.add(new BuoyInfo(new PlainText("Selected"), 8, 40) {
+            @Override
+            protected EntityBuoy getBuoy() {
+                return selected;
+            }
+        });
+
+        infoPanels.add(new BuoyInfoProperty(new PlainText("Next"), 150, 6, true) {
+            @Override
+            protected EntityBuoy getBuoy() {
+                return next;
+            }
+
+            @Override
+            protected void setBuoy(EntityBuoy buoy) {
+                next = buoy;
+            }
+        });
+
+        infoPanels.add(new BuoyInfoProperty(new PlainText("Previous"), 150, 40, false) {
+            @Override
+            protected EntityBuoy getBuoy() {
+                return previous;
+            }
+
+            @Override
+            protected void setBuoy(EntityBuoy buoy) {
+                previous = buoy;
+            }
+        });
     }
 
     private void reloadElementsIfNecessary() {
@@ -92,12 +140,8 @@ public class GuiBuoy extends GuiBase {
         lastUpdateTime = Minecraft.getSystemTime();
     }
 
-    @Override
-    public void drawGuiForeground(int x, int y) {
-        //getFontRenderer().drawString(buoy.getBuoyType().getName(), 8, 5, 0x404040);
-    }
-
-    private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/buoy.png");
+    private static final ResourceLocation BACKGROUND = ResourceHelper.getResource("/gui/buoy_background.png");
+    private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/buoy_elements.png");
     @Override
     public void drawGuiBackground(float f, int x, int y) {
         reloadElementsIfNecessary();
@@ -107,8 +151,9 @@ public class GuiBuoy extends GuiBase {
 
         int left = getGuiLeft();
         int top = getGuiTop();
-        ResourceHelper.bindResource(TEXTURE);
+        ResourceHelper.bindResource(BACKGROUND);
         drawTexturedModalRect(left, top, 0, 0, xSize, ySize);
+        ResourceHelper.bindResource(TEXTURE);
 
         x -= getGuiLeft();
         y -= getGuiTop();
@@ -135,12 +180,28 @@ public class GuiBuoy extends GuiBase {
                 drawTexturedModalRect(left + target[0], top + target[1], element.u, element.v, target[2], target[3]);
             }
         }
+
+        GL11.glEnable(GL11.GL_BLEND);
+        for (MapElement mapElement : mapElements) {
+            if (mapElement.isVisible()) {
+                if (mapElement.entity.equals(buoy)) {
+                    drawBuoyLine(buoy, previous, true);
+                    drawBuoyLine(buoy, next, true);
+                }else{
+                    drawBuoyLine(mapElement.entity, mapElement.prev, false);
+                    drawBuoyLine(mapElement.entity, mapElement.next, false);
+                }
+            }
+        }
+
+
+        ResourceHelper.bindResource(TEXTURE);
         GL11.glColor4f(1, 1, 1, 1);
         stopScissor();
 
 
         if (listElements.size() <= VISIBLE_LIST_ITEMS) {
-            GL11.glEnable(GL11.GL_BLEND);
+
             GL11.glColor4f(1, 1, 1, 0.5F);
             scroll = 0;
         }
@@ -157,7 +218,7 @@ public class GuiBuoy extends GuiBase {
 
             int textureId = element.isSelected() ? 2 : inRect(x, y, target) ? 1 : 0;
 
-            drawTexturedModalRect(left + target[0], top + target[1], LIST_ELEMENT_SRC_X, LIST_ELEMENT_SRC_Y + textureId * (target[3] + 1), target[2], target[3]);
+            drawTexturedModalRect(left + target[0], top + target[1], LIST_ELEMENT_SRC_X + textureId * (target[2] + 1), LIST_ELEMENT_SRC_Y, target[2], target[3]);
 
             GL11.glEnable(GL11.GL_DEPTH_TEST);
             renderItem.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, element.item, left + target[0], top + target[1] + 1);
@@ -167,9 +228,82 @@ public class GuiBuoy extends GuiBase {
             GL11.glColor4f(1, 1, 1, 1);
         }
 
+        for (BuoyInfo infoPanel : infoPanels) {
+            info = drawBuoyInfo(infoPanel, x, y, info);
+        }
+
+
         if (info != null) {
             drawMouseOver(info.getInfo(), x + getGuiLeft(), y + getGuiTop());
         }
+    }
+
+    private void drawBuoyLine(Entity entity, Entity other, boolean owner) {
+        if (entity != null && other != null && !other.equals(buoy)) {
+            int left = getGuiLeft();
+            int top = getGuiTop();
+
+            int[] location1 = getEntityLocation(entity);
+            int[] location2 = getEntityLocation(other);
+
+            int color = 0x5504243C;
+            if (owner) {
+                color |= 0xFF << 24;
+            }
+
+            drawLine(left + location1[0], top + location1[1], left + location2[0], top + location2[1], 3, color);
+        }
+    }
+
+    private IInfoText drawBuoyInfo(BuoyInfo buoyInfo, int mX, int mY, IInfoText info) {
+        int left = getGuiLeft();
+        int top = getGuiTop();
+
+        getFontRenderer().drawString(buoyInfo.label.translate(), left + buoyInfo.x, top + buoyInfo.y, 0x404040);
+        GL11.glColor4f(1, 1, 1, 1);
+
+        EntityBuoy buoy = buoyInfo.getBuoy();
+        if (buoy != null) {
+            int[] target = {buoyInfo.x, buoyInfo.y + BUTTON_Y, 16, 16};
+            GL11.glEnable(GL11.GL_DEPTH_TEST);
+            renderItem.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, buoy.getBuoyItem(), left + target[0], top + target[1]);
+
+            if (inRect(mX, mY, target)) {
+                info = new StaticText(buoy.getBuoyType().getName() + "\n" + ColorHelper.GRAY + (int)buoy.posX + ", " + (int)buoy.posY + ", " + (int)buoy.posZ);
+            }
+        }
+
+
+
+        Button[] buttons = buoyInfo.getButtons();
+        if (buttons != null) {
+            ResourceHelper.bindResource(TEXTURE);
+            GL11.glColor4f(1, 1, 1, 1);
+            GL11.glEnable(GL11.GL_BLEND);
+            for (int i = 0; i < buttons.length; i++) {
+                Button button = buttons[i];
+                int[] target = {buoyInfo.x + BUTTON_X + BUTTON_OFFSET * i, buoyInfo.y + BUTTON_Y, BUTTON_SIZE, BUTTON_SIZE};
+                int textureId = 0;
+                if (button.isEnabled()) {
+                    if (inRect(mX, mY, target)) {
+                        info = new StaticText(button.text.translate());
+                        textureId = 1;
+                    }
+                }else{
+                    textureId = 2;
+                }
+
+                drawTexturedModalRect(left + target[0], top + target[1], BUTTON_SRC_X + textureId * (target[2] + 1), BUTTON_SRC_Y, target[2], target[3]);
+                if (!button.isEnabled()) {
+                    GL11.glColor4f(1, 1, 1, 0.5F);
+                }
+                drawTexturedModalRect(left + target[0] + BUTTON_ICON_OFFSET, top + target[1] + BUTTON_ICON_OFFSET, BUTTON_ICON_SRC_X + button.iconIndex * (BUTTON_ICON_SIZE + 1), BUTTON_ICON_SRC_Y, BUTTON_ICON_SIZE, BUTTON_ICON_SIZE);
+                GL11.glColor4f(1, 1, 1, 1);
+            }
+            GL11.glDisable(GL11.GL_BLEND);
+        }
+
+        return info;
     }
 
     private RenderItem renderItem = new RenderItem();
@@ -178,7 +312,7 @@ public class GuiBuoy extends GuiBase {
         return new int[] {LIST_X, LIST_Y + i * LIST_ELEMENT_HEIGHT, LIST_ELEMENT_WIDTH, LIST_ELEMENT_HEIGHT};
     }
 
-    private static final int ELEMENT_SRC_Y = 175;
+    private static final int ELEMENT_SRC_Y = 1;
 
     private static final int SELECTED_BUOY_SIZE = 7;
     private static final int SELECTED_BUOY_SRC_X = 9;
@@ -195,10 +329,10 @@ public class GuiBuoy extends GuiBase {
 
 
     private static final int LIST_X = 10;
-    private static final int LIST_Y = 15;
+    private static final int LIST_Y = 104;
     private static final int VISIBLE_LIST_ITEMS = 8;
     private static final int LIST_ELEMENT_SRC_X = 1;
-    private static final int LIST_ELEMENT_SRC_Y = 187;
+    private static final int LIST_ELEMENT_SRC_Y = 13;
     private static final int LIST_ELEMENT_WIDTH = 73;
     private static final int LIST_ELEMENT_HEIGHT = 18;
 
@@ -210,12 +344,33 @@ public class GuiBuoy extends GuiBase {
     private static final int[] SCROLL_TARGET = {SCROLL_X, LIST_Y, SCROLL_BAR_WIDTH, SCROLL_HEIGHT};
 
     private static final int MAP_X = 108;
-    private static final int MAP_Y = 18;
+    private static final int MAP_Y = 107;
     private static final int MAP_SIZE = 138;
     private static final int[] MAP_TARGET = {MAP_X, MAP_Y, MAP_SIZE, MAP_SIZE};
 
+    private static final int BUTTON_X = 20;
+    private static final int BUTTON_Y = 10;
+    private static final int BUTTON_OFFSET = 20;
+    private static final int BUTTON_SRC_X = 1;
+    private static final int BUTTON_SRC_Y = 32;
+    private static final int BUTTON_ICON_SRC_X = 1;
+    private static final int BUTTON_ICON_SRC_Y = 51;
+    private static final int BUTTON_SIZE = 18;
+    private static final int BUTTON_ICON_SIZE = 16;
+    private static final int BUTTON_ICON_OFFSET = (BUTTON_SIZE - BUTTON_ICON_SIZE) / 2;
+
+
+    private int[] getEntityLocation(Entity entity) {
+        int x = (int)((0.5 + (entity.posX - buoy.posX) / VISIBLE_BLOCKS) * MAP_SIZE);
+        int z = (int)((0.5 + (entity.posZ - buoy.posZ) / VISIBLE_BLOCKS) * MAP_SIZE);
+
+        return new int[] {MAP_X + x, MAP_Y + z};
+    }
+
     private class MapElement {
         private Entity entity;
+        private EntityBuoy next;
+        private EntityBuoy prev;
         private int[] target;
 
         private boolean isVisible() {
@@ -224,10 +379,9 @@ public class GuiBuoy extends GuiBase {
 
         private int[] getTarget() {
             if (target == null) {
-                int x = (int)((0.5 + (entity.posX - buoy.posX) / VISIBLE_BLOCKS) * MAP_SIZE);
-                int z = (int)((0.5 + (entity.posZ - buoy.posZ) / VISIBLE_BLOCKS) * MAP_SIZE);
+                int[] location = getEntityLocation(entity);
 
-                target = new int[] {MAP_X + x - w / 2, MAP_Y + z - h / 2, w, h};
+                target = new int[] {location[0] - w / 2, location[1] - h / 2, w, h};
             }
 
             return target;
@@ -265,7 +419,6 @@ public class GuiBuoy extends GuiBase {
 
     private class ListElement implements Comparable<ListElement> {
         private EntityBuoy buoy;
-        private String name;
         private ItemStack item;
         private int distance;
         private ILocalizedText direction;
@@ -275,7 +428,6 @@ public class GuiBuoy extends GuiBase {
         private ListElement(EntityBuoy buoy) {
             this.buoy = buoy;
             item = buoy.getBuoyItem();
-            this.name = buoy.getBuoyType().getName();
             distance = (int)GuiBuoy.this.buoy.getDistanceToEntity(this.buoy);
             double differenceX = this.buoy.posX - GuiBuoy.this.buoy.posX;
             double differenceZ = this.buoy.posZ - GuiBuoy.this.buoy.posZ;
@@ -295,7 +447,7 @@ public class GuiBuoy extends GuiBase {
 
 
     private MapElement createBuoyElement(final EntityBuoy buoy, final boolean owner) {
-        return new MapElement(
+        MapElement mapElement = new MapElement(
                 buoy,
                 owner ? SELECTED_BUOY_SRC_X : BUOY_SRC_X,
                 ELEMENT_SRC_Y,
@@ -308,7 +460,7 @@ public class GuiBuoy extends GuiBase {
                         List<String> info = new ArrayList<String>();
                         info.add(buoy.getBuoyType().getName());
                         if (owner) {
-                            info.add(ColorHelper.YELLOW + "Owner");    //TODO localize
+                            info.add(ColorHelper.YELLOW + "Active");    //TODO localize
                         }else if(buoy.equals(selected)) {
                             info.add(ColorHelper.GREEN + "Selected"); //TODO localize
                         }
@@ -316,6 +468,14 @@ public class GuiBuoy extends GuiBase {
                     }
                 }
         );
+
+        mapElement.next = buoy.getNextBuoy();
+        mapElement.prev = buoy.getPrevBuoy();
+        if (owner) {
+            next = mapElement.next;
+            previous = mapElement.prev;
+        }
+        return mapElement;
     }
 
     private MapElement createBoatElement(EntityBoat boat) {
@@ -369,7 +529,7 @@ public class GuiBuoy extends GuiBase {
     }
 
     @Override
-    public void mouseClick(int x, int y, int button) {
+    public void mouseClick(int x, int y, int b) {
         x -= getGuiLeft();
         y -= getGuiTop();
         if (inRect(x, y, SCROLL_TARGET)) {
@@ -396,6 +556,22 @@ public class GuiBuoy extends GuiBase {
             if (inRect(x, y, target)) {
                 selected = element.buoy.equals(selected) ? null : element.buoy;
                 return;
+            }
+        }
+
+        for (BuoyInfo infoPanel : infoPanels) {
+            Button[] buttons = infoPanel.getButtons();
+            if (buttons != null) {
+                for (int i = 0; i < buttons.length; i++) {
+                    Button button = buttons[i];
+                    int[] target = {infoPanel.x + BUTTON_X + BUTTON_OFFSET * i, infoPanel.y + BUTTON_Y, BUTTON_SIZE, BUTTON_SIZE};
+                    if (inRect(x, y, target)) {
+                        if (button.isEnabled()) {
+                            button.onClick();
+                        }
+                        return;
+                    }
+                }
             }
         }
     }
@@ -425,4 +601,139 @@ public class GuiBuoy extends GuiBase {
         return listElements.size() > VISIBLE_LIST_ITEMS ? Math.round((listElements.size() - VISIBLE_LIST_ITEMS) * part) : 0;
     }
 
+    private abstract class BuoyInfo {
+        private int x;
+        private int y;
+        private ILocalizedText label;
+
+        protected BuoyInfo(ILocalizedText label, int x, int y) {
+            this.x = x;
+            this.y = y;
+            this.label = label;
+        }
+
+        protected abstract EntityBuoy getBuoy();
+        protected Button[] getButtons() {return null;}
+    }
+
+    private abstract class BuoyInfoProperty extends BuoyInfo {
+        private Button[] buttons;
+        protected BuoyInfoProperty(ILocalizedText label, int x, int y, boolean next) {
+            super(label, x, y);
+            buttons = new Button[] {
+                new UseButton(next) {
+                    @Override
+                    protected void setBuoy(EntityBuoy buoy) {
+                        BuoyInfoProperty.this.setBuoy(buoy);
+                    }
+                },
+                new SelectButton() {
+                    @Override
+                    protected EntityBuoy getBuoy() {
+                        return BuoyInfoProperty.this.getBuoy();
+                    }
+                },
+                new RemoveButton(next) {
+                    @Override
+                    protected EntityBuoy getBuoy() {
+                        return BuoyInfoProperty.this.getBuoy();
+                    }
+
+                    @Override
+                    protected void setBuoy(EntityBuoy buoy) {
+                        BuoyInfoProperty.this.setBuoy(buoy);
+                    }
+                }
+            };
+        }
+        protected abstract void setBuoy(EntityBuoy buoy);
+
+
+        @Override
+        public Button[] getButtons() {
+            return buttons;
+        }
+    }
+
+    private abstract class Button {
+        private ILocalizedText text;
+        private int iconIndex;
+
+        protected Button(ILocalizedText text, int iconIndex) {
+            this.text = text;
+            this.iconIndex = iconIndex;
+        }
+
+        protected abstract void onClick();
+        protected abstract boolean isEnabled();
+    }
+
+    private abstract class UseButton extends Button {
+        private boolean next;
+
+        protected UseButton(boolean next) {
+            super(new PlainText("Use selected buoy"), 0); //TODO localize
+            this.next = next;
+        }
+
+        @Override
+        protected void onClick() {
+            setBuoy(selected);
+            sendSetBuoyToServer(selected, next);
+        }
+
+        @Override
+        protected boolean isEnabled() {
+            return selected != null;
+        }
+
+        protected abstract void setBuoy(EntityBuoy buoy);
+    }
+
+    private abstract class SelectButton extends Button {
+        protected SelectButton() {
+            super(new PlainText("Select this buoy"), 1); //TODO localize
+        }
+
+        @Override
+        protected void onClick() {
+            selected = getBuoy();
+        }
+
+        @Override
+        protected boolean isEnabled() {
+            return getBuoy() != null;
+        }
+        protected abstract EntityBuoy getBuoy();
+    }
+
+    private abstract class RemoveButton extends Button {
+        private boolean next;
+
+        protected RemoveButton(boolean next) {
+            super(new PlainText("Remove this buoy"), 2); //TODO localize
+            this.next = next;
+        }
+
+        @Override
+        protected void onClick() {
+            setBuoy(null);
+            sendSetBuoyToServer(null, next);
+        }
+
+        @Override
+        protected boolean isEnabled() {
+            return getBuoy() != null;
+        }
+        protected abstract EntityBuoy getBuoy();
+        protected abstract void setBuoy(EntityBuoy buoy);
+    }
+
+    private void sendSetBuoyToServer(EntityBuoy buoy, boolean next) {
+        DataWriter dw = PacketHandler.getDataWriter(PacketType.BUOY);
+        int entityId = buoy != null && !buoy.isDead ? buoy.getEntityId() : -1;
+        dw.writeInteger(entityId);
+        dw.writeBoolean(next);
+        PacketHandler.sendPacketToServer(dw);
+    }
 }

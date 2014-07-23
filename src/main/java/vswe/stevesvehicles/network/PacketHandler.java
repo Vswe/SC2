@@ -59,7 +59,7 @@ public class PacketHandler {
             }else if(type == PacketType.BUOY) {
                 Container container = player.openContainer;
                 if (container instanceof ContainerBuoy) {
-                    ((ContainerBuoy)container).receiveInfo(dr);
+                    ((ContainerBuoy)container).receiveInfo(dr, false);
                 }
             }
 
@@ -79,7 +79,7 @@ public class PacketHandler {
             PacketType type = dr.readEnum(PacketType.class);
             World world = player.worldObj;
 
-            if (type == PacketType.BLOCK || type == PacketType.VEHICLE) {
+            if (type == PacketType.BLOCK || type == PacketType.VEHICLE || type == PacketType.BUOY) {
                 Container container = player.openContainer;
                 if (container instanceof ContainerPlayer) {
                     int entityId = dr.readInteger();
@@ -92,6 +92,9 @@ public class PacketHandler {
                     VehicleBase vehicle = containerVehicle.getVehicle();
 
                     receivePacketAtVehicle(vehicle, dr, player);
+                }else if(container instanceof ContainerBuoy) {
+                    ContainerBuoy containerBuoy = (ContainerBuoy)container;
+                        containerBuoy.receiveInfo(dr, true);
                 }else if(container instanceof ContainerBase) {
                     ContainerBase containerBase = (ContainerBase)container;
                     TileEntityBase base = containerBase.getTileEntity();

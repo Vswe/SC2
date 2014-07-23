@@ -149,11 +149,12 @@ public abstract class GuiBase extends GuiContainerSpecial {
 	public void drawGuiForeground(int x, int y) {}
 
     public void applyColor(int color, float multiplier) {
+        float a = (color >> 24 & 255) == 0 ? 1 : (float)(color >> 24 & 255) / 255.0F;
         float r = (float)(color >> 16 & 255) / 255.0F;
         float g = (float)(color >> 8 & 255) / 255.0F;
         float b = (float)(color & 255) / 255.0F;
 
-        GL11.glColor4f(r * multiplier, g * multiplier, b * multiplier, 1);
+        GL11.glColor4f(r * multiplier, g * multiplier, b * multiplier, a);
     }
 	
 	@Override
@@ -221,11 +222,26 @@ public abstract class GuiBase extends GuiContainerSpecial {
 		//stop scale
 		GL11.glPopMatrix();	
 	}
-	
 
-	
-		
-	@Override
+
+    public void drawLine(int x1, int y1, int x2, int y2, int thickness, int color) {
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        applyColor(color, 1);
+
+        GL11.glEnable(GL11.GL_LINE_SMOOTH );
+        GL11.glLineWidth(1 + thickness * this.width / 500F);
+
+        GL11.glBegin(GL11.GL_LINES );
+        GL11.glVertex3f(x1, y1, 0);
+        GL11.glVertex3f(x2, y2, 0);
+        GL11.glEnd();
+
+
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+    }
+
+
+    @Override
 	protected final void drawGuiContainerBackgroundLayer(float f, int x, int y) {
 		this.drawGuiBackground(f,x,y);
 	}

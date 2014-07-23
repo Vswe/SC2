@@ -65,6 +65,7 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
         return false;
     }
 
+    @SuppressWarnings("UnnecessaryBoxing")
     @Override
     protected void entityInit(){
         this.dataWatcher.addObject(17, new Integer(0));
