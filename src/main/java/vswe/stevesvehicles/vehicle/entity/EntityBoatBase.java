@@ -41,6 +41,7 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
 
 
 
+
     /** true if no player in boat */
     private boolean isBoatEmpty;
 
@@ -203,7 +204,7 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
         spawnParticles(horizontalSpeed);
 
 
-        if (worldObj.isRemote && isBoatEmpty) {
+        if (useSimpleUpdate()) {
             updateClientSoloBoat();
         }else {
             handleFloating();
@@ -218,6 +219,9 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
         }
     }
 
+    protected boolean useSimpleUpdate() {
+        return worldObj.isRemote && isBoatEmpty;
+    }
 
 
     private static final double BOUNDING_BOX_EXPANSION = 0.8;

@@ -246,7 +246,7 @@ public class GuiBuoy extends GuiBase {
             int[] location1 = getEntityLocation(entity);
             int[] location2 = getEntityLocation(other);
 
-            int color = 0x5504243C;
+            int color = 0x55BD3612;
             if (owner) {
                 color |= 0xFF << 24;
             }

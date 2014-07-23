@@ -7,7 +7,7 @@ import vswe.stevesvehicles.client.ResourceHelper;
 
 public enum BuoyType {
     NORMAL(0xE25B00),
-    OTHER(0x003866);
+    OTHER(0x06477C);
 
 
     BuoyType(int color) {

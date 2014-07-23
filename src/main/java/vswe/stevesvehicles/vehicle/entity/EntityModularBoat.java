@@ -1,7 +1,6 @@
 package vswe.stevesvehicles.vehicle.entity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,12 +13,15 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
+import vswe.stevesvehicles.buoy.EntityBuoy;
 import vswe.stevesvehicles.network.DataReader;
 import vswe.stevesvehicles.network.DataWriter;
 import vswe.stevesvehicles.network.PacketHandler;
 import vswe.stevesvehicles.network.PacketType;
 import vswe.stevesvehicles.vehicle.VehicleBase;
 import vswe.stevesvehicles.vehicle.VehicleBoat;
+
+import java.util.List;
 
 
 public class EntityModularBoat extends EntityBoatBase implements IVehicleEntity {
@@ -74,6 +76,28 @@ public class EntityModularBoat extends EntityBoatBase implements IVehicleEntity 
 
     @Override
     public boolean interactFirst(EntityPlayer player){
+        if (player.isSneaking()) {
+            List<EntityBuoy> list = worldObj.getEntitiesWithinAABB(EntityBuoy.class, boundingBox.expand(10, 3, 10));
+            EntityBuoy closest = null;
+            double closestDistance = 0;
+            for (EntityBuoy buoy : list) {
+                double distance = getDistanceSqToEntity(buoy);
+                if (closest == null || distance < closestDistance) {
+                    closest = buoy;
+                    distance = closestDistance;
+                }
+            }
+
+            if (closest != null) {
+                targetX = closest.posX + 2;
+                targetZ = closest.posZ + 2;
+                hasTarget = true;
+                targetBuoy = closest;
+            }
+
+            return true;
+        }
+
         if (!vehicleBase.canInteractWithEntity(player)) {
             return false;
         }else{
@@ -118,7 +142,12 @@ public class EntityModularBoat extends EntityBoatBase implements IVehicleEntity 
     }
 
     private static final double MINIMUM_STEERING_SPEED = 0.01;
+    private static final double THROTTLE = 0.1;
 
+    private double targetX;
+    private double targetZ;
+    private boolean hasTarget;
+    private EntityBuoy targetBuoy;
 
     private int directionMultiplier;
     private boolean hasRider;
@@ -129,7 +158,7 @@ public class EntityModularBoat extends EntityBoatBase implements IVehicleEntity 
 
         if (riddenByEntity != null && riddenByEntity instanceof EntityLivingBase) {
             EntityLivingBase rider = (EntityLivingBase)riddenByEntity;
-            double speedDifference = rider.moveForward * 0.1;
+            double speedDifference = rider.moveForward * THROTTLE;
             if (!hasRider || speed <= MINIMUM_STEERING_SPEED) {
                 hasRider = true;
                 directionMultiplier = rider.moveForward >= 0 ? 1 : -1;
@@ -157,9 +186,33 @@ public class EntityModularBoat extends EntityBoatBase implements IVehicleEntity 
             preventRotationUpdate = true;
         }else{
             hasRider = false;
+            if (hasTarget) {
+                speed += THROTTLE;
+                double differenceX = targetX - posX;
+                double differenceZ = targetZ - posZ;
+                double differenceSquared = differenceX * differenceX + differenceZ * differenceZ;
+
+                if (differenceSquared < 0.5) {
+                    hasTarget = false;
+                    if (targetBuoy != null) {
+                        targetBuoy = targetBuoy.getNextBuoy();
+                        if (targetBuoy != null) {
+                            hasTarget = true;
+                            targetX = targetBuoy.posX + 2;
+                            targetZ = targetBuoy.posZ + 2;
+                        }
+                    }
+                }else{
+                    double yaw = Math.atan2(differenceZ, differenceX);
+                    motionX = Math.cos(yaw) * speed;
+                    motionZ = Math.sin(yaw) * speed;
+                }
+            }
         }
 
     }
+
+
 
     /*
         Both the server and the client does the steering calculations, just like with the vanilla boat. The algorithm
