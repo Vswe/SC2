@@ -389,12 +389,13 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
 
             setPosition(targetX, targetY, targetZ);
             setRotation(rotationYaw, rotationPitch);
-
+            handleRotation();
         }else {
             double targetX = posX + motionX;
             double targetY = posY + motionY;
             double targetZ = posZ + motionZ;
             setPosition(targetX, targetY, targetZ);
+            handleRotation();
 
             if (onGround) {
                 motionX *= 0.5D;
@@ -405,6 +406,8 @@ public abstract class EntityBoatBase extends EntityBoat { //The only reason this
             motionX *= 0.95;
             motionY *= 0.95;
             motionZ *= 0.95;
+
+
         }
     }
 

@@ -123,11 +123,13 @@ public class GuiBuoy extends GuiBase {
         ));
 
         mapElements.add(createBuoyElement(buoy, true));
+        mapElements.add(createBuoyTargetElement(buoy));
         for (Object obj : list) {
             if (((Entity)obj).isDead) continue;
 
             if (obj instanceof EntityBuoy) {
                 mapElements.add(createBuoyElement((EntityBuoy) obj, false));
+                mapElements.add(createBuoyTargetElement((EntityBuoy) obj));
                 listElements.add(new ListElement((EntityBuoy) obj));
             }else if(obj instanceof EntityBoat) {
                 mapElements.add(createBoatElement((EntityBoat) obj));
@@ -139,6 +141,7 @@ public class GuiBuoy extends GuiBase {
 
         lastUpdateTime = Minecraft.getSystemTime();
     }
+
 
     private static final ResourceLocation BACKGROUND = ResourceHelper.getResource("/gui/buoy_background.png");
     private static final ResourceLocation TEXTURE = ResourceHelper.getResource("/gui/buoy_elements.png");
@@ -162,6 +165,23 @@ public class GuiBuoy extends GuiBase {
         setupScissor(MAP_X, MAP_Y, MAP_SIZE, MAP_SIZE);
         startScissor();
 
+        GL11.glEnable(GL11.GL_BLEND);
+        for (MapElement mapElement : mapElements) {
+            if (mapElement.isVisible()) {
+                if (mapElement.entity.equals(buoy)) {
+                    drawBuoyLine(buoy, previous, true);
+                    drawBuoyLine(buoy, next, true);
+                }else{
+                    drawBuoyLine(mapElement.entity, mapElement.prev, false);
+                    drawBuoyLine(mapElement.entity, mapElement.next, false);
+                }
+            }
+        }
+        GL11.glDisable(GL11.GL_BLEND);
+
+        ResourceHelper.bindResource(TEXTURE);
+        GL11.glColor4f(1, 1, 1, 1);
+
         for (MapElement element : mapElements) {
             if (element.isVisible()) {
                 int[] target = element.getTarget();
@@ -181,25 +201,12 @@ public class GuiBuoy extends GuiBase {
             }
         }
 
-        GL11.glEnable(GL11.GL_BLEND);
-        for (MapElement mapElement : mapElements) {
-            if (mapElement.isVisible()) {
-                if (mapElement.entity.equals(buoy)) {
-                    drawBuoyLine(buoy, previous, true);
-                    drawBuoyLine(buoy, next, true);
-                }else{
-                    drawBuoyLine(mapElement.entity, mapElement.prev, false);
-                    drawBuoyLine(mapElement.entity, mapElement.next, false);
-                }
-            }
-        }
-
 
         ResourceHelper.bindResource(TEXTURE);
         GL11.glColor4f(1, 1, 1, 1);
         stopScissor();
 
-
+        GL11.glEnable(GL11.GL_BLEND);
         if (listElements.size() <= VISIBLE_LIST_ITEMS) {
 
             GL11.glColor4f(1, 1, 1, 0.5F);
@@ -359,10 +366,13 @@ public class GuiBuoy extends GuiBase {
     private static final int BUTTON_ICON_SIZE = 16;
     private static final int BUTTON_ICON_OFFSET = (BUTTON_SIZE - BUTTON_ICON_SIZE) / 2;
 
-
     private int[] getEntityLocation(Entity entity) {
-        int x = (int)((0.5 + (entity.posX - buoy.posX) / VISIBLE_BLOCKS) * MAP_SIZE);
-        int z = (int)((0.5 + (entity.posZ - buoy.posZ) / VISIBLE_BLOCKS) * MAP_SIZE);
+        return getEntityLocation(entity.posX, entity.posZ);
+    }
+
+    private int[] getEntityLocation(double posX, double posZ) {
+        int x = (int)((0.5 + (posX - buoy.posX) / VISIBLE_BLOCKS) * MAP_SIZE);
+        int z = (int)((0.5 + (posZ - buoy.posZ) / VISIBLE_BLOCKS) * MAP_SIZE);
 
         return new int[] {MAP_X + x, MAP_Y + z};
     }
@@ -377,9 +387,13 @@ public class GuiBuoy extends GuiBase {
             return entity != null && !entity.isDead;
         }
 
+        protected int[] getLocation() {
+            return getEntityLocation(entity);
+        }
+
         private int[] getTarget() {
             if (target == null) {
-                int[] location = getEntityLocation(entity);
+                int[] location = getLocation();
 
                 target = new int[] {location[0] - w / 2, location[1] - h / 2, w, h};
             }
@@ -476,6 +490,17 @@ public class GuiBuoy extends GuiBase {
             previous = mapElement.prev;
         }
         return mapElement;
+    }
+
+
+    private MapElement createBuoyTargetElement(EntityBuoy buoy) {
+        final double[] location = EntityModularBoat.getTarget(buoy);
+        return new MapElement(buoy, BOAT_SRC_X, ELEMENT_SRC_Y, BOAT_SIZE, BOAT_SIZE, 0xFF0000, new StaticText("Boat buoy target")) {
+            @Override
+            protected int[] getLocation() {
+                return getEntityLocation(location[0], location[1]);
+            }
+        };
     }
 
     private MapElement createBoatElement(EntityBoat boat) {

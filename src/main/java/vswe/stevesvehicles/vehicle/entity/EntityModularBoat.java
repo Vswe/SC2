@@ -84,15 +84,12 @@ public class EntityModularBoat extends EntityBoatBase implements IVehicleEntity 
                 double distance = getDistanceSqToEntity(buoy);
                 if (closest == null || distance < closestDistance) {
                     closest = buoy;
-                    distance = closestDistance;
+                    closestDistance = distance;
                 }
             }
 
             if (closest != null) {
-                targetX = closest.posX + 2;
-                targetZ = closest.posZ + 2;
-                hasTarget = true;
-                targetBuoy = closest;
+                moveTo(closest);
             }
 
             return true;
@@ -195,11 +192,9 @@ public class EntityModularBoat extends EntityBoatBase implements IVehicleEntity 
                 if (differenceSquared < 0.5) {
                     hasTarget = false;
                     if (targetBuoy != null) {
-                        targetBuoy = targetBuoy.getNextBuoy();
-                        if (targetBuoy != null) {
-                            hasTarget = true;
-                            targetX = targetBuoy.posX + 2;
-                            targetZ = targetBuoy.posZ + 2;
+                        EntityBuoy next = targetBuoy.getNextBuoy();
+                        if (next != null) {
+                            moveTo(next);
                         }
                     }
                 }else{
@@ -210,6 +205,37 @@ public class EntityModularBoat extends EntityBoatBase implements IVehicleEntity 
             }
         }
 
+    }
+
+    private void moveTo(EntityBuoy buoy) {
+        double[] target = getTarget(buoy);
+        targetX = target[0];
+        targetZ = target[1];
+
+        hasTarget = true;
+        targetBuoy = buoy;
+    }
+
+    private static final double BUOY_DISTANCE = 3;
+
+    public static double[] getTarget(EntityBuoy buoy) {
+        EntityBuoy prev = buoy.getPrevBuoy();
+        EntityBuoy next = buoy.getNextBuoy();
+
+        if (prev != null && next != null) {
+            //TODO test that this algorithm works in both concave and convex setups
+            double differenceX = next.posX - prev.posX;
+            double differenceZ = next.posZ - prev.posZ;
+
+            double angle = Math.atan2(differenceZ, differenceX);
+            angle += Math.PI / 2;
+
+
+            return new double[] {buoy.posX + BUOY_DISTANCE * Math.cos(angle), buoy.posZ + BUOY_DISTANCE * Math.sin(angle)};
+        }else{
+            //TODO what do we do when we don't have a previous and a next buoy?
+            return new double[] {buoy.posX + 2, buoy.posZ + 2};
+        }
     }
 
 
