@@ -28,5 +28,5 @@ public class SlotCartCrafterResult extends SlotBase implements ISpecialItemTrans
 	public int getSlotStackLimit() {
 		return 0;
 	}
-    
+
 }
