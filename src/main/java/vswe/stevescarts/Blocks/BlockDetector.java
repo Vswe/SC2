@@ -11,6 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.Helpers.DetectorType;
 import vswe.stevescarts.TileEntities.TileEntityDetector;
@@ -59,8 +60,17 @@ public class BlockDetector extends BlockContainerBase
 
 
     @Override
-	public boolean isBlockSolid(IBlockAccess world, int x, int y, int z, int side)
-    {
+    public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
+        return true;
+    }
+
+    @Override
+    public boolean isBlockNormalCube() {
+        return true;
+    }
+
+    @Override
+    public boolean isBlockSolid(IBlockAccess world, int x, int y, int z, int side) {
         return true;
     }
 
