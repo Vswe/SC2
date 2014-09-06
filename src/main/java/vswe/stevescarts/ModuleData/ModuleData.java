@@ -844,7 +844,7 @@ public class ModuleData {
 		new ModuleData(95, "Experience Bank", ModuleExperience.class, 36)
 		.addRecipe(new Object[][] {{null, Items.redstone,  null},
 				{Items.glowstone_dust, Items.emerald, Items.glowstone_dust},
-			   {ComponentTypes.SIMPLE_PCB.getItemStack(), Blocks.cauldron, ComponentTypes.SIMPLE_PCB.getItemStack()}
+			   {ComponentTypes.SIMPLE_PCB.getItemStack(), Items.cauldron, ComponentTypes.SIMPLE_PCB.getItemStack()}
 			  });		
 		
 		
