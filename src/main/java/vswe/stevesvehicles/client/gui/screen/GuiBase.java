@@ -191,7 +191,7 @@ public abstract class GuiBase extends GuiContainerSpecial {
 	
 	protected float getScale() {	
 	
-        net.minecraft.client.gui.ScaledResolution scaledresolution = new net.minecraft.client.gui.ScaledResolution(this.mc.gameSettings, this.mc.displayWidth, this.mc.displayHeight);
+        net.minecraft.client.gui.ScaledResolution scaledresolution = new net.minecraft.client.gui.ScaledResolution(this.mc, this.mc.displayWidth, this.mc.displayHeight);
         float w = scaledresolution.getScaledWidth() * 0.9F;
         float h = scaledresolution.getScaledHeight() * 0.9F;
 		float multX = w / getXSize();
@@ -605,7 +605,7 @@ public abstract class GuiBase extends GuiContainerSpecial {
         setupScissor(target[0], target[1], target[2], target[3]);
     }
     protected void setupScissor(int x, int y, int w, int h) {
-        ScaledResolution scaledresolution = new ScaledResolution(this.mc.gameSettings, Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
+        ScaledResolution scaledresolution = new ScaledResolution(this.mc, Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
 
         float scale = getScale();
 

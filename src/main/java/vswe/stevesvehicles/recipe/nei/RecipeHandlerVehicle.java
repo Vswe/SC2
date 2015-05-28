@@ -349,7 +349,7 @@ public abstract class RecipeHandlerVehicle extends TemplateRecipeHandler {
     }
 
     protected Point getMouse() {
-        ScaledResolution scaledresolution = new ScaledResolution(Minecraft.getMinecraft().gameSettings, Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
+        ScaledResolution scaledresolution = new ScaledResolution(Minecraft.getMinecraft(), Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
         int w = scaledresolution.getScaledWidth();
         int h = scaledresolution.getScaledHeight();
         int mX = Mouse.getX() * w / Minecraft.getMinecraft().displayWidth;
