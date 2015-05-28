@@ -163,7 +163,7 @@ public abstract class FancyPancyHandler {
 
         //no need to download the fancy if we have it already
         if (object == null) {
-            object = new ThreadDownloadImageData(null, fancyUrl, fallbackResource, optionalBuffer);
+            object = new ThreadDownloadImageData(/*null, */fancyUrl, fallbackResource, optionalBuffer);
             texturemanager.loadTexture(fancy, object);
         }
 

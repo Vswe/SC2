@@ -2,7 +2,6 @@ package vswe.stevesvehicles.network;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.CompressedStreamTools;
-import net.minecraft.nbt.NBTSizeTracker;
 import net.minecraft.nbt.NBTTagCompound;
 
 import java.io.IOException;
@@ -90,7 +89,7 @@ public class DataReader {
             }
 
             try {
-                return CompressedStreamTools.func_152457_a(bytes, new NBTSizeTracker(2097152L));
+                return CompressedStreamTools.decompress(bytes);
             }catch (IOException ex) {
                 return null;
             }
