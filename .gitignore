@@ -10,11 +10,11 @@ eclipse
 *.iws
 out
 
-#Ignore minecraft source files
+#Ignore build files
 build
 
-#Ignore compiled mod files
-bin
+#Ignore Minecraft run directory
+run
 
 #Ignore gradle logs
 .gradle

@@ -115,7 +115,7 @@ public abstract class TankEffect extends InventoryEffect implements ITankHolder 
 				if (oldFluid.fluidID != tank.getFluid().fluidID) {
 					upgrade.updateGuiData(con, crafting, id, (short)tank.getFluid().fluidID);
 					changed = true;
-				}					
+				}
 				if (oldFluid.amount != tank.getFluid().amount) {
 					upgrade.updateGuiData(con, crafting, amount1, upgrade.getShortFromInt(true, tank.getFluid().amount));
 					upgrade.updateGuiData(con, crafting, amount2, upgrade.getShortFromInt(false, tank.getFluid().amount));
@@ -132,7 +132,7 @@ public abstract class TankEffect extends InventoryEffect implements ITankHolder 
 			}else{
 				con.olddata = tank.getFluid().copy();
 			}
-		}		
+		}
 	}
 	
 	
